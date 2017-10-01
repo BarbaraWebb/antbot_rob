@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_visualnavigationapp" default="compile.module.visualnavigationapp">
+  <dirname property="module.visualnavigationapp.basedir" file="${ant.file.module_visualnavigationapp}"/>
+  
+  <property name="module.jdk.home.visualnavigationapp" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.visualnavigationapp" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.visualnavigationapp" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.visualnavigationapp" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="visualnavigationapp.output.dir" value="${module.visualnavigationapp.basedir}/build"/>
+  <property name="visualnavigationapp.testoutput.dir" value="${module.visualnavigationapp.basedir}/build"/>
+  
+  <path id="visualnavigationapp.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="visualnavigationapp.module.production.classpath">
+    <path refid="${module.jdk.classpath.visualnavigationapp}"/>
+  </path>
+  
+  <path id="visualnavigationapp.runtime.production.module.classpath">
+    <pathelement location="${visualnavigationapp.output.dir}"/>
+  </path>
+  
+  <path id="visualnavigationapp.module.classpath">
+    <path refid="${module.jdk.classpath.visualnavigationapp}"/>
+    <pathelement location="${visualnavigationapp.output.dir}"/>
+  </path>
+  
+  <path id="visualnavigationapp.runtime.module.classpath">
+    <pathelement location="${visualnavigationapp.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.visualnavigationapp">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.visualnavigationapp">
+    <patternset refid="excluded.from.module.visualnavigationapp"/>
+  </patternset>
+  
+  
+  <target name="compile.module.visualnavigationapp" depends="compile.module.visualnavigationapp.production,compile.module.visualnavigationapp.tests" description="Compile module VisualNavigationApp"/>
+  
+  <target name="compile.module.visualnavigationapp.production" depends="register.custom.compilers" description="Compile module VisualNavigationApp; production classes"/>
+  
+  <target name="compile.module.visualnavigationapp.tests" depends="register.custom.compilers,compile.module.visualnavigationapp.production" description="compile module VisualNavigationApp; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.visualnavigationapp" description="cleanup module">
+    <delete dir="${visualnavigationapp.output.dir}"/>
+    <delete dir="${visualnavigationapp.testoutput.dir}"/>
+  </target>
+</project>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_pathintegrationapp" default="compile.module.pathintegrationapp">
+  <dirname property="module.pathintegrationapp.basedir" file="${ant.file.module_pathintegrationapp}"/>
+  
+  <property name="module.jdk.home.pathintegrationapp" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.pathintegrationapp" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.pathintegrationapp" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.pathintegrationapp" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="pathintegrationapp.output.dir" value="${module.pathintegrationapp.basedir}/build"/>
+  <property name="pathintegrationapp.testoutput.dir" value="${module.pathintegrationapp.basedir}/build"/>
+  
+  <path id="pathintegrationapp.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="pathintegrationapp.module.production.classpath">
+    <path refid="${module.jdk.classpath.pathintegrationapp}"/>
+  </path>
+  
+  <path id="pathintegrationapp.runtime.production.module.classpath">
+    <pathelement location="${pathintegrationapp.output.dir}"/>
+  </path>
+  
+  <path id="pathintegrationapp.module.classpath">
+    <path refid="${module.jdk.classpath.pathintegrationapp}"/>
+    <pathelement location="${pathintegrationapp.output.dir}"/>
+  </path>
+  
+  <path id="pathintegrationapp.runtime.module.classpath">
+    <pathelement location="${pathintegrationapp.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.pathintegrationapp">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.pathintegrationapp">
+    <patternset refid="excluded.from.module.pathintegrationapp"/>
+  </patternset>
+  
+  
+  <target name="compile.module.pathintegrationapp" depends="compile.module.pathintegrationapp.production,compile.module.pathintegrationapp.tests" description="Compile module PathIntegrationApp"/>
+  
+  <target name="compile.module.pathintegrationapp.production" depends="register.custom.compilers" description="Compile module PathIntegrationApp; production classes"/>
+  
+  <target name="compile.module.pathintegrationapp.tests" depends="register.custom.compilers,compile.module.pathintegrationapp.production" description="compile module PathIntegrationApp; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.pathintegrationapp" description="cleanup module">
+    <delete dir="${pathintegrationapp.output.dir}"/>
+    <delete dir="${pathintegrationapp.testoutput.dir}"/>
+  </target>
+</project>

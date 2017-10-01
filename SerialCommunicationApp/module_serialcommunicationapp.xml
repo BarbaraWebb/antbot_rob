@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_serialcommunicationapp" default="compile.module.serialcommunicationapp">
+  <dirname property="module.serialcommunicationapp.basedir" file="${ant.file.module_serialcommunicationapp}"/>
+  
+  <property name="module.jdk.home.serialcommunicationapp" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.serialcommunicationapp" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.serialcommunicationapp" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.serialcommunicationapp" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="serialcommunicationapp.output.dir" value="${module.serialcommunicationapp.basedir}/build"/>
+  <property name="serialcommunicationapp.testoutput.dir" value="${module.serialcommunicationapp.basedir}/build"/>
+  
+  <path id="serialcommunicationapp.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="serialcommunicationapp.module.production.classpath">
+    <path refid="${module.jdk.classpath.serialcommunicationapp}"/>
+  </path>
+  
+  <path id="serialcommunicationapp.runtime.production.module.classpath">
+    <pathelement location="${serialcommunicationapp.output.dir}"/>
+  </path>
+  
+  <path id="serialcommunicationapp.module.classpath">
+    <path refid="${module.jdk.classpath.serialcommunicationapp}"/>
+    <pathelement location="${serialcommunicationapp.output.dir}"/>
+  </path>
+  
+  <path id="serialcommunicationapp.runtime.module.classpath">
+    <pathelement location="${serialcommunicationapp.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.serialcommunicationapp">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.serialcommunicationapp">
+    <patternset refid="excluded.from.module.serialcommunicationapp"/>
+  </patternset>
+  
+  
+  <target name="compile.module.serialcommunicationapp" depends="compile.module.serialcommunicationapp.production,compile.module.serialcommunicationapp.tests" description="Compile module SerialCommunicationApp"/>
+  
+  <target name="compile.module.serialcommunicationapp.production" depends="register.custom.compilers" description="Compile module SerialCommunicationApp; production classes"/>
+  
+  <target name="compile.module.serialcommunicationapp.tests" depends="register.custom.compilers,compile.module.serialcommunicationapp.production" description="compile module SerialCommunicationApp; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.serialcommunicationapp" description="cleanup module">
+    <delete dir="${serialcommunicationapp.output.dir}"/>
+    <delete dir="${serialcommunicationapp.testoutput.dir}"/>
+  </target>
+</project>

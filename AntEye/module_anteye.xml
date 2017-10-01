@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_anteye" default="compile.module.anteye">
+  <dirname property="module.anteye.basedir" file="${ant.file.module_anteye}"/>
+  
+  <property name="module.jdk.home.anteye" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.anteye" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.anteye" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.anteye" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="anteye.output.dir" value="${module.anteye.basedir}/build"/>
+  <property name="anteye.testoutput.dir" value="${module.anteye.basedir}/build"/>
+  
+  <path id="anteye.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="anteye.module.production.classpath">
+    <path refid="${module.jdk.classpath.anteye}"/>
+  </path>
+  
+  <path id="anteye.runtime.production.module.classpath">
+    <pathelement location="${anteye.output.dir}"/>
+  </path>
+  
+  <path id="anteye.module.classpath">
+    <path refid="${module.jdk.classpath.anteye}"/>
+    <pathelement location="${anteye.output.dir}"/>
+  </path>
+  
+  <path id="anteye.runtime.module.classpath">
+    <pathelement location="${anteye.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.anteye">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.anteye">
+    <patternset refid="excluded.from.module.anteye"/>
+  </patternset>
+  
+  
+  <target name="compile.module.anteye" depends="compile.module.anteye.production,compile.module.anteye.tests" description="Compile module AntEye"/>
+  
+  <target name="compile.module.anteye.production" depends="register.custom.compilers" description="Compile module AntEye; production classes"/>
+  
+  <target name="compile.module.anteye.tests" depends="register.custom.compilers,compile.module.anteye.production" description="compile module AntEye; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.anteye" description="cleanup module">
+    <delete dir="${anteye.output.dir}"/>
+    <delete dir="${anteye.testoutput.dir}"/>
+  </target>
+</project>

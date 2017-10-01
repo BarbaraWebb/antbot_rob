@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_antbotapps" default="compile.module.antbotapps">
+  <dirname property="module.antbotapps.basedir" file="${ant.file.module_antbotapps}"/>
+  
+  <property name="module.jdk.home.antbotapps" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.antbotapps" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.antbotapps" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.antbotapps" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="antbotapps.output.dir" value="${module.antbotapps.basedir}/build"/>
+  <property name="antbotapps.testoutput.dir" value="${module.antbotapps.basedir}/build"/>
+  
+  <path id="antbotapps.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="antbotapps.module.production.classpath">
+    <path refid="${module.jdk.classpath.antbotapps}"/>
+  </path>
+  
+  <path id="antbotapps.runtime.production.module.classpath">
+    <pathelement location="${antbotapps.output.dir}"/>
+  </path>
+  
+  <path id="antbotapps.module.classpath">
+    <path refid="${module.jdk.classpath.antbotapps}"/>
+    <pathelement location="${antbotapps.output.dir}"/>
+  </path>
+  
+  <path id="antbotapps.runtime.module.classpath">
+    <pathelement location="${antbotapps.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.antbotapps">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.antbotapps">
+    <patternset refid="excluded.from.module.antbotapps"/>
+  </patternset>
+  
+  
+  <target name="compile.module.antbotapps" depends="compile.module.antbotapps.production,compile.module.antbotapps.tests" description="Compile module AntBotApps"/>
+  
+  <target name="compile.module.antbotapps.production" depends="register.custom.compilers" description="Compile module AntBotApps; production classes"/>
+  
+  <target name="compile.module.antbotapps.tests" depends="register.custom.compilers,compile.module.antbotapps.production" description="compile module AntBotApps; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.antbotapps" description="cleanup module">
+    <delete dir="${antbotapps.output.dir}"/>
+    <delete dir="${antbotapps.testoutput.dir}"/>
+  </target>
+</project>

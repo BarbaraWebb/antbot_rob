@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_broadcast_library" default="compile.module.broadcast_library">
+  <dirname property="module.broadcast_library.basedir" file="${ant.file.module_broadcast_library}"/>
+  
+  <property name="module.jdk.home.broadcast_library" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.broadcast_library" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.broadcast_library" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.broadcast_library" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="broadcast_library.output.dir" value="${module.broadcast_library.basedir}/build"/>
+  <property name="broadcast_library.testoutput.dir" value="${module.broadcast_library.basedir}/build"/>
+  
+  <path id="broadcast_library.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="broadcast_library.module.production.classpath">
+    <path refid="${module.jdk.classpath.broadcast_library}"/>
+  </path>
+  
+  <path id="broadcast_library.runtime.production.module.classpath">
+    <pathelement location="${broadcast_library.output.dir}"/>
+  </path>
+  
+  <path id="broadcast_library.module.classpath">
+    <path refid="${module.jdk.classpath.broadcast_library}"/>
+    <pathelement location="${broadcast_library.output.dir}"/>
+  </path>
+  
+  <path id="broadcast_library.runtime.module.classpath">
+    <pathelement location="${broadcast_library.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.broadcast_library">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.broadcast_library">
+    <patternset refid="excluded.from.module.broadcast_library"/>
+  </patternset>
+  
+  
+  <target name="compile.module.broadcast_library" depends="compile.module.broadcast_library.production,compile.module.broadcast_library.tests" description="Compile module Broadcast_Library"/>
+  
+  <target name="compile.module.broadcast_library.production" depends="register.custom.compilers" description="Compile module Broadcast_Library; production classes"/>
+  
+  <target name="compile.module.broadcast_library.tests" depends="register.custom.compilers,compile.module.broadcast_library.production" description="compile module Broadcast_Library; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.broadcast_library" description="cleanup module">
+    <delete dir="${broadcast_library.output.dir}"/>
+    <delete dir="${broadcast_library.testoutput.dir}"/>
+  </target>
+</project>

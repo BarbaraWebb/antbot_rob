@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_combinerapp" default="compile.module.combinerapp">
+  <dirname property="module.combinerapp.basedir" file="${ant.file.module_combinerapp}"/>
+  
+  <property name="module.jdk.home.combinerapp" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.combinerapp" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.combinerapp" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.combinerapp" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="combinerapp.output.dir" value="${module.combinerapp.basedir}/build"/>
+  <property name="combinerapp.testoutput.dir" value="${module.combinerapp.basedir}/build"/>
+  
+  <path id="combinerapp.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="combinerapp.module.production.classpath">
+    <path refid="${module.jdk.classpath.combinerapp}"/>
+  </path>
+  
+  <path id="combinerapp.runtime.production.module.classpath">
+    <pathelement location="${combinerapp.output.dir}"/>
+  </path>
+  
+  <path id="combinerapp.module.classpath">
+    <path refid="${module.jdk.classpath.combinerapp}"/>
+    <pathelement location="${combinerapp.output.dir}"/>
+  </path>
+  
+  <path id="combinerapp.runtime.module.classpath">
+    <pathelement location="${combinerapp.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.combinerapp">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.combinerapp">
+    <patternset refid="excluded.from.module.combinerapp"/>
+  </patternset>
+  
+  
+  <target name="compile.module.combinerapp" depends="compile.module.combinerapp.production,compile.module.combinerapp.tests" description="Compile module CombinerApp"/>
+  
+  <target name="compile.module.combinerapp.production" depends="register.custom.compilers" description="Compile module CombinerApp; production classes"/>
+  
+  <target name="compile.module.combinerapp.tests" depends="register.custom.compilers,compile.module.combinerapp.production" description="compile module CombinerApp; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.combinerapp" description="cleanup module">
+    <delete dir="${combinerapp.output.dir}"/>
+    <delete dir="${combinerapp.testoutput.dir}"/>
+  </target>
+</project>
