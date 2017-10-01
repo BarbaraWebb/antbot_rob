@@ -80,6 +80,46 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
+                <!--New optical flow button and radio group, can be removed once integrated-->
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="OF"
+                    android:id="@+id/OF_btn"
+                    android:layout_marginTop="5dp"
+                    android:onClick="onClick" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:weightSum="1"
+                    android:visibility="gone"
+                    android:id="@+id/OF_radioGroup">
+
+                    <RadioButton
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="RunDown"
+                        android:id="@+id/OF1_radioBtn"
+                        android:checked="false"
+                        android:layout_marginTop="10dp" />
+
+                    <RadioButton
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Turn To Minimum"
+                        android:id="@+id/OF2_radioBtn"
+                        android:checked="false"
+                        android:layout_marginTop="10dp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

@@ -287,6 +287,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     Thread chosen_thread;
 
 
+    //Optical flow obstacle detection - RM
+    //Will reuse some visual variables
+
+    //Single thread will be used for both runnables: Detection and avoidance
+    Thread opticalFlowThread; //Bot will detect obstacle and try to navigate it
+
+
     //Initiate all ServiceConnections for all Background Services
     ServiceConnection visualNavigationServiceConnection = new ServiceConnection() {
         @Override
