@@ -182,6 +182,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     String visualModule;
     String pathIntegratorModule;
     String combinerModule;
+    String opticalFlowModule;
     boolean notification = true;
 
     //Layout Views
@@ -340,7 +341,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     StringBuilder perfectMemoryErrorString = new StringBuilder();
 
     //See learnButton FListener
-    Runnable learnRunnable = new Runnable() {
+    Runnable learn = new Runnable() {
         @Override
         public void run() {
             if (!saveImages && !loadImages) {
@@ -986,7 +987,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                         runDown.start();
                         break;
                 }
-            } else { //Else run the combiner module
+            } else if (selectedModule == 2) { //Else run the combiner module
                 switch(combinerModule){
                     case BACK_WITH_MB:
                         MethodChosen = 0;
@@ -1008,6 +1009,25 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                         break;
                 }
 
+            }  else if (selectedModule == 3){
+                //Selected module is optical flow, see StartScreen and start_scree.xml - RM
+                //Switch to see which radio button was selected. 2 modes: Detect, and Avoid
+                //Former will detect obstacle, and range and stop at a given threshold
+                //Latter will detect obstacle and try and navigate around it, retaining it's path
+                switch(opticalFlowModule){
+                    case OF_DETECT:
+                        opticalFlowThread = new Thread(opticalFlowDetection);
+                        opticalFlowThread.start();
+                        break;
+                    case OF_AVOID:
+                        opticalFlowThread = new Thread(opticalFlowAvoidance);
+                        opticalFlowThread.start();
+                        break;
+                    default: //Default to detection
+                        opticalFlowThread = new Thread(opticalFlowDetection);
+                        opticalFlowThread.start();
+                        break;
+                    }
             }
 
 
@@ -1118,8 +1138,39 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     }
 
-    // Monitoring time to stop outbound PI and start Inbound
+    //Runnables for new optical flow obstacle detection - RM
+    Runnable opticalFlowDetection = new Runnable() {
+        @Override
+        public void run() {
+            //Need to wait a little
+            try {
+                sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
+
+        }
+    };
+
+    Runnable opticalFlowAvoidance = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+    };
+
+    //End of OF threads - RM
+    //-------------------------------------------------------
+
+
+    // Monitoring time to stop outbound PI and start Inbound
     Runnable startInbound = new Runnable() {
         @Override
         public void run() {
