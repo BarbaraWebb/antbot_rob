@@ -82,6 +82,9 @@ import static org.opencv.video.Video.calcOpticalFlowFarneback;
 import static org.opencv.video.Video.calcOpticalFlowPyrLK;
 
 
+//NOTE: There are many comments suffixed with ' - RM' This means they were left by Robert Mitchell in order
+//to make the code more readable, it does NOT mean that I wrote the code there.
+
 public class MainActivity extends Activity implements CvCameraViewListener2 , BroadcastValues, SensorEventListener{
     private static final String TAG = "OCVSample::Activity";
     boolean opticCheck = false;
@@ -128,6 +131,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     Mat leftCXFlowImage = null;
     Mat rightCXFlowImage = null;
+    Mat centeredFlowImage = null;
     Mat currentRightCXImage;
     Mat currentLeftCXImage;
     Mat current_image;
@@ -790,6 +794,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
      * size as the inputFrame!
      */
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
+        //Callback method, every camera frame received will go through here. - RM
 
         //Initiation of the needed Variables
         rgbaList = new ArrayList<>();
@@ -800,9 +805,12 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         // initialize some CX variables
         currentRightCXImage = Mat.zeros(10, 90, CvType.CV_8UC1);
         currentLeftCXImage = Mat.zeros(10, 90, CvType.CV_8UC1);
+
         leftCXFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
         rightCXFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
 
+        //Centered flow image - For obstacle detection - RM
+        centeredFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
 
         current_image = Mat.zeros(10, 90, CvType.CV_8UC1);
         debugFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
@@ -814,7 +822,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         Mat tempRotate = Mat.zeros(processedSourceImage.size(), processedSourceImage.type());
         fullImageToDisplay=Mat.zeros(processedSourceImage.size(),processedSourceImage.type());
 
-
+        //We have frame rate information computed here
         prevFrameTime = currentFrameTime;
         currentFrameTime = (float) SystemClock.elapsedRealtime();
         if ((currentFrameTime-prevFrameTime)/1000 > 0){
@@ -823,7 +831,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             frame_rate_cx = 0;
         }
 
-
+        //Get input frame in RGBA then copy to BlueChannel Mat - RM
         rgba = inputFrame.rgba();                                           //Input Frame in rgba format
         BlueChannel = new Mat(rgba.rows(), rgba.cols(), CvType.CV_8UC1);    //Mat for later image processing
 
@@ -833,17 +841,22 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         double rgbaHeight = rgba.height();
         displayedImage = Mat.zeros((int) (rgbaHeight / scale), 360 / resolution, CvType.CV_8UC1);
 
+        //Extract blue channel from RGBA image and store in BlueChannel - RM
         rgbaList.add(rgba);                                                 //Needed for channel extraction from rgba image
         BlueChannelList.add(BlueChannel);                                   //Needed for channel extraction from rgba image
         Core.mixChannels(rgbaList, BlueChannelList, from_to);               //Extract only the blue channel from rgba
 
+        //Unwrap circular image - RM
         remap(BlueChannel, unwrappedImg, imageMapX, imageMapY, INTER_LINEAR);
+
+        //Resize into temp for image rotation - RM
         resize(unwrappedImg, tempRotate, processedSourceImage.size(), 2.81, 2.81, INTER_LANCZOS4);
 
         int counter1 = 0;
         int counter3;
         int colPosition;
 
+        //Image rotation? - RM
         for (int phi = 0; phi < 360; phi = phi + sourceResolution) {
             counter3 = 0;
             for (int theta_tmp = 0; theta_tmp < theta_new.length; theta_tmp = theta_tmp + sourceResolution) {
@@ -858,6 +871,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             counter1++;
         }
 
+        //Rotated image now in processedSourceImage - RM
 
         //Mat serverImage = new Mat(processedSourceImage.size(),processedSourceImage.type());
         //Core.flip(processedSourceImage,serverImage, -1);
@@ -869,8 +883,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
          *
          */
 
+        //Down-sampling, will always happen as res is hard-coded to 4 - RM
+        //Will down-sample processedSourceImage and output it to processedDestImage - RM
         if (resolution != 1) {
-
             int destAzimuthCounter = 0;
             for (int azimuth = 0; azimuth < processedSourceImage.cols(); azimuth = azimuth + resolution) {
                 int destElevationCounter = 0;
@@ -902,6 +917,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             processedDestImage = processedSourceImage;
         }
 
+        //processedDestImage is now the down-sampled 90x10, blue channel image needed - RM
+
+        //Some image pre-processing - RM
         Imgproc.equalizeHist(processedDestImage, processedDestImage);
         GaussianBlur(processedDestImage, processedDestImage, new Size(3, 3), 0, 0);
 
@@ -910,11 +928,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //processedDestImage.copyTo(visual_image);
         //broadcastImage.execute(processedDestImage);
 
-
+        //Image shifting - RM
         //shift image so that left side is left and right side is right
         processedDestImage.colRange(0, 68).copyTo(current_image.colRange(22, 90));
         processedDestImage.colRange(68, 90).copyTo(current_image.colRange(0, 22));
 
+
+        // Left and Right flow images created here - RM
         // takes 360 image with center at 45 deg for left flow
         current_image.colRange(12, 90).copyTo(rightCXFlowImage.colRange(0, 78));
         current_image.colRange(0, 12).copyTo(rightCXFlowImage.colRange(78, 90));
@@ -923,33 +943,42 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         current_image.colRange(0, 78).copyTo(leftCXFlowImage.colRange(12, 90));
         current_image.colRange(78, 90).copyTo(leftCXFlowImage.colRange(0, 12));
 
-//      compute optic flow and charge the global variables with the speed values
+        // compute optic flow and charge the global variables with the speed values
 
-//        computeSparseOpticFlow();
-//        getSpeedsFromSparseFlow();
+        // OPTICAL FLOW COMPUTED HERE - RM
+        // Existing methods exist for sparse and are not currently used. Re-purpose - RM
+        // So from here it can be seen that the left and right CXFlowImage matrices aren't used for OF - RM
+        computeSparseOpticFlow();
+
+        // getSpeedsFromSparseFlow();
 
         computeDenseOpticFlow();
         getSpeedsFromDenseFlow();
 
         // --commented for speed--
-//        processedDestImage.copyTo(second_frame);
+        //processedDestImage.copyTo(second_frame);
 
         // Uncommented by Zhaoyu
         //processedSourceImage.copyTo(fullImageToDisplay);
         //processedDestImage.copyTo(imageToDisplay);
 
-        if(!opticCheck && counting>7){
-            temporaryImageToCompare=Mat.zeros(processedDestImage.size(),processedDestImage.type());
-            opticCheck=true;
-            fullSnapShot=Mat.zeros(processedSourceImage.size(),processedSourceImage.type());
-            snapShot=Mat.zeros(processedDestImage.size(),processedDestImage.type());
+        // opticCheck initialised to false, not ever reset. - RM
+        // counting initialised to 1, reset after it reaches 20 - RM
+        // So this if waits seven frames then runs this code once. - RM
 
-            processedDestImage.copyTo(snapShot);
-            processedSourceImage.copyTo(fullSnapShot);
-            rotatedImageDB=new ArrayList<>();
+        if( !opticCheck && counting > 7 ){
+            temporaryImageToCompare=Mat.zeros(processedDestImage.size(),processedDestImage.type());
+            opticCheck = true;
+            fullSnapShot = Mat.zeros(processedSourceImage.size(),processedSourceImage.type());
+            snapShot = Mat.zeros(processedDestImage.size(),processedDestImage.type());
+
+            processedDestImage.copyTo(snapShot); //Down-sampled copy of the image frame - RM
+            processedSourceImage.copyTo(fullSnapShot); // Full res copy of the image frame - M
+            rotatedImageDB = new ArrayList<>();
 
             Log.i(flowTag, "ModuleSelected"+selectedModule);
 
+            //Choose which module and which setting to run - RM
             if(selectedModule==0){
                 // Uncomment to start recular CX (one speed input)
                 //obstacleAvoid=new Thread(CXthread);
@@ -1031,16 +1060,20 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
 
 
-        }
+        } // if ( !opticCheck && counting > 7 )
+
         sec_check = true;
+
+        // Frame count management
         counting++;
-        if(counting==20) counting=0;
+        if( counting == 20 ) counting = 0;
 
         //Here we put the processed image back into a Mat with the proportions of the output image
         current_image.copyTo(
                     displayedImage.rowRange(0, current_image.rows())
                                   .colRange(0, displayedImage.cols())
         );
+
         debugFlowImage.copyTo(
                     displayedImage.rowRange(displayedImage.rows()-debugFlowImage.rows(), displayedImage.rows())
                                   .colRange(0, displayedImage.cols())
@@ -1156,6 +1189,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     Runnable opticalFlowAvoidance = new Runnable() {
         @Override
         public void run() {
+            //Need to wait a little
             try {
                 sleep(3000);
             } catch (InterruptedException e) {
@@ -1976,6 +2010,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     private void computeSparseOpticFlow() {
         // first time around we initialize all
+        // Looking at repurposing this method for optical flow obstacle avoidance - RM
         if (previous_image == null) {
 
             previous_image = Mat.zeros(10, 90, CvType.CV_8UC1);
@@ -1989,8 +2024,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             goodFeaturesToTrack(current_image, initialImage, 100, 0.5, 3);
             initialImage.convertTo(prevPointsToTrack, CvType.CV_32FC2);
         }
+
+        //What? Only the left flow is computed??? - RM
+        //Seemingly only using the central image so regular flow is computed -- RM
         // now we can compute the flow
         // left flow
+
+        //Seems to be an embellished if ( !(prevPointsToTrack == null) ) {}
         if (prevPointsToTrack.cols() > 0 && prevPointsToTrack.rows() > 0) {
             calcOpticalFlowPyrLK(
                     previous_image,
@@ -2021,6 +2061,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
         // now we can compute the flow
         // left flow
+
+        //Again, the flow is not computed as described in his dissertation. - RM
+        // Only computed on the central frame? Not the left and right - RM
         calcOpticalFlowFarneback(
                 previous_image,
                 current_image,
@@ -2059,30 +2102,38 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             float leftFlowSum = 0;
             float rightFlowSum = 0;
+
             Mat left_pref_vector;
             Mat right_pref_vector;
             Mat flowVector = new Mat(1, 3, CvType.CV_32FC1);
+
             double[] current_left_flow_vector;
             double[] previous_left_flow_vector;
+
+            //For every point in the points of interest matrix - RM
             for (int i = 0; i < currentPointsToTrack.rows(); i++) {
                 for (int j = 0; j < currentPointsToTrack.cols(); j++) {
 
                     // ------------------- compute left flow --------------------
                     //-----------------------------------------------------------
+                    // If the current point has moved far enough between the two frames we can
+                    // compute a flow vector (+12 is for left side offset)
                     if (Math.abs(
                             mod((int) currentPointsToTrack.get(i, j)[0] + 12, 90)
                             - mod((int) prevPointsToTrack.get(i, j)[0] + 12, 90))
                             < 70){
+
+                        //Compute previous and current flow vectors
                         current_left_flow_vector = new double[]{mod((int) currentPointsToTrack.get(i, j)[0] + 12, 90), (int) currentPointsToTrack.get(i, j)[1]};
                         previous_left_flow_vector = new double[]{mod((int) prevPointsToTrack.get(i, j)[0] + 12, 90), (int) prevPointsToTrack.get(i, j)[1]};
 
                         //   print arrows on debugFlowImage image - DEBUG
-                        org.opencv.core.Point pt1_left = new org.opencv.core.Point(
+                        /* org.opencv.core.Point pt1_left = new org.opencv.core.Point(
                                 previous_left_flow_vector[0], previous_left_flow_vector[1]);
                         org.opencv.core.Point pt2_left = new org.opencv.core.Point(
                                 current_left_flow_vector[0], current_left_flow_vector[1]);
-                        arrowedLine(debugFlowImage, pt1_left, pt2_left, new Scalar(0));
-//                        //-----------------------------------------------------------
+                        arrowedLine(debugFlowImage, pt1_left, pt2_left, new Scalar(0));*/
+                        //-----------------------------------------------------------
 
                         // preferred flow vector as 1x3 Mat
                         left_pref_vector = left_preferred_flow.row((int) previous_left_flow_vector[0]);
@@ -2099,22 +2150,26 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     }
 
                     // ------------------- compute right flow --------------------
-                    //-----------------------------------------------------------
+                    //------------------------------------------------------------
+                    // Again, compute the difference between the x coordinates to see if we have
+                    // enough info to form an informative flow vector
                     if (Math.abs(
                             mod((int) currentPointsToTrack.get(i, j)[0] - 12, 90)
                             - mod((int) prevPointsToTrack.get(i, j)[0] - 12, 90))
                             < 70){
+
+                        //Compute current and previous point vectors
                         double[] current_right_flow_vector = {mod((int) currentPointsToTrack.get(i, j)[0] - 12, 90), (int) currentPointsToTrack.get(i, j)[1]};
                         double[] previous_right_flow_vector = {mod((int) prevPointsToTrack.get(i, j)[0] - 12, 90), (int) prevPointsToTrack.get(i, j)[1]};
 
                         //   print arrows on debugFlowImage image - DEBUG
-                        org.opencv.core.Point pt1_right = new org.opencv.core.Point(
+                        /*org.opencv.core.Point pt1_right = new org.opencv.core.Point(
                                 previous_right_flow_vector[0],
                                 previous_right_flow_vector[1] + right_image_row);
                         org.opencv.core.Point pt2_right = new org.opencv.core.Point(
                                 current_right_flow_vector[0],
                                 current_right_flow_vector[1] + right_image_row);
-                        arrowedLine(debugFlowImage, pt1_right, pt2_right, new Scalar(0));
+                        arrowedLine(debugFlowImage, pt1_right, pt2_right, new Scalar(0));*/
                         //-----------------------------------------------------------
 
                         // preferred flow vector as 1x3 Mat
@@ -2131,12 +2186,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     }
                 }
             }
+
+            //(14) from Lucas' dissertation
             leftCXFlow = -1000*leftFlowSum/(totalpoints*(currentFrameTime-prevFrameTime));
             rightCXFlow = -1000*rightFlowSum/(totalpoints*(currentFrameTime-prevFrameTime));
 
-            current_image.copyTo(previous_image);
-            goodFeaturesToTrack(current_image, initialImage, 100, 0.5, 3);
-            initialImage.convertTo(prevPointsToTrack, CvType.CV_32FC2);
+            current_image.copyTo(previous_image); //Set next previous image
+            goodFeaturesToTrack(current_image, initialImage, 100, 0.5, 3); //Get corners from current image
+            initialImage.convertTo(prevPointsToTrack, CvType.CV_32FC2); // Set as previous points to track
+
         }
     }
 
@@ -2240,6 +2298,69 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         rightCXFlow = 1000*leftFlowSum/(totalpoints*(currentFrameTime-prevFrameTime));
 
         current_image.copyTo(previous_image);
+    }
+
+    //Function to look for obstacles using optical flow - RM
+    public void getObstaclesFromSparseFlow(){
+        //Already have corner information in previousPointsToTrack, currentPointsToTrack
+        //Only two frames worth of points, want at least five later
+
+        //Compute focus of expansion
+        Mat focus_of_expansion = new Mat(2, 1, CvType.CV_32FC1);
+        focus_of_expansion = fromFlowComputeFOE();
+
+        //Now get Time To Contact (TTC)
+        //Rotational Velocity Vr is just 0, so V = Vt - Vr = Vt - 0 = Vt
+        //Is delta_i the change in distance? Or the real distance?
+
+        //Try real distance first
+        double ttc;
+        double speed; //Take speed from encoders for now, can retrieve from OF later
+        ArrayList<Double> dists_from_fow = new ArrayList<Double>(); //ArrayList to hold distance of each current point from the FOE
+
+        //Build dists_from_flow
+
+
+    }
+
+    public Mat fromFlowComputeFOE(){
+        //For method see: http://www.dgp.toronto.edu/~donovan/stabilization/opticalflow.pdf pages 13 and 14
+
+        //Matrices initialised with 0 rows as we build them from scratch, row by row
+        Mat A = new Mat(0, 2, CvType.CV_32FC1); //Matrix A for Focus of Expansion calculation
+        Mat b = new Mat(0, 1, CvType.CV_32FC1); //Vector b for Focus of Expansion calculation
+
+        //Iterate through all points of interest
+        for (int i = 0; i < currentPointsToTrack.rows(); i++) {
+            for (int j = 0; j < currentPointsToTrack.cols(); j++) {
+                //Get xy uv, (x,y) being the ith point, (u,v) being the displacement vector
+                double x = prevPointsToTrack.get(i,j)[0];
+                double y = prevPointsToTrack.get(i,j)[1];
+                double u = Math.abs(currentPointsToTrack.get(i,j)[0] - x);
+                double v = Math.abs(currentPointsToTrack.get(i,j)[1] - y);
+
+                //Matrices for the next rows to be added
+                Mat next_uv = new Mat(1, 2, CvType.CV_32FC1);
+                Mat next_bi = new Mat(1, 1, CvType.CV_32FC1);
+
+                //Initialise new row
+                next_uv.put(1,1, u);
+                next_uv.put(1,2, v);
+
+                double bi = (x * v) - (y * u);
+                next_bi.put(1, 1, bi);
+
+                //Add new point and vector information to A and b
+                A.push_back(next_uv);
+                b.push_back(next_bi);
+            }
+        }
+
+        int n = A.rows();
+        Mat FOE; // Should return a 2x1 representing the point that is the focus of expansion
+        FOE = (((A.t().mul(A)).inv()).mul(A.t())).mul(b); //FOE: Given as FOE = (A'A)^-1A'b
+
+        return FOE;
     }
 
     // Drive forward

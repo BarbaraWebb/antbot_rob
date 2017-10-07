@@ -47,6 +47,9 @@ public interface BroadcastValues {
     //String SIMPLE_COMBINER = "SimpleCombinerModule";
     //String WEIGHTED_COMBINER = "WeightedCombinerModule";
 
+    String OF_MODULE = "OpticalFlowModule";
+    String OF_DETECT = "OpticalFlowDetectionModule";
+    String OF_AVOID = "OpticalFlowAvoidanceModule";
     String NO_MODULE = "NoModule";
 
     //______________________________________AntEye Broadcasts_______________________________________

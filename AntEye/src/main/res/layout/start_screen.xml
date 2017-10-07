@@ -99,7 +99,7 @@
                     <RadioButton
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="RunDown"
+                        android:text="Detect"
                         android:id="@+id/OF1_radioBtn"
                         android:checked="false"
                         android:layout_marginTop="10dp" />
@@ -107,7 +107,7 @@
                     <RadioButton
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:text="Turn To Minimum"
+                        android:text="Avoid"
                         android:id="@+id/OF2_radioBtn"
                         android:checked="false"
                         android:layout_marginTop="10dp" />

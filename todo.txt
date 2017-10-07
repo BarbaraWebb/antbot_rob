@@ -1,0 +1,52 @@
+Todo and notes file for Project:
+
+02 / 10 / 17:
+todo:
+ - Optical flow detection implementation
+   > onCvCameraFrame is the main callback method used (everything happens
+     in response to a new visual stimulus
+   > From here the threads are run
+   > Looking at repurposing existing method computeSparseOpicFlow()
+     originally used for speed calculation. Not used anywhere else, so
+     may be modified.
+ 
+notes:
+ - Optical flow paper: http://www.araa.asn.au/acra/acra2005/papers/low.pdf ::CITE::
+   > Detect corners using sparse flow and goodFeaturesToTrack
+   > Compute range over a series of frames
+   > Halt if below some threshold
+   > Tune manually
+
+ - Cross correlation matching?
+
+ - Turns out the optical flow as described by Luca isn't actually there
+   > Actually I was wrong, it is, but it's not in the flow computation method; it's in the getSpeeds method
+ - Seems to be a number of implementations of image rotation/reshaping/remapping
+
+
+ - Line 2117: if ( Maths.abs( mod((int) currentPointsTotrack.get(i,j)[0] + 12, 90) - mod((int) prevPointsToTrack.get(i,j)[0] + 12, 90)) < 70 ) {...}
+   Taking a distance between two x coordinates of points + 12, this is the pixel offset for the left hand side.
+   Looks like, if the distance difference between points in the image (mod 90 for image overlap), is greater than 70, then we have enough information to compute
+   a flow vector (IMPORTANT FOR OBSTACLES)
+
+ - So, where to implement my stuff?..
+   >Can add functions in MainActivity.java - Function for detection? Then work the behaviour into the appropriate threads (i.e. if clear move step else halt)
+
+progress:
+- Actually know how the existing stuff works. The method described by Luca IS present despite what I initially thought; he computes the flow vectors manually
+- Added menu options and appropriate back-end code
+- Have an idea as to how to implement behaviour:
+  A low level (instinct level) function running on each frame to check distances using the methods described in the paper linked above
+
+
+06 / 10 / 17:
+- Getting this optical flow off the ground
+  >Compute the focus of expansion
+
+- May need to restructure existing OF flow code so sparse code may be used without
+  messing with dense code
+  
+notes:
+- Papers for OF: http://www.dgp.toronto.edu/~donovan/stabilization/opticalflow.pdf
+                 http://journals.sagepub.com/doi/full/10.5772/5715
+		 
