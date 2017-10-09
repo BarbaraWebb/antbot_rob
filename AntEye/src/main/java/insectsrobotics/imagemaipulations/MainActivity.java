@@ -59,6 +59,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Currency;
 import java.util.List;
 import java.io.OutputStreamWriter;
@@ -139,12 +140,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     MatOfPoint initialImage;
     MatOfPoint2f prevPointsToTrack;
     MatOfPoint2f currentPointsToTrack;
+    MatOfPoint2f flowPointsPrevious;
+    MatOfPoint2f flowPointsCurrent;
     MatOfByte Status;
     MatOfFloat Err;
     Mat debugFlowImage;
     boolean tracked = false;
     float prevFrameTime = 0;
     float currentFrameTime;
+
 
     float rightCXFlow = 0;
     float leftCXFlow = 0;
@@ -297,6 +301,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     //Single thread will be used for both runnables: Detection and avoidance
     Thread opticalFlowThread; //Bot will detect obstacle and try to navigate it
+    double global_TTC;  // Global Time To Contact variable
 
 
     //Initiate all ServiceConnections for all Background Services
@@ -948,12 +953,19 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         // OPTICAL FLOW COMPUTED HERE - RM
         // Existing methods exist for sparse and are not currently used. Re-purpose - RM
         // So from here it can be seen that the left and right CXFlowImage matrices aren't used for OF - RM
+        //
+        // flowPointsCurrent = currentPointsToTrack; // Create a copy for the OF to utilise
+        //flowPointsPrevious = prevPointsToTrack;
+
         computeSparseOpticFlow();
+        getObstaclesFromSparseFlow();
+        getSpeedsFromSparseFlow();
 
-        // getSpeedsFromSparseFlow();
 
-        computeDenseOpticFlow();
-        getSpeedsFromDenseFlow();
+
+        //Commented by Rob just to get things going just now - RM
+        //computeDenseOpticFlow();
+        //getSpeedsFromDenseFlow();
 
         // --commented for speed--
         //processedDestImage.copyTo(second_frame);
@@ -1175,6 +1187,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     Runnable opticalFlowDetection = new Runnable() {
         @Override
         public void run() {
+            // Simple test thread; drive forward, keep watching time-to-contact to know when to stop
+
             //Need to wait a little
             try {
                 sleep(3000);
@@ -1183,12 +1197,53 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
 
 
+            boolean stop = false;
+            int startTime = (int) SystemClock.elapsedRealtime(); //Set start time for thread
+            int currentTime = (int) SystemClock.elapsedRealtime() - startTime;
+
+            while( !stop || (currentTime <= 10000 )) { //Set timelimit
+                if ( global_TTC < 2000 ){ // Will need tuned, if time to conact < 2 seconds, break
+
+                    try {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                debugTextView.setText(String.format("Obstacle detected!"));
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    stop = true;
+                    continue;
+                }
+
+
+
+                go( new double[]{50, 50} ); //Go foward
+                currentTime = (int) SystemClock.elapsedRealtime() - startTime; //Update elapsed time
+            }
+
+            go (new double[]{0,0});
+
+            try {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        debugTextView.setText(String.format("Obstacle detection run completed."));
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     };
 
     Runnable opticalFlowAvoidance = new Runnable() {
         @Override
-        public void run() {
+        public void run() { //Should really be worked in with existing PI stuff
             //Need to wait a little
             try {
                 sleep(3000);
@@ -2226,13 +2281,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         double[] previous_left_flow_vector;
         double[] current_right_flow_vector;
         double[] previous_right_flow_vector;
-        
+
         for (int y = 0; y < currentPointsToTrack.rows(); y++) {
             for (int x = 0; x < currentPointsToTrack.cols(); x++) {
 
                 // ------------------- compute left flow --------------------
                 //-----------------------------------------------------------
-               
+
                 current_left_flow_vector = new double[]{mod((int) currentPointsToTrack.get(y, x)[0] + x + 12, 90),
                                                         mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)};
                 previous_left_flow_vector = new double[]{mod(x + 12, 90), y};
@@ -2258,7 +2313,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     // filter vector by preferred flow and sum
                     leftFlowSum += left_pref_vector.dot(flowVector);
                 }
-                
+
 
                 // ------------------- compute right flow --------------------
                 //-----------------------------------------------------------
@@ -2306,7 +2361,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //Only two frames worth of points, want at least five later
 
         //Compute focus of expansion
-        Mat focus_of_expansion = new Mat(2, 1, CvType.CV_32FC1);
+
+
+        Mat focus_of_expansion;
         focus_of_expansion = fromFlowComputeFOE();
 
         //Now get Time To Contact (TTC)
@@ -2314,30 +2371,75 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //Is delta_i the change in distance? Or the real distance?
 
         //Try real distance first
-        double ttc;
-        double speed; //Take speed from encoders for now, can retrieve from OF later
-        ArrayList<Double> dists_from_fow = new ArrayList<Double>(); //ArrayList to hold distance of each current point from the FOE
+        float ttc = 1; //Time to contact
+        float speed; //Take speed from OF, encoders would be more accurate, but more work needed
 
-        //Build dists_from_flow
+        String FOETAG ="FOE Details";
+        String output = "Focus of expansion size: " + focus_of_expansion.size();
+        Log.i(FOETAG, output);
+        output = "Focus of expansion: " + focus_of_expansion.get(1,1);
+        Log.i(FOETAG, output);
 
+        ArrayList<Double> dists_from_foe = new ArrayList(); //ArrayList to hold distance of each current point from the FOE
+
+        //Get speed from Optical Flow variables (take average of L and R flows)
+        speed = Math.abs( (leftCXFlow + rightCXFlow) / 2 );
+
+        //Build dists_from_foe
+        for ( int i = 0; i < currentPointsToTrack.rows(); i++ ){
+            for ( int j = 0; j < currentPointsToTrack.cols(); j ++){
+                // Each entry is given as delta_i / |Vt|, in our case delta_i / |V| as we have no rotation
+                //Compute euclidean distance of current point of interest from FOE
+                float x1 = 0;//foe_as_point[0];
+                float y1 = 0;//foe_as_point[1];
+                float x2 = (float)currentPointsToTrack.get(i,j)[0];
+                float y2 = (float)currentPointsToTrack.get(i,j)[1];
+
+                float dist = (float) Math.sqrt( Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2) );
+
+                dists_from_foe.add(new Double(dist)); //Add new distance to list
+            }
+        }
+
+        //TTC is a product of all the distances divided by the velocity
+        for ( int k = 0; k < dists_from_foe.size(); k++ ){
+            ttc = ttc * (float) dists_from_foe.get(k).floatValue();
+        }
+        ttc = ttc / (float) Math.pow(speed, dists_from_foe.size());
+        global_TTC = ttc; //Store globally for now, want to get parameter passing up and running
+        //Now have ttc to store globally or locally and return
 
     }
 
     public Mat fromFlowComputeFOE(){
+        String tag = "FOE_COMP_DEBUG"; //Debug parameters
+        String output = tag + "=== DEBUG START ===";;
+        Log.i(tag, output);
+
         //For method see: http://www.dgp.toronto.edu/~donovan/stabilization/opticalflow.pdf pages 13 and 14
 
         //Matrices initialised with 0 rows as we build them from scratch, row by row
-        Mat A = new Mat(0, 2, CvType.CV_32FC1); //Matrix A for Focus of Expansion calculation
-        Mat b = new Mat(0, 1, CvType.CV_32FC1); //Vector b for Focus of Expansion calculation
+        int num_points = prevPointsToTrack.rows() * prevPointsToTrack.cols();
+        Mat A = new Mat(num_points, 2, CvType.CV_32FC1); //Matrix A for Focus of Expansion calculation
+        Mat b = new Mat(num_points, 1, CvType.CV_32FC1); //Vector b for Focus of Expansion calculation
 
+        //AntEye has stopped, problem lies here!!!
         //Iterate through all points of interest
-        for (int i = 0; i < currentPointsToTrack.rows(); i++) {
-            for (int j = 0; j < currentPointsToTrack.cols(); j++) {
+
+        int point_index = 0;
+        for (int i = 0; i < prevPointsToTrack.rows(); i++) {
+            for (int j = 0; j < prevPointsToTrack.cols(); j++) {
                 //Get xy uv, (x,y) being the ith point, (u,v) being the displacement vector
-                double x = prevPointsToTrack.get(i,j)[0];
-                double y = prevPointsToTrack.get(i,j)[1];
-                double u = Math.abs(currentPointsToTrack.get(i,j)[0] - x);
-                double v = Math.abs(currentPointsToTrack.get(i,j)[1] - y);
+
+                double x =  Math.abs( mod( (int) prevPointsToTrack.get(i,j)[0], 90));
+                double y =  Math.abs( mod( (int) prevPointsToTrack.get(i,j)[1], 90));
+                double u =  Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[0], 90)) - (int) x);
+                double v =  Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[1], 90)) - (int) y);
+
+                //DEBUG
+                double[] uv = {u, v};
+                output = "[u, v]: " + Arrays.toString(uv);
+                Log.i(tag, output);
 
                 //Matrices for the next rows to be added
                 Mat next_uv = new Mat(1, 2, CvType.CV_32FC1);
@@ -2352,15 +2454,44 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 //Add new point and vector information to A and b
                 A.push_back(next_uv);
+                output = "In loop, A.dump(): " + A.dump();
+                Log.i(tag, output);
                 b.push_back(next_bi);
             }
         }
 
-        int n = A.rows();
-        Mat FOE; // Should return a 2x1 representing the point that is the focus of expansion
-        FOE = (((A.t().mul(A)).inv()).mul(A.t())).mul(b); //FOE: Given as FOE = (A'A)^-1A'b
 
+        Mat FOE = new Mat(1,2, CvType.CV_32FC1); // Should return a 2x1 representing the point that is the focus of expansion
+        output = "A.size(): " + A.size();
+        Log.i(tag, output);
+        output = "A.dump(): " + A.dump();
+        Log.i(tag, output);
+
+        //FOE: Given as FOE = (A'A)^-1A'b
+        //FOE = (((A.t().mul(A)).inv()).mul(A.t())).mul(b);
+        int n = A.cols();//Always two, but keep general
+        Mat AtA = new Mat(n,n, CvType.CV_32FC1); //Init new matrix of size nxn where n is the number of rows of A
+        Mat AtAinvAt = new Mat(A.cols(), A.rows(), CvType.CV_32FC1); //Init new matrix to hold ((A'A)^-1)A'
+
+        Core.gemm(A.t(), A, 1, new Mat(), 0, AtA, 0); //Step one of FOE: A'A
+        output = "AtA.dump(): " + AtA.dump();
+        Log.i(tag, output);
+
+        Mat AtAinv = AtA.inv(); // Step two of FOE: Invert A'A
+        Core.gemm(AtAinv, A.t(), 1, new Mat(), 0, AtAinvAt, 0); // Step three of FOE: Multiply by A' again
+        Core.gemm(AtAinvAt, b, 1, new Mat(), 0, FOE, 0); // Final step: Multiply ((A'A)^-1)A' by b
+
+        output = "FOE.size() : " + FOE.size();
+        Log.i(tag, output);
+
+        output = "FOE.dump() : " + FOE.dump();
+        Log.i(tag, output);
+
+        //End debug output and return
+        output = tag + "=== DEBUG END ===";
+        Log.i(tag, output);
         return FOE;
+
     }
 
     // Drive forward
