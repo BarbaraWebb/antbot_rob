@@ -302,6 +302,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     //Single thread will be used for both runnables: Detection and avoidance
     Thread opticalFlowThread; //Bot will detect obstacle and try to navigate it
     double global_TTC;  // Global Time To Contact variable
+    Mat global_foe;
 
 
     //Initiate all ServiceConnections for all Background Services
@@ -2357,15 +2358,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     //Function to look for obstacles using optical flow - RM
     public void getObstaclesFromSparseFlow(){
-        //Already have corner information in previousPointsToTrack, currentPointsToTrack
-        //Only two frames worth of points, want at least five later
-
-        //Compute focus of expansion
-
-
-        Mat focus_of_expansion;
-        focus_of_expansion = fromFlowComputeFOE();
-
+        Mat focus_of_expansion = fromFlowComputeFOE();
+        //FOE is 2x1 despite what output is saying, use FOE.get(0,0) and (1,0) respectively, remember [0]
         //Now get Time To Contact (TTC)
         //Rotational Velocity Vr is just 0, so V = Vt - Vr = Vt - 0 = Vt
         //Is delta_i the change in distance? Or the real distance?
@@ -2374,11 +2368,17 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         float ttc = 1; //Time to contact
         float speed; //Take speed from OF, encoders would be more accurate, but more work needed
 
-        String FOETAG ="FOE Details";
-        String output = "Focus of expansion size: " + focus_of_expansion.size();
-        Log.i(FOETAG, output);
-        output = "Focus of expansion: " + focus_of_expansion.get(1,1);
-        Log.i(FOETAG, output);
+        String tag ="Obstacle Debug: ";
+        String output = " === DEBUG START === ";
+        Log.i(tag, output);
+
+        output = "global_foe.dump()" + global_foe.dump();
+        Log.i(tag, output);
+
+        output = "FOE.size(): " + focus_of_expansion.size();
+        Log.i(tag, output);
+        output = "FOE.dump(): " + focus_of_expansion.dump();
+        Log.i(tag, output);
 
         ArrayList<Double> dists_from_foe = new ArrayList(); //ArrayList to hold distance of each current point from the FOE
 
@@ -2411,7 +2411,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     }
 
-    public Mat fromFlowComputeFOE(){
+    public Mat fromFlowComputeFOE(){ //Compute the focus of expansion from the sparse optical flow - RM
         String tag = "FOE_COMP_DEBUG"; //Debug parameters
         String output = tag + "=== DEBUG START ===";;
         Log.i(tag, output);
@@ -2419,67 +2419,90 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //For method see: http://www.dgp.toronto.edu/~donovan/stabilization/opticalflow.pdf pages 13 and 14
 
         //Matrices initialised with 0 rows as we build them from scratch, row by row
-        int num_points = prevPointsToTrack.rows() * prevPointsToTrack.cols();
-        Mat A = new Mat(num_points, 2, CvType.CV_32FC1); //Matrix A for Focus of Expansion calculation
-        Mat b = new Mat(num_points, 1, CvType.CV_32FC1); //Vector b for Focus of Expansion calculation
+        Mat A = new Mat(0, 2, CvType.CV_32FC1); //Matrix A for Focus of Expansion calculation
+        Mat b = new Mat(0, 1, CvType.CV_32FC1); //Vector b for Focus of Expansion calculation
 
         //AntEye has stopped, problem lies here!!!
         //Iterate through all points of interest
-
-        int point_index = 0;
         for (int i = 0; i < prevPointsToTrack.rows(); i++) {
             for (int j = 0; j < prevPointsToTrack.cols(); j++) {
                 //Get xy uv, (x,y) being the ith point, (u,v) being the displacement vector
-
-                double x =  Math.abs( mod( (int) prevPointsToTrack.get(i,j)[0], 90));
-                double y =  Math.abs( mod( (int) prevPointsToTrack.get(i,j)[1], 90));
-                double u =  Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[0], 90)) - (int) x);
-                double v =  Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[1], 90)) - (int) y);
-
-                //DEBUG
-                double[] uv = {u, v};
-                output = "[u, v]: " + Arrays.toString(uv);
-                Log.i(tag, output);
+                float x =  Math.abs( mod( (int) prevPointsToTrack.get(i,j)[0], 90));
+                float y =  Math.abs( mod( (int) prevPointsToTrack.get(i,j)[1], 90));
+                float[] u =  {Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[0], 90)) - (int) x)};
+                float[] v =  {Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[1], 90)) - (int) y)};
 
                 //Matrices for the next rows to be added
                 Mat next_uv = new Mat(1, 2, CvType.CV_32FC1);
                 Mat next_bi = new Mat(1, 1, CvType.CV_32FC1);
 
                 //Initialise new row
-                next_uv.put(1,1, u);
-                next_uv.put(1,2, v);
+                next_uv.put(0,0, u);
+                next_uv.put(0,1, v);
+                //output = "In, loop next_uv.dump(): " + next_uv.dump();
+                //Log.i(tag, output);
 
-                double bi = (x * v) - (y * u);
-                next_bi.put(1, 1, bi);
+                double bi = (x * v[0]) - (y * u[0]);
+                next_bi.put(0, 0, bi);
 
                 //Add new point and vector information to A and b
-                A.push_back(next_uv);
-                output = "In loop, A.dump(): " + A.dump();
-                Log.i(tag, output);
-                b.push_back(next_bi);
+                A.push_back(next_uv); //This doesn't work for some reason
+                //output = "In loop, A.dump(): " + A.dump();
+                //Log.i(tag, output);
+
+                b.push_back(next_bi); // Check this
+                //output = "b.dump(): " + b.dump();
+                //Log.i(tag, output);
             }
         }
 
 
         Mat FOE = new Mat(1,2, CvType.CV_32FC1); // Should return a 2x1 representing the point that is the focus of expansion
-        output = "A.size(): " + A.size();
-        Log.i(tag, output);
-        output = "A.dump(): " + A.dump();
-        Log.i(tag, output);
+        //output = "A.size(): " + A.size();
+        //Log.i(tag, output);
+        //output = "A.dump(): " + A.dump();
+        //Log.i(tag, output);
 
         //FOE: Given as FOE = (A'A)^-1A'b
-        //FOE = (((A.t().mul(A)).inv()).mul(A.t())).mul(b);
+
         int n = A.cols();//Always two, but keep general
         Mat AtA = new Mat(n,n, CvType.CV_32FC1); //Init new matrix of size nxn where n is the number of rows of A
         Mat AtAinvAt = new Mat(A.cols(), A.rows(), CvType.CV_32FC1); //Init new matrix to hold ((A'A)^-1)A'
 
         Core.gemm(A.t(), A, 1, new Mat(), 0, AtA, 0); //Step one of FOE: A'A
-        output = "AtA.dump(): " + AtA.dump();
-        Log.i(tag, output);
+        //output = "AtA.dump(): " + AtA.dump();
+        //Log.i(tag, output);
 
         Mat AtAinv = AtA.inv(); // Step two of FOE: Invert A'A
         Core.gemm(AtAinv, A.t(), 1, new Mat(), 0, AtAinvAt, 0); // Step three of FOE: Multiply by A' again
         Core.gemm(AtAinvAt, b, 1, new Mat(), 0, FOE, 0); // Final step: Multiply ((A'A)^-1)A' by b
+
+        //Final bounds check to make sure we're in 0, 89 range in x and 0,9 in y
+        //If out of bounds, treat as if "wrapped", modulo if positive,
+
+        output = "FOE.dump() before: " + FOE.dump();
+        Log.i(tag, output);
+        double fx = FOE.get(0,0)[0];
+        if ( fx >= 90 ) {
+            fx = fx % 90;
+            FOE.put(0,0, fx); //Replace the fixed value
+        } else if (fx < 0) {
+            fx = Math.abs(fx); //Absolute value
+            fx = fx % 90; //Get in range
+            fx = 89 - fx; // Sub from 90 to get "wrapped position"
+            FOE.put(0, 0, fx); //Replace the fixed value
+        }
+
+        double fy = FOE.get(1,0)[0];
+        if ( fy >= 10 ){
+            fy = fy % 10;
+            FOE.put(0,1, fy);
+        } else if ( fy < 0 ){
+            fy = Math.abs(fy);
+            fy = fy % 10;
+            fy = 9 - fy;
+            FOE.put(0,1,fy); //Replace the fixed y value
+        }
 
         output = "FOE.size() : " + FOE.size();
         Log.i(tag, output);
@@ -2490,6 +2513,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //End debug output and return
         output = tag + "=== DEBUG END ===";
         Log.i(tag, output);
+        global_foe = FOE;
         return FOE;
 
     }
