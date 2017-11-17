@@ -66,21 +66,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/home/refmitchell/.gradle/caches/modules-2/files-2.1/pl.edu.icm/JLargeArrays/1.2/85c8cd79cc2865ef37cd70f96cd82246ee642d58/JLargeArrays-1.2.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="85c8cd79cc2865ef37cd70f96cd82246ee642d58">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/JLargeArrays-1.2_9ded9c2cd13a55ebd1f02ce5ead2ed9fd4e52fc4.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/home/refmitchell/Uni/4/Project/antbot_rob/openCVLibrary300/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="be06c658ee3e3d23ad7c7a59ec8a75e2240e5b5f">
         <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_d991df4776a6cd6e0429c785d6ed03d1e32f6b91.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/refmitchell/.gradle/caches/modules-2/files-2.1/pl.edu.icm/JLargeArrays/1.2/85c8cd79cc2865ef37cd70f96cd82246ee642d58/JLargeArrays-1.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="85c8cd79cc2865ef37cd70f96cd82246ee642d58">
+        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/JLargeArrays-1.2_9ded9c2cd13a55ebd1f02ce5ead2ed9fd4e52fc4.jar" />
     </item>
     <item
         is-multidex="false"

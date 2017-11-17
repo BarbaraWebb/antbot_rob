@@ -106,6 +106,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     Mat BlueChannel;
     MatOfInt from_to;
     Mat rgba;
+    Mat norm_rgba;
     List<Mat> rgbaList;
     List<Mat> BlueChannelList;
     double[] pixel;
@@ -301,9 +302,17 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     //Single thread will be used for both runnables: Detection and avoidance
     Thread opticalFlowThread; //Bot will detect obstacle and try to navigate it
-    double global_TTC;  // Global Time To Contact variable
-    Mat global_foe;
 
+    Mat global_foe;
+    Mat sample_foe; //NOT TRUE FOE, DO NOT USE FOR CALCS, used to store summed FOE x and y for mean FOE
+    boolean init_foe = true;
+
+    double sample_ttc = 0; //NOT TRUE TTC, used to store summed TTCs for mean TTC calc
+    int sample_size = 5; //Number of frames we will use to average out FOE
+
+    int sample_no = 0; //The sample we're currently on (incremented by fromFlowComputeFOE)
+    int threshold_ttc = 5;
+    double global_ttc = threshold_ttc + 1;  // Global Time To Contact variable
 
     //Initiate all ServiceConnections for all Background Services
     ServiceConnection visualNavigationServiceConnection = new ServiceConnection() {
@@ -547,6 +556,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         visualModule = mBundle.getString(VN_MODULE, NO_MODULE);
         pathIntegratorModule = mBundle.getString(PI_MODULE, NO_MODULE);
         combinerModule = mBundle.getString(C_MODULE, NO_MODULE);
+        opticalFlowModule = mBundle.getString(OF_MODULE, NO_MODULE);
         selectedModule=mBundle.getInt("selectModule",0);
 
         // DEBUG LOG to file
@@ -807,6 +817,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         BlueChannelList = new ArrayList<>();
         from_to = new MatOfInt(2, 0);
         rgba = new Mat();
+        norm_rgba = new Mat();
 
         // initialize some CX variables
         currentRightCXImage = Mat.zeros(10, 90, CvType.CV_8UC1);
@@ -816,7 +827,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         rightCXFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
 
         //Centered flow image - For obstacle detection - RM
-        centeredFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
+        //centeredFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
 
         current_image = Mat.zeros(10, 90, CvType.CV_8UC1);
         debugFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
@@ -839,6 +850,12 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         //Get input frame in RGBA then copy to BlueChannel Mat - RM
         rgba = inputFrame.rgba();                                           //Input Frame in rgba format
+        Log.i("Channels : ", Integer.toString(rgba.channels()));
+        //RGB normalisation here!!
+        String op = "RGBA.size()" + rgba.size();
+        Log.i("RGBA shape : ",op);
+        //normalizeRgbaImage(); //Normalise the global rgba image
+
         BlueChannel = new Mat(rgba.rows(), rgba.cols(), CvType.CV_8UC1);    //Mat for later image processing
 
         Mat unwrappedImg =  Mat.zeros((int) unwrapHeight, (int) unwrapWidth, CvType.CV_8UC1);
@@ -949,6 +966,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         current_image.colRange(0, 78).copyTo(leftCXFlowImage.colRange(12, 90));
         current_image.colRange(78, 90).copyTo(leftCXFlowImage.colRange(0, 12));
 
+        Log.i("current_image channels", Integer.toString(current_image.channels()));
         // compute optic flow and charge the global variables with the speed values
 
         // OPTICAL FLOW COMPUTED HERE - RM
@@ -1058,6 +1076,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 //Latter will detect obstacle and try and navigate around it, retaining it's path
                 switch(opticalFlowModule){
                     case OF_DETECT:
+                        Log.i("OF: ", "Thread started");
                         opticalFlowThread = new Thread(opticalFlowDetection);
                         opticalFlowThread.start();
                         break;
@@ -1160,6 +1179,25 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         return processedMat;
     }
 
+    private void normalizeRgbaImage() {
+        //Loop across columns and rows of rgba image
+        int norm_scale = 255; //Normalisation scaling factor
+        for ( int i = 0; i < rgba.rows(); i++ ){
+            for ( int j = 0; j < rgba.cols(); j++ ){
+                double[] channel_array = rgba.get(i, j); //Get the channel array
+                double total = channel_array[0] + channel_array[1] + channel_array[2]; //Compute the sum of R G B
+                double[] norm_channel_array = { //Array to store normalised colour channels
+                        (channel_array[0]), //Red
+                        (channel_array[1]), //Green
+                        (channel_array[2] / total) * norm_scale, //Blue
+                        channel_array[3] //Alpha is not modified
+                };
+                rgba.put(i, j, norm_channel_array); //Replace values in original rgba image
+            }
+        }
+
+    }
+
     //Rotate the 360X40 snapshot
     private void rotateSnapShot(){
         int counter1 = 0;
@@ -1197,42 +1235,68 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 e.printStackTrace();
             }
 
-
             boolean stop = false;
+            int counter = 0;
             int startTime = (int) SystemClock.elapsedRealtime(); //Set start time for thread
             int currentTime = (int) SystemClock.elapsedRealtime() - startTime;
 
-            while( !stop || (currentTime <= 10000 )) { //Set timelimit
-                if ( global_TTC < 2000 ){ // Will need tuned, if time to conact < 2 seconds, break
 
+
+            boolean initial = false;
+
+            while( !stop && (currentTime <= 30000 )) { //Set timelimit of 10 seconds
+                try{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run(){
+                            debugTextView.setText(String.format("Time to contact: %f" , global_ttc ));
+                        }
+                    });
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                if ( global_ttc < threshold_ttc){ //If ttc less than threshold (2 seconds)
                     try {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                debugTextView.setText(String.format("Obstacle detected!"));
+                                debugTextView.setText(String.format("Obstacle detected!")); //Show output
                             }
                         });
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    counter++;
+                    stop = true; //Set stop flag
+                    continue; //Jump to next loop iteration (effectively a break, consider replacing)
+                }
 
+                if (counter > 1) {
                     stop = true;
                     continue;
                 }
 
-
-
-                go( new double[]{50, 50} ); //Go foward
                 currentTime = (int) SystemClock.elapsedRealtime() - startTime; //Update elapsed time
+                if ( !initial ) { //If this is the first loop iteration
+                    go(new double[]{50, 50}); //Issue new go command
+                    initial = true; //Set flag so we don't send more movement commands
+                }
             }
 
-            go (new double[]{0,0});
+            go (new double[]{0,0}); //Stop command
+
+            try {
+                sleep(1000); //Delay time for stop to execute
+            } catch (Exception e){
+                e.printStackTrace();
+            }
 
             try {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        debugTextView.setText(String.format("Obstacle detection run completed."));
+                        debugTextView.setText(String.format("Obstacle detection run completed. "));
                     }
                 });
             } catch (Exception e) {
@@ -1253,7 +1317,86 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
 
 
+            boolean stop = false;
+            boolean detect = false;
+
+            // Left and right tread speeds 0 - 100
+            double LFT_SPEED = 50;
+            double RGT_SPEED = 50;
+
+            int startTime = (int) SystemClock.elapsedRealtime(); //Set start time for thread
+            int currentTime = (int) SystemClock.elapsedRealtime() - startTime;
+
+            while( !stop &&(currentTime <= 10000 )) { //Set timelimit of 30 seconds
+                try{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run(){
+                            debugTextView.setText(String.format("Time to contact: %f" , global_ttc ));
+                        }
+                    });
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                if ( global_ttc < threshold_ttc){
+                    try {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                debugTextView.setText(String.format("Obstacle detected!"));
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    detect = true;
+                } else {
+                    detect = false;
+                }
+
+                if (detect == true) {
+                    // Mat global_foe; (0,0)x (1,0)y
+                    double[] local_foe = { global_foe.get(0,0)[0], global_foe.get(1,0)[0] };
+                    //If FOE is shifted left then we turn right and vice versa
+                    if ( local_foe[0] <= 45 ) { //Bias to left, obstacle directly ahead will still go left
+                        LFT_SPEED = 20;
+                    } else {
+                        RGT_SPEED = 20;
+                    }
+
+                } else {
+                    LFT_SPEED = 50;
+                    RGT_SPEED = 50;
+                }
+
+                go(new double[]{ LFT_SPEED, RGT_SPEED }); //Move with set speeds
+
+                currentTime = (int) SystemClock.elapsedRealtime() - startTime; //Update elapsed time
+
+            }
+
+            try {
+                sleep(1000);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            go (new double[]{0,0});
+
+            try {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        debugTextView.setText(String.format("Obstacle detection run completed. "));
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
+
     };
 
     //End of OF threads - RM
@@ -2380,18 +2523,31 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         output = "FOE.dump(): " + focus_of_expansion.dump();
         Log.i(tag, output);
 
-        ArrayList<Double> dists_from_foe = new ArrayList(); //ArrayList to hold distance of each current point from the FOE
+        double[] foe_as_point = {focus_of_expansion.get(0,0)[0], focus_of_expansion.get(1,0)[0]};
+
+        //org.opencv.core.Point foe_point = new org.opencv.core.Point(focus_of_expansion.get(0,0)[0], focus_of_expansion.get(0,1)[0]);
+
+        //arrowedLine(debugFlowImage, foe_point, foe_point, new Scalar(0));
+
+        ArrayList<Double> dists_from_foe = new ArrayList<Double>(); //ArrayList to hold distance of each current point from the FOE
 
         //Get speed from Optical Flow variables (take average of L and R flows)
         speed = Math.abs( (leftCXFlow + rightCXFlow) / 2 );
 
+        /*
+        if (speed > 9){
+            output = "Speed: " + speed;
+            Log.i(tag, output);
+
+        }*/
+
         //Build dists_from_foe
         for ( int i = 0; i < currentPointsToTrack.rows(); i++ ){
-            for ( int j = 0; j < currentPointsToTrack.cols(); j ++){
+            for ( int j = 0; j < currentPointsToTrack.cols(); j++ ){
                 // Each entry is given as delta_i / |Vt|, in our case delta_i / |V| as we have no rotation
                 //Compute euclidean distance of current point of interest from FOE
-                float x1 = 0;//foe_as_point[0];
-                float y1 = 0;//foe_as_point[1];
+                float x1 = (float)foe_as_point[0];
+                float y1 = (float)foe_as_point[1];
                 float x2 = (float)currentPointsToTrack.get(i,j)[0];
                 float y2 = (float)currentPointsToTrack.get(i,j)[1];
 
@@ -2403,10 +2559,29 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         //TTC is a product of all the distances divided by the velocity
         for ( int k = 0; k < dists_from_foe.size(); k++ ){
-            ttc = ttc * (float) dists_from_foe.get(k).floatValue();
+            ttc = ttc * dists_from_foe.get(k).floatValue();
         }
-        ttc = ttc / (float) Math.pow(speed, dists_from_foe.size());
-        global_TTC = ttc; //Store globally for now, want to get parameter passing up and running
+
+        //Divide twice to make TTC manageable
+        ttc = ttc / (float) Math.pow(speed, dists_from_foe.size()); //Division by V, elementwise
+      //  ttc = ttc / (float) Math.pow(10, 6); //Tuning parameter to scale values to manageable size
+
+        //If we need samples
+        /*
+        if ( sample_no < sample_size ){
+            sample_ttc = sample_ttc + ttc; //Add current ttc to cumulative sum of ttcs
+            //sample_no is incremented in fromFlowComputeFOE, DO NOT DO IT HERE
+        } else { //sample_no >= sample_size, we have enough samples
+            global_ttc = sample_ttc / sample_size; //Mean time to contact
+            sample_ttc = 0; // reset cumulative sum variable
+            //Again, do not modify sample_no here!
+        }*/
+
+        global_ttc = ttc / Math.pow(10,7); //Store globally for now, want to get parameter passing up and running
+
+        output = "TTC: " + ttc;
+        Log.i(tag, output);
+
         //Now have ttc to store globally or locally and return
 
     }
@@ -2422,7 +2597,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         Mat A = new Mat(0, 2, CvType.CV_32FC1); //Matrix A for Focus of Expansion calculation
         Mat b = new Mat(0, 1, CvType.CV_32FC1); //Vector b for Focus of Expansion calculation
 
-        //AntEye has stopped, problem lies here!!!
         //Iterate through all points of interest
         for (int i = 0; i < prevPointsToTrack.rows(); i++) {
             for (int j = 0; j < prevPointsToTrack.cols(); j++) {
@@ -2457,64 +2631,158 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
 
 
-        Mat FOE = new Mat(1,2, CvType.CV_32FC1); // Should return a 2x1 representing the point that is the focus of expansion
+        Mat FOE = new Mat(2,1, CvType.CV_32FC1); // Should return a 2x1 representing the point that is the focus of expansion
         //output = "A.size(): " + A.size();
         //Log.i(tag, output);
         //output = "A.dump(): " + A.dump();
         //Log.i(tag, output);
 
         //FOE: Given as FOE = (A'A)^-1A'b
-
-        int n = A.cols();//Always two, but keep general
-        Mat AtA = new Mat(n,n, CvType.CV_32FC1); //Init new matrix of size nxn where n is the number of rows of A
-        Mat AtAinvAt = new Mat(A.cols(), A.rows(), CvType.CV_32FC1); //Init new matrix to hold ((A'A)^-1)A'
-
-        Core.gemm(A.t(), A, 1, new Mat(), 0, AtA, 0); //Step one of FOE: A'A
-        //output = "AtA.dump(): " + AtA.dump();
-        //Log.i(tag, output);
-
-        Mat AtAinv = AtA.inv(); // Step two of FOE: Invert A'A
-        Core.gemm(AtAinv, A.t(), 1, new Mat(), 0, AtAinvAt, 0); // Step three of FOE: Multiply by A' again
-        Core.gemm(AtAinvAt, b, 1, new Mat(), 0, FOE, 0); // Final step: Multiply ((A'A)^-1)A' by b
-
-        //Final bounds check to make sure we're in 0, 89 range in x and 0,9 in y
-        //If out of bounds, treat as if "wrapped", modulo if positive,
-
-        output = "FOE.dump() before: " + FOE.dump();
-        Log.i(tag, output);
-        double fx = FOE.get(0,0)[0];
-        if ( fx >= 90 ) {
-            fx = fx % 90;
-            FOE.put(0,0, fx); //Replace the fixed value
-        } else if (fx < 0) {
-            fx = Math.abs(fx); //Absolute value
-            fx = fx % 90; //Get in range
-            fx = 89 - fx; // Sub from 90 to get "wrapped position"
-            FOE.put(0, 0, fx); //Replace the fixed value
+        //If this is the very first call initialise global_foe to front centre
+        if (init_foe) {
+            global_foe = new Mat(2,1,CvType.CV_32FC1);
+            global_foe.put(0,0,45);
+            global_foe.put(1,0,5);
+            init_foe = false;
         }
 
-        double fy = FOE.get(1,0)[0];
-        if ( fy >= 10 ){
-            fy = fy % 10;
-            FOE.put(0,1, fy);
-        } else if ( fy < 0 ){
-            fy = Math.abs(fy);
-            fy = fy % 10;
-            fy = 9 - fy;
-            FOE.put(0,1,fy); //Replace the fixed y value
+        try {
+            int n = A.cols();//Always two, but keep general
+            Mat AtA = new Mat(n, n, CvType.CV_32FC1); //Init new matrix of size nxn where n is the number of rows of A
+            Mat AtAinvAt = new Mat(A.cols(), A.rows(), CvType.CV_32FC1); //Init new matrix to hold ((A'A)^-1)A'
+
+            Core.gemm(A.t(), A, 1, new Mat(), 0, AtA, 0); //Step one of FOE: A'A
+            //output = "AtA.dump(): " + AtA.dump();
+            //Log.i(tag, output);
+
+            Mat AtAinv = AtA.inv(); // Step two of FOE: Invert A'A
+            Core.gemm(AtAinv, A.t(), 1, new Mat(), 0, AtAinvAt, 0); // Step three of FOE: Multiply by A' again
+            Core.gemm(AtAinvAt, b, 1, new Mat(), 0, FOE, 0); // Final step: Multiply ((A'A)^-1)A' by b
+
+            //Final bounds check to make sure we're in 0, 89 range in x and 0,9 in y
+            //If out of bounds, treat as if "wrapped", modulo if positive,
+
+            output = "FOE.dump() before: " + FOE.dump();
+            Log.i(tag, output);
+            double fx = FOE.get(0, 0)[0];
+            if (fx >= 90) {
+                fx = fx % 90;
+                FOE.put(0, 0, fx); //Replace the fixed value
+            } else if (fx < 0) {
+                fx = Math.abs(fx); //Absolute value
+                fx = fx % 90; //Get in range
+                fx = 89 - fx; // Sub from 90 to get "wrapped position"
+                FOE.put(0, 0, fx); //Replace the fixed value
+            }
+
+            double fy = FOE.get(1, 0)[0];
+            if (fy >= 10) {
+                fy = fy % 10;
+                FOE.put(0, 1, fy);
+            } else if (fy < 0) {
+                fy = Math.abs(fy);
+                fy = fy % 10;
+                fy = 9 - fy;
+                FOE.put(0, 1, fy); //Replace the fixed y value
+            }
+
+            output = "FOE.size() : " + FOE.size();
+            Log.i(tag, output);
+
+            output = "FOE.dump() : " + FOE.dump();
+            Log.i(tag, output);
+
+            //End debug output and return
+            output = tag + "=== DEBUG END ===";
+            Log.i(tag, output);
+
+            //Making sure foe is averaged
+            if ( sample_no >= sample_size ) { //If we have enough samples, update FOE
+                //Extract FOE info and divide by sample size
+                double temp_x = sample_foe.get(0,0)[0];
+                double temp_y = sample_foe.get(1,0)[0];
+
+                //Take average x and y
+                temp_x = temp_x / sample_size;
+                temp_y = temp_y / sample_size;
+
+                //Update global FOE
+                global_foe.put(0,0, temp_x);
+                global_foe.put(1,0, temp_y);
+
+                sample_no = 0; //Reset sample count
+                sample_foe = new Mat(2,1, CvType.CV_32FC1); //Re-instantiate sample FOE
+            }
+
+            if (sample_no < sample_size) { //Done this way to avoid skipping a frame
+                //Extraction
+                if (sample_no == 0){ //If this is the first sample, initialise to (0,0)
+                    sample_foe = new Mat(2,1, CvType.CV_32FC1);
+                    sample_foe.put(0,0,0);
+                    sample_foe.put(1,0,0);
+                }
+                double temp_x1 = sample_foe.get(0,0)[0]; //Current sample_FOE x
+                double temp_y1 = sample_foe.get(1,0)[0]; //Current sample_FOE y
+                output = "FOE.dump() catch" + FOE.dump();
+                Log.i(tag,output);
+                double temp_x2 = FOE.get(0,0)[0]; //Current computed FOE x
+                double temp_y2 = FOE.get(1,0)[0]; //Current computed FOE y
+
+                sample_foe.put(0, 0, (temp_x1 + temp_x2)); //Add new x to cumulative sum
+                sample_foe.put(1, 0, (temp_y1 + temp_y2)); //Add new y to cumulative sum
+
+                sample_no++; //new sample has been taken, increment sample counter
+            }
+            return global_foe; //Return current global, our curent foe
+        }catch( Exception e ){
+            e.printStackTrace();
         }
 
-        output = "FOE.size() : " + FOE.size();
-        Log.i(tag, output);
+        //If, for some reason we could not compute the FOE properly, default to front, center
+        FOE.put(0, 0, 45);
+        FOE.put(1, 0, 5);
 
-        output = "FOE.dump() : " + FOE.dump();
-        Log.i(tag, output);
+        //Exactly the same as the above code, could clean up by moving to a function
+        //Making sure foe is averaged
+        if ( sample_no >= sample_size ) { //If we have enough samples, update FOE
+            //Extract FOE info and divide by sample size
+            double temp_x = sample_foe.get(0,0)[0];
+            double temp_y = sample_foe.get(1,0)[0];
 
-        //End debug output and return
-        output = tag + "=== DEBUG END ===";
-        Log.i(tag, output);
-        global_foe = FOE;
-        return FOE;
+            //Take average x and y
+            temp_x = temp_x / sample_size;
+            temp_y = temp_y / sample_size;
+
+            //Update global FOE
+            global_foe.put(0,0, temp_x);
+            global_foe.put(1,0, temp_y);
+
+            sample_no = 0; //Reset sample count
+            sample_foe = new Mat(2,1, CvType.CV_32FC1); //Re-instantiate sample FOE
+        }
+
+        if (sample_no < sample_size) { //Done this way to avoid skipping a frame
+            //Extraction
+            if (sample_no == 0){ //If this is the first sample, initialise to (0,0)
+                sample_foe = new Mat(2,1, CvType.CV_32FC1);
+                sample_foe.put(0,0,0);
+                sample_foe.put(1,0,0);
+            }
+            double temp_x1 = sample_foe.get(0,0)[0]; //Current sample_FOE x
+            double temp_y1 = sample_foe.get(1,0)[0]; //Current sample_FOE y
+            output = "FOE.dump() catch" + FOE.dump();
+            Log.i(tag,output);
+            double temp_x2 = FOE.get(0,0)[0]; //Current computed FOE x
+            double temp_y2 = FOE.get(1,0)[0]; //Current computed FOE y
+
+            sample_foe.put(0, 0, (temp_x1 + temp_x2)); //Add new x to cumulative sum
+            sample_foe.put(1, 0, (temp_y1 + temp_y2)); //Add new y to cumulative sum
+
+            sample_no++; //new sample has been taken, increment sample counter
+        }
+
+        return global_foe;
+
 
     }
 

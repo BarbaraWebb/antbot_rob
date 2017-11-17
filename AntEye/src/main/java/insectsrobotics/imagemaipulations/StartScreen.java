@@ -158,6 +158,8 @@ public class StartScreen extends Activity implements BroadcastValues{
                     Combiner_radioGroup.setVisibility(View.GONE);
                     OF_radioGroup.setVisibility(View.VISIBLE);
                     OF_radioGroup.setOnCheckedChangeListener(radioGroupOnChangeListener);
+                    //Know we are getting in here
+                    break;
                 case "Start":
                     if (navigationModules[0] == -1 && navigationModules[1] == -1 && navigationModules[2] == -1 && navigationModules[3] == -1) {
                         navigationModules[0] = R.id.VS1_radioBtn;

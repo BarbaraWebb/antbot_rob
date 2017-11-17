@@ -1,3 +1,6 @@
+
+
+
 Todo and notes file for Project:
 
 02 / 10 / 17:
@@ -49,4 +52,142 @@ progress:
 notes:
 - Papers for OF: http://www.dgp.toronto.edu/~donovan/stabilization/opticalflow.pdf
                  http://journals.sagepub.com/doi/full/10.5772/5715
+
+progress:
+- Code for computing FOE is in place
+- Need to look at using this info
 		 
+08 / 10 / 17:
+- Compute velocity of the robot.
+  > For this need to build new arduino functions.
+  > Unless I can use getSpeedsFromSparse/Dense flow
+    - Will try this method first to avoid fiddling with Arduino
+
+- Compute TTC
+- Maybe compute image depth
+- Build a basic thread to get the robot to detect an obstacle and halt
+
+notes:
+- No speed retrieval methods on hardware apparently
+  > How was Luca using the encoders???
+
+- No idea what metric my TTC is in, assuming millisecs but could be secs. Check to see
+  if V was per second, TTC should be the same.
+
+progress:
+- Have now got code for computing TTC, and hence image depth should be ok
+  (Depth = TTC * V)
+
+- Have a very simple test thread to check if the system actually works. How to debug this
+  I am completely lost. Could try drawing flow arrows and printing debug info to
+  the runOnUiThread.
+
+- Debugging on the robot time!
+
+09 / 10 / 17:
+- Get code working
+
+notes:
+- Running seems inconsistent (Being stupid, make sure arduino is on
+  before trying to run)
+
+- Need to use prevPoints, and currentPoints BEFORE they're used for left/right flow
+
+- IMPORTANT: MATRIX MULTIPLICATION IN ANDROID uses Core.gemm() function to do proper matrix dot product
+
+
+15 / 10 / 17:
+notes:
+- Not the most productive week, sidetracked by CT.
+- Need to fill out this file for every work session; need to know what was happening when I stopped!
+
+progess:
+- Currently debugging AntEye, calculation of the FOE is producing strange results
+- Computing u and v is fine (results look weird but worry about that later), then when
+  added to A, they show strange, erratic values. May be worth a Stack Overflow question God forbid.
+  - Would be worth checking b too to make sure the method does what it's suppoesed to.
+  - Otherwise, find a solution quickly, too small a problem to hang about over.
+
+16 / 10 / 17:
+- Figure out Mat.put() problem (DONE)
+  > Matrix indexing is still from 0...
+  > Still getting some strange outputs
+  > Fixed, due to matrix initialisation + use of pushback
+  > Check b, seems fine
+
+- Refactor code for A and b calculations (DONE)
+  > double should be float[] (for u and v)
+  > remove debug outputs
+
+- Get true FOE (wrap values around axis to get a value) (DONE)
+
+- Work on TTC calculation, look for bugs.
+
+notes:
+- Need to be careful with matrix ops, can be finicky
+- Should FOE be absolute? Negative FOE x or y does't make sense
+  > Not absolute, wrapped, e.g. -2.5 should be 87.5 (subtract from 90 if neg)
+    fx = -95
+    fx = Math.abs(fx) = 95	
+    fx = fx % 90 = 5
+    fx = 89 - 5 = 84
+
+- Printing the correct value tends to help when debugging...
+- FOE is returning a 2x1 despite output saying it's 1x2 which is strange
+  and annoying.
+
+progress:
+- Seem to have a working FOE calculation and this is being sucessfully passed
+  up the chain to the obstacle detection function
+
+- Aside: Might be a good idea to draw the FOE on screen, look into this
+
+27 / 10 / 17:
+- Draw FOE on debug image
+- if wrong, then fix
+- if looks correct, split image
+
+notes:
+- Speed is changing erratically
+- OF information for speed is the same as that for FOE, could be causing problems
+
+
+30 / 10 / 17:
+
+notes:
+- Need a way of saccading; idea, compute left and right flow fields
+  as Luca did. Then look for FOE in each of these
+
+  [     | .   ]  // Say image is centered at -45 (left flow) FOE should be thereish
+
+  If it's anywhere to the left, then we need to..
+
+  Ok, don't split the frame, just look for FOE, then turn away from it
+
+- Need to figure out how foe would change based on flow field...
+
+
+06 / 11 / 17:
+today:
+- Fix movement and stopping commands (DONE)
+- TTC gone wild??? WHY?!
+  - Soln, take average ttc values (possibly average out the FOE as well.
+  - This is getting stupid.
+  - Taking average FOE over 5 frames, looks more consistent than before.
+
+notes:
+- Lost time due to ADB and weird TTC issues.
+- FOE averageing:
+  - Init global_foe to (45, 5)
+  - FOE is a 2x1, ensure all matrices reflect this, stupid amount of null
+    pointer exceptions
+  - global_ttc should be just above whatever threshold you are setting
+  
+
+10 / 11 / 17:
+today:
+- Normailize input image
+
+notes:
+- RGBA normalisation is making the app noticably slower, this may present an issue.
+
