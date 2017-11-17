@@ -976,15 +976,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         // flowPointsCurrent = currentPointsToTrack; // Create a copy for the OF to utilise
         //flowPointsPrevious = prevPointsToTrack;
 
-        computeSparseOpticFlow();
+  //      computeSparseOpticFlow();
+//        getObstaclesFromSparseFlow();
+    //    getSpeedsFromSparseFlow();
+
+        computeDenseOpticFlow();
+        getSpeedsFromDenseFlow();
         getObstaclesFromSparseFlow();
-        getSpeedsFromSparseFlow();
 
-
-
-        //Commented by Rob just to get things going just now - RM
-        //computeDenseOpticFlow();
-        //getSpeedsFromDenseFlow();
 
         // --commented for speed--
         //processedDestImage.copyTo(second_frame);
@@ -2327,11 +2326,11 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                         previous_left_flow_vector = new double[]{mod((int) prevPointsToTrack.get(i, j)[0] + 12, 90), (int) prevPointsToTrack.get(i, j)[1]};
 
                         //   print arrows on debugFlowImage image - DEBUG
-                        /* org.opencv.core.Point pt1_left = new org.opencv.core.Point(
+                        org.opencv.core.Point pt1_left = new org.opencv.core.Point(
                                 previous_left_flow_vector[0], previous_left_flow_vector[1]);
                         org.opencv.core.Point pt2_left = new org.opencv.core.Point(
                                 current_left_flow_vector[0], current_left_flow_vector[1]);
-                        arrowedLine(debugFlowImage, pt1_left, pt2_left, new Scalar(0));*/
+                        arrowedLine(debugFlowImage, pt1_left, pt2_left, new Scalar(1));
                         //-----------------------------------------------------------
 
                         // preferred flow vector as 1x3 Mat
@@ -2362,13 +2361,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                         double[] previous_right_flow_vector = {mod((int) prevPointsToTrack.get(i, j)[0] - 12, 90), (int) prevPointsToTrack.get(i, j)[1]};
 
                         //   print arrows on debugFlowImage image - DEBUG
-                        /*org.opencv.core.Point pt1_right = new org.opencv.core.Point(
+                        org.opencv.core.Point pt1_right = new org.opencv.core.Point(
                                 previous_right_flow_vector[0],
                                 previous_right_flow_vector[1] + right_image_row);
                         org.opencv.core.Point pt2_right = new org.opencv.core.Point(
                                 current_right_flow_vector[0],
                                 current_right_flow_vector[1] + right_image_row);
-                        arrowedLine(debugFlowImage, pt1_right, pt2_right, new Scalar(0));*/
+                        arrowedLine(debugFlowImage, pt1_right, pt2_right, new Scalar(1));
                         //-----------------------------------------------------------
 
                         // preferred flow vector as 1x3 Mat
@@ -2509,7 +2508,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         //Try real distance first
         float ttc = 1; //Time to contact
-        float speed; //Take speed from OF, encoders would be more accurate, but more work needed
+        float speed; //Take speed from OF, would be more accurate, but more work needed
 
         String tag ="Obstacle Debug: ";
         String output = " === DEBUG START === ";

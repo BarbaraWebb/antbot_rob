@@ -190,4 +190,47 @@ today:
 
 notes:
 - RGBA normalisation is making the app noticably slower, this may present an issue.
+- Now, only normalize the blue channel for effiency but still slow.
+
+progress:
+- Little; normalisation had no noticeable affect on the calculations + behaviour
+
+17 / 11 / 17:
+today:
+- Draw points on the debug frame, hope to confirm suspicions about
+  cvGoodFeaturesToTrack();
+
+- Switch to using dense flow for all optic flow (DONE)
+- Move to speed from encoders, either how Luca did it, or from the arduino direct
+  
+- Test
+- Look into creating an optical flow filter as in:
+  http://jeb.biologists.org/content/jexbio/213/11/1886.full.pdf
+
+  Looks like a uniform flow filter shifted left and right then overlaid.
+
+notes:
+- cvGoodFeaturesToTrack():
+  - Movement is being detected where there is none, small but varied
+  - Somewhat inconsistant, new features are being picked up and vanishing while
+    the robot is sat still. Take images to document.
+    - Images taken, better examples could be collected.
+
+- Wheel encoders:
+  - It looks like the arduino keeps track of these, but:
+    1. Not for the go command. No encoder information is collected or sent
+    2. In it's other uses, it is used internally, not sent back, where is this
+       message?
+    3. Need to find this, otherwise I'm going to have to edit Arduino code which is
+       a scary prospect.
+
+- Have not tested
+
+progress:
+- Determined that cvGoodFeatures was giving bad/inconsistent information
+- Switched flow methods
+- Closer to true wheel encoder usage, lord knows what was going on before
+- Have an idea of what to do flow filter wise, but need to look into practical
+  implementations of such a filter.
+
 
