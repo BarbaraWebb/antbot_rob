@@ -1,6 +1,3 @@
-
-
-
 Todo and notes file for Project:
 
 02 / 10 / 17:
@@ -233,4 +230,88 @@ progress:
 - Have an idea of what to do flow filter wise, but need to look into practical
   implementations of such a filter.
 
+20 / 11 / 17:
+todo:
+- quick tests of new OF
+- check Luca's filters for OF against his dissertation to see what he was doing
+- figure out how broadcasting and recieving works here, need those encoder values
+  and they're not being sent
+- Get Leon's email.
+
+notes:
+- prevPointsToTrack for some reason not initialised in computeDenseOpticFlow
+- prevPointsToTrack not used at all for dense flow
+- Testing did not happen due to this
+
+21 / 11 / 17:
+todo:
+- fix FOE calculation for dense flow (DONE)
+- more work on flow filtering
+
+notes:
+- old code for computing foe was downright strange, be careful with new stuff
+- luca's flow filtering was done using CX_Holonomic.get_prefered_flow() which
+  uses his method of projecting the vectors onto a unit circle.
+- the left and right preferred flow will be identical as the directional flag is
+  never used
+
+  How can I use this?
+
+23 / 11 / 17:
+notes:
+- Luca's filtering done using the dot product i.e. the projection of the actual
+  viewed flow onto the expected.
+
+- TTC now infinite, distances seem more realistic and FOE is consistant
+- Need to figure out image depth to use TTC, otherwise also, FLOW FILTERING!!!
+
+24 / 11 / 17:
+- Solve Infinite TTC (DONE)
+- Filtering: figure it out. (DONE, I think...)
+  - How to gain a filter from Luca's code (known, figured out a couple of days ago)
+  - How to use this to detect obstacles???
+    - For each flow vector detected:
+      	  project it onto the expected (dot product)
+	  add the result to an accumulator
+	  if we exceed some threshold
+	  reset and saccade away from the FOE.
+
+- Implement filtering for the purpose of collision avoidance (DONE)
+
+- Look more into the orginal method using the OF paper, convinced I'm missing
+  something
+
+notes:
+- Infinite TTC caused by fact that speed is less than one when the robot is
+  stationary, we divide by speed^distances which comes out as ~0.02^900 -> 0
+  Dividing by 0 gives infinity in Java
+
+- Solution?: Could just set speeds to 1 if sufficiently small.
+- Could test to see if it drops when actually running the bot.
+  - Tests show it does, though not sure how it behaves
+  - Answer: strangely. TTC goes from infinite to slightly greater than 0
+    in one jump.
+  - Problem: As soon as the power was actually computable (big enough to where,
+    it wouldn't -> 0), it becomse infinite as you're still going to the power of
+    900. Attempted solution was to scale back the power by the same degree that we
+    increased the speed, however no joy. It only takes one sufficiently large
+    speed reading to throw the whole thing off.
+  - May finally be time to accept that this approach will not work.
+    
+- Maybe remove normalisation for performance
+  - Was already off for some reason?
+- Moment of realisation when all of my flow filtering code essenially does
+  what Luca's already did. So, I feel like I may be computing speed information?
+
+progress:
+- Figured out some problems with the old CA approach
+- Implemented an OF filter for Collision Avoidance.
+- Now need to test with this and tune it to see what thresholds would be
+  appropriate.
+
+- Construct a testing environment; observe flow values as obstacles approach on
+  either side.
+
+- Still need to send Leo an email to sort out the encoders, but the dense flow
+  speed actually looks a lot more consistent.
 

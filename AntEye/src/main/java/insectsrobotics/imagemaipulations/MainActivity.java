@@ -84,7 +84,7 @@ import static org.opencv.video.Video.calcOpticalFlowPyrLK;
 
 
 //NOTE: There are many comments suffixed with ' - RM' This means they were left by Robert Mitchell in order
-//to make the code more readable, it does NOT mean that I wrote the code there.
+//to make the code more readable, it does not mean that I wrote the code there.
 
 public class MainActivity extends Activity implements CvCameraViewListener2 , BroadcastValues, SensorEventListener{
     private static final String TAG = "OCVSample::Activity";
@@ -311,8 +311,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     int sample_size = 5; //Number of frames we will use to average out FOE
 
     int sample_no = 0; //The sample we're currently on (incremented by fromFlowComputeFOE)
-    int threshold_ttc = 5;
+    int threshold_ttc = 0;
     double global_ttc = threshold_ttc + 1;  // Global Time To Contact variable
+    float speed = Math.abs( (leftCXFlow + rightCXFlow) / 2);
+
+    //Left and right collision avoidances which may be thresholded. If one side exceeds a threshold
+    //Saccade in opposite direction
+    float leftCAFlow = 0;
+    float rightCAFlow = 0;
 
     //Initiate all ServiceConnections for all Background Services
     ServiceConnection visualNavigationServiceConnection = new ServiceConnection() {
@@ -970,19 +976,19 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         // compute optic flow and charge the global variables with the speed values
 
         // OPTICAL FLOW COMPUTED HERE - RM
-        // Existing methods exist for sparse and are not currently used. Re-purpose - RM
-        // So from here it can be seen that the left and right CXFlowImage matrices aren't used for OF - RM
-        //
+
         // flowPointsCurrent = currentPointsToTrack; // Create a copy for the OF to utilise
         //flowPointsPrevious = prevPointsToTrack;
-
-  //      computeSparseOpticFlow();
-//        getObstaclesFromSparseFlow();
-    //    getSpeedsFromSparseFlow();
-
-        computeDenseOpticFlow();
-        getSpeedsFromDenseFlow();
+/*
+        computeSparseOpticFlow();
         getObstaclesFromSparseFlow();
+        getSpeedsFromSparseFlow();
+*/
+        computeDenseOpticFlow();
+        filterCollisionAvoidance(); //Collision avoidance using a flow filter and dense optic flow
+        //getObstaclesFromSparseFlow(); //Obstacle detection using time-to-contact
+        getSpeedsFromDenseFlow();
+
 
 
         // --commented for speed--
@@ -1248,7 +1254,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run(){
-                            debugTextView.setText(String.format("Time to contact: %f" , global_ttc ));
+                            debugTextView.setText(String.format("Time to contact: %f\n" +
+                                                                "Speed: %f"
+                                                                , global_ttc
+                                                                , Math.abs( (leftCXFlow + rightCXFlow )/ 2)));
                         }
                     });
                 } catch (Exception e){
@@ -2434,15 +2443,17 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 current_left_flow_vector = new double[]{mod((int) currentPointsToTrack.get(y, x)[0] + x + 12, 90),
                                                         mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)};
                 previous_left_flow_vector = new double[]{mod(x + 12, 90), y};
+
                 if (Math.abs(previous_left_flow_vector[0] - current_left_flow_vector[0]) < 70) {
                     //   print arrows on debugFlowImage image - DEBUG
+                    /*
                     if (x + 12 == 20 || x + 12 == 70) {
                         org.opencv.core.Point pt1_left = new org.opencv.core.Point(
                                 previous_left_flow_vector[0], previous_left_flow_vector[1]);
                         org.opencv.core.Point pt2_left = new org.opencv.core.Point(
                                 current_left_flow_vector[0], current_left_flow_vector[1]);
                         arrowedLine(debugFlowImage, pt1_left, pt2_left, new Scalar(0));
-                    }
+                    }*/
                     //-----------------------------------------------------------
 
                     // preferred flow vector as 1x3 Mat
@@ -2467,6 +2478,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 if (previous_right_flow_vector[0] - current_right_flow_vector[0] < 70) {
                     //   print arrows on debugFlowImage image - DEBUG
+                    /*
                     if (x - 12 == 20 || x - 12 == 70) {
                         org.opencv.core.Point pt1_right = new org.opencv.core.Point(
                                 previous_right_flow_vector[0],
@@ -2475,7 +2487,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                                 current_right_flow_vector[0],
                                 current_right_flow_vector[1] + right_image_row);
                         arrowedLine(debugFlowImage, pt1_right, pt2_right, new Scalar(0));
-                    }
+                    }*/
                     //-----------------------------------------------------------
 
                     // preferred flow vector as 1x3 Mat
@@ -2498,7 +2510,66 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         current_image.copyTo(previous_image);
     }
 
-    //Function to look for obstacles using optical flow - RM
+    public void filterCollisionAvoidance() {
+        Mat focus_of_expansion = fromFlowComputeFOE(); //Need this to know which way to saccade.
+        Mat left_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), true); //Left flow filter
+        Mat right_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), false); //Right flow filter
+
+        //Filters are functionally identical, see Lucas' dissertation for the method used
+
+        double[] current_left_flow_vector;
+        double[] current_right_flow_vector;
+        double[] previous_left_flow_vector;
+        double[] previous_right_flow_vector;
+
+        Mat left_filter_vector;
+        Mat right_filter_vector;
+
+        Mat flow_vector = new Mat(1, 3, CvType.CV_32FC1);
+
+        float left_flow_sum = 0;
+        float right_flow_sum = 0;
+
+        for ( int y = 0; y < currentPointsToTrack.rows(); y++ ){
+            for ( int x = 0; x < currentPointsToTrack.cols(); x++ ){//These filters are functionally identical, see Luca's dissertation for the method used to compute the filter
+                //Compute left flow vector
+                previous_left_flow_vector = new double[]{ mod(x + 12, 90), y }; //((x+12), y)
+                current_left_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x - 12, 90),
+                                                          mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) }; //Flow info returned by farneback
+
+                left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]); //Vector for x - 12 mod 90
+
+                //Create 1x3 flow vector (the current flow vector)
+                flow_vector.put(0, 0, current_left_flow_vector[0]);
+                flow_vector.put(0, 1, current_left_flow_vector[1]);
+                flow_vector.put(0, 2, 0);
+
+                left_flow_sum += left_filter_vector.dot(flow_vector); //Filter and sum
+
+                //Compute right flow vector
+                previous_right_flow_vector = new double[] { mod(x - 12, 90), y };
+                current_right_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x + 12, 90),
+                                                           mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
+
+                right_filter_vector = right_filter.row((int) previous_right_flow_vector[0]); //Vector for x + 12 mod 90
+
+                //Create 1x3 flow vector (the current flow vector)
+                flow_vector.put(0, 0, current_right_flow_vector[0]);
+                flow_vector.put(0, 1, current_right_flow_vector[1]);
+                flow_vector.put(0, 2, 0);
+
+                right_flow_sum += right_filter_vector.dot(flow_vector); //Filter and sum
+            }
+        }
+
+        //1. Needs tuned
+        //2. May just be worth integrating this into the getSpeedsFromDenseFlow() function
+        leftCAFlow = left_flow_sum;
+        rightCAFlow = right_flow_sum;
+
+    }
+
+    //Collision avoidance using Time to Contact; set up to use dense flow
     public void getObstaclesFromSparseFlow(){
         Mat focus_of_expansion = fromFlowComputeFOE();
         //FOE is 2x1 despite what output is saying, use FOE.get(0,0) and (1,0) respectively, remember [0]
@@ -2532,7 +2603,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         //Get speed from Optical Flow variables (take average of L and R flows)
         speed = Math.abs( (leftCXFlow + rightCXFlow) / 2 );
-
+        speed = speed * 1000; //Scale
+        output = "Speed : " + speed;
+        Log.i(tag, output);
         /*
         if (speed > 9){
             output = "Speed: " + speed;
@@ -2556,14 +2629,34 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
         }
 
+
         //TTC is a product of all the distances divided by the velocity
+        output = " - BEFORE LOOP - ";
+        Log.i(tag, output);
+        output = " - ttc_out : " + ttc; //Should be 1
+        Log.i(tag, output);
+        output = " - dists_from_foe.size() : " + dists_from_foe.size();
+        Log.i(tag, output);
         for ( int k = 0; k < dists_from_foe.size(); k++ ){
+            output = " - dist(k) : " + dists_from_foe.get(k);
+            Log.i(tag, output);
+
             ttc = ttc * dists_from_foe.get(k).floatValue();
+            output = " - ttc_1 : " + ttc;
+            Log.i(tag, output);
+
+            output = " - Speed " + speed + " Math.pow(...) " + Math.pow(speed, dists_from_foe.size());
+            Log.i(tag, output);
+            ttc = ttc / (float) Math.pow(speed, 9); //Division by V, elementwise
+            output = " - ttc_2 : " + ttc ;
+            Log.i(tag, output);
         }
+        output = " - END LOOP - ";
+        Log.i(tag, output);
 
         //Divide twice to make TTC manageable
-        ttc = ttc / (float) Math.pow(speed, dists_from_foe.size()); //Division by V, elementwise
-      //  ttc = ttc / (float) Math.pow(10, 6); //Tuning parameter to scale values to manageable size
+        //ttc = ttc / (float) Math.pow(speed, dists_from_foe.size()); //Division by V, elementwise
+
 
         //If we need samples
         /*
@@ -2576,18 +2669,17 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             //Again, do not modify sample_no here!
         }*/
 
-        global_ttc = ttc / Math.pow(10,7); //Store globally for now, want to get parameter passing up and running
 
         output = "TTC: " + ttc;
         Log.i(tag, output);
-
+        global_ttc = ttc;
         //Now have ttc to store globally or locally and return
 
     }
 
     public Mat fromFlowComputeFOE(){ //Compute the focus of expansion from the sparse optical flow - RM
         String tag = "FOE_COMP_DEBUG"; //Debug parameters
-        String output = tag + "=== DEBUG START ===";;
+        String output = tag + "=== DEBUG START ===";
         Log.i(tag, output);
 
         //For method see: http://www.dgp.toronto.edu/~donovan/stabilization/opticalflow.pdf pages 13 and 14
@@ -2597,13 +2689,19 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         Mat b = new Mat(0, 1, CvType.CV_32FC1); //Vector b for Focus of Expansion calculation
 
         //Iterate through all points of interest
-        for (int i = 0; i < prevPointsToTrack.rows(); i++) {
-            for (int j = 0; j < prevPointsToTrack.cols(); j++) {
+        for (int i = 0; i < currentPointsToTrack.rows(); i++) {
+            for (int j = 0; j < currentPointsToTrack.cols(); j++) {
                 //Get xy uv, (x,y) being the ith point, (u,v) being the displacement vector
-                float x =  Math.abs( mod( (int) prevPointsToTrack.get(i,j)[0], 90));
-                float y =  Math.abs( mod( (int) prevPointsToTrack.get(i,j)[1], 90));
-                float[] u =  {Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[0], 90)) - (int) x)};
-                float[] v =  {Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[1], 90)) - (int) y)};
+                //Previous location of the pixel.
+                float x = (float) j; //Math.abs( mod( (int) prevPointsToTrack.get(i,j)[0], 90));
+                float y = (float) i; //Math.abs( mod( (int) prevPointsToTrack.get(i,j)[1], 90));
+                //New location of the pixel from Farneback flow
+                float u = mod((int) (currentPointsToTrack.get(i, j)[0] + x), 90); //New x position of the pixel
+                float v = mod((int) (currentPointsToTrack.get(i, j)[1] + y), 10); //New y position of the pixel
+
+                //Used these for sparse flow
+                //float[] u =  {Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[0], 90)) + (int) x)};
+                //float[] v =  {Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[1], 10) + (int) y))};
 
                 //Matrices for the next rows to be added
                 Mat next_uv = new Mat(1, 2, CvType.CV_32FC1);
@@ -2615,7 +2713,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 //output = "In, loop next_uv.dump(): " + next_uv.dump();
                 //Log.i(tag, output);
 
-                double bi = (x * v[0]) - (y * u[0]);
+                double bi = (x * v) - (y * u);
                 next_bi.put(0, 0, bi);
 
                 //Add new point and vector information to A and b
@@ -2679,10 +2777,19 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 fy = fy % 10;
                 FOE.put(0, 1, fy);
             } else if (fy < 0) {
+                output = "fy < 0 - START";
+                Log.i(tag, output);
                 fy = Math.abs(fy);
+                Log.i(tag, Double.toString(fy));
                 fy = fy % 10;
+                Log.i(tag, Double.toString(fy));
                 fy = 9 - fy;
-                FOE.put(0, 1, fy); //Replace the fixed y value
+                Log.i(tag, Double.toString(fy));
+                FOE.put(1, 0, fy); //Replace the fixed y value
+                output = "fy < 0 - END";
+                Log.i(tag, output);
+
+
             }
 
             output = "FOE.size() : " + FOE.size();
@@ -2722,7 +2829,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 }
                 double temp_x1 = sample_foe.get(0,0)[0]; //Current sample_FOE x
                 double temp_y1 = sample_foe.get(1,0)[0]; //Current sample_FOE y
-                output = "FOE.dump() catch" + FOE.dump();
+                output = "FOE.dump() try" + FOE.dump();
                 Log.i(tag,output);
                 double temp_x2 = FOE.get(0,0)[0]; //Current computed FOE x
                 double temp_y2 = FOE.get(1,0)[0]; //Current computed FOE y
@@ -2779,6 +2886,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             sample_no++; //new sample has been taken, increment sample counter
         }
+
+        //Debug - Draw the FOE on the debug image
+        org.opencv.core.Point pt1_right = new org.opencv.core.Point(
+                global_foe.get(0,0)[0],
+                global_foe.get(1,0)[0]);
+        org.opencv.core.Point pt2_right = new org.opencv.core.Point(
+                global_foe.get(0,0)[0],
+                global_foe.get(1,0)[0]);
+        arrowedLine(debugFlowImage, pt1_right, pt2_right, new Scalar(0));
 
         return global_foe;
 
