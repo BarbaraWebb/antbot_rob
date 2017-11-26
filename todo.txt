@@ -315,3 +315,66 @@ progress:
 - Still need to send Leo an email to sort out the encoders, but the dense flow
   speed actually looks a lot more consistent.
 
+28 / 11 / 17:
+todo:
+- Send Leo an email RE encoders. (DONE)
+- Experiment with collision avoidance filtering
+  (Something that would be good, more to write about)
+  - Modify obstacle detection thread (DONE) / Create new thread + menu option using
+    the filter instead of ttc.
+  - Look at how the L/R flow's behave with obstacles approaching, slightly
+    angled, and directly ahead. (IP, see notes);
+
+- Dense flow speed looks good, having an encoder option would be good though
+
+notes:
+- making test thread:
+  - For now, just want to set the robot to go and watch the values change.
+
+- testing:
+  Initial runs:
+  - right flow always seems to be larger than left. why?
+  - may try slowing the bot down a little
+
+  Object pass, object on the left:
+  - Left value, dropped sometimes, didn't change others. On passing the value consistantly increased
+  - Right value, unaffected (good)
+
+  Object pass, object on the right:
+  - Left value, no variation
+  - Right value, inconsistant variation, seemed to drop sometimes, no change others.
+  - Right value still greater by about 10, (so by about 1000 in reality), what is the reason for this discrepancy???
+
+  General:
+  - Value on the opposite side to the object will not change which was expected.
+  - Value on the object side seems to drop, but it's not consistant. 
+
+Barbara's model used an accumulator, I'm not accumulating flow information, just
+the immediate result from the filter.
+
+I was implementing flow filters in the way Luca did in an effort to understand
+how they worked. Now I feel like I do. The current flow sums are coming out as
+negative. So, a majority of them are negative (from the looks of the values,
+all of them). Therefore, the angle between the filter and the actual vectors is
+greater than 90 degrees. Hmm....
+
+- Sorted the negative values
+
+
+progress:
+- Sent Leo that email, if no response within a reasonable time, I will triple
+  check then implement my own code in the go command on the arduino
+
+- Debugged my filtering code. Taking negatives was the wrong approach; when
+  breaking it down it became apparent that the filter was being applied to
+  the wrong side of the input image (the +/- 12 terms were reversed).
+
+- Now my filter values look better; note, something approaching from behind will
+  cause the value to drop and a stop to be triggered, so this is good.
+
+- I can now use the flow to manipulate the behaviour of the robot in a more
+  consistant way than I could previous. Now I just need to figure out the
+  output for an obstacle approaching input. Needs more experimentation but no
+  time left today. Nice to actually be running experiments again...
+  
+

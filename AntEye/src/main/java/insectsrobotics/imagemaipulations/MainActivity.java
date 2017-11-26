@@ -320,6 +320,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     float leftCAFlow = 0;
     float rightCAFlow = 0;
 
+    int global_start_time = (int) SystemClock.elapsedRealtime();
+    int global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time;
+
     //Initiate all ServiceConnections for all Background Services
     ServiceConnection visualNavigationServiceConnection = new ServiceConnection() {
         @Override
@@ -988,6 +991,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         filterCollisionAvoidance(); //Collision avoidance using a flow filter and dense optic flow
         //getObstaclesFromSparseFlow(); //Obstacle detection using time-to-contact
         getSpeedsFromDenseFlow();
+        speed = (leftCXFlow + rightCXFlow) / 2;
 
 
 
@@ -1229,6 +1233,84 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     //Runnables for new optical flow obstacle detection - RM
     Runnable opticalFlowDetection = new Runnable() {
+      @Override
+      public void run() {
+          //This version of the thread is for testing the flow filtering collision avoidance
+          try {
+              sleep(3000);
+          } catch (Exception e){
+              e.printStackTrace();
+          }
+
+          boolean stop = false; //Halt flag
+          boolean initialise = true; //Loop initialisation flag
+          int start_time = (int) SystemClock.elapsedRealtime(); //Start time for the thread
+          int current_time = (int) SystemClock.elapsedRealtime() - start_time; //Current thread time
+          int lft_speed = 25;
+          int rgt_speed = 25;
+
+          //While we've not detected an obstacle, run for at most 10 seconds (testing)
+          while ( !stop && (current_time <= 10000)){
+              //Print out debug information, catch exceptions
+              try {
+                  runOnUiThread(new Runnable() {
+                      @Override
+                      public void run(){
+                          debugTextView.setText(String.format(
+                                  "Speed: %f \n" +
+                                  "Left CA flow: %f \n" +
+                                  "Right CA flow: %f \n",
+                                  speed,
+                                  leftCAFlow,
+                                  rightCAFlow));
+                      }
+                  });
+              } catch ( Exception e ){
+                  e.printStackTrace();
+              }
+              //End printing
+
+              //Initialise if 1st iteration
+              if ( initialise ){
+                  initialise = false; //Unset flag
+                  go( new double[] { lft_speed, rgt_speed } ); // Tell the robot to move until told otherwise
+              }
+
+              if ( leftCAFlow <= 0 ){ //Try to trigger a speed change
+                  /*lft_speed = 30;
+                  rgt_speed = 10;
+                  initialise = false; //Re-call the go command to trigger the speed change*/
+                  stop = true;
+                  continue;
+              }
+              current_time = (int) SystemClock.elapsedRealtime() - start_time; //Update current time
+          }
+
+          try {
+              runOnUiThread(new Runnable() {
+                  @Override
+                  public void run(){
+                      debugTextView.setText(String.format(
+                              "Obstacle seen"
+                      ));
+                  }
+              });
+
+          } catch (Exception e){
+              e.printStackTrace();
+          }
+
+          go( new double[] { 0, 0} );
+          try{
+              sleep( 1000 );
+          } catch (Exception e){
+              e.printStackTrace();
+          }
+      }
+
+    };
+    /*
+    Runnable opticalFlowDetection = new Runnable() {
         @Override
         public void run() {
             // Simple test thread; drive forward, keep watching time-to-contact to know when to stop
@@ -1313,7 +1395,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         }
     };
-
+*/
     Runnable opticalFlowAvoidance = new Runnable() {
         @Override
         public void run() { //Should really be worked in with existing PI stuff
@@ -2511,6 +2593,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     }
 
     public void filterCollisionAvoidance() {
+        int delta = (int) SystemClock.elapsedRealtime() - global_current_time; //Change in time since last read
+        global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time; //Time since start
+
         Mat focus_of_expansion = fromFlowComputeFOE(); //Need this to know which way to saccade.
         Mat left_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), true); //Left flow filter
         Mat right_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), false); //Right flow filter
@@ -2534,7 +2619,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             for ( int x = 0; x < currentPointsToTrack.cols(); x++ ){//These filters are functionally identical, see Luca's dissertation for the method used to compute the filter
                 //Compute left flow vector
                 previous_left_flow_vector = new double[]{ mod(x + 12, 90), y }; //((x+12), y)
-                current_left_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x - 12, 90),
+                current_left_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x + 12, 90),
                                                           mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) }; //Flow info returned by farneback
 
                 left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]); //Vector for x - 12 mod 90
@@ -2548,7 +2633,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 //Compute right flow vector
                 previous_right_flow_vector = new double[] { mod(x - 12, 90), y };
-                current_right_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x + 12, 90),
+                current_right_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x - 12, 90),
                                                            mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
 
                 right_filter_vector = right_filter.row((int) previous_right_flow_vector[0]); //Vector for x + 12 mod 90
@@ -2563,9 +2648,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
 
         //1. Needs tuned
-        //2. May just be worth integrating this into the getSpeedsFromDenseFlow() function
-        leftCAFlow = left_flow_sum;
-        rightCAFlow = right_flow_sum;
+        //2. May just be worth integrating this into the getSpeedsFromDenseFlow() function, feel like I'm computing
+        //   everything twice, just with different weighting at the end
+
+        //Values found were negative, so we use the negatives. Divide by 100 to scale and make values manageable.
+
+        leftCAFlow =  1000 * left_flow_sum / (delta * 900);
+        rightCAFlow = 1000 * right_flow_sum / (delta * 900);
 
     }
 
