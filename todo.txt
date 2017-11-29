@@ -377,4 +377,37 @@ progress:
   output for an obstacle approaching input. Needs more experimentation but no
   time left today. Nice to actually be running experiments again...
   
+29 / 11 / 17:
+today:
+- Experiment with flow filtering / some weighting
+  - Left and right now very consistent
+  - Need some way of differentiating/thresholding
+    - Side that is approaching faster is greater
+    - Aside: Know what Luca was doing with image shift now. (left is right vv)
+    - Take side which is approaching faster, trigger turn in opposite direction
+    - Do not observe flow info while turning
 
+  - Idea: Use difference threshold instead of straight threshold?
+  
+- If getting more pertinant info, start adding behaviour
+
+notes:
+- Need to build some test boxes, reasonable size, painted black
+- My code is noticeably slower than the old CX code...
+  - Fixed, sleep(600) needed in thread loops to give the image processing
+    time to execute.
+
+progress:
+- Fixed efficiency issues, not my image processing code, but related to
+  synchronisation issues.
+- Flow information now quite consistant
+- Fixed image shift (left flow was being displayed and stored as right and vice
+  versa)
+- Now have some idea how to use this information!
+  - Information is good, but ranges are a tad wild - Some tuning required 
+  - Taking the flow difference then setting positive and negative threshold
+  - Initial threshold value is +/-5000 for the difference
+    - Stop, rotate +/- 45, move
+    - Problem, at different points in motion, certain flow signals mean different
+      things: e.g. when avoiding a negative signal shouldn't necessarily trigger
+      a turn.

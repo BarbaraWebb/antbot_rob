@@ -319,9 +319,11 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     //Saccade in opposite direction
     float leftCAFlow = 0;
     float rightCAFlow = 0;
+    float ca_flow_diff = 0;
 
     int global_start_time = (int) SystemClock.elapsedRealtime();
     int global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time;
+
 
     //Initiate all ServiceConnections for all Background Services
     ServiceConnection visualNavigationServiceConnection = new ServiceConnection() {
@@ -859,10 +861,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         //Get input frame in RGBA then copy to BlueChannel Mat - RM
         rgba = inputFrame.rgba();                                           //Input Frame in rgba format
-        Log.i("Channels : ", Integer.toString(rgba.channels()));
+        //Log.i("Channels : ", Integer.toString(rgba.channels()));
         //RGB normalisation here!!
         String op = "RGBA.size()" + rgba.size();
-        Log.i("RGBA shape : ",op);
+       // Log.i("RGBA shape : ",op);
         //normalizeRgbaImage(); //Normalise the global rgba image
 
         BlueChannel = new Mat(rgba.rows(), rgba.cols(), CvType.CV_8UC1);    //Mat for later image processing
@@ -975,7 +977,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         current_image.colRange(0, 78).copyTo(leftCXFlowImage.colRange(12, 90));
         current_image.colRange(78, 90).copyTo(leftCXFlowImage.colRange(0, 12));
 
-        Log.i("current_image channels", Integer.toString(current_image.channels()));
+        //Log.i("current_image channels", Integer.toString(current_image.channels()));
         // compute optic flow and charge the global variables with the speed values
 
         // OPTICAL FLOW COMPUTED HERE - RM
@@ -988,6 +990,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         getSpeedsFromSparseFlow();
 */
         computeDenseOpticFlow();
+
         filterCollisionAvoidance(); //Collision avoidance using a flow filter and dense optic flow
         //getObstaclesFromSparseFlow(); //Obstacle detection using time-to-contact
         getSpeedsFromDenseFlow();
@@ -1016,7 +1019,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             processedSourceImage.copyTo(fullSnapShot); // Full res copy of the image frame - M
             rotatedImageDB = new ArrayList<>();
 
-            Log.i(flowTag, "ModuleSelected"+selectedModule);
+            //Log.i(flowTag, "ModuleSelected"+selectedModule);
 
             //Choose which module and which setting to run - RM
             if(selectedModule==0){
@@ -1249,9 +1252,16 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
           int lft_speed = 25;
           int rgt_speed = 25;
 
+
           //While we've not detected an obstacle, run for at most 10 seconds (testing)
-          while ( !stop && (current_time <= 10000)){
+          while ( !stop /*&& (current_time <= 10000)*/){
+              try {
+                  sleep(600);
+              } catch (Exception e){
+                  e.printStackTrace();
+              }
               //Print out debug information, catch exceptions
+              ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
               try {
                   runOnUiThread(new Runnable() {
                       @Override
@@ -1259,10 +1269,12 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                           debugTextView.setText(String.format(
                                   "Speed: %f \n" +
                                   "Left CA flow: %f \n" +
-                                  "Right CA flow: %f \n",
+                                  "Right CA flow: %f \n" +
+                                  "Flow Difference: %f \n",
                                   speed,
                                   leftCAFlow,
-                                  rightCAFlow));
+                                  rightCAFlow,
+                                  ca_flow_diff));
                       }
                   });
               } catch ( Exception e ){
@@ -1275,14 +1287,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                   initialise = false; //Unset flag
                   go( new double[] { lft_speed, rgt_speed } ); // Tell the robot to move until told otherwise
               }
-
-              if ( leftCAFlow <= 0 ){ //Try to trigger a speed change
+              /*
+              if (  ){ //Try to trigger a speed change
                   /*lft_speed = 30;
                   rgt_speed = 10;
-                  initialise = false; //Re-call the go command to trigger the speed change*/
+                  initialise = false; //Re-call the go command to trigger the speed change
                   stop = true;
                   continue;
               }
+              */
               current_time = (int) SystemClock.elapsedRealtime() - start_time; //Update current time
           }
 
@@ -2651,12 +2664,12 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //2. May just be worth integrating this into the getSpeedsFromDenseFlow() function, feel like I'm computing
         //   everything twice, just with different weighting at the end
 
-        //Values found were negative, so we use the negatives. Divide by 100 to scale and make values manageable.
-
-        leftCAFlow =  1000 * left_flow_sum / (delta * 900);
-        rightCAFlow = 1000 * right_flow_sum / (delta * 900);
+        //Again image shifting, left is right and right is left.
+        rightCAFlow =  1000 * left_flow_sum;// / (delta /*900*/);
+        leftCAFlow = 1000 * right_flow_sum; // / (delta /*900*/);
 
     }
+
 
     //Collision avoidance using Time to Contact; set up to use dense flow
     public void getObstaclesFromSparseFlow(){
@@ -2672,15 +2685,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         String tag ="Obstacle Debug: ";
         String output = " === DEBUG START === ";
-        Log.i(tag, output);
+       // Log.i(tag, output);
 
-        output = "global_foe.dump()" + global_foe.dump();
-        Log.i(tag, output);
+        //output = "global_foe.dump()" + global_foe.dump();
+        //Log.i(tag, output);
 
-        output = "FOE.size(): " + focus_of_expansion.size();
-        Log.i(tag, output);
-        output = "FOE.dump(): " + focus_of_expansion.dump();
-        Log.i(tag, output);
+        //output = "FOE.size(): " + focus_of_expansion.size();
+        //Log.i(tag, output);
+        //output = "FOE.dump(): " + focus_of_expansion.dump();
+        //Log.i(tag, output);
 
         double[] foe_as_point = {focus_of_expansion.get(0,0)[0], focus_of_expansion.get(1,0)[0]};
 
@@ -2693,8 +2706,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //Get speed from Optical Flow variables (take average of L and R flows)
         speed = Math.abs( (leftCXFlow + rightCXFlow) / 2 );
         speed = speed * 1000; //Scale
-        output = "Speed : " + speed;
-        Log.i(tag, output);
+        //output = "Speed : " + speed;
+        //Log.i(tag, output);
         /*
         if (speed > 9){
             output = "Speed: " + speed;
@@ -2720,28 +2733,28 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
 
         //TTC is a product of all the distances divided by the velocity
-        output = " - BEFORE LOOP - ";
-        Log.i(tag, output);
-        output = " - ttc_out : " + ttc; //Should be 1
-        Log.i(tag, output);
-        output = " - dists_from_foe.size() : " + dists_from_foe.size();
-        Log.i(tag, output);
+        //output = " - BEFORE LOOP - ";
+        //Log.i(tag, output);
+        //output = " - ttc_out : " + ttc; //Should be 1
+        //Log.i(tag, output);
+        //output = " - dists_from_foe.size() : " + dists_from_foe.size();
+        //Log.i(tag, output);
         for ( int k = 0; k < dists_from_foe.size(); k++ ){
-            output = " - dist(k) : " + dists_from_foe.get(k);
-            Log.i(tag, output);
+            //output = " - dist(k) : " + dists_from_foe.get(k);
+          //  Log.i(tag, output);
 
             ttc = ttc * dists_from_foe.get(k).floatValue();
-            output = " - ttc_1 : " + ttc;
-            Log.i(tag, output);
+            //output = " - ttc_1 : " + ttc;
+            //Log.i(tag, output);
 
-            output = " - Speed " + speed + " Math.pow(...) " + Math.pow(speed, dists_from_foe.size());
-            Log.i(tag, output);
+            //output = " - Speed " + speed + " Math.pow(...) " + Math.pow(speed, dists_from_foe.size());
+            //Log.i(tag, output);
             ttc = ttc / (float) Math.pow(speed, 9); //Division by V, elementwise
-            output = " - ttc_2 : " + ttc ;
-            Log.i(tag, output);
+            //output = " - ttc_2 : " + ttc ;
+            //Log.i(tag, output);
         }
-        output = " - END LOOP - ";
-        Log.i(tag, output);
+        //output = " - END LOOP - ";
+        //Log.i(tag, output);
 
         //Divide twice to make TTC manageable
         //ttc = ttc / (float) Math.pow(speed, dists_from_foe.size()); //Division by V, elementwise
@@ -2759,8 +2772,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }*/
 
 
-        output = "TTC: " + ttc;
-        Log.i(tag, output);
+        //output = "TTC: " + ttc;
+        //Log.i(tag, output);
         global_ttc = ttc;
         //Now have ttc to store globally or locally and return
 
@@ -2769,7 +2782,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     public Mat fromFlowComputeFOE(){ //Compute the focus of expansion from the sparse optical flow - RM
         String tag = "FOE_COMP_DEBUG"; //Debug parameters
         String output = tag + "=== DEBUG START ===";
-        Log.i(tag, output);
+        //Log.i(tag, output);
 
         //For method see: http://www.dgp.toronto.edu/~donovan/stabilization/opticalflow.pdf pages 13 and 14
 
@@ -2848,8 +2861,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             //Final bounds check to make sure we're in 0, 89 range in x and 0,9 in y
             //If out of bounds, treat as if "wrapped", modulo if positive,
 
-            output = "FOE.dump() before: " + FOE.dump();
-            Log.i(tag, output);
+            //output = "FOE.dump() before: " + FOE.dump();
+            //Log.i(tag, output);
             double fx = FOE.get(0, 0)[0];
             if (fx >= 90) {
                 fx = fx % 90;
@@ -2866,30 +2879,30 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 fy = fy % 10;
                 FOE.put(0, 1, fy);
             } else if (fy < 0) {
-                output = "fy < 0 - START";
-                Log.i(tag, output);
+                //output = "fy < 0 - START";
+                //Log.i(tag, output);
                 fy = Math.abs(fy);
-                Log.i(tag, Double.toString(fy));
+                //Log.i(tag, Double.toString(fy));
                 fy = fy % 10;
-                Log.i(tag, Double.toString(fy));
+                //Log.i(tag, Double.toString(fy));
                 fy = 9 - fy;
-                Log.i(tag, Double.toString(fy));
+                //Log.i(tag, Double.toString(fy));
                 FOE.put(1, 0, fy); //Replace the fixed y value
-                output = "fy < 0 - END";
-                Log.i(tag, output);
+                //output = "fy < 0 - END";
+                //Log.i(tag, output);
 
 
             }
 
-            output = "FOE.size() : " + FOE.size();
-            Log.i(tag, output);
+            //output = "FOE.size() : " + FOE.size();
+            //Log.i(tag, output);
 
-            output = "FOE.dump() : " + FOE.dump();
-            Log.i(tag, output);
+            //output = "FOE.dump() : " + FOE.dump();
+            //Log.i(tag, output);
 
             //End debug output and return
-            output = tag + "=== DEBUG END ===";
-            Log.i(tag, output);
+            //output = tag + "=== DEBUG END ===";
+            //Log.i(tag, output);
 
             //Making sure foe is averaged
             if ( sample_no >= sample_size ) { //If we have enough samples, update FOE
@@ -2918,8 +2931,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 }
                 double temp_x1 = sample_foe.get(0,0)[0]; //Current sample_FOE x
                 double temp_y1 = sample_foe.get(1,0)[0]; //Current sample_FOE y
-                output = "FOE.dump() try" + FOE.dump();
-                Log.i(tag,output);
+                //output = "FOE.dump() try" + FOE.dump();
+                //Log.i(tag,output);
                 double temp_x2 = FOE.get(0,0)[0]; //Current computed FOE x
                 double temp_y2 = FOE.get(1,0)[0]; //Current computed FOE y
 
@@ -2965,8 +2978,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
             double temp_x1 = sample_foe.get(0,0)[0]; //Current sample_FOE x
             double temp_y1 = sample_foe.get(1,0)[0]; //Current sample_FOE y
-            output = "FOE.dump() catch" + FOE.dump();
-            Log.i(tag,output);
+            //output = "FOE.dump() catch" + FOE.dump();
+            //Log.i(tag,output);
             double temp_x2 = FOE.get(0,0)[0]; //Current computed FOE x
             double temp_y2 = FOE.get(1,0)[0]; //Current computed FOE y
 
