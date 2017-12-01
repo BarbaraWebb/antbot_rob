@@ -411,3 +411,44 @@ progress:
     - Problem, at different points in motion, certain flow signals mean different
       things: e.g. when avoiding a negative signal shouldn't necessarily trigger
       a turn.
+
+01 / 12 / 17:
+today:
+- Figure out how to threshold:
+  - Sufficiently Big/Small/In some window?
+  - Accumulation? Swing cancels any previous? (May be a good idea)
+- Implement reactive behaviour.
+
+notes:
+Basic thresholding: Value > T => Trigger turn
+- Working in avoidance thread now, trying to simply trigger a left turn
+- An initial value for T = -5000 actually worked alright, but it seems
+  sensitive to noise (e.g. simply passing things on the right)
+
+- Utilising the "leaky accumulator" idea;
+  accumulate readings x where x > T, this helps deal with some noise
+   - still possible to trigger false saccades, in some cases
+   
+  could accumulate within a certain time period, or, take a series of readings
+  with the same sign (e.g. if we see n contiguous readings of x, where x > |T|,
+  then react).
+
+Within Time Period:
+- If you just add the ca_difference to the accumulators, if one breaches the
+  threshold then there's a significant bias.
+
+- Initial tests with dual threshold promising
+- More motor command issues, stop not being registered.
+
+  1. AT = 5000, RT = 20000:
+     - Functioned extremely well in some tests, poorly in others
+     - Seemed to prefer turning right
+
+  2. AT = 5000, RT = 30000:
+  
+
+- Ongoing issue; need to fix speeds so AntBot actually goes straight
+
+
+
+

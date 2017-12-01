@@ -1412,92 +1412,154 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     Runnable opticalFlowAvoidance = new Runnable() {
         @Override
         public void run() { //Should really be worked in with existing PI stuff
-            //Need to wait a little
+            //This version of the thread is for testing the flow filtering collision avoidance
             try {
                 sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-
-            boolean stop = false;
-            boolean detect = false;
-
-            // Left and right tread speeds 0 - 100
-            double LFT_SPEED = 50;
-            double RGT_SPEED = 50;
-
-            int startTime = (int) SystemClock.elapsedRealtime(); //Set start time for thread
-            int currentTime = (int) SystemClock.elapsedRealtime() - startTime;
-
-            while( !stop &&(currentTime <= 10000 )) { //Set timelimit of 30 seconds
-                try{
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run(){
-                            debugTextView.setText(String.format("Time to contact: %f" , global_ttc ));
-                        }
-                    });
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                if ( global_ttc < threshold_ttc){
-                    try {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                debugTextView.setText(String.format("Obstacle detected!"));
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    detect = true;
-                } else {
-                    detect = false;
-                }
-
-                if (detect == true) {
-                    // Mat global_foe; (0,0)x (1,0)y
-                    double[] local_foe = { global_foe.get(0,0)[0], global_foe.get(1,0)[0] };
-                    //If FOE is shifted left then we turn right and vice versa
-                    if ( local_foe[0] <= 45 ) { //Bias to left, obstacle directly ahead will still go left
-                        LFT_SPEED = 20;
-                    } else {
-                        RGT_SPEED = 20;
-                    }
-
-                } else {
-                    LFT_SPEED = 50;
-                    RGT_SPEED = 50;
-                }
-
-                go(new double[]{ LFT_SPEED, RGT_SPEED }); //Move with set speeds
-
-                currentTime = (int) SystemClock.elapsedRealtime() - startTime; //Update elapsed time
-
-            }
-
-            try {
-                sleep(1000);
             } catch (Exception e){
                 e.printStackTrace();
             }
 
-            go (new double[]{0,0});
+            boolean avoid = false; //Is the robot currently avoiding an obstacle?
+            boolean stop = false; //Halt flag
+            boolean initialise = true; //Loop initialisation flag
+            int start_time = (int) SystemClock.elapsedRealtime(); //Start time for the thread
+            int current_time = (int) SystemClock.elapsedRealtime() - start_time; //Current thread time
+            int t_move_start = 0; //Time that a saccade started
+
+            //Accumulation time intervals
+            int t_interval_start = current_time; //Start of the time interval
+            int t_delta = (int) SystemClock.elapsedRealtime() - current_time; //Time interval
+
+            //Left and right motor speeds
+            int lft_speed = 25;
+            int rgt_speed = 25;
+
+            //Accumulators for left and right flow
+            int dual_accumulator = 0; //Add both values and see if there's significant bias
+            int left_accumulator = 0; //Add only left values
+            int right_accumulator = 0; //Add only right values
+            int accumulation_threshold = 5000; //Threshold for a value to be accumulated (ignore all others)
+            int reaction_threshold = 20000; //Value to be met for a reaction to be triggered. (need at most four readings
+
+
+            //While we've not detected an obstacle, run for at most 10 seconds (testing)
+            while ( !stop && (current_time <= 10000) ){
+                try { sleep(600); } catch ( Exception e ){ e.printStackTrace(); }
+
+                //Print out debug information, catch exceptions
+                ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
+
+                //Flow accumulators
+                if ( ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) leftCAFlow; }
+                else if ( ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) rightCAFlow); }
+
+                if ( Math.abs(ca_flow_diff) >= accumulation_threshold ){ dual_accumulator = dual_accumulator + (int) ca_flow_diff; }
+
+                //If accumulation time limit reached, reset timer and accumulators
+                if ( t_delta >= 2000 ){
+                    left_accumulator = 0;
+                    right_accumulator = 0;
+                    dual_accumulator = 0;
+                    t_interval_start = (int) SystemClock.elapsedRealtime();
+                }
+
+                try {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run(){
+                            debugTextView.setText(String.format(
+                                    "Speed: %f \n" +
+                                            "Left CA flow: %f \n" +
+                                            "Right CA flow: %f \n" +
+                                            "Flow Difference: %f \n"
+                                            ,
+                                    speed,
+                                    leftCAFlow,
+                                    rightCAFlow,
+                                    ca_flow_diff
+                                    ));
+                        }
+                    });
+                } catch ( Exception e ){
+                    e.printStackTrace();
+                }
+                //End printing
+
+                //Initialise if 1st iteration (re-used to reset speeds mid-run)
+                if ( initialise ){
+                    initialise = false;
+                    go( new double[] { lft_speed, rgt_speed } );
+                    t_interval_start = (int) SystemClock.elapsedRealtime(); //Start the time interval for accumulation
+                }
+
+                //Figure out which way to turn
+                boolean left = false;
+                boolean right = false;
+
+                //Dual decision (contiguous results)
+                if ( dual_accumulator >= reaction_threshold ){ right = true; }
+                else if ( dual_accumulator <= -reaction_threshold ){ left = true; }
+
+                /*
+
+                //Uncomment to use the individual method for accumulation.
+                //Individual decision
+                if ( left_accumulator >= reaction_threshold ){ right = true; }
+                else if ( right_accumulator >= reaction_threshold ){ left = true; }
+                //Left accumulator keeps track of left flow and so should trigger a right turn
+                //Right accumulator keeps track of right flow and so should trigger a left turn
+
+                */
+
+
+                if ( left && (!avoid) ){ //Left turn required
+                    Log.i("CA:", "Left turn triggered");
+                    lft_speed = 10; //Left turn
+                    rgt_speed = 100; //Left turn
+                    initialise = true; //Re-call the go command to trigger the speed change
+                    avoid = true; //Flag so we know to ignore this code snippet when avoiding
+                    t_move_start = current_time; //Time the saccade started
+
+                } else if ( right && (!avoid) ){ //Right turn required
+                    Log.i("CA:", "Right turn triggered");
+                    lft_speed = 100; //Right turn
+                    rgt_speed = 10; //Right turn
+                    initialise = true; //Re-call the go command to trigger the speed change
+                    avoid = true; //Flag so we know to ignore this code snippet when avoiding
+                    t_move_start = current_time; //Time the saccade started
+
+                } else if ( avoid && ((current_time - t_move_start ) >= 500)){
+                    //Make adjustments in half second intervals
+                    lft_speed = 25; //Back to default
+                    rgt_speed = 25; //Back to default
+                    avoid = false; //No longer avoiding an obstacle
+                    initialise = true; //Need to reset robot speeds
+                }
+
+                current_time = (int) SystemClock.elapsedRealtime() - start_time; //Update current time
+                t_delta = (int) SystemClock.elapsedRealtime() - t_interval_start; //Update accumulation interval
+            }
 
             try {
                 runOnUiThread(new Runnable() {
                     @Override
-                    public void run() {
-                        debugTextView.setText(String.format("Obstacle detection run completed. "));
+                    public void run(){
+                        debugTextView.setText(String.format(
+                                "Obstacle seen"
+                        ));
                     }
                 });
-            } catch (Exception e) {
+
+            } catch (Exception e){
                 e.printStackTrace();
             }
 
+            go( new double[] { 0, 0} );
+            try{
+                sleep( 1000 );
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
     };
