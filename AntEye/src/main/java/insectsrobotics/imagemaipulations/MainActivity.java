@@ -1432,18 +1432,20 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             //Left and right motor speeds
             int lft_speed = 25;
-            int rgt_speed = 25;
+            int rgt_speed = 22;
 
             //Accumulators for left and right flow
             int dual_accumulator = 0; //Add both values and see if there's significant bias
             int left_accumulator = 0; //Add only left values
             int right_accumulator = 0; //Add only right values
             int accumulation_threshold = 5000; //Threshold for a value to be accumulated (ignore all others)
-            int reaction_threshold = 20000; //Value to be met for a reaction to be triggered. (need at most four readings
+            int reaction_threshold = 10000; //Value to be met for a reaction to be triggered. (need at most four readings)
+
+            int loop_count = 0;
 
 
-            //While we've not detected an obstacle, run for at most 10 seconds (testing)
-            while ( !stop && (current_time <= 10000) ){
+            //While
+            while ( !stop && (current_time <= 30000) ){
                 try { sleep(600); } catch ( Exception e ){ e.printStackTrace(); }
 
                 //Print out debug information, catch exceptions
@@ -1456,10 +1458,11 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 if ( Math.abs(ca_flow_diff) >= accumulation_threshold ){ dual_accumulator = dual_accumulator + (int) ca_flow_diff; }
 
                 //If accumulation time limit reached, reset timer and accumulators
-                if ( t_delta >= 2000 ){
+                if ( loop_count >= 2/*t_delta >= 2000 */){
                     left_accumulator = 0;
                     right_accumulator = 0;
                     dual_accumulator = 0;
+                    loop_count = 0; //Reset loop counter
                     t_interval_start = (int) SystemClock.elapsedRealtime();
                 }
 
@@ -1489,6 +1492,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 if ( initialise ){
                     initialise = false;
                     go( new double[] { lft_speed, rgt_speed } );
+                    try{ sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Command delay
                     t_interval_start = (int) SystemClock.elapsedRealtime(); //Start the time interval for accumulation
                 }
 
@@ -1497,10 +1501,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 boolean right = false;
 
                 //Dual decision (contiguous results)
-                if ( dual_accumulator >= reaction_threshold ){ right = true; }
-                else if ( dual_accumulator <= -reaction_threshold ){ left = true; }
+                //if ( dual_accumulator >= reaction_threshold ){ right = true; }
+                //else if ( dual_accumulator <= -reaction_threshold ){ left = true; }
 
-                /*
+
 
                 //Uncomment to use the individual method for accumulation.
                 //Individual decision
@@ -1509,29 +1513,40 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 //Left accumulator keeps track of left flow and so should trigger a right turn
                 //Right accumulator keeps track of right flow and so should trigger a left turn
 
-                */
-
 
                 if ( left && (!avoid) ){ //Left turn required
                     Log.i("CA:", "Left turn triggered");
+                    try {
+                        turnAround(20);
+                    }catch(Exception e){ e.printStackTrace(); }
+                    /*
                     lft_speed = 10; //Left turn
-                    rgt_speed = 100; //Left turn
-                    initialise = true; //Re-call the go command to trigger the speed change
+                    rgt_speed = 100; //Left turn*/
+                    initialise = true; //Re-call the go command to trigger the speedsleep(integratorRunTime); change
                     avoid = true; //Flag so we know to ignore this code snippet when avoiding
+                    dual_accumulator = 0;
+                    left_accumulator = 0;
+                    right_accumulator = 0;
                     t_move_start = current_time; //Time the saccade started
 
                 } else if ( right && (!avoid) ){ //Right turn required
                     Log.i("CA:", "Right turn triggered");
-                    lft_speed = 100; //Right turn
-                    rgt_speed = 10; //Right turn
+                    try {
+                        turnAround(-20);
+                    }catch(Exception e){ e.printStackTrace(); }
+                    /*lft_speed = 100; //Right turn
+                    rgt_speed = 10; //Right turn*/
                     initialise = true; //Re-call the go command to trigger the speed change
                     avoid = true; //Flag so we know to ignore this code snippet when avoiding
+                    dual_accumulator = 0;
+                    left_accumulator = 0;
+                    right_accumulator = 0;
                     t_move_start = current_time; //Time the saccade started
 
                 } else if ( avoid && ((current_time - t_move_start ) >= 500)){
                     //Make adjustments in half second intervals
                     lft_speed = 25; //Back to default
-                    rgt_speed = 25; //Back to default
+                    rgt_speed = 22; //Back to default
                     avoid = false; //No longer avoiding an obstacle
                     initialise = true; //Need to reset robot speeds
                 }
@@ -1563,6 +1578,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
 
     };
+
+
 
     //End of OF threads - RM
     //-------------------------------------------------------
@@ -2722,9 +2739,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
         }
 
-        //1. Needs tuned
-        //2. May just be worth integrating this into the getSpeedsFromDenseFlow() function, feel like I'm computing
-        //   everything twice, just with different weighting at the end
+
 
         //Again image shifting, left is right and right is left.
         rightCAFlow =  1000 * left_flow_sum;// / (delta /*900*/);

@@ -1,0 +1,139 @@
+Notes file for dissertation 1st draft:
+This file is mostly for content planning purposes. All formatting will be
+handled during the write-up phase (hopefully in LaTeX)
+
+Title Page:
+            
+      Developing AntBot: A mobile-phone powered autnomous robot based on
+      the insect brain.
+      -
+      Visual Route Memory
+
+      Robert Mitchell
+
+      Master of Informatics
+      Informatics
+      School of Informatics
+      The University of Edinburgh
+      2018
+      
+	
+
+
+Abstract:
+
+Acknowledgements:
+	- Dr. B. Webb
+	- Zhaoyu Zhang
+	- Leonard Eberding
+	- Jan? 
+	- Parents
+
+Declaration:
+	I declare that this disseration was composed by myself, the work
+	contained herein is my own except where explicitly stated otherwise
+	in the text, and that this work has not been submitted for any other
+	degree or professional qualification except as specified.
+
+	       Robert Mitchell
+
+Table of Contents:
+      - Self explanatory
+List of Figures:
+      - Self explanatory
+List of Tables:
+      - Self explanatory
+Section 1 - Introduction:
+
+	{NOTE: need to briefly define Path Integration somewhere 
+
+	Path Integration is the ability of the ant to determine its
+	displacement from the nest using odometric and directional
+	information, the ant uses the integrated path to learn the a straight
+	route from the nest to a food source.}
+	
+
+	Cataglyphis Velox, herein referred to as ants, or desert ants have the
+	amazing ability to navigate through complex natural environments using
+	only low-resolution visual information and minimal computational
+	complexity. The "Ant Navigational Toolkit", proposed in 2009 by
+	Wehner describes the two most prominant components in ant navigation:
+	Path Integration, and Visual Navigation. In this paper, we focus on
+	the latter alongside a biologically plausible method for performing
+	collision avoidance. A robot, based on a mobile phone, has been
+	constructed as a development platform in order to implement the
+	algorithms in the Ant Navigational Toolkit.
+
+	Cite: [Eberding, Wehner, and Scimeca]
+	
+	Section 1.1 - Motivation:
+	
+	Insects are remarkably good at using visual cues to perform navigation.
+	A model for visual memory and learning has been proposed by Ardin et
+	al. which shows that the Mushroom Body neuropils (traditionally
+	considered a mechanism for purely olfactory learning) provides a
+	plausible neural circuit for encoding visual memories.
+
+	The Mushroom Body circuit has been implemented and tested on AntBot prior.
+	However, the existing model is quite simple, using binary weightings for
+	the neural connections, and a single boolean Extrinsic Neuron denoting
+	whether, or not, an image was recognised. A method was implemented by
+	Zhang in 2017 using eight ENs each of which denoted one of the eight
+	cardinal directions (N, NE, E, SE, S, SW, W, NW). This will be discussed in
+	section <<SECTION>>.
+
+	We also look at biologically inspired methods of Collision Avoidance (CA)
+	using optical flow techniques.
+
+	============================================================================
+
+	Section 1.2 - Project Goals:
+	
+	This paper shall discuss methods of improving upon the existing Mushroom
+	Body model, as well as experiment with different methods of biologically
+	inspired Collision Avoidance. The final goal being, to send the robot on
+	a journey through an obstacle course and then see if it could reproduce the
+	same route using visual memories.
+
+	The first stage of the project focuses on the Collision Avoidance, as a
+	pre-requisite to collecting our route information. The traditional methods
+	of performing CA in robots tend to use SONAR or LIDAR sensors, however, ants
+	do not posess these sensory capabilities so far as we know.
+	It has been shown that Optical Flow (OF) provides a biologically feasible way
+	of performing CA [Drosophila], and even	some navigational tasks [Honeybees].
+
+	A few OF techniques are available which allow us to perform CA, and so, we will
+	look at a selection. We will look at using the effects of using different types
+	of flow field, and then different the different methods of detecting obstacles.
+	In the context of this project this is assumed to be low level, reactionary
+	behaviour (i.e. we do not use a neural model or perform any processing, rather
+	we react based on immediate stimulus). 
+
+	We will then begin to experiment with the Mushroom Body network, first
+	establishing a measure of baseline performance by using the original "basic"
+	network. The robustness of the network will be tested similarly to [Ardin],
+	wherein the robot may deviate from the memorised route by so much that it can
+	never find the path again. These instances of the robot getting "lost" will be
+	counted as errors. After establishing a baseline for performance, we will
+	compare and contrast different versions of the MB circuit to see if we
+	can improve upon the performance presented by our predecessors while still
+	remaining biologically feasible.
+
+	Finally, we will report the results of the tests performed during the
+	different stages of development, as well as comparing results with relevant
+	results from previous iterations of this project. We will end with a conclusion
+	noting contributions to the project, as well as discussing limitations and
+	possible future developments.  
+
+
+	
+
+Section 2 - Background:
+
+Section 3 - Platform:
+
+Section 4 - Methods:
+
+Section 5 - Results and Evaluation: //Conisder splitting into two sections
+
+Section 6 - Conclusion and Discussion:

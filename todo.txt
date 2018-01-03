@@ -439,16 +439,152 @@ Within Time Period:
 
 - Initial tests with dual threshold promising
 - More motor command issues, stop not being registered.
+  Initial value for AT chosen based on observations as robot approaches obstacles
+  Initial value for RT chosen based on initial value for AT.
 
   1. AT = 5000, RT = 20000:
      - Functioned extremely well in some tests, poorly in others
      - Seemed to prefer turning right
 
   2. AT = 5000, RT = 30000:
-  
+     - Showed responses, though too late
+       turn was being triggered, after a collision had occurred.
 
+  3. AT = 5000, RT = 25000:
+     - Again, response is triggered, though later than would be desired
+     - Near collision or "bounce" off the surface
+     - Can see promise with a different style of turn (-ve, +ve instead of arc)
+
+     Repeat with alternate turn style:
+     - Just bad
+  
+  - Did not take into account time allowed for samples:
+    - Increasing time => Increased sensitivity
+    
 - Ongoing issue; need to fix speeds so AntBot actually goes straight
 
+progress:
+- Have something that is working in the way I need it to, however it needs tests
+  and tuning (major)
+
+- Need to play with thresholding some more
+
+- Robot seems to prefer turning left for some reason, convinced there's some
+  command buffer delay (i.e. issueing 3 or 4 go commands to avoid instead of one)
+
+  - Maybe stop, then continue with new speeds, communication latency may be too
+    great for continuous motion
+
+  - It is reacting, but too late
 
 
+04 / 12 / 17:
+today:
+- work with tuning the filter behaviour
 
+notes:
+1. AT = 5000, RT = 20000
+   - Reacted well, but too slowly
+   - Speeds are good check batteries.
+   - Batteries fine.
+
+   - Noticing inconsistency and repeated motion
+     - Right turn triggered for seemingly no reason
+
+2. AT = 5000, RT = 20000, No obstacle
+   - 1st run:
+     - Repeated slight left turns, last was large
+     - No right motion despite that being the previously perceived bias.
+   - 2nd run:
+     - Started turning immediately
+     - Followed a random looking pattern with some repeated movements
+       (e.g. there was a distinct left/right swerve motion)
+
+- Maybe a command queue issue?
+  - Not this issue, but may be an underlying problem
+  - The fact that the robot started moving before the activity was loaded is very odd
+  - Could be thread resolution? Thread is never properly stopped
+
+Added in thread timer: 15 seconds
+Runs with no obstacle present
+1. Initiated a left turn by the centre of the pitch and moved towards the opening
+   turned right before reaching it
+
+2. Initiated the same left turn near the centre of the pitch, another slight left turn where
+   (1) turned right and headed towards the opening
+
+3. Same as (2) with a strange short stop and final motor jump?
+
+4. Different number of turns but still gravitates towards the opening in the mesh
+
+From other end of the pitch:
+
+5. Same right turns as previous tests
+
+6. Again, not as severe as (5)
+
+Ok, so the robot always seems to want to go right in an empty space. Always makes roughly three turns
+of different sizes at roughly the same places. Always finishes in roughly the same place
+
+Introduce obstacle on the right to see if a left turn is triggered instead of the standard right
+
+7. Weaker right turn triggered but still right, not left. This is odd as nothing major has been changed
+
+8. Same run as (7), Left turn triggered, far too early
+
+- Changed time count method (counting loop iterations instead of raw time. Same behaviour still
+- Change accumulators
+
+- Changed reaction threshold to 10000,  works better. Accumulation threshold still 5000
+  reasoning: very first test with no accumulation worked very well, thinking is that a lower
+  reaction threshold allows multiple smaller values to make a difference rather than focusing on a
+  few larger ones.
+
+08 / 12 / 17:
+today:
+- work more with tuning
+- emergency stop? how?
+
+notes:
+- Still issues with tuning
+  - Seems to be that in general, lower reaction thresholds are better (too sensitive > not sensitive
+    enough)
+  - Experiment with dual vs individual accumulation
+  - Still preferring a right turn WHY?!
+  - Try running inverse scenario
+    - May be background interference; nope...
+
+  - Right turn preference may be resolved: Potential issue; speed problem mentioned previously
+    the robot was always drifting to the left which may have been triggering that right turn.
+    Solution: set the right speed to ~90% of the left and the robot will move in an almost straight
+    line (slight right drift, but seems negligable). Robot now seems to react nicely to the obstacles.
+    Should be noted that behaviour becomes unpredictable in an open space (background elements
+    could be playing with the flow).
+
+    Best results so far: AT = 5000, RT = 10000, Speed: 25 (22). Still don't have an emergency stop.
+    May be worth trying a halt and turn
+
+18 / 12 / 17:
+- Optic Flow:
+  - Try halt and turn (works waaaay better)
+  - Find out what more wants done with this
+  - Reaction time still too slow in some instances (How could this be fixed?)
+    - Sensitivity is still there so can't be too over-zealous with the sensitivity...
+    
+
+- Mushroom Body / Willshaw:
+  - Read...
+
+
+notes:
+- Don't worry about integrating OF into CX
+- No downward image for speed computation
+  
+
+20 / 12 / 17:
+today:
+- MB / Willshaw, code walkthrough, commenting
+
+
+notes:
+- Willshaw, seems that first image is used to set thresholding for all subsequent images
