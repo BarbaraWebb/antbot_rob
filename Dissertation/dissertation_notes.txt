@@ -54,7 +54,7 @@ Section 1 - Introduction:
 	route from the nest to a food source.}
 	
 
-	Cataglyphis Velox, herein referred to as ants, or desert ants have the
+	Cataglyphis, herein referred to as ants, or desert ants have the
 	amazing ability to navigate through complex natural environments using
 	only low-resolution visual information and minimal computational
 	complexity. The "Ant Navigational Toolkit", proposed in 2009 by
@@ -189,7 +189,17 @@ Section 2 - Background:
 
 	We adapt this model in Section 4.
 	
-
+	2.2: Mushroom Body models for Visual Navigation:
+	Ants are highly capable when it comes to visual navigation, especially considering
+	their limited brainpower and the limited detail they can extract from a scene. Though
+	low in detail, the eyes of the ant cover an impressive field of view, allowing it
+	to see almost 280 degrees at any one time (upper estimate from [Ardin]).
+	
+	Previous papers have discussed various algorithmic models for performing the task of
+	visual navigation. In this paper we focus more on the proposed neural model of
+	the Mushroom Body circuit. The precise neural mechanisms used for visual route
+	navigation are still unknown.
+	
 
 	
 	
@@ -201,3 +211,17 @@ Section 4 - Methods:
 Section 5 - Results and Evaluation: //Conisder splitting into two sections
 
 Section 6 - Conclusion and Discussion:
+
+References:
+
+Visual Navigation: 
+[Ardin et al.] [Mushroom Body]
+Ardin P, Peng F, Mangan M, Lagogiannis K, Webb B (2016) Using an Insect Mushroom Body Circuit to Encode Route Memory in Complex Natural Environments.
+PLoS Comput Biol 12(2): e1004683. https://doi.org/10.1371/journal.pcbi.1004683
+
+[Baddeley et al.] [Infomax]
+Baddeley B, Graham P, Husbands P, Philippides A (2012) A Model of Ant Route Navigation Driven by Scene Familiarity. PLoS Comput Biol 8(1): e1002336. https://doi.org/10.1371/journal.pcbi.1002336
+
+Optical Flow:
+Kahlouche Souhila, Achour Karim (2007) Optical Flow Based Robot Obstacle Avoidance
+
