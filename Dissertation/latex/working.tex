@@ -1,11 +1,15 @@
+
 \documentclass[a4paper,12pt]{article}
+\usepackage{geometry}
+\geometry{margin=1in}
 \begin{document}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLEPAGE
 \pagenumbering{gobble}
 \centering
-
-{\huge Developing AntBot: Visual Navigation based on the insect brain \par}
+\vspace*{5cm}
+{\huge Developing AntBot: \par Visual Navigation based on the insect brain \par}
 \vspace{1cm}
 {\itshape Robert Mitchell}
 
@@ -80,13 +84,103 @@ Dr. Barbara Webb
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BODY
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% INTRODUCTION
 \pagenumbering{arabic}
+
 \raggedright
 \section{ Introduction }
-\subsection{ Motivation }
+Desert ants (\textit{Cataglyphis velox}) have the
+remarkable ability to navigate through complex natural environments, using only low-resolution
+visual information and limited computational power. It is well documented that many species of
+ant, and other hymenoptra are capable of very robust visual navigation; however, it is as yet
+unclear how the insects perform this seemingly complex task with such little brainpower. In this
+paper, we will focus on using and extending an existing model for visual navigation in ants using
+the Mushroom Body circuit, an artificial neural network which emulates the Mushroom Body neuropils
+in the ant brain. We will also discuss biologically plausible methods of visual Collision Avoidance
+using Optical Flow. A robot (AntBot) has been constructed \cite{Eberding2015} to allow us a testing
+platform on which to implement, and experiment with, the algorithms in the
+\textit{Ant Navigational Toolkit} \cite{Wehner2009}.
 
+\subsection{ Motivation }
+Though we are able to observe, and mimic algorithmically, the visual navigational capabilities
+of insects, we still do not understand the precise methods by which this process takes place. The
+model we will look at was propsed by \textit{Ardin et al.} \cite{Ardin2016}, which takes
+the Mushroom Body (whose function was thought to be primarily for olfactory learning), and shows
+that this provides a plausible neural model for encoding visual memories.
+\newline
+
+The MB circuit has been implemented and tested on AntBot by Eberding and Zhang respectively, however
+the existing MB circuit is fairly simple. It uses binary weightings for the connections between
+the visual projection neurons and the Kenyon Cells, and a single boolean Extrinsic Neuron denoting
+image recognition. A modification was made by Zhang, whereby eight ENs were used, one for each of
+the cardinal directions in the Central Complex model. This will be discussed further in
+\ref{MBBackground}. The reader should note that the Central Complex (CX) model is primarily used
+to model the task of Path Integration and will not be discussed further (see \cite{Scimeca2016}).
+\newline
+
+We would also like to look at methods for collision avoidance (CA) which do not involve specialised
+sensors such as a LIDAR or SONAR, the luxury of which, ants do not have. Models have been proposed
+which use Optical Flow (OF) properties to determine whether or not a collision is imminent. These
+models have been propsed both in a purely robotic context \cite{Souhila2007},
+and biological ones \cite{Low2005, Stewart2010}. 
+  
 \subsection { Goals }
+% EDIT: The reverse route may not be worth talking about, or perhaps integrated path integration?
+% I'm not sure there is enough time for this
+
+The project aims for the following experimental scenario to be possible: We want to send the robot
+on a run through an obstacle course, allowing it to navigate however it chooses through the
+environment. From here, we want the robot to be able to replicate this route using only visual
+memories, which it should store on that initial run. Finally, we would like the robot to be able to 
+navigate home following the reverse of this route. It should be noted that this final step is not
+strictly accurate to the behaviour of the desert ant. \textit{Wehner et al.} \cite{Wehner2006}
+demonstrated that the remembered routes have a distinct polarity, so knowledge of a route from
+nest to food, does not imply that the ant has knowledge of a route from food to nest.
+\newline
+
+The first stage of the project will focus upon obtaining a working collision avoidance system as a
+pre-requisite to gathering the route information. This CA system should be based on visual
+information readily available to AntBot with no additional/specialist sensors. For this paper, we
+assume that CA is a low-level reactionary behaviour, in that, we don not use any further processing
+of the detected motion (e.g. a neural model); we react based on the immediate stimulus of the flow
+field. We will look at two different optical flow techniques used to build CA systems. We will also
+discuss the effects of using different types of flow field, how the different flow
+techniques behave in the same situation, and different methods of response.
+\newline
+
+We then move to the Mushroom Body circuit, first estabilishing a baseline performance measure for
+the visual navigation task by using the orignal \textit{basic} model from \cite{Ardin2016} with
+binary weightings and a single Extrinsic Neuron. A scanning behaviour will be used for this baseline;
+ants have demonstrated use of scanning in visual navigation but it is generally accepted that this
+is not the primary method they use to determine a direction after having recognised a scene, rather,
+this scanning behaviour only occurs in certain scenarios (e.g. when the ant becomes lost)
+\cite{Kodzhabashev2006}. 
+\newline
+
+Finally, we will report the results of the experiments performed at different stages during, and
+post development; we will compare these to relevant results from previous iterations of
+this project. We will end with a conclusion of our findings and contributions to the project,
+as well as discussing technical limitations and potential for future developments.
+\newline
 
 \subsection { Results }
+This work is based on work done previously by Leonard Eberding, Luca Scimeca, and Zhaoyu Zhang
+\cite{Eberding2016, Scimeca2017, Zhang2017}.
+\newline
+
+Significant contributions:
+\begin{enumerate}
+  \item{An optical flow based system for Collision Avoidance}
+  \item{Results indicating the impracticality of an expansion based system for Collision Avoidance}
+  \item{\textit{[FUTURE]} Successful replication of a route through a cluttered environment using Visual Navigation}
+  \item{\textit{[FUTURE]} Comparison of different Visual Navigation models in a set navigational task}
+    
+\end{enumerate}
+
+
+\vfill
+\textit{Note: results marked [FUTURE] are results I would like to have achieved by the culmination
+of the project and the writing of the final dissertation. They are not current.}
+\textit{To be continued...}
+
 
 \newpage
 
@@ -97,6 +191,7 @@ Dr. Barbara Webb
 
 \subsubsection{ Filtering }
 
+\subsection{ The Mushroom Body for Visual Navigation } \label{MBBackground}
 
 \newpage
 
