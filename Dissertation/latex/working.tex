@@ -1,7 +1,10 @@
 
 \documentclass[a4paper,12pt]{article}
+\usepackage{amsmath}
 \usepackage{geometry}
+\usepackage{graphicx}
 \geometry{margin=1in}
+\graphicspath{ {Images/} }
 \begin{document}
 
 
@@ -119,8 +122,8 @@ to model the task of Path Integration and will not be discussed further (see \ci
 We would also like to look at methods for collision avoidance (CA) which do not involve specialised
 sensors such as a LIDAR or SONAR, the luxury of which, ants do not have. Models have been proposed
 which use Optical Flow (OF) properties to determine whether or not a collision is imminent. These
-models have been propsed both in a purely robotic context \cite{Souhila2007},
-and biological ones \cite{Low2005, Stewart2010}. 
+models have been propsed both in purely robotic contexts \cite{Souhila2007},
+and biological ones \cite{Low2005}. 
   
 \subsection { Goals }
 % EDIT: The reverse route may not be worth talking about, or perhaps integrated path integration?
@@ -133,14 +136,15 @@ memories, which it should store on that initial run. Finally, we would like the 
 navigate home following the reverse of this route. It should be noted that this final step is not
 strictly accurate to the behaviour of the desert ant. \textit{Wehner et al.} \cite{Wehner2006}
 demonstrated that the remembered routes have a distinct polarity, so knowledge of a route from
-nest to food, does not imply that the ant has knowledge of a route from food to nest.
+nest to food, does not imply that the ant has knowledge of a route from food to nest. In this case,
+we make the outward and homeward route the same.
 \newline
 
 The first stage of the project will focus upon obtaining a working collision avoidance system as a
 pre-requisite to gathering the route information. This CA system should be based on visual
 information readily available to AntBot with no additional/specialist sensors. For this paper, we
-assume that CA is a low-level reactionary behaviour, in that, we don not use any further processing
-of the detected motion (e.g. a neural model); we react based on the immediate stimulus of the flow
+assume that CA is a low-level reactionary behaviour, in that, we do not use any further processing
+of the detected motion; we react based on the immediate stimulus of the flow
 field. We will look at two different optical flow techniques used to build CA systems. We will also
 discuss the effects of using different types of flow field, how the different flow
 techniques behave in the same situation, and different methods of response.
@@ -186,21 +190,204 @@ of the project and the writing of the final dissertation. They are not current.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BACKGROUND
 \section{ Background}
+\subsection{ Optical Flow }
+\textit{Image flow} is defined as being the 3D velocity vector of an object, projected onto a
+2D image plane\cite{ODonovan2005}. Optical flow is an approximation of this, working from a series
+of images to compute the projected velocity vector for a pixel. A single \textit{flow vector}
+shows the displacement of a single pixel from one image to the next. A set of these flow vectors
+creates a \textit{flow field}, a series of vectors which describe the motion in the complete image.
+\newline
+
+Broadly, there are two types of flow field: dense and sparse (also known as differential and
+feature-based repectively\cite{Low2005}). A \textit{dense} flow field tracks
+the motion of every pixel in the image. A \textit{sparse} flow field tracks the motion of a subset
+of pixels in the image. The sparse field may track a uniform subset of pixels, such as a grid, or a
+set of important points in the image, such as the prominent features in the image (object corners).
+See \ref{sec:methods} for implementation.
+
+
 \subsection{ Optical flow models for Collision Avoidance }
-\subsubsection{ Expansion }
+Collision avoidance is an important component in navigation. Ants
+do not have dedicated sensory systems or the ability to create a visual 3D map of their environment
+using stereoscopic vision or motion paralax. It has been demonstrated that optical flow is used by
+honeybees in performing visual navigation \cite{Dittmar2010}, so it is not unreasonable to
+think that bees and other hymenoptera may use this information for other purposes. Indeed, optical
+flow has been shown to be a viable model for collision avoidance in \textit{Drosophila}
+\cite{Stewart2010}. We visit two models in this paper which we will term the
+\textit{time-to-collision} model and the \textit{filtering} model.
+
+\subsubsection{ Time-to-Collision }
+This model, proposed by \textit{Low and Wyeth}\cite{Low2005}, aims to replicate the CA capabilities
+of larger animals such as birds and humans. The model relies on accurately computing the
+\textit{time-to-collision} or \textit{time-to-contact} (TTC), which is the computed time until the
+robot collides with an obstacle. The TTC is computed as follows:
+
+\begin{equation}
+TTC = \frac{d}{v}
+\end{equation}
+
+Where $d$ is the distance from a point object on a collision course with the robot and $v$ is
+constant speed at which the robot and object are closing.
+\newline
+\textit{Low and Wyeth} then alter this equation by taking the direction of the velocity vector $v$
+and the direction to a point on the object and computing the angle between these two vectors $\phi$.
+Their TTC equation then becomes:
+
+\begin{equation}
+ TTC = \frac{cos\phi \times sin\phi}{\phi}
+\end{equation}
+
+However, this method of computation relies on the assumption that the robot only ever moves in the
+forward camera direction which is not appropriate for AntBot (See section \ref{sec:platform}).
+We must look for an alternate way to compute TTC. Fortuntely, such information is easily
+computable from the \textit{focus of expansion} (FOE), the point from which all flow vectors
+originate.
+\newline
+
+A general method for computing the FOE is given by \cite{ODonovan2005}:
+
+\begin{equation}
+  FOE = (A^TA)^{-1}A^T\mathbf{b}
+\end{equation}
+
+\begin{equation*}
+  \begin{split}
+ A = 
+\begin{bmatrix}
+  a_{00} & a_{01}\\
+  \dots  & \dots \\
+  a_{n0} &  a_{n1}
+\end{bmatrix}
+\qquad
+\end{split}
+\begin{split}
+\mathbf{b} =
+\begin{bmatrix}
+  b_0 \\
+  \dots \\
+  b_n
+\end{bmatrix}
+\end{split}
+\end{equation*}
+\newline
+
+Where, for each pixel $p_i = (x, y)$, the associated flow vector is given by $\mathbf{v} = (u, v)$.
+We then set $a_{i0} = u, a_{i1} = v$ and finally $b_i = xv - yu$. The TTC can then be computed as:
+
+\begin{equation}
+  TTC = \frac{d}{v} = \frac{y}{\frac{\partial y}{\partial t}}
+\end{equation}
+
+Where $y$ is the vertical distance of some point $p = (x,y,z)$ from the
+FOE, and $\frac{\partial y}{\partial t}$ is the velocity of translational motion of $y$.
+A full derivation is given by \textit{O'Donovan} from whom we have adapted this equation.
+
+Finally, we can simplify this to:
+\begin{equation}
+TTC = \frac{\Delta_i}{|\vec{V}_t|} \dots
+\end{equation}
+Where $\Delta_i$ is the distance of a point $p_i = (x,y)$ from the FOE, and $|\vec{V}_t|$ is the
+translational velocity of the camerap computed from optical flow\cite{Souhila2007}.
+\newline
+This time-to-contact is then appropriately thresholded and a reaction is generated based on the
+position of the focus of expansion.
 
 \subsubsection{ Filtering }
+The filtering method asks the following question: Given my current motion, what visual changes do
+I expect to see? Much of the following explanation was provided by \cite{Stewart2010}.
+A model proposed by \textit{Stewart et al.} for CA in simulated fruit flies takes
+advantage of the fact that expanding patterns will trigger an avoidance manouver away from the focus
+of expansion\cite{Stewart2010}. Their model uses two offset flow filters (the \textit{expected}
+flow). Each filter is constructed as a frontally centered expansion pattern with the same spatial
+extent to either side of the expansion pole (the central vertical axis of the pattern). These filters
+are then offset by $+3^{\circ}$ for the right and $-3^{\circ}$ for the left. The left and right
+filters feed into leaky accumulators, and if the accumulator exceeds a given threshold, a saccade
+in the opposite direction is triggered. The model from \cite{Stewart2010} is shown in Figure
+\ref{fig:stewartca}. We discuss a slightly modified version of this model in section
+\ref{sec:methods}.
+
+\begin{figure}[h]
+ 
+  \centering
+  \includegraphics[width=0.9\textwidth]{Stewart2010CAModel}
+  \caption{
+    \label{fig:stewartca} The OF filter model: (Caption from \textit{Stewart et al.} Figure 7):
+    Collision avoidance (CA). (A)The CA filters used in the
+    model. Each covers ~105 deg. of azimuth but they are centred
+    at $\pm 3$ deg. (elevation = 0 deg.). (B) Control diagram for collision
+    avoidance. Only the half of the system that triggers rightward
+    saccades is shown for clarity; the other half has an identical
+    configuration. The dark blue box represents the blue wide-field
+    filter in A. The reset operation also applies to the other half of
+    the system, i.e. a saccade in one direction sets both
+    accumulators to 0. Thresh., threshold; ang. vel., angular velocity.
+  }
+ 
+\end{figure}
 
 \subsection{ The Mushroom Body for Visual Navigation } \label{MBBackground}
+The Mushroom Body neuropils are structures present in the brains of insects though they are
+largest in the brains of hymenoptera. They are known to play a critical role in olfactory
+learning, and have been thought to play a role in visual memory in hymenoptera since 1982
+at the latest\cite{Mobbs1982}. In 2010 a Mushroom Body circuit was proposed by \textit{Ardin et al.}
+to allow emulation of the structure in a simulated desert ant \cite{Ardin2010}. The simulated
+ant's view is taken from 1cm above the ground and has a field of view of $296^{\circ}$ azimuth
+by $76^{\circ}$ elevation. A ratio of $4^{\circ}/pixel$ is used to give a $19\times74$ pixel image.
+This image is then downsampled to 10$\times$36 pixels to give a realistic resolution for ant vision.
+A $1\times360$ vector is used for further processing.
+\newline
+
+The generalised MB circuit is a three layer neural network: The first layer consists of a set of
+visual Projection Neurons (vPNs), these connect to the second layer of standard artificial neurons
+referred to as Kenyon Cells (KCs), and finally these KCs connect to a set of Extrinsic Neurons (ENs).
+\newline
+
+The model by \textit{Ardin et al.} (shown in Figure \ref{fig:ardinmb}) consisted of 350 vPNs
+(one for each pixel in the downsampled image). In the second layer we have 20,000 KCs each of
+which receives input from 10 randomly selected vPNs; each KC requires coincident input from multiple
+vPNs to fire. Every KC is then connected to a single EN which sums the number of KCs which are
+activated by the input image. The network is trained by providing a reward signal at regular
+intervals. If KC activation coincides with a reward signal, the connection strength to the EN is
+greatly reduced. The single EN simply gives a familiarity measure for the image seen. The agent
+decides on its next action by scanning to find the direction of greatest familiarity.
+\newline
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{Ardin2010MBModel}
+  \caption{
+    \label{fig:ardinmb} The Mushroom Body circuit: (Caption from \textit{Stewart et al.} Figure 2):
+    Images (see Fig 1) activate the visual projection neurons (vPNs). Each Kenyon cell (KC) receives
+    input from 10 (random) vPNs and exceeds firing threshold only for coincident activation from
+    several vPNs, thus images are encoded as a sparse pattern of KC activation. All KCs converge on
+    a single extrinsic neuron (EN) and if activation coincides with a reward signal, the connection
+    strength is decreased. After training the EN output to previously rewarded (familiar) images is
+    few or no spikes.
+  }
+\end{figure}
+
+This version of the MB circuit has demonstrated the capacity to learn scene information, as well
+as recapitulate routes by using the scanning technique \cite{Ardin2010}. In 2015, \textit{Eberding}
+implemented the Willshaw Network (WN) on AntBot, which resembles the Mushroom Body neuropils; he
+demonstrated that the network allowed the agent to perform visual navigation through a sparse testing
+environment\cite{Eberding2015}. The agent navigates by scanning, computing unfamiliarity, and finally
+choosing the direction of minimum unfamiliarity. In order to save on computational resources, the
+KCs are binary rather than spiking (we hope to explore a spiking model later). While this does
+generate a correct route, however, the route is not as continuous as those performed by real ants.
 
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PLATFORM
-\section{ Platform }
+\section{ Platform } \label{sec:platform}
 a
 
 \newpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% METHODS
+\section{ Methods } \label{sec:methods}
+a
+\newpage
 \end{document}
+
+
+
+
