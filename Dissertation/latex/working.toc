@@ -8,5 +8,11 @@
 \contentsline {subsubsection}{\numberline {2.2.1} Time-to-Collision }{4}
 \contentsline {subsubsection}{\numberline {2.2.2} Filtering }{6}
 \contentsline {subsection}{\numberline {2.3} The Mushroom Body for Visual Navigation }{6}
-\contentsline {section}{\numberline {3} Platform }{9}
-\contentsline {section}{\numberline {4} Methods }{10}
+\contentsline {section}{\numberline {3} Platform }{10}
+\contentsline {subsection}{\numberline {3.1} Hardware }{10}
+\contentsline {subsection}{\numberline {3.2} Software }{10}
+\contentsline {subsubsection}{\numberline {3.2.1} Android }{10}
+\contentsline {subsubsection}{\numberline {3.2.2}Arduino}{12}
+\contentsline {section}{\numberline {4} Methods }{14}
+\contentsline {section}{\numberline {5} Results and Evalutation }{15}
+\contentsline {section}{\numberline {6} Discussion }{16}

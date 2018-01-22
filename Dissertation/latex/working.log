@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  15 JAN 2018 10:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  22 JAN 2018 16:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -130,21 +130,43 @@ File: pdftex.def 2017/06/24 v1.0g Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen120
 \Gin@req@width=\dimen121
+)
+(/usr/share/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/05/22 v1.1-161 Sub-captions (AR)
+
+(/usr/share/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/share/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen122
+\captionmargin@=\dimen123
+\captionwidth=\dimen124
+\caption@tempdima=\dimen125
+\caption@indent=\dimen126
+\caption@parindent=\dimen127
+\caption@hangindent=\dimen128
+)
+\c@ContinuedFloat=\count102
+)
+\c@subfigure=\count103
+\c@subtable=\count104
 ) (./working.aux)
 \openout1 = `working.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -182,16 +204,16 @@ LaTeX Font Info:    ... okay on input line 8.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count102
-\scratchdimen=\dimen122
+\scratchcounter=\count105
+\scratchdimen=\dimen129
 \scratchbox=\box28
-\nofMPsegments=\count103
-\nofMParguments=\count104
+\nofMPsegments=\count106
+\nofMParguments=\count107
 \everyMPshowfont=\toks21
-\MPscratchCnt=\count105
-\MPscratchDim=\dimen123
-\MPnumerator=\count106
-\makeMPintoPDFobject=\count107
+\MPscratchCnt=\count108
+\MPscratchDim=\dimen130
+\MPnumerator=\count109
+\makeMPintoPDFobject=\count110
 \everyMPtoPDFconversion=\toks22
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -244,7 +266,10 @@ G,.JBIG2,.JB2,.eps]
 (/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
-)) [1
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+ [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [1] [2] [3] (./working.toc
 )
@@ -260,130 +285,72 @@ e
 \tf@lot=\write5
 \openout5 = `working.lot'.
 
- [6]
-
-LaTeX Warning: Citation `Eberding2015' on page 1 undefined on input line 101.
-
-
-LaTeX Warning: Citation `Wehner2009' on page 1 undefined on input line 103.
-
-
-LaTeX Warning: Citation `Ardin2016' on page 1 undefined on input line 108.
-
-
-LaTeX Warning: Citation `Scimeca2016' on page 1 undefined on input line 119.
-
-
-LaTeX Warning: Citation `Souhila2007' on page 1 undefined on input line 125.
-
-
-LaTeX Warning: Citation `Low2005' on page 1 undefined on input line 126.
-
-[1]
-
-LaTeX Warning: Citation `Wehner2006' on page 2 undefined on input line 137.
-
-
-LaTeX Warning: Citation `Ardin2016' on page 2 undefined on input line 154.
-
-
-LaTeX Warning: Citation `Kodzhabashev2006' on page 2 undefined on input line 15
-9.
-
-[2]
-
-LaTeX Warning: Citation `Eberding2016' on page 3 undefined on input line 170.
-
-
-LaTeX Warning: Citation `Scimeca2017' on page 3 undefined on input line 170.
-
-
-LaTeX Warning: Citation `Zhang2017' on page 3 undefined on input line 170.
-
-[3]
-
-LaTeX Warning: Citation `ODonovan2005' on page 4 undefined on input line 195.
-
-
-LaTeX Warning: Citation `Low2005' on page 4 undefined on input line 202.
-
-
-LaTeX Warning: Citation `Dittmar2010' on page 4 undefined on input line 213.
-
-
-LaTeX Warning: Citation `Stewart2010' on page 4 undefined on input line 216.
-
-
-LaTeX Warning: Citation `Low2005' on page 4 undefined on input line 220.
-
-[4]
-
-LaTeX Warning: Citation `ODonovan2005' on page 5 undefined on input line 247.
-
-
-LaTeX Warning: Citation `Souhila2007' on page 5 undefined on input line 290.
-
-[5]
-
-LaTeX Warning: Citation `Stewart2010' on page 6 undefined on input line 297.
-
-
-LaTeX Warning: Citation `Stewart2010' on page 6 undefined on input line 300.
-
-
-LaTeX Warning: Citation `Stewart2010' on page 6 undefined on input line 305.
-
+ [6] [1] [2] [3] [4] [5]
 <Images/Stewart2010CAModel.png, id=50, 1046.91125pt x 770.88pt>
 File: Images/Stewart2010CAModel.png Graphic file (type png)
 <use Images/Stewart2010CAModel.png>
-Package pdftex.def Info: Images/Stewart2010CAModel.png  used on input line 312.
- on input line 312.
+Package pdftex.def Info: Images/Stewart2010CAModel.png  used on input line 314.
+ on input line 314.
 Package pdftex.def Info: Requested size: 407.66833pt x 300.17148pt on input lin
-e 312.
+e 314.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Citation `Mobbs1982' on page 6 undefined on input line 332.
-
-
-LaTeX Warning: Citation `Ardin2010' on page 6 undefined on input line 333.
 
 [6] [7 <./Images/Stewart2010CAModel.png>]
 <Images/Ardin2010MBModel.PNG, id=60, 523.83705pt x 395.91914pt>
 File: Images/Ardin2010MBModel.PNG Graphic file (type png)
 <use Images/Ardin2010MBModel.PNG>
-Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 357. o
-n input line 357.
+Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 359. o
+n input line 359.
 Package pdftex.def Info: Requested size: 407.66833pt x 308.12698pt on input lin
-e 357.
+e 359.
  [8 <./Images/Ardin2010MBModel.PNG>]
-[9] [10] (./working.aux)
+[9]
+<Images/KogetoDot.jpeg, id=67, 351.3125pt x 426.59375pt>
+File: Images/KogetoDot.jpeg Graphic file (type jpg)
+<use Images/KogetoDot.jpeg>
+Package pdftex.def Info: Images/KogetoDot.jpeg  used on input line 434. on inpu
+t line 434.
+Package pdftex.def Info: Requested size: 183.4495pt x 222.76735pt on input line
+ 434.
 
-LaTeX Warning: There were undefined references.
+Underfull \hbox (badness 4595) in paragraph at lines 435--435
+[]\OT1/cmr/m/n/12 Figure 3: |The Kogeto Dot 360$[]$
+ []
 
- ) 
+<Images/PanoramicView.jpg, id=68, 614.295pt x 614.295pt>
+File: Images/PanoramicView.jpg Graphic file (type jpg)
+<use Images/PanoramicView.jpg>
+Package pdftex.def Info: Images/PanoramicView.jpg  used on input line 440. on i
+nput line 440.
+Package pdftex.def Info: Requested size: 183.4495pt x 183.4463pt on input line 
+440.
+[10] [11 <./Images/KogetoDot.jpeg> <./Images/PanoramicView.jpg>] [12] [13]
+[14] [15] [16] (./working.bbl [17]) [18] (./working.aux) ) 
 Here is how much of TeX's memory you used:
- 2595 strings out of 492985
- 34927 string characters out of 6138637
- 104365 words of memory out of 5000000
- 6114 multiletter control sequences out of 15000+600000
- 13118 words of font info for 46 fonts, out of 8000000 for 9000
+ 3733 strings out of 492985
+ 55399 string characters out of 6138637
+ 125690 words of memory out of 5000000
+ 7237 multiletter control sequences out of 15000+600000
+ 13654 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,21n,29p,766b,239s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
-/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmti12.pfb>
-Output written on working.pdf (17 pages, 660259 bytes).
+ 42i,21n,40p,773b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pf
+b></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/sha
+re/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on working.pdf (25 pages, 812991 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
+ 139 PDF objects out of 1000 (max. 8388607)
+ 94 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
