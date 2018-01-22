@@ -588,3 +588,31 @@ today:
 
 notes:
 - Willshaw, seems that first image is used to set thresholding for all subsequent images
+
+19 / 01 / 17: Happy New Year!
+today:
+- MB/Willshaw familiarisation
+  - Thank goodness I commented this the last time around
+  - Seem to want to use between 200 and 400 KCs to learn the first image
+  - This is used to ensure the threshold is set so that an appropriate amount
+    of KCs are used.
+  - Brightness is taken as a cumulative sum over all connected vPNs, not
+    thresholding them individually.
+    - These implementation details should be included in the background section
+      of the dissertation.   
+- Implement new thread for the following process:
+  - Navigate for time T through obstacle course
+  - Replace at start
+  - Navigate the same route using vision
+  - We will create copies of the Willshaw module for each new implementation
+    for the sake of clarity; also I feel that the OF one will take a bit more
+    modification.
+- Plan modifications for MB model.
+  - Real valued weightings
+  - Optical flow snapshots: Honeybee paper
+    - Saving the dense flow images which store the pixel and the pixels new
+      location.
+    - How to engineer this into the MB network?..
+  - Need the paper for vPN weighting strategy
+
+notes:
