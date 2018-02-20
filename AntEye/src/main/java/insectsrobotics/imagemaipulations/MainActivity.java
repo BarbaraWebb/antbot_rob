@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.hardware.Camera;
@@ -68,6 +69,7 @@ import insectrobotics.broadcastlibrary.BroadcastValues;
 import insectsrobotics.imagemaipulations.Receiver_and_Broadcaster.Broadcast;
 import insectsrobotics.imagemaipulations.Receiver_and_Broadcaster.Receive;
 import insectsrobotics.imagemaipulations.NavigationModules.WillshawModule;
+import insectsrobotics.imagemaipulations.NavigationModules.RealWillshawModule;
 import insectsrobotics.imagemaipulations.NavigationModules.PerfectMemoryModule;
 
 import static java.lang.Thread.sleep;
@@ -192,6 +194,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     String pathIntegratorModule;
     String combinerModule;
     String opticalFlowModule;
+    String visualNavigationModule;
     boolean notification = true;
 
     //Layout Views
@@ -215,6 +218,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     File sdCard = Environment.getExternalStorageDirectory();
     File dir = new File(sdCard.getAbsolutePath() + "/");
     File file = new File(dir, "text.txt");
+    File log_file = new File( dir, "log_file.txt");
+
+
 
     //*** Camera calibration data
     double R1 = 104.7; //radius of the inner circle
@@ -324,6 +330,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     int global_start_time = (int) SystemClock.elapsedRealtime();
     int global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time;
 
+    //Visual Navigation Through Dense Environments : VN_Vars
+    Thread learning_trip; //Thread for the outbound learning trip
+    Thread memory_trip; //Thread for reproducing the route learned in the learning_trip
+
+    boolean real = false; //Boolean to flag which network we use
+    WillshawModule mushroom_body;
+    RealWillshawModule real_mushroom_body;
 
     //Initiate all ServiceConnections for all Background Services
     ServiceConnection visualNavigationServiceConnection = new ServiceConnection() {
@@ -505,13 +518,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     public MainActivity() {
     }
 
-
+    
     /**
      * Called when the activity is first created.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Log.i("MainActivity", "Main Activity starts");
         //First Bind all other services from apps to this one
 
@@ -568,12 +582,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         pathIntegratorModule = mBundle.getString(PI_MODULE, NO_MODULE);
         combinerModule = mBundle.getString(C_MODULE, NO_MODULE);
         opticalFlowModule = mBundle.getString(OF_MODULE, NO_MODULE);
+        visualNavigationModule = mBundle.getString(NAV_MODULE, NO_MODULE);
         selectedModule=mBundle.getInt("selectModule",0);
 
         // DEBUG LOG to file
         LogToFileUtils.init(this.getApplicationContext());
 
         //DEBUG: Create new File for error output
+        log(log_file, "New input");
+
         try {
             FileOutputStream f = new FileOutputStream(file);
             f.write(("Measurements: " + "\n").getBytes());
@@ -1020,7 +1037,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             rotatedImageDB = new ArrayList<>();
 
             //Log.i(flowTag, "ModuleSelected"+selectedModule);
-
+            //Search hook : MENU_SELECTION
             //Choose which module and which setting to run - RM
             if(selectedModule==0){
                 // Uncomment to start recular CX (one speed input)
@@ -1101,6 +1118,27 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                         opticalFlowThread.start();
                         break;
                     }
+            } else if (selectedModule == 4){
+
+                switch(visualNavigationModule){
+                    case VN_BASE:
+                        Log.i("VN: ", "Thread started");
+                        real = false;
+                        learning_trip = new Thread(navLearning);
+                        learning_trip.start();
+                        memory_trip = new Thread(navMemory);
+                        break;
+                    case VN_REAL:
+                        Log.i("VN: ", "Thread started: real");
+                        real = true;
+                        learning_trip = new Thread(navLearning);
+                        learning_trip.start();
+                        memory_trip = new Thread(navMemoryReal);
+                    default:
+                        learning_trip = new Thread(navLearning);
+                        learning_trip.start();
+                        memory_trip = new Thread(navMemory);
+                }
             }
 
 
@@ -1419,6 +1457,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 e.printStackTrace();
             }
 
+            log(log_file, "CA run started");
             boolean avoid = false; //Is the robot currently avoiding an obstacle?
             boolean stop = false; //Halt flag
             boolean initialise = true; //Loop initialisation flag
@@ -1431,8 +1470,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             int t_delta = (int) SystemClock.elapsedRealtime() - current_time; //Time interval
 
             //Left and right motor speeds
-            int lft_speed = 25;
-            int rgt_speed = 22;
+            int lft_speed = 15;
+            int rgt_speed = 13;
 
             //Accumulators for left and right flow
             int dual_accumulator = 0; //Add both values and see if there's significant bias
@@ -1522,7 +1561,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     /*
                     lft_speed = 10; //Left turn
                     rgt_speed = 100; //Left turn*/
-                    initialise = true; //Re-call the go command to trigger the speedsleep(integratorRunTime); change
+                    initialise = true; //Re-call the go command to trigger the speed change
                     avoid = true; //Flag so we know to ignore this code snippet when avoiding
                     dual_accumulator = 0;
                     left_accumulator = 0;
@@ -1545,8 +1584,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 } else if ( avoid && ((current_time - t_move_start ) >= 500)){
                     //Make adjustments in half second intervals
-                    lft_speed = 25; //Back to default
-                    rgt_speed = 22; //Back to default
+                    lft_speed = 15; //Back to default
+                    rgt_speed = 13; //Back to default
                     avoid = false; //No longer avoiding an obstacle
                     initialise = true; //Need to reset robot speeds
                 }
@@ -1584,6 +1623,558 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     //End of OF threads - RM
     //-------------------------------------------------------
 
+    //Visual Navigation Threads
+    //Thread for the outbound learning route.
+    //Search hook : NAV_LEARN
+    Runnable navLearning = new Runnable(){
+        @Override
+        public void run() {
+            try {
+                sleep(3000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            mushroom_body = new WillshawModule();
+            real_mushroom_body = new RealWillshawModule();
+
+            //Setup the model
+            boolean model_not_initialised = true;
+            while (model_not_initialised) { //Spin until we can initialise the model
+                if (images_access) {
+                    //Can't send a matrix, need to send an array
+                    Mat matImage = processedDestImage; //get current image
+                    byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()]; //Process into an array
+                    matImage.get(0, 0, imageArray_tmp);
+                    int[] imageArray = new int[imageArray_tmp.length];
+                    for (int n = 0; n < imageArray_tmp.length; n++) {
+                        imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
+                    }
+
+                    //Call the method to construct the network ( for the chosen network type );
+                    if (real) {
+                        real_mushroom_body.setupLearningAlgorithm(imageArray);
+                    } else {
+                        mushroom_body.setupLearningAlgorithm(imageArray);
+                    }
+
+                    model_not_initialised = false; //Model is now ready, can exit the loop
+                }
+            }
+
+            //The Willshaw net (Mushroom Body) is now ready to use.
+
+            //Run the CA algorithm (Same as the opticalFlowAvoidance thread)
+
+            boolean avoid = false; //Is the robot currently avoiding an obstacle?
+            boolean stop = false; //Halt flag
+            boolean initialise = true; //Loop initialisation flag
+            int start_time = (int) SystemClock.elapsedRealtime(); //Start time for the thread
+            int current_time = (int) SystemClock.elapsedRealtime() - start_time; //Current thread time
+            int t_move_start = 0; //Time that a saccade started
+
+            //Accumulation time intervals
+            int t_interval_start = current_time; //Start of the time interval
+            int t_delta = (int) SystemClock.elapsedRealtime() - current_time; //Time interval
+
+            //Left and right motor speeds
+            int lft_speed = 15;
+            int rgt_speed = 13;
+
+            //Accumulators for left and right flow
+            int dual_accumulator = 0; //Add both values and see if there's significant bias
+            int left_accumulator = 0; //Add only left values
+            int right_accumulator = 0; //Add only right values
+            int accumulation_threshold = 5000; //Threshold for a value to be accumulated (ignore all others)
+            int reaction_threshold = 10000; //Value to be met for a reaction to be triggered. (need at most four readings)
+
+            int loop_count = 0;
+
+            //While
+            while (!stop && (current_time <= 30000)) {
+                try {
+                    sleep(600);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //Print out debug information, catch exceptions
+                ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
+
+                //Flow accumulators
+                if (ca_flow_diff >= accumulation_threshold) {
+                    left_accumulator = left_accumulator + (int) leftCAFlow;
+                } else if (ca_flow_diff <= -accumulation_threshold) {
+                    right_accumulator = right_accumulator + Math.abs((int) rightCAFlow);
+                }
+
+                if (Math.abs(ca_flow_diff) >= accumulation_threshold) {
+                    dual_accumulator = dual_accumulator + (int) ca_flow_diff;
+                }
+
+                //If accumulation time limit reached, reset timer and accumulators
+                if (loop_count >= 2/*t_delta >= 2000 */) {
+                    left_accumulator = 0;
+                    right_accumulator = 0;
+                    dual_accumulator = 0;
+                    loop_count = 0; //Reset loop counter
+
+                }
+
+                if (t_delta > 1000) { //Save images every second (30 images learned)
+                    t_interval_start = (int) SystemClock.elapsedRealtime();
+                    boolean image_not_learned = true;
+                    while (image_not_learned) { //Spin until image becomes available
+                        //DEBUG NOTE: This shouldn't cause any problems but it's
+                        //possible that this delay could cause problems with the CA
+                        //by spinning too long. Keep an eye out
+                        if (images_access) {
+                            Mat matImage = processedDestImage; //get current image
+                            byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()]; //Process into an array
+                            matImage.get(0, 0, imageArray_tmp);
+                            int[] imageArray = new int[imageArray_tmp.length];
+                            for (int n = 0; n < imageArray_tmp.length; n++) {
+                                imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
+                            }
+
+                            //Call the method to construct the network
+                            if (real) {
+                                real_mushroom_body.learnImage(imageArray);
+                            } else {
+                                mushroom_body.learnImage(imageArray);
+                            }
+
+                            image_not_learned = false; //Image has been learned, we can exit the loop
+                        }
+                    }
+                }
+
+                try {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            debugTextView.setText(String.format(
+                                    "Speed: %f \n" +
+                                            "Left CA flow: %f \n" +
+                                            "Right CA flow: %f \n" +
+                                            "Flow Difference: %f \n"
+                                    ,
+                                    speed,
+                                    leftCAFlow,
+                                    rightCAFlow,
+                                    ca_flow_diff
+                            ));
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //End printing
+
+                //Initialise if 1st iteration (re-used to reset speeds mid-run)
+                if (initialise) {
+                    initialise = false;
+                    go(new double[]{lft_speed, rgt_speed});
+                    try {
+                        sleep(1000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } //Command delay
+                    t_interval_start = (int) SystemClock.elapsedRealtime(); //Start the time interval for accumulation
+                }
+
+                //Figure out which way to turn
+                boolean left = false;
+                boolean right = false;
+
+                //Dual decision (contiguous results)
+                //if ( dual_accumulator >= reaction_threshold ){ right = true; }
+                //else if ( dual_accumulator <= -reaction_threshold ){ left = true; }
+
+
+                //Uncomment to use the individual method for accumulation.
+                //Individual decision
+                if (left_accumulator >= reaction_threshold) {
+                    right = true;
+                } else if (right_accumulator >= reaction_threshold) {
+                    left = true;
+                }
+                //Left accumulator keeps track of left flow and so should trigger a right turn
+                //Right accumulator keeps track of right flow and so should trigger a left turn
+
+
+                if (left && (!avoid)) { //Left turn required
+                    Log.i("CA:", "Left turn triggered");
+                    try {
+                        turnAround(20);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    /*
+                    lft_speed = 10; //Left turn
+                    rgt_speed = 100; //Left turn*/
+                    initialise = true; //Re-call the go command to trigger the speed change
+                    avoid = true; //Flag so we know to ignore this code snippet when avoiding
+                    dual_accumulator = 0;
+                    left_accumulator = 0;
+                    right_accumulator = 0;
+                    t_move_start = current_time; //Time the saccade started
+
+                } else if (right && (!avoid)) { //Right turn required
+                    Log.i("CA:", "Right turn triggered");
+                    try {
+                        turnAround(-20);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    /*lft_speed = 100; //Right turn
+                    rgt_speed = 10; //Right turn*/
+                    initialise = true; //Re-call the go command to trigger the speed change
+                    avoid = true; //Flag so we know to ignore this code snippet when avoiding
+                    dual_accumulator = 0;
+                    left_accumulator = 0;
+                    right_accumulator = 0;
+                    t_move_start = current_time; //Time the saccade started
+
+                } else if (avoid && ((current_time - t_move_start) >= 500)) {
+                    //Make adjustments in half second intervals
+                    lft_speed = 15; //Back to default
+                    rgt_speed = 13; //Back to default
+                    avoid = false; //No longer avoiding an obstacle
+                    initialise = true; //Need to reset robot speeds
+                }
+
+                current_time = (int) SystemClock.elapsedRealtime() - start_time; //Update current time
+                t_delta = (int) SystemClock.elapsedRealtime() - t_interval_start; //Update accumulation interval
+            }
+
+            try {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        debugTextView.setText(String.format(
+                                "End of learning run. Replace the robot at the start of the course " +
+                                        "to allow recapitulation."
+                        ));
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            go(new double[]{0, 0}); //Stop
+
+            try {
+                sleep(1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (real) {
+                //For real values, want to do multiple memory runs to see how well the model
+                //learns over time
+                memory_trip = new Thread(navMemoryReal); //Make sure using the real valued nav.
+                for ( int run_count = 0; run_count < 5; ++run_count ) {
+                    try {
+                        sleep(30000); //Wait for 30 Seconds to allow the robot to be replaced at the start of the course
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    //Start the attempted reconstruction of the route
+                    memory_trip.start();
+                    try {
+                        memory_trip.join(); //Wait for the thread to finish before next iteration
+                    } catch ( Exception e ){ e.printStackTrace(); }
+                }
+            }else{
+                try {
+                    sleep(30000); //Wait for 30 Seconds to allow the robot to be replaced at the start of the course
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+                //Start the attempted reconstruction of the route
+                memory_trip = new Thread(navMemory);
+                memory_trip.start();
+
+            }
+        }
+    };
+
+    Runnable navMemory = new Runnable(){
+        @Override
+        public void run() {
+            //Assume robot is placed back at the start of the run.
+            //Scanning routine?
+            //Scan, check familiarity, go in direction of global minima.
+            //Using scanning as Klinokinsesis is impractical with this robot in a dense environment
+
+            //This is the scanning algorithm from startScanning().
+            int min_index;
+            int start_t = (int) SystemClock.elapsedRealtime();
+            int interval_t = (int) SystemClock.elapsedRealtime() - start_t;
+            int end_t = 120000; //Allow a lot of extra time for scanning
+
+            while (interval_t < end_t) {
+                try {
+                    turnAround(30.00);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                Boolean image_not_accessed;
+
+                String unfarmiliarity_distribution = "";
+
+                for (int i = 0; i < 11; i++) {
+                    image_not_accessed = true;
+                    while (image_not_accessed){
+                        if (images_access){
+                            Mat matImage = processedDestImage;
+                            //Since there is no possibility to send a 2D array or Mat file the image is transformed to a 1D int array
+                            byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
+                            matImage.get(0, 0, imageArray_tmp);
+                            int[] imageArray = new int[imageArray_tmp.length];
+                            for (int n = 0; n < imageArray_tmp.length; n++) {
+                                imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
+                            }
+                            familarity_array[i] = mushroom_body.calculateFamiliarity(imageArray);
+                            unfarmiliarity_distribution += familarity_array[i] + ",";
+                            image_not_accessed = false;
+                        }}
+
+                    if (i != 10) {
+                        try {
+                            turnAround(-6.00);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                LogToFileUtils.write(unfarmiliarity_distribution+'\n');
+
+                min_index = getMinIndex(familarity_array);
+
+                LogToFileUtils.write("Seleted index: " + min_index + "\n");
+
+                log(log_file, "[MB_LEARN:FAMILIARITY]: " + unfarmiliarity_distribution + ";");
+                log(log_file, "[MB_LEARN:MIN_INDEX]: " + min_index);
+
+                try {
+                    turnAround((10 - min_index) * 6.0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                //We will instead move for a set time, instead of a distance 2 seconds
+
+                go( new double[]{ 15, 13 } );
+                try { sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Wait for the command to start
+
+                //Time tracking:
+                int t_start = (int) SystemClock.elapsedRealtime();
+                int t_delta = (int) SystemClock.elapsedRealtime() - t_start;
+                int t_interval = 2000; //2 second interval
+
+                //Accumulators for left and right flow
+                int dual_accumulator = 0; //Add both values and see if there's significant bias
+                int left_accumulator = 0; //Add only left values
+                int right_accumulator = 0; //Add only right values
+                int accumulation_threshold = 5000; //Threshold for a value to be accumulated (ignore all others)
+                int reaction_threshold = 10000; //Value to be met for a reaction to be triggered. (need at most four readings)
+
+                int loop_count = 0;
+
+                while ( t_delta < t_interval ) {
+                    //Perform CA accumulation checks
+                    try { sleep(600); } catch ( Exception e ){ e.printStackTrace(); }
+
+                    //Print out debug information, catch exceptions
+                    ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
+
+                    //Flow accumulators
+                    if ( ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) leftCAFlow; }
+                    else if ( ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) rightCAFlow); }
+
+                    if ( Math.abs(ca_flow_diff) >= accumulation_threshold ){ dual_accumulator = dual_accumulator + (int) ca_flow_diff; }
+
+                    //If accumulation time limit reached, reset timer and accumulators
+                    if ( loop_count >= 2){
+                        left_accumulator = 0;
+                        right_accumulator = 0;
+                        dual_accumulator = 0;
+                        loop_count = 0; //Reset loop counter
+                    }
+
+                    if ( (left_accumulator >= reaction_threshold) ||
+                            (right_accumulator >= reaction_threshold) ) {
+                        go (new double[]{0, 0}); //Halt the robot
+                        try { sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Wait
+                        break; //Break the loop (trigger an early scan)
+                    }
+
+                    loop_count++;
+                    t_delta = (int) SystemClock.elapsedRealtime() - t_start;
+                }
+
+                try {
+                    sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            try {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        debugTextView.setText(String.format(
+                                "End of visual memory run."
+                        ));
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
+
+    //Runnable for the memory navigation using the real valued willshaw net
+    Runnable navMemoryReal = new Runnable(){
+        @Override
+        public void run() {
+            //Assume robot is placed back at the start of the run.
+
+            //This is the scanning algorithm from startScanning().
+            int min_index;
+            int start_t = (int) SystemClock.elapsedRealtime();
+            int interval_t = (int) SystemClock.elapsedRealtime() - start_t;
+            int end_t = 30000;
+            while (interval_t < end_t) {
+                interval_t = (int) SystemClock.elapsedRealtime() - start_t;
+                try {
+                    turnAround(30.00);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                Boolean image_not_accessed;
+
+                String unfarmiliarity_distribution = "";
+
+                for (int i = 0; i < 11; i++) {
+                    image_not_accessed = true;
+                    while (image_not_accessed){
+                        if (images_access){
+                            Mat matImage = processedDestImage;
+                            //Since there is no possibility to send a 2D array or Mat file the image is transformed to a 1D int array
+                            byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
+                            matImage.get(0, 0, imageArray_tmp);
+                            int[] imageArray = new int[imageArray_tmp.length];
+                            for (int n = 0; n < imageArray_tmp.length; n++) {
+                                imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
+                            }
+                            familarity_array[i] = real_mushroom_body.calculateFamiliarity(imageArray);
+                            unfarmiliarity_distribution += familarity_array[i] + ",";
+                            image_not_accessed = false;
+                        }}
+
+                    if (i != 10) {
+                        try {
+                            turnAround(-6.00);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                LogToFileUtils.write(unfarmiliarity_distribution+'\n');
+
+                min_index = getMinIndex(familarity_array);
+
+                LogToFileUtils.write("Seleted index: " + min_index + "\n");
+
+                try {
+                    turnAround((10 - min_index) * 6.0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                //We will instead move for a set time, instead of a distance 2 seconds
+
+                go( new double[]{ 25, 22 } );
+                try { sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Wait for the command to start
+
+                //Time tracking:
+                int t_start = (int) SystemClock.elapsedRealtime();
+                int t_delta = (int) SystemClock.elapsedRealtime() - t_start;
+                int t_interval = 2000; //2 second interval
+
+                //Accumulators for left and right flow
+                int dual_accumulator = 0; //Add both values and see if there's significant bias
+                int left_accumulator = 0; //Add only left values
+                int right_accumulator = 0; //Add only right values
+                int accumulation_threshold = 5000; //Threshold for a value to be accumulated (ignore all others)
+                int reaction_threshold = 10000; //Value to be met for a reaction to be triggered. (need at most four readings)
+
+                int loop_count = 0;
+
+                while ( t_delta < t_interval ) {
+                    //Perform CA accumulation checks
+                    try { sleep(600); } catch ( Exception e ){ e.printStackTrace(); }
+
+                    //Print out debug information, catch exceptions
+                    ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
+
+                    //Flow accumulators
+                    if ( ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) leftCAFlow; }
+                    else if ( ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) rightCAFlow); }
+
+                    if ( Math.abs(ca_flow_diff) >= accumulation_threshold ){ dual_accumulator = dual_accumulator + (int) ca_flow_diff; }
+
+                    //If accumulation time limit reached, reset timer and accumulators
+                    if ( loop_count >= 2){
+                        left_accumulator = 0;
+                        right_accumulator = 0;
+                        dual_accumulator = 0;
+                        loop_count = 0; //Reset loop counter
+                    }
+
+                    if ( (left_accumulator >= reaction_threshold) ||
+                            (right_accumulator >= reaction_threshold) ) {
+                        go (new double[]{0, 0}); //Halt the robot
+                        try { sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Wait
+                        break; //Break the loop (trigger an early scan)
+                    }
+
+                    loop_count++;
+                    t_delta = (int) SystemClock.elapsedRealtime() - t_start;
+                }
+
+                try {
+                    sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
 
     // Monitoring time to stop outbound PI and start Inbound
     Runnable startInbound = new Runnable() {
@@ -3203,6 +3794,20 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 "      "+memory.get(11)+"     "+memory.get(13)+"\n"+
                 "                "+memory.get(4)+"\n"+
                 "                "+memory.get(12);
+    }
+
+    private int log(File file, String output) { //Function to log information to an output file;
+        output = output.concat("\n"); //Add an implicit newline character
+        try {
+            FileOutputStream stream = new FileOutputStream(file);
+            stream.write(output.getBytes()); //Write to the output stream
+            stream.close();
+        } catch (Exception e) { //Catch FileIO exception
+            e.printStackTrace();
+            System.exit(-1);
+            return 1; //Return flag
+        }
+        return 0;
     }
 
     /**

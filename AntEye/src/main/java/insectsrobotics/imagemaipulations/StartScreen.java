@@ -16,6 +16,9 @@ import java.util.HashMap;
 import insectrobotics.broadcastlibrary.BroadcastValues;
 import insectsrobotics.imagemaipulations.Calibration.PreferencesManager;
 
+//import static insectsrobotics.imagemaipulations.R.id.Nav_radioGroup;
+//import static insectsrobotics.imagemaipulations.R.id.Nav_radioGroup;
+
 
 public class StartScreen extends Activity implements BroadcastValues{
 
@@ -26,10 +29,11 @@ public class StartScreen extends Activity implements BroadcastValues{
     RadioGroup PI_radioGroup;
     RadioGroup Combiner_radioGroup;
     RadioGroup OF_radioGroup;
+    RadioGroup Nav_radioGroup;
     HashMap<Integer, String> moduleSelectionMap;
     int selectedModule = 0;
 
-    int[] navigationModules = {-1, -1, -1, -1};
+    int[] navigationModules = {-1, -1, -1, -1, -1};
 
     boolean defaultSettings = true;
 
@@ -53,6 +57,8 @@ public class StartScreen extends Activity implements BroadcastValues{
                 navigationModules[2] = checkedId;
             } else if (group.equals(OF_radioGroup)){
                 navigationModules[3] = checkedId;
+            } else if (group.equals(Nav_radioGroup)) {
+                navigationModules[4] = checkedId;
             }
 
         }
@@ -77,9 +83,12 @@ public class StartScreen extends Activity implements BroadcastValues{
         moduleSelectionMap.put(R.id.Combiner2_radioBtn, KLINOKINESIS);
         moduleSelectionMap.put(R.id.Combiner3_radioBtn, EIGHT_ENS);
         moduleSelectionMap.put(-3, NO_MODULE);
-        moduleSelectionMap.put(R.id.OF1_radioBtn, OF_DETECT);
+        moduleSelectionMap.put(R.id.OF1_radioBtn, OF_AVOID); //NOT CURRENTLY IMPLEMENTED (OF_DETECT)
         moduleSelectionMap.put(R.id.OF2_radioBtn, OF_AVOID);
         moduleSelectionMap.put(-4, NO_MODULE);
+        moduleSelectionMap.put(R.id.VN1_radioBtn, VN_BASE);
+        moduleSelectionMap.put(R.id.VN2_radioBtn, VN_REAL);
+        moduleSelectionMap.put(-5, NO_MODULE);
 
         TextView advancedSettingsTextView = (TextView) findViewById(R.id.AdvancedSettingTextView);
         advancedSettingsTextView.setOnClickListener(new View.OnClickListener() {
@@ -101,11 +110,12 @@ public class StartScreen extends Activity implements BroadcastValues{
         LinearLayout defaultSettingsLayout = (LinearLayout) findViewById(R.id.defaultSettingsLayout);
         defaultSettingsLayout.setVisibility(View.VISIBLE);
         firstClick = true;
-        if (PI_radioGroup != null && VS_radioGroup != null && Combiner_radioGroup != null && OF_radioGroup != null) {
+        if (PI_radioGroup != null && VS_radioGroup != null && Combiner_radioGroup != null && OF_radioGroup != null && Nav_radioGroup != null) {
             PI_radioGroup.setVisibility(View.GONE);
             VS_radioGroup.setVisibility(View.GONE);
             Combiner_radioGroup.setVisibility(View.GONE);
             OF_radioGroup.setVisibility(View.GONE);
+            Nav_radioGroup.setVisibility(View.GONE);
         }
     }
 
@@ -122,6 +132,7 @@ public class StartScreen extends Activity implements BroadcastValues{
             PI_radioGroup = (RadioGroup) findViewById(R.id.PI_radioGroup);
             Combiner_radioGroup = (RadioGroup) findViewById(R.id.Combiner_radioGroup);
             OF_radioGroup = (RadioGroup) findViewById(R.id.OF_radioGroup);
+            Nav_radioGroup = (RadioGroup) findViewById(R.id.Nav_radioGroup);
             Button button = (Button) v;
 
             //Would it not make more sense to use button ids to check?
@@ -132,6 +143,7 @@ public class StartScreen extends Activity implements BroadcastValues{
                     PI_radioGroup.setVisibility(View.GONE);
                     Combiner_radioGroup.setVisibility(View.GONE);
                     OF_radioGroup.setVisibility(View.GONE);
+                    Nav_radioGroup.setVisibility(View.GONE);
                     VS_radioGroup.setVisibility(View.VISIBLE);
                     VS_radioGroup.setOnCheckedChangeListener(radioGroupOnChangeListener);
                     break;
@@ -140,6 +152,7 @@ public class StartScreen extends Activity implements BroadcastValues{
                     VS_radioGroup.setVisibility(View.GONE);
                     Combiner_radioGroup.setVisibility(View.GONE);
                     OF_radioGroup.setVisibility(View.GONE);
+                    Nav_radioGroup.setVisibility(View.GONE);
                     PI_radioGroup.setVisibility(View.VISIBLE);
                     PI_radioGroup.setOnCheckedChangeListener(radioGroupOnChangeListener);
                     break;
@@ -148,6 +161,7 @@ public class StartScreen extends Activity implements BroadcastValues{
                     VS_radioGroup.setVisibility(View.GONE);
                     PI_radioGroup.setVisibility(View.GONE);
                     OF_radioGroup.setVisibility(View.GONE);
+                    Nav_radioGroup.setVisibility(View.GONE);
                     Combiner_radioGroup.setVisibility(View.VISIBLE);
                     Combiner_radioGroup.setOnCheckedChangeListener(radioGroupOnChangeListener);
                     break;
@@ -156,18 +170,29 @@ public class StartScreen extends Activity implements BroadcastValues{
                     VS_radioGroup.setVisibility(View.GONE);
                     PI_radioGroup.setVisibility(View.GONE);
                     Combiner_radioGroup.setVisibility(View.GONE);
+                    Nav_radioGroup.setVisibility(View.GONE);
                     OF_radioGroup.setVisibility(View.VISIBLE);
                     OF_radioGroup.setOnCheckedChangeListener(radioGroupOnChangeListener);
                     //Know we are getting in here
                     break;
+                case "VN":
+                    selectedModule = 4;
+                    VS_radioGroup.setVisibility(View.GONE);
+                    PI_radioGroup.setVisibility(View.GONE);
+                    Combiner_radioGroup.setVisibility(View.GONE);
+                    OF_radioGroup.setVisibility(View.GONE);
+                    Nav_radioGroup.setVisibility(View.VISIBLE);
+                    Nav_radioGroup.setOnCheckedChangeListener(radioGroupOnChangeListener);
+                    break;
                 case "Start":
-                    if (navigationModules[0] == -1 && navigationModules[1] == -1 && navigationModules[2] == -1 && navigationModules[3] == -1) {
+                    if (navigationModules[0] == -1 && navigationModules[1] == -1 && navigationModules[2] == -1 && navigationModules[3] == -1 && navigationModules[4] == -1) {
                         navigationModules[0] = R.id.VS1_radioBtn;
                         navigationModules[1] = R.id.PI1_radioBtn;
                         navigationModules[2] = R.id.Combiner1_radioBtn;
                         navigationModules[3] = R.id.OF1_radioBtn;
+                        navigationModules[4] = R.id.VN1_radioBtn;
                         onStartButtonClick(findViewById(R.id.startBtn));
-                    } else if (navigationModules[0] != -1 && navigationModules[1] != -1 && navigationModules[2] != -1 && navigationModules[3] != -1) {
+                    } else if (navigationModules[0] != -1 && navigationModules[1] != -1 && navigationModules[2] != -1 && navigationModules[3] != -1 && navigationModules[4] != -1) {
                         onStartButtonClick(findViewById(R.id.startBtn));
                     } else {
                         if (navigationModules[0] == -1)
@@ -178,6 +203,8 @@ public class StartScreen extends Activity implements BroadcastValues{
                             navigationModules[2] = R.id.Combiner1_radioBtn;
                         if (navigationModules[3] == -1)
                             navigationModules[3] = R.id.OF1_radioBtn;
+                        if (navigationModules[4] == -1)
+                            navigationModules[4] = R.id.VN1_radioBtn;
                     }
 
 
@@ -207,6 +234,7 @@ public class StartScreen extends Activity implements BroadcastValues{
         savedBundle.putString(PI_MODULE, moduleSelectionMap.get(navigationModules[1]));
         savedBundle.putString(C_MODULE, moduleSelectionMap.get(navigationModules[2]));
         savedBundle.putString(OF_MODULE, moduleSelectionMap.get(navigationModules[3]));
+        savedBundle.putString(NAV_MODULE, moduleSelectionMap.get(navigationModules[4]));
         savedBundle.putInt("selectModule",selectedModule);
         startMainActivityIntent.putExtra("Data", savedBundle);
         //startMainActivityIntent.putExtra("ServerConnection", mBundle);

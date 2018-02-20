@@ -50,6 +50,10 @@ public interface BroadcastValues {
     String OF_MODULE = "OpticalFlowModule";
     String OF_DETECT = "OpticalFlowDetectionModule";
     String OF_AVOID = "OpticalFlowAvoidanceModule";
+
+    String NAV_MODULE = "VisualNavigationModule";
+    String VN_BASE = "VisualNavigationBaseModule";
+    String VN_REAL = "VisualNavigationRealModule";
     String NO_MODULE = "NoModule";
 
     //______________________________________AntEye Broadcasts_______________________________________

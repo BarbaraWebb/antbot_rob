@@ -616,3 +616,78 @@ today:
   - Need the paper for vPN weighting strategy
 
 notes:
+
+26 / 01 / 18:
+- Add new menu item to run the route nav pattern (DONE)
+- Write the CA with memory thread (DONE)
+- Write the VN thread from MB (Planned)
+
+notes:
+- So far, the plan is to continue using scanning behaviour.
+  Klinokinesis is more realistic, but the hardware is limiting
+  in this case. We can't turn fast enough using klinokinesis in
+  a densly populated environment.
+
+08 / 02 / 18:
+- Finish basic VN thread (Done-ish but could maybe use refinement)
+  
+- Make modified Willshaw network
+
+notes:
+- Images are stored every second. This should hopefully be enough to allow the
+  robot to recapitulate the route with a fine level of detail.
+
+- Thought: Image of robot looking at a box before a turn and image of next
+  section in the route may have similar levels of familiarity. Learning rate
+  could play a difference hear
+
+- Do I want OF and vn going at the same time? I.e. an OF CA trigger will
+  trigger a scan instead of an avoidance saccade? Or could I move for 2 seconds
+  triggering saccades as necessary?
+
+- First option preferable. CA warning will trigger a scan.
+  - Obstacle detected: directional decision was made here
+  - Also avoids issues with running into the box then scanning, or scanning
+    while right next to something
+
+13 / 02 / 18:
+today:
+- Write RealWillshaw code : Done, I think
+- Come up with experiment structure for Real : Done
+  - One learning CA run
+  - Then learning memory runs (i.e. run the robot from memory, save
+    the most familiar image).
+- Write experiment structure for real : In progress...
+
+- In lab:
+  - Finish hardware stuff (exception of battery)
+  - Measure available space; buy battery ASAP
+
+notes:
+- RealWillshaw
+  - Every KC starts with a weighting of 1
+  - Upon activation KC weigting is: w = w * r; where r is learning rate
+    starting with r = 0.9;
+
+
+14 / 02 / 18:
+- Still have no defined end point for the nav thread.
+
+notes:
+- Nav threads appear to be done? Now need to go into labs and test :(
+- Still need a working power source. Battery ordered, awaiting delivery
+  but need contingency plans should this fail too. Can maybe construct a
+  series battery pack that will fit along with the extra components.
+
+19 / 02 / 18:
+- Experiment with new speeds and reaction thresholds for OF
+- Try running the new nav threads. See if shit goes south
+
+notes:
+- New power source installed; much more powerful than the old one, needs
+  recalibration of OF sections
+
+
+20 / 02 / 18:
+- Willshaw code needs tested, need metrics to see how it is behaving/performing.
+- Create log file which is parseable for easy graph production.
