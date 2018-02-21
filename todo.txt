@@ -689,5 +689,12 @@ notes:
 
 
 20 / 02 / 18:
-- Willshaw code needs tested, need metrics to see how it is behaving/performing.
+- Willshaw code needs tested, need metrics to see how it is behaving/performing
 - Create log file which is parseable for easy graph production.
+
+21 / 02 / 18:
+- Create modified log file utility for statistical data (done)
+- Switch to image convolution instead of physical scanning (techincal
+  limitations)
+- Write python script for interpreting stats and producing graphs
+

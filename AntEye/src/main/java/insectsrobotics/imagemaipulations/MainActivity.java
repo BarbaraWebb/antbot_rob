@@ -518,7 +518,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     public MainActivity() {
     }
 
-    
+
     /**
      * Called when the activity is first created.
      */
@@ -587,9 +587,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         // DEBUG LOG to file
         LogToFileUtils.init(this.getApplicationContext());
-
-        //DEBUG: Create new File for error output
-        log(log_file, "New input");
+        StatFileUtils.init(this.getApplicationContext()); //Statistical log file
+        StatFileUtils.write("new", "new", "new"); //Add comments to delimit the instances of MainActivity in the stats file
 
         try {
             FileOutputStream f = new FileOutputStream(file);
@@ -1911,13 +1910,20 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             //Scan, check familiarity, go in direction of global minima.
             //Using scanning as Klinokinsesis is impractical with this robot in a dense environment
 
-            //This is the scanning algorithm from startScanning().
+            //This is a modified scanning algorithm from startScanning()
+            //Here we use image convolution instead of physical scanning due to poorly controlled
+            //robot movement.
+                        
             int min_index;
             int start_t = (int) SystemClock.elapsedRealtime();
             int interval_t = (int) SystemClock.elapsedRealtime() - start_t;
-            int end_t = 120000; //Allow a lot of extra time for scanning
+            int end_t = 60000; //Allow a lot of extra time for scanning
+            int scan_count = 0;
+            String task_code = "NAVM";
 
             while (interval_t < end_t) {
+                //Scanning algorithm
+                interval_t = (int) SystemClock.elapsedRealtime() - start_t;
                 try {
                     turnAround(30.00);
                 } catch (Exception e) {
@@ -1926,7 +1932,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 Boolean image_not_accessed;
 
-                String unfarmiliarity_distribution = "";
+                String unfamiliarity_distribution = "{";
 
                 for (int i = 0; i < 11; i++) {
                     image_not_accessed = true;
@@ -1941,7 +1947,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                                 imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
                             }
                             familarity_array[i] = mushroom_body.calculateFamiliarity(imageArray);
-                            unfarmiliarity_distribution += familarity_array[i] + ",";
+                            unfamiliarity_distribution += familarity_array[i] + ",";
                             image_not_accessed = false;
                         }}
 
@@ -1954,14 +1960,19 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     }
                 }
 
-                LogToFileUtils.write(unfarmiliarity_distribution+'\n');
+                ++scan_count; //Scan complete, increment
+                String info_str = "SCN" + scan_count;
+                String output = "{" + unfamiliarity_distribution + "}";
+
+                StatFileUtils.write(task_code, info_str, output);
+
+                LogToFileUtils.write(unfamiliarity_distribution+'\n');
 
                 min_index = getMinIndex(familarity_array);
+                output = "-- Chosen index: " + min_index;
+                StatFileUtils.write(task_code, info_str, output);
 
                 LogToFileUtils.write("Seleted index: " + min_index + "\n");
-
-                log(log_file, "[MB_LEARN:FAMILIARITY]: " + unfarmiliarity_distribution + ";");
-                log(log_file, "[MB_LEARN:MIN_INDEX]: " + min_index);
 
                 try {
                     turnAround((10 - min_index) * 6.0);

@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 
 /**
- * A Library used to ouput log message to file.
+ * A Library used to output log message to file.
  * Can be found here : https://github.com/itgoyo/LogToFile
  * Created by itgoyo on 2017/2/23.
  */
