@@ -298,7 +298,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     AsyncTask<Object, Integer, Boolean> start_home = null;
     double familarity;
     Boolean images_access = false;
-    double[] familarity_array = new double[11];
+    double[] familiarity_array = new double[31]; //Rob
+    double[] familarity_array = new double[11]; //Zhaoyu
     double distance_travelled;
     Thread chosen_thread;
 
@@ -1911,9 +1912,12 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             //Using scanning as Klinokinsesis is impractical with this robot in a dense environment
 
             //This is a modified scanning algorithm from startScanning()
-            //Here we use image convolution instead of physical scanning due to poorly controlled
-            //robot movement.
-                        
+            //Here we rotate the image in the azimuth instead of rotating the robot
+            //The image is checked at a rotation of -15 pixels through to 15 pixels (31 total checks)
+            //Then the index of greatest familiarity is chosen as per usual
+            //We compute the number of notches (pixels) we will need to turn away from our
+            //current heading, then multiply by four to get the angle we need passed to turnAround;
+
             int min_index;
             int start_t = (int) SystemClock.elapsedRealtime();
             int interval_t = (int) SystemClock.elapsedRealtime() - start_t;
@@ -1924,38 +1928,28 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             while (interval_t < end_t) {
                 //Scanning algorithm
                 interval_t = (int) SystemClock.elapsedRealtime() - start_t;
-                try {
-                    turnAround(30.00);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
 
                 Boolean image_not_accessed;
 
-                String unfamiliarity_distribution = "{";
+                String unfamiliarity_distribution = "";
 
-                for (int i = 0; i < 11; i++) {
+                for (int i = 0; i < 31; i++) {
                     image_not_accessed = true;
                     while (image_not_accessed){
                         if (images_access){
                             Mat matImage = processedDestImage;
                             //Since there is no possibility to send a 2D array or Mat file the image is transformed to a 1D int array
-                            byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
-                            matImage.get(0, 0, imageArray_tmp);
+                            //byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
+                            //matImage.get(0, 0, imageArray_tmp);
+                            int rotation = i - 15;
+                            byte[] imageArray_tmp = rotateInAzimuth(rotation, matImage);
                             int[] imageArray = new int[imageArray_tmp.length];
                             for (int n = 0; n < imageArray_tmp.length; n++) {
                                 imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
                             }
-                            familarity_array[i] = mushroom_body.calculateFamiliarity(imageArray);
-                            unfamiliarity_distribution += familarity_array[i] + ",";
+                            familiarity_array[i] = mushroom_body.calculateFamiliarity(imageArray);
+                            unfamiliarity_distribution += familiarity_array[i] + ",";
                             image_not_accessed = false;
-                        }}
-
-                    if (i != 10) {
-                        try {
-                            turnAround(-6.00);
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
                     }
                 }
@@ -1968,14 +1962,22 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 LogToFileUtils.write(unfamiliarity_distribution+'\n');
 
-                min_index = getMinIndex(familarity_array);
+                min_index = getMinIndex(familiarity_array);
                 output = "-- Chosen index: " + min_index;
                 StatFileUtils.write(task_code, info_str, output);
 
                 LogToFileUtils.write("Seleted index: " + min_index + "\n");
+                int notches = 0;
+                if (min_index <= 14 ){ //left turn
+                    notches = -(14 - min_index);
+                } else { //right turn
+                    notches = min_index - 14;
+                }
+
+                double degrees = notches * 4;
 
                 try {
-                    turnAround((10 - min_index) * 6.0);
+                    turnAround(degrees);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -2186,6 +2188,37 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
         }
     };
+
+    byte[] rotateInAzimuth( int pixels, Mat image ) {
+        byte[] byte_image_array = new byte[image.rows() * image.cols()];
+        Mat segment = new Mat(image.rows(), pixels, 0); //Hold the shifted segment
+
+        //Rotate matrix using a temporary matrix to store the rotated columns
+        if ( pixels > 0 ) {
+            for (int i = 0; i < pixels; ++i) { image.col(i).copyTo(segment.col(i)); }
+            for ( int i = pixels; i < image.cols(); ++i){ image.col(i).copyTo(image.col(i - pixels)); }
+            for ( int i = 0; i < pixels; i++ ){ segment.col(i).copyTo(image.col(image.cols() - pixels)); }
+        } else if ( pixels < 0 ){
+            //Negative pixel reading, right rotation
+            int pix_idx = 0;
+            for ( int i = image.cols() - pixels; i < image.rows(); ++i ){
+                image.col(i).copyTo(segment.col(pix_idx));
+                ++pix_idx;
+            }
+
+            for ( int i = image.cols() - pixels; i > 0; --i ) {
+                image.col(i).copyTo(image.col(i + pixels));
+            }
+
+            for ( int i = 0; i < pixels; ++i){
+                segment.col(i).copyTo(image.col(i));
+            }
+        }
+
+        image.get(0, 0, byte_image_array);  //get byte array from rotated image
+
+        return byte_image_array; //Return image as byte array.
+    }
 
     // Monitoring time to stop outbound PI and start Inbound
     Runnable startInbound = new Runnable() {

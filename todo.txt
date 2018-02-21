@@ -698,3 +698,23 @@ notes:
   limitations)
 - Write python script for interpreting stats and producing graphs
 
+notes:
+- image of size 90x10 360 / 90 = 4; So 4 degrees azimuth per pixel
+  Current algorithm rotates through 60 degrees +/-30 either side of the
+  forward vector. So, could rotate -15 pixels, then rotate one-by-one
+  for 30 iterations, checking to see how familiar that image is to the
+  network. Find minmum as before; then compute angle and rotate to roughly
+  that angle; the robot seemingly cannot handle small angles well.
+
+  Note: current algorithm is meant to behave as described above; however
+  due to imprecise control, the robot does not act as it is meant to.
+  I do not think that having a gyroscope or compass for control purposes
+  is unreasonable. May suggest this for future iterations.
+
+
+
+
+
+  
+  
+
