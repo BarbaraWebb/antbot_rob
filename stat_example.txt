@@ -1,0 +1,8 @@
+Comments denoted using --
+[INFORMATION] is not relevant to graphing, but will help with reading of the file
+-t denotes data to be graphed otherwise its just output. This is just a simple line graph
+We may add options for things like heatmaps to see how images are arranged
+
+[INFORMATION] some general output data -- 
+[INFORMATION] -t "This is a title" {comma, separated, data, for, graphing} -- Data is only graphed if it has a title
+[INFORMATION] new -- Denotes a new instance for ease of manual data extraction

@@ -711,10 +711,43 @@ notes:
   I do not think that having a gyroscope or compass for control purposes
   is unreasonable. May suggest this for future iterations.
 
+22 / 02 / 18:
+- Write a rough python script for producing graph data from stats file
+- If time go to B&Q and get stuff for obstacles
 
-
-
-
+notes:
+- Implemented a rough scanning algorithm which uses image rotation
+  This needs a test to see that it doesn't crash the phone, but it should work.
+  The algorithm is simple but sound, it's the technicalities of Java that may
+  cause issues.
   
-  
+- And, because its not yet noted; the file writing is working, but for some
+  reason /storage/emulated/0/ doesn't show up in the file browser on my linux.
+  If you go on the phone's file explorer, the files are visible; may be some
+  cache refreshing trick. This needs researched but is low priority.
 
+26 / 02 / 18:
+in the break:
+- bought supplies for obstacles from b&q
+  - measured antbot, blocks should be on their edge with plants glued on top
+todo:
+- debug scanning
+  - -ve rotations were accounted for but not in loop arithmatic resulting
+    in a lot of indexing problems
+  - have an index of 7515? pixels
+  - after fixing loop references scanning now works without crashing, some
+    wild indices are still present; why?
+  - I am literally retarded; thought I was adding when I was concatenating.
+
+- test scanning to see if it works
+  - it does
+
+notes:
+- Turning is done using set wheel speeds and encoder values; so power source
+  may be causing over turning but I think this is unlikely
+
+- Small angles seem imprecise but large ones are roughly correct
+
+stuff to try:
+- Untrained network image recognition
+- 

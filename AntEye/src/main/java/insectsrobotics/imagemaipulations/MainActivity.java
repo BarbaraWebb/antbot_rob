@@ -1942,6 +1942,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                             //byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
                             //matImage.get(0, 0, imageArray_tmp);
                             int rotation = i - 15;
+
                             byte[] imageArray_tmp = rotateInAzimuth(rotation, matImage);
                             int[] imageArray = new int[imageArray_tmp.length];
                             for (int n = 0; n < imageArray_tmp.length; n++) {
@@ -1956,26 +1957,27 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 ++scan_count; //Scan complete, increment
                 String info_str = "SCN" + scan_count;
-                String output = "{" + unfamiliarity_distribution + "}";
+                String output = "-t \"Unfamiliarity Distribution for Scan " + scan_count + "\" {" + unfamiliarity_distribution + "}";
 
                 StatFileUtils.write(task_code, info_str, output);
 
                 LogToFileUtils.write(unfamiliarity_distribution+'\n');
 
                 min_index = getMinIndex(familiarity_array);
-                output = "-- Chosen index: " + min_index;
+                output = "Chosen index: " + min_index;
                 StatFileUtils.write(task_code, info_str, output);
 
                 LogToFileUtils.write("Seleted index: " + min_index + "\n");
                 int notches = 0;
                 if (min_index <= 14 ){ //left turn
-                    notches = -(14 - min_index);
+                    notches = (14 - min_index);
                 } else { //right turn
-                    notches = min_index - 14;
+                    notches = -(min_index - 14);
                 }
 
                 double degrees = notches * 4;
-
+                output = "Rotation: " + degrees;
+                StatFileUtils.write(task_code, info_str, output);
                 try {
                     turnAround(degrees);
                 } catch (Exception e) {
@@ -2191,7 +2193,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     byte[] rotateInAzimuth( int pixels, Mat image ) {
         byte[] byte_image_array = new byte[image.rows() * image.cols()];
-        Mat segment = new Mat(image.rows(), pixels, 0); //Hold the shifted segment
+        Mat segment = new Mat(image.rows(), Math.abs(pixels), 0); //Hold the shifted segment
 
         //Rotate matrix using a temporary matrix to store the rotated columns
         if ( pixels > 0 ) {
@@ -2201,16 +2203,17 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         } else if ( pixels < 0 ){
             //Negative pixel reading, right rotation
             int pix_idx = 0;
-            for ( int i = image.cols() - pixels; i < image.rows(); ++i ){
+            for ( int i = image.cols() - Math.abs(pixels); i < image.rows(); ++i ){
                 image.col(i).copyTo(segment.col(pix_idx));
                 ++pix_idx;
+            } //Read segment of interest into intermediate matrix
+
+            for ( int i = image.cols() - Math.abs(pixels); i > 0; --i ) {
+
+                image.col(i).copyTo(image.col(i + Math.abs(pixels) - 1)); //take your time... (may need - 1)
             }
 
-            for ( int i = image.cols() - pixels; i > 0; --i ) {
-                image.col(i).copyTo(image.col(i + pixels));
-            }
-
-            for ( int i = 0; i < pixels; ++i){
+            for ( int i = 0; i < Math.abs(pixels); ++i){
                 segment.col(i).copyTo(image.col(i));
             }
         }
@@ -3886,6 +3889,30 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
         }
         return flag;
+    }
+
+    public static int getAvgMinIndex(double[] arr) {
+        //In unfamiliarity distributions, there can be a lot of 0 values; rather than
+        //taking the first, we take the midpoint of a series of minimum values.
+        //If the minimum values appear in a cluster (e.g. {34, 23, 0, 0, 0, 0, 0, 10, 23, 56});
+        //We return the index which is the midpoint of this group (e.g. 4 in the above array);
+        //If the minimum is alone, we return the index of it
+        int index = 0;
+        int group_length = 1;
+        double minimum = arr[0];
+
+
+        for ( int i = 0; i < arr.length; ++i ){
+            if ( arr[i] < minimum ){
+                minimum = arr[i]; index = i;
+                if ( (i > 0) && (arr[i] == arr[i - 1])) { //If arr[i] == its predecessor
+                    group_length++; //Maintain a record of the group length
+                } else { group_length = 1; } //
+            }
+
+        }
+
+        return index;
     }
 
     Runnable startScanning = new Runnable() {

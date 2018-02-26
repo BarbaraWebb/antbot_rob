@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="StatFileUtils" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="memory" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="BookmarkManager">
@@ -15,78 +15,78 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74b556ac-5938-4187-a0fb-37fd37c50494" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jsr305_2_0_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/proguard-rules.pro" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_26_0_0_alpha1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/AndroidManifest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/test/java/com/example/visualsandbox/ExampleUnitTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/androidTest/java/com/example/visualsandbox/ExampleInstrumentedTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/layout/start_screen.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/values/strings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/junit_4_12.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/javax_inject_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_integration_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/values/colors.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_fragment_26_0_0_alpha1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_ui_26_0_0_alpha1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-mdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-mdpi/ic_launcher_round.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/build.gradle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_26_0_0_alpha1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_compat_26_0_0_alpha1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/javax_annotation_api_1_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/values/styles.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/javawriter_2_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xhdpi/ic_launcher_round.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_library_1_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_media_compat_26_0_0_alpha1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_26_0_0_alpha1.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/java/com/example/visualsandbox/StartScreen.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/values/strings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_media_compat_26_0_0_alpha1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xhdpi/ic_launcher_round.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xxhdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/layout/start_screen.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_fragment_26_0_0_alpha1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-mdpi/ic_launcher_round.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_compat_26_0_0_alpha1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_integration_1_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/javax_inject_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/javax_annotation_api_1_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/proguard-rules.pro" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_26_0_0_alpha1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_26_0_0_alpha1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_library_1_3.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-hdpi/ic_launcher.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_26_0_0_alpha1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-hdpi/ic_launcher_round.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/visualsandbox.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xhdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_utils_26_0_0_alpha1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/build.gradle" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/junit_4_12.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/values/colors.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/values/styles.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_26_0_0_alpha1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-hdpi/ic_launcher_round.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/visualsandbox.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/javawriter_2_1_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_core_ui_26_0_0_alpha1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/test/java/com/example/visualsandbox/ExampleUnitTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_26_0_0_alpha1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-hdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-mdpi/ic_launcher.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_26_0_0_alpha1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jsr305_2_0_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/visualsandbox/src/androidTest/java/com/example/visualsandbox/ExampleInstrumentedTest.java" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/merged.dir/values/values.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/merged.dir/values/values.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" afterPath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntEye/AntEye.iml" afterPath="$PROJECT_DIR$/AntEye/AntEye.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/merged.dir/values/values.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" afterPath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_0_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-debug.aar" afterPath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-debug.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" afterPath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.gradle" afterPath="$PROJECT_DIR$/settings.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-release.aar" afterPath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-release.aar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" afterPath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" afterPath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" afterPath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" afterPath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_0_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" afterPath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/antbot_rob.iml" afterPath="$PROJECT_DIR$/antbot_rob.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-debug.aar" afterPath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-debug.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-release.aar" afterPath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-release.aar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_0_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_0_1.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AntEye/AntEye.iml" afterPath="$PROJECT_DIR$/AntEye/AntEye.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" afterPath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" afterPath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
     </list>
     <ignored path="antbot_rob.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -121,86 +121,10 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="582">
-              <caret line="1949" column="45" selection-start-line="1949" selection-start-column="28" selection-end-line="1949" selection-end-column="45" />
+            <state relative-caret-position="408">
+              <caret line="3909" column="47" selection-start-line="3909" selection-start-column="47" selection-end-line="3909" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#12438#12959#0" expanded="true" />
-                <element signature="e#12958#12959#0" expanded="true" />
-                <element signature="e#17023#17046#0" expanded="true" />
-                <element signature="e#17076#17100#0" expanded="true" />
-                <element signature="e#17138#17150#0" expanded="true" />
-                <element signature="e#17152#17396#0" expanded="true" />
-                <element signature="e#17395#17396#0" expanded="true" />
-                <element signature="e#48575#51702#0" expanded="true" />
-                <element signature="e#49721#50329#0" expanded="true" />
-                <element signature="e#50328#50329#0" expanded="true" />
-                <element signature="e#51193#51441#0" expanded="true" />
-                <element signature="e#51440#51441#0" expanded="true" />
-                <element signature="e#51701#51702#0" expanded="true" />
-                <element signature="e#54960#62797#0" expanded="true" />
-                <element signature="e#57903#58643#0" expanded="true" />
-                <element signature="e#58642#58643#0" expanded="true" />
-                <element signature="e#62254#62516#0" expanded="true" />
-                <element signature="e#62515#62516#0" expanded="true" />
-                <element signature="e#62796#62797#0" expanded="true" />
-                <element signature="e#63029#75491#0" expanded="true" />
-                <element signature="e#68933#69658#0" expanded="true" />
-                <element signature="e#69657#69658#0" expanded="true" />
-                <element signature="e#73494#73879#0" expanded="true" />
-                <element signature="e#73878#73879#0" expanded="true" />
-                <element signature="e#75490#75491#0" expanded="true" />
-                <element signature="e#75519#82771#0" expanded="true" />
-                <element signature="e#82390#82665#0" expanded="true" />
-                <element signature="e#82664#82665#0" expanded="true" />
-                <element signature="e#82770#82771#0" expanded="true" />
-                <element signature="e#82879#88517#0" expanded="true" />
-                <element signature="e#88516#88517#0" expanded="true" />
-                <element signature="e#89929#90165#0" expanded="true" />
-                <element signature="e#90164#90165#0" expanded="true" />
-                <element signature="e#90191#99781#0" expanded="true" />
-                <element signature="e#91711#92371#0" expanded="true" />
-                <element signature="e#92370#92371#0" expanded="true" />
-                <element signature="e#97861#98737#0" expanded="true" />
-                <element signature="e#98736#98737#0" expanded="true" />
-                <element signature="e#99206#99676#0" expanded="true" />
-                <element signature="e#99675#99676#0" expanded="true" />
-                <element signature="e#99780#99781#0" expanded="true" />
-                <element signature="e#99808#109950#0" expanded="true" />
-                <element signature="e#101408#102100#0" expanded="true" />
-                <element signature="e#102099#102100#0" expanded="true" />
-                <element signature="e#107934#108963#0" expanded="true" />
-                <element signature="e#108962#108963#0" expanded="true" />
-                <element signature="e#109432#109845#0" expanded="true" />
-                <element signature="e#109844#109845#0" expanded="true" />
-                <element signature="e#109949#109950#0" expanded="true" />
-                <element signature="e#109985#119845#0" expanded="true" />
-                <element signature="e#111593#112235#0" expanded="true" />
-                <element signature="e#112234#112235#0" expanded="true" />
-                <element signature="e#117897#118879#0" expanded="true" />
-                <element signature="e#118878#118879#0" expanded="true" />
-                <element signature="e#119387#119740#0" expanded="true" />
-                <element signature="e#119739#119740#0" expanded="true" />
-                <element signature="e#119844#119845#0" expanded="true" />
-                <element signature="e#140938#140946#0" expanded="true" />
-                <element signature="e#158802#159246#0" expanded="true" />
-                <element signature="e#159245#159246#0" expanded="true" />
-                <element signature="e#159570#162238#0" expanded="true" />
-                <element signature="e#162237#162238#0" expanded="true" />
-                <element signature="e#162275#164940#0" expanded="true" />
-                <element signature="e#164939#164940#0" expanded="true" />
-                <element signature="e#164973#171185#0" expanded="true" />
-                <element signature="e#169333#170253#0" expanded="true" />
-                <element signature="e#170252#170253#0" expanded="true" />
-                <element signature="e#170723#171080#0" expanded="true" />
-                <element signature="e#171079#171080#0" expanded="true" />
-                <element signature="e#171184#171185#0" expanded="true" />
-                <element signature="e#171257#171706#0" expanded="true" />
-                <element signature="e#171705#171706#0" expanded="true" />
-                <element signature="e#171741#172177#0" expanded="true" />
-                <element signature="e#172176#172177#0" expanded="true" />
-                <element signature="e#172217#172848#0" expanded="true" />
-                <element signature="e#172847#172848#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -209,7 +133,7 @@
       <file leaf-file-name="LogToFileUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/LogToFileUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
+            <state relative-caret-position="90">
               <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -221,7 +145,7 @@
       <file leaf-file-name="StatFileUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/StatFileUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
+            <state relative-caret-position="373">
               <caret line="118" column="18" selection-start-line="118" selection-start-column="18" selection-end-line="118" selection-end-column="18" />
               <folding />
             </state>
@@ -231,7 +155,7 @@
       <file leaf-file-name="WillshawModule.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/WillshawModule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-738">
+            <state relative-caret-position="72">
               <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
               <folding />
             </state>
@@ -241,7 +165,7 @@
       <file leaf-file-name="NavigationModules.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/_Superclasses/NavigationModules.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="378">
               <caret line="30" column="23" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="23" />
               <folding />
             </state>
@@ -250,21 +174,21 @@
       </file>
       <file leaf-file-name="start_screen.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/res/layout/start_screen.xml">
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
+            <state relative-caret-position="2682">
               <caret line="149" column="53" selection-start-line="149" selection-start-column="53" selection-end-line="149" selection-end-column="53" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="StartScreen.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/StartScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3816">
+            <state relative-caret-position="3996">
               <caret line="236" column="88" selection-start-line="236" selection-start-column="88" selection-end-line="236" selection-end-column="88" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -296,7 +220,7 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-520">
+            <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -8125,7 +8049,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="28" width="1366" height="740" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.318264" sideWeight="0.49674797" order="12" side_tool="false" content_ui="tabs" />
@@ -8133,28 +8057,28 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49284008" sideWeight="0.503252" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18469217" sideWeight="0.49674797" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.49674797" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293556" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26096824" sideWeight="0.49033818" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32368898" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.50966185" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.50966185" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2495935" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32368898" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -8445,7 +8369,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="362">
           <caret line="55" column="50" selection-start-line="55" selection-start-column="50" selection-end-line="55" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -8453,13 +8376,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2097">
           <caret line="131" column="13" selection-start-line="131" selection-start-column="13" selection-end-line="131" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/res/layout/start_screen.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
+        <state relative-caret-position="2682">
           <caret line="149" column="53" selection-start-line="149" selection-start-column="53" selection-end-line="149" selection-end-column="53" />
           <folding />
         </state>
@@ -8470,7 +8392,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/_Superclasses/NavigationModules.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
+        <state relative-caret-position="378">
           <caret line="30" column="23" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="23" />
           <folding />
         </state>
@@ -8478,7 +8400,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/StartScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3816">
+        <state relative-caret-position="3996">
           <caret line="236" column="88" selection-start-line="236" selection-start-column="88" selection-end-line="236" selection-end-column="88" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -8503,19 +8425,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-520">
+        <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/LogToFileUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
+        <state relative-caret-position="90">
           <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -8523,104 +8445,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/StatFileUtils.java">
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/WillshawModule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="118" column="18" selection-start-line="118" selection-start-column="18" selection-end-line="118" selection-end-column="18" />
+        <state relative-caret-position="72">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/WillshawModule.java">
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/StatFileUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-738">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="373">
+          <caret line="118" column="18" selection-start-line="118" selection-start-column="18" selection-end-line="118" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="582">
-          <caret line="1949" column="45" selection-start-line="1949" selection-start-column="28" selection-end-line="1949" selection-end-column="45" />
+        <state relative-caret-position="408">
+          <caret line="3909" column="47" selection-start-line="3909" selection-start-column="47" selection-end-line="3909" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#12438#12959#0" expanded="true" />
-            <element signature="e#12958#12959#0" expanded="true" />
-            <element signature="e#17023#17046#0" expanded="true" />
-            <element signature="e#17076#17100#0" expanded="true" />
-            <element signature="e#17138#17150#0" expanded="true" />
-            <element signature="e#17152#17396#0" expanded="true" />
-            <element signature="e#17395#17396#0" expanded="true" />
-            <element signature="e#48575#51702#0" expanded="true" />
-            <element signature="e#49721#50329#0" expanded="true" />
-            <element signature="e#50328#50329#0" expanded="true" />
-            <element signature="e#51193#51441#0" expanded="true" />
-            <element signature="e#51440#51441#0" expanded="true" />
-            <element signature="e#51701#51702#0" expanded="true" />
-            <element signature="e#54960#62797#0" expanded="true" />
-            <element signature="e#57903#58643#0" expanded="true" />
-            <element signature="e#58642#58643#0" expanded="true" />
-            <element signature="e#62254#62516#0" expanded="true" />
-            <element signature="e#62515#62516#0" expanded="true" />
-            <element signature="e#62796#62797#0" expanded="true" />
-            <element signature="e#63029#75491#0" expanded="true" />
-            <element signature="e#68933#69658#0" expanded="true" />
-            <element signature="e#69657#69658#0" expanded="true" />
-            <element signature="e#73494#73879#0" expanded="true" />
-            <element signature="e#73878#73879#0" expanded="true" />
-            <element signature="e#75490#75491#0" expanded="true" />
-            <element signature="e#75519#82771#0" expanded="true" />
-            <element signature="e#82390#82665#0" expanded="true" />
-            <element signature="e#82664#82665#0" expanded="true" />
-            <element signature="e#82770#82771#0" expanded="true" />
-            <element signature="e#82879#88517#0" expanded="true" />
-            <element signature="e#88516#88517#0" expanded="true" />
-            <element signature="e#89929#90165#0" expanded="true" />
-            <element signature="e#90164#90165#0" expanded="true" />
-            <element signature="e#90191#99781#0" expanded="true" />
-            <element signature="e#91711#92371#0" expanded="true" />
-            <element signature="e#92370#92371#0" expanded="true" />
-            <element signature="e#97861#98737#0" expanded="true" />
-            <element signature="e#98736#98737#0" expanded="true" />
-            <element signature="e#99206#99676#0" expanded="true" />
-            <element signature="e#99675#99676#0" expanded="true" />
-            <element signature="e#99780#99781#0" expanded="true" />
-            <element signature="e#99808#109950#0" expanded="true" />
-            <element signature="e#101408#102100#0" expanded="true" />
-            <element signature="e#102099#102100#0" expanded="true" />
-            <element signature="e#107934#108963#0" expanded="true" />
-            <element signature="e#108962#108963#0" expanded="true" />
-            <element signature="e#109432#109845#0" expanded="true" />
-            <element signature="e#109844#109845#0" expanded="true" />
-            <element signature="e#109949#109950#0" expanded="true" />
-            <element signature="e#109985#119845#0" expanded="true" />
-            <element signature="e#111593#112235#0" expanded="true" />
-            <element signature="e#112234#112235#0" expanded="true" />
-            <element signature="e#117897#118879#0" expanded="true" />
-            <element signature="e#118878#118879#0" expanded="true" />
-            <element signature="e#119387#119740#0" expanded="true" />
-            <element signature="e#119739#119740#0" expanded="true" />
-            <element signature="e#119844#119845#0" expanded="true" />
-            <element signature="e#140938#140946#0" expanded="true" />
-            <element signature="e#158802#159246#0" expanded="true" />
-            <element signature="e#159245#159246#0" expanded="true" />
-            <element signature="e#159570#162238#0" expanded="true" />
-            <element signature="e#162237#162238#0" expanded="true" />
-            <element signature="e#162275#164940#0" expanded="true" />
-            <element signature="e#164939#164940#0" expanded="true" />
-            <element signature="e#164973#171185#0" expanded="true" />
-            <element signature="e#169333#170253#0" expanded="true" />
-            <element signature="e#170252#170253#0" expanded="true" />
-            <element signature="e#170723#171080#0" expanded="true" />
-            <element signature="e#171079#171080#0" expanded="true" />
-            <element signature="e#171184#171185#0" expanded="true" />
-            <element signature="e#171257#171706#0" expanded="true" />
-            <element signature="e#171705#171706#0" expanded="true" />
-            <element signature="e#171741#172177#0" expanded="true" />
-            <element signature="e#172176#172177#0" expanded="true" />
-            <element signature="e#172217#172848#0" expanded="true" />
-            <element signature="e#172847#172848#0" expanded="true" />
           </folding>
         </state>
       </provider>

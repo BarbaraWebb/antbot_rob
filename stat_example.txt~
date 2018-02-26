@@ -1,0 +1,6 @@
+;; This buffer is for text that is not saved, and for Lisp evaluation.
+;; To create a file, visit it with C-x C-f and enter text in its buffer.
+
+[INFORMATION] some general output data -- Whyf
+[INFORMATION] -t "This is a title" {comma, separated, data, for, graphing} -- Data is only graphed if it has a title
+[INFORMATION] new 
