@@ -3844,6 +3844,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     }
 
     private int log(File file, String output) { //Function to log information to an output file;
+        //Note to whoever inherits this monstrous code: This function does work but its deprecated
+        //You should instead use LogToFileUtils; StatFileUtils (see guide or contact me for formatting
+        //information); or create your own logging utility based on LogToFileUtils.
         output = output.concat("\n"); //Add an implicit newline character
         try {
             FileOutputStream stream = new FileOutputStream(file);
@@ -3899,20 +3902,31 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //If the minimum is alone, we return the index of it
         int index = 0;
         int group_length = 1;
+        int longest_group_length = 1;
         double minimum = arr[0];
 
-
         for ( int i = 0; i < arr.length; ++i ){
-            if ( arr[i] < minimum ){
-                minimum = arr[i]; index = i;
+            if ( arr[i] < minimum ){ //Will reach the last instance of the minimum
+                minimum = arr[i]; index = i; // Store the new minimum, and store the index
+                group_length = 1; //We've found a new minimum so any previous group info is redundant
+            } else if ( arr[i] == minimum ){
                 if ( (i > 0) && (arr[i] == arr[i - 1])) { //If arr[i] == its predecessor
                     group_length++; //Maintain a record of the group length
-                } else { group_length = 1; } //
+                } else if ( (i > 0) && arr[i] != arr[i - 1] ){
+                    if ( group_length > longest_group_length ) {
+                        longest_group_length = group_length; //Save last length of group of minimum values
+                        group_length = 1; //Reset group length.
+                    }
+                } else { group_length = 1; } //This else should only be called once per function call
             }
-
         }
 
-        return index;
+        //Index is now the first element in the longest group of minimum values
+        //longest_group_length should now be the length of the longest group of minima detected
+
+        //Want to return the index at the midpoint of this cluster.
+        int mid_idx = index + (longest_group_length - 1) / 2; //Integer division will take care of odd/even cases (this is rough)
+        return mid_idx;
     }
 
     Runnable startScanning = new Runnable() {

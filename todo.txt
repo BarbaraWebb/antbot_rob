@@ -740,14 +740,48 @@ todo:
   - I am literally retarded; thought I was adding when I was concatenating.
 
 - test scanning to see if it works
-  - it does
+  - it does, the network doesn't... see below
 
 notes:
 - Turning is done using set wheel speeds and encoder values; so power source
   may be causing over turning but I think this is unlikely
 
 - Small angles seem imprecise but large ones are roughly correct
+  - Reccommendation for future iterations is to introduce more complex robot
+    control systems
 
-stuff to try:
-- Untrained network image recognition
-- 
+- some ideas came up today which are worth exploring
+  - Untrained network image recognition:
+    How does an untrained network recognise images?
+    Easy enough to check, comment out the code from the learning run
+    Expect: All angles should return high values, none should be
+    especially low.
+    What if?: If they are low then there is something fundamentally wrong
+    with this implementation of the network which needs addressed before
+    any experiments can take place. It is likely that this will kill
+    experiments
+    
+  - Save images from scans:
+    Firstly to make sure that the scanning is functioning as expected
+    Secondly to look at how similar the images are, is the scan to
+    fine?
+    Rough method; is there a way of saving images from openCV? If
+    not then add heatmapping functionality to AntBotStats and output it
+    Expect: Scanning to work as it should, images should all be off by one
+    pixel from the last in the desired direction
+    What if?: If this doesn't work its likely to do with the way the
+    whole image copying process works, however, the fact that there
+    are different familiarity results being returned; this should not be
+    the case if the image copying doesn't work.
+
+  - Find a way of representing the network:
+    I want to be able to see a visual representation of the network
+    However, I have no idea how I can do this. Need a compact, yet
+    descriptive representation of 900 inputs connected randomly to
+    20,000 neurons, all running to a single neuron
+
+    Idea that could mostly be implemented in AntBotStats
+    Show image, heatmap of KC activation, output value of EN
+
+    Image can be given as a heatmap or potentially a jpg. KCs can
+    be formatted into a 100x200 matrix ant printed as a heatmap.
