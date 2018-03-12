@@ -298,7 +298,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     AsyncTask<Object, Integer, Boolean> start_home = null;
     double familarity;
     Boolean images_access = false;
-    double[] familiarity_array = new double[31]; //Rob
+    double[] familiarity_array = new double[16]; //Rob
     double[] familarity_array = new double[11]; //Zhaoyu
     double distance_travelled;
     Thread chosen_thread;
@@ -1477,8 +1477,11 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             int dual_accumulator = 0; //Add both values and see if there's significant bias
             int left_accumulator = 0; //Add only left values
             int right_accumulator = 0; //Add only right values
-            int accumulation_threshold = 5000; //Threshold for a value to be accumulated (ignore all others)
-            int reaction_threshold = 10000; //Value to be met for a reaction to be triggered. (need at most four readings)
+            int accumulation_threshold = 5000; //Threshold for a value to be accumulated (ignore all others) (def = 5000)
+            int reaction_threshold = 10000; //Value to be met for a reaction to be triggered. (need at most four readings) (def = 1000)
+            int turn = 20;
+
+
 
             int loop_count = 0;
 
@@ -1556,7 +1559,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 if ( left && (!avoid) ){ //Left turn required
                     Log.i("CA:", "Left turn triggered");
                     try {
-                        turnAround(20);
+                        turnAround(turn);
                     }catch(Exception e){ e.printStackTrace(); }
                     /*
                     lft_speed = 10; //Left turn
@@ -1571,7 +1574,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 } else if ( right && (!avoid) ){ //Right turn required
                     Log.i("CA:", "Right turn triggered");
                     try {
-                        turnAround(-20);
+                        turnAround(-turn);
                     }catch(Exception e){ e.printStackTrace(); }
                     /*lft_speed = 100; //Right turn
                     rgt_speed = 10; //Right turn*/
@@ -1685,7 +1688,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             int dual_accumulator = 0; //Add both values and see if there's significant bias
             int left_accumulator = 0; //Add only left values
             int right_accumulator = 0; //Add only right values
-            int accumulation_threshold = 5000; //Threshold for a value to be accumulated (ignore all others)
+            int accumulation_threshold = 4000; //Threshold for a value to be accumulated (ignore all others)
             int reaction_threshold = 10000; //Value to be met for a reaction to be triggered. (need at most four readings)
 
             int loop_count = 0;
@@ -1933,7 +1936,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 String unfamiliarity_distribution = "";
 
-                for (int i = 0; i < 31; i++) {
+                for (int i = 0; i < 16; i++) {
                     image_not_accessed = true;
                     while (image_not_accessed){
                         if (images_access){
@@ -1941,7 +1944,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                             //Since there is no possibility to send a 2D array or Mat file the image is transformed to a 1D int array
                             //byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
                             //matImage.get(0, 0, imageArray_tmp);
-                            int rotation = i - 15;
+                            int rotation = 2 * (i - 8);
 
                             byte[] imageArray_tmp = rotateInAzimuth(rotation, matImage);
                             int[] imageArray = new int[imageArray_tmp.length];
@@ -1957,22 +1960,22 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 ++scan_count; //Scan complete, increment
                 String info_str = "SCN" + scan_count;
-                String output = "-t \"Unfamiliarity Distribution for Scan " + scan_count + "\" {" + unfamiliarity_distribution + "}";
+                String output = "-t \"(Using AvgMin) Unfamiliarity Distribution for Scan " + scan_count + "\" {" + unfamiliarity_distribution + "}";
 
                 StatFileUtils.write(task_code, info_str, output);
 
                 LogToFileUtils.write(unfamiliarity_distribution+'\n');
 
-                min_index = getMinIndex(familiarity_array);
+                min_index = getAvgMinIndex(familiarity_array);
                 output = "Chosen index: " + min_index;
                 StatFileUtils.write(task_code, info_str, output);
 
                 LogToFileUtils.write("Seleted index: " + min_index + "\n");
                 int notches = 0;
-                if (min_index <= 14 ){ //left turn
-                    notches = (14 - min_index);
+                if (min_index <= 8 ){ //left turn
+                    notches = (8 - min_index);
                 } else { //right turn
-                    notches = -(min_index - 14);
+                    notches = -(min_index - 8);
                 }
 
                 double degrees = notches * 4;
@@ -3322,6 +3325,88 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         current_image.copyTo(previous_image);
     }
 
+    /*public void filterCollisionAvoidance() {
+        int delta = (int) SystemClock.elapsedRealtime() - global_current_time; //Change in time since last read
+        global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time; //Time since start
+
+        //Mat focus_of_expansion = fromFlowComputeFOE(); //Need this to know which way to saccade.
+        Mat left_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), true); //Left flow filter
+        Mat right_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), false); //Right flow filter
+
+        //Filters are functionally identical, see Lucas' dissertation for the method used
+
+        double[] current_left_flow_vector;
+        double[] current_right_flow_vector;
+        double[] previous_left_flow_vector;
+        double[] previous_right_flow_vector;
+
+        Mat left_filter_vector;
+        Mat right_filter_vector;
+
+        Mat flow_vector = new Mat(1, 3, CvType.CV_32FC1);
+
+        float left_flow_sum = 0;
+        float right_flow_sum = 0;
+        int filter_offset = 4; //How much we offset the pixels to get the angles for the flow filters (def = 12)
+        int blinder_size = 30; //How much we reduce the field of vision by on each side (def = 0)
+
+        int image_width = 30; //30; //The width of the arc (def = 90)
+        int factor = 1000; //Factor by which the flow is multiplied (def = 1000)
+
+        //IMPORTANT: 90 == 2(blinder_size) + image_width; filter_offset / image_width == 12 / 90
+
+        //Flow filtering limited to a frontal arc of 20 pixels (~80deg)
+        for ( int y = 0; y < currentPointsToTrack.rows(); y++ ){
+            for ( int x = 0; x < currentPointsToTrack.cols(); x++ ){//These filters are functionally identical, see Luca's dissertation for the method used to compute the filter
+                //Log.e("DBG FLOW", "currentPointsToTrack.cols(): " + currentPointsToTrack.cols() );
+                //Compute left flow vector
+
+                //If limiting to an arc, the centering points for the flow need changed and possibly the filter too
+                previous_left_flow_vector = new double[]{ mod((x + 12), 90), y }; //((x+12), y)
+                current_left_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x + 12, 90),
+                                                          mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) }; //Flow info returned by farneback
+               // if ( true) { //If x is between 30 and 60 (our window of interest)
+
+                    left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]); //Vector for x + 12 mod 90
+
+                    //Create 1x3 flow vector (the current flow vector)
+                    flow_vector.put(0, 0, current_left_flow_vector[0]);
+                    flow_vector.put(0, 1, current_left_flow_vector[1]);
+                    flow_vector.put(0, 2, 0);
+
+                    Log.e("FLOWSUMS", "left_flow filtered: " + left_filter_vector.dot(flow_vector));
+
+                    left_flow_sum += left_filter_vector.dot(flow_vector); //Filter and sum
+
+                //}
+
+                //Compute right flow vector
+                previous_right_flow_vector = new double[] { mod(x - 12, 90), y };
+                current_right_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x - 12, 90) ,
+                                                           mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
+                //if ( (x >=30) && ( x < 60) && (Math.abs(current_right_flow_vector[0] - previous_right_flow_vector[0]) < 70)) { //If x is between 30 and 60 (our window of interest)
+                    right_filter_vector = right_filter.row((int) previous_right_flow_vector[0]); //Vector for x + 12 mod 90
+
+                    //Create 1x3 flow vector (the current flow vector)
+                    flow_vector.put(0, 0, current_right_flow_vector[0]);
+                    flow_vector.put(0, 1, current_right_flow_vector[1]);
+                    flow_vector.put(0, 2, 0);
+                    Log.e("FLOWSUMS", "right_flow filtered: " + right_filter_vector.dot(flow_vector));
+                    right_flow_sum += right_filter_vector.dot(flow_vector); //Filter and sum
+                //}
+            }
+        }
+
+
+
+        //Again image shifting, left is right and right is left.
+
+            rightCAFlow = factor * left_flow_sum;// / (delta 900);
+            leftCAFlow = factor * right_flow_sum; // / (delta 900);
+
+
+    }*/
+
     public void filterCollisionAvoidance() {
         int delta = (int) SystemClock.elapsedRealtime() - global_current_time; //Change in time since last read
         global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time; //Time since start
@@ -3350,7 +3435,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 //Compute left flow vector
                 previous_left_flow_vector = new double[]{ mod(x + 12, 90), y }; //((x+12), y)
                 current_left_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x + 12, 90),
-                                                          mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) }; //Flow info returned by farneback
+                        mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) }; //Flow info returned by farneback
 
                 left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]); //Vector for x - 12 mod 90
 
@@ -3364,7 +3449,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 //Compute right flow vector
                 previous_right_flow_vector = new double[] { mod(x - 12, 90), y };
                 current_right_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x - 12, 90),
-                                                           mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
+                        mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
 
                 right_filter_vector = right_filter.row((int) previous_right_flow_vector[0]); //Vector for x + 12 mod 90
 
@@ -3384,7 +3469,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         leftCAFlow = 1000 * right_flow_sum; // / (delta /*900*/);
 
     }
-
 
     //Collision avoidance using Time to Contact; set up to use dense flow
     public void getObstaclesFromSparseFlow(){
@@ -3892,6 +3976,33 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
         }
         return flag;
+    }
+
+    public static int getMinIndexNotZero(double[] arr){
+        double minNum = arr[0];
+        int flag = 0;
+        for(int i = 0; i < arr.length; i++){
+
+            if(arr[i] < minNum && arr[i] != 0){
+                minNum = arr[i];
+                flag = i;
+            } else if ( minNum == 0 ) { //If it's been initialised to 0, then take the first value
+                minNum = arr[i];
+                flag = i;
+            }
+        }
+        return flag;
+    }
+    public static int getMaxIndex(double[] arr) {
+        double max = 0;
+        int index = 0;
+        for ( int i = 0; i < arr.length; ++i ){
+            if ( arr[i] > max ) {
+                index = i;
+                max = arr[i];
+            }
+        }
+        return index;
     }
 
     public static int getAvgMinIndex(double[] arr) {

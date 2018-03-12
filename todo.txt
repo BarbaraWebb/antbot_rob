@@ -785,3 +785,143 @@ notes:
 
     Image can be given as a heatmap or potentially a jpg. KCs can
     be formatted into a 100x200 matrix ant printed as a heatmap.
+
+27 / 02 / 18:
+todo:
+- check untrained model (done)
+- troubleshoot...
+
+notes:
+- untrained model returning zero on images (partially explainable from
+  the fact that the EN sums KC activation but this does not account for
+  as much + range)
+
+- lighting in the room likely part of the problem (turn on image normalisation again to
+  see if there's a difference).
+  - Number of activated KCs does seem to be affected by lighting; there is still
+    the bias on one side, but the range is much less. Still high but less.
+
+
+06 / 02 / 18:
+interim:
+- graphing tool partially extended for showing the network
+- obstacles created and tests run; antbot can see them
+
+todo:
+- willshaw fiddling:
+  - increasing threshold -> learnedKCs is lower which is good
+  - scan may be too fine-grained lots of zero entries in a particular
+    part of the array
+
+  - half the number of scans (double the pixel distance)
+  - This was a good shout, the 31 scan routine had too much detail
+    which was causing confusion.
+
+  - Still getting many zero entries:
+    What could cause a zero?
+    All KCs activated for this image were used for learning
+
+    No KCs activated for this image. error is initialised to 0
+    - ^this. producing output to stat files has showed that the number
+       of KCs being activated for a given image is either very low
+       or 0; thus the probability of those KCs having been used for learning
+       at some point is quite high.
+
+  - Need to wrap up now, brightness threshold is currently 2000. this could go up a
+    smidge.
+
+  - Error needs initialised to something non-zero; the way of computing is nice and
+    simple but it also means that less KCs being activated automatically makes for
+    a more familiar image as no KCs being activated will result in a familiarity of 0.
+    - Perhaps maximum KCs; then error = error - willshaw...
+    - Error would likely never be zero, but it should have a more definite minimum.
+
+  - good day.
+    
+
+
+07 / 03 / 18:
+todo:
+- Alter familiarity calculation
+- Experiment with normalised PN input
+  - PN value = val / sum(all_vals)
+
+notes:
+- pls work
+  - Initial improvement may have been a fluke
+
+- Still have the same problem only now it's inverted
+  Problem:
+	error init to zero
+  	each time we activate a KC add its weight
+	minimum error value denotes most familiar image
+	threshold -> we need to activate a sufficient number of KCs each time
+	~200
+	For those which activate no KCs, we return the max learned KCs; maybe
+	not guaranteed to be a maximum, but should always be greater than the minimum
+
+	New problem
+	If we do not activate enough KCs then the sum will be low
+	Lower the threshold to ensure enough are active.
+
+- PN normalisation causing weird hang in learn image for first image. This could be
+  due to threshold adjustment
+
+10 / 03 / 18:
+todo:
+- Attempt to fix Willshaw net
+  - Check PN normalisation values, make sure that loop terminates
+    - Was being silly, as per, doing integer division at that scale results in 0
+    - Now have a normalised image to work with (fast too).
+- Run some experiments on OF systems
+  - This didn't happen but for good reason; implemented and roughly debugged
+    a system whereby we only pay attention to a frontal arc for obstacle avoidance
+    - This wasn't done previously because I had spent so much time on OF, though
+      it turned out to be straightforward-ish
+    - This is a better system, it just needs tuned; also more biologically plausable
+      as insects have certain ommatadia which are higher definition (need a reference
+      for this).
+
+notes:
+
+
+
+11 / 03 / 18:
+todo:
+- get functionality back in the OF system; new system is better but needs fixed
+
+12 / 03 / 18:
+todo:
+- fix the OF; start with the old, then move to the new
+
+notes:
+- OF tests:
+  - Double check against git code; then check with box
+    - Took old code direct from github
+     - Test with the box was as successful as previous tests and fairly consistent
+       - Behaviour is fairly inconsistent now? - This worked well before?
+       - Increased speeds, box tests seem to work but affected by side information
+       
+
+     - Test with tussocks:
+       - Problem: the way the camera is set up means that the image is warped. We don't
+       	 get a band, we get a ring. In essence, far more is visable than should be when using
+	 this robot
+
+       - Looked at the camera frame; two things, one, the attachment isn't centered
+       	 (I don't think this is an issue); two, part of the image was obscured which
+	 explains why there was a large obstruction on one side of the image which
+	 I couldn't explain before. This may explain a lot of problems with the optic flow.
+	 Need to "calibrate" before all tests from now on; this was stupid.
+
+       - OF Acutally seems to work fairly well now in general, however, the robot
+         fails to turn left with tussocks, only right; however, it will turn left
+	 away from the netting which is odd. (Behavioural note)
+
+       - Setting up the arena to test with that.
+       - Basic OF works now to the same degree as original functionality; camera obstruction
+         was likely playing a huge part in the problems observed.
+
+       - 
+
+	 
