@@ -17,7 +17,7 @@ public class WillshawModule extends NavigationModules {
     boolean networkSetUp = false;
     boolean firstImage = true;
     boolean inverse = true;
-    int threshold = 1800;
+    int threshold = 1700;
     float f_threshold = 5.25f;
     int f_learnedKCs = 0;
     private final String TAG = this.getClass().getSimpleName();
@@ -68,32 +68,33 @@ public class WillshawModule extends NavigationModules {
     public void learnImage(int[] image) {
         super.learnImage(image);
         float[] float_image = new float[image.length];
-
+        int total_KCs = 0;
         //Log.e("WNNorm", "Pixel values before normalisation: " + Arrays.toString(float_image));
         float_image = normalisePNs(image); //Normalise the image
         //Log.e("WNNorm", "Pixel values after normalisation: " + Arrays.toString(float_image));
         if (firstImage) {
             while (learnedKCs >= 400 || learnedKCs <= 200) {
-                Arrays.fill(willshawNetwork, (byte) 1); //Why is this not done in initialisation? Sorry, why is this done twice?
+                Arrays.fill(willshawNetwork, (byte) 1); //Reset the network for this iteration
                 learnedKCs = 0;
+                total_KCs = 0;
                 f_learnedKCs = 0;
                 for (int KCNumber = 0; KCNumber < willshawConnectionArray.length; KCNumber++) { // For each KC
-                    int brightness = 0; // Pixel brightness
+                    int brightness = 0; // Coincident brightness
                     float f_brightness = 0;
                     for (int PNNumber = 0; PNNumber < 10; PNNumber++) { // For each associated projected neuron
                         //Get the pixel brightness for the pixel related to the KC, PN connection
-                        int brightness_tmp = image[willshawConnectionArray[KCNumber][PNNumber]];
+                        int brightness_tmp = image[willshawConnectionArray[KCNumber][PNNumber]]; //Pixel brightness
                         float brightness_flt = float_image[willshawConnectionArray[KCNumber][PNNumber]];
-                        brightness = brightness + brightness_tmp; //Update the brightness
+                        brightness = brightness + brightness_tmp; //Add to the total brightness
                         f_brightness = f_brightness + brightness_flt;
                     }
-                    Log.e("WNN", "Brightness (float): " + f_brightness);
+                    //Log.e("WNN", "Brightness (float): " + f_brightness);
                     int wn_copy = willshawNetwork[KCNumber];
-                    if (brightness >= threshold) { //If brightness exceeds threshold
+                    if (brightness >= threshold) { //If coincident brightness exceeds threshold
                         if (willshawNetwork[KCNumber] != 0) { //If KC has not yet been used for learning
                             willshawNetwork[KCNumber] = 0; //Lower weight to zero
-                            learnedKCs++; //Increment number of KCs used for learning
-
+                            learnedKCs++; //Increment number of KCs used for learning this image
+                            total_KCs++;
                         }
                     }
 
@@ -121,12 +122,13 @@ public class WillshawModule extends NavigationModules {
                     raised = false;
                 }
                 LogToFileUtils.write("Threshold after adjustment = " + threshold);
-                Log.e(TAG, "Threshold after adjustment = " + threshold);
-
+                Log.e("WNN", "Threshold after adjustment = " + threshold);
+                Log.e("WNN", "Deactivated KCs for first image " + learnedKCs);
             }
             firstImage = false; //Have now processed the first image.
         } else {
             learnedKCs = 0; //Init learned KCs to zero for the new image
+
             f_learnedKCs = 0;
             for (int KCNumber = 0; KCNumber < willshawConnectionArray.length; KCNumber++) { //For each KC
                 int brightness = 0;
@@ -140,6 +142,7 @@ public class WillshawModule extends NavigationModules {
                 }
 
                 if (brightness >= threshold) { //If brightness above threshold
+                    total_KCs++;
                     if (willshawNetwork[KCNumber] != 0) { //If KC not already been used
                         willshawNetwork[KCNumber] = 0; //Decrease weight for KC
                         learnedKCs++; //Increment #of kcs used
@@ -155,7 +158,10 @@ public class WillshawModule extends NavigationModules {
 
         }
         Log.e("WNN", "Deactivated Kenyon Cells: " + learnedKCs);
+        Log.e("WNN", "Total Kenyon Cells down: " + total_KCs);
         Log.e("WNN", "Deactivated Kenyon Cells (float): " + f_learnedKCs);
+        StatFileUtils.write("WNN", "KCS", "Learning, total kenyon cells: " + total_KCs);
+        StatFileUtils.write("WNN", "KCS", "Learning, learned kenyon cells: " + learnedKCs);
         learnedKCs = 0;
     }
 
@@ -187,11 +193,17 @@ public class WillshawModule extends NavigationModules {
                 }
             }
             LogToFileUtils.write("Calculated Error: " + error);
-            Log.e(TAG, "Error: " + error);
+            Log.e("WNN", "Error: " + error);
         }
 
-        if (activated == 0){ error = maximum_KCs; } //If no KCs were activated then this is not a familiar image.
+
+        //If < 100 KCs are activated, or more KCs are activated than were activated by the image
+        //which learned the most, then set to the maximum.
+
+        if (activated < 100 || activated > 600){ error = maximum_KCs; }
+
         StatFileUtils.write("WN", "KCX", "KCs activated for image: " + activated);
+        Log.e("WNN", "Activated: " + activated);
         return error;
     }
 
@@ -205,6 +217,7 @@ public class WillshawModule extends NavigationModules {
         return float_image;
     }
 
+    //Zhaoyu?..
     public double calculateMaximumUnfamiliarity() {
         return maximum_KCs;
     }

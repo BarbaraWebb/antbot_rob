@@ -83,7 +83,7 @@ public class StartScreen extends Activity implements BroadcastValues{
         moduleSelectionMap.put(R.id.Combiner2_radioBtn, KLINOKINESIS);
         moduleSelectionMap.put(R.id.Combiner3_radioBtn, EIGHT_ENS);
         moduleSelectionMap.put(-3, NO_MODULE);
-        moduleSelectionMap.put(R.id.OF1_radioBtn, OF_AVOID); //NOT CURRENTLY IMPLEMENTED (OF_DETECT)
+        moduleSelectionMap.put(R.id.OF1_radioBtn, OF_DETECT); //NOT CURRENTLY IMPLEMENTED (OF_DETECT)
         moduleSelectionMap.put(R.id.OF2_radioBtn, OF_AVOID);
         moduleSelectionMap.put(-4, NO_MODULE);
         moduleSelectionMap.put(R.id.VN1_radioBtn, VN_BASE);

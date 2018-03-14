@@ -922,6 +922,75 @@ notes:
        - Basic OF works now to the same degree as original functionality; camera obstruction
          was likely playing a huge part in the problems observed.
 
-       - 
+       - Quick test of focused flow 30 degree window, then leave if it doesn't work
+         within two modifications (good food for thought if there are problems though)
+
+	 Seems to work ( may require some tuning as it seems to be unpredictable
+	 in dense environments. )
+
+- Willshaw Network:
+  - Back to the matter in hand. KC activation is still seemingly far too low.
+    A hacky fix is to threshold the output of the network. If too few KCs are
+    activated we return the maximum unfamiliarity; in the same fashion if the
+    unfamiliarity is greater than the maximum unfamiliarity; the scan is ignored.
+    Using this fix has improved performance as; in the cases the image wasn't
+    recognised, often the best course of action was to keep going straight but this
+    is a poor fix, there is something wrong with the network. Now I need to figure out
+    what it is...
+
+    - Thankfully the OF is back to its original standard (generally good with some mistakes).
+
+  - Modified the arena so that OF played a minimal role, clearly there is still some tuning
+    issues (May be the spinlock but I think the frontal arc is still too wide)
+
+    - With this modified arena the willshaw network (sort of) worked. The robot did not
+      get the first part of the route but seemingly recovered (how much sense does this make?)
+      The robot ended roughly where it ended on the initial run. More tests of this nature
+      required. This shows that the hacky modifications are cleaning up the data but
+      there has to be a better way of doing this...
 
 	 
+14 / 03 / 18:
+yesterday:
+- Noticed problems with the image rotation; if anybody ever tells you references don't
+  exist in Java, slap them.
+- This explained the large problem of KC activation inconsistency.
+- Test method for discussion: Leave the robot sitting still, allow it to go through the learning
+  routine and learn some images, these should largely activate the same KCs
+
+  Then allow the robot to try to recall the images. The same KCs should be activated; they weren't
+  Removing the image rotation demonstrated the issue.
+
+todo:
+- Fix image rotation; algorithm needs improved for -ve rotation.
+- Fix image rotation; make copies of the image and rotate them, rather than rotating the image
+  passed in. It's passed by reference which is screwing everything up.
+- Test willshaw with new image rotation
+
+notes:
+- Image rotation fixed, now working well
+- When sat still we expect the following:
+  - Learned KCs and total KCs high for first image
+  - LearnedKCs low and total KCs high for the remaining images
+  - On recall the scan should consistently choose index 8 (forward as most familiar)
+  - This worked as expected
+  - Image rotation likely worked before but algorithm is now improved and reference accounted for
+
+- VICON:
+  - ViconTracker software.
+  - Should be a case of load, select object, then record. See about outputting data to a CSV
+    then parsing and plotting using ABS
+
+- Willshaw:
+  - Now functions a lot better, KC activation is about perfect I think
+  - The lower threshold is still good I think, but the upper one is no longer
+    required. I am not seeing any KC activations in the range that they were
+    previously
+    
+  - Unsure as to why it functions so much better now than it did when using scanning originally
+  - The upper threshold is set to an experimental value of 600, though it may now be removable.
+
+OPTICAL FLOW EXPERIMENTS:
+- Now that everything seems to work, I will move on to experiments.
+
+

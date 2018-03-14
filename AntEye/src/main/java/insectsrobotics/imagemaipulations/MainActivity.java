@@ -1274,8 +1274,41 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     //Runnables for new optical flow obstacle detection - RM
     Runnable opticalFlowDetection = new Runnable() {
-      @Override
-      public void run() {
+        //Convert resource into test thread for basic algorithms
+        @Override
+        public void run() {
+            String tag = "OFTST";
+            String output = "";
+            Mat ident = Mat.eye(3, 3, CvType.CV_8UC1);
+            output = "3x3 Identity: \n" + ident.dump();
+
+            Log.e(tag, output);
+            rotateMatInAzimuth(1, ident);
+            output = "3x3 rotated: \n" + ident.dump();
+            Log.e(tag, output);
+
+            rotateMatInAzimuth(1, ident);
+            output = "3x3 rotated: \n" + ident.dump();
+            Log.e(tag, output);
+
+            rotateMatInAzimuth(1, ident);
+            output = "3x3 rotated: \n" + ident.dump();
+            Log.e(tag, output);
+
+            rotateMatInAzimuth(-1, ident);
+            output = "3x3 rotated: \n" + ident.dump();
+            Log.e(tag, output);
+
+            rotateMatInAzimuth(-1, ident);
+            output = "3x3 rotated: \n" + ident.dump();
+            Log.e(tag, output);
+
+            rotateMatInAzimuth(-1, ident);
+            output = "3x3 rotated: \n" + ident.dump();
+            Log.e(tag, output);
+        }
+    };
+          /*
           //This version of the thread is for testing the flow filtering collision avoidance
           try {
               sleep(3000);
@@ -1292,7 +1325,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
 
           //While we've not detected an obstacle, run for at most 10 seconds (testing)
-          while ( !stop /*&& (current_time <= 10000)*/){
+          while ( !stop /*&& (current_time <= 10000)){
               try {
                   sleep(600);
               } catch (Exception e){
@@ -1333,13 +1366,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                   stop = true;
                   continue;
               }
-              */
-              current_time = (int) SystemClock.elapsedRealtime() - start_time; //Update current time
+
+              //current_time = (int) SystemClock.elapsedRealtime() - start_time; //Update current time
           }
 
           try {
               runOnUiThread(new Runnable() {
-                  @Override
+
+               @ Opverride
                   public void run(){
                       debugTextView.setText(String.format(
                               "Obstacle seen"
@@ -1360,7 +1394,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
       }
 
     };
-    /*
+
     Runnable opticalFlowDetection = new Runnable() {
         @Override
         public void run() {
@@ -1593,6 +1627,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     initialise = true; //Need to reset robot speeds
                 }
 
+                loop_count++;
                 current_time = (int) SystemClock.elapsedRealtime() - start_time; //Update current time
                 t_delta = (int) SystemClock.elapsedRealtime() - t_interval_start; //Update accumulation interval
             }
@@ -1688,7 +1723,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             int dual_accumulator = 0; //Add both values and see if there's significant bias
             int left_accumulator = 0; //Add only left values
             int right_accumulator = 0; //Add only right values
-            int accumulation_threshold = 4000; //Threshold for a value to be accumulated (ignore all others)
+            int accumulation_threshold = 5000; //Threshold for a value to be accumulated (ignore all others)
             int reaction_threshold = 10000; //Value to be met for a reaction to be triggered. (need at most four readings)
 
             int loop_count = 0;
@@ -1721,12 +1756,16 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     right_accumulator = 0;
                     dual_accumulator = 0;
                     loop_count = 0; //Reset loop counter
-
                 }
 
-                if (t_delta > 1000) { //Save images every second (30 images learned)
-                    t_interval_start = (int) SystemClock.elapsedRealtime();
-                    boolean image_not_learned = true;
+                if (images_access){
+                    new_image = new SaveImages();
+                    new_image.execute(processedDestImage, LEARN_IMAGE);
+                }
+                    /*boolean image_not_learned = true;
+                    go(new double[]{0, 0});
+                    try{ sleep(1000); } catch (Exception e){ e.printStackTrace(); }
+
                     while (image_not_learned) { //Spin until image becomes available
                         //DEBUG NOTE: This shouldn't cause any problems but it's
                         //possible that this delay could cause problems with the CA
@@ -1750,7 +1789,11 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                             image_not_learned = false; //Image has been learned, we can exit the loop
                         }
                     }
-                }
+                    go( new double[]{lft_speed, rgt_speed});
+                    try { sleep(1000); } catch (Exception e){ e.printStackTrace(); }
+
+                    t_interval_start = (int) SystemClock.elapsedRealtime();*/
+
 
                 try {
                     runOnUiThread(new Runnable() {
@@ -1847,6 +1890,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     initialise = true; //Need to reset robot speeds
                 }
 
+                loop_count++;
                 current_time = (int) SystemClock.elapsedRealtime() - start_time; //Update current time
                 t_delta = (int) SystemClock.elapsedRealtime() - t_interval_start; //Update accumulation interval
             }
@@ -1946,7 +1990,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                             //matImage.get(0, 0, imageArray_tmp);
                             int rotation = 2 * (i - 8);
 
-                            byte[] imageArray_tmp = rotateInAzimuth(rotation, matImage);
+                            byte[] imageArray_tmp = rotateMatInAzimuth(rotation, matImage); //Commented to check correctness -
                             int[] imageArray = new int[imageArray_tmp.length];
                             for (int n = 0; n < imageArray_tmp.length; n++) {
                                 imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
@@ -2194,36 +2238,50 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
     };
 
-    byte[] rotateInAzimuth( int pixels, Mat image ) {
+
+    byte[] rotateMatInAzimuth( int pixels, Mat image_in ) {
+        String tag = "OFTST";
+        String output = "";
+
+        //IMPORTANT: need to copy the image so we don't modify the original, they're referenced
+        //unlike everything else in Java.
+        Mat image = new Mat(image_in.rows(), image_in.cols(), image_in.type());
+        image_in.copyTo(image);
+
         byte[] byte_image_array = new byte[image.rows() * image.cols()];
-        Mat segment = new Mat(image.rows(), Math.abs(pixels), 0); //Hold the shifted segment
 
         //Rotate matrix using a temporary matrix to store the rotated columns
         if ( pixels > 0 ) {
-            for (int i = 0; i < pixels; ++i) { image.col(i).copyTo(segment.col(i)); }
-            for ( int i = pixels; i < image.cols(); ++i){ image.col(i).copyTo(image.col(i - pixels)); }
-            for ( int i = 0; i < pixels; i++ ){ segment.col(i).copyTo(image.col(image.cols() - pixels)); }
+
+            for ( int j = 0; j < pixels; ++j ) {
+                Mat first = new Mat(image.rows(), 1, CvType.CV_8UC1);
+                Mat tmp = new Mat(image.rows(), 1, CvType.CV_8UC1);
+                image.col(0).copyTo(first);
+                for ( int i = 1; i < image.cols(); ++i ) {
+                    image.col(i).copyTo(image.col(i - 1));
+                }
+                first.copyTo( image.col(image.cols() - 1) );
+            }
+
+
         } else if ( pixels < 0 ){
             //Negative pixel reading, right rotation
-            int pix_idx = 0;
-            for ( int i = image.cols() - Math.abs(pixels); i < image.rows(); ++i ){
-                image.col(i).copyTo(segment.col(pix_idx));
-                ++pix_idx;
-            } //Read segment of interest into intermediate matrix
 
-            for ( int i = image.cols() - Math.abs(pixels); i > 0; --i ) {
-
-                image.col(i).copyTo(image.col(i + Math.abs(pixels) - 1)); //take your time... (may need - 1)
+            for ( int j = 0; j < Math.abs(pixels); ++j ) {
+                Mat last = new Mat(image.rows(), 1, CvType.CV_8UC1);
+                Mat tmp = new Mat(image.rows(), 1, CvType.CV_8UC1);
+                image.col( image.cols() - 1 ).copyTo(last);
+                for ( int i = image.cols() - 2; i >= 0; --i ) {
+                    image.col(i).copyTo(image.col(i + 1));
+                }
+                last.copyTo( image.col(0) );
             }
 
-            for ( int i = 0; i < Math.abs(pixels); ++i){
-                segment.col(i).copyTo(image.col(i));
-            }
         }
 
         image.get(0, 0, byte_image_array);  //get byte array from rotated image
 
-        return byte_image_array; //Return image as byte array.
+        return byte_image_array;
     }
 
     // Monitoring time to stop outbound PI and start Inbound
@@ -2235,6 +2293,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
         }
     };
 
@@ -3325,11 +3384,11 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         current_image.copyTo(previous_image);
     }
 
-    /*public void filterCollisionAvoidance() {
+    public void filterCollisionAvoidance() {
         int delta = (int) SystemClock.elapsedRealtime() - global_current_time; //Change in time since last read
         global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time; //Time since start
 
-        //Mat focus_of_expansion = fromFlowComputeFOE(); //Need this to know which way to saccade.
+        Mat focus_of_expansion = fromFlowComputeFOE(); //Need this to know which way to saccade.
         Mat left_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), true); //Left flow filter
         Mat right_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), false); //Right flow filter
 
@@ -3347,67 +3406,53 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         float left_flow_sum = 0;
         float right_flow_sum = 0;
-        int filter_offset = 4; //How much we offset the pixels to get the angles for the flow filters (def = 12)
-        int blinder_size = 30; //How much we reduce the field of vision by on each side (def = 0)
 
-        int image_width = 30; //30; //The width of the arc (def = 90)
-        int factor = 1000; //Factor by which the flow is multiplied (def = 1000)
-
-        //IMPORTANT: 90 == 2(blinder_size) + image_width; filter_offset / image_width == 12 / 90
-
-        //Flow filtering limited to a frontal arc of 20 pixels (~80deg)
         for ( int y = 0; y < currentPointsToTrack.rows(); y++ ){
             for ( int x = 0; x < currentPointsToTrack.cols(); x++ ){//These filters are functionally identical, see Luca's dissertation for the method used to compute the filter
-                //Log.e("DBG FLOW", "currentPointsToTrack.cols(): " + currentPointsToTrack.cols() );
                 //Compute left flow vector
+                previous_left_flow_vector = new double[]{mod(x + 4, 90), y}; //((x+12), y)
+                current_left_flow_vector = new double[]{mod((int) currentPointsToTrack.get(y, x)[0] + x + 4, 90),
+                        mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)}; //Flow info returned by farneback
 
-                //If limiting to an arc, the centering points for the flow need changed and possibly the filter too
-                previous_left_flow_vector = new double[]{ mod((x + 12), 90), y }; //((x+12), y)
-                current_left_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x + 12, 90),
-                                                          mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) }; //Flow info returned by farneback
-               // if ( true) { //If x is between 30 and 60 (our window of interest)
-
-                    left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]); //Vector for x + 12 mod 90
+                if ( (x >= 40) || (x < 50) ) {
+                    left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]); //Vector for x - 12 mod 90
 
                     //Create 1x3 flow vector (the current flow vector)
                     flow_vector.put(0, 0, current_left_flow_vector[0]);
                     flow_vector.put(0, 1, current_left_flow_vector[1]);
                     flow_vector.put(0, 2, 0);
 
-                    Log.e("FLOWSUMS", "left_flow filtered: " + left_filter_vector.dot(flow_vector));
-
                     left_flow_sum += left_filter_vector.dot(flow_vector); //Filter and sum
-
-                //}
-
+                }
                 //Compute right flow vector
-                previous_right_flow_vector = new double[] { mod(x - 12, 90), y };
-                current_right_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x - 12, 90) ,
-                                                           mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
-                //if ( (x >=30) && ( x < 60) && (Math.abs(current_right_flow_vector[0] - previous_right_flow_vector[0]) < 70)) { //If x is between 30 and 60 (our window of interest)
+                previous_right_flow_vector = new double[] { mod(x - 4, 90), y };
+                current_right_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x - 4, 90),
+                        mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
+
+                if ( (x >= 40) || (x < 50) ) {
                     right_filter_vector = right_filter.row((int) previous_right_flow_vector[0]); //Vector for x + 12 mod 90
 
                     //Create 1x3 flow vector (the current flow vector)
                     flow_vector.put(0, 0, current_right_flow_vector[0]);
                     flow_vector.put(0, 1, current_right_flow_vector[1]);
                     flow_vector.put(0, 2, 0);
-                    Log.e("FLOWSUMS", "right_flow filtered: " + right_filter_vector.dot(flow_vector));
+
                     right_flow_sum += right_filter_vector.dot(flow_vector); //Filter and sum
-                //}
+                }
             }
         }
 
 
 
         //Again image shifting, left is right and right is left.
+        rightCAFlow =  1000 * left_flow_sum;// / (delta /*900*/);
+        leftCAFlow = 1000 * right_flow_sum; // / (delta /*900*/);
 
-            rightCAFlow = factor * left_flow_sum;// / (delta 900);
-            leftCAFlow = factor * right_flow_sum; // / (delta 900);
+    }
 
 
-    }*/
 
-    public void filterCollisionAvoidance() {
+/*    public void filterCollisionAvoidance() {
         int delta = (int) SystemClock.elapsedRealtime() - global_current_time; //Change in time since last read
         global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time; //Time since start
 
@@ -3465,10 +3510,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
 
         //Again image shifting, left is right and right is left.
-        rightCAFlow =  1000 * left_flow_sum;// / (delta /*900*/);
-        leftCAFlow = 1000 * right_flow_sum; // / (delta /*900*/);
+        rightCAFlow =  1000 * left_flow_sum;// / (delta 900);
+        leftCAFlow = 1000 * right_flow_sum; // / (delta 900);
 
-    }
+    }*/
 
     //Collision avoidance using Time to Contact; set up to use dense flow
     public void getObstaclesFromSparseFlow(){
@@ -4005,39 +4050,33 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         return index;
     }
 
-    public static int getAvgMinIndex(double[] arr) {
+    public int getAvgMinIndex(double[] arr) {
         //In unfamiliarity distributions, there can be a lot of 0 values; rather than
         //taking the first, we take the midpoint of a series of minimum values.
         //If the minimum values appear in a cluster (e.g. {34, 23, 0, 0, 0, 0, 0, 10, 23, 56});
         //We return the index which is the midpoint of this group (e.g. 4 in the above array);
         //If the minimum is alone, we return the index of it
         int index = 0;
-        int group_length = 1;
-        int longest_group_length = 1;
         double minimum = arr[0];
+        int max_kcs = (int) mushroom_body.calculateMaximumUnfamiliarity();
+        int count = 0;
 
-        for ( int i = 0; i < arr.length; ++i ){
-            if ( arr[i] < minimum ){ //Will reach the last instance of the minimum
-                minimum = arr[i]; index = i; // Store the new minimum, and store the index
-                group_length = 1; //We've found a new minimum so any previous group info is redundant
-            } else if ( arr[i] == minimum ){
-                if ( (i > 0) && (arr[i] == arr[i - 1])) { //If arr[i] == its predecessor
-                    group_length++; //Maintain a record of the group length
-                } else if ( (i > 0) && arr[i] != arr[i - 1] ){
-                    if ( group_length > longest_group_length ) {
-                        longest_group_length = group_length; //Save last length of group of minimum values
-                        group_length = 1; //Reset group length.
-                    }
-                } else { group_length = 1; } //This else should only be called once per function call
+        for ( int i = 0; i < arr.length; ++i ) {
+            if ( arr[i] >= max_kcs ){ ++count; }
+
+            if ( arr[i] <= minimum ){
+                minimum = arr[i];
+                index = i;
             }
+
         }
 
-        //Index is now the first element in the longest group of minimum values
-        //longest_group_length should now be the length of the longest group of minima detected
+        if ( count == arr.length ) {
+            //If all array elements are >= max_kcs, then we don't want to turn the robot at all.
+            index = arr.length / 2;
+        }
 
-        //Want to return the index at the midpoint of this cluster.
-        int mid_idx = index + (longest_group_length - 1) / 2; //Integer division will take care of odd/even cases (this is rough)
-        return mid_idx;
+        return index;
     }
 
     Runnable startScanning = new Runnable() {
@@ -4445,8 +4484,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
                 image_string += imageArray[n]+ " ";
             }
-
-            model.onNewImage(imageArray, (int) transmission[1]);
+            //model.onNewImage... for Zhaoyu's code
+            mushroom_body.onNewImage(imageArray, (int) transmission[1]);
+            StatFileUtils.write("SI", "MB", "Image: " + image_string);
             // LogToFileUtils.write("IMAGE: " + image_string);
             // LogToFileUtils.write("REQUEST CODE: " + (int) transmission[1]);
             return false;
