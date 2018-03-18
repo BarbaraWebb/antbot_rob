@@ -128,7 +128,7 @@ public class StatFileUtils {
             file.mkdir();
             Log.i(class_tag, "New directory created");
         }
-        File stat_file = new File(file.getPath() + "/stats_two.txt");
+        File stat_file = new File(file.getPath() + "/reaction_times.txt");
         if (!stat_file.exists()) {
             try {
                 stat_file.createNewFile();

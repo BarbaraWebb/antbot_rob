@@ -1,0 +1,82 @@
+OPTICAL FLOW EXPERIMENTS:
+- Now that everything seems to work, I will move on to experiments.
+
+Section 1: correctness testing
+ARENA 1: Basic functionality - clear pitch
+- Aim: Demonstrate that the OFCA system functions in some way.
+- Clear with no tussocks present in the arena
+- Robot started centrally in the South end of the pitch
+- The robot should navigate to the box at the North end of the pitch
+- Some spurious flow reactions will be triggered despite the high walled arena.
+- This is due to the distorted FOV AntBot has. This MUST be mentioned in the report.
+- Also must be mentioned that this is advantageous to some degree as it seems to assist with
+  wall collisions
+  
+A1E:
+- We expect zero collisions of any sort on this run.
+- For results see google sheet in drive.
+- Many unexpected turns on each run.
+
+ARENA 2: Basic functionality - Simple avoidance of a large object
+- Aim: Demonstrate that the OFCA system can negotiate an obstacle
+- Arena has the pickfords box present in the centre
+- Robot started centrally in the South end of the pitch
+- The robot should avoid the box and correct so as to avoid the wall
+- The robot should make it to the box at the opposite end of the pitch however, this is
+  not a requirement
+  
+A2E:
+- We expect no full collisions or partial collisions for this test. A partial collision is
+  acceptable, but it should not occur.
+- Unexpected collisions and incosistent behaviour (turning on both sides)
+
+ARENA 3: Basic functionality - Tussock interaction
+- Aim: Demonstrate that the OFCA system can see and avoid the tussocks
+  Note for next year, taller tussocks may be an idea.
+  
+- Arena set up with a line of tussocks up the East side of the pitch in the South end.
+  Tussocks then set up in a similar line in the North West side.
+- Robot will be started in the South West corner of the pitch
+
+A3E:
+- We expect no collisions at all.
+- Robot performed exceptionally well taking slightly varying paths
+
+Basic functionality:
+- No issues should be experienced here
+
+For all following experiments, we divide the pitch into quadrants: NE, NW, SE, SW.
+
+We now look at scaling complexity. Randomly distributed tussocks with enough space
+for the robot to pass through, N per quadrant.
+13 tussocks, so we can go for 1, 2, 3 per quadrant. Does not sound a lot but is quite dense.
+General trend; we expect to see collision rise as we increase N. Robot shall always
+be started from the south west corner. The start point was chosen so that the robot
+has to do something; it cannot simply go straight to its goal.
+
+One per quad:
+- No issues but robot ran out of time on the first run.
+- Stopped slightly short on second.
+- Third was fine
+- Robot didn't seem to follow the same route twice.
+
+Two per quad:
+- Robot still stopping slightly short at times
+- Two consecutive runs connected with the same tussock but a reaction was triggered.
+
+Three per quad:
+- Robot made incorrect first turn and turned towards the wall of the arena. It is known
+  that once it makes its way in here, the run is unrecoverable. This is successful as the robot
+  avoided the tussocks, but unsucessful in that the robot cornered itself.
+
+  A development for this system would be to include a desired direction in the decision to turn.
+  I.e. weight the turns with the desired direction. As of now the robot has no such weighting.
+  So the turn will be triggered purely on raw flow with no planning or forethought
+
+- Final run of this arena showed that the window size could still be affecting the
+
+More experiments could be run; I don't feel like this is very thourough, but I will ask.
+May be worth predicting the robot's behaviour and setting up specialist arenas. For example
+fully blocked or guided into a corner. The note about heading is a good take away.
+::END OF FILE::
+

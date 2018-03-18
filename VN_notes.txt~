@@ -1,0 +1,33 @@
+Notes for visual navigation experimentation:
+
+Part 1: VICON
+- I can use vicon to record runs and the timer on the threads easily gives me enough time to
+  run recordings for outward, then outward memory.
+
+- Would like to run a single recording then get the data from it to see how it is formatted
+- The data is in a .csv so pandas may be useful; want to see what plots I can produce
+
+notes:
+- Vicon files need modified slightly before they can be plotted. However, this is easy to do, and
+  once done, they can be parsed and plotted with ease.
+
+how-to:
+- Record runs on vicon
+- Export runs to csv in the Desktop\antbot_tracks folder on the vicon machine
+- Upload the csvs to Drive
+- Download on laptop
+- Remove lines 1, 2, 3, and 5
+- Run vicon.py to get a trajectory plot of the two routes.
+- Do with this whatever needs done
+
+Part 2: Experiments; design and implementation
+- Want different arenas. Arenas which are easy for the OF to navigate as this is not what
+  we're testing.
+
+- Want to make sure the robot has to make some navigational decisions.
+
+- Homeward routes? How hard would this be to implement as a curiosity?
+
+  - During learning learn the outward image, learn the homeward image at the same time by doing
+    a rotateMatInAzimuth variant which returns a matrix. If possible, it may be nice to get an image
+    from the cameras to show the route taken.

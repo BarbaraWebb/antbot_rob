@@ -298,7 +298,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     AsyncTask<Object, Integer, Boolean> start_home = null;
     double familarity;
     Boolean images_access = false;
-    double[] familiarity_array = new double[16]; //Rob
+    double[] familiarity_array = new double[17]; //Rob
     double[] familarity_array = new double[11]; //Zhaoyu
     double distance_travelled;
     Thread chosen_thread;
@@ -1505,7 +1505,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             //Left and right motor speeds
             int lft_speed = 15;
-            int rgt_speed = 13;
+            int rgt_speed = 14;
 
             //Accumulators for left and right flow
             int dual_accumulator = 0; //Add both values and see if there's significant bias
@@ -1515,7 +1515,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             int reaction_threshold = 10000; //Value to be met for a reaction to be triggered. (need at most four readings) (def = 1000)
             int turn = 20;
 
-
+            boolean reaction_taken = false;
+            int reaction_time;
 
             int loop_count = 0;
 
@@ -1592,6 +1593,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 if ( left && (!avoid) ){ //Left turn required
                     Log.i("CA:", "Left turn triggered");
+                    if ( !reaction_taken ){
+                        reaction_taken = true;
+                        reaction_time = (int) SystemClock.elapsedRealtime() - t_interval_start;
+                        //Reaction time in milliseconds. Print to stats file
+                        StatFileUtils.write("OF", "RCTIME", "Reaction time: " + reaction_time + "; for speeds {" + lft_speed + ", " + rgt_speed + "}");
+                    }
+
                     try {
                         turnAround(turn);
                     }catch(Exception e){ e.printStackTrace(); }
@@ -1622,7 +1630,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 } else if ( avoid && ((current_time - t_move_start ) >= 500)){
                     //Make adjustments in half second intervals
                     lft_speed = 15; //Back to default
-                    rgt_speed = 13; //Back to default
+                    rgt_speed = 14; //Back to default
                     avoid = false; //No longer avoiding an obstacle
                     initialise = true; //Need to reset robot speeds
                 }
@@ -1717,7 +1725,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             //Left and right motor speeds
             int lft_speed = 15;
-            int rgt_speed = 13;
+            int rgt_speed = 14;
 
             //Accumulators for left and right flow
             int dual_accumulator = 0; //Add both values and see if there's significant bias
@@ -1885,7 +1893,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 } else if (avoid && ((current_time - t_move_start) >= 500)) {
                     //Make adjustments in half second intervals
                     lft_speed = 15; //Back to default
-                    rgt_speed = 13; //Back to default
+                    rgt_speed = 14; //Back to default
                     avoid = false; //No longer avoiding an obstacle
                     initialise = true; //Need to reset robot speeds
                 }
@@ -1980,7 +1988,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 String unfamiliarity_distribution = "";
 
-                for (int i = 0; i < 16; i++) {
+                for (int i = 0; i < 17; i++) {
                     image_not_accessed = true;
                     while (image_not_accessed){
                         if (images_access){
@@ -1989,6 +1997,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                             //byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
                             //matImage.get(0, 0, imageArray_tmp);
                             int rotation = 2 * (i - 8);
+                            Log.e("NM", "Image rotation: " + rotation);
 
                             byte[] imageArray_tmp = rotateMatInAzimuth(rotation, matImage); //Commented to check correctness -
                             int[] imageArray = new int[imageArray_tmp.length];
@@ -2004,7 +2013,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 ++scan_count; //Scan complete, increment
                 String info_str = "SCN" + scan_count;
-                String output = "-t \"(Using AvgMin) Unfamiliarity Distribution for Scan " + scan_count + "\" {" + unfamiliarity_distribution + "}";
+                String output = "-t \"Unfamiliarity Distribution for Scan " + scan_count + "\" {" + unfamiliarity_distribution + "}";
 
                 StatFileUtils.write(task_code, info_str, output);
 
@@ -2022,7 +2031,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     notches = -(min_index - 8);
                 }
 
-                double degrees = notches * 4;
+                double degrees = notches * 8;
                 output = "Rotation: " + degrees;
                 StatFileUtils.write(task_code, info_str, output);
                 try {
@@ -2039,7 +2048,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 //We will instead move for a set time, instead of a distance 2 seconds
 
-                go( new double[]{ 15, 13 } );
+                go( new double[]{ 15, 14 } );
                 try { sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Wait for the command to start
 
                 //Time tracking:
@@ -3410,12 +3419,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         for ( int y = 0; y < currentPointsToTrack.rows(); y++ ){
             for ( int x = 0; x < currentPointsToTrack.cols(); x++ ){//These filters are functionally identical, see Luca's dissertation for the method used to compute the filter
                 //Compute left flow vector
+                //+-4 is the left/right offset for the flow frame; e.g. -4 centres the frame at -16deg.
+                //The narrower this is, the closer we are to considering the original flow filter.
+                //So this may effectively act as our rather than the raw pixel values.
                 previous_left_flow_vector = new double[]{mod(x + 4, 90), y}; //((x+12), y)
                 current_left_flow_vector = new double[]{mod((int) currentPointsToTrack.get(y, x)[0] + x + 4, 90),
                         mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)}; //Flow info returned by farneback
 
-                if ( (x >= 40) || (x < 50) ) {
-                    left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]); //Vector for x - 12 mod 90
+                if ( (x >= 40) || (x < 50) ) { //Windowing not active; switch to && to activate
+                    left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]);
 
                     //Create 1x3 flow vector (the current flow vector)
                     flow_vector.put(0, 0, current_left_flow_vector[0]);

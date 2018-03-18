@@ -993,4 +993,15 @@ notes:
 OPTICAL FLOW EXPERIMENTS:
 - Now that everything seems to work, I will move on to experiments.
 
+Section 1: correctness testing
+ARENA 1: Basic functionality - clear pitch
+- Clear with no tussocks present in the arena
+- Robot started centrally in the South end of the pitch
+- The robot should navigate to the box at the North end of the pitch
+- Some spurious flow reactions will be triggered despite the high walled arena.
+- This is due to the distorted FOV AntBot has. This MUST be mentioned in the report.
 
+A1E:
+- We expect zero collisions of any sort on this run.
+
+ARENA 2: Basic functionality
