@@ -9,48 +9,52 @@ Warning--entry type for "Scimeca2017" isn't style-file defined
 --line 33 of file working.bib
 Warning--entry type for "Zhang2017" isn't style-file defined
 --line 39 of file working.bib
+Name 1 in "D.J. Willshaw, O.P. Buneman, AND H. C. Longuet-Higgins" has a comma at the end for entry Willshaw1969
+while executing---line 1049 of file plain.bst
 Warning--to sort, need author or key in Mobbs1982
 Warning--empty author in Mobbs1982
+Name 1 in "D.J. Willshaw, O.P. Buneman, AND H. C. Longuet-Higgins" has a comma at the end for entry Willshaw1969
+while executing---line 1090 of file plain.bst
 Warning--empty journal in ODonovan2005
-You've used 15 entries,
+You've used 16 entries,
             2118 wiz_defined-function locations,
-            600 strings with 6721 characters,
-and the built_in function-call counts, 4616 in all, are:
-= -- 434
-> -- 221
+            607 strings with 6866 characters,
+and the built_in function-call counts, 4856 in all, are:
+= -- 457
+> -- 234
 < -- 1
-+ -- 91
-- -- 72
-* -- 327
-:= -- 773
-add.period$ -- 42
-call.type$ -- 15
-change.case$ -- 79
++ -- 96
+- -- 76
+* -- 339
+:= -- 818
+add.period$ -- 45
+call.type$ -- 16
+change.case$ -- 84
 chr.to.int$ -- 0
-cite$ -- 18
-duplicate$ -- 163
-empty$ -- 380
-format.name$ -- 72
-if$ -- 957
+cite$ -- 19
+duplicate$ -- 173
+empty$ -- 397
+format.name$ -- 76
+if$ -- 1005
 int.to.chr$ -- 0
-int.to.str$ -- 15
-missing$ -- 11
-newline$ -- 74
-num.names$ -- 30
-pop$ -- 92
+int.to.str$ -- 16
+missing$ -- 12
+newline$ -- 79
+num.names$ -- 32
+pop$ -- 97
 preamble$ -- 1
-purify$ -- 64
+purify$ -- 68
 quote$ -- 0
-skip$ -- 121
+skip$ -- 129
 stack$ -- 0
-substring$ -- 261
-swap$ -- 24
+substring$ -- 266
+swap$ -- 25
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 60
+type$ -- 64
 warning$ -- 3
-while$ -- 43
-width$ -- 17
-write$ -- 154
-(There were 6 warnings)
+while$ -- 45
+width$ -- 18
+write$ -- 164
+(There were 2 error messages)

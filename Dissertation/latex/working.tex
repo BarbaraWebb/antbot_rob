@@ -50,7 +50,8 @@ Dr. Barbara Webb
 \centering
 {\LARGE\textbf{Abstract}}
 \begin{flushleft}
-{\small }
+  {\small \textit{The abstract will be written as one of the last parts of the report to allow
+    an accurate summary of the project as a whole.}}
 \end{flushleft}
 
 \newpage
@@ -152,20 +153,30 @@ discuss the effects of using different types of flow field, how the different fl
 techniques behave in the same situation, and different methods of response.
 \newline
 
-We then move to the Mushroom Body circuit, first estabilishing a baseline performance measure for
-the visual navigation task by using the orignal \textit{basic} model from \cite{Ardin2016} with
-binary weightings and a single Extrinsic Neuron. A scanning behaviour will be used for this baseline;
-ants have demonstrated use of scanning in visual navigation but it is generally accepted that this
+We then move to the Mushroom Body circuit; this model for visual navigation was demonstrated by
+\cite{Ardin2016} in simulation. Previous iterations of this project which focussed on the Mushroom
+Body circuit have struggled to achieve similar performance on a robot using the methods originally
+presented by \textit{Ardin et al.}; certainly, no previous iteration
+has dealt with a non-deterministic route through a cluttered environment. We aim to get the original
+\textit{basic} model from \cite{Ardin2016} working on the robot in a robust fashion and hope to
+establish a baseline agains which future iterations can work while modifying the model. We will use
+a modified scanning behaviour to establish this baseline; ants have demonstrated use of scanning in
+visual navigation but it is generally accepted that this
 is not the primary method they use to determine a direction after having recognised a scene, rather,
 this scanning behaviour only occurs in certain scenarios (e.g. when the ant becomes lost)
-\cite{Kodzhabashev2015}. 
+\cite{Kodzhabashev2015}. This will require debugging of the existing model and any interacting
+factors; for example, \textit{Zhang} managed to achieve good results with the MB model using
+klinokinesis as the route following behaviour while a scanning struggled to produce robust routes.
+It should also be noted that the scanning behaviour performed poorly using a Perfect Memory model
+(the highest performing model used by \textit{Ardin et al.}) which may suggest that the model is
+not all that contributes to the accuracy of recapitulated routes.
 \newline
 
-Finally, we will report the results of the experiments performed at different stages during, and
+Finally, we will report the results of the experiments and testing performed at different stages during, and
 post development; we will compare these to relevant results from previous iterations of
 this project. We will end with a conclusion of our findings and contributions to the project,
 as well as discussing technical limitations and potential for future developments.
-\newline
+\newpage
 
 \subsection { Results }
 This work is based on work done previously by Leonard Eberding, Luca Scimeca, and Zhaoyu Zhang
@@ -174,20 +185,13 @@ This work is based on work done previously by Leonard Eberding, Luca Scimeca, an
 
 Significant contributions:
 \begin{enumerate}
-  \item{An optical flow based system for Collision Avoidance}
-  \item{Results indicating the impracticality of an expansion based system for Collision Avoidance}
-  \item{\textit{[FUTURE]} Successful replication of a route through a cluttered environment using Visual Navigation}
-  \item{\textit{[FUTURE]} Comparison of different Visual Navigation models in a set navigational task}
-    
+  \item{An optical flow based system for Collision Avoidance,}
+  \item{Results indicating the impracticality of a time-to-contact based system for Collision Avoidance,}
+  \item{Implemented hardware upgrades to AntBot to make the platform more robust,}
+  \item{Implemented a new type of scanning behaviour for AntBot,}
+  \item{Successful replication of a route through a cluttered environment using Visual Navigation,}
+  \item{Implemented a basic but extensible statistical logging utility on AntBot with a complementary parsing and plotting utility written in Python.} %AntBotStats
 \end{enumerate}
-
-
-\vfill
-\textit{Note: results marked [FUTURE] are results I would like to have achieved by the culmination
-of the project and the writing of the final dissertation. They are not current.}
-\textit{To be continued...}
-
-
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BACKGROUND
@@ -208,7 +212,7 @@ set of important points in the image, such as the prominent features in the imag
 See \ref{sec:methods} for implementation.
 
 
-\subsection{ Optical flow models for Collision Avoidance }
+\subsection{ Optical flow models for Collision Avoidance } \label{sec:ofca}
 Collision avoidance is an important component in navigation. Ants
 do not have dedicated sensory systems or the ability to create a visual 3D map of their environment
 using stereoscopic vision or motion paralax. It has been demonstrated that optical flow is used by
@@ -225,6 +229,7 @@ of larger animals such as birds and humans. The model relies on accurately compu
 robot collides with an obstacle. The TTC is computed as follows:
 
 \begin{equation}
+  \label{eqn:lowttc}
 TTC = \frac{d}{v}
 \end{equation}
 
@@ -239,60 +244,37 @@ Their TTC equation then becomes:
  TTC = \frac{cos\phi \times sin\phi}{\phi}
 \end{equation}
 
-However, this method of computation relies on the assumption that the robot only ever moves in the
-forward camera direction which is not appropriate for AntBot (See section \ref{sec:platform}).
-We must look for an alternate way to compute TTC. Fortuntely, such information is easily
-computable from the \textit{focus of expansion} (FOE), the point from which all flow vectors
-originate.
+The TTC is then used to generate range information (image depth), which can be used to generate an
+appropriate reaction.
 \newline
 
-A general method for computing the FOE is given by \cite{ODonovan2005}:
-
-\begin{equation}
-  FOE = (A^TA)^{-1}A^T\mathbf{b}
-\end{equation}
-
-\begin{equation*}
-  \begin{split}
- A = 
-\begin{bmatrix}
-  a_{00} & a_{01}\\
-  \dots  & \dots \\
-  a_{n0} &  a_{n1}
-\end{bmatrix}
-\qquad
-\end{split}
-\begin{split}
-\mathbf{b} =
-\begin{bmatrix}
-  b_0 \\
-  \dots \\
-  b_n
-\end{bmatrix}
-\end{split}
-\end{equation*}
+An alternative, yet equivalent, method for computing the TTC is given by \textit{Souhila and Karim}
+wherein the time-to-contact is given in terms of the distance of all pixels from the \textit{focus of expansion}
+(FOE); the point from which all flow vectors originate. \textit{Souhila and Karim} do
+not give a method of explicitly computing the FOE of a flow frame
+however, they do describe their method of estimating it. All flow vectors are in two dimensions with a
+horizontal ($x$) and vertical ($y$) component. Focussing on the horizontal case; flow vectors to the
+right of the FOE will have a positive $x$ component, and flow vectors to the left of the FOE will have a negative
+$x$ component. They then tally the signs of the horizontal components of the flow vectors computing a
+difference between the horizontal components on the left of the FOE, and the horizontal components on the
+right of the FOE. Intuitively, at the point where this difference is minimised, the divergence of the
+horizontal components is maximised; this gives us the horizontal component of the FOE. The vertical
+component is computed in a similar manner.
 \newline
 
-Where, for each pixel $p_i = (x, y)$, the associated flow vector is given by $\mathbf{v} = (u, v)$.
-We then set $a_{i0} = u, a_{i1} = v$ and finally $b_i = xv - yu$. The TTC can then be computed as:
-
-\begin{equation}
-  TTC = \frac{d}{v} = \frac{y}{\frac{\partial y}{\partial t}}
-\end{equation}
-
-Where $y$ is the vertical distance of some point $p = (x,y,z)$ from the
-FOE, and $\frac{\partial y}{\partial t}$ is the velocity of translational motion of $y$.
-A full derivation is given by \textit{O'Donovan} from whom we have adapted this equation.
-
-Finally, we can simplify this to:
+Finally, they compute the TTC as:
 \begin{equation}
 TTC = \frac{\Delta_i}{|\vec{V}_t|} \dots
 \end{equation}
 Where $\Delta_i$ is the distance of a point $p_i = (x,y)$ from the FOE, and $|\vec{V}_t|$ is the
-translational velocity of the camerap computed from optical flow\cite{Souhila2007}.
+translational velocity of the camera computed from optical flow\cite{Souhila2007}.
 \newline
+
 This time-to-contact is then appropriately thresholded and a reaction is generated based on the
-position of the focus of expansion.
+magnitudes of the vectors surrounding the FOE. A ``balance strategy'' is then used as the control law by which
+the robot is directed through the environment; this strategy will be discussed in Section \ref{sec:methods}
+as a modified version was used during development.
+
 
 \subsubsection{ Filtering }
 The filtering method asks the following question: Given my current motion, what visual changes do
@@ -328,7 +310,7 @@ in the opposite direction is triggered. The model from \cite{Stewart2010} is sho
 \end{figure}
 
 \subsection{ The Mushroom Body for Visual Navigation } \label{MBBackground}
-The Mushroom Body neuropils are structures present in the brains of insects though they are
+The Mushroom Body neuropils are structures present in the brains of all insects though they are
 largest in the brains of hymenoptera. They are known to play a critical role in olfactory
 learning, and have been thought to play a role in visual memory in hymenoptera since 1982
 at the latest\cite{Mobbs1982}. In 2016 a Mushroom Body circuit was proposed by \textit{Ardin et al.}
@@ -342,6 +324,9 @@ A $1\times360$ vector is used for further processing.
 The generalised MB circuit is a three layer neural network: The first layer consists of a set of
 visual Projection Neurons (vPNs), these connect to the second layer of standard artificial neurons
 referred to as Kenyon Cells (KCs), and finally these KCs connect to a set of Extrinsic Neurons (ENs).
+The reader should note that any reference to the weight of a Kenyon Cell herein is specifically referring
+to the weight of the connection between that KC and the Extrinsic Neuron; this abstraction is made for
+ease of reference.
 \newline
 
 The model by \textit{Ardin et al.} (shown in Figure \ref{fig:ardinmb}) consisted of 350 vPNs
@@ -370,11 +355,11 @@ decides on its next action by scanning to find the direction of greatest familia
 
 This version of the MB circuit has demonstrated the capacity to learn scene information, as well
 as recapitulate routes by using the scanning technique \cite{Ardin2016}. In 2016, \textit{Eberding}
-implemented the Willshaw Network (WN) on AntBot, which resembles the Mushroom Body neuropils; he
+implemented the Willshaw Network (WN) on AntBot, which resembles the Mushroom Body neuropils (see \ref{sec:wn}); he
 demonstrated that the network allowed the agent to perform visual navigation through a sparse testing
 environment\cite{Eberding2016}. The agent navigates by scanning, computing unfamiliarity, and finally
 choosing the direction of minimum unfamiliarity. In order to save on computational resources, the
-KCs are binary rather than spiking (we hope to explore a spiking model later). While this does
+KCs are binary rather than spiking (we hope to explore a spiking model in the future). While this does
 generate a correct route, it is not as continuous as those performed by real ants.
 \newline
 
@@ -395,8 +380,46 @@ combining the MB model for visual navigation and the CX model for path integrati
 integration and the CX model are not explored in this project, the model is still worth discussing,
 as it may still be used to encode a desired response to specific stimuli.
 
-%Should the Klinokinesis Algorithm be given here?
+% Should the Klinokinesis Algorithm be given here?
 
+\subsection{The Willshaw Network} \label{sec:wn}
+The Willshaw network is a specific style of neural network with an interesting background; capable of
+instantaneous learning, high capacity, and importantly, resembling the structure of the Mushroom Body
+inputs, storage layer, and outputs.
+\newline
+
+The idea behind the network stems from the effect of passing a pattern of light beams through two
+patterned pinhole cards and a lens to create a pattern of refraction on a screen. The pattern output
+on the screen is said to be a correlogram of the two patterns. Intuitively, the light pattern output
+at $A$ can be passed through filter pattern $B$ to produce pattern $C$. This idea is then refined by
+\textit{Willshaw et al.} into a simple, three-layer neural network. As an aside, though the terminology of artificial
+neural networks is not used in the original paper, the model presented is designed to be interpreted as
+a biological neural network, so interpretation as an ANN is a case of semantics. The three layers of the
+Willshaw network are quite simple: a set of input neurons $N_B$ are represented as parallel horizontal
+lines; a set of output neurons $N_A$ are represented as parallel vertical lines; and finally the storage
+layer is a map of all of the intersections between the inputs and outputs. The storage layer is made up of
+artificial synapses which are initially inactive (weight zero). The synapses are activated (weight set to one)
+when the input pattern and output pattern activate the same synapse. More succinctly, synapse $c_{i,j}$ is set
+to 1 when $a_i$ and $b_j$ are activated simultaneously.
+
+\begin{figure}[h]
+ 
+  \centering
+  \includegraphics[width=0.5\textwidth]{Willshaw1969Model}
+  \caption{
+    \label{fig:willshawnet} The original network figure (Fig. 4) from \textit{Willshaw et al.} \cite{Willshaw1969}.
+  }
+ 
+\end{figure}
+
+This style of network can be transformed into something which models the MB circuit presented by \cite{Ardin2016}.
+The input neurons $N_b$ become the vPNs with multiple inputs going to each synapse. The synapses themselves become the
+KCs, though the weighting convention is reversed with zero being active, and one being inactive. We reduce the set of
+outputs $N_a$ to a single line which represents our reward signal. Coincidence of a pattern of KC activation and a reward
+signal results in instant learning of that pattern by the learning rule set up in \cite{Willshaw1969},
+just as in the MB circuit. Finally we must add the Extrinsic Neuron to
+the model as there is no parallel in the original Willshaw Net. As before the EN simply sums the weights of the KCs activated
+on presentation of an input pattern. Thus, the Willshaw net can be used to model the Mushroom Body circuit.
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PLATFORM
@@ -438,7 +461,7 @@ on the motor board to provide motion control.
   \begin{minipage}[t!]{0.45\textwidth}
     \centering
     \includegraphics[width=0.9\textwidth]{PanoramicView}
-    \caption{A sample of the view given by the lense pre-processing.}
+    \caption{A sample of the view given by the lense before any processing.}
   \end{minipage}
 
 \end{figure}
@@ -558,13 +581,116 @@ Previous works have mentioned a message of the format \textit{e e1 e2 e3 e4} n. 
 to send wheel encoder information from the Arduino to the phone, however, this message was only sent
 during the execution of a particular function and it has since been removed from the Arduino code.
 There are currently no utilities available to retrieve and reset encoder values on-demand from the
-phone, though this should not be difficult to implement.
+phone, though such utilities should not be difficult to implement.
 
+\subsection{Modifications}
+Some hardware modifications have been made to the robot. Upon the uptake of this project, AntBot
+was powered by six 1.2V AA NiMH batteries wired in series (using a simple power pack). This power
+pack was connected to the motor board (and subsequently the motors) by a pair of 9V connectors. The robot
+had to be opened up in order to connect or disconnect the batteries from the motors. The batteries themselves
+had to be extracted from the power pack and charged individually. These actions, repeated often by the current
+project and predecessors had caused wear on the power pack and the internal wiring. The wires themselves
+needed re-soldered multiple times. In order to have a more robust platform for testing, the on-board
+power system was modified. The aim of the modification was simply to avoid opening up the robot at any cost.
+As such a new power source which could be charged as required without removal was added, along with external
+charging ports and a switch. The internal wiring was re-done such that power could either flow from the
+external ports to the battery, or from the battery to the motors controlled by the external switch. The new
+power source is a 9.6V NiMH power pack which can be charged without removal from the robot. Motor speeds
+and systems which depended on them required re-tuning after completion of the modifications.
 \newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% METHODS
 \section{ Methods } \label{sec:methods}
-\textit{Included for skeleton purposes.}
+\subsection{Optical flow models for Collision Avoidance}
+\subsubsection{Time-to-Collision}
+We attempted to follow the outline presented by \textit{Low and Wyeth} as, at first glance, it seems
+a straightforward and neat solution. However, this method of computation for the TTC relies on the
+assumption that the camera view only ever moves in the forward direction which is not appropriate
+for AntBot (See Section \ref{sec:platform}). So we look instead at the paper by \textit{Souhila and Karim}
+for an alternative; for this method, we must compute the \textit{focus of expansion} or FOE, however,
+their method of computing the FOE again relied on forward motion of the camera and did not translate
+well into AntBot. A more general method for computing the FOE is given by \cite{ODonovan2005}:
 
+%Copy of description from old backround so I don't have to type out the maths again.
+%\textit{Included for skeleton purposes.}
+%However, this method of computation relies on the assumption that the robot only ever moves in the
+%forward camera direction which is not appropriate for AntBot (See section \ref{sec:platform}).
+%We must look for an alternate way to compute TTC. Fortuntely, such information is easily
+%computable from the \textit{focus of expansion} (FOE), the point from which all flow vectors
+%originate.
+%\newline
+
+%A general method for computing the FOE is given by \cite{ODonovan2005}:
+
+\begin{equation}
+  FOE = (A^TA)^{-1}A^T\mathbf{b}
+\end{equation}
+
+\begin{equation*}
+  \begin{split}
+ A = 
+\begin{bmatrix}
+  a_{00} & a_{01}\\
+  \dots  & \dots \\
+  a_{n0} &  a_{n1}
+\end{bmatrix}
+\qquad
+\end{split}
+\begin{split}
+\mathbf{b} =
+\begin{bmatrix}
+  b_0 \\
+  \dots \\
+  b_n
+\end{bmatrix}
+\end{split}
+\end{equation*}
+\newline
+
+Where, for each pixel $p_i = (x, y)$, the associated flow vector is given by $\mathbf{v} = (u, v)$.
+We then set $a_{i0} = u, a_{i1} = v$ and finally $b_i = xv - yu$. The TTC can then be computed as:
+
+\begin{equation}
+  TTC = \frac{d}{v} = \frac{y}{\frac{\partial y}{\partial t}}
+\end{equation}
+
+Where $y$ is the vertical distance of some point $p = (x,y,z)$ from the
+FOE, $\frac{\partial y}{\partial t}$ is the velocity of translational motion of $y$, and
+$d$ and $v$ are as given in (\ref{eqn:lowttc}).
+A full derivation is given by \textit{O'Donovan} from whom we have adapted this equation.
+\newline
+
+Finally, we can simplify this to the desired equation from \cite{Souhila2007}:
+\begin{equation}
+TTC = \frac{\Delta_i}{|\vec{V}_t|} \dots
+\end{equation}
+Where $\Delta_i$ is the distance of a point $p_i = (x,y)$ from the FOE, and $|\vec{V}_t|$ is the
+translational velocity of the camera computed from optical flow\cite{Souhila2007}. 
+\newline
+This time-to-contact is then appropriately thresholded and a reaction is generated based on the
+position of the focus of expansion which provided a simple method of replicating the balance strategy
+used by \cite{Souhila2007} as the FOE will be drawn to one side based on the motion parallax observed.
+Instability in the computation of these properties was dealt with by averaging the properties
+across a series of frames to reduce potential noise.
+\newline
+
+The generated responses were to be halt on detection (for debugging purposes), and triggering of a
+smooth turn away from the obstacle. This technique was designed to be used with a sparse optic flow
+field, however, a version using a dense flow field was attempted. The computation across a dense
+flow field was found to be impractical. 
+
+
+\subsubsection{Filtering}
+An optical flow filter was previously implemented by \textit{Scimeca} for the purpose of speed retrieval.
+This same filter was re-purposed for use in collision avoidance; the creation of the filter (largely taken from
+\cite{Scimeca2017}) is as follows:
+
+An $Nx3$
+
+\subsection{Debugging the Mushroom Body}
+
+
+\subsection{AntBotStats}
 \newpage
 
 \section{ Results and Evalutation } \label{sec:results}
