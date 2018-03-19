@@ -3426,7 +3426,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 current_left_flow_vector = new double[]{mod((int) currentPointsToTrack.get(y, x)[0] + x + 4, 90),
                         mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)}; //Flow info returned by farneback
 
-                if ( (x >= 40) || (x < 50) ) { //Windowing not active; switch to && to activate
+                if ( (x >= 40) || (x < 50) ) { 
                     left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]);
 
                     //Create 1x3 flow vector (the current flow vector)
@@ -3456,7 +3456,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
 
 
-        //Again image shifting, left is right and right is left.
+        //Again due to image shifting, left is right and right is left.
         rightCAFlow =  1000 * left_flow_sum;// / (delta /*900*/);
         leftCAFlow = 1000 * right_flow_sum; // / (delta /*900*/);
 

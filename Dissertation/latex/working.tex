@@ -1,5 +1,5 @@
 
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,10pt]{article}
 \usepackage{amsmath}
 \usepackage{geometry}
 \usepackage{graphicx}
@@ -681,11 +681,46 @@ flow field was found to be impractical.
 
 
 \subsubsection{Filtering}
-An optical flow filter was previously implemented by \textit{Scimeca} for the purpose of speed retrieval.
-This same filter was re-purposed for use in collision avoidance; the creation of the filter (largely taken from
-\cite{Scimeca2017}) is as follows:
+Here a dense optical flow field is used, and in order to explain the computation, it is important
+to discuss the flow computation itself. The optical flow is computed using openCV's
+\textit{calcOpticalFlowFarneback()} function. When given two consecutive frames the function returns
+a matrix $M$ of arrays of type double. $M_{y,x}$ is a one-dimensional array of length two which contains
+the displacement in each axis of the respective pixel (i.e. $M_{y,x}[0]$ gives the displacement of the $x$
+coordinate, and $M_{y,x}[1]$ gives the displacement in the $y$ axis.
+\newline
 
-An $Nx3$
+An optical flow filter was previously implemented by \textit{Scimeca} for the purpose of speed retrieval. 
+As collision avoidance in optical flow relies on detecting a difference in motion between two sides
+the same filtering method could be re-purposed for collision avoidance. Though inspired by \cite{Stewart2010},
+our method for performing the computation and avoidance was modified slightly. Instead of creating
+a left and right filter, we create left and right flow frames by taking rotating the image frame
+by a certain angle left or right as in \cite{Scimeca2017}. However, we reduce the angle from $\pm 45^{circ}$
+\cite{Scimeca2017} to $\pm 16^{circ}$. It was found that the size of this angle affected the region of the %Need to fact check this!!!
+image which would trigger responses; a larger angle would result in higher sensitivity to the sides of the
+robot, a smaller angle results in higher frontal sensitivity which was desired for the CA system. We only
+want the robot to avoid obstacles to the front, obstacles to the sides should not trigger responses. The filter
+itself is the same as the second filter from \cite{Scimeca2017} which was already implemented on the robot.
+\newline
+
+The filter is constructed as an $Nx3$ matrix $F$ such that:
+
+\begin{equation}
+F_i = [ \quad sin(-\pi + i\frac{2\pi}{N}) \qquad 0 \qquad 0 \quad ] \quad \textit{for} \quad i \in \{0, N - 1\}
+\end{equation}
+
+where $F_i$ is the $ith$ row of $F$. Intuitively each row corresponds to a pixel value in the $x$ axis.
+\newline
+
+Once the filter is computed, we retrieve the flow for each pixel by adding the displacements
+retrieved from \textit{calcOpticalFlowFarneback()} to the pixel value and compare it to the filter. 
+For each value of $x$ we apply an offset of $\pm 4px$ which corresponds to our left and right frames centred at
+$\pm 16^{\circ}$. For the $ith$ pixel, with filter vector $\bar F_i$ and flow vector $\bar O_i$ we apply the filter
+simply by computing:
+
+\begin{equation}
+  
+\end{equation}
+
 
 \subsection{Debugging the Mushroom Body}
 

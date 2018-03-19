@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  18 MAR 2018 17:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.3.19)  19 MAR 2018 22:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2017-04-15>
 Babel <3.15> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/share/texmf-dist/tex/latex/base/size12.clo
-File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+(/usr/share/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -187,12 +187,12 @@ LaTeX Font Info:    ... okay on input line 9.
 * \topmargin=-37.0pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=12.0pt
+* \topskip=10.0pt
 * \footskip=30.0pt
-* \marginparwidth=35.0pt
-* \marginparsep=10.0pt
+* \marginparwidth=57.0pt
+* \marginparsep=11.0pt
 * \columnsep=10.0pt
-* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -285,8 +285,8 @@ Package caption Info: End \AtBeginDocument code.
 \tf@lot=\write5
 \openout5 = `working.lot'.
 
- [6] [1] [2] [3] [4] [5] [6]
-<Images/Stewart2010CAModel.png, id=53, 1046.91125pt x 770.88pt>
+ [6] [1] [2] [3] [4]
+<Images/Stewart2010CAModel.png, id=49, 1046.91125pt x 770.88pt>
 File: Images/Stewart2010CAModel.png Graphic file (type png)
 <use Images/Stewart2010CAModel.png>
 Package pdftex.def Info: Images/Stewart2010CAModel.png  used on input line 296.
@@ -297,68 +297,71 @@ e 296.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7] [8 <./Images/Stewart2010CAModel.png>]
-<Images/Ardin2010MBModel.PNG, id=62, 523.83705pt x 395.91914pt>
+[5]
+<Images/Ardin2010MBModel.PNG, id=55, 523.83705pt x 395.91914pt>
 File: Images/Ardin2010MBModel.PNG Graphic file (type png)
 <use Images/Ardin2010MBModel.PNG>
 Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 344. o
 n input line 344.
 Package pdftex.def Info: Requested size: 407.66833pt x 308.12698pt on input lin
 e 344.
- [9 <./Images/Ardin2010MBModel.PNG>]
-[10]
-<Images/Willshaw1969Model.png, id=69, 830.10126pt x 829.0975pt>
+ [6 <./Images/Stewart2010CAModel.png>] [7 <./Images/Ardin2010MBModel.PNG>]
+<Images/Willshaw1969Model.png, id=64, 830.10126pt x 829.0975pt>
 File: Images/Willshaw1969Model.png Graphic file (type png)
 <use Images/Willshaw1969Model.png>
 Package pdftex.def Info: Images/Willshaw1969Model.png  used on input line 408. 
 on input line 408.
 Package pdftex.def Info: Requested size: 226.48395pt x 226.19975pt on input lin
 e 408.
- [11 <./Images/Willshaw1969Model.png>]
-<Images/KogetoDot.jpeg, id=74, 351.3125pt x 426.59375pt>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[8] [9 <./Images/Willshaw1969Model.png>]
+<Images/KogetoDot.jpeg, id=72, 351.3125pt x 426.59375pt>
 File: Images/KogetoDot.jpeg Graphic file (type jpg)
 <use Images/KogetoDot.jpeg>
 Package pdftex.def Info: Images/KogetoDot.jpeg  used on input line 457. on inpu
 t line 457.
 Package pdftex.def Info: Requested size: 183.4495pt x 222.76735pt on input line
  457.
-
-Underfull \hbox (badness 4595) in paragraph at lines 458--458
-[]\OT1/cmr/m/n/12 Figure 4: |The Kogeto Dot 360$[]$
- []
-
-<Images/PanoramicView.jpg, id=75, 614.295pt x 614.295pt>
+<Images/PanoramicView.jpg, id=73, 614.295pt x 614.295pt>
 File: Images/PanoramicView.jpg Graphic file (type jpg)
 <use Images/PanoramicView.jpg>
 Package pdftex.def Info: Images/PanoramicView.jpg  used on input line 463. on i
 nput line 463.
 Package pdftex.def Info: Requested size: 183.4495pt x 183.4463pt on input line 
 463.
-[12] [13 <./Images/KogetoDot.jpeg> <./Images/PanoramicView.jpg>] [14] [15]
-[16] [17] [18] [19] [20] (./working.bbl [21]) [22] (./working.aux) ) 
+ [10 <./Images/KogetoDot.jpeg> <./Images/PanoramicView.jpg>] [11] [12] [13] [14
+] [15] [16] [17] (./working.bbl)
+[18] (./working.aux) ) 
 Here is how much of TeX's memory you used:
- 3737 strings out of 492985
- 55555 string characters out of 6138637
- 127732 words of memory out of 5000000
- 7243 multiletter control sequences out of 15000+600000
- 12724 words of font info for 45 fonts, out of 8000000 for 9000
+ 3740 strings out of 492985
+ 55525 string characters out of 6138638
+ 128705 words of memory out of 5000000
+ 7241 multiletter control sequences out of 15000+600000
+ 12288 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,21n,40p,773b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
-sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
-></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on working.pdf (29 pages, 888604 bytes).
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
+x10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
+share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmti12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ti9.pfb>
+Output written on working.pdf (25 pages, 953289 bytes).
 PDF statistics:
- 154 PDF objects out of 1000 (max. 8388607)
- 102 compressed objects within 2 object streams
+ 162 PDF objects out of 1000 (max. 8388607)
+ 109 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

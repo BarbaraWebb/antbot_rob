@@ -578,6 +578,7 @@ public class CX_Holonomic {
     public static Mat get_preferred_flow(int column_pixel_number, double heading, boolean LEFT){
         Mat axes = tn_axes(heading);
         Mat D = get_direction_vector(column_pixel_number);
+        //Filter 1 from Luca's dissertation (alledgedly better for a cluttered environment
 //        Mat preferred_flow = new Mat(D.rows(), D.cols(), D.type());
 //        Mat partial_cross_product;
 //
@@ -591,6 +592,7 @@ public class CX_Holonomic {
 //            }
 //        }
 
+        //Filter 2 from Luca's Dissertation
         Mat preferred_flow = new Mat(90, 3, CvType.CV_32FC1);
         double direction;
         direction = -Math.PI;

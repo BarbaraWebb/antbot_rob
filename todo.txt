@@ -1005,3 +1005,35 @@ A1E:
 - We expect zero collisions of any sort on this run.
 
 ARENA 2: Basic functionality
+:: ALL FLOW EXPERIMENT INFO WAS MOVED TO OF_notes.txt ::
+
+19 / 03 / 18:
+todo:
+- Upload fixed code to the robot (DONE)
+- Run Visual Navigation experiments, two per arena, starting at the south and the south west points
+  - The arenas themselves are not of particular interest, more the route taken. These arenas should
+    be easy for optic flow to deal with.
+- Start with five arenas; a total of 10 runs.
+- One initial test to check optical flow
+- If time, curiosities.
+
+notes:
+- Curiosities: These are not for data collection, more out of interest.
+  1. Check to see if the offset of the flow frame has a "windowing" effect. If it does, all is not
+     lost in the windowing department.
+
+  2. Try a quick-and-dirty implementation of homeward navigation.
+     - Idea; learn an outward image AND its homeward counterpart at the same time by
+       using the image rotation function.
+
+     - For first attempt leave recall as obstical based, but it could also be distance based.
+       Move 10cm, scan, etc. Leave running and just see how well the robot navigates
+
+     - If this works it could be worth attempting with a real valued network just to see if the
+       route becomes more stable as time progresses. It may not be the original route, but still.
+
+     - Everything was time based in Zhaoyu's work. If we had a way of saving a "HOME" image...
+       Maybe worth asking Barbara out of interest
+       
+- Robot ran low on power; great...
+  - On with dissertation while it charges
