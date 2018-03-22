@@ -591,12 +591,12 @@ had to be opened up in order to connect or disconnect the batteries from the mot
 had to be extracted from the power pack and charged individually. These actions, repeated often by the current
 project and predecessors had caused wear on the power pack and the internal wiring. The wires themselves
 needed re-soldered multiple times. In order to have a more robust platform for testing, the on-board
-power system was modified. The aim of the modification was simply to avoid opening up the robot at any cost.
+power system was modified. The aim of the modification was to add a power source which could be charged in-place.
 As such a new power source which could be charged as required without removal was added, along with external
 charging ports and a switch. The internal wiring was re-done such that power could either flow from the
 external ports to the battery, or from the battery to the motors controlled by the external switch. The new
-power source is a 9.6V NiMH power pack which can be charged without removal from the robot. Motor speeds
-and systems which depended on them required re-tuning after completion of the modifications.
+power source is a 9.6V NiMH power pack. Motor speeds and systems which depended on them required re-tuning
+after completion of the modifications.
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% METHODS
@@ -670,35 +670,40 @@ translational velocity of the camera computed from optical flow\cite{Souhila2007
 This time-to-contact is then appropriately thresholded and a reaction is generated based on the
 position of the focus of expansion which provided a simple method of replicating the balance strategy
 used by \cite{Souhila2007} as the FOE will be drawn to one side based on the motion parallax observed.
-Instability in the computation of these properties was dealt with by averaging the properties
+Initial instability in the computation of these properties was countered with by averaging the properties
 across a series of frames to reduce potential noise.
 \newline
 
 The generated responses were to be halt on detection (for debugging purposes), and triggering of a
 smooth turn away from the obstacle. This technique was designed to be used with a sparse optic flow
 field, however, a version using a dense flow field was attempted. The computation across a dense
-flow field was found to be impractical. 
+flow field was found to be impractical. No formal results have been collected using this system; any
+apparant functionality was found to be luck instead of a working system. Analysis of functionality
+of such a system on AntBot is left for Section \ref{sec:results}.
 
 
 \subsubsection{Filtering}
-Here a dense optical flow field is used, and in order to explain the computation, it is important
+Here a dense optical flow field is used, and in order to explain the filtering process, it is important
 to discuss the flow computation itself. The optical flow is computed using openCV's
 \textit{calcOpticalFlowFarneback()} function. When given two consecutive frames the function returns
 a matrix $M$ of arrays of type double. $M_{y,x}$ is a one-dimensional array of length two which contains
 the displacement in each axis of the respective pixel (i.e. $M_{y,x}[0]$ gives the displacement of the $x$
-coordinate, and $M_{y,x}[1]$ gives the displacement in the $y$ axis.
+coordinate, and $M_{y,x}[1]$ gives the displacement of the $y$ coordinate.
 \newline
 
 An optical flow filter was previously implemented by \textit{Scimeca} for the purpose of speed retrieval. 
 As collision avoidance in optical flow relies on detecting a difference in motion between two sides
 the same filtering method could be re-purposed for collision avoidance. Though inspired by \cite{Stewart2010},
-our method for performing the computation and avoidance was modified slightly. Instead of creating
+our method for performing the computation and avoidance was modified slightly for the sake of
+implementation on AntBot. Instead of creating
 a left and right filter, we create left and right flow frames by taking rotating the image frame
-by a certain angle left or right as in \cite{Scimeca2017}. However, we reduce the angle from $\pm 45^{circ}$
-\cite{Scimeca2017} to $\pm 16^{circ}$. It was found that the size of this angle affected the region of the %Need to fact check this!!!
+by a certain angle left or right as in \cite{Scimeca2017}. However, we reduce the angle from $\pm 45^{\circ}$
+\cite{Scimeca2017} to $\pm 16^{\circ}$. It was found that the size of this angle had a mild effect on the region of the 
 image which would trigger responses; a larger angle would result in higher sensitivity to the sides of the
 robot, a smaller angle results in higher frontal sensitivity which was desired for the CA system. We only
-want the robot to avoid obstacles to the front, obstacles to the sides should not trigger responses. The filter
+want the robot to avoid obstacles to the front, obstacles to the sides should not trigger responses. The offset
+angle was tuned manually and $\pm 16^{\circ}$ was found to perform well; smaller angles resulted in
+an insensitive system, and larger resulted in more noise, though performance was still good. The filter
 itself is the same as the second filter from \cite{Scimeca2017} which was already implemented on the robot.
 \newline
 
@@ -714,18 +719,82 @@ where $F_i$ is the $ith$ row of $F$. Intuitively each row corresponds to a pixel
 Once the filter is computed, we retrieve the flow for each pixel by adding the displacements
 retrieved from \textit{calcOpticalFlowFarneback()} to the pixel value. 
 For each value of $x$ we apply an offset of $\pm 4px$ which corresponds to our left and right frames centred at
-$\pm 16^{\circ}$. For the $ith$ pixel, with filter vector $\bar F_i$ and flow vector $\bar O_i$ we apply the filter
-simply by computing:
+$\pm 16^{\circ}$. For the $ith$ pixel, with filter vector $\bar F_i$ and flow vector  e$\bar O_i$ we apply the filter
+simply by computing the projection:
 
 \begin{equation}
-  
+  P_i = \bar F_i \cdot \bar O_i
 \end{equation}
 
+This allows us to measure the geometric difference between the expected and actual pixel motion. The computation
+for a single frame simply sums all of these projections:
+
+\begin{equation}
+  FlowSum = \sum_{i = 0}^{K - 1} P_i
+\end{equation}
+
+where $K$ is the number of pixels in the image, in our case $K = 900$. This sum is computed for both shifted frames
+and a tuning factor is applied for the simple purpose of making the numbers returned easier to handle.
+\newline
+
+Now we have defined a way of computing speed differences between the two sides, we
+can start to define behaviour. In the case an obstacle is seen on one side of the image, we expect the speed
+on that side to be higher due to motion paralax. Thus, we simply compute the difference between the
+two sums:
+
+\begin{equation}
+FlowDifference = LeftFlowSum - RightFlowSum
+\end{equation}
+
+which gives us our final stimulus to be used to generate a reaction. Here we employ the idea of ``leaky'' accumulators
+from \cite{Stewart2010}. An accumulator is kept for both sides of the frame. The raw difference is thresholded to account
+for noise such that only significantly positive or negative values contribute to behaviour; this is known as the
+\textit{accumulation threshold}. Once the accumulator on one side exceeds its \textit{reaction threshold}, an immediate
+turn away from the perceived obstacle will be performed. The turn is simply a $\pm 20^{\circ}$ rotation using the robot's
+\textit{turnAround()} function. The accumulators are reset periodically to avoid a build up of old flow information.
+A separate method of accumulation was trialled out of interest whereby a single accumulator would be fed the raw difference
+and a sufficiently large positive or negative value would trigger the appropriate response. No difference was noticed in
+performance and so separate accumulators were kept. While this implementation was simple, and not as refined
+as we would have liked, it did demonstrate impressive performance in navigating arenas of varying density.
 
 \subsection{Debugging the Mushroom Body}
+The Mushroom Body circuit (implemented as a Willshaw Net) was originally implemented by \textit{Eberding} when he
+initially developed the platform. Though the implementation does mirror the model of \textit{Ardin et al.}, the model
+struggled to perform to the same degree despite potentially having more visual information due to the higher resolution
+image of AntBot. The nature of our experimental scenario required (at least initially) that a scanning behaviour be used
+to perform visual navigation and this is the context in which we shall frame our discussion; this because \textit{Zhang}
+did manage to achieve significantly improved results using Klinokinesis as a route following strategy. Initial attempts
+at scanning resulted in extremely poor performance with seemingly no capacity for memory present in the network beyond
+blind luck. The first and most obvious issue was the scanning behaviour itself; while the robot was to turn through a
+$60^{\circ}$ arc in increments of $6^{\circ}$, the actual arc was far larger ($> 100^{\circ}$). On closer inspection of the
+control code on the Arduino, the problem could be seen as the control method. The turning command relies on a calculation
+based on encoder clicks per degree; while simple and appropriate for general use, this style of control generally struggles
+to make precise movements, such as scanning increments.
+\newline
+
+To remedy this, we opt for a different style of scanning which
+we will refer to as \textit{visual scanning}. Since AntBot has a $360^{\circ}$ view, we instead take a still image, and rotate
+it, showing each rotated frame to the network and receiving a familiarity measure; this change was felt justified as we are
+concerned with the performance of the MB model and did not wish to be hampered by robot control issues (though these issues
+can, and we feel should be fixed if possible - See Section \ref{sec:discussion}). These values are stored in an array (as
+with standard scanning), the minimum value is selected and the angle computed by taking the distance from the centre-point
+of the array and multiplying by the number of pixels traversed horizontally then multiplying again by the constant $4$ (degrees/pixel).
+In the first iteration, a highly granular scan was used, however, this was found to be less effective and more prone to erroneous
+familiarity measures. Reducing the number of image angles while scanning over the same arc resulted in more stable performance. In total
+$17$ different angles (from $-16px$ to $+16px$ in increments of $2px$) are compared. With the visual scanning, the problem of robot
+control was largely eliminated.
+\newline
+
+However, a common behaviour was observed. Be it physical or visual scanning, the robot always performed a turn in the same direction,
+at the same angle (i.e. the most familiar direction was always to the extreme left). For the purposes of debugging and visualising the
+network and its outputs a two-part tool \textit{AntBotStats} was developed (see Section \ref{sec:abs}). Visualising the output of the
+network showed that the returned familiarity was not following the correct pattern over a scan.
 
 
-\subsection{AntBotStats}
+
+
+
+\subsection{AntBotStats}\label{sec:abs}
 \newpage
 
 \section{ Results and Evalutation } \label{sec:results}

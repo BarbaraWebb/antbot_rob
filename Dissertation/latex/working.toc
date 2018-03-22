@@ -19,7 +19,7 @@
 \contentsline {subsection}{\numberline {4.1}Optical flow models for Collision Avoidance}{14}
 \contentsline {subsubsection}{\numberline {4.1.1}Time-to-Collision}{14}
 \contentsline {subsubsection}{\numberline {4.1.2}Filtering}{15}
-\contentsline {subsection}{\numberline {4.2}Debugging the Mushroom Body}{15}
-\contentsline {subsection}{\numberline {4.3}AntBotStats}{15}
-\contentsline {section}{\numberline {5} Results and Evalutation }{16}
-\contentsline {section}{\numberline {6} Discussion }{17}
+\contentsline {subsection}{\numberline {4.2}Debugging the Mushroom Body}{16}
+\contentsline {subsection}{\numberline {4.3}AntBotStats}{17}
+\contentsline {section}{\numberline {5} Results and Evalutation }{18}
+\contentsline {section}{\numberline {6} Discussion }{19}
