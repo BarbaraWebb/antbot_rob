@@ -33,7 +33,36 @@ Part 2: Experiments; design and implementation
     from the cameras to show the route taken.
 
 - Optical flow errors result in a reset; they happen but they should not be causing issues for the
-  visual navigation experiments.
+  visual navigation experiments. This may be waived if the effects are not too bad.
 
 - Want to track the full trajectory; if the robot goes wrong and goes into a wall or similar,
   switch off the chassis and let the robot sit. Do not replace on route if the robot gets lost.
+
+Part 3: Moar experiments
+- Difference in the sensitivity of OF was noticed; this was not in-fact the sensitivity of the OF,
+  rather the fact that the robot does not stop before turning as it does in Visual Navigation.
+
+  - This could be the source of a couple of the errors in the flow experiments but it does not account for them
+    all.
+
+- Reward signal frequency has been increased in an attempt to learn more images; we are learning more
+  but any improvement is not readily apparent.
+
+Part 4:
+- Problems:
+  1. Tussocks are too short to give any reliable information; likely that visual cues are being taken
+     from other parts of the image.
+  2. Scanning only on obstacle detection was a bad idea given the inconsistency with the optical flow
+  3. Robot behaviour could become inconsistent or strange resulting in a reboot. The cause is unknown
+     but likely related to the communications between the arduino and phone being disrupted.
+
+- Solutions:
+  1. Try using larger objects in a dense-ish formation.
+  2. Scan every 10cm AND on obstacle detection (Turns out there was already a two second limit)
+  3. None
+
+  Even with experimental issues the network is showing promise.
+
+- Curio:
+  1. Window size
+  2. Homeward-bound

@@ -1529,8 +1529,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
 
                 //Flow accumulators
-                if ( ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) leftCAFlow; }
-                else if ( ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) rightCAFlow); }
+                if ( ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) ca_flow_diff; }
+                else if ( ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) ca_flow_diff); }
 
                 if ( Math.abs(ca_flow_diff) >= accumulation_threshold ){ dual_accumulator = dual_accumulator + (int) ca_flow_diff; }
 
@@ -1600,6 +1600,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                         StatFileUtils.write("OF", "RCTIME", "Reaction time: " + reaction_time + "; for speeds {" + lft_speed + ", " + rgt_speed + "}");
                     }
 
+                    go( new double[]{0, 0});
+                    try { sleep(1000); } catch( Exception e ){ e.printStackTrace(); }
                     try {
                         turnAround(turn);
                     }catch(Exception e){ e.printStackTrace(); }
@@ -1615,6 +1617,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 } else if ( right && (!avoid) ){ //Right turn required
                     Log.i("CA:", "Right turn triggered");
+                    go( new double[]{0, 0});
+                    try { sleep(1000); } catch( Exception e ){ e.printStackTrace(); }
                     try {
                         turnAround(-turn);
                     }catch(Exception e){ e.printStackTrace(); }
@@ -1749,9 +1753,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 //Flow accumulators
                 if (ca_flow_diff >= accumulation_threshold) {
-                    left_accumulator = left_accumulator + (int) leftCAFlow;
+                    left_accumulator = left_accumulator + (int) ca_flow_diff;
                 } else if (ca_flow_diff <= -accumulation_threshold) {
-                    right_accumulator = right_accumulator + Math.abs((int) rightCAFlow);
+                    right_accumulator = right_accumulator + Math.abs((int) ca_flow_diff);
                 }
 
                 if (Math.abs(ca_flow_diff) >= accumulation_threshold) {
@@ -1859,11 +1863,21 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 if (left && (!avoid)) { //Left turn required
                     Log.i("CA:", "Left turn triggered");
+
+                    go( new double[]{ 0, 0 });
+                    try{ sleep(1000); } catch ( Exception e ){ e.printStackTrace(); }
+
                     try {
                         turnAround(20);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    if (images_access){
+                        new_image = new SaveImages();
+                        new_image.execute(processedDestImage, LEARN_IMAGE);
+                    }
+
                     /*
                     lft_speed = 10; //Left turn
                     rgt_speed = 100; //Left turn*/
@@ -1876,10 +1890,21 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 } else if (right && (!avoid)) { //Right turn required
                     Log.i("CA:", "Right turn triggered");
+
+                    go( new double[]{ 0, 0 });
+                    try{ sleep(1000); } catch ( Exception e ){ e.printStackTrace(); }
+
+
+
                     try {
                         turnAround(-20);
                     } catch (Exception e) {
                         e.printStackTrace();
+                    }
+
+                    if (images_access){
+                        new_image = new SaveImages();
+                        new_image.execute(processedDestImage, LEARN_IMAGE);
                     }
                     /*lft_speed = 100; //Right turn
                     rgt_speed = 10; //Right turn*/
@@ -1898,9 +1923,16 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     initialise = true; //Need to reset robot speeds
                 }
 
+
+                if (images_access){
+                    new_image = new SaveImages();
+                    new_image.execute(processedDestImage, LEARN_IMAGE);
+                } //Just throwing the code in to learn as many images as possible.
+
                 loop_count++;
                 current_time = (int) SystemClock.elapsedRealtime() - start_time; //Update current time
                 t_delta = (int) SystemClock.elapsedRealtime() - t_interval_start; //Update accumulation interval
+
             }
 
             try {
@@ -1944,7 +1976,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     } catch ( Exception e ){ e.printStackTrace(); }
                 }
             }else{
-                try {
+                /*try {
                     sleep(30000); //Wait for 30 Seconds to allow the robot to be replaced at the start of the course
                 }catch(Exception e){
                     e.printStackTrace();
@@ -1952,7 +1984,26 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 //Start the attempted reconstruction of the route
                 memory_trip = new Thread(navMemory);
-                memory_trip.start();
+                memory_trip.start();*/
+
+
+
+                for ( int run_count = 0; run_count < 5; ++run_count ) {
+                    try { turnAround(170); } catch ( Exception e ){ e.printStackTrace(); }
+                    try {
+                        sleep(5000); //Wait for 30 Seconds to allow the robot to be replaced at the start of the course
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    memory_trip = new Thread(navMemory); //Make sure using the real valued nav.
+                    //Start the attempted reconstruction of the route
+                    memory_trip.start();
+
+                    try {
+                        memory_trip.join(); //Wait for the thread to finish before next iteration
+                    } catch ( Exception e ){ e.printStackTrace(); }
+                }
 
             }
         }
@@ -2054,7 +2105,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 //Time tracking:
                 int t_start = (int) SystemClock.elapsedRealtime();
                 int t_delta = (int) SystemClock.elapsedRealtime() - t_start;
-                int t_interval = 2000; //2 second interval
+                int t_interval = 1000; //2 second interval
 
                 //Accumulators for left and right flow
                 int dual_accumulator = 0; //Add both values and see if there's significant bias
@@ -2068,13 +2119,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 while ( t_delta < t_interval ) {
                     //Perform CA accumulation checks
                     try { sleep(600); } catch ( Exception e ){ e.printStackTrace(); }
-
+                    t_delta = (int) SystemClock.elapsedRealtime() - t_start;
                     //Print out debug information, catch exceptions
                     ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
 
                     //Flow accumulators
-                    if ( ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) leftCAFlow; }
-                    else if ( ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) rightCAFlow); }
+                    if ( ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) ca_flow_diff; }
+                    else if ( ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) ca_flow_diff); }
 
                     if ( Math.abs(ca_flow_diff) >= accumulation_threshold ){ dual_accumulator = dual_accumulator + (int) ca_flow_diff; }
 
@@ -2087,14 +2138,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     }
 
                     if ( (left_accumulator >= reaction_threshold) ||
-                            (right_accumulator >= reaction_threshold) ) {
+                            (right_accumulator >= reaction_threshold) || t_delta >=t_interval ) {
                         go (new double[]{0, 0}); //Halt the robot
                         try { sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Wait
                         break; //Break the loop (trigger an early scan)
                     }
 
                     loop_count++;
-                    t_delta = (int) SystemClock.elapsedRealtime() - t_start;
+
                 }
 
                 try {
@@ -2117,6 +2168,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            int num_images = mushroom_body.imagesLearned();
+            StatFileUtils.write("WN", "IL", "Number of images learned for this run: " + num_images);
         }
     };
 
@@ -3416,14 +3470,16 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         float left_flow_sum = 0;
         float right_flow_sum = 0;
 
+        int offset = 4;
+
         for ( int y = 0; y < currentPointsToTrack.rows(); y++ ){
             for ( int x = 0; x < currentPointsToTrack.cols(); x++ ){//These filters are functionally identical, see Luca's dissertation for the method used to compute the filter
                 //Compute left flow vector
                 //+-4 is the left/right offset for the flow frame; e.g. -4 centres the frame at -16deg.
                 //The narrower this is, the closer we are to considering the original flow filter.
                 //So this may effectively act as our rather than the raw pixel values.
-                previous_left_flow_vector = new double[]{mod(x + 4, 90), y}; //((x+12), y)
-                current_left_flow_vector = new double[]{mod((int) currentPointsToTrack.get(y, x)[0] + x + 4, 90),
+                previous_left_flow_vector = new double[]{mod(x + offset, 90), y}; //((x+12), y)
+                current_left_flow_vector = new double[]{mod((int) currentPointsToTrack.get(y, x)[0] + x + offset, 90),
                         mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)}; //Flow info returned by farneback
 
                 if ( (x >= 40) || (x < 50) ) { 
@@ -3437,8 +3493,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     left_flow_sum += left_filter_vector.dot(flow_vector); //Filter and sum
                 }
                 //Compute right flow vector
-                previous_right_flow_vector = new double[] { mod(x - 4, 90), y };
-                current_right_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x - 4, 90),
+                previous_right_flow_vector = new double[] { mod(x - offset, 90), y };
+                current_right_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x - offset, 90),
                         mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
 
                 if ( (x >= 40) || (x < 50) ) {
@@ -4489,16 +4545,24 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             Mat matImage = (Mat) transmission[0];
             //Since there is no possibility to send a 2D array or Mat file the image is transformed to a 1D int array
             byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
+            byte[] revArray_tmp = new byte[matImage.height() * matImage.width()];
             matImage.get(0, 0, imageArray_tmp);
+
+            //imageArray_tmp = rotateMatInAzimuth(0, matImage); //For curiosity
+            revArray_tmp = rotateMatInAzimuth(45, matImage); //Array of reverse image (for homeward route)
+
             int[] imageArray = new int[imageArray_tmp.length];
+            int[] revImageArray = new int[imageArray_tmp.length];
             String image_string="";
             for (int n = 0; n < imageArray_tmp.length; n++) {
                 imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
+                revImageArray[n] = (int) revArray_tmp[n] & 0xFF;
                 image_string += imageArray[n]+ " ";
             }
             //model.onNewImage... for Zhaoyu's code
-            mushroom_body.onNewImage(imageArray, (int) transmission[1]);
-            StatFileUtils.write("SI", "MB", "Image: " + image_string);
+            mushroom_body.onNewImage(imageArray, (int) transmission[1]); //Learn image,
+            mushroom_body.onNewImage(revImageArray, (int) transmission[1]); //Learn reversed image
+            //StatFileUtils.write("SI", "MB", "Image: " + image_string);
             // LogToFileUtils.write("IMAGE: " + image_string);
             // LogToFileUtils.write("REQUEST CODE: " + (int) transmission[1]);
             return false;
@@ -4514,6 +4578,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
             matImage.get(0, 0, imageArray_tmp);
             int[] imageArray = new int[imageArray_tmp.length];
+
             for (int n = 0; n < imageArray_tmp.length; n++) {
                 imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
             }

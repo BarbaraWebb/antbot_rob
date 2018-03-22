@@ -712,7 +712,7 @@ where $F_i$ is the $ith$ row of $F$. Intuitively each row corresponds to a pixel
 \newline
 
 Once the filter is computed, we retrieve the flow for each pixel by adding the displacements
-retrieved from \textit{calcOpticalFlowFarneback()} to the pixel value and compare it to the filter. 
+retrieved from \textit{calcOpticalFlowFarneback()} to the pixel value. 
 For each value of $x$ we apply an offset of $\pm 4px$ which corresponds to our left and right frames centred at
 $\pm 16^{\circ}$. For the $ith$ pixel, with filter vector $\bar F_i$ and flow vector $\bar O_i$ we apply the filter
 simply by computing:

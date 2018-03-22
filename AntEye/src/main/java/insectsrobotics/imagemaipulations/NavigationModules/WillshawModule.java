@@ -22,6 +22,7 @@ public class WillshawModule extends NavigationModules {
     int f_learnedKCs = 0;
     private final String TAG = this.getClass().getSimpleName();
     int maximum_KCs = 0;
+    int images_learned = 0;
 
     public WillshawModule() { //Willshaw constructor
         super(); //Call super
@@ -163,6 +164,7 @@ public class WillshawModule extends NavigationModules {
         StatFileUtils.write("WNN", "KCS", "Learning, total kenyon cells: " + total_KCs);
         StatFileUtils.write("WNN", "KCS", "Learning, learned kenyon cells: " + learnedKCs);
         learnedKCs = 0;
+        images_learned++;
     }
 
     @Override
@@ -221,5 +223,6 @@ public class WillshawModule extends NavigationModules {
     public double calculateMaximumUnfamiliarity() {
         return maximum_KCs;
     }
+    public int imagesLearned(){ return images_learned; }
 
 }
