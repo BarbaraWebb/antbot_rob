@@ -9,6 +9,7 @@ Warning--entry type for "Scimeca2017" isn't style-file defined
 --line 33 of file working.bib
 Warning--entry type for "Zhang2017" isn't style-file defined
 --line 39 of file working.bib
+Warning--I didn't find a database entry for "Eberding"
 Name 1 in "D.J. Willshaw, O.P. Buneman, AND H. C. Longuet-Higgins" has a comma at the end for entry Willshaw1969
 while executing---line 1049 of file plain.bst
 Warning--to sort, need author or key in Mobbs1982
@@ -18,7 +19,7 @@ while executing---line 1090 of file plain.bst
 Warning--empty journal in ODonovan2005
 You've used 16 entries,
             2118 wiz_defined-function locations,
-            607 strings with 6866 characters,
+            609 strings with 6882 characters,
 and the built_in function-call counts, 4856 in all, are:
 = -- 457
 > -- 234

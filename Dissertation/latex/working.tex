@@ -1,5 +1,5 @@
 
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,12pt]{article}
 \usepackage{amsmath}
 \usepackage{geometry}
 \usepackage{graphicx}
@@ -596,7 +596,9 @@ As such a new power source which could be charged as required without removal wa
 charging ports and a switch. The internal wiring was re-done such that power could either flow from the
 external ports to the battery, or from the battery to the motors controlled by the external switch. The new
 power source is a 9.6V NiMH power pack. Motor speeds and systems which depended on them required re-tuning
-after completion of the modifications.
+after completion of the modifications. The required modifications to chassis (holes drilled for components)
+were done by the Informatics workshop. The wiring, research and sourcing of parts were performed as part
+of the project.
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% METHODS
@@ -757,7 +759,10 @@ and a sufficiently large positive or negative value would trigger the appropriat
 performance and so separate accumulators were kept. While this implementation was simple, and not as refined
 as we would have liked, it did demonstrate impressive performance in navigating arenas of varying density.
 
-\subsection{Debugging the Mushroom Body}
+\subsection{The Mushroom Body}
+This section will be less of a formal declaration of method, and more a discussion of the process undertaken to get
+the Mushroom Body circuit working in a robust manner.
+
 The Mushroom Body circuit (implemented as a Willshaw Net) was originally implemented by \textit{Eberding} when he
 initially developed the platform. Though the implementation does mirror the model of \textit{Ardin et al.}, the model
 struggled to perform to the same degree despite potentially having more visual information due to the higher resolution
@@ -781,24 +786,279 @@ with standard scanning), the minimum value is selected and the angle computed by
 of the array and multiplying by the number of pixels traversed horizontally then multiplying again by the constant $4$ (degrees/pixel).
 In the first iteration, a highly granular scan was used, however, this was found to be less effective and more prone to erroneous
 familiarity measures. Reducing the number of image angles while scanning over the same arc resulted in more stable performance. In total
-$17$ different angles (from $-16px$ to $+16px$ in increments of $2px$) are compared. With the visual scanning, the problem of robot
-control was largely eliminated.
+$17$ different angles (from $-16px$ to $+16px$ in increments of $2px$) are compared. The image rotation itself is done with
+a basic array rotation algorithm which manipulates matrix columns. With the visual scanning, the problem of robot
+control was largely eliminated. 
 \newline
 
-However, a common behaviour was observed. Be it physical or visual scanning, the robot always performed a turn in the same direction,
+However, a common behaviour was still observed. Be it physical or visual scanning, the robot always performed a turn in the same direction,
 at the same angle (i.e. the most familiar direction was always to the extreme left). For the purposes of debugging and visualising the
 network and its outputs a two-part tool \textit{AntBotStats} was developed (see Section \ref{sec:abs}). Visualising the output of the
 network showed that the returned familiarity was not following the correct pattern over a scan.
 
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{MB-Bad-Familiarity}
+  \caption{
+    \label{fig:mbbad} The erroneous familiarity pattern displayed by the network. The plot shows the
+    familiarity response of the Extrinsic Neuron (y-axis) against the index of the scan (x-axis). 0
+    denotes the leftmost direction, 15 directly ahead, and 30 the rightmost direction. This was a simple
+    plot produced early in the debugging process, hence the lack of axis labelling and higher number
+    of scan points. 
+  }
+\end{figure}
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{MB-Good-Familiarity}
+  \caption{
+    \label{fig:mbgood} The expected familiarity response of the Extrinsic Neuron. Note the improved
+    range of the response along with the clearly defined minimum.
+  }
+\end{figure}
+
+In figures \ref{fig:mbbad} and \ref{fig:mbgood} (both produced using visual scanning) we see that the pattern being
+returned by the early network with scanning was far from what it should have been. The EN response of 0 should, in theory,
+correspond to the most familiar angle. Figure \ref{fig:mbbad} clearly shows that there is a problem with the Kenyon Cell
+activation in the network; a presented image should activate somewhere in the range of 200 to 500 KCs (this is rough due
+to the pseudo random construction of the network). The EN response shows that at least $1000$ KCs were activated by some
+scan angles; in almost all cases, an EN response of $0$ was caused by a lack of any KC activation (the familiarity measure
+was initialised as $0$ in the network). To, fix this upper and lower thresholds on KC activation were added to the
+network. If KC activation lay outside these bounds a \textit{maximum unfamiliarity} measure was returned; this value
+was defined as the maximum number of KCs activated by an image during the learning process. The justification for introducing
+bounds on KC activation was that too few KCs did not give enough information, while too many represented noise in the network.
+Regardless of the justifiability of this decision, \textit{Ardin et al.} did not encounter such problems in their functionally
+identical model.
+\newline
+
+It is here we must note again, \textit{Zhang's} improved performance using Klinokinesis; this suggests that the network itself
+is likely not the issue. Upon performing further debugging
+the problem revealed itself to be related to the visual scanning (just as the original scanning method had experienced similar
+problems); due to a quirk of OpenCV in Java, the \textit{Mat} (matrix) objects are passed by reference (despite there being
+no explicit instruction to do so, and no clear mention of such behaviour in the documentation). When Mat objects are passed,
+a separate object called the \textit{matrix header} is actually passed which performs the same function as a pointer in a C-style
+language. Thus, the image rotation algorithm was working correctly, but the image was being rotated in unexpected ways. Simply,
+creating a copy of the Mat object inside the rotation function fixed the issue and the network began functioning correctly.
+\newline
+
+The final model is largely the same as in \cite{Eberding}; the only real modification being the Kenyon Cell thresholding.
+Normalisation of the PN input was implemented but not found to make a noticable difference so raw PN values were used
+to reduce complexity in the model. 
 
 
 \subsection{AntBotStats}\label{sec:abs}
+To aid in debugging the Visual Navigation system and production of results a two-part tool, \textit{AntBotStats} was developed.
+The tool consists of an on-board Java class, \textit{StatFileUtils} (adapted from \textit{LogToFileUtils} \cite{Zhang2017} and a
+Python parsing and plotting tool. The \textit{StatFileUtils} class is designed in such a way that title, plot type, and data can be
+specified. The Python system then reads the file, produces the correct plots and outputs them to a PDF for viewing as a collection.
+The tool is currently quite basic but is designed to be easily extensible to produce different information; for example a module was
+added to produce trajectory plots from the Vicon motion capture system. 
 \newpage
 
-\section{ Results and Evalutation } \label{sec:results}
-\textit{Included for skeleton purposes.}
+\section{Experimentation}\label{sec:test}
+\subsection{General}
+An experimental arena was constructed on the old Robocup practice pitch in G.17 in the Informatics Forum. This space was chosen
+for its suitable size, locality, and easy access to recording equipment for Visual Navigation experiments. An enclosure was constructed
+using old (mostly) preconstructed perimeter perimeter sections from the Robocup pitch which could be easily set up and dismantled as the
+space was shared. The enclosure was added to act as a visual blind (Figure \ref{fig:arena}) in an attempt to reduce the background noise observed by the robot and
+also to keep the distances on either side reasonable as it was noted by \cite{Scimeca2017} (and experienced first hand) that large differences
+in distance on either side of the robot could cause drastic differences in the speed observed by the optical flow which would affect our
+experiments. The perimeter blind was aligned with the tape markings of the football pitch to establish consistency.
+\newline
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{The-Arena}
+  \caption{
+    \label{fig:arena} The empty experimental arena.
+  }
+\end{figure}
+
+As obstacles, early tests involved the use of large, obvious objects such as cardboard boxes. To try and create a more realistic
+picture for AntBot, simple synthetic tussocks were constructed. These were constructed by taking $1m^2$ synthetic hedge wall panels and
+cutting them down to different sizes. These were then fitted to rough-cut (in an effort to keep sizes non-uniform and somewhat
+natural) wood blocks. The wood blocks compensate for the distance from the ground to AntBot's view height such that AntBot can only
+see the synthetic plant (Figure \ref{fig:tussock}).
+\newline
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{Tussock}
+  \caption{
+    \label{fig:tussock} An example of the tussocks used during experiments.
+  }
+\end{figure}
+
+\subsection{Collision Avoidance}
+Collision avoidance experiments aimed to test the basic functionality of the system; once demonstrated, we then wished to demonstrate
+the robustness of the system. Finally, some experiments were performed out of sheer curiosity to determine how predictable the
+system was and how well it coped with less random patterns of obstacles as well as determining the effect of different tuning modifications.
+Each of the main experiments took place in a set arena and consisted of five runs to observe the consistency in performance. 
+\newline
+
+We start by demonstrating the basic functionality of the system using a series of three basic arenas: An empty arena, a single large obstacle
+(a cardboard box present in the lab), and finally basic tussock interaction to ensure that the robot could detect and react to the synthetic
+tussocks.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{Tussock-Interaction}
+  \caption{
+    \label{fig:tussock} The arena used for basic tussock interaction
+  }
+\end{figure}
+
+Once basic functionality is established, we then partition the arena into quadrants and start to increase tussock density per quadrant.
+Starting with a density of $1/\textit{quadrant}$ the tussocks were placed randomly, as density increased tussocks were placed more
+deliberately to attempt to block paths the robot had used previously (while still permitting enough space for the robot to navigate
+through the environmnent). For these experiments in increasing complexity, the robot was always started from the South West corner
+of the arena so that, regardless of the arena set up, the robot would have to perform some collision avoidance movements. The reader
+should note that the initial tussock in the South East corner was a little more limited in where it could be placed. If placed too
+far to the North, the avoidance turn triggered would turn the robot away from the arena; while this is technically successful as the
+robot avoided the obstacle, the run would provide no useful data as the robot had not attempted to navigate the more complex arena; thus
+the tussock in question was placed in a location that would trigger an inward turn. Each run was assessed on three criteria: Number of collisions,
+Number of failed avoids, and whether or not there was a \textit{risk-on-end}. A collision was a direct impact with an obstacle that
+should have been avoided where no turn was triggered in response (or the turn only occured after the collision). A failed avoid occurred in
+the case where the robot did react but it was too late in doing so, or the robot could not turn enough due to space constraints. The
+risk-on-end occurs when the robot is about to have a collision and the timer runs out (i.e. a collision would have occured in any other
+navigational scenario); these occurred frequently, however, the vast majority of them would involve a collision with the side of the arena.
+\newline
+
+The final series of tests for the CA system involved setting up pre-determined arenas to see if the robot would respond in a predictable
+fashion when presented with a particular pattern of obstacles. Some arenas were designed to test tuning parameters on the robot, for example,
+to test how speed of the robot affects the reaction time and sensitivity of the system. These experiments presented largely unexpected though
+useful and thought-provoking results.
+\newline
+
+\subsection{Visual Navigation}
+Visual navigation experiments were conducted again across different arenas. These arenas were designed in such a way that the optical
+flow would have little difficulty navigating them, while still providing enough visual information as to make the images captured
+meaningful. A major failure in the collision avoidance system would result in a full reset (though minor failures were permitted to
+continue). Each arena hosted two runs, one starting from the South West corner of the arena, the second starting from the South end
+in the centre of the arena. A learning run was conducted using only the collision avoidance system to navigate through the arena
+for 30 seconds. Image learning was not performed at any set intervals; a reward signal was sent once per main loop iteration \textit{if}
+the new frame was available from pre-processing (synchronisation between threads means this may not always be the case). Upon finishing
+the learning run, the robot was placed at the start point for the run.
+\newline
+
+The robot then attempts to recall the route using only visual memory. Scans were performed at regular time intervals, or if the robot
+encountered an obstacle during a routine forward motion. The memory run had a time limit of 60 seconds, the extra time to allow for
+scanning and decision making. If the robot reached the end of the route before the time was up it would behave
+unpredictably as one might expect.
+\newline
+
+Eighteen experiments were run in total; the first eight were run as described above, the robot's behaviour was modified slightly
+for the remaining ten. For the last experiments, the reward signal frequency was increased in an attempt to gain more information
+about a route; in the first bout of tests, the reward signal was being sent approximately seven times per run, in the second bout
+this was tripled, however, some stored images may overlap. The CA behaviour was also modified to allow the robot to stop before
+turning instead of performing an immediate turn.
+\newline
+
+The routes were captured using the Vicon motion capture system; separate recordings were taken for learning and memory runs, the
+files exported in .csv format then parsed and plotted using a module in \textit{AntBotStats}. All plots were set to the same scale
+so as to allow direct comparison between results without needing to account for scale. Figures \ref{fig:autoscalerun} and \ref{fig:setscalerun}
+suitably demonstrate this; though run MAB-5-2 was a success, the plot shown in Figure \ref{fig:autoscalerun} does not make this clear.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{MAB-5-2}
+  \caption{
+   \label{fig:autoscalerun}The autoscaled plot for run MAB-5-2.
+  }
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{MAB-5-2-S}
+  \caption{\label{fig:setscalerun}The set-scale plot for run MAB-5-2; forcing the axes to a uniform scale over all runs gives a more accurate immediate
+      view of the runs and their similarity.}
+\end{figure}
+
+\newpage
+
+\section{ Results and Evaluation } \label{sec:results}
+\subsection{Collision Avoidance}
+\subsubsection{Time-to-Collision}
+The TTC system was implemented with both flow field types; quite simply, performing the computation on a dense flow
+field resulted in drastic reduction on speed and accuracy. We will discuss in the context of a sparse flow field. The
+sparse optic flow field is computed using the \textit{Lucas-Kanade} method on the points returned by OpenCV's
+\textit{goodFeaturesToTrack()} function. This function returns a Mat object which indicates the strong corners in an image.
+In essence, it locates prominent features in the image which can provide consistent information. Inconsistensies
+were noticed in the computation of the FOE and the speed (and hence the TTC) and many \textit{dirty} fixes were required to get the computation
+functional. For a straightforward matrix calculation, this should not be the case. As the entire method was dependent on
+the output of \textit{goodFeaturesToTrack()}, we felt it appropriate to check that the values being returned here were in-fact
+reliable.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{OpticalFlowInconsistencies}
+  \caption{
+    \label{fig:ofbad} $\pm 45^{\circ}$ offset image frames showing the flow vectors computed at each point (distinct black
+    pixels). The five images were taken over the course of one minute while the robot was stationary in G.17.
+  }
+\end{figure}
+
+The flow vectors detected using the points returned by \textit{goodFeaturesToTrack()} can be seen in Figure \ref{fig:ofbad}.
+Though the changes are not drastic, it can be seen firstly that varying motion is being detected in the image where none
+exists though this \textit{noise} can be expected somewhat. Secondly, it should be noted that the different frames show different numbers
+of features. While sat still, the algorithm cannot reliably detect consistent corners in the image. While the slight
+differences in flow are not of major consequence, the different feature count was found to have a large effect
+on the consistency of the computation as, every other frame, we are considering new information, and perhaps missing information
+we had previously.
+\newline
+
+This flow information is key to computing both the speed of motion and the focus of expansion of the flow field; thus, the
+time-to-contact is not accurate nor consistent. Though TTC was abandoned as a method for collision avoidance as part of this
+project, there are a number of modifications that could be applied to make this more stable, however, any method of computing the
+TTC relies on an accurate speed calculation. The works on which we based this system use encoder information to compute the
+speeds, and while this is not entirely implausible from a biological standpoint \textit{[STEPCOUNTING REFERENCE]}, we are currently
+reliant on optical flow alone for speed retrieval. 
+
+\subsubsection{Filtering}
+The filtering system proved to be quite robust in its operation; over the thirty functional performance runs we only note four direct
+collisions (complete failures of the system), and six partial collisions (the robot corrected but did so too late, or knocked a
+tussock on the way past). The full set of results for the functional performance experiments are shown in Table \ref{tab:ofres}.
+
+\begin{center}
+  \begin{table}
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+      \hline
+      \multicolumn{4}{|l|}{\textbf{Optical Flow Functional Performance} }   &                  &              &               \\ \hline
+                   & \textbf{Arena 1} & Empty              &             & \textbf{Arena 2} & Single Box   &               \\ \hline
+      \textbf{Run} & Collision        & Failed avoid       & Risk on end & Collision        & Failed avoid & Risk on end   \\ \hline
+      1            &  0               & 0                  & Yes         & 1                & 0            & Yes           \\ \hline
+      2            &  1               & 0                  & Yes         & 0                & 0            & No            \\ \hline
+      3            &  0               & 0                  & No          & 0                & 1            & No            \\ \hline
+      4            &  0               & 0                  & No          & 0                & 1            & No            \\ \hline 
+      5            &  0               & 0                  & No          & 0                & 0            & No            \\ \hline
+                   & \textbf{Arena 3} & Tusock Interaction &             & \textbf{Arena 4} & 1 per quad   &               \\ \hline
+      \textbf{Run} & Collision        & Failed avoid       & Risk on end & Collision        & Failed avoid & Risk on end   \\ \hline
+      1            & 0                & 0                  & No          & 0                & 0            & No            \\ \hline
+      2            & 0                & 0                  & No          & 0                & 0            & No            \\ \hline
+      3            & 0                & 0                  & No          & 0                & 0            & No            \\ \hline
+      4            & 0                & 0                  & No          & 0                & 0            & No            \\ \hline 
+      5            & 0                & 0                  & No          & 0                & 0            & No            \\ \hline
+                   & \textbf{Arena 5} & 2 per quad         &             & \textbf{Arena 6} & 3 per quad   &               \\ \hline
+      \textbf{Run} & Collision        & Failed avoid       & Risk on end & Collision        & Failed avoid & Risk on end   \\ \hline
+      1            & 0                &  0                 & Yes(*)      & 0                & 1            & No            \\ \hline
+      2            & 0                &  0                 & No          & 1                & 0            & Removed(**)   \\ \hline
+      3            & 0                &  1                 & No          & 0                & 0            & No            \\ \hline
+      4            & 0                &  1                 & No          & 0                & 0            & Yes           \\ \hline 
+      5            & 0                &  1                 & Yes         & 1                & 0            & No            \\ \hline
+   \end{tabular}
+   \caption{The results for the functional performance experiments on the filtering CA system. (*) This was the only case of
+     a risk on end coming from a tussock during formal experiments, all other potential collisions were with the side of the arena (this scenario will be discussed further
+     in Section \ref{sec:discussion}). (**) The first turn the robot made took it away from the arena in the manner described in \ref{sec:test}, the
+     collision was with the arena wall in the South East corner as the robot had no where left to go.
+    }
+    \label{tab:ofres}
+  \end{table}
+\end{center}
+
+
+\subsection{Visual Navigation using the Mushroom Body}
 
 \newpage
 

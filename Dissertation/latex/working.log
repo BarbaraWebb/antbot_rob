@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  22 MAR 2018 16:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  24 MAR 2018 17:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ LaTeX2e <2017-04-15>
 Babel <3.15> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/share/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+(/usr/share/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -152,7 +152,11 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 )
 \c@subfigure=\count103
 \c@subtable=\count104
-) (./working.aux)
+) (./working.aux
+
+LaTeX Warning: Label `fig:tussock' multiply defined.
+
+)
 \openout1 = `working.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
@@ -187,12 +191,12 @@ LaTeX Font Info:    ... okay on input line 9.
 * \topmargin=-37.0pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=10.0pt
+* \topskip=12.0pt
 * \footskip=30.0pt
-* \marginparwidth=57.0pt
-* \marginparsep=11.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -277,16 +281,16 @@ Package caption Info: End \AtBeginDocument code.
 \openout3 = `working.toc'.
 
  [4]
-(./working.lof)
+[5] (./working.lof [6])
 \tf@lof=\write4
 \openout4 = `working.lof'.
 
- [5] (./working.lot)
+ [7] (./working.lot)
 \tf@lot=\write5
 \openout5 = `working.lot'.
 
- [6] [1] [2] [3] [4]
-<Images/Stewart2010CAModel.png, id=49, 1046.91125pt x 770.88pt>
+ [8] [1] [2] [3] [4] [5] [6]
+<Images/Stewart2010CAModel.png, id=59, 1046.91125pt x 770.88pt>
 File: Images/Stewart2010CAModel.png Graphic file (type png)
 <use Images/Stewart2010CAModel.png>
 Package pdftex.def Info: Images/Stewart2010CAModel.png  used on input line 296.
@@ -297,71 +301,151 @@ e 296.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[5]
-<Images/Ardin2010MBModel.PNG, id=55, 523.83705pt x 395.91914pt>
+[7] [8 <./Images/Stewart2010CAModel.png>]
+<Images/Ardin2010MBModel.PNG, id=68, 523.83705pt x 395.91914pt>
 File: Images/Ardin2010MBModel.PNG Graphic file (type png)
 <use Images/Ardin2010MBModel.PNG>
 Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 344. o
 n input line 344.
 Package pdftex.def Info: Requested size: 407.66833pt x 308.12698pt on input lin
 e 344.
- [6 <./Images/Stewart2010CAModel.png>] [7 <./Images/Ardin2010MBModel.PNG>]
-<Images/Willshaw1969Model.png, id=64, 830.10126pt x 829.0975pt>
+ [9 <./Images/Ardin2010MBModel.PNG>]
+[10]
+<Images/Willshaw1969Model.png, id=76, 830.10126pt x 829.0975pt>
 File: Images/Willshaw1969Model.png Graphic file (type png)
 <use Images/Willshaw1969Model.png>
 Package pdftex.def Info: Images/Willshaw1969Model.png  used on input line 408. 
 on input line 408.
 Package pdftex.def Info: Requested size: 226.48395pt x 226.19975pt on input lin
 e 408.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[8] [9 <./Images/Willshaw1969Model.png>]
-<Images/KogetoDot.jpeg, id=72, 351.3125pt x 426.59375pt>
+ [11 <./Images/Willshaw1969Model.png>]
+<Images/KogetoDot.jpeg, id=81, 351.3125pt x 426.59375pt>
 File: Images/KogetoDot.jpeg Graphic file (type jpg)
 <use Images/KogetoDot.jpeg>
 Package pdftex.def Info: Images/KogetoDot.jpeg  used on input line 457. on inpu
 t line 457.
 Package pdftex.def Info: Requested size: 183.4495pt x 222.76735pt on input line
  457.
-<Images/PanoramicView.jpg, id=73, 614.295pt x 614.295pt>
+
+Underfull \hbox (badness 4595) in paragraph at lines 458--458
+[]\OT1/cmr/m/n/12 Figure 4: |The Kogeto Dot 360$[]$
+ []
+
+<Images/PanoramicView.jpg, id=82, 614.295pt x 614.295pt>
 File: Images/PanoramicView.jpg Graphic file (type jpg)
 <use Images/PanoramicView.jpg>
 Package pdftex.def Info: Images/PanoramicView.jpg  used on input line 463. on i
 nput line 463.
 Package pdftex.def Info: Requested size: 183.4495pt x 183.4463pt on input line 
 463.
- [10 <./Images/KogetoDot.jpeg> <./Images/PanoramicView.jpg>] [11] [12] [13] [14
-] [15] [16] [17] [18] [19]
-(./working.bbl) [20] (./working.aux) ) 
+[12] [13 <./Images/KogetoDot.jpeg> <./Images/PanoramicView.jpg>] [14] [15]
+[16] [17] [18] [19] [20]
+<Images/MB-Bad-Familiarity.png, id=114, 980.66376pt x 731.73375pt>
+File: Images/MB-Bad-Familiarity.png Graphic file (type png)
+<use Images/MB-Bad-Familiarity.png>
+Package pdftex.def Info: Images/MB-Bad-Familiarity.png  used on input line 802.
+ on input line 802.
+Package pdftex.def Info: Requested size: 317.07614pt x 236.58246pt on input lin
+e 802.
+<Images/MB-Good-Familiarity.png, id=115, 928.46875pt x 695.59875pt>
+File: Images/MB-Good-Familiarity.png Graphic file (type png)
+<use Images/MB-Good-Familiarity.png>
+Package pdftex.def Info: Images/MB-Good-Familiarity.png  used on input line 814
+. on input line 814.
+Package pdftex.def Info: Requested size: 317.07614pt x 237.55122pt on input lin
+e 814.
+ [21] [22 <./Images/MB-Bad-Familiarity.png> <./Images/MB-Good-Familiarity.png>]
+
+
+LaTeX Warning: Citation `Eberding' on page 23 undefined on input line 845.
+
+[23] [24]
+<Images/The-Arena.JPG, id=131, 6006.44pt x 3388.66pt>
+File: Images/The-Arena.JPG Graphic file (type jpg)
+<use Images/The-Arena.JPG>
+Package pdftex.def Info: Images/The-Arena.JPG  used on input line 873. on input
+ line 873.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 873.
+<Images/Tussock.JPG, id=132, 6006.44pt x 3388.66pt>
+File: Images/Tussock.JPG Graphic file (type jpg)
+<use Images/Tussock.JPG>
+Package pdftex.def Info: Images/Tussock.JPG  used on input line 888. on input l
+ine 888.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 888.
+ [25 <./Images/The-Arena.JPG>]
+<Images/Tussock-Interaction.JPG, id=136, 6006.44pt x 3388.66pt>
+File: Images/Tussock-Interaction.JPG Graphic file (type jpg)
+<use Images/Tussock-Interaction.JPG>
+Package pdftex.def Info: Images/Tussock-Interaction.JPG  used on input line 907
+. on input line 907.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 907.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[26 <./Images/Tussock.JPG>] [27 <./Images/Tussock-Interaction.JPG>]
+<Images/MAB-5-2.png, id=143, 987.2082pt x 492.8814pt>
+File: Images/MAB-5-2.png Graphic file (type png)
+<use Images/MAB-5-2.png>
+Package pdftex.def Info: Images/MAB-5-2.png  used on input line 966. on input l
+ine 966.
+Package pdftex.def Info: Requested size: 407.66833pt x 203.53418pt on input lin
+e 966.
+ [28]
+<Images/MAB-5-2-S.png, id=148, 462.528pt x 346.896pt>
+File: Images/MAB-5-2-S.png Graphic file (type png)
+<use Images/MAB-5-2-S.png>
+Package pdftex.def Info: Images/MAB-5-2-S.png  used on input line 974. on input
+ line 974.
+Package pdftex.def Info: Requested size: 407.66833pt x 305.76697pt on input lin
+e 974.
+
+[29 <./Images/MAB-5-2.png>]
+<Images/OpticalFlowInconsistencies.png, id=153, 1817.79124pt x 812.03375pt>
+File: Images/OpticalFlowInconsistencies.png Graphic file (type png)
+<use Images/OpticalFlowInconsistencies.png>
+Package pdftex.def Info: Images/OpticalFlowInconsistencies.png  used on input l
+ine 996. on input line 996.
+Package pdftex.def Info: Requested size: 317.07614pt x 141.63719pt on input lin
+e 996.
+ [30 <./Images/MAB-5-2-S.png>] [31 <./Images/OpticalFlowInconsistencies.png>]
+Overfull \hbox (37.3126pt too wide) in paragraph at lines 1026--1055
+[][] 
+ []
+
+[32] [33] (./working.bbl [34]) [35] (./working.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3741 strings out of 492985
- 55534 string characters out of 6138637
- 128716 words of memory out of 5000000
- 7242 multiletter control sequences out of 15000+600000
- 12288 words of font info for 43 fonts, out of 8000000 for 9000
+ 3796 strings out of 492985
+ 56870 string characters out of 6138637
+ 132867 words of memory out of 5000000
+ 7290 multiletter control sequences out of 15000+600000
+ 14040 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,21n,40p,773b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
-r/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
-></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.p
-fb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmti9.pfb>
-Output written on working.pdf (27 pages, 961234 bytes).
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
+/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on working.pdf (44 pages, 22646141 bytes).
 PDF statistics:
- 168 PDF objects out of 1000 (max. 8388607)
- 113 compressed objects within 2 object streams
+ 217 PDF objects out of 1000 (max. 8388607)
+ 137 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
