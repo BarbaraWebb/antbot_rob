@@ -4,6 +4,7 @@
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{subcaption}
+\usepackage{multirow}
 \geometry{margin=1in}
 \graphicspath{ {Images/} }
 \begin{document}
@@ -1057,8 +1058,96 @@ tussock on the way past). The full set of results for the functional performance
   \end{table}
 \end{center}
 
+Collisions were often the result of avoidance turns putting the robot on a collision course with another tussock (even when there was perhaps
+a clear path had the robot turned the other way). We drew no distinction between collisions with tussocks and collisions with the arena wall
+hence, the single collision in the empty arena; this collision is an interesting one as there is seemingly no reason for it to occur. Why
+is it that the AntBot reacts when there is no obstacle and when flow discrepancies should be minimal (due to the white boundary)? One may also
+ask why the AntBot would, in avoiding one obstacle, turn toward another. Both questions result in the same conclusions (which will be reflected
+in the results of more rigid test scenarios to follow). Firstly, while the system performed well, the detection and response system is quite crude.
+A smooth arc would be a much more desireable behaviour for responding to flow stimuli, and indeed, this was the behaviour in the first iteration of
+this system; it was removed as the number of failed avoid maneuvers was much greater due to the robot's inability to perform such movements quickly.
+Even more desireable would be a proportional feedback control system, however this presents a number of technical challenges for the AntBot. Secondly,
+AntBot's view is rather distorted due to the $360^{\circ}$ lens attachment. The high-wall enclosure was introduced to reduce the effects of background noise
+however, AntBot can actually see out of this arena. The lens distortion also presents challenges with the tussocks. While they are visible, they are
+extremely small in the image frame unless placed directly in front of the robot \textit{[NOTE: NEED FIGURE HERE TO DEMO LENS DISTORTION]}. The simple
+solution would be to construct larger tussocks. The area observable outside the arena will have minimal effect unless there is no immediate stimulus
+in the arena, however it may cause problems if the stimulus is out of range (i.e. not yet effectively visible to the camera).
+
+\begin{center}
+  \begin{table}
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
+      \hline
+      \multicolumn{4}{|l|}{\textbf{Optical Flow Behavioural Results} }   &                  &              &               \\ \hline
+                   & \textbf{Arena 7} & Diagonal wall      &             & \textbf{Arena 8} & Curved wall  &               \\ \hline
+      \textbf{Run} & Collision        & Failed avoid       & As expected & Collision        & Failed avoid & As expected   \\ \hline
+      1            &  1               & 0                  & No          & 1                & 0            & Almost        \\ \hline
+      2            &  1               & 0                  & No          & 1                & 0            & Almost        \\ \hline
+      3            &  1               & 1                  & No          & 0                & 0            & Almost        \\ \hline
+      4            &  1               & 1                  & No          & 1                & 0            & Almost        \\ \hline
+      5            &  1               & 0                  & Almost      & 1                & 0            & No            \\ \hline
+                   & \textbf{Arena 9} & Fluted walls       &             & \multicolumn{3}{l|}{\multirow{5}{*}{}}          \\ \cline{1-4}
+      \textbf{Run} & Collision        & Failed avoid       & As expected & \multicolumn{3}{l|}{}                           \\ \cline{1-4}
+      1            & 1                & 0                  & No          & \multicolumn{3}{l|}{}                           \\ \cline{1-4}
+      2            & 1                & 0                  & No          & \multicolumn{3}{l|}{}                           \\ \cline{1-4}
+      3            & 1                & 0                  & No          & \multicolumn{3}{l|}{}                           \\ \cline{1-4}
+      4            & 1                & 0                  & No          & \multicolumn{3}{l|}{}                           \\ \cline{1-4}
+      5            & 1                & 0                  & No          & \multicolumn{3}{l|}{}                           \\ \hline
+
+   \end{tabular}
+   \caption{The results for the behavioural experiments conducted on the optical flow system; for these, arenas were designed to
+     elicit a certain behavioural response, however, they mostly failed to do so, highlighting problems with the current implementation
+     and methods of experimentation. The ``As expected'' column denotes cases whether the robot performed the expected moves: No means
+     not at all, Almost means that movements were initially correct then went wrong, and Yes means complete success.
+    }
+    \label{tab:ofrestwo}
+  \end{table}
+\end{center}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Diagonal}
+  \caption{
+    \label{fig:diag} The diagonal wall arena.
+  }
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Curved}
+  \caption{
+    \label{fig:curved} The curved wall arena.
+  }
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Fluted}
+  \caption{
+    \label{fig:fluted} The fluted walls arena.
+  }
+\end{figure}
+
+Figures \ref{fig:diagonal}, \ref{fig:curved}, and \ref{fig:fluted} show the three arenas used for behavrioual experiments. These experiments
+helped to highlight the issues mentioned following the functional results. In each case, the desired behaviour is fairly clear from the layout of
+the arena: In the diagonal case, we want the robot to turn right and either follow the wall or move away from it, in the curved case we want the
+robot to follow the curve or turn away from it completely, and finally in the fluted case, we want the robot to move straight through the
+opening between the two walls. In all but one experiment in Arena 7, the robot reacted early, turning towards the wall instead of away from it.
+In all but one case in Arena 8, the robot reacted correctly initially, but in moving away from the wall it would lose sight of it and ultimately
+turn back towards it resulting in a collision. In all cases in Arena 9, the robot reacted to one side of the flute (despite the fact it actually
+had a clear path) and run into the opposite side. These three simple tests back up the points raised earlier. In both Arena 7 and 9 the robot
+is reacting to situations where no reaction is necessary. Again, this points to the effect of noise in the flow frame though, we may also
+question the choice of filter. The filter was chosen for simplicity as it was already on-board and had demonstrated the capacity to compute
+fairly accurate speed information \cite{Scimeca2017} with a dense flow field; though usage of the existing filter was justified,
+it may be worth considering something different. While we feel good results were achieved, it is apparent that many refinements can, and indeed should
+be made.
 
 \subsection{Visual Navigation using the Mushroom Body}
+The results for the Visual Navigation portion of the project are somewhat harder to quantify. We can say with certainty that the Mushroom Body circuit
+demonstrates the capability to perform robust route navigation through a somewhat cluttered environment. Though rare there were cases where the robot would
+lose the route and regain it again through drastic correction; there are some cases where the correction could be deemed luck, and in others the correction
+appears more genuine.
+
+
 
 \newpage
 

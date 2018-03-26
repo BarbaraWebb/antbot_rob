@@ -29,5 +29,5 @@
 \contentsline {subsection}{\numberline {6.1}Collision Avoidance}{30}
 \contentsline {subsubsection}{\numberline {6.1.1}Time-to-Collision}{30}
 \contentsline {subsubsection}{\numberline {6.1.2}Filtering}{32}
-\contentsline {subsection}{\numberline {6.2}Visual Navigation using the Mushroom Body}{32}
-\contentsline {section}{\numberline {7} Discussion }{33}
+\contentsline {subsection}{\numberline {6.2}Visual Navigation using the Mushroom Body}{35}
+\contentsline {section}{\numberline {7} Discussion }{36}

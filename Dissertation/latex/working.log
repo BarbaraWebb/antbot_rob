@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  24 MAR 2018 17:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  25 MAR 2018 16:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -152,6 +152,13 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 )
 \c@subfigure=\count103
 \c@subtable=\count104
+)
+(/usr/share/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
+\multirow@colwidth=\skip46
+\multirow@cntb=\count105
+\multirow@dima=\skip47
+\bigstrutjot=\dimen129
 ) (./working.aux
 
 LaTeX Warning: Label `fig:tussock' multiply defined.
@@ -159,18 +166,18 @@ LaTeX Warning: Label `fig:tussock' multiply defined.
 )
 \openout1 = `working.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -208,16 +215,16 @@ LaTeX Font Info:    ... okay on input line 9.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count105
-\scratchdimen=\dimen129
+\scratchcounter=\count106
+\scratchdimen=\dimen130
 \scratchbox=\box28
-\nofMPsegments=\count106
-\nofMParguments=\count107
+\nofMPsegments=\count107
+\nofMParguments=\count108
 \everyMPshowfont=\toks21
-\MPscratchCnt=\count108
-\MPscratchDim=\dimen130
-\MPnumerator=\count109
-\makeMPintoPDFobject=\count110
+\MPscratchCnt=\count109
+\MPscratchDim=\dimen131
+\MPnumerator=\count110
+\makeMPintoPDFobject=\count111
 \everyMPtoPDFconversion=\toks22
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -293,10 +300,10 @@ Package caption Info: End \AtBeginDocument code.
 <Images/Stewart2010CAModel.png, id=59, 1046.91125pt x 770.88pt>
 File: Images/Stewart2010CAModel.png Graphic file (type png)
 <use Images/Stewart2010CAModel.png>
-Package pdftex.def Info: Images/Stewart2010CAModel.png  used on input line 296.
- on input line 296.
+Package pdftex.def Info: Images/Stewart2010CAModel.png  used on input line 297.
+ on input line 297.
 Package pdftex.def Info: Requested size: 407.66833pt x 300.17148pt on input lin
-e 296.
+e 297.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -305,83 +312,83 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <Images/Ardin2010MBModel.PNG, id=68, 523.83705pt x 395.91914pt>
 File: Images/Ardin2010MBModel.PNG Graphic file (type png)
 <use Images/Ardin2010MBModel.PNG>
-Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 344. o
-n input line 344.
+Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 345. o
+n input line 345.
 Package pdftex.def Info: Requested size: 407.66833pt x 308.12698pt on input lin
-e 344.
+e 345.
  [9 <./Images/Ardin2010MBModel.PNG>]
 [10]
 <Images/Willshaw1969Model.png, id=76, 830.10126pt x 829.0975pt>
 File: Images/Willshaw1969Model.png Graphic file (type png)
 <use Images/Willshaw1969Model.png>
-Package pdftex.def Info: Images/Willshaw1969Model.png  used on input line 408. 
-on input line 408.
+Package pdftex.def Info: Images/Willshaw1969Model.png  used on input line 409. 
+on input line 409.
 Package pdftex.def Info: Requested size: 226.48395pt x 226.19975pt on input lin
-e 408.
+e 409.
  [11 <./Images/Willshaw1969Model.png>]
 <Images/KogetoDot.jpeg, id=81, 351.3125pt x 426.59375pt>
 File: Images/KogetoDot.jpeg Graphic file (type jpg)
 <use Images/KogetoDot.jpeg>
-Package pdftex.def Info: Images/KogetoDot.jpeg  used on input line 457. on inpu
-t line 457.
+Package pdftex.def Info: Images/KogetoDot.jpeg  used on input line 458. on inpu
+t line 458.
 Package pdftex.def Info: Requested size: 183.4495pt x 222.76735pt on input line
- 457.
+ 458.
 
-Underfull \hbox (badness 4595) in paragraph at lines 458--458
+Underfull \hbox (badness 4595) in paragraph at lines 459--459
 []\OT1/cmr/m/n/12 Figure 4: |The Kogeto Dot 360$[]$
  []
 
 <Images/PanoramicView.jpg, id=82, 614.295pt x 614.295pt>
 File: Images/PanoramicView.jpg Graphic file (type jpg)
 <use Images/PanoramicView.jpg>
-Package pdftex.def Info: Images/PanoramicView.jpg  used on input line 463. on i
-nput line 463.
+Package pdftex.def Info: Images/PanoramicView.jpg  used on input line 464. on i
+nput line 464.
 Package pdftex.def Info: Requested size: 183.4495pt x 183.4463pt on input line 
-463.
+464.
 [12] [13 <./Images/KogetoDot.jpeg> <./Images/PanoramicView.jpg>] [14] [15]
 [16] [17] [18] [19] [20]
 <Images/MB-Bad-Familiarity.png, id=114, 980.66376pt x 731.73375pt>
 File: Images/MB-Bad-Familiarity.png Graphic file (type png)
 <use Images/MB-Bad-Familiarity.png>
-Package pdftex.def Info: Images/MB-Bad-Familiarity.png  used on input line 802.
- on input line 802.
+Package pdftex.def Info: Images/MB-Bad-Familiarity.png  used on input line 803.
+ on input line 803.
 Package pdftex.def Info: Requested size: 317.07614pt x 236.58246pt on input lin
-e 802.
+e 803.
 <Images/MB-Good-Familiarity.png, id=115, 928.46875pt x 695.59875pt>
 File: Images/MB-Good-Familiarity.png Graphic file (type png)
 <use Images/MB-Good-Familiarity.png>
-Package pdftex.def Info: Images/MB-Good-Familiarity.png  used on input line 814
-. on input line 814.
+Package pdftex.def Info: Images/MB-Good-Familiarity.png  used on input line 815
+. on input line 815.
 Package pdftex.def Info: Requested size: 317.07614pt x 237.55122pt on input lin
-e 814.
+e 815.
  [21] [22 <./Images/MB-Bad-Familiarity.png> <./Images/MB-Good-Familiarity.png>]
 
 
-LaTeX Warning: Citation `Eberding' on page 23 undefined on input line 845.
+LaTeX Warning: Citation `Eberding' on page 23 undefined on input line 846.
 
 [23] [24]
 <Images/The-Arena.JPG, id=131, 6006.44pt x 3388.66pt>
 File: Images/The-Arena.JPG Graphic file (type jpg)
 <use Images/The-Arena.JPG>
-Package pdftex.def Info: Images/The-Arena.JPG  used on input line 873. on input
- line 873.
+Package pdftex.def Info: Images/The-Arena.JPG  used on input line 874. on input
+ line 874.
 Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
-e 873.
+e 874.
 <Images/Tussock.JPG, id=132, 6006.44pt x 3388.66pt>
 File: Images/Tussock.JPG Graphic file (type jpg)
 <use Images/Tussock.JPG>
-Package pdftex.def Info: Images/Tussock.JPG  used on input line 888. on input l
-ine 888.
+Package pdftex.def Info: Images/Tussock.JPG  used on input line 889. on input l
+ine 889.
 Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
-e 888.
+e 889.
  [25 <./Images/The-Arena.JPG>]
 <Images/Tussock-Interaction.JPG, id=136, 6006.44pt x 3388.66pt>
 File: Images/Tussock-Interaction.JPG Graphic file (type jpg)
 <use Images/Tussock-Interaction.JPG>
-Package pdftex.def Info: Images/Tussock-Interaction.JPG  used on input line 907
-. on input line 907.
+Package pdftex.def Info: Images/Tussock-Interaction.JPG  used on input line 908
+. on input line 908.
 Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
-e 907.
+e 908.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -390,33 +397,60 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <Images/MAB-5-2.png, id=143, 987.2082pt x 492.8814pt>
 File: Images/MAB-5-2.png Graphic file (type png)
 <use Images/MAB-5-2.png>
-Package pdftex.def Info: Images/MAB-5-2.png  used on input line 966. on input l
-ine 966.
+Package pdftex.def Info: Images/MAB-5-2.png  used on input line 967. on input l
+ine 967.
 Package pdftex.def Info: Requested size: 407.66833pt x 203.53418pt on input lin
-e 966.
+e 967.
  [28]
 <Images/MAB-5-2-S.png, id=148, 462.528pt x 346.896pt>
 File: Images/MAB-5-2-S.png Graphic file (type png)
 <use Images/MAB-5-2-S.png>
-Package pdftex.def Info: Images/MAB-5-2-S.png  used on input line 974. on input
- line 974.
+Package pdftex.def Info: Images/MAB-5-2-S.png  used on input line 975. on input
+ line 975.
 Package pdftex.def Info: Requested size: 407.66833pt x 305.76697pt on input lin
-e 974.
+e 975.
 
 [29 <./Images/MAB-5-2.png>]
 <Images/OpticalFlowInconsistencies.png, id=153, 1817.79124pt x 812.03375pt>
 File: Images/OpticalFlowInconsistencies.png Graphic file (type png)
 <use Images/OpticalFlowInconsistencies.png>
 Package pdftex.def Info: Images/OpticalFlowInconsistencies.png  used on input l
-ine 996. on input line 996.
+ine 997. on input line 997.
 Package pdftex.def Info: Requested size: 317.07614pt x 141.63719pt on input lin
-e 996.
+e 997.
  [30 <./Images/MAB-5-2-S.png>] [31 <./Images/OpticalFlowInconsistencies.png>]
-Overfull \hbox (37.3126pt too wide) in paragraph at lines 1026--1055
+Overfull \hbox (37.3126pt too wide) in paragraph at lines 1027--1056
 [][] 
  []
 
-[32] [33] (./working.bbl [34]) [35] (./working.aux)
+[32]
+Overfull \hbox (7.11986pt too wide) in paragraph at lines 1078--1101
+[][] 
+ []
+
+<Images/Diagonal.JPG, id=165, 6006.44pt x 3388.66pt>
+File: Images/Diagonal.JPG Graphic file (type jpg)
+<use Images/Diagonal.JPG>
+Package pdftex.def Info: Images/Diagonal.JPG  used on input line 1110. on input
+ line 1110.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 1110.
+<Images/Curved.JPG, id=166, 6006.44pt x 3388.66pt>
+File: Images/Curved.JPG Graphic file (type jpg)
+<use Images/Curved.JPG>
+Package pdftex.def Info: Images/Curved.JPG  used on input line 1118. on input l
+ine 1118.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 1118.
+<Images/Fluted.JPG, id=167, 6006.44pt x 3388.66pt>
+File: Images/Fluted.JPG Graphic file (type jpg)
+<use Images/Fluted.JPG>
+Package pdftex.def Info: Images/Fluted.JPG  used on input line 1126. on input l
+ine 1126.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 1126.
+[33 <./Images/Diagonal.JPG>] [34 <./Images/Curved.JPG>] [35 <./Images/Fluted.JP
+G>] [36] (./working.bbl [37]) [38] (./working.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -425,10 +459,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3796 strings out of 492985
- 56870 string characters out of 6138637
- 132867 words of memory out of 5000000
- 7290 multiletter control sequences out of 15000+600000
+ 3866 strings out of 492985
+ 57993 string characters out of 6138637
+ 136422 words of memory out of 5000000
+ 7353 multiletter control sequences out of 15000+600000
  14040 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,21n,40p,773b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -442,10 +476,10 @@ st/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on working.pdf (44 pages, 22646141 bytes).
+Output written on working.pdf (47 pages, 42884879 bytes).
 PDF statistics:
- 217 PDF objects out of 1000 (max. 8388607)
- 137 compressed objects within 2 object streams
+ 229 PDF objects out of 1000 (max. 8388607)
+ 143 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
