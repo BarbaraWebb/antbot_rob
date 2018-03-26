@@ -1,5 +1,6 @@
 
 \documentclass[a4paper,12pt]{article}
+\usepackage[toc,page]{appendix}
 \usepackage{amsmath}
 \usepackage{geometry}
 \usepackage{graphicx}
@@ -1014,7 +1015,7 @@ This flow information is key to computing both the speed of motion and the focus
 time-to-contact is not accurate nor consistent. Though TTC was abandoned as a method for collision avoidance as part of this
 project, there are a number of modifications that could be applied to make this more stable, however, any method of computing the
 TTC relies on an accurate speed calculation. The works on which we based this system use encoder information to compute the
-speeds, and while this is not entirely implausible from a biological standpoint \textit{[STEPCOUNTING REFERENCE]}, we are currently
+speeds, and while this is not entirely implausible from a biological standpoint \textit{[NOTE: STEPCOUNTING REFERENCE]}, we are currently
 reliant on optical flow alone for speed retrieval. 
 
 \subsubsection{Filtering}
@@ -1145,7 +1146,10 @@ be made.
 The results for the Visual Navigation portion of the project are somewhat harder to quantify. We can say with certainty that the Mushroom Body circuit
 demonstrates the capability to perform robust route navigation through a somewhat cluttered environment. Though rare there were cases where the robot would
 lose the route and regain it again through drastic correction; there are some cases where the correction could be deemed luck, and in others the correction
-appears more genuine.
+appears more genuine. Here we present the more interesting plots for discussion however the complete set of plots is available in Appendix \ref{app:plots}.
+\newline
+
+Firstly, we will present an example of what we consider a failure. 
 
 
 
@@ -1158,6 +1162,11 @@ appears more genuine.
 
 \bibliographystyle{plain}
 \bibliography{working}
+\newpage
+
+\appendix
+\section{Visual Navigation trajectory plots} \label{app:plots}
+\textit{Plots to follow...}
 
 \end{document}
 

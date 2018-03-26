@@ -28,6 +28,7 @@
 \contentsline {section}{\numberline {6} Results and Evaluation }{30}
 \contentsline {subsection}{\numberline {6.1}Collision Avoidance}{30}
 \contentsline {subsubsection}{\numberline {6.1.1}Time-to-Collision}{30}
-\contentsline {subsubsection}{\numberline {6.1.2}Filtering}{32}
-\contentsline {subsection}{\numberline {6.2}Visual Navigation using the Mushroom Body}{35}
-\contentsline {section}{\numberline {7} Discussion }{36}
+\contentsline {subsubsection}{\numberline {6.1.2}Filtering}{31}
+\contentsline {subsection}{\numberline {6.2}Visual Navigation using the Mushroom Body}{36}
+\contentsline {section}{\numberline {7} Discussion }{37}
+\contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{40}
