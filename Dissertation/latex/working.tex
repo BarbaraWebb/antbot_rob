@@ -1128,7 +1128,7 @@ in the arena, however it may cause problems if the stimulus is out of range (i.e
   }
 \end{figure}
 
-Figures \ref{fig:diagonal}, \ref{fig:curved}, and \ref{fig:fluted} show the three arenas used for behavrioual experiments. These experiments
+Figures \ref{fig:diag}, \ref{fig:curved}, and \ref{fig:fluted} show the three arenas used for behavrioual experiments. These experiments
 helped to highlight the issues mentioned following the functional results. In each case, the desired behaviour is fairly clear from the layout of
 the arena: In the diagonal case, we want the robot to turn right and either follow the wall or move away from it, in the curved case we want the
 robot to follow the curve or turn away from it completely, and finally in the fluted case, we want the robot to move straight through the
@@ -1146,13 +1146,86 @@ be made.
 The results for the Visual Navigation portion of the project are somewhat harder to quantify. We can say with certainty that the Mushroom Body circuit
 demonstrates the capability to perform robust route navigation through a somewhat cluttered environment. Though rare there were cases where the robot would
 lose the route and regain it again through drastic correction; there are some cases where the correction could be deemed luck, and in others the correction
-appears more genuine. Here we present the more interesting plots for discussion however the complete set of plots is available in Appendix \ref{app:plots}.
+appears more genuine. Here we present the more interesting plots for discussion however the complete set of plots is available in Appendix \ref{app:plots} as we did not wish to clutter the discussion with figures. The navigational behaviours can be roughly categorised into four sets: Failures, successes, recoveries, and failed recoveries.
 \newline
 
-Firstly, we will present an example of what we consider a failure. 
+Firstly, we will present an example of what we consider a failure in Figure \ref{fig:ab-4-1-fail}. Figure \ref{fig:ab-4-1-fail}
+demonstrates a failure of the navigation system, but also strength of the model. We show as one might expect that, once the
+robot loses its way (in this case the very first turn is incorrect) it will struggle to regain the route. While certainly a
+weakness, the model reproduces accurate ant behaviour in this regard. One of the key points in \cite{Wehner2006} is that
+ants remember more of a ``viusal corridor'' than a map of their landscape. If one point is misremembered and the ant loses
+its way it will become lost; here we see the same behaviour in the model. Indeed, this behaviour is replicated a few times
+throughout the results.
+
+\begin{figure}
+ \centering
+  \includegraphics[width=\textwidth]{AB-4-1}
+  \caption{
+    \label{fig:ab-4-1-fail} Trajectory plot of run AB-4-1; this run was considered a failure of the
+    Visual Navigation system.
+  }
+\end{figure}
+
+We also see some more successful navigation in runs such as AB-3-1 (shown in Figure \ref{fig:ab-3-1-succ}). It should first be
+noted that, once reaching a spot near the end of the learned route, the visual navigation would struggle as it had no
+more information to work from; this is simply due to the timed nature of experiments. We are interested quite simply in how
+closely the recalled route follows the learned route. 
+
+\begin{figure}
+ \centering
+  \includegraphics[width=\textwidth]{AB-3-1}
+  \caption{
+    \label{fig:ab-3-1-succ} Trajectory plot of run AB-3-1; this run was considered a success of the Visual Navigation
+    system.
+  }
+\end{figure}
+
+Figure \ref{fig:ab-3-1-succ} demonstrates the ideal behaviour wherein the robot zig-zags over the correct route, consistently
+correcting to keep itself on course. It is in this behaviour we see the model's capacity to remember the visual corridor
+correctly. We do occassionally observe another behaviour; the robot will lose its way and recover. This behaviour occurred in
+cases where the robot was lucky enough to get a view which would allow it to correct. There were cases which looked as if
+they were correcting, however, they failed to recover the route. Examples of both can be seen in Figures \ref{fig:ab-2-2-succ}
+and \ref{fig:mab-1-2-succ} respectively. In particular Figure \ref{fig:ab-2-2-succ} highlights a problem with the timed
+nature of the experiments. Though it appears the robot will recover, there is no way of knowing for sure.
+The timer is used as there is no real way to distinguish memories of home and food source from memories of the route using
+the current model.
 
 
+\begin{figure}
+ \centering
+  \includegraphics[width=\textwidth]{MAB-2-2}
+  \caption{
+    \label{fig:mab-2-2-succ} Trajectory plot of run AB-1-2; a near-successful recovery.
+  }
+\end{figure}
 
+
+\begin{figure}
+ \centering
+  \includegraphics[width=\textwidth]{AB-1-2}
+  \caption{
+    \label{fig:ab-1-2-fail} Trajectory plot of run AB-1-2; a failed recovery.
+  }
+\end{figure}
+
+It was mentioned in Section \ref{sec:test} that the behaviour of the robot during learning was modified slightly. This
+was due to the type of behaviour we see in Figure \ref{fig:ab-3-2}. This run was considered successful, however it can be seen
+that the robot did not follow the route precisely, rather following an inside line. A potential reason was seen as the
+delay between obstacle detection and reaction during learning. Along with the increased image count, the runs from
+the modified learning system (tagged MAB) performed better in general, however there were certainly still errors.
+\newline
+
+\begin{figure}
+ \centering
+  \includegraphics[width=\textwidth]{AB-3-2}
+  \caption{
+    \label{fig:ab-3-2} Trajectory plot of run AB-3-2.
+  }
+\end{figure}
+
+In all, the visual navigation system performed quite well. Drastic errors were rare, though certainly present. The full series
+of trajectories in Appendix \ref{app:plots} show that the network was capable of reproducing routes on a robot through a
+cluttered (yet low detail due to the distorted field of vision) environment using a visual scanning route following behaviour.
 \newpage
 
 \section{ Discussion } \label{sec:discussion}

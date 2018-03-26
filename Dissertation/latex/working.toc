@@ -30,5 +30,5 @@
 \contentsline {subsubsection}{\numberline {6.1.1}Time-to-Collision}{30}
 \contentsline {subsubsection}{\numberline {6.1.2}Filtering}{31}
 \contentsline {subsection}{\numberline {6.2}Visual Navigation using the Mushroom Body}{36}
-\contentsline {section}{\numberline {7} Discussion }{37}
-\contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{40}
+\contentsline {section}{\numberline {7} Discussion }{40}
+\contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{43}

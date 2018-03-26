@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.3.22)  26 MAR 2018 12:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  26 MAR 2018 16:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **working
 (./working.tex
 LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
+Babel <3.15> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texmf-dist/tex/latex/base/size12.clo
@@ -132,7 +132,7 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
 (/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+File: pdftex.def 2017/06/24 v1.0g Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen120
 \Gin@req@width=\dimen121
@@ -266,7 +266,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
 (/usr/share/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2018/01/21 v0.26 Utility functions of pdfTeX for LuaTeX (HO
+Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -307,8 +307,9 @@ Package caption Info: End \AtBeginDocument code.
 File: Images/Stewart2010CAModel.png Graphic file (type png)
 <use Images/Stewart2010CAModel.png>
 Package pdftex.def Info: Images/Stewart2010CAModel.png  used on input line 298.
-
-(pdftex.def)             Requested size: 407.66833pt x 300.17148pt.
+ on input line 298.
+Package pdftex.def Info: Requested size: 407.66833pt x 300.17148pt on input lin
+e 298.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -317,21 +318,27 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <Images/Ardin2010MBModel.PNG, id=68, 523.83705pt x 395.91914pt>
 File: Images/Ardin2010MBModel.PNG Graphic file (type png)
 <use Images/Ardin2010MBModel.PNG>
-Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 346.
-(pdftex.def)             Requested size: 407.66833pt x 308.12698pt.
+Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 346. o
+n input line 346.
+Package pdftex.def Info: Requested size: 407.66833pt x 308.12698pt on input lin
+e 346.
  [9 <./Images/Ardin2010MBModel.PNG>]
 [10]
 <Images/Willshaw1969Model.png, id=76, 830.10126pt x 829.0975pt>
 File: Images/Willshaw1969Model.png Graphic file (type png)
 <use Images/Willshaw1969Model.png>
-Package pdftex.def Info: Images/Willshaw1969Model.png  used on input line 410.
-(pdftex.def)             Requested size: 226.48395pt x 226.19975pt.
+Package pdftex.def Info: Images/Willshaw1969Model.png  used on input line 410. 
+on input line 410.
+Package pdftex.def Info: Requested size: 226.48395pt x 226.19975pt on input lin
+e 410.
  [11 <./Images/Willshaw1969Model.png>]
 <Images/KogetoDot.jpeg, id=81, 351.3125pt x 426.59375pt>
 File: Images/KogetoDot.jpeg Graphic file (type jpg)
 <use Images/KogetoDot.jpeg>
-Package pdftex.def Info: Images/KogetoDot.jpeg  used on input line 459.
-(pdftex.def)             Requested size: 183.4495pt x 222.76735pt.
+Package pdftex.def Info: Images/KogetoDot.jpeg  used on input line 459. on inpu
+t line 459.
+Package pdftex.def Info: Requested size: 183.4495pt x 222.76735pt on input line
+ 459.
 
 Underfull \hbox (badness 4595) in paragraph at lines 460--460
 []\OT1/cmr/m/n/12 Figure 4: |The Kogeto Dot 360$[]$
@@ -340,22 +347,26 @@ Underfull \hbox (badness 4595) in paragraph at lines 460--460
 <Images/PanoramicView.jpg, id=82, 614.295pt x 614.295pt>
 File: Images/PanoramicView.jpg Graphic file (type jpg)
 <use Images/PanoramicView.jpg>
-Package pdftex.def Info: Images/PanoramicView.jpg  used on input line 465.
-(pdftex.def)             Requested size: 183.4495pt x 183.4463pt.
+Package pdftex.def Info: Images/PanoramicView.jpg  used on input line 465. on i
+nput line 465.
+Package pdftex.def Info: Requested size: 183.4495pt x 183.4463pt on input line 
+465.
 [12] [13 <./Images/KogetoDot.jpeg> <./Images/PanoramicView.jpg>] [14] [15]
 [16] [17] [18] [19] [20]
 <Images/MB-Bad-Familiarity.png, id=114, 980.66376pt x 731.73375pt>
 File: Images/MB-Bad-Familiarity.png Graphic file (type png)
 <use Images/MB-Bad-Familiarity.png>
 Package pdftex.def Info: Images/MB-Bad-Familiarity.png  used on input line 804.
-
-(pdftex.def)             Requested size: 317.07614pt x 236.58246pt.
+ on input line 804.
+Package pdftex.def Info: Requested size: 317.07614pt x 236.58246pt on input lin
+e 804.
 <Images/MB-Good-Familiarity.png, id=115, 928.46875pt x 695.59875pt>
 File: Images/MB-Good-Familiarity.png Graphic file (type png)
 <use Images/MB-Good-Familiarity.png>
 Package pdftex.def Info: Images/MB-Good-Familiarity.png  used on input line 816
-.
-(pdftex.def)             Requested size: 317.07614pt x 237.55122pt.
+. on input line 816.
+Package pdftex.def Info: Requested size: 317.07614pt x 237.55122pt on input lin
+e 816.
  [21] [22 <./Images/MB-Bad-Familiarity.png> <./Images/MB-Good-Familiarity.png>]
 
 
@@ -365,20 +376,25 @@ LaTeX Warning: Citation `Eberding' on page 23 undefined on input line 847.
 <Images/The-Arena.JPG, id=131, 6006.44pt x 3388.66pt>
 File: Images/The-Arena.JPG Graphic file (type jpg)
 <use Images/The-Arena.JPG>
-Package pdftex.def Info: Images/The-Arena.JPG  used on input line 875.
-(pdftex.def)             Requested size: 317.07614pt x 178.85355pt.
+Package pdftex.def Info: Images/The-Arena.JPG  used on input line 875. on input
+ line 875.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 875.
 <Images/Tussock.JPG, id=132, 6006.44pt x 3388.66pt>
 File: Images/Tussock.JPG Graphic file (type jpg)
 <use Images/Tussock.JPG>
-Package pdftex.def Info: Images/Tussock.JPG  used on input line 890.
-(pdftex.def)             Requested size: 317.07614pt x 178.85355pt.
+Package pdftex.def Info: Images/Tussock.JPG  used on input line 890. on input l
+ine 890.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 890.
  [25 <./Images/The-Arena.JPG>]
 <Images/Tussock-Interaction.JPG, id=136, 6006.44pt x 3388.66pt>
 File: Images/Tussock-Interaction.JPG Graphic file (type jpg)
 <use Images/Tussock-Interaction.JPG>
 Package pdftex.def Info: Images/Tussock-Interaction.JPG  used on input line 909
-.
-(pdftex.def)             Requested size: 317.07614pt x 178.85355pt.
+. on input line 909.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 909.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -387,22 +403,27 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <Images/MAB-5-2.png, id=143, 987.2082pt x 492.8814pt>
 File: Images/MAB-5-2.png Graphic file (type png)
 <use Images/MAB-5-2.png>
-Package pdftex.def Info: Images/MAB-5-2.png  used on input line 968.
-(pdftex.def)             Requested size: 407.66833pt x 203.53418pt.
+Package pdftex.def Info: Images/MAB-5-2.png  used on input line 968. on input l
+ine 968.
+Package pdftex.def Info: Requested size: 407.66833pt x 203.53418pt on input lin
+e 968.
  [28]
 <Images/MAB-5-2-S.png, id=148, 987.2082pt x 492.8814pt>
 File: Images/MAB-5-2-S.png Graphic file (type png)
 <use Images/MAB-5-2-S.png>
-Package pdftex.def Info: Images/MAB-5-2-S.png  used on input line 976.
-(pdftex.def)             Requested size: 407.66833pt x 203.53418pt.
+Package pdftex.def Info: Images/MAB-5-2-S.png  used on input line 976. on input
+ line 976.
+Package pdftex.def Info: Requested size: 407.66833pt x 203.53418pt on input lin
+e 976.
 
 [29 <./Images/MAB-5-2.png>]
 <Images/OpticalFlowInconsistencies.png, id=153, 1817.79124pt x 812.03375pt>
 File: Images/OpticalFlowInconsistencies.png Graphic file (type png)
 <use Images/OpticalFlowInconsistencies.png>
 Package pdftex.def Info: Images/OpticalFlowInconsistencies.png  used on input l
-ine 998.
-(pdftex.def)             Requested size: 317.07614pt x 141.63719pt.
+ine 998. on input line 998.
+Package pdftex.def Info: Requested size: 317.07614pt x 141.63719pt on input lin
+e 998.
  [30 <./Images/MAB-5-2-S.png>]
 Overfull \hbox (37.3126pt too wide) in paragraph at lines 1028--1057
 [][] 
@@ -416,24 +437,78 @@ Overfull \hbox (7.11986pt too wide) in paragraph at lines 1079--1102
 <Images/Diagonal.JPG, id=165, 6006.44pt x 3388.66pt>
 File: Images/Diagonal.JPG Graphic file (type jpg)
 <use Images/Diagonal.JPG>
-Package pdftex.def Info: Images/Diagonal.JPG  used on input line 1109.
-(pdftex.def)             Requested size: 317.07614pt x 178.85355pt.
+Package pdftex.def Info: Images/Diagonal.JPG  used on input line 1109. on input
+ line 1109.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 1109.
 <Images/Curved.JPG, id=166, 6006.44pt x 3388.66pt>
 File: Images/Curved.JPG Graphic file (type jpg)
 <use Images/Curved.JPG>
-Package pdftex.def Info: Images/Curved.JPG  used on input line 1117.
-(pdftex.def)             Requested size: 317.07614pt x 178.85355pt.
+Package pdftex.def Info: Images/Curved.JPG  used on input line 1117. on input l
+ine 1117.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 1117.
 <Images/Fluted.JPG, id=167, 6006.44pt x 3388.66pt>
 File: Images/Fluted.JPG Graphic file (type jpg)
 <use Images/Fluted.JPG>
-Package pdftex.def Info: Images/Fluted.JPG  used on input line 1125.
-(pdftex.def)             Requested size: 317.07614pt x 178.85355pt.
-
-LaTeX Warning: Reference `fig:diagonal' on page 33 undefined on input line 1131
-.
-
+Package pdftex.def Info: Images/Fluted.JPG  used on input line 1125. on input l
+ine 1125.
+Package pdftex.def Info: Requested size: 317.07614pt x 178.85355pt on input lin
+e 1125.
 [33] [34 <./Images/Diagonal.JPG>] [35 <./Images/Curved.JPG> <./Images/Fluted.JP
-G>] [36] [37] (./working.bbl [38]) [39] [40] (./working.aux)
+G>] [36]
+<Images/AB-4-1.png, id=181, 987.2082pt x 492.8814pt>
+File: Images/AB-4-1.png Graphic file (type png)
+<use Images/AB-4-1.png>
+Package pdftex.def Info: Images/AB-4-1.png  used on input line 1162. on input l
+ine 1162.
+Package pdftex.def Info: Requested size: 452.9679pt x 226.1491pt on input line 
+1162.
+<Images/AB-3-1.png, id=182, 987.2082pt x 492.8814pt>
+File: Images/AB-3-1.png Graphic file (type png)
+<use Images/AB-3-1.png>
+Package pdftex.def Info: Images/AB-3-1.png  used on input line 1176. on input l
+ine 1176.
+Package pdftex.def Info: Requested size: 452.9679pt x 226.1491pt on input line 
+1176.
+
+
+LaTeX Warning: Reference `fig:ab-2-2-succ' on page 37 undefined on input line 1
+187.
+
+
+LaTeX Warning: Reference `fig:mab-1-2-succ' on page 37 undefined on input line 
+1188.
+
+
+LaTeX Warning: Reference `fig:ab-2-2-succ' on page 37 undefined on input line 1
+188.
+
+<Images/MAB-2-2.png, id=183, 987.2082pt x 492.8814pt>
+File: Images/MAB-2-2.png Graphic file (type png)
+<use Images/MAB-2-2.png>
+Package pdftex.def Info: Images/MAB-2-2.png  used on input line 1196. on input 
+line 1196.
+Package pdftex.def Info: Requested size: 452.9679pt x 226.1491pt on input line 
+1196.
+<Images/AB-1-2.png, id=184, 987.2082pt x 492.8814pt>
+File: Images/AB-1-2.png Graphic file (type png)
+<use Images/AB-1-2.png>
+Package pdftex.def Info: Images/AB-1-2.png  used on input line 1205. on input l
+ine 1205.
+Package pdftex.def Info: Requested size: 452.9679pt x 226.1491pt on input line 
+1205.
+[37 <./Images/AB-4-1.png>] [38 <./Images/AB-3-1.png> <./Images/MAB-2-2.png>]
+<Images/AB-3-2.png, id=194, 987.2082pt x 492.8814pt>
+File: Images/AB-3-2.png Graphic file (type png)
+<use Images/AB-3-2.png>
+Package pdftex.def Info: Images/AB-3-2.png  used on input line 1219. on input l
+ine 1219.
+Package pdftex.def Info: Requested size: 452.9679pt x 226.1491pt on input line 
+1219.
+
+[39 <./Images/AB-1-2.png>] [40 <./Images/AB-3-2.png>] (./working.bbl [41])
+[42] [43] (./working.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -442,10 +517,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3969 strings out of 492982
- 59439 string characters out of 6138579
- 140276 words of memory out of 5000000
- 7456 multiletter control sequences out of 15000+600000
+ 3998 strings out of 492985
+ 60002 string characters out of 6138637
+ 139877 words of memory out of 5000000
+ 7477 multiletter control sequences out of 15000+600000
  14040 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,21n,40p,773b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -459,10 +534,10 @@ st/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on working.pdf (49 pages, 42897540 bytes).
+Output written on working.pdf (52 pages, 43080869 bytes).
 PDF statistics:
- 236 PDF objects out of 1000 (max. 8388607)
- 148 compressed objects within 2 object streams
+ 255 PDF objects out of 1000 (max. 8388607)
+ 154 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 106 words of extra memory for PDF output out of 10000 (max. 10000000)
 
