@@ -1188,8 +1188,11 @@ they were correcting, however, they failed to recover the route. Examples of bot
 and \ref{fig:mab-1-2-succ} respectively. In particular Figure \ref{fig:ab-2-2-succ} highlights a problem with the timed
 nature of the experiments. Though it appears the robot will recover, there is no way of knowing for sure.
 The timer is used as there is no real way to distinguish memories of home and food source from memories of the route using
-the current model.
-
+the current model. We should also note that using timers on the robot caused a great deal of inconsistency in general; during
+recapitulation of AB runs, the robot was meant to move for a time interval of 2 \textit{seconds}, during MAB experiments, this
+interval was reduced to 1 \textit{second}. It can clearly be seen from the trajectory plots that the robot did not move in
+consistent intervals during recapitulation. A potential solution to this problem is to use the \textit{move()} command to
+move a set distance, however, this has potential to cause problems with the CA system.
 
 \begin{figure}
  \centering
@@ -1223,13 +1226,75 @@ the modified learning system (tagged MAB) performed better in general, however t
   }
 \end{figure}
 
-In all, the visual navigation system performed quite well. Drastic errors were rare, though certainly present. The full series
+In all, the visual navigation system performed quite well. Drastic errors were rare, though certainly present.The full series
 of trajectories in Appendix \ref{app:plots} show that the network was capable of reproducing routes on a robot through a
 cluttered (yet low detail due to the distorted field of vision) environment using a visual scanning route following behaviour.
+\newline
+
+What follows was not a formal experiment, but rather an exercise in curiosity. We gave AntBot the ability to learn homeward
+routes by rotating each image by $180^{\circ}$ and storing both the original and rotated versions. The robot was then set
+to run a learning route through an empty arena and tasked with retracing its route home, then back out, and so on. Two runs
+of this nature were conducted, however, only one was recorded. During the first run, the arena contained a box and the
+robot did not cope well with this landscape; outbound routes performed as well as could be expected, though inbound routes
+failed badly, requireing numerous corrections. The second run (taking place in the empty arena) faired far better, though
+corrections were still required. The trajectories can be seen in Figure \ref{fig:home}. Two corrections were required
+through the course of these experiments during runs \textit{Memory 1} and \textit{Memory 5}. Both corrections occurred
+at an offset of greater than 2000mm (in the negative direaction) from the origin and, once corrected, the robot successfully
+navigated home. There was one out of three homeward routes that  
+
+\begin{figure}
+ \centering
+  \includegraphics[width=\textwidth]{Homeward}
+  \caption{
+    \label{fig:home} Trajectory plot of the homeward experiment. The Vicon capture was accidentally stopped
+    early during outward trip \textit{Memory 4} and the last section of the trip was missed. The linkage has
+    been filled in to show where the rough route the robot took but it must be understood that this is not
+    part of the recording, the line was simply drawn to fill in the gap. 
+  }
+\end{figure}
+
 \newpage
 
 \section{ Discussion } \label{sec:discussion}
-\textit{Included for skeleton purposes.} 
+\subsection{Conclusion}
+In this project, we have investigated the plausibility of a visual collision avoidance system based on optical flow combining
+this with a visual navigation model using the Mushroom Body. We investigated two different optical flow based collision avoidance
+systems and found results indicating the impracticality of a time-to-collision/depth centric system on the current robot. We
+also presented here results which show that even a basic flow filter based system can function well, though is certainly
+not without its flaws. We then investigated the Mushroom Body circuit for visual navigation, undertaking the debugging
+process to find out why the network seemingly did not function as it should. In the end, the problem with the visual
+navigation was found to be the route following strategy which was failing as a result of the control system implementation. We
+implemented a visual scanning algorithm for the robot and saw a drastic improvement in the functionality of the navigation
+system. Results presented for the Mushroom Body demonstrate a clear capacity for route memory in the context of a ``visual
+corridor'' allowing the robot to navigate in the manner observed in ants. While we have seen improvement in the performance
+of the MB model, we do still present many cases where the robot became confused, or chose its direction incorrectly. We will
+present ideas for future improvement in the following section.
+
+\subsection{Future work}
+\subsubsection{Improvements on work presented}
+Here we wish to draw attention to the flaws in the experiments or research presented here and propose solutions.
+\newline
+
+Firstly, we wish to discuss time-to-contact and image depth. While the methods presented did not work, there are
+some modifications that could be made to gain a functioning system. We know that the system struggles to cope
+with a dense flow field, yet the points returned by the \textit{goodFeaturesToTrack()} result in inconsistency. We
+could however take a subset of a dense flow field to reduce the computational demand, yet maintain the stability of
+considering set points in the frame. The flow field was not the only problem in computing time-to-contact. We also
+need the translational velocity of the camera. \textit{Scimeca} found that a dense flow field was far better at
+computing accurate speed information than a sparse field, however, only one field may be in use on the robot at
+a single time. Introducing a subset system would allow us to use the dense flow information to compute the speed
+which gives us a more accurate estimation of time-to-contact. Alternatively, wheel encoders could be used to compute the
+speed information \textit{[NOTE: STEPCOUNTING]}.
+\newline
+
+We note also that AntBot's field of vision is greatly distorted and while the tussocks may seem to completely
+fill the camera view, in reality, they are providing minimal detail. This could quite easily be remedied by
+constructing taller tussocks which provide more detail. We think that this could have a great effect on the
+performance of the VN and CA systems here presented.
+\newline
+
+ 
+\subsubsection{Hardware engineering}
 
 \newpage
 

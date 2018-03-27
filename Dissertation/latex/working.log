@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  26 MAR 2018 16:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  27 MAR 2018 10:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -484,31 +484,38 @@ LaTeX Warning: Reference `fig:mab-1-2-succ' on page 37 undefined on input line
 LaTeX Warning: Reference `fig:ab-2-2-succ' on page 37 undefined on input line 1
 188.
 
-<Images/MAB-2-2.png, id=183, 987.2082pt x 492.8814pt>
+[37 <./Images/AB-4-1.png>]
+<Images/MAB-2-2.png, id=187, 987.2082pt x 492.8814pt>
 File: Images/MAB-2-2.png Graphic file (type png)
 <use Images/MAB-2-2.png>
-Package pdftex.def Info: Images/MAB-2-2.png  used on input line 1196. on input 
-line 1196.
+Package pdftex.def Info: Images/MAB-2-2.png  used on input line 1199. on input 
+line 1199.
 Package pdftex.def Info: Requested size: 452.9679pt x 226.1491pt on input line 
-1196.
-<Images/AB-1-2.png, id=184, 987.2082pt x 492.8814pt>
+1199.
+<Images/AB-1-2.png, id=188, 987.2082pt x 492.8814pt>
 File: Images/AB-1-2.png Graphic file (type png)
 <use Images/AB-1-2.png>
-Package pdftex.def Info: Images/AB-1-2.png  used on input line 1205. on input l
-ine 1205.
+Package pdftex.def Info: Images/AB-1-2.png  used on input line 1208. on input l
+ine 1208.
 Package pdftex.def Info: Requested size: 452.9679pt x 226.1491pt on input line 
-1205.
-[37 <./Images/AB-4-1.png>] [38 <./Images/AB-3-1.png> <./Images/MAB-2-2.png>]
-<Images/AB-3-2.png, id=194, 987.2082pt x 492.8814pt>
+1208.
+<Images/AB-3-2.png, id=189, 987.2082pt x 492.8814pt>
 File: Images/AB-3-2.png Graphic file (type png)
 <use Images/AB-3-2.png>
-Package pdftex.def Info: Images/AB-3-2.png  used on input line 1219. on input l
-ine 1219.
+Package pdftex.def Info: Images/AB-3-2.png  used on input line 1223. on input l
+ine 1223.
 Package pdftex.def Info: Requested size: 452.9679pt x 226.1491pt on input line 
-1219.
-
-[39 <./Images/AB-1-2.png>] [40 <./Images/AB-3-2.png>] (./working.bbl [41])
-[42] [43] (./working.aux)
+1223.
+ [38 <./Images/AB-3-1.png>] [39 <./Images/MAB-2-2.png> <./Images/AB-1-2.png>]
+<Images/Homeward.png, id=199, 987.2082pt x 492.8814pt>
+File: Images/Homeward.png Graphic file (type png)
+<use Images/Homeward.png>
+Package pdftex.def Info: Images/Homeward.png  used on input line 1247. on input
+ line 1247.
+Package pdftex.def Info: Requested size: 452.9679pt x 226.1491pt on input line 
+1247.
+ [40 <./Images/AB-3-2.png>] [41 <./Images/Homeward.png>] [42] (./working.bbl [4
+3]) [44] [45] (./working.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -517,10 +524,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3998 strings out of 492985
- 60002 string characters out of 6138637
- 139877 words of memory out of 5000000
- 7477 multiletter control sequences out of 15000+600000
+ 4004 strings out of 492985
+ 60119 string characters out of 6138637
+ 139887 words of memory out of 5000000
+ 7482 multiletter control sequences out of 15000+600000
  14040 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,21n,40p,773b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -534,10 +541,10 @@ st/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on working.pdf (52 pages, 43080869 bytes).
+Output written on working.pdf (54 pages, 43164382 bytes).
 PDF statistics:
- 255 PDF objects out of 1000 (max. 8388607)
- 154 compressed objects within 2 object streams
+ 263 PDF objects out of 1000 (max. 8388607)
+ 158 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 106 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 111 words of extra memory for PDF output out of 10000 (max. 10000000)
 
