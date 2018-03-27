@@ -33,4 +33,6 @@
 \contentsline {section}{\numberline {7} Discussion }{41}
 \contentsline {subsection}{\numberline {7.1}Conclusion}{41}
 \contentsline {subsection}{\numberline {7.2}Future work}{42}
-\contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{45}
+\contentsline {subsubsection}{\numberline {7.2.1}Improvements on work presented}{42}
+\contentsline {subsubsection}{\numberline {7.2.2}Engineering}{44}
+\contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{47}

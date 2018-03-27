@@ -1293,9 +1293,49 @@ constructing taller tussocks which provide more detail. We think that this could
 performance of the VN and CA systems here presented.
 \newline
 
- 
-\subsubsection{Hardware engineering}
+The filtering CA system certainly requires refinement. We have shown that it works and is plausible, but
+the implementation leaves a lot to be desired. Ideally we would like to see smooth, immediate responses
+to stimuli. A proportional response would be excellent, however, this presents a number of challenges
+from a hardware perspective which will be discussed in Section \ref{sec:engineering}. It was noted earlier
+that such responses were too slow for the experimental environment, however, these methods were tested
+pre-upgrade. Turning methods with the new power supply were untested, however it is clear that the robot
+is capable of faster movement in general, so turning will be faster and may now be an option. For the
+same reason, Klinokinesis may now be a viable route following strategy in a cluttered environment where
+it was not on the uptake of this project.
+\newline
 
+One of the original goals for this project was to investigate the performance of a MB based navigational
+model which used real weightings for the KCs, as opposed to binary weightings. Code was in fact written
+to model this, however, the model was never tested or used in experiments due to the difficulties in
+establishing a working baseline using the binary model, so we instead decided to focus on achieving that
+baseline. However, the real valued network could easily be put into use in future iterations of this project.
+\newline
+
+Finally, the experimental scenario itself could be made far more complex. Admittedly, we aimed to demonstrate
+basic functionality of the visual navigation system in the real world using a scanning route following strategy,
+however, we have implementations of the Central Complex neural model as well as a method for combining
+both the CX and MB models to perform a joint navigational task \cite{Zhang2017, Scimeca2017} present on the robot.
+The building blocks have been gradually placed over the last few years to allow for some interesting experiments to
+be conducted. A simple scenario was dreamt up early in this project but deemed impractical at the time; however,
+it may now be possible to build such a scenario. We set up an arena, similar to the ones used in our experiments
+though ideally larger. We define two locations in the arena to act as a food source and a nest then we use some
+abstract feedback system whereby the robot receives a signal to tell it that it has arrived at the food source or
+the nest. The robot can be sent on a foraging run from the nest until it finds the food source, storing path
+integration information as it goes. Upon finding the food source, the robot navigates back home using
+the path integration vector and collision avoidance learning the homeward route as it goes. It can then
+navigate back out via the PI vector and collision avoidance, learning the outbound route as it goes. The final
+stage is then to allow the robot to follow the learned visual routes. An extension, though this seems impractical
+on AntBot currently, could be to maintain a single instance of the navigational models over multiple environments
+to see if the robot can remember multiple different routes to food, rather than just a single route.
+ 
+\subsubsection{Engineering} \label{sec:engineering}
+Here we wish to present future engineering suggestions regarding AntBot. The first thing that must be talked
+about is the codebase itself. As the code is inherited from three previous generations of the project it has
+become somewhat of a mess; combined with the process of learning to program in Android, as well as the fact that
+much of the existing code (admittedly, including our own) is poorly documented this means that a significant
+amount of time during a project is likely to be spent getting to grips with the robot and the codebase. There
+is a straightforward, though horrendously time consuming fix in refactoring and documenting much of the code on
+AntBot. 
 \newpage
 
 \bibliographystyle{plain}
