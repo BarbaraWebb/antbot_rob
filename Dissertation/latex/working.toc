@@ -35,4 +35,6 @@
 \contentsline {subsection}{\numberline {7.2}Future work}{42}
 \contentsline {subsubsection}{\numberline {7.2.1}Improvements on work presented}{42}
 \contentsline {subsubsection}{\numberline {7.2.2}Engineering}{44}
-\contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{47}
+\contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{49}
+\contentsline {subsection}{\numberline {A.1}AB Runs}{49}
+\contentsline {subsection}{\numberline {A.2}MAB Runs}{53}

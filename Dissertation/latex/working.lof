@@ -11,12 +11,31 @@
 \contentsline {figure}{\numberline {11}{\ignorespaces The autoscaled plot for run MAB-5-2. \relax }}{29}
 \contentsline {figure}{\numberline {12}{\ignorespaces The set-scale plot for run MAB-5-2; forcing the axes to a uniform scale over all runs gives a more accurate immediate view of the runs and their similarity.\relax }}{30}
 \contentsline {figure}{\numberline {13}{\ignorespaces $\pm 45^{\circ }$ offset image frames showing the flow vectors computed at each point (distinct black pixels). The five images were taken over the course of one minute while the robot was stationary in G.17. \relax }}{31}
-\contentsline {figure}{\numberline {14}{\ignorespaces The diagonal wall arena. \relax }}{34}
-\contentsline {figure}{\numberline {15}{\ignorespaces The curved wall arena. \relax }}{35}
-\contentsline {figure}{\numberline {16}{\ignorespaces The fluted walls arena. \relax }}{35}
-\contentsline {figure}{\numberline {17}{\ignorespaces Trajectory plot of run AB-4-1; this run was considered a failure of the Visual Navigation system. \relax }}{37}
-\contentsline {figure}{\numberline {18}{\ignorespaces Trajectory plot of run AB-3-1; this run was considered a success of the Visual Navigation system. \relax }}{38}
-\contentsline {figure}{\numberline {19}{\ignorespaces Trajectory plot of run AB-1-2; a near-successful recovery. \relax }}{39}
-\contentsline {figure}{\numberline {20}{\ignorespaces Trajectory plot of run AB-1-2; a failed recovery. \relax }}{39}
-\contentsline {figure}{\numberline {21}{\ignorespaces Trajectory plot of run AB-3-2. \relax }}{40}
-\contentsline {figure}{\numberline {22}{\ignorespaces Trajectory plot of the homeward experiment. The Vicon capture was accidentally stopped early during outward trip \textit {Memory 4} and the last section of the trip was missed. The linkage has been filled in to show where the rough route the robot took but it must be understood that this is not part of the recording, the line was simply drawn to fill in the gap. \relax }}{41}
+\contentsline {figure}{\numberline {14}{\ignorespaces The appearance of the tussock in the visual frame (boxed in red). Though the tussock is completely obstructing the frontal section of the robot's view, the tussock is comparitively small in the visual frame. This image was taken without the arena. \relax }}{34}
+\contentsline {figure}{\numberline {15}{\ignorespaces The diagonal wall arena. \relax }}{35}
+\contentsline {figure}{\numberline {16}{\ignorespaces The curved wall arena. \relax }}{35}
+\contentsline {figure}{\numberline {17}{\ignorespaces The fluted walls arena. \relax }}{35}
+\contentsline {figure}{\numberline {18}{\ignorespaces Trajectory plot of run AB-4-1; this run was considered a failure of the Visual Navigation system. \relax }}{37}
+\contentsline {figure}{\numberline {19}{\ignorespaces Trajectory plot of run AB-3-1; this run was considered a success of the Visual Navigation system. \relax }}{38}
+\contentsline {figure}{\numberline {20}{\ignorespaces Trajectory plot of run AB-1-2; a near-successful recovery. \relax }}{39}
+\contentsline {figure}{\numberline {21}{\ignorespaces Trajectory plot of run AB-1-2; a failed recovery. \relax }}{39}
+\contentsline {figure}{\numberline {22}{\ignorespaces Trajectory plot of run AB-3-2. \relax }}{40}
+\contentsline {figure}{\numberline {23}{\ignorespaces Trajectory plot of the homeward experiment. The Vicon capture was accidentally stopped early during outward trip \textit {Memory 4} and the last section of the trip was missed. The linkage has been filled in to show where the rough route the robot took but it must be understood that this is not part of the recording, the line was simply drawn to fill in the gap. \relax }}{41}
+\contentsline {figure}{\numberline {24}{\ignorespaces Run AB-1-1. \relax }}{49}
+\contentsline {figure}{\numberline {25}{\ignorespaces Run AB-1-2. \relax }}{49}
+\contentsline {figure}{\numberline {26}{\ignorespaces Run AB-2-1. \relax }}{50}
+\contentsline {figure}{\numberline {27}{\ignorespaces Run AB-2-2. \relax }}{50}
+\contentsline {figure}{\numberline {28}{\ignorespaces Run AB-3-1. \relax }}{51}
+\contentsline {figure}{\numberline {29}{\ignorespaces Run AB-3-2. \relax }}{51}
+\contentsline {figure}{\numberline {30}{\ignorespaces Run AB-4-1. \relax }}{52}
+\contentsline {figure}{\numberline {31}{\ignorespaces Run AB-4-2. \relax }}{52}
+\contentsline {figure}{\numberline {32}{\ignorespaces Run MAB-1-1. \relax }}{53}
+\contentsline {figure}{\numberline {33}{\ignorespaces Run MAB-1-2. \relax }}{53}
+\contentsline {figure}{\numberline {34}{\ignorespaces Run MAB-2-1. \relax }}{54}
+\contentsline {figure}{\numberline {35}{\ignorespaces Run MAB-2-2. \relax }}{54}
+\contentsline {figure}{\numberline {36}{\ignorespaces Run MAB-3-1. \relax }}{55}
+\contentsline {figure}{\numberline {37}{\ignorespaces Run MAB-3-2. \relax }}{55}
+\contentsline {figure}{\numberline {38}{\ignorespaces Run MAB-4-1. \relax }}{56}
+\contentsline {figure}{\numberline {39}{\ignorespaces Run MAB-4-2. \relax }}{56}
+\contentsline {figure}{\numberline {40}{\ignorespaces Run MAB-5-1. \relax }}{57}
+\contentsline {figure}{\numberline {41}{\ignorespaces Run MAB-5-2. \relax }}{57}

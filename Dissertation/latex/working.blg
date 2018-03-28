@@ -17,45 +17,45 @@ Warning--empty author in Mobbs1982
 Name 1 in "D.J. Willshaw, O.P. Buneman, AND H. C. Longuet-Higgins" has a comma at the end for entry Willshaw1969
 while executing---line 1090 of file plain.bst
 Warning--empty journal in ODonovan2005
-You've used 16 entries,
+You've used 17 entries,
             2118 wiz_defined-function locations,
-            609 strings with 6882 characters,
-and the built_in function-call counts, 4856 in all, are:
-= -- 457
-> -- 234
+            618 strings with 7093 characters,
+and the built_in function-call counts, 5240 in all, are:
+= -- 496
+> -- 252
 < -- 1
-+ -- 96
-- -- 76
-* -- 339
-:= -- 818
-add.period$ -- 45
-call.type$ -- 16
-change.case$ -- 84
++ -- 104
+- -- 82
+* -- 372
+:= -- 881
+add.period$ -- 48
+call.type$ -- 17
+change.case$ -- 90
 chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 173
-empty$ -- 397
-format.name$ -- 76
-if$ -- 1005
+cite$ -- 20
+duplicate$ -- 184
+empty$ -- 426
+format.name$ -- 82
+if$ -- 1082
 int.to.chr$ -- 0
-int.to.str$ -- 16
-missing$ -- 12
-newline$ -- 79
-num.names$ -- 32
-pop$ -- 97
+int.to.str$ -- 17
+missing$ -- 13
+newline$ -- 84
+num.names$ -- 34
+pop$ -- 101
 preamble$ -- 1
-purify$ -- 68
+purify$ -- 73
 quote$ -- 0
-skip$ -- 129
+skip$ -- 136
 stack$ -- 0
-substring$ -- 266
-swap$ -- 25
+substring$ -- 303
+swap$ -- 26
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 64
+type$ -- 68
 warning$ -- 3
-while$ -- 45
-width$ -- 18
-write$ -- 164
+while$ -- 49
+width$ -- 19
+write$ -- 175
 (There were 2 error messages)

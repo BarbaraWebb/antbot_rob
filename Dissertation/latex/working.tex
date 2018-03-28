@@ -1,11 +1,13 @@
 
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt,twoside,openright]{article}
+
 \usepackage[toc,page]{appendix}
 \usepackage{amsmath}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{multirow}
+\usepackage[section]{placeins}
 \geometry{margin=1in}
 \graphicspath{ {Images/} }
 \begin{document}
@@ -40,7 +42,10 @@ Dr. Barbara Webb
 \begin{flushleft}
  {\small
   I would like to take the opportunity to thank my supervisor, Dr. Barbara Webb, for her
-  guidance, and invaluable insight on the subject matter. My gratitude also extends to
+  guidance, and invaluable insight on the subject matter. I would also like to thank the
+  insect robotics group, in partiular Jan Stankiewicz, for helping me use and understand the
+  Vicon motion capture system used to gather results, as well as helping me talk through many
+  problems throughout the project. My gratitude also extends to
   Zhaoyu Zhang and Leonard Eberding, two of my predecessors on this project; both have been
   extremely useful in explaining the existing codebase and operations of the robot where they
   were not always clear. Finally I should like to thank my parents, for their unwavering support
@@ -1015,8 +1020,12 @@ This flow information is key to computing both the speed of motion and the focus
 time-to-contact is not accurate nor consistent. Though TTC was abandoned as a method for collision avoidance as part of this
 project, there are a number of modifications that could be applied to make this more stable, however, any method of computing the
 TTC relies on an accurate speed calculation. The works on which we based this system use encoder information to compute the
-speeds, and while this is not entirely implausible from a biological standpoint \textit{[NOTE: STEPCOUNTING REFERENCE]}, we are currently
-reliant on optical flow alone for speed retrieval. 
+speeds, and while this is plausible from a biological standpoint \cite{Wittlinger1965}, we are currently
+reliant on optical flow alone for speed retrieval.
+\newline
+
+This CA system was abandoned and the reader should note that the code is still on the robot, though commented and missing some
+sections. The menu option on the robot was repurposed to allow easy debugging of other procedures.
 
 \subsubsection{Filtering}
 The filtering system proved to be quite robust in its operation; over the thirty functional performance runs we only note four direct
@@ -1070,9 +1079,19 @@ this system; it was removed as the number of failed avoid maneuvers was much gre
 Even more desireable would be a proportional feedback control system, however this presents a number of technical challenges for the AntBot. Secondly,
 AntBot's view is rather distorted due to the $360^{\circ}$ lens attachment. The high-wall enclosure was introduced to reduce the effects of background noise
 however, AntBot can actually see out of this arena. The lens distortion also presents challenges with the tussocks. While they are visible, they are
-extremely small in the image frame unless placed directly in front of the robot \textit{[NOTE: NEED FIGURE HERE TO DEMO LENS DISTORTION]}. The simple
+extremely small in the image frame unless placed directly in front of the robot (Figure \ref{fig:distortion}). The simple
 solution would be to construct larger tussocks. The area observable outside the arena will have minimal effect unless there is no immediate stimulus
 in the arena, however it may cause problems if the stimulus is out of range (i.e. not yet effectively visible to the camera).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{TussockInFrame}
+  \includegraphics[width=0.7\textwidth]{TussockInFront}
+  \caption{
+    \label{fig:distortion} The appearance of the tussock in the visual frame (boxed in red). Though the tussock is completely obstructing the frontal
+    section of the robot's view, the tussock is comparitively small in the visual frame. This image was taken without the arena.
+  }
+\end{figure}
 
 \begin{center}
   \begin{table}
@@ -1140,7 +1159,7 @@ is reacting to situations where no reaction is necessary. Again, this points to 
 question the choice of filter. The filter was chosen for simplicity as it was already on-board and had demonstrated the capacity to compute
 fairly accurate speed information \cite{Scimeca2017} with a dense flow field; though usage of the existing filter was justified,
 it may be worth considering something different. While we feel good results were achieved, it is apparent that many refinements can, and indeed should
-be made.
+be made (See Section \ref{sec:discussion}).
 
 \subsection{Visual Navigation using the Mushroom Body}
 The results for the Visual Navigation portion of the project are somewhat harder to quantify. We can say with certainty that the Mushroom Body circuit
@@ -1184,14 +1203,14 @@ Figure \ref{fig:ab-3-1-succ} demonstrates the ideal behaviour wherein the robot 
 correcting to keep itself on course. It is in this behaviour we see the model's capacity to remember the visual corridor
 correctly. We do occassionally observe another behaviour; the robot will lose its way and recover. This behaviour occurred in
 cases where the robot was lucky enough to get a view which would allow it to correct. There were cases which looked as if
-they were correcting, however, they failed to recover the route. Examples of both can be seen in Figures \ref{fig:ab-2-2-succ}
-and \ref{fig:mab-1-2-succ} respectively. In particular Figure \ref{fig:ab-2-2-succ} highlights a problem with the timed
+they were correcting, however, they failed to recover the route. Examples of both can be seen in Figures \ref{fig:mab-2-2-succ}
+and \ref{fig:ab-1-2-fail} respectively. In particular Figure \ref{fig:mab-2-2-succ} highlights a problem with the timed
 nature of the experiments. Though it appears the robot will recover, there is no way of knowing for sure.
 The timer is used as there is no real way to distinguish memories of home and food source from memories of the route using
 the current model. We should also note that using timers on the robot caused a great deal of inconsistency in general; during
 recapitulation of AB runs, the robot was meant to move for a time interval of 2 \textit{seconds}, during MAB experiments, this
 interval was reduced to 1 \textit{second}. It can clearly be seen from the trajectory plots that the robot did not move in
-consistent intervals during recapitulation. A potential solution to this problem is to use the \textit{move()} command to
+consistent intervals during recapitulation. A potential solution to this problem is to use the \textit{move} command to
 move a set distance, however, this has potential to cause problems with the CA system.
 
 \begin{figure}
@@ -1284,13 +1303,27 @@ need the translational velocity of the camera. \textit{Scimeca} found that a den
 computing accurate speed information than a sparse field, however, only one field may be in use on the robot at
 a single time. Introducing a subset system would allow us to use the dense flow information to compute the speed
 which gives us a more accurate estimation of time-to-contact. Alternatively, wheel encoders could be used to compute the
-speed information \textit{[NOTE: STEPCOUNTING]}.
+distance and therefore speed information \cite{Wittlinger1965}.
 \newline
 
-We note also that AntBot's field of vision is greatly distorted and while the tussocks may seem to completely
+We note also that AntBot's field of vision is distorted and while the tussocks may seem to completely
 fill the camera view, in reality, they are providing minimal detail. This could quite easily be remedied by
 constructing taller tussocks which provide more detail. We think that this could have a great effect on the
 performance of the VN and CA systems here presented.
+\newline
+
+The results for the VN portion of this project are somewhat lacklustre; while they show promise for the model,
+there is no obvious way to quantify the results. Saying ``this route looks similar to this other route'' is
+not a good way of presenting results. In part, this is due to the nature of the experiments, errors were
+not corrected as doing so meant stepping into the arena and corrupting AntBot's view, however, it can
+be seen in Figure \ref{fig:home} that applying corrections to the robot did not result in a corrupted route
+and in fact could have produced more meaningful results. One might suggest that we take some similarity metric
+such as the sum of squared error between the two routes, establishing an error threshold for what might be
+considered a success. In practice this is made difficult by the nature of the information returned by the
+Vicon system though it may not be impossible. The recordings are of different lengths and even removing
+duplicates (e.g. where the robot was sat still for multiple frames) does not result in frame $x$ in the
+learning run corresponding to frame $x$ in the memory run. Computing the distance between the points
+may not be the best method but it certainly gives something more tangible than the current results.
 \newline
 
 The filtering CA system certainly requires refinement. We have shown that it works and is plausible, but
@@ -1331,11 +1364,40 @@ to see if the robot can remember multiple different routes to food, rather than 
 \subsubsection{Engineering} \label{sec:engineering}
 Here we wish to present future engineering suggestions regarding AntBot. The first thing that must be talked
 about is the codebase itself. As the code is inherited from three previous generations of the project it has
-become somewhat of a mess; combined with the process of learning to program in Android, as well as the fact that
-much of the existing code (admittedly, including our own) is poorly documented this means that a significant
-amount of time during a project is likely to be spent getting to grips with the robot and the codebase. There
+become messy; combined with the process of learning to program in Android, as well as the fact that
+much of the existing code (admittedly, including our own) is poorly documented means that a significant
+amount of time during an AntBot project is likely to be spent getting to grips with the robot and the codebase. There
 is a straightforward, though horrendously time consuming fix in refactoring and documenting much of the code on
-AntBot. 
+AntBot. However, this solution also relies on each successor being familiar enough with Android to commit to 
+the system design. This should not be considered a deterrant as any system will have some kind of learning curve,
+however, it is important that any future system has sufficient documentation to allow students to pick up
+the project with relative ease. Operation of the robot should not present a major roadblock. Again, my thanks
+go to my predecessors who were more than willing to discuss the codebase and help me understand the system.
+\newline
+
+While AntBot is certainly a capable robot, the hardware does present some limitations. The two main issues
+are linked to robot control. Firstly, the command execution and synchronisation delays; commands require roughly
+1 second of thread delay to execute and main loops require roughly 0.6 seconds of delay per iteration to keep
+everything in sync. For basic operation, this presents no problems, but a more refined control system (
+from the Android component) is made difficult and accurate timing in threads becomes impossible. Reactionary
+behaviours will work initially, but ultimately the delays cause a delayed reaction (one of the main reasons the
+stop-then-turn behaviour was added to the learning runs for VN experiments). The only known way around this
+is to construct arenas in such a manner that the robot has additional time to cope with the delays. The
+synchronisation delays cause timing issues; however, omitting them causes the application to slow drastically.
+These are necessary by design. Thankfully, the only other platform problem is the firmware on the Arduino
+which can easily be re-written. The firmware architecture is entirely appropriate but the control code
+needs re-written and possibly a sensor added. This became apparent during initial tests with the robot, wherein
+equal speeds to both sides using the \textit{go} command would result in a curved trajectory. As ever with
+wheeled robots, one side has slightly better drive than the other, however, this should be dealt with at a
+firmware level, the left side always requires approximately $90\%$ the power of the right, so we can
+modify the motor commands at a firmware level to reflect this. The turning is also very inaccurate which
+was noted in early scanning tests, and the later homeward route. The turning code is based purely based on
+encoder values, and while there is nothing wrong with this method in theory, in practice it results in the robot
+running over, or under (due to to slippage) the desired angle. A simple PID control system using a gyroscope
+or compass could remove this problem entirely. In this project, we discovered just how seriously simple
+control problems can affect the performance of otherwise good models. As we are interested in the models,
+control should be implemented using whatever sensors are necessary. The key point is that the models themselves
+must only operate on visual information. 
 \newpage
 
 \bibliographystyle{plain}
@@ -1344,7 +1406,162 @@ AntBot.
 
 \appendix
 \section{Visual Navigation trajectory plots} \label{app:plots}
-\textit{Plots to follow...}
+
+The full selection of plots generated from the visual navigation experiments can be viewed here. They were included
+as an Appendix so as not to clutter the discussion with figures.
+
+\subsection{AB Runs}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{AB-1-1}
+  \caption{
+    \label{fig:ab-1-1} Run AB-1-1.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{AB-1-2}
+  \caption{
+    \label{fig:ab-1-2} Run AB-1-2.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{AB-2-1}
+  \caption{
+    \label{fig:ab-2-1} Run AB-2-1.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{AB-2-2}
+  \caption{
+    \label{fig:ab-2-2} Run AB-2-2.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{AB-3-1}
+  \caption{
+    \label{fig:ab-3-1} Run AB-3-1.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{AB-3-2}
+  \caption{
+    \label{fig:ab-3-2} Run AB-3-2.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{AB-4-1}
+  \caption{
+    \label{fig:ab-4-1} Run AB-4-1.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{AB-4-2}
+  \caption{
+    \label{fig:ab-4-2} Run AB-4-2.
+  }
+\end{figure}
+\FloatBarrier
+\newpage
+
+\subsection{MAB Runs}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{MAB-1-1}
+  \caption{
+    \label{fig:mab-1-1} Run MAB-1-1.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{MAB-1-2}
+  \caption{
+    \label{fig:mab-1-2} Run MAB-1-2.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{MAB-2-1}
+  \caption{
+    \label{fig:mab-2-1} Run MAB-2-1.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{MAB-2-2}
+  \caption{
+    \label{fig:mab-2-2} Run MAB-2-2.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{MAB-3-1}
+  \caption{
+    \label{fig:mab-3-1} Run MAB-3-1.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{MAB-3-2}
+  \caption{
+    \label{fig:mab-3-2} Run MAB-3-2.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{MAB-4-1}
+  \caption{
+    \label{fig:mab-4-1} Run MAB-4-1.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{MAB-4-2}
+  \caption{
+    \label{fig:mab-4-2} Run MAB-4-2.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{MAB-5-1}
+  \caption{
+    \label{fig:mab-5-1} Run MAB-5-1.
+  }
+\end{figure}
+
+\begin{figure}[h!]
+ \centering
+  \includegraphics[width=\textwidth]{MAB-5-2-S}
+  \caption{
+    \label{fig:mab-5-2} Run MAB-5-2.
+  }
+\end{figure}
+
+
+
 
 \end{document}
 
