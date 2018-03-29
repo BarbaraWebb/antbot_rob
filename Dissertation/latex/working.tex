@@ -104,7 +104,8 @@ remarkable ability to navigate through complex natural environments, using only 
 visual information and limited computational power. It is well documented that many species of
 ant, and other hymenoptra are capable of very robust visual navigation; however, it is as yet
 unclear how the insects perform this seemingly complex task with such little brainpower. In this
-paper, we will focus on using and extending an existing model for visual navigation in ants using
+paper, we will focus on using (and discussing extensions for) an existing model for visual navigation
+in ants using
 the Mushroom Body circuit, an artificial neural network which emulates the Mushroom Body neuropils
 in the ant brain. We will also discuss biologically plausible methods of visual Collision Avoidance
 using Optical Flow. A robot (AntBot) has been constructed \cite{Eberding2016} to allow us a testing
@@ -119,10 +120,10 @@ the Mushroom Body (whose function was thought to be primarily for olfactory lear
 that this provides a plausible neural model for encoding visual memories.
 \newline
 
-The MB circuit has been implemented and tested on AntBot by Eberding and Zhang respectively, however
+The MB circuit has been implemented and tested on AntBot by \textit{Eberding} and \textit{Zhang} respectively, however
 the existing MB circuit is fairly simple. It uses binary weightings for the connections between
 the visual projection neurons and the Kenyon Cells, and a single boolean Extrinsic Neuron denoting
-image recognition. A modification was made by Zhang, whereby eight ENs were used, one for each of
+image recognition. A modification was made by \textit{Zhang}, whereby eight ENs were used, one for each of
 the cardinal directions in the Central Complex model. This will be discussed further in
 \ref{MBBackground}. The reader should note that the Central Complex (CX) model is primarily used
 to model the task of Path Integration and will not be discussed further (see \cite{Scimeca2017}).
@@ -141,7 +142,7 @@ and biological ones \cite{Low2005}.
 The project aims for the following experimental scenario to be possible: We want to send the robot
 on a run through an obstacle course, allowing it to navigate however it chooses through the
 environment. From here, we want the robot to be able to replicate this route using only visual
-memories, which it should store on that initial run. Finally, we would like the robot to be able to 
+memories, which it should store on that initial run. As a small extension, we would like the robot to be able to 
 navigate home following the reverse of this route. It should be noted that this final step is not
 strictly accurate to the behaviour of the desert ant. As noted by \cite{Baddeley2012} in their
 familiarity-driven study of ant route navigation, \textit{Wehner et al.} \cite{Wehner2006}
@@ -156,8 +157,7 @@ information readily available to AntBot with no additional/specialist sensors. F
 assume that CA is a low-level reactionary behaviour, in that, we do not use any further processing
 of the detected motion; we react based on the immediate stimulus of the flow
 field. We will look at two different optical flow techniques used to build CA systems. We will also
-discuss the effects of using different types of flow field, how the different flow
-techniques behave in the same situation, and different methods of response.
+discuss the effects of using different types of flow field and different methods of response.
 \newline
 
 We then move to the Mushroom Body circuit; this model for visual navigation was demonstrated by
@@ -166,7 +166,7 @@ Body circuit have struggled to achieve similar performance on a robot using the 
 presented by \textit{Ardin et al.}; certainly, no previous iteration
 has dealt with a non-deterministic route through a cluttered environment. We aim to get the original
 \textit{basic} model from \cite{Ardin2016} working on the robot in a robust fashion and hope to
-establish a baseline agains which future iterations can work while modifying the model. We will use
+establish a baseline against which future iterations can work while modifying the model. We will use
 a modified scanning behaviour to establish this baseline; ants have demonstrated use of scanning in
 visual navigation but it is generally accepted that this
 is not the primary method they use to determine a direction after having recognised a scene, rather,
@@ -174,8 +174,8 @@ this scanning behaviour only occurs in certain scenarios (e.g. when the ant beco
 \cite{Kodzhabashev2015}. This will require debugging of the existing model and any interacting
 factors; for example, \textit{Zhang} managed to achieve good results with the MB model using
 klinokinesis as the route following behaviour while a scanning struggled to produce robust routes.
-It should also be noted that the scanning behaviour performed poorly using a Perfect Memory model
-(the highest performing model used by \textit{Ardin et al.}) which may suggest that the model is
+It should also be noted that the scanning behaviour performed poorly using a Perfect Memory model \cite{Zhang2017}
+(the best model used by \textit{Ardin et al.}) which may suggest that the model is
 not all that contributes to the accuracy of recapitulated routes.
 \newline
 
@@ -277,11 +277,12 @@ Where $\Delta_i$ is the distance of a point $p_i = (x,y)$ from the FOE, and $|\v
 translational velocity of the camera computed from optical flow\cite{Souhila2007}.
 \newline
 
-This time-to-contact is then appropriately thresholded and a reaction is generated based on the
-magnitudes of the vectors surrounding the FOE. A ``balance strategy'' is then used as the control law by which
-the robot is directed through the environment; this strategy will be discussed in Section \ref{sec:methods}
-as a modified version was used during development.
-
+This time-to-contact is then used to compute image depth information and a reaction is generated based on the
+magnitudes of the vectors surrounding the FOE. The reaction is controlled by the image depth information
+as well as a ``balance strategy''. The balance strategy steers the robot away from the side of greatest
+flow, but keeps the robot within its designated navigational zone (governed by the depth information). The
+balance strategy is similar in idea to the filtering system described in Section \ref{sec:methods}, though
+the explicit method used by \textit{Souhila and Karim} is not explored in this project.
 
 \subsubsection{ Filtering }
 The filtering method asks the following question: Given my current motion, what visual changes do
@@ -336,7 +337,7 @@ to the weight of the connection between that KC and the Extrinsic Neuron; this a
 ease of reference.
 \newline
 
-The model by \textit{Ardin et al.} (shown in Figure \ref{fig:ardinmb}) consisted of 350 vPNs
+The model by \textit{Ardin et al.} (shown in Figure \ref{fig:ardinmb}) consists of 350 vPNs
 (one for each pixel in the downsampled image). In the second layer we have 20,000 KCs each of
 which receives input from 10 randomly selected vPNs; each KC requires coincident input from multiple
 vPNs to fire. Every KC is then connected to a single EN which sums the number of KCs which are
@@ -362,7 +363,7 @@ decides on its next action by scanning to find the direction of greatest familia
 
 This version of the MB circuit has demonstrated the capacity to learn scene information, as well
 as recapitulate routes by using the scanning technique \cite{Ardin2016}. In 2016, \textit{Eberding}
-implemented the Willshaw Network (WN) on AntBot, which resembles the Mushroom Body neuropils (see \ref{sec:wn}); he
+implemented the Willshaw Network (WN) on AntBot, which resembles the Mushroom Body neuropils (see Section \ref{sec:wn}); he
 demonstrated that the network allowed the agent to perform visual navigation through a sparse testing
 environment\cite{Eberding2016}. The agent navigates by scanning, computing unfamiliarity, and finally
 choosing the direction of minimum unfamiliarity. In order to save on computational resources, the
@@ -383,8 +384,8 @@ A separate model, also implemented by \textit{Zhang}, added seven extrinsic neur
 used to represent one of eight directions relative to the robot's current heading; if we take 0$^\circ$
 to be the robot's forward direction then the other seven directions correspond to $+45^\circ$,
 $+90^\circ$, $+135^\circ$, $\pm180^\circ$, $-135^\circ$, $-90^\circ$, and $-45^\circ$. This model was implemented as a way of
-combining the MB model for visual navigation and the CX model for path integration. While, path
-integration and the CX model are not explored in this project, the model is still worth discussing,
+combining the MB model for visual navigation and the CX model for path integration. While path
+integration and the CX model are not explored in this project, the model is still worth discussing
 as it may still be used to encode a desired response to specific stimuli.
 
 % Should the Klinokinesis Algorithm be given here?
@@ -514,7 +515,6 @@ five applications:
 
 \item{
     The \textit{Combiner} application - This application is used to combine the output from the
-
     VN and PI applications in order to compute what action the robot should take. This application
     governs the movement of the robot based on the two primary navigational systems.
   }
@@ -600,7 +600,7 @@ project and predecessors had caused wear on the power pack and the internal wiri
 needed re-soldered multiple times. In order to have a more robust platform for testing, the on-board
 power system was modified. The aim of the modification was to add a power source which could be charged in-place.
 As such a new power source which could be charged as required without removal was added, along with external
-charging ports and a switch. The internal wiring was re-done such that power could either flow from the
+charging ports and a switch. The internal wiring was set up such that power could either flow from the
 external ports to the battery, or from the battery to the motors controlled by the external switch. The new
 power source is a 9.6V NiMH power pack. Motor speeds and systems which depended on them required re-tuning
 after completion of the modifications. The required modifications to chassis (holes drilled for components)
@@ -617,8 +617,8 @@ a straightforward and neat solution. However, this method of computation for the
 assumption that the camera view only ever moves in the forward direction which is not appropriate
 for AntBot (See Section \ref{sec:platform}). So we look instead at the paper by \textit{Souhila and Karim}
 for an alternative; for this method, we must compute the \textit{focus of expansion} or FOE, however,
-their method of computing the FOE again relied on forward motion of the camera and did not translate
-well into AntBot. A more general method for computing the FOE is given by \cite{ODonovan2005}:
+their method of computing the FOE and did not translate well into AntBot giving a wildly fluctuating FOE.
+A more general method for computing the FOE is given by \cite{ODonovan2005}:
 
 %Copy of description from old backround so I don't have to type out the maths again.
 %\textit{Included for skeleton purposes.}
@@ -676,6 +676,8 @@ TTC = \frac{\Delta_i}{|\vec{V}_t|} \dots
 Where $\Delta_i$ is the distance of a point $p_i = (x,y)$ from the FOE, and $|\vec{V}_t|$ is the
 translational velocity of the camera computed from optical flow\cite{Souhila2007}. 
 \newline
+
+The time-to-contact is computed on a subset of pixels to the front of the robot.
 This time-to-contact is then appropriately thresholded and a reaction is generated based on the
 position of the focus of expansion which provided a simple method of replicating the balance strategy
 used by \cite{Souhila2007} as the FOE will be drawn to one side based on the motion parallax observed.
@@ -697,7 +699,7 @@ to discuss the flow computation itself. The optical flow is computed using openC
 \textit{calcOpticalFlowFarneback()} function. When given two consecutive frames the function returns
 a matrix $M$ of arrays of type double. $M_{y,x}$ is a one-dimensional array of length two which contains
 the displacement in each axis of the respective pixel (i.e. $M_{y,x}[0]$ gives the displacement of the $x$
-coordinate, and $M_{y,x}[1]$ gives the displacement of the $y$ coordinate.
+coordinate, and $M_{y,x}[1]$ gives the displacement of the $y$ coordinate).
 \newline
 
 An optical flow filter was previously implemented by \textit{Scimeca} for the purpose of speed retrieval. 
@@ -716,7 +718,7 @@ an insensitive system, and larger resulted in more noise, though performance was
 itself is the same as the second filter from \cite{Scimeca2017} which was already implemented on the robot.
 \newline
 
-The filter is constructed as an $Nx3$ matrix $F$ such that:
+The filter is constructed as an $N \times 3$ matrix $F$ such that:
 
 \begin{equation}
 F_i = [ \quad sin(-\pi + i\frac{2\pi}{N}) \qquad 0 \qquad 0 \quad ] \quad \textit{for} \quad i \in \{0, N - 1\}
@@ -728,7 +730,7 @@ where $F_i$ is the $ith$ row of $F$. Intuitively each row corresponds to a pixel
 Once the filter is computed, we retrieve the flow for each pixel by adding the displacements
 retrieved from \textit{calcOpticalFlowFarneback()} to the pixel value. 
 For each value of $x$ we apply an offset of $\pm 4px$ which corresponds to our left and right frames centred at
-$\pm 16^{\circ}$. For the $ith$ pixel, with filter vector $\bar F_i$ and flow vector  e$\bar O_i$ we apply the filter
+$\pm 16^{\circ}$. For the $ith$ pixel, with filter vector $\bar F_i$ and flow vector $\bar O_i$ we apply the filter
 simply by computing the projection:
 
 \begin{equation}
@@ -743,7 +745,7 @@ for a single frame simply sums all of these projections:
 \end{equation}
 
 where $K$ is the number of pixels in the image, in our case $K = 900$. This sum is computed for both shifted frames
-and a tuning factor is applied for the simple purpose of making the numbers returned easier to handle.
+and a tuning factor is applied simply to make the numbers returned easier to handle.
 \newline
 
 Now we have defined a way of computing speed differences between the two sides, we
@@ -764,18 +766,18 @@ turn away from the perceived obstacle will be performed. The turn is simply a $\
 A separate method of accumulation was trialled out of interest whereby a single accumulator would be fed the raw difference
 and a sufficiently large positive or negative value would trigger the appropriate response. No difference was noticed in
 performance and so separate accumulators were kept. While this implementation was simple, and not as refined
-as we would have liked, it did demonstrate impressive performance in navigating arenas of varying density.
+as we would have liked, it did demonstrate impressive performance in navigating arenas of varying obstacle density.
 
 \subsection{The Mushroom Body}
 This section will be less of a formal declaration of method, and more a discussion of the process undertaken to get
 the Mushroom Body circuit working in a robust manner.
 
 The Mushroom Body circuit (implemented as a Willshaw Net) was originally implemented by \textit{Eberding} when he
-initially developed the platform. Though the implementation does mirror the model of \textit{Ardin et al.}, the model
+developed the platform. Though the implementation does mirror the model of \textit{Ardin et al.}, the model
 struggled to perform to the same degree despite potentially having more visual information due to the higher resolution
 image of AntBot. The nature of our experimental scenario required (at least initially) that a scanning behaviour be used
-to perform visual navigation and this is the context in which we shall frame our discussion; this because \textit{Zhang}
-did manage to achieve significantly improved results using Klinokinesis as a route following strategy. Initial attempts
+to perform visual navigation and this is the context in which we shall frame our discussion; \textit{Zhang}
+did manage to achieve significantly improved results using klinokinesis as a route following strategy. Initial attempts
 at scanning resulted in extremely poor performance with seemingly no capacity for memory present in the network beyond
 blind luck. The first and most obvious issue was the scanning behaviour itself; while the robot was to turn through a
 $60^{\circ}$ arc in increments of $6^{\circ}$, the actual arc was far larger ($> 100^{\circ}$). On closer inspection of the
@@ -788,10 +790,10 @@ To remedy this, we opt for a different style of scanning which
 we will refer to as \textit{visual scanning}. Since AntBot has a $360^{\circ}$ view, we instead take a still image, and rotate
 it, showing each rotated frame to the network and receiving a familiarity measure; this change was felt justified as we are
 concerned with the performance of the MB model and did not wish to be hampered by robot control issues (though these issues
-can, and we feel should be fixed if possible - See Section \ref{sec:discussion}). These values are stored in an array (as
+can, and we feel should be fixed if possible - see Section \ref{sec:discussion}). These values are stored in an array (as
 with standard scanning), the minimum value is selected and the angle computed by taking the distance from the centre-point
 of the array and multiplying by the number of pixels traversed horizontally then multiplying again by the constant $4$ (degrees/pixel).
-In the first iteration, a highly granular scan was used, however, this was found to be less effective and more prone to erroneous
+In the first iteration, a fine grained scan was used, however, this was found to be less effective and more prone to erroneous
 familiarity measures. Reducing the number of image angles while scanning over the same arc resulted in more stable performance. In total
 $17$ different angles (from $-16px$ to $+16px$ in increments of $2px$) are compared. The image rotation itself is done with
 a basic array rotation algorithm which manipulates matrix columns. With the visual scanning, the problem of robot
@@ -1024,8 +1026,10 @@ speeds, and while this is plausible from a biological standpoint \cite{Wittlinge
 reliant on optical flow alone for speed retrieval.
 \newline
 
-This CA system was abandoned and the reader should note that the code is still on the robot, though commented and missing some
-sections. The menu option on the robot was repurposed to allow easy debugging of other procedures.
+This CA system was abandoned and the reader should note that the code is still on the robot, though commented and with
+a great amount of functionality removed. The menu option on the robot was repurposed to allow easy debugging of other procedures
+in the last stage of the project. In short, no functional implementation is on the robot at this time, though the remnants of
+the implementation are still present.
 
 \subsubsection{Filtering}
 The filtering system proved to be quite robust in its operation; over the thirty functional performance runs we only note four direct
@@ -1272,6 +1276,11 @@ navigated home. There was one out of three homeward routes that
   }
 \end{figure}
 
+These results indicate a significant improvement over the results presented by \textit{Zhang} with regard to the
+scanning route following strategy and bring the performance more in line with the klinokinesis results presented in
+\cite{Zhang2017}. Multiple errors were experienced per run when using scanning, while our visual scanning behaviour
+demonstrated a much more stable performance replicating (albeit with varying degrees of success) 13 of 18 runs, only one of
+which experienced serious error, though it recovered. The homeward experiments experienced only 2 errors over the five memory runs.
 \newpage
 
 \section{ Discussion } \label{sec:discussion}
@@ -1290,8 +1299,9 @@ of the MB model, we do still present many cases where the robot became confused,
 present ideas for future improvement in the following section.
 
 \subsection{Future work}
-\subsubsection{Improvements on work presented}
-Here we wish to draw attention to the flaws in the experiments or research presented here and propose solutions.
+\subsubsection{Improvements on work presented - Potential developments for MInf Part 2}
+Here we wish to draw attention to the flaws in the experiments or research presented here and propose solutions
+as well as suggest potential future developments.
 \newline
 
 Firstly, we wish to discuss time-to-contact and image depth. While the methods presented did not work, there are
