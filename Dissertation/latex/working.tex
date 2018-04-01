@@ -19,7 +19,7 @@
 \vspace*{5cm}
 {\huge Developing AntBot: \par Visual Navigation based on the insect brain \par}
 \vspace{1cm}
-{\itshape Robert Mitchell}
+{\Large \textit{Robert Mitchell}}
 
 \vspace{2cm}
 
@@ -104,7 +104,7 @@ remarkable ability to navigate through complex natural environments, using only 
 visual information and limited computational power. It is well documented that many species of
 ant, and other hymenoptra are capable of very robust visual navigation; however, it is as yet
 unclear how the insects perform this seemingly complex task with such little brainpower. In this
-paper, we will focus on using (and discussing extensions for) an existing model for visual navigation
+paper, we will focus on using (and discuss extensions for) an existing model for visual navigation
 in ants using
 the Mushroom Body circuit, an artificial neural network which emulates the Mushroom Body neuropils
 in the ant brain. We will also discuss biologically plausible methods of visual Collision Avoidance
@@ -116,15 +116,17 @@ platform on which to implement, and experiment with, the algorithms in the
 Though we are able to observe and mimic algorithmically the visual navigational capabilities
 of insects, we still do not understand the precise methods by which this process takes place. The
 model we will look at was propsed by \textit{Ardin et al.} \cite{Ardin2016}, which takes
-the Mushroom Body (whose function was thought to be primarily for olfactory learning), and shows
+the Mushroom Body (whose function is thought to be primarily for olfactory learning), and shows
 that this provides a plausible neural model for encoding visual memories.
 \newline
 
 The MB circuit has been implemented and tested on AntBot by \textit{Eberding} and \textit{Zhang} respectively, however
-the existing MB circuit is fairly simple. It uses binary weightings for the connections between
-the visual projection neurons and the Kenyon Cells, and a single boolean Extrinsic Neuron denoting
+the existing MB circuit is fairly simple. It uses randomized connections between
+the visual projection neurons and the Kenyon Cells, and binary weightings between the Kenyon Cells
+and a single Extrinsic Neuron denoting the level of
 image recognition. A modification was made by \textit{Zhang}, whereby eight ENs were used, one for each of
-the cardinal directions in the Central Complex model. This will be discussed further in
+the cardinal directions in the Central Complex model. This will be discussed further in Section
+Section
 \ref{MBBackground}. The reader should note that the Central Complex (CX) model is primarily used
 to model the task of Path Integration and will not be discussed further (see \cite{Scimeca2017}).
 \newline
@@ -166,7 +168,7 @@ Body circuit have struggled to achieve similar performance on a robot using the 
 presented by \textit{Ardin et al.}; certainly, no previous iteration
 has dealt with a non-deterministic route through a cluttered environment. We aim to get the original
 \textit{basic} model from \cite{Ardin2016} working on the robot in a robust fashion and hope to
-establish a baseline against which future iterations can work while modifying the model. We will use
+establish a baseline against which future projects can work while modifying the model. We will use
 a modified scanning behaviour to establish this baseline; ants have demonstrated use of scanning in
 visual navigation but it is generally accepted that this
 is not the primary method they use to determine a direction after having recognised a scene, rather,
@@ -175,8 +177,8 @@ this scanning behaviour only occurs in certain scenarios (e.g. when the ant beco
 factors; for example, \textit{Zhang} managed to achieve good results with the MB model using
 klinokinesis as the route following behaviour while a scanning struggled to produce robust routes.
 It should also be noted that the scanning behaviour performed poorly using a Perfect Memory model \cite{Zhang2017}
-(the best model used by \textit{Ardin et al.}) which may suggest that the model is
-not all that contributes to the accuracy of recapitulated routes.
+(the best model used by \textit{Ardin et al.}) suggests that the model is
+not the only factor that contributes to the accuracy of recapitulated routes.
 \newline
 
 Finally, we will report the results of the experiments and testing performed at different stages during, and
@@ -196,7 +198,7 @@ Significant contributions:
   \item{Results indicating the impracticality of a time-to-contact based system for Collision Avoidance,}
   \item{Implemented hardware upgrades to AntBot to make the platform more robust,}
   \item{Implemented a new type of scanning behaviour for AntBot,}
-  \item{Successful replication of a route through a cluttered environment using Visual Navigation,}
+  \item{Successful replication of multiple routes through a cluttered environment using Visual Navigation,}
   \item{Implemented a basic but extensible statistical logging utility on AntBot with a complementary parsing and plotting utility written in Python.} %AntBotStats
 \end{enumerate}
 \newpage
@@ -208,7 +210,7 @@ Significant contributions:
 2D image plane\cite{ODonovan2005}. Optical flow is an approximation of this, working from a series
 of images to compute the projected velocity vector for a pixel. A single \textit{flow vector}
 shows the displacement of a single pixel from one image to the next. A set of these flow vectors
-creates a \textit{flow field}, a series of vectors which describe the motion in the complete image.
+creates a \textit{flow field}, a collection of vectors which describe the motion in the complete image.
 \newline
 
 Broadly, there are two types of flow field: dense and sparse (also known as differential and
@@ -281,7 +283,7 @@ This time-to-contact is then used to compute image depth information and a react
 magnitudes of the vectors surrounding the FOE. The reaction is controlled by the image depth information
 as well as a ``balance strategy''. The balance strategy steers the robot away from the side of greatest
 flow, but keeps the robot within its designated navigational zone (governed by the depth information). The
-balance strategy is similar in idea to the filtering system described in Section \ref{sec:methods}, though
+balance strategy is similar to the filtering system described in Section \ref{sec:methods}, though
 the explicit method used by \textit{Souhila and Karim} is not explored in this project.
 
 \subsubsection{ Filtering }
@@ -295,7 +297,7 @@ extent to either side of the expansion pole (the central vertical axis of the pa
 are then offset by $+3^{\circ}$ for the right and $-3^{\circ}$ for the left. The left and right
 filters feed into leaky accumulators, and if the accumulator exceeds a given threshold, a saccade
 in the opposite direction is triggered. The model from \cite{Stewart2010} is shown in Figure
-\ref{fig:stewartca}. We discuss a slightly modified version of this model in section
+\ref{fig:stewartca}. We discuss a modified version of this model in section
 \ref{sec:methods}.
 
 \begin{figure}[h]
@@ -332,7 +334,7 @@ A $1\times360$ vector is used for further processing.
 The generalised MB circuit is a three layer neural network: The first layer consists of a set of
 visual Projection Neurons (vPNs), these connect to the second layer of standard artificial neurons
 referred to as Kenyon Cells (KCs), and finally these KCs connect to a set of Extrinsic Neurons (ENs).
-The reader should note that any reference to the weight of a Kenyon Cell herein is specifically referring
+The reader should note that any reference to the weight of a Kenyon Cell herein is refers specifically
 to the weight of the connection between that KC and the Extrinsic Neuron; this abstraction is made for
 ease of reference.
 \newline
@@ -398,7 +400,7 @@ inputs, storage layer, and outputs.
 
 The idea behind the network stems from the effect of passing a pattern of light beams through two
 patterned pinhole cards and a lens to create a pattern of refraction on a screen. The pattern output
-on the screen is said to be a correlogram of the two patterns. Intuitively, the light pattern output
+on the screen is said to be a correlogram patterns on the cards. Intuitively, the light pattern output
 at $A$ can be passed through filter pattern $B$ to produce pattern $C$. This idea is then refined by
 \textit{Willshaw et al.} into a simple, three-layer neural network. As an aside, though the terminology of artificial
 neural networks is not used in the original paper, the model presented is designed to be interpreted as
@@ -423,16 +425,19 @@ to 1 when $a_i$ and $b_j$ are activated simultaneously.
 This style of network can be transformed into something which models the MB circuit presented by \cite{Ardin2016}.
 The input neurons $N_b$ become the vPNs with multiple inputs going to each synapse. The synapses themselves become the
 KCs, though the weighting convention is reversed with zero being active, and one being inactive. We reduce the set of
-outputs $N_a$ to a single line which represents our reward signal. Coincidence of a pattern of KC activation and a reward
-signal results in instant learning of that pattern by the learning rule set up in \cite{Willshaw1969},
-just as in the MB circuit. Finally we must add the Extrinsic Neuron to
-the model as there is no parallel in the original Willshaw Net. As before the EN simply sums the weights of the KCs activated
-on presentation of an input pattern. Thus, the Willshaw net can be used to model the Mushroom Body circuit.
+outputs $N_a$ to a single line which represents our EN and our reward signal. The output corresponds to the number of
+KCs that are activated by the input pattern, however, learning only occurs on receiving the reward signal (a slight
+modification of Willshaw's original network).
+%Coincidence of a pattern of KC activation and a reward
+%signal results in instant learning of that pattern by the learning rule set up in \cite{Willshaw1969},
+%just as in the MB circuit. Finally we must add the Extrinsic Neuron to
+%the model as there is no parallel in the original Willshaw Net. As before the EN simply sums the weights of the KCs activated
+%on presentation of an input pattern. Thus, the Willshaw net can be used to model the Mushroom Body circuit.
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PLATFORM
 \section{ Platform } \label{sec:platform}
-In order to test the hypothesised models for ant navigation we use a simple robot autonomous - AntBot.
+In order to test the hypothesised models for ant navigation we use a simple autonomous robot - AntBot.
 AntBot was originally developed by \textit{Eberding} in 2016; here we will discuss his design and
 implementation, upon which we develop our algorithms.
 
@@ -442,7 +447,7 @@ as a compact Android robot. The robot required only four components: A sufficien
 phone (A Google Nexus 5 was used) as the brain, the Zumo Robot shield by Pololu as the chassis,
 an Arduino microcontroller to allow them to communicate, and finally a 360$^{\circ}$ camera attachment.
 AntBot uses the same basic structure, however, a Dangu 5 Rover chassis is used as the base, and
-therefore an alternate motor controller board had to be used.
+therefore an alternate motor controller board is used.
 \newline
 
 The Android phone was chosen as the control module for the robot for a number of reasons. Firstly,
@@ -450,7 +455,7 @@ the hardware; a modern smartphone allows a compact, powerful platform on which t
 software system as well as providing built in sensory systems and the libraries to use them (e.g. the
 camera). The Google Nexus 5 is more than capable of running image processing software, analysing
 optical flow patterns, and simulating the required artifical neural networks required for this project.
-Using an Android platform also allows for modular software design (See section \ref{subsubsec:droid}).
+Using an Android platform also allows for modular software design (see Section \ref{subsubsec:droid}).
 In order to mimic the near 360$^{\circ}$ field of view (FOV) given by the ant's compound eyes, we use a
 panoramic lense (the Kogeto Dot), which uses a convex mirror to give a full 360$^{\circ}$ FOV. This
 lense is attached to the front camera and requires some pre-processing to retrieve the desired
@@ -537,7 +542,7 @@ be possible to follow this exact structure.
 
 
 \subsubsection{Arduino}
-The Arduino software can be split into two sections: the \textit{parser} and the \textit{executioner}.
+The Arduino software is split into two sections: the \textit{parser} and the \textit{executioner}\cite{Eberding2016}.
 The parser will receive commands from the serial port and convert them into a series of movement
 commands. These movement commands are then sent to the motor board by the executioner. Encoder
 information may be gathered by the Arduino and sent back to the phone for processing.
@@ -594,12 +599,12 @@ phone, though such utilities should not be difficult to implement.
 Some hardware modifications have been made to the robot. Upon the uptake of this project, AntBot
 was powered by six 1.2V AA NiMH batteries wired in series (using a simple power pack). This power
 pack was connected to the motor board (and subsequently the motors) by a pair of 9V connectors. The robot
-had to be opened up in order to connect or disconnect the batteries from the motors. The batteries themselves
+had to be partially deconstructed to connect or disconnect the batteries from the motors. The batteries themselves
 had to be extracted from the power pack and charged individually. These actions, repeated often by the current
-project and predecessors had caused wear on the power pack and the internal wiring. The wires themselves
+project and predecessors had caused wear on the power pack and the internal wiring. The connections
 needed re-soldered multiple times. In order to have a more robust platform for testing, the on-board
-power system was modified. The aim of the modification was to add a power source which could be charged in-place.
-As such a new power source which could be charged as required without removal was added, along with external
+power system was modified. 
+A new power source which could be charged as required without removal was added, along with external
 charging ports and a switch. The internal wiring was set up such that power could either flow from the
 external ports to the battery, or from the battery to the motors controlled by the external switch. The new
 power source is a 9.6V NiMH power pack. Motor speeds and systems which depended on them required re-tuning
@@ -614,11 +619,11 @@ of the project.
 \subsubsection{Time-to-Collision}
 We attempted to follow the outline presented by \textit{Low and Wyeth} as, at first glance, it seems
 a straightforward and neat solution. However, this method of computation for the TTC relies on the
-assumption that the camera view only ever moves in the forward direction which is not appropriate
-for AntBot (See Section \ref{sec:platform}). So we look instead at the paper by \textit{Souhila and Karim}
+assumption that the camera view only ever moves in the forward direction \cite{Low2005} which is not appropriate
+for AntBot (see Section \ref{sec:platform}). So instead, we look at the paper by \textit{Souhila and Karim}
 for an alternative; for this method, we must compute the \textit{focus of expansion} or FOE, however,
-their method of computing the FOE and did not translate well into AntBot giving a wildly fluctuating FOE.
-A more general method for computing the FOE is given by \cite{ODonovan2005}:
+their method of estimating the FOE and did not translate well into AntBot giving a wildly fluctuating FOE.
+A more general method for computing the FOE is given by \textit{O'Donovan}\cite{ODonovan2005}:
 
 %Copy of description from old backround so I don't have to type out the maths again.
 %\textit{Included for skeleton purposes.}
@@ -665,7 +670,7 @@ We then set $a_{i0} = u, a_{i1} = v$ and finally $b_i = xv - yu$. The TTC can th
 
 Where $y$ is the vertical distance of some point $p = (x,y,z)$ from the
 FOE, $\frac{\partial y}{\partial t}$ is the velocity of translational motion of $y$, and
-$d$ and $v$ are as given in (\ref{eqn:lowttc}).
+$d$ and $v$ are as given in Equation (\ref{eqn:lowttc}).
 A full derivation is given by \textit{O'Donovan} from whom we have adapted this equation.
 \newline
 
@@ -674,7 +679,9 @@ Finally, we can simplify this to the desired equation from \cite{Souhila2007}:
 TTC = \frac{\Delta_i}{|\vec{V}_t|} \dots
 \end{equation}
 Where $\Delta_i$ is the distance of a point $p_i = (x,y)$ from the FOE, and $|\vec{V}_t|$ is the
-translational velocity of the camera computed from optical flow\cite{Souhila2007}. 
+translational velocity of the camera computed from optical flow\footnote{We must note that
+\textit{Souhila and Karim} are not specific as to how they compute the camera velocity, in context
+it seems that they use optical flow techniques, however, their robot is equipped with wheel encoders.}\cite{Souhila2007}.
 \newline
 
 The time-to-contact is computed on a subset of pixels to the front of the robot.
@@ -690,7 +697,9 @@ smooth turn away from the obstacle. This technique was designed to be used with 
 field, however, a version using a dense flow field was attempted. The computation across a dense
 flow field was found to be impractical. No formal results have been collected using this system; any
 apparant functionality was found to be luck instead of a working system. Analysis of functionality
-of such a system on AntBot is left for Section \ref{sec:results}.
+of such a system on AntBot is left for Section \ref{sec:results}. The use of depth information, as in
+\cite{Low2005, Souhila2007}, was planned, but as the TTC is pre-requisite for computing image depth the
+system never reached that stage.
 
 
 \subsubsection{Filtering}
@@ -715,7 +724,7 @@ robot, a smaller angle results in higher frontal sensitivity which was desired f
 want the robot to avoid obstacles to the front, obstacles to the sides should not trigger responses. The offset
 angle was tuned manually and $\pm 16^{\circ}$ was found to perform well; smaller angles resulted in
 an insensitive system, and larger resulted in more noise, though performance was still good. The filter
-itself is the same as the second filter from \cite{Scimeca2017} which was already implemented on the robot.
+itself is second filter from \cite{Scimeca2017} which was already implemented on the robot.
 \newline
 
 The filter is constructed as an $N \times 3$ matrix $F$ such that:
@@ -745,7 +754,7 @@ for a single frame simply sums all of these projections:
 \end{equation}
 
 where $K$ is the number of pixels in the image, in our case $K = 900$. This sum is computed for both shifted frames
-and a tuning factor is applied simply to make the numbers returned easier to handle.
+and a factor is applied simply to make the numbers returned easier to handle.
 \newline
 
 Now we have defined a way of computing speed differences between the two sides, we
@@ -758,12 +767,12 @@ FlowDifference = LeftFlowSum - RightFlowSum
 \end{equation}
 
 which gives us our final stimulus to be used to generate a reaction. Here we employ the idea of ``leaky'' accumulators
-from \cite{Stewart2010}. An accumulator is kept for both sides of the frame. The raw difference is thresholded to account
+from \cite{Stewart2010}. An accumulator is kept for both sides of the frame. The difference is thresholded to account
 for noise such that only significantly positive or negative values contribute to behaviour; this is known as the
 \textit{accumulation threshold}. Once the accumulator on one side exceeds its \textit{reaction threshold}, an immediate
 turn away from the perceived obstacle will be performed. The turn is simply a $\pm 20^{\circ}$ rotation using the robot's
 \textit{turnAround()} function. The accumulators are reset periodically to avoid a build up of old flow information.
-A separate method of accumulation was trialled out of interest whereby a single accumulator would be fed the raw difference
+A separate method of accumulation was trialled out of interest whereby a single accumulator would be fed the raw (thresholded) difference
 and a sufficiently large positive or negative value would trigger the appropriate response. No difference was noticed in
 performance and so separate accumulators were kept. While this implementation was simple, and not as refined
 as we would have liked, it did demonstrate impressive performance in navigating arenas of varying obstacle density.
@@ -831,11 +840,12 @@ In figures \ref{fig:mbbad} and \ref{fig:mbgood} (both produced using visual scan
 returned by the early network with scanning was far from what it should have been. The EN response of 0 should, in theory,
 correspond to the most familiar angle. Figure \ref{fig:mbbad} clearly shows that there is a problem with the Kenyon Cell
 activation in the network; a presented image should activate somewhere in the range of 200 to 500 KCs (this is rough due
-to the pseudo random construction of the network). The EN response shows that at least $1000$ KCs were activated by some
-scan angles; in almost all cases, an EN response of $0$ was caused by a lack of any KC activation (the familiarity measure
+to the pseudo random construction of the network). The EN response shows that at least $1500$ KCs were activated by some
+scan angles; in almost all cases, an EN response of $0$ was caused by a lack of any KC activation or sufficiently
+low KC activation (the familiarity measure
 was initialised as $0$ in the network). To, fix this upper and lower thresholds on KC activation were added to the
 network. If KC activation lay outside these bounds a \textit{maximum unfamiliarity} measure was returned; this value
-was defined as the maximum number of KCs activated by an image during the learning process. The justification for introducing
+was defined as the maximum number of KCs activated by an image during the learning process \cite{Zhang2017}. The justification for introducing
 bounds on KC activation was that too few KCs did not give enough information, while too many represented noise in the network.
 Regardless of the justifiability of this decision, \textit{Ardin et al.} did not encounter such problems in their functionally
 identical model.
@@ -844,25 +854,37 @@ identical model.
 It is here we must note again, \textit{Zhang's} improved performance using Klinokinesis; this suggests that the network itself
 is likely not the issue. Upon performing further debugging
 the problem revealed itself to be related to the visual scanning (just as the original scanning method had experienced similar
-problems); due to a quirk of OpenCV in Java, the \textit{Mat} (matrix) objects are passed by reference (despite there being
-no explicit instruction to do so, and no clear mention of such behaviour in the documentation). When Mat objects are passed,
+problems); due to a quirk of OpenCV in Java, the \textit{Mat} (matrix) objects are subtly passed by reference, there is no
+syntax for this, and it is not the expected behaviour in Java. When Mat objects are passed,
 a separate object called the \textit{matrix header} is actually passed which performs the same function as a pointer in a C-style
-language. Thus, the image rotation algorithm was working correctly, but the image was being rotated in unexpected ways. Simply,
-creating a copy of the Mat object inside the rotation function fixed the issue and the network began functioning correctly.
+language. Thus, the image rotation algorithm was working correctly, but the image was being rotated in unexpected ways as we were
+treating as a pass-by-value scenario. Simply, creating a copy of the Mat object inside the rotation function fixed the issue
+and the system began functioning correctly. Final tuning of the brightness threshold for KC activation was then performed.
 \newline
 
-The final model is largely the same as in \cite{Eberding}; the only real modification being the Kenyon Cell thresholding.
-Normalisation of the PN input was implemented but not found to make a noticable difference so raw PN values were used
-to reduce complexity in the model. 
+The final model is largely the same as in \cite{Eberding2016}; the only real modification being the Kenyon Cell thresholding.
+Normalisation of the PN input was implemented but not found to make a noticable difference in terms of KC activation so raw
+PN values were used to reduce complexity in the model. Normalised PNs may be included in future iterations.
 
+\subsubsection{Real Weightings}
+An alternate version of the Mushroom Body circuit was constructed using real-valued weights as opposed to binary ones. This
+version was adapted from the existing model, changing only the construction of the KC weight matrix and the weight decay procedure.
+In this version, each KC starts with a weight of 1. KC activation remains the same, however, on activation we take the weight and
+multiply it by some learning rate $\alpha$ (the initial model has $\alpha = 0.9$). This weight decay occurs on every activation of the Kenyon Cell. The idea is
+a standard one in machine learning; the more the network observes a pattern, the more familiar that pattern becomes. The motivation
+for such a model is simply to remove the instantaneous learning aspect of the original model. In reality, learning and memory are
+not two distinct processes. Recalling can help reinforce learning. As an example, we could allow AntBot to learn continuously throughout
+the homeward experiment presented in Section \ref{sec:results}; we would hope to see the routes become more accurate over each run. Though
+this model was not used during this project, it was developed as a prototype and felt worth discussing briefly.
 
 \subsection{AntBotStats}\label{sec:abs}
 To aid in debugging the Visual Navigation system and production of results a two-part tool, \textit{AntBotStats} was developed.
-The tool consists of an on-board Java class, \textit{StatFileUtils} (adapted from \textit{LogToFileUtils} \cite{Zhang2017} and a
+The tool consists of an on-board Java class, \textit{StatFileUtils} (adapted from \textit{LogToFileUtils} \cite{Zhang2017}) and a
 Python parsing and plotting tool. The \textit{StatFileUtils} class is designed in such a way that title, plot type, and data can be
 specified. The Python system then reads the file, produces the correct plots and outputs them to a PDF for viewing as a collection.
 The tool is currently quite basic but is designed to be easily extensible to produce different information; for example a module was
-added to produce trajectory plots from the Vicon motion capture system. 
+added to produce trajectory plots from the Vicon motion capture system. We would like to develop this tool further so that a more
+polished version can be made available to future students.
 \newpage
 
 \section{Experimentation}\label{sec:test}
@@ -887,7 +909,7 @@ experiments. The perimeter blind was aligned with the tape markings of the footb
 
 As obstacles, early tests involved the use of large, obvious objects such as cardboard boxes. To try and create a more realistic
 picture for AntBot, simple synthetic tussocks were constructed. These were constructed by taking $1m^2$ synthetic hedge wall panels and
-cutting them down to different sizes. These were then fitted to rough-cut (in an effort to keep sizes non-uniform and somewhat
+cutting them down to different sizes. These were then glued to rough-cut (in an effort to keep sizes non-uniform and somewhat
 natural) wood blocks. The wood blocks compensate for the distance from the ground to AntBot's view height such that AntBot can only
 see the synthetic plant (Figure \ref{fig:tussock}).
 \newline
@@ -901,9 +923,9 @@ see the synthetic plant (Figure \ref{fig:tussock}).
 \end{figure}
 
 \subsection{Collision Avoidance}
-Collision avoidance experiments aimed to test the basic functionality of the system; once demonstrated, we then wished to demonstrate
+Collision avoidance experiments aimed to test the basic functionality of the system; once demonstrated, we then wished to show
 the robustness of the system. Finally, some experiments were performed out of sheer curiosity to determine how predictable the
-system was and how well it coped with less random patterns of obstacles as well as determining the effect of different tuning modifications.
+system was and how well it coped with less random patterns of obstacles.
 Each of the main experiments took place in a set arena and consisted of five runs to observe the consistency in performance. 
 \newline
 
@@ -915,7 +937,7 @@ tussocks.
   \centering
   \includegraphics[width=0.7\textwidth]{Tussock-Interaction}
   \caption{
-    \label{fig:tussock} The arena used for basic tussock interaction
+    \label{fig:tussock-interaction} The arena used for basic tussock interaction
   }
 \end{figure}
 
@@ -929,7 +951,7 @@ far to the North, the avoidance turn triggered would turn the robot away from th
 robot avoided the obstacle, the run would provide no useful data as the robot had not attempted to navigate the more complex arena; thus
 the tussock in question was placed in a location that would trigger an inward turn. Each run was assessed on three criteria: Number of collisions,
 Number of failed avoids, and whether or not there was a \textit{risk-on-end}. A collision was a direct impact with an obstacle that
-should have been avoided where no turn was triggered in response (or the turn only occured after the collision). A failed avoid occurred in
+should have been avoided where no turn was triggered in response (or the turn only occured well after the collision). A failed avoid occurred in
 the case where the robot did react but it was too late in doing so, or the robot could not turn enough due to space constraints. The
 risk-on-end occurs when the robot is about to have a collision and the timer runs out (i.e. a collision would have occured in any other
 navigational scenario); these occurred frequently, however, the vast majority of them would involve a collision with the side of the arena.
@@ -942,7 +964,7 @@ useful and thought-provoking results.
 \newline
 
 \subsection{Visual Navigation}
-Visual navigation experiments were conducted again across different arenas. These arenas were designed in such a way that the optical
+Visual navigation experiments were again conducted across different arenas. These arenas were designed in such a way that the optical
 flow would have little difficulty navigating them, while still providing enough visual information as to make the images captured
 meaningful. A major failure in the collision avoidance system would result in a full reset (though minor failures were permitted to
 continue). Each arena hosted two runs, one starting from the South West corner of the arena, the second starting from the South end
@@ -954,8 +976,8 @@ the learning run, the robot was placed at the start point for the run.
 
 The robot then attempts to recall the route using only visual memory. Scans were performed at regular time intervals, or if the robot
 encountered an obstacle during a routine forward motion. The memory run had a time limit of 60 seconds, the extra time to allow for
-scanning and decision making. If the robot reached the end of the route before the time was up it would behave
-unpredictably as one might expect.
+scanning and decision making. If the robot reached the end of the route (or close proximity to the end of the route) before the time
+was up it would behave unpredictably as one might expect.
 \newline
 
 Eighteen experiments were run in total; the first eight were run as described above, the robot's behaviour was modified slightly
@@ -1021,9 +1043,10 @@ we had previously.
 This flow information is key to computing both the speed of motion and the focus of expansion of the flow field; thus, the
 time-to-contact is not accurate nor consistent. Though TTC was abandoned as a method for collision avoidance as part of this
 project, there are a number of modifications that could be applied to make this more stable, however, any method of computing the
-TTC relies on an accurate speed calculation. The works on which we based this system use encoder information to compute the
-speeds, and while this is plausible from a biological standpoint \cite{Wittlinger1965}, we are currently
-reliant on optical flow alone for speed retrieval.
+TTC relies on an accurate speed calculation. The works on which we based this system have access to far more reliable speed information
+through the use of encoders or flow computed with a high definition camera. The speed information available from AntBot's optical
+flow speed retrieval system is less accurate, though we could implement an encoder based system while remaining biologically
+plausible \cite{Wittlinger1965}
 \newline
 
 This CA system was abandoned and the reader should note that the code is still on the robot, though commented and with
@@ -1064,8 +1087,8 @@ tussock on the way past). The full set of results for the functional performance
       5            & 0                &  1                 & Yes         & 1                & 0            & No            \\ \hline
    \end{tabular}
    \caption{The results for the functional performance experiments on the filtering CA system. (*) This was the only case of
-     a risk on end coming from a tussock during formal experiments, all other potential collisions were with the side of the arena (this scenario will be discussed further
-     in Section \ref{sec:discussion}). (**) The first turn the robot made took it away from the arena in the manner described in \ref{sec:test}, the
+     a risk on end coming from a tussock during formal experiments, all other potential collisions were with the side of the arena.
+     (**) The first turn the robot made took it away from the arena in the manner described in \ref{sec:test}, the
      collision was with the arena wall in the South East corner as the robot had no where left to go.
     }
     \label{tab:ofres}
@@ -1093,7 +1116,7 @@ in the arena, however it may cause problems if the stimulus is out of range (i.e
   \includegraphics[width=0.7\textwidth]{TussockInFront}
   \caption{
     \label{fig:distortion} The appearance of the tussock in the visual frame (boxed in red). Though the tussock is completely obstructing the frontal
-    section of the robot's view, the tussock is comparitively small in the visual frame. This image was taken without the arena.
+    section of the robot's view, the tussock is comparitively small in the visual frame. This image was taken without the enclosure.
   }
 \end{figure}
 
@@ -1106,7 +1129,7 @@ in the arena, however it may cause problems if the stimulus is out of range (i.e
       \textbf{Run} & Collision        & Failed avoid       & As expected & Collision        & Failed avoid & As expected   \\ \hline
       1            &  1               & 0                  & No          & 1                & 0            & Almost        \\ \hline
       2            &  1               & 0                  & No          & 1                & 0            & Almost        \\ \hline
-      3            &  1               & 1                  & No          & 0                & 0            & Almost        \\ \hline
+      3            &  1               & 1                  & No          & 0                & 0            & Yes           \\ \hline
       4            &  1               & 1                  & No          & 1                & 0            & Almost        \\ \hline
       5            &  1               & 0                  & Almost      & 1                & 0            & No            \\ \hline
                    & \textbf{Arena 9} & Fluted walls       &             & \multicolumn{3}{l|}{\multirow{5}{*}{}}          \\ \cline{1-4}
@@ -1156,20 +1179,22 @@ helped to highlight the issues mentioned following the functional results. In ea
 the arena: In the diagonal case, we want the robot to turn right and either follow the wall or move away from it, in the curved case we want the
 robot to follow the curve or turn away from it completely, and finally in the fluted case, we want the robot to move straight through the
 opening between the two walls. In all but one experiment in Arena 7, the robot reacted early, turning towards the wall instead of away from it.
-In all but one case in Arena 8, the robot reacted correctly initially, but in moving away from the wall it would lose sight of it and ultimately
-turn back towards it resulting in a collision. In all cases in Arena 9, the robot reacted to one side of the flute (despite the fact it actually
+In three of five runs in Arena 8, the robot reacted correctly initially, but in moving away from the wall it would lose sight of it and ultimately
+turn back towards it resulting in a collision; one run was a complete failure. In all cases in Arena 9, the robot reacted to one side of the
+flute (despite the fact it actually
 had a clear path) and run into the opposite side. These three simple tests back up the points raised earlier. In both Arena 7 and 9 the robot
 is reacting to situations where no reaction is necessary. Again, this points to the effect of noise in the flow frame though, we may also
 question the choice of filter. The filter was chosen for simplicity as it was already on-board and had demonstrated the capacity to compute
 fairly accurate speed information \cite{Scimeca2017} with a dense flow field; though usage of the existing filter was justified,
 it may be worth considering something different. While we feel good results were achieved, it is apparent that many refinements can, and indeed should
-be made (See Section \ref{sec:discussion}).
+be made (see Section \ref{sec:discussion}).
 
 \subsection{Visual Navigation using the Mushroom Body}
 The results for the Visual Navigation portion of the project are somewhat harder to quantify. We can say with certainty that the Mushroom Body circuit
 demonstrates the capability to perform robust route navigation through a somewhat cluttered environment. Though rare there were cases where the robot would
 lose the route and regain it again through drastic correction; there are some cases where the correction could be deemed luck, and in others the correction
-appears more genuine. Here we present the more interesting plots for discussion however the complete set of plots is available in Appendix \ref{app:plots} as we did not wish to clutter the discussion with figures. The navigational behaviours can be roughly categorised into four sets: Failures, successes, recoveries, and failed recoveries.
+appears more genuine. Here we present the more interesting plots for discussion however the complete set of plots is available in Appendix \ref{app:plots}
+as we did not wish to clutter the discussion with figures. 
 \newline
 
 Firstly, we will present an example of what we consider a failure in Figure \ref{fig:ab-4-1-fail}. Figure \ref{fig:ab-4-1-fail}
@@ -1215,7 +1240,7 @@ the current model. We should also note that using timers on the robot caused a g
 recapitulation of AB runs, the robot was meant to move for a time interval of 2 \textit{seconds}, during MAB experiments, this
 interval was reduced to 1 \textit{second}. It can clearly be seen from the trajectory plots that the robot did not move in
 consistent intervals during recapitulation. A potential solution to this problem is to use the \textit{move} command to
-move a set distance, however, this has potential to cause problems with the CA system.
+move a set distance, however, this may cause problems with the CA system.
 
 \begin{figure}
  \centering
@@ -1235,7 +1260,7 @@ move a set distance, however, this has potential to cause problems with the CA s
 \end{figure}
 
 It was mentioned in Section \ref{sec:test} that the behaviour of the robot during learning was modified slightly. This
-was due to the type of behaviour we see in Figure \ref{fig:ab-3-2}. This run was considered successful, however it can be seen
+was due to the type of behaviour we see in Figure \ref{fig:ab-3-2-inside}. This run was considered successful, however it can be seen
 that the robot did not follow the route precisely, rather following an inside line. A potential reason was seen as the
 delay between obstacle detection and reaction during learning. Along with the increased image count, the runs from
 the modified learning system (tagged MAB) performed better in general, however there were certainly still errors.
@@ -1245,11 +1270,11 @@ the modified learning system (tagged MAB) performed better in general, however t
  \centering
   \includegraphics[width=\textwidth]{AB-3-2}
   \caption{
-    \label{fig:ab-3-2} Trajectory plot of run AB-3-2.
+    \label{fig:ab-3-2-inside} Trajectory plot of run AB-3-2.
   }
 \end{figure}
 
-In all, the visual navigation system performed quite well. Drastic errors were rare, though certainly present.The full series
+In all, the visual navigation system performed quite well. Drastic errors were rare, though certainly present. The full series
 of trajectories in Appendix \ref{app:plots} show that the network was capable of reproducing routes on a robot through a
 cluttered (yet low detail due to the distorted field of vision) environment using a visual scanning route following behaviour.
 \newline
@@ -1261,7 +1286,7 @@ of this nature were conducted, however, only one was recorded. During the first 
 robot did not cope well with this landscape; outbound routes performed as well as could be expected, though inbound routes
 failed badly, requireing numerous corrections. The second run (taking place in the empty arena) faired far better, though
 corrections were still required. The trajectories can be seen in Figure \ref{fig:home}. Two corrections were required
-through the course of these experiments during runs \textit{Memory 1} and \textit{Memory 5}. Both corrections occurred
+through the course of this experiment during runs \textit{Memory 1} and \textit{Memory 5}. Both corrections occurred
 at an offset of greater than 2000mm (in the negative direaction) from the origin and, once corrected, the robot successfully
 navigated home. There was one out of three homeward routes that  
 
@@ -1280,7 +1305,7 @@ These results indicate a significant improvement over the results presented by \
 scanning route following strategy and bring the performance more in line with the klinokinesis results presented in
 \cite{Zhang2017}. Multiple errors were experienced per run when using scanning, while our visual scanning behaviour
 demonstrated a much more stable performance replicating (albeit with varying degrees of success) 13 of 18 runs, only one of
-which experienced serious error, though it recovered. The homeward experiments experienced only 2 errors over the five memory runs.
+which experienced serious error, though it recovered. The homeward experiments experienced only two errors over the five memory runs.
 \newpage
 
 \section{ Discussion } \label{sec:discussion}
@@ -1318,7 +1343,7 @@ distance and therefore speed information \cite{Wittlinger1965}.
 
 We note also that AntBot's field of vision is distorted and while the tussocks may seem to completely
 fill the camera view, in reality, they are providing minimal detail. This could quite easily be remedied by
-constructing taller tussocks which provide more detail. We think that this could have a great effect on the
+constructing larger tussocks which provide more detail. We think that this could have a great effect on the
 performance of the VN and CA systems here presented.
 \newline
 
@@ -1343,12 +1368,12 @@ from a hardware perspective which will be discussed in Section \ref{sec:engineer
 that such responses were too slow for the experimental environment, however, these methods were tested
 pre-upgrade. Turning methods with the new power supply were untested, however it is clear that the robot
 is capable of faster movement in general, so turning will be faster and may now be an option. For the
-same reason, Klinokinesis may now be a viable route following strategy in a cluttered environment where
+same reason, klinokinesis may now be a viable route following strategy in a cluttered environment where
 it was not on the uptake of this project.
 \newline
 
 One of the original goals for this project was to investigate the performance of a MB based navigational
-model which used real weightings for the KCs, as opposed to binary weightings. Code was in fact written
+model which used real weightings for the KCs, as opposed to binary weightings. Code was written
 to model this, however, the model was never tested or used in experiments due to the difficulties in
 establishing a working baseline using the binary model, so we instead decided to focus on achieving that
 baseline. However, the real valued network could easily be put into use in future iterations of this project.
@@ -1388,9 +1413,9 @@ go to my predecessors who were more than willing to discuss the codebase and hel
 While AntBot is certainly a capable robot, the hardware does present some limitations. The two main issues
 are linked to robot control. Firstly, the command execution and synchronisation delays; commands require roughly
 1 second of thread delay to execute and main loops require roughly 0.6 seconds of delay per iteration to keep
-everything in sync. For basic operation, this presents no problems, but a more refined control system (
-from the Android component) is made difficult and accurate timing in threads becomes impossible. Reactionary
-behaviours will work initially, but ultimately the delays cause a delayed reaction (one of the main reasons the
+everything in sync. For basic operation, this presents no problems, but a more refined control system (from the Android component)
+is made difficult and accurate timing in threads becomes impossible. Reactionary
+behaviours will work at times, but ultimately the delays cause a delayed reaction (one of the main reasons the
 stop-then-turn behaviour was added to the learning runs for VN experiments). The only known way around this
 is to construct arenas in such a manner that the robot has additional time to cope with the delays. The
 synchronisation delays cause timing issues; however, omitting them causes the application to slow drastically.
@@ -1401,10 +1426,12 @@ equal speeds to both sides using the \textit{go} command would result in a curve
 wheeled robots, one side has slightly better drive than the other, however, this should be dealt with at a
 firmware level, the left side always requires approximately $90\%$ the power of the right, so we can
 modify the motor commands at a firmware level to reflect this. The turning is also very inaccurate which
-was noted in early scanning tests, and the later homeward route. The turning code is based purely based on
+was noted in early scanning tests, and the later homeward experiment. The turning code is based purely based on
 encoder values, and while there is nothing wrong with this method in theory, in practice it results in the robot
 running over, or under (due to to slippage) the desired angle. A simple PID control system using a gyroscope
-or compass could remove this problem entirely. In this project, we discovered just how seriously simple
+or compass could remove this problem entirely. Motor speeds were also power dependent, so a voltage regulator
+would be a nice addition to ensure experiments remain consistent at varying power levels.
+In this project, we discovered just how seriously simple hardware and 
 control problems can affect the performance of otherwise good models. As we are interested in the models,
 control should be implemented using whatever sensors are necessary. The key point is that the models themselves
 must only operate on visual information. 
