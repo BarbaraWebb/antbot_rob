@@ -33,9 +33,16 @@
 \contentsline {subsection}{\numberline {6.2}Visual Navigation using the Mushroom Body}{38}
 \contentsline {section}{\numberline {7} Discussion }{43}
 \contentsline {subsection}{\numberline {7.1}Conclusion}{43}
-\contentsline {subsection}{\numberline {7.2}Future work}{44}
-\contentsline {subsubsection}{\numberline {7.2.1}Improvements on work presented - Potential developments for MInf Part 2}{44}
-\contentsline {subsubsection}{\numberline {7.2.2}Engineering}{46}
+\contentsline {subsection}{\numberline {7.2}Future work - Potential developments for MInf Part 2}{44}
+\contentsline {subsubsection}{\numberline {7.2.1}Improvements on work presented}{44}
+\contentsline {paragraph}{Time-to-Contact:}{44}
+\contentsline {paragraph}{Filtering:}{45}
+\contentsline {paragraph}{Visual Navigation:}{45}
+\contentsline {paragraph}{VN Extensions:}{46}
+\contentsline {paragraph}{Future Experiments:}{46}
+\contentsline {subsubsection}{\numberline {7.2.2}Engineering}{47}
+\contentsline {paragraph}{Software:}{47}
+\contentsline {paragraph}{Hardware/Firmware:}{47}
 \contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{51}
 \contentsline {subsection}{\numberline {A.1}AB Runs}{51}
 \contentsline {subsection}{\numberline {A.2}MAB Runs}{55}

@@ -9,11 +9,19 @@
 \usepackage{multirow}
 \usepackage[section]{placeins}
 \usepackage{array}
+%\usepackage{titlesec}
 
 \geometry{margin=1in}
 \graphicspath{ {Images/} }
 
 \newcolumntype{?}[1]{!{\vrule width #1}}
+%\setcounter{tocdepth}{4}
+
+%\titleformat{\paragraph}
+%{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+%\titlespacing*{\paragraph}
+%{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
 \begin{document}
 
 
@@ -1388,12 +1396,13 @@ corridor'' allowing the robot to navigate in the manner observed in ants. While 
 of the MB model, we do still present many cases where the robot became confused, or chose its direction incorrectly. We will
 present ideas for future improvement in the following section.
 
-\subsection{Future work}
-\subsubsection{Improvements on work presented - Potential developments for MInf Part 2}
+\subsection{Future work - Potential developments for MInf Part 2}
+\subsubsection{Improvements on work presented}
 Here we wish to draw attention to the flaws in the experiments or research presented here and propose solutions
 as well as suggest potential future developments.
 \newline
 
+\paragraph{Time-to-Contact:}
 Firstly, we wish to discuss time-to-contact and image depth. While the methods presented did not work, there are
 some modifications that could be made to gain a functioning system. We know that the system struggles to cope
 with a dense flow field, yet the points returned by the \textit{goodFeaturesToTrack()} result in inconsistency. We
@@ -1403,7 +1412,8 @@ need the translational velocity of the camera. \textit{Scimeca} found that a den
 computing accurate speed information than a sparse field, however, only one field may be in use on the robot at
 a single time. Introducing a subset system would allow us to use the dense flow information to compute the speed
 which gives us a more accurate estimation of time-to-contact. Alternatively, wheel encoders could be used to compute the
-distance and therefore speed information \cite{Wittlinger1965}.
+distance and therefore speed information \cite{Wittlinger1965}. We would like to investigate this system
+further in Part 2, however, AntBot's field of vision may cause problems for a depth centric system.
 \newline
 
 We note also that AntBot's field of vision is distorted and while the tussocks may seem to completely
@@ -1412,6 +1422,24 @@ constructing larger tussocks which provide more detail. We think that this could
 performance of the VN and CA systems here presented.
 \newline
 
+\paragraph{Filtering:}
+The filtering CA system certainly requires refinement. We have shown that it works and is plausible, but
+the implementation leaves a lot to be desired. Ideally we would like to see smooth, immediate responses
+to stimuli. A proportional response would be excellent, however, this presents a number of challenges
+from a hardware perspective which will be discussed in Section \ref{sec:engineering}. It was noted earlier
+that such responses were too slow for the experimental environment, however, these methods were tested
+pre-upgrade. Turning methods with the new power supply were untested, however it is clear that the robot
+is capable of faster movement in general, so turning will be faster and may now be an option. For the
+same reason, klinokinesis may now be a viable route following strategy in a cluttered environment where
+it was not on the uptake of this project. We should note that visual collision avoidance, while interesting,
+is not crucial for insects as they have other mechanisms to help deal with this (e.g. antenna). We could
+integrate a simple mechanosensor to act as a backup in the case the visual system fails. Another aspect
+which could be examined is the choice of filter; the filter was chosen for simplicity, however, it
+would be interesting to experiment with something different. We think it unlikely that much time
+will be spent on this in Part 2, though it will be studied if time is available.
+\newline
+
+\paragraph{Visual Navigation:}
 The results for the VN portion of this project are somewhat lacklustre; while they show promise for the model,
 there is no obvious way to quantify the results. Saying ``this route looks similar to this other route'' is
 not a good way of presenting results. In part, this is due to the nature of the experiments, errors were
@@ -1423,27 +1451,24 @@ considered a success. In practice this is made difficult by the nature of the in
 Vicon system though it may not be impossible. The recordings are of different lengths and even removing
 duplicates (e.g. where the robot was sat still for multiple frames) does not result in frame $x$ in the
 learning run corresponding to frame $x$ in the memory run. Computing the distance between the points
-may not be the best method but it certainly gives something more tangible than the current results.
+may not be the best method but it certainly gives something more tangible than the current results. In Part 2
+we would like to run these experiments again, this time establishing better metrics to give us a firm foundation
+on which to develop our extensions.
 \newline
 
-The filtering CA system certainly requires refinement. We have shown that it works and is plausible, but
-the implementation leaves a lot to be desired. Ideally we would like to see smooth, immediate responses
-to stimuli. A proportional response would be excellent, however, this presents a number of challenges
-from a hardware perspective which will be discussed in Section \ref{sec:engineering}. It was noted earlier
-that such responses were too slow for the experimental environment, however, these methods were tested
-pre-upgrade. Turning methods with the new power supply were untested, however it is clear that the robot
-is capable of faster movement in general, so turning will be faster and may now be an option. For the
-same reason, klinokinesis may now be a viable route following strategy in a cluttered environment where
-it was not on the uptake of this project.
-\newline
-
+\paragraph{VN Extensions:}
 One of the original goals for this project was to investigate the performance of a MB based navigational
 model which used real weightings for the KCs, as opposed to binary weightings. Code was written
 to model this, however, the model was never tested or used in experiments due to the difficulties in
 establishing a working baseline using the binary model, so we instead decided to focus on achieving that
 baseline. However, the real valued network could easily be put into use in future iterations of this project.
+We also included the capability for PN processing (normalisation) but this was not used for this project.
+Again, PN normalisation could easily be included in future projects and may provide better tolerance to
+changing conditions (e.g. changing light levels). The effects of these extensions will be examined
+in Part 2.
 \newline
 
+\paragraph{Future Experiments:}
 Finally, the experimental scenario itself could be made far more complex. Admittedly, we aimed to demonstrate
 basic functionality of the visual navigation system in the real world using a scanning route following strategy,
 however, we have implementations of the Central Complex neural model as well as a method for combining
@@ -1459,9 +1484,13 @@ the path integration vector and collision avoidance learning the homeward route 
 navigate back out via the PI vector and collision avoidance, learning the outbound route as it goes. The final
 stage is then to allow the robot to follow the learned visual routes. An extension, though this seems impractical
 on AntBot currently, could be to maintain a single instance of the navigational models over multiple environments
-to see if the robot can remember multiple different routes to food, rather than just a single route.
+to see if the robot can remember multiple different routes to food, rather than just a single route. This is presented
+as food-for-thought; due to the complexity it is unlikely that such a scenario could be studied during Part 2, however,
+we think it would be a good focus for a new project. We can use this scenario to set our own goals: We want the
+VN/CA systems as well as the hardware to be ready for such an experiment by the culmination of Part 2.
  
 \subsubsection{Engineering} \label{sec:engineering}
+\paragraph{Software:}
 Here we wish to present future engineering suggestions regarding AntBot. The first thing that must be talked
 about is the codebase itself. As the code is inherited from three previous generations of the project it has
 become messy; combined with the process of learning to program in Android, as well as the fact that
@@ -1475,6 +1504,7 @@ the project with relative ease. Operation of the robot should not present a majo
 go to my predecessors who were more than willing to discuss the codebase and help me understand the system.
 \newline
 
+\paragraph{Hardware/Firmware:}
 While AntBot is certainly a capable robot, the hardware does present some limitations. The two main issues
 are linked to robot control. Firstly, the command execution and synchronisation delays; commands require roughly
 1 second of thread delay to execute and main loops require roughly 0.6 seconds of delay per iteration to keep
@@ -1484,7 +1514,9 @@ behaviours will work at times, but ultimately the delays cause a delayed reactio
 stop-then-turn behaviour was added to the learning runs for VN experiments). The only known way around this
 is to construct arenas in such a manner that the robot has additional time to cope with the delays. The
 synchronisation delays cause timing issues; however, omitting them causes the application to slow drastically.
-These are necessary by design. Thankfully, the only other platform problem is the firmware on the Arduino
+These are necessary by design.
+
+Thankfully, the only other platform problem is the firmware on the Arduino
 which can easily be re-written. The firmware architecture is entirely appropriate but the control code
 needs re-written and possibly a sensor added. This became apparent during initial tests with the robot, wherein
 equal speeds to both sides using the \textit{go} command would result in a curved trajectory. As ever with
@@ -1495,7 +1527,9 @@ was noted in early scanning tests, and the later homeward experiment. The turnin
 encoder values, and while there is nothing wrong with this method in theory, in practice it results in the robot
 running over, or under (due to to slippage) the desired angle. A simple PID control system using a gyroscope
 or compass could remove this problem entirely. Motor speeds were also power dependent, so a voltage regulator
-would be a nice addition to ensure experiments remain consistent at varying power levels.
+would be a nice addition to ensure experiments remain consistent at varying power levels. We aim to start
+MInf Part 2 by addressing this aspect of the robot.
+
 In this project, we discovered just how seriously simple hardware and 
 control problems can affect the performance of otherwise good models. As we are interested in the models,
 control should be implemented using whatever sensors are necessary. The key point is that the models themselves
