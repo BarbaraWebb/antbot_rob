@@ -1,5 +1,5 @@
 
-\documentclass[a4paper,12pt,twoside,openright]{article}
+\documentclass[a4paper,11pt,twoside,openright]{article}
 
 \usepackage[toc,page]{appendix}
 \usepackage{amsmath}
@@ -9,12 +9,18 @@
 \usepackage{multirow}
 \usepackage[section]{placeins}
 \usepackage{array}
+\usepackage[nottoc,numbib]{tocbibind}
 %\usepackage{titlesec}
 
 \geometry{margin=1in}
 \graphicspath{ {Images/} }
 
 \newcolumntype{?}[1]{!{\vrule width #1}}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\let\oldsection\section
+\def\section{\cleardoublepage\oldsection}
+
 %\setcounter{tocdepth}{4}
 
 %\titleformat{\paragraph}
@@ -65,16 +71,6 @@ Dr. Barbara Webb
 \end{flushleft}  
 
 \newpage
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ABSTRACT
-\centering
-{\LARGE\textbf{Abstract}}
-\begin{flushleft}
-  {\small \textit{The abstract will be written as one of the last parts of the report to allow
-    an accurate summary of the project as a whole.}}
-\end{flushleft}
-
-\newpage
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DECLARATION
 \centering
 {\LARGE\textbf{Declaration}}
@@ -88,6 +84,15 @@ Dr. Barbara Webb
 
     \textit{Robert Mitchell}}
 
+\end{flushleft}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ABSTRACT
+\centering
+{\LARGE\textbf{Abstract}}
+\begin{flushleft}
+  {\small \textit{The abstract will be written as one of the last parts of the report to allow
+    an accurate summary of the project as a whole.}}
 \end{flushleft}
 
 \newpage
@@ -449,20 +454,22 @@ to 1 when $a_i$ and $b_j$ are activated simultaneously.
 \end{figure}
 
 This network can be transformed into something which models the MB circuit presented by \cite{Ardin2016}(shown in Figure \ref{fig:willshawmb}).
-As each KC receives input from multiple random vPNs we omit them from the figure; instead we show each KC input as
-a single line-in representing the sum of all connected vPNs (the actual input each KC receives). So, our
-input pattern represents the sum sent to each KC. We reduce the network to a single output representing the
-unfamiliarity measure returned (i.e. the sum of the weights of the KCs that \textit{would} be activated by a given input signal). We
+Each input line represents the activity of a single KC in the network. A KC is ``active'' when its aggregate input from the linked vPNs is
+greater than a set threshold. Thus, the input to the network represents a pattern of KC activation. The synapses represent the weight of the
+connection between each KC and the output line (EN). We reduce the network to a single output representing the
+unfamiliarity measure returned (i.e. the sum of the weights of the KCs activated in the input pattern). We
 make one slight tweak in adding a \textit{reward} signal. In our version, learning only occurs in the presence of
-the reward signal. Adding more ENs simply means adding more vertical components to the model. 
+the reward signal. Learning is otherwise identical to the original model though the weighting convention for the synapses is reversed (0 is now ``active'', 1 ``inactive'').
+Adding more ENs simply means adding more vertical components to the model. 
 
 \begin{figure}[h]
  
   \centering
   \includegraphics[width=0.4\textwidth]{WillshawMB}
   \caption{
-    \label{fig:willshawmb} Our modified Willshaw network which models the Mushroom Body circuit. The inputs ($KC_{in}$ / $N_b$)
-    represent the aggregate input to each KC (the sum of all linked vPNs). The output represents the output of the EN.
+    \label{fig:willshawmb} Our modified Willshaw network which models the Mushroom Body circuit. The input ($KC_{in}$ / $N_b$)
+    represents a pattern of KC activation. The synapses represent the weight of the connection between each KC and the EN.
+    The output represents the output of the EN.
   }
  
 \end{figure}
@@ -649,6 +656,16 @@ power source is a 9.6V NiMH power pack. Motor speeds and systems which depended 
 after completion of the modifications. The required modifications to chassis (holes drilled for components)
 were done by the Informatics workshop. The wiring, research and sourcing of parts were performed as part
 of this project.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{AntBot}
+  \includegraphics[width=0.7\textwidth]{AntBotCharging}
+  \caption{
+    \label{fig:antbotcomp} AntBot pre (top) and post (bottom) hardware upgrade. We can now charge
+    AntBot directly. Note the addition of motion capture tracking markers for the Vicon system.
+    }
+\end{figure}
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% METHODS
@@ -749,62 +766,98 @@ the displacement in each axis of the respective pixel (i.e. $M_{y,x}[0]$ gives t
 coordinate, and $M_{y,x}[1]$ gives the displacement of the $y$ coordinate).
 \newline
 
-An optical flow filter was previously implemented by \textit{Scimeca} for the purpose of speed retrieval. 
-As collision avoidance in optical flow relies on detecting a difference in motion between two sides
-the same filtering method could be re-purposed for collision avoidance. Though inspired by \cite{Stewart2010},
-our method for performing the computation and avoidance was modified slightly for the sake of
-implementation on AntBot. Instead of creating
+An optical flow filter was previously implemented by \textit{Scimeca} for the purpose of speed retrieval (Figure \ref{fig:flowfilter}).
+This filter represents the expected motion observed when the robot moves forward through a clear environment. Thus, if an
+obstacle is present, motion parallax will cause one side to appear to move faster than the other. So
+collision avoidance relies on detecting a significant difference in motion between two sides of a flow field.
+With this in mind, we repurpose the flow filter from \cite{Scimeca2017}. Though inspired by \cite{Stewart2010},
+our method for performing the computation and avoidance was modified for the sake of
+implementation on AntBot, instead mirroring \textit{Scimeca's} method of speed retrieval.
+\newline
+
+Instead of creating
 a left and right filter, we create left and right flow frames by rotating the image frame
 by a certain angle left or right as in \cite{Scimeca2017}. However, we reduce the angle from $\pm 45^{\circ}$
 \cite{Scimeca2017} to $\pm 16^{\circ}$. It was found that the size of this angle had a mild effect on the region of the 
 image which would trigger responses; a larger angle would result in higher sensitivity to the sides of the
-robot, a smaller angle results in higher frontal sensitivity which was desired for the CA system. We only
+robot, a smaller angle results in lower side sensitivity which was desired for the CA system. We only
 want the robot to avoid obstacles to the front, obstacles to the sides should not trigger responses. The offset
 angle was tuned manually and $\pm 16^{\circ}$ was found to perform well; smaller angles resulted in
-an insensitive system, and larger resulted in more noise, though performance was still good. The filter
+an insensitive system, and larger resulted in more noise though performance was still good. The filter
 itself is second filter from \cite{Scimeca2017} which was already implemented on the robot.
 \newline
 
 The filter is constructed as an $N \times 3$ matrix $F$ such that:
 
 \begin{equation}
+  \label{eq:filter}
 F_i = [ \quad sin(-\pi + i\frac{2\pi}{N}) \qquad 0 \qquad 0 \quad ] \quad \textit{for} \quad i \in \{0, N - 1\}
 \end{equation}
 
 where $F_i$ is the $ith$ row of $F$. Intuitively each row corresponds to a pixel value in the $x$ axis.
 \newline
 
+
 Once the filter is computed, we retrieve the flow for each pixel by adding the displacements
 retrieved from \textit{calcOpticalFlowFarneback()} to the pixel value. 
-For each value of $x$ we apply an offset of $\pm 4px$ which corresponds to our left and right frames centred at
-$\pm 16^{\circ}$. For the $ith$ pixel, with filter vector $\bar F_i$ and flow vector $\bar O_i$ we apply the filter
-simply by computing the projection:
-
-\begin{equation}
-  P_i = \bar F_i \cdot \bar O_i
-\end{equation}
-
-This allows us to measure the geometric difference between the expected and actual pixel motion. The computation
-for a single frame simply sums all of these projections:
-
-\begin{equation}
-  FlowSum = \sum_{i = 0}^{K - 1} P_i
-\end{equation}
-
-where $K$ is the number of pixels in the image, in our case $K = 900$. This sum is computed for both shifted frames
-and a factor is applied simply to make the numbers returned easier to handle.
+For each value of $x$ we also apply an offset of $\pm 4px$ which corresponds to our left and right frames centred at
+$\pm 16^{\circ}$. We can summarise the filtering process as:
 \newline
 
-Now we have defined a way of computing speed differences between the two sides, we
+Let $M$ be the matrix returned by \textit{calcOpticalFlowFarneback()}.
+
+For each $x, y$ we will:
+\newline
+
+\centering
+Compute pixel's starting location in the shifted frames as:
+\begin{align*}
+  PLF = [ \quad (x + 4)\Mod{N} \qquad y \quad ]\\
+  PRF = [ \quad (x - 4)\Mod{N} \qquad y \quad ]
+\end{align*}
+
+Compute the flow vector from the start location to where it is now as:
+\begin{align*}
+  CLF = [ (M_{y,x}[0] + x + 4)\Mod{N} \qquad (M_{y,x}[1] + y) \Mod{R} ]\\
+  CRF = [ (M_{y,x}[0] + x - 4)\Mod{N} \qquad (M_{y,x}[1] + y) \Mod{R} ]
+\end{align*}
+
+Extract the correct filter vector from matrix $F$ (Eq. \ref{eq:filter}):
+\begin{align*}
+  LFilter = F_{PLF[0]}\\
+  RFilter = F_{PRF[0]}
+\end{align*}
+
+Apply the filter:
+\begin{align}
+  LFD = LFilter \cdot CLF \\
+  RFD = RFilter \cdot CRF
+\end{align}
+
+\raggedright
+Where $N$ is the number of horizontal pixels and $R$ is the number of vertical pixels. Here
+we have $N = 90$ and $R = 10$. Now $LFD$ and $RFD$ represent how much
+the observed flow deviates from the expected flow for a given pixel on the left and right respectively.
+We then sum this over the shifted image frames to get the total difference between expected and observed flow:
+
+\begin{align}
+  LeftFlowSum = \sum_{i = 0}^{K - 1} LFD_i \qquad
+  RightFlowSum = \sum_{i = 0}^{K - 1} RFD_i
+\end{align}
+
+Where $ K = N \cdot R$, and $LFD_i$ is the $LFD$ value computed for the $i$th pixel.
+Now we have defined a way of computing the observed speed on either side, we
 can start to define behaviour. In the case an obstacle is seen on one side of the image, we expect the speed
-on that side to be higher due to motion paralax. Thus, we simply compute the difference between the
+on that side to be higher due to motion parallax. Thus, we simply compute the difference between the
 two sums:
 
 \begin{equation}
 FlowDifference = LeftFlowSum - RightFlowSum
 \end{equation}
 
-which gives us our final stimulus to be used to generate a reaction. Here we employ the idea of ``leaky'' accumulators
+which gives us our final stimulus to be used to generate a reaction. Large positive $FlowDifference$ means we
+have seen an obstacle on the left, similarly, large negative $FlowDifference$ means we have seen an obstacle on
+the right. Here we employ the idea of ``leaky'' accumulators
 from \cite{Stewart2010}. An accumulator is kept for both sides of the frame. The difference is thresholded to account
 for noise such that only significantly positive or negative values contribute to behaviour; this is known as the
 \textit{accumulation threshold}. Once the accumulator on one side exceeds its \textit{reaction threshold}, an immediate
@@ -815,9 +868,27 @@ and a sufficiently large positive or negative value would trigger the appropriat
 performance and so separate accumulators were kept. While this implementation was simple, and not as refined
 as we would have liked, it did demonstrate impressive performance in navigating arenas of varying obstacle density.
 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{LucaFilterModel}
+  \caption{
+    \label{fig:flowfilter} The filter implemented by \textit{Scimeca}: (Caption by \textit{Scimeca}, Figure 13):
+    Figure (a) shows the idea behind the modification of the filter for speed retrieval. When moving
+    forward, for example, we expect the rectangular 360 [degree] image to have vector flows in
+    different length throughout the frame, in the pattern shown in the Figure.
+    \newline
+    Figure (b) shows the filter response of the modified filtering process for this [\textit{Scimeca's}] project.
+    During matching, the found flow vectors will be projected onto the corresponding filter vectors
+    nullifying the information on the y axis and scaling the vectors differently depending on the
+    area of the image they are found in.
+  }
+\end{figure}
+\FloatBarrier
 \subsection{The Mushroom Body}
 This section will be less of a formal declaration of method, and more a discussion of the process undertaken to get
 the Mushroom Body circuit working in a robust manner (see Section \ref{MBBackground}).
+\newline
 
 The Mushroom Body circuit (implemented as a Willshaw Net) was originally implemented by \textit{Eberding} when he
 developed the platform. Though the implementation does mirror the model of \textit{Ardin et al.}, the model
@@ -880,29 +951,31 @@ correspond to the most familiar angle. Figure \ref{fig:mbbad} clearly shows that
 activation in the network; a presented image should activate somewhere in the range of 200 to 500 KCs (this is rough due
 to the pseudo random construction of the network). The EN response shows that at least $1500$ KCs were activated by some
 scan angles; in almost all cases, an EN response of $0$ was caused by a lack of any KC activation or sufficiently
-low KC activation (the familiarity measure
+low KC activation (the unfamiliarity measure
 was initialised as $0$ in the network). To, fix this upper and lower thresholds on KC activation were added to the
 network. If KC activation lay outside these bounds a \textit{maximum unfamiliarity} measure was returned; this value
 was defined as the maximum number of KCs activated by an image during the learning process \cite{Zhang2017}. The justification for introducing
 bounds on KC activation was that too few KCs did not give enough information, while too many represented noise in the network.
-Regardless of the justifiability of this decision, \textit{Ardin et al.} did not encounter such problems in their functionally
-identical model.
+Regardless of the justifiability of this decision we were still experiencing KC activation problems and \textit{Ardin et al.}
+did not encounter such problems in their functionally identical model.
 \newline
 
-It is here we must note again, \textit{Zhang's} improved performance using Klinokinesis; this suggests that the network itself
+It is here we must note again, \textit{Zhang's} improved performance using klinokinesis; this suggests that the network itself
 is likely not the issue. Upon performing further debugging
-the problem revealed itself to be related to the visual scanning (just as the original scanning method had experienced similar
-problems); due to a quirk of OpenCV in Java, the \textit{Mat} (matrix) objects are subtly passed by reference, there is no
+the problem revealed itself to be a bug in the visual scanning though we think the problem was the same as that experienced by the
+phsyical scanning, just introduced in a different manner. Due to a quirk of OpenCV in Java, the \textit{Mat} (matrix) objects are subtly passed by reference, there is no
 syntax for this, and it is not the expected behaviour in Java. When Mat objects are passed,
 a separate object called the \textit{matrix header} is actually passed which performs the same function as a pointer in a C-style
 language. Thus, the image rotation algorithm was working correctly, but the image was being rotated in unexpected ways as we were
-treating as a pass-by-value scenario. Simply, creating a copy of the Mat object inside the rotation function fixed the issue
+treating this as a pass-by-value scenario. Simply, creating a copy of the Mat object inside the rotation function fixed the issue
 and the system began functioning correctly. Final tuning of the brightness threshold for KC activation was then performed.
 \newline
 
 The final model is largely the same as in \cite{Eberding2016}; the only real modification being the Kenyon Cell thresholding.
 Normalisation of the PN input was implemented but not found to make a noticable difference in terms of KC activation so raw
 PN values were used to reduce complexity in the model. Normalised PNs may be included in future iterations.
+While KC activation thresholding should not strictly be necessary, it was kept as a safety mechanism in the
+final model.
 
 \subsubsection{Real Weightings}
 An alternate version of the Mushroom Body circuit was constructed using real-valued weights as opposed to binary ones. This
@@ -1515,6 +1588,7 @@ stop-then-turn behaviour was added to the learning runs for VN experiments). The
 is to construct arenas in such a manner that the robot has additional time to cope with the delays. The
 synchronisation delays cause timing issues; however, omitting them causes the application to slow drastically.
 These are necessary by design.
+\newline
 
 Thankfully, the only other platform problem is the firmware on the Arduino
 which can easily be re-written. The firmware architecture is entirely appropriate but the control code
@@ -1529,6 +1603,7 @@ running over, or under (due to to slippage) the desired angle. A simple PID cont
 or compass could remove this problem entirely. Motor speeds were also power dependent, so a voltage regulator
 would be a nice addition to ensure experiments remain consistent at varying power levels. We aim to start
 MInf Part 2 by addressing this aspect of the robot.
+\newline
 
 In this project, we discovered just how seriously simple hardware and 
 control problems can affect the performance of otherwise good models. As we are interested in the models,

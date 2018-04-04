@@ -1,48 +1,51 @@
+\contentsline {section}{List of Figures}{vii}
+\contentsline {section}{List of Tables}{xi}
 \contentsline {section}{\numberline {1} Introduction }{1}
 \contentsline {subsection}{\numberline {1.1} Motivation }{1}
-\contentsline {subsection}{\numberline {1.2} Goals }{2}
-\contentsline {subsection}{\numberline {1.3} Results }{4}
+\contentsline {subsection}{\numberline {1.2} Goals }{1}
+\contentsline {subsection}{\numberline {1.3} Results }{3}
 \contentsline {section}{\numberline {2} Background}{5}
 \contentsline {subsection}{\numberline {2.1} Optical Flow }{5}
 \contentsline {subsection}{\numberline {2.2} Optical flow models for Collision Avoidance }{5}
 \contentsline {subsubsection}{\numberline {2.2.1} Time-to-Collision }{5}
 \contentsline {subsubsection}{\numberline {2.2.2} Filtering }{7}
-\contentsline {subsection}{\numberline {2.3} The Mushroom Body for Visual Navigation }{8}
-\contentsline {subsection}{\numberline {2.4}The Willshaw Network}{11}
+\contentsline {subsection}{\numberline {2.3} The Mushroom Body for Visual Navigation }{7}
+\contentsline {subsection}{\numberline {2.4}The Willshaw Network}{10}
 \contentsline {section}{\numberline {3} Platform }{13}
 \contentsline {subsection}{\numberline {3.1} Hardware }{13}
 \contentsline {subsection}{\numberline {3.2} Software }{14}
 \contentsline {subsubsection}{\numberline {3.2.1} Android }{14}
-\contentsline {subsubsection}{\numberline {3.2.2}Arduino}{16}
-\contentsline {subsection}{\numberline {3.3}Modifications}{16}
-\contentsline {section}{\numberline {4} Methods }{18}
-\contentsline {subsection}{\numberline {4.1}Optical flow models for Collision Avoidance}{18}
-\contentsline {subsubsection}{\numberline {4.1.1}Time-to-Collision}{18}
-\contentsline {subsubsection}{\numberline {4.1.2}Filtering}{19}
-\contentsline {subsection}{\numberline {4.2}The Mushroom Body}{21}
-\contentsline {subsubsection}{\numberline {4.2.1}Real Weightings}{25}
+\contentsline {subsubsection}{\numberline {3.2.2}Arduino}{15}
+\contentsline {subsection}{\numberline {3.3}Modifications}{15}
+\contentsline {section}{\numberline {4} Methods }{17}
+\contentsline {subsection}{\numberline {4.1}Optical flow models for Collision Avoidance}{17}
+\contentsline {subsubsection}{\numberline {4.1.1}Time-to-Collision}{17}
+\contentsline {subsubsection}{\numberline {4.1.2}Filtering}{18}
+\contentsline {subsection}{\numberline {4.2}The Mushroom Body}{22}
+\contentsline {subsubsection}{\numberline {4.2.1}Real Weightings}{24}
 \contentsline {subsection}{\numberline {4.3}AntBotStats}{25}
-\contentsline {section}{\numberline {5}Experimentation}{26}
-\contentsline {subsection}{\numberline {5.1}General}{26}
+\contentsline {section}{\numberline {5}Experimentation}{27}
+\contentsline {subsection}{\numberline {5.1}General}{27}
 \contentsline {subsection}{\numberline {5.2}Collision Avoidance}{27}
-\contentsline {subsection}{\numberline {5.3}Visual Navigation}{29}
-\contentsline {section}{\numberline {6} Results and Evaluation }{32}
-\contentsline {subsection}{\numberline {6.1}Collision Avoidance}{32}
-\contentsline {subsubsection}{\numberline {6.1.1}Time-to-Collision}{32}
+\contentsline {subsection}{\numberline {5.3}Visual Navigation}{30}
+\contentsline {section}{\numberline {6} Results and Evaluation }{33}
+\contentsline {subsection}{\numberline {6.1}Collision Avoidance}{33}
+\contentsline {subsubsection}{\numberline {6.1.1}Time-to-Collision}{33}
 \contentsline {subsubsection}{\numberline {6.1.2}Filtering}{34}
 \contentsline {subsection}{\numberline {6.2}Visual Navigation using the Mushroom Body}{38}
 \contentsline {section}{\numberline {7} Discussion }{43}
 \contentsline {subsection}{\numberline {7.1}Conclusion}{43}
-\contentsline {subsection}{\numberline {7.2}Future work - Potential developments for MInf Part 2}{44}
-\contentsline {subsubsection}{\numberline {7.2.1}Improvements on work presented}{44}
-\contentsline {paragraph}{Time-to-Contact:}{44}
-\contentsline {paragraph}{Filtering:}{45}
-\contentsline {paragraph}{Visual Navigation:}{45}
-\contentsline {paragraph}{VN Extensions:}{46}
-\contentsline {paragraph}{Future Experiments:}{46}
-\contentsline {subsubsection}{\numberline {7.2.2}Engineering}{47}
-\contentsline {paragraph}{Software:}{47}
-\contentsline {paragraph}{Hardware/Firmware:}{47}
-\contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{51}
-\contentsline {subsection}{\numberline {A.1}AB Runs}{51}
-\contentsline {subsection}{\numberline {A.2}MAB Runs}{55}
+\contentsline {subsection}{\numberline {7.2}Future work - Potential developments for MInf Part 2}{43}
+\contentsline {subsubsection}{\numberline {7.2.1}Improvements on work presented}{43}
+\contentsline {paragraph}{Time-to-Contact:}{43}
+\contentsline {paragraph}{Filtering:}{44}
+\contentsline {paragraph}{Visual Navigation:}{44}
+\contentsline {paragraph}{VN Extensions:}{44}
+\contentsline {paragraph}{Future Experiments:}{45}
+\contentsline {subsubsection}{\numberline {7.2.2}Engineering}{45}
+\contentsline {paragraph}{Software:}{45}
+\contentsline {paragraph}{Hardware/Firmware:}{45}
+\contentsline {section}{\numberline {8}References}{47}
+\contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{49}
+\contentsline {subsection}{\numberline {A.1}AB Runs}{49}
+\contentsline {subsection}{\numberline {A.2}MAB Runs}{53}
