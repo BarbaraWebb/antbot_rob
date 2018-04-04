@@ -48,4 +48,4 @@
 \contentsline {section}{\numberline {8}References}{47}
 \contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{49}
 \contentsline {subsection}{\numberline {A.1}AB Runs}{49}
-\contentsline {subsection}{\numberline {A.2}MAB Runs}{53}
+\contentsline {subsection}{\numberline {A.2}MAB Runs}{54}
