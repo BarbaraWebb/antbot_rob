@@ -1,4 +1,5 @@
 
+
 \documentclass[a4paper,11pt,twoside,openright]{article}
 
 \usepackage[toc,page]{appendix}
@@ -52,7 +53,6 @@ Supervised by\par
 Dr. Barbara Webb
 
 \newpage
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ACKNOWLEDGEMENTS
 \pagenumbering{roman}
 \centering
@@ -76,7 +76,7 @@ Dr. Barbara Webb
 {\LARGE\textbf{Declaration}}
 \begin{flushleft}
   {\small
-    I declare that this disseration was composed by myself, the work
+    I declare that this dissertation was composed by myself, the work
     contained herein is my own except where explicitly stated otherwise
     in the text, and that this work has not been submitted for any other
     degree or professional qualification except as specified.
@@ -91,8 +91,31 @@ Dr. Barbara Webb
 \centering
 {\LARGE\textbf{Abstract}}
 \begin{flushleft}
-  {\small \textit{The abstract will be written as one of the last parts of the report to allow
-    an accurate summary of the project as a whole.}}
+  {\small We investigate here the process by which desert ants (\textit{Cataglyphis Velox})
+    perform visual route navigation. A model proposed by \textit{Ardin et al.} \cite{Ardin2016} has shown
+    promise in simulation and has been implemented on AntBot, an autonomous robot designed to test
+    the proposed navigational models for ants. This model replicates the structure of the Mushroom Body
+    neuropils, a structure present in the brains of all insects. The mushroom bodies are known
+    to be used primarily for olfactory learning and association. However, the increased size of the structure in the brains
+    of hymenoptera suggests that this part of the brain may perform more complex associative tasks.
+    One such task is visual route memory. \textit{Ardin et al.} use a scanning route following behaviour,
+    whereby the simulated ant scans a $60^{\circ}$ arc and chooses the most familiar direction, 
+    to demonstrate the plausibility of their model. Previous implementations of the MB model on AntBot which
+    use a scanning behaviour have struggled to replicate the simulation performance of \textit{Ardin et al.}, requiring multiple corrections per run to allow
+    the robot to reach its goal. We demonstrate the problems with the model in its current form on the robot and
+    show how our solutions can improve the performance while remaining biologically plausible.
+    As part of this work, we also investigate biologically plausible methods of visual collision avoidance using optical
+    flow. Optical flow is the projection of 3D motion vectors in a scene onto a 2D image frame;
+    the vectors which describe the motion present in an image.
+    We present two distinct models; one based on time-to-contact and image depth \cite{Low2005, Souhila2007}, the
+    other using an optical flow filter \cite{Stewart2010, Scimeca2017}.
+    We demonstrate that a simple filter-based visual collision avoidance model
+    can provide robust performance in a cluttered environment. We also demonstrate that a time-to-contact model
+    is impractical on the current AntBot platform and propose our solutions to the problems inherent in the current model.
+    We present our interpretation of experimental results for both the improved Mushroom Body model, and the trialled
+    collision avoidance systems.
+    Finally, we present our thoughts on the work carried out, suggest future development ideas, and improvements
+    which could be made.}
 \end{flushleft}
 
 \newpage
@@ -1038,7 +1061,8 @@ Collision avoidance experiments aimed to test the basic functionality of the sys
 the robustness of the system. Finally, some experiments were performed out of sheer curiosity to determine how predictable the
 system was and how well it coped with less random patterns of obstacles.
 Each of the main experiments took place in a set arena and consisted of five runs to observe the consistency in performance.
-Each run lasted 30 seconds as the robot could usually navigate the length of the arena in this time.
+Each run lasted 30 seconds as the robot could usually navigate the length of the arena in this time. For information on timing
+and synchronisation inconsistencies please see Section \ref{sec:discussion} on software engineering.
 \newline
 
 We start by demonstrating the basic functionality of the system using a series of three basic arenas: An empty arena, a single large obstacle
@@ -1127,6 +1151,7 @@ AB or MAB for AntBot or Modified-AntBot. As an example: MAB-3-2 refers to Modifi
 be somewhat confusing as arenas were \textit{not} the same between bouts; MAB-3-2 and AB-3-2 did not take place in the same arena. The
 numbering was reset after modifying AntBot's behaviour. There were four arenas for AB experiments and five for MAB experiments.
 \newline
+
 
 The routes were captured using the Vicon motion capture system; separate recordings were taken for learning and memory runs, the
 files exported in .csv format then parsed and plotted using a module in \textit{AntBotStats}. All plots were set to the same scale
@@ -1327,7 +1352,10 @@ turn back towards it resulting in a collision; one run was a complete failure. A
 the tussocks become too small in its field of view. In all cases in Arena 9, the robot reacted to one side of the
 flute (despite the fact it actually
 had a clear path) and run into the opposite side. Making the flute wider allowed to robot to behave as desired so there is either not enough detail in
-the image, or the gap appears too small to AntBot, and thus it thinks there is no route open to it. These three simple tests back up the points raised earlier.
+the image, or the gap appears too small to AntBot, and thus it thinks there is no route open to it.
+\newline
+
+These three simple tests back up the points raised earlier.
 In both Arena 7 and 9 the robot
 is reacting to situations where no reaction is necessary. Again, this points to the effect of noise in the flow frame though, we may also
 question the choice of filter. The filter was chosen for simplicity as it was already on-board and had demonstrated the capacity to compute
@@ -1336,21 +1364,84 @@ it may be worth considering something different. While we feel good results were
 be made (see Section \ref{sec:discussion}).
 
 \subsection{Visual Navigation using the Mushroom Body}
-The results for the Visual Navigation portion of the project are somewhat harder to quantify. We can say with certainty that the Mushroom Body circuit
+\paragraph{Results:}
+The results for the Visual Navigation portion of the project are harder to quantify. It is clear that the Mushroom Body circuit
 demonstrates the capability to perform robust route navigation through a somewhat cluttered environment. Though rare there were cases where the robot would
-lose the route and regain it again through drastic correction; there are some cases where the correction could be deemed luck, and in others the correction
-appears more genuine. Here we present the more interesting plots for discussion however the complete set of plots is available in Appendix \ref{app:plots}
-as we did not wish to clutter the discussion with figures. 
+lose the route and regain it again through drastic self-correction; there are some cases where the correction could be deemed luck, and in others the correction
+appears more genuine. Here we present some of the more interesting plots for discussion along with a table summarising our results.
+The complete set of plots is available in Appendix \ref{app:plots}.
 \newline
 
-Firstly, we will present an example of what we consider a failure in Figure \ref{fig:ab-4-1-fail}. Figure \ref{fig:ab-4-1-fail}
-demonstrates a failure of the navigation system, but also strength of the model. We show as one might expect that, once the
-robot loses its way (in this case the very first turn is incorrect) it will struggle to regain the route. While certainly a
-weakness, the model reproduces accurate ant behaviour in this regard. One of the key points in \cite{Wehner2006} is that
-ants remember more of a ``viusal corridor'' than a map of their landscape. If one point is misremembered and the ant loses
-its way it will become lost; here we see the same behaviour in the model. Indeed, this behaviour is replicated a few times
-throughout the results.
+An example plot can be seen in Figure \ref{fig:ab-4-1-fail}. The blue route marks the
+learning run performed using Collision Avoidance. The orange path marks the route the robot then recalls from memory. The start point is clearly marked.
+We also take two distance measures (taken in \textit{millimetres}) which are marked on the plot for convenience. The first distance measure (green dashes) is taken from the final
+point in the learning run, to the closest point, using euclidean distance, on the remembered route. The second distance measure (red dashes) is taken
+from the final point in the memory run, to the closest point in the learning run. We include both distance measurements due to the effects of
+inconsistent timing in the experiments (see Section \ref{sec:discussion}).
+\newline
 
+In certain cases, one distance measure provides more useful information
+than the other. Often, the memory run would be physically longer than the learning run, occasionally they were the same length, and even more occassionally
+the memory run was shorter. Once the robot reaches a location near the end of the learning route, visual information becomes less meaningful. There
+is no feedback to tell the robot to stop. So we take the nearest point on the memory run to the end of the learning run as the robot has gone as
+far as it reasonably can using visual memories. Should the memory task run out of time before it can reach a point near the end of the learned route this
+distance measure becomes meaningless, as we have no way of knowing how the robot would have gone on to behave. Instead, we then take the distance
+from the end of the memory route to the closest learned point, giving us a measure of how far we were from the route on stopping, and what chance
+was had of success. Thus, we measure both distances take the most useful measurement, though this may not always be the one that points to success.
+\newline
+
+Due to the size of the AntBot and the arena, the error threshold of $>20cm$ used by \textit{Ardin et al.} is no longer a good
+measure of error. A variance of $20cm$ was actually seen as very good in terms of accuracy at this scale. If we expand our error
+to be $65cm$ then we get a far better threshold. As can be seen from the collection of plots in Appendix \ref{app:plots},
+the robot has a good chance of recovering its route when it is approximately $65cm$ off course. Further than this, and the robot will
+likely only recover by luck. There are cases however, where common sense must come into play. Take for example, Figure \ref{fig:ab-1-2-fail}.
+In the case of AB-1-2 we might be tempted to take the shorter red distance as our final error. The memory run appears (slightly) shorter, and
+this could be counted as a success by our interpretation, however, in this case we cannot give the model the benefit of the doubt.
+It is clear from the figure that the robot would not have recovered the route so we count this as a failure. Unlike previous experiments
+which used the MB circuit,
+the agent was not corrected in the case of error. We instead allowed it to complete the run to see how it would behave (i.e. when the
+agent loses the route, does its behaviour match that of the ant). Successes and failures were judged on the success of the
+navigational task alone; we did not consider behavioural accuracy. Summary results are presented in Table \ref{tab:vnres}.
+\newline
+
+\begin{table}[]
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\multicolumn{5}{|l|}{\textbf{Visual Navigation Summary Results}}                                                \\ \hline
+\textbf{Run}     & \textbf{Green distance} \textit{(mm)} & \textbf{Red distance} \textit{(mm)} & \textbf{Distance taken} & \textbf{Success} \\ \hline
+\textbf{AB-1-1}  & 419.14                  & 413.35                & N/A                     & Yes              \\ \hline
+\textbf{AB-1-2}  & 1346.24                 & 473.58                & N/A                     & No               \\ \hline
+\textbf{AB-2-1}  & 86.04                   & 177.99                & Green                   & Yes              \\ \hline
+\textbf{AB-2-2}  & 1494.37                 & 619.01                & Red                     & Yes (**)         \\ \hline
+\textbf{AB-3-1}  & 280.19                  & 595.29                & Green                   & Yes              \\ \hline
+\textbf{AB-3-2}  & 469.03                  & 466.09                & N/A                     & Yes              \\ \hline
+\textbf{AB-4-1}  & 733.95                  & 849.13                & Green                   & No               \\ \hline
+\textbf{AB-4-2}  & 623.86                  & 573.33                & Red                     & Yes              \\ \hline
+\textbf{MAB-1-1} & 958.23                  & 1786.78               & Green                   & No               \\ \hline
+\textbf{MAB-1-2} & 364.03                  & 465.03                & Green                   & Yes              \\ \hline
+\textbf{MAB-2-1} & 244.56                  & 319.14                & Green                   & Yes              \\ \hline
+\textbf{MAB-2-2} & 322.33                  & 422.53                & Green                   & Yes (*)          \\ \hline
+\textbf{MAB-3-1} & 147.34                  & 156.86                & N/A                     & Yes              \\ \hline
+\textbf{MAB-3-2} & 858.28                  & 1047.04               & Green                   & No               \\ \hline
+\textbf{MAB-4-1} & 610.47                  & 610.54                & N/A                     & Yes (**)         \\ \hline
+\textbf{MAB-4-2} & 131.21                  & 130.73                & N/A                     & Yes              \\ \hline
+\textbf{MAB-5-1} & 428.73                  & 100.95                & Red                     & Yes              \\ \hline
+\textbf{MAB-5-2} & 206.57                  & 206.08                & N/A                     & Yes              \\ \hline
+\end{tabular}
+
+\caption{\label{tab:vnres} The summarised results for the VN experiments. All distances are given in millimetres. The green and
+  red distances correspond to the distances marked in green dashes and red dashes on the plots. Distance taken denotes the
+  distance used to determine success; N/A was given in the case where neither measure was more meaningful than the other.
+  For an explanation of interpretation, please see the results discussion for VN experiments. (*) While
+  we consider this run a success, the memory route does deviate significantly from the learned route though it seems correction is attempted.
+  (**) These are considered edge cases, by our interpretation they are successes, however they could also be considered failures (particularly
+  MAB-4-1). This table was copied by hand; in the case the distances presented disagree with the distances on the plots, the plots prevail.
+  We count a $77\%$ success rate including edge cases, $66\%$ excluding.
+}
+\end{table}
+
+\FloatBarrier
 \begin{figure}
  \centering
   \includegraphics[width=0.7\textwidth]{AB-4-1}
@@ -1360,10 +1451,6 @@ throughout the results.
   }
 \end{figure}
 
-We also see some more successful navigation in runs such as AB-3-1 (shown in Figure \ref{fig:ab-3-1-succ}). It should first be
-noted that, once reaching a spot near the end of the learned route, the visual navigation would struggle as it had no
-more information to work from; this is simply due to the timed nature of experiments. We are interested quite simply in how
-closely the recalled route follows the learned route. 
 
 \begin{figure}
  \centering
@@ -1374,19 +1461,25 @@ closely the recalled route follows the learned route.
   }
 \end{figure}
 
+The results presented in Table \ref{tab:vnres}, suggest that we have a great improvement over previous experiments which used a scanning route
+following strategy. However, we must be careful not to compare directly as previous experiments conducted by \textit{Zhang} and \textit{Eberding}
+corrected errors mid-run and used a
+different notion of error altogher. \textit{Zhang} defined an error to be a $50cm$ deviation from the learned route. We were
+more generous as we found the agent could still recover past this distance. We cannot claim directly that we had fewer errors,
+though it seems safe to conclude we have had more success in accurately recreating routes without the need for manual correction.
+\newline
+
+\paragraph{Discussion:}
 Figure \ref{fig:ab-3-1-succ} demonstrates the ideal behaviour wherein the robot zig-zags over the correct route, consistently
 correcting to keep itself on course. It is in this behaviour we see the model's capacity to remember the visual corridor
-correctly. We do occassionally observe another behaviour; the robot will lose its way and recover. This behaviour occurred in
-cases where the robot was lucky enough to get a view which would allow it to correct. There were cases which looked as if
-they were correcting, however, they failed to recover the route. Examples of both can be seen in Figures \ref{fig:mab-2-2-succ}
-and \ref{fig:ab-1-2-fail} respectively. In particular Figure \ref{fig:mab-2-2-succ} highlights a problem with the timed
-nature of the experiments. Though it appears the robot will recover, there is no way of knowing for sure.
-The timer is used as there is no real way to distinguish memories of home and food source from memories of the route using
-the current model. We should also note that using timers on the robot caused a great deal of inconsistency in general; during
-recapitulation of AB runs, the robot was meant to move for a time interval of 2 \textit{seconds}, during MAB experiments, this
-interval was reduced to 1 \textit{second}. It can clearly be seen from the trajectory plots that the robot did not move in
-consistent intervals during recapitulation. A potential solution to this problem is to use the \textit{move} command to
-move a set distance, however, this may cause problems with the CA system.
+correctly. In Figure \ref{fig:ab-4-1-fail} we can see an example of complete failure in terms of navigation however, this
+figure also demonstrates the strength of the model. From Figure \ref{fig:ab-4-1-fail} see that the robot is unable to recover its route once it becomes
+lost as it cannot find the next point in the visual corridor. This successfully replicates the type of behaviour seen in ants
+when they lose their route\cite{Wehner2006}. This figure demonstrates why we chose to allow incorrect routes to continue though we do think that
+correction could prove useful (see Section \ref{sec:discussion}). We can also point to Figure \ref{fig:mab-2-2-succ} to justify this decision.
+Here we can see the robot attempt a recovery and it appears to succeed, getting within $50cm$ of its goal endpoint with a correct heading.
+We show here that correcting errors is not always necessary, at times the agent may recover.
+\newline
 
 \begin{figure}
  \centering
@@ -1405,12 +1498,12 @@ move a set distance, however, this may cause problems with the CA system.
   }
 \end{figure}
 
-It was mentioned in Section \ref{sec:test} that the behaviour of the robot during learning was modified slightly. This
-was due to the type of behaviour we see in Figure \ref{fig:ab-3-2-inside}. This run was considered successful, however it can be seen
-that the robot did not follow the route precisely, rather following an inside line. A potential reason was seen as the
-delay between obstacle detection and reaction during learning. Along with the increased image count, the runs from
-the modified learning system performed better in general, however there were certainly still errors.
+In Figure \ref{fig:ab-3-2-inside} we see the justification for modifying the agent's behaviour. This run was considered successful, however it can be seen
+that the robot did not follow the route precisely, rather it followed an inside line. A potential reason was interpreted as the
+delay between obstacle detection and reaction during learning. After modification, we do not see a large difference, though
+we do generally see the robot get closer to its goal and successful routes seem more stable.
 \newline
+
 
 \begin{figure}
  \centering
@@ -1420,21 +1513,28 @@ the modified learning system performed better in general, however there were cer
   }
 \end{figure}
 
+\FloatBarrier
+
 In all, the visual navigation system performed quite well. Drastic errors were rare, though certainly present. The full series
 of trajectories in Appendix \ref{app:plots} show that the network was capable of reproducing routes on a robot through a
-cluttered (yet low detail due to the distorted field of vision) environment using a visual scanning route following behaviour.
+cluttered, yet low detail, environment using a visual scanning route following behaviour.
 \newline
 
+\paragraph{The Homeward Experiment:}
 What follows was not a formal experiment, but rather an exercise in curiosity. We gave AntBot the ability to learn homeward
 routes by rotating each image by $180^{\circ}$ and storing both the original and rotated versions. The robot was then set
-to run a learning route through an empty arena and tasked with retracing its route home, then back out, and so on. Two runs
-of this nature were conducted, however, only one was recorded. During the first run, the arena contained a box and the
+to run a learning route through an empty arena and tasked with retracing its route home, then back out, and so on. Two experiments
+of this nature were conducted, however, only one was recorded. During the first experiment, the arena contained a box and the
 robot did not cope well with this landscape; outbound routes performed as well as could be expected, though inbound routes
-failed badly, requireing numerous corrections. The second run (taking place in the empty arena) faired far better, though
-corrections were still required. The trajectories can be seen in Figure \ref{fig:home}. Two corrections were required
+failed badly, requiring numerous corrections.
+\newline
+
+The second experiment (taking place in the empty arena) faired far better, though
+corrections were still required. This experiment was recorded and the trajectories can be seen in Figure \ref{fig:home}. Two corrections were required
 through the course of this experiment during runs \textit{Memory 1} and \textit{Memory 5}. Both corrections occurred
-at an offset of greater than 2000mm (in the negative direaction) from the origin and, once corrected, the robot successfully
-navigated home. There was one out of three homeward routes that  
+at an offset of greater than $2000mm$ (in the negative direction) from the origin and, once corrected, the robot successfully
+navigated home. The homeward route \textit{Memory 3} required no correction.
+\newline
 
 \begin{figure}
  \centering
@@ -1449,9 +1549,9 @@ navigated home. There was one out of three homeward routes that
 
 These results indicate a significant improvement over the results presented by \textit{Zhang} with regard to the
 scanning route following strategy and bring the performance more in line with the klinokinesis results presented in
-\cite{Zhang2017}. Multiple errors were experienced per run when using scanning, while our visual scanning behaviour
-demonstrated a much more stable performance replicating (albeit with varying degrees of success) 13 of 18 runs, only one of
-which experienced serious error, though it recovered. The homeward experiments experienced only two errors over the five memory runs.
+\cite{Zhang2017}. Previously, multiple errors were experienced per run when using scanning, while our visual scanning behaviour
+demonstrated a much more stable performance replicating (albeit with varying degrees of success) 14 of 18 runs, only one of
+which experienced serious error, though it recovered. The homeward experiment experienced only two errors over the five memory runs.
 \newpage
 
 \section{ Discussion } \label{sec:discussion}
@@ -1513,20 +1613,33 @@ will be spent on this in Part 2, though it will be studied if time is available.
 \newline
 
 \paragraph{Visual Navigation:}
-The results for the VN portion of this project are somewhat lacklustre; while they show promise for the model,
-there is no obvious way to quantify the results. Saying ``this route looks similar to this other route'' is
+The results for the VN portion of this project are decent, though presenting them aptly has been
+challenging. While they certainly show promise for the model,
+there is no straightforward way to quantify the results. Saying ``this route looks similar to this other route'' is
 not a good way of presenting results. In part, this is due to the nature of the experiments, errors were
-not corrected as doing so meant stepping into the arena and corrupting AntBot's view, however, it can
+not corrected as we wished to observe the agent's behaviour and doing so meant stepping into the arena and
+corrupting AntBot's view. However, it can
 be seen in Figure \ref{fig:home} that applying corrections to the robot did not result in a corrupted route
-and in fact could have produced more meaningful results. One might suggest that we take some similarity metric
+as we feared it would
+and in fact could have produced more meaningful results.
+\newline
+
+One might suggest that we take some similarity metric
 such as the sum of squared error between the two routes, establishing an error threshold for what might be
 considered a success. In practice this is made difficult by the nature of the information returned by the
 Vicon system though it may not be impossible. The recordings are of different lengths and even removing
 duplicates (e.g. where the robot was sat still for multiple frames) does not result in frame $x$ in the
 learning run corresponding to frame $x$ in the memory run. Computing the distance between the points
-may not be the best method but it certainly gives something more tangible than the current results. In Part 2
-we would like to run these experiments again, this time establishing better metrics to give us a firm foundation
-on which to develop our extensions.
+may not be the best method but it certainly gives something more tangible than the current results.
+\newline
+
+Another method, suggested by Dr. B. Webb, was to connect the two routes by computing a line from the
+end of the learning route to a close point on the memory route. We can then compute the area enclosed between
+the two routes and use this area as a metric for overall route similarity, in addition to the distances we presented
+as part of this work. However, this method fell victim to the same problem. Shading regions between curves
+in pyplot seems to rely on both curves having an equal number of points. Time was not available to investigate
+this further, though we would like to find a way to implement such a system
+during Part 2 of the project as we feel the data would prove very useful.
 \newline
 
 \paragraph{VN Extensions:}
@@ -1590,7 +1703,7 @@ synchronisation delays cause timing issues; however, omitting them causes the ap
 These are necessary by design.
 \newline
 
-Thankfully, the only other platform problem is the firmware on the Arduino
+The only other platform problem is the firmware on the Arduino
 which can easily be re-written. The firmware architecture is entirely appropriate but the control code
 needs re-written and possibly a sensor added. This became apparent during initial tests with the robot, wherein
 equal speeds to both sides using the \textit{go} command would result in a curved trajectory. As ever with

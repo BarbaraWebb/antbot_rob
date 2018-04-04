@@ -27,25 +27,28 @@
 \contentsline {section}{\numberline {5}Experimentation}{27}
 \contentsline {subsection}{\numberline {5.1}General}{27}
 \contentsline {subsection}{\numberline {5.2}Collision Avoidance}{27}
-\contentsline {subsection}{\numberline {5.3}Visual Navigation}{30}
+\contentsline {subsection}{\numberline {5.3}Visual Navigation}{29}
 \contentsline {section}{\numberline {6} Results and Evaluation }{33}
 \contentsline {subsection}{\numberline {6.1}Collision Avoidance}{33}
 \contentsline {subsubsection}{\numberline {6.1.1}Time-to-Collision}{33}
 \contentsline {subsubsection}{\numberline {6.1.2}Filtering}{34}
 \contentsline {subsection}{\numberline {6.2}Visual Navigation using the Mushroom Body}{38}
-\contentsline {section}{\numberline {7} Discussion }{43}
-\contentsline {subsection}{\numberline {7.1}Conclusion}{43}
-\contentsline {subsection}{\numberline {7.2}Future work - Potential developments for MInf Part 2}{43}
-\contentsline {subsubsection}{\numberline {7.2.1}Improvements on work presented}{43}
-\contentsline {paragraph}{Time-to-Contact:}{43}
-\contentsline {paragraph}{Filtering:}{44}
-\contentsline {paragraph}{Visual Navigation:}{44}
-\contentsline {paragraph}{VN Extensions:}{44}
-\contentsline {paragraph}{Future Experiments:}{45}
-\contentsline {subsubsection}{\numberline {7.2.2}Engineering}{45}
-\contentsline {paragraph}{Software:}{45}
-\contentsline {paragraph}{Hardware/Firmware:}{45}
-\contentsline {section}{\numberline {8}References}{47}
-\contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{49}
-\contentsline {subsection}{\numberline {A.1}AB Runs}{49}
-\contentsline {subsection}{\numberline {A.2}MAB Runs}{54}
+\contentsline {paragraph}{Results:}{38}
+\contentsline {paragraph}{Discussion:}{41}
+\contentsline {paragraph}{The Homeward Experiment:}{44}
+\contentsline {section}{\numberline {7} Discussion }{47}
+\contentsline {subsection}{\numberline {7.1}Conclusion}{47}
+\contentsline {subsection}{\numberline {7.2}Future work - Potential developments for MInf Part 2}{47}
+\contentsline {subsubsection}{\numberline {7.2.1}Improvements on work presented}{47}
+\contentsline {paragraph}{Time-to-Contact:}{47}
+\contentsline {paragraph}{Filtering:}{48}
+\contentsline {paragraph}{Visual Navigation:}{48}
+\contentsline {paragraph}{VN Extensions:}{49}
+\contentsline {paragraph}{Future Experiments:}{49}
+\contentsline {subsubsection}{\numberline {7.2.2}Engineering}{49}
+\contentsline {paragraph}{Software:}{49}
+\contentsline {paragraph}{Hardware/Firmware:}{50}
+\contentsline {section}{\numberline {8}References}{51}
+\contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{53}
+\contentsline {subsection}{\numberline {A.1}AB Runs}{53}
+\contentsline {subsection}{\numberline {A.2}MAB Runs}{58}
