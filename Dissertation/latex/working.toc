@@ -1,5 +1,5 @@
-\contentsline {section}{List of Figures}{vii}
-\contentsline {section}{List of Tables}{xi}
+\contentsline {section}{List of Figures}{ix}
+\contentsline {section}{List of Tables}{xiii}
 \contentsline {section}{\numberline {1} Introduction }{1}
 \contentsline {subsection}{\numberline {1.1} Motivation }{1}
 \contentsline {subsection}{\numberline {1.2} Goals }{1}
