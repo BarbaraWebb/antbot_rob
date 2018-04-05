@@ -178,7 +178,6 @@ the visual projection neurons and the Kenyon Cells, and binary weightings betwee
 and a single Extrinsic Neuron denoting the level of
 image recognition. A modification was made by \textit{Zhang}, whereby eight ENs were used, one for each of
 the cardinal directions in the Central Complex model. This will be discussed further in Section
-Section
 \ref{MBBackground}. The reader should note that the Central Complex (CX) model is primarily used
 to model the task of Path Integration and will not be discussed further (see \cite{Scimeca2017}).
 Previous projects did not achieve robust performance using a scanning route following strategy so we
@@ -229,9 +228,9 @@ is not the primary method they use to determine a direction after having recogni
 this scanning behaviour only occurs in certain scenarios (e.g. when the ant becomes lost)
 \cite{Kodzhabashev2015}. This will require debugging of the existing model and any interacting
 factors; for example, \textit{Zhang} managed to achieve good results with the MB model using
-klinokinesis as the route following behaviour while a scanning struggled to produce robust routes.
+klinokinesis as the route following behaviour while a scanning behaviour struggled to produce robust routes.
 It should also be noted that the scanning behaviour performed poorly using a Perfect Memory model \cite{Zhang2017}
-(the best model used by \textit{Ardin et al.}) suggests that the model is
+(the best model used by \textit{Ardin et al.}) which suggests that the model is
 not the only factor that contributes to the accuracy of recapitulated routes.
 \newline
 
@@ -253,7 +252,7 @@ Significant contributions of this project:
   \item{Implemented hardware upgrades to AntBot to make the platform more robust,}
   \item{Implemented a basic but extensible statistical logging utility on AntBot with a complementary parsing and plotting utility written in Python,} 
   \item{Implemented a new type of scanning behaviour for AntBot,}
-  \item{Successful replication of multiple routes through a cluttered environment using Visual Navigation.}
+  \item{Successful recapitulation of multiple routes through a cluttered environment using Visual Navigation.}
   \end{enumerate}
 \newpage
 
@@ -299,6 +298,7 @@ TTC = \frac{r}{v}
 Where $r$ is the distance from a point object on a collision course with the robot and $v$ is
 constant speed at which the robot and object are closing.
 \newline
+
 \textit{Low and Wyeth} then alter this equation by taking the direction of the velocity vector $v$
 and the direction to a point on the object and computing the angle between these two vectors $\phi$.
 Their TTC equation then becomes:
@@ -431,7 +431,7 @@ decides on its next action by scanning to find the direction of greatest familia
 
 This version of the MB circuit has demonstrated the capacity to learn scene information, as well
 as recapitulate routes by using the scanning technique \cite{Ardin2016}. In 2016, \textit{Eberding}
-implemented the Willshaw Network (WN) on AntBot, which resembles the Mushroom Body neuropils (see Section \ref{sec:wn}); he
+implemented the Willshaw Network (WN) on AntBot, which resembles the Mushroom Body circuit (see Section \ref{sec:wn}); he
 demonstrated that the network allowed the agent to perform visual navigation through a sparse testing
 environment\cite{Eberding2016}. The agent navigates by scanning, computing unfamiliarity, and finally
 choosing the direction of minimum unfamiliarity. In order to save on computational resources, the
@@ -687,7 +687,7 @@ power system was modified.
 A new power source which could be charged as required without removal was added, along with external
 charging ports and a switch. The internal wiring was set up such that power could either flow from the
 external ports to the battery, or from the battery to the motors controlled by the external switch. The new
-power source is a 9.6V NiMH power pack. Motor speeds and systems which depended on them required re-tuning
+power source is a 9.6V NiMH power pack. Motor speeds and systems dependent on them required re-tuning
 after completion of the modifications. The required modifications to chassis (holes drilled for components)
 were done by the Informatics workshop. The wiring, research and sourcing of parts were performed as part
 of this project.
