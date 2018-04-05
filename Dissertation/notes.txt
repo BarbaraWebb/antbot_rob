@@ -11,20 +11,12 @@ Files:
  - latex/build.sh:
    Bash shell script to compile the document and output a pdf to the Dissertation/pdf directory
 
+ - latex/backup.sh:
+   Bash shell script to backup files and clean the working directory (log corruption could cause compile problems)
+
 Directories:
  - latex:
    All latex files for document production purposes
 
-FIRST DRAFT:
-1. Introduction:
-- Mention extending the Mushroom Body network but this was never fully realised.
-
-1.1 Motivation:
-- Italiscise Eberding and Zhang
-
-1.2 Goals:
-- Mentioning the Homeward task as a goal; I can and would like to keep this in
-  but it could be tweaked to be more of a curiosity than an outright goal.
-
-- "effects of using different types of flow field..." - This could be refined
-  to make it more accurate
+- pdf:
+   Output directory for production

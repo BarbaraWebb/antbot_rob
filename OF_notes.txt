@@ -1,4 +1,4 @@
-OPTICAL FLOW EXPERIMENTS:
+OPTICAL FLOW EXPERIMENTS: Informal notes file
 - Now that everything seems to work, I will move on to experiments.
 
 Section 1: correctness testing
@@ -131,9 +131,6 @@ Predictable arenas: 1st
     robot couldn't react quickly enough. Instead of triggering a saccade, if possible, it'd be
     nice to implement some kind of feedback control on speeds based on flow difference. Quicker
     and smoother responses.
-
-Speeds:
-	=
 
 ::END OF FILE::
 

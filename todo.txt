@@ -1,3 +1,5 @@
+Informal notes file.
+
 Todo and notes file for Project:
 
 02 / 10 / 17:
@@ -681,7 +683,7 @@ notes:
 
 19 / 02 / 18:
 - Experiment with new speeds and reaction thresholds for OF
-- Try running the new nav threads. See if shit goes south
+- Try running the new nav threads.
 
 notes:
 - New power source installed; much more powerful than the old one, needs
@@ -737,7 +739,7 @@ todo:
   - have an index of 7515? pixels
   - after fixing loop references scanning now works without crashing, some
     wild indices are still present; why?
-  - I am literally retarded; thought I was adding when I was concatenating.
+  - I am stupid; thought I was adding when I was concatenating.
 
 - test scanning to see if it works
   - it does, the network doesn't... see below

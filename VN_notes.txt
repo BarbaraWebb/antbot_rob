@@ -1,4 +1,4 @@
-Notes for visual navigation experimentation:
+Notes for visual navigation experimentation: Informal notes file
 
 Part 1: VICON
 - I can use vicon to record runs and the timer on the threads easily gives me enough time to
@@ -38,7 +38,7 @@ Part 2: Experiments; design and implementation
 - Want to track the full trajectory; if the robot goes wrong and goes into a wall or similar,
   switch off the chassis and let the robot sit. Do not replace on route if the robot gets lost.
 
-Part 3: Moar experiments
+Part 3: More experiments
 - Difference in the sensitivity of OF was noticed; this was not in-fact the sensitivity of the OF,
   rather the fact that the robot does not stop before turning as it does in Visual Navigation.
 
