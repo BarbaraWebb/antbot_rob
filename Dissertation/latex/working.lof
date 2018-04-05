@@ -1,5 +1,5 @@
 \contentsline {figure}{\numberline {1}{\ignorespaces The TTC model: (Caption from \textit {Low and Wyeth} Figure 1): Time To Contact Figures: Left - Robot on a straight collision course with object, Right - Robot not on a collision course with object. \relax }}{6}
-\contentsline {figure}{\numberline {2}{\ignorespaces The OF filter model: (Caption from \textit {Stewart et al.} Figure 7): Collision avoidance (CA). (A)The CA filters used in the model. Each covers \nobreakspace {}105 deg. of azimuth but they are centred at $\pm 3$ deg. (elevation = 0 deg.). [Left and right filters are blue and red respectively] (B) Control diagram for collision avoidance. Only the half of the system that triggers rightward saccades is shown for clarity; the other half has an identical configuration. The dark blue box represents the blue wide-field filter in A. The reset operation also applies to the other half of the system, i.e. a saccade in one direction sets both accumulators to 0. Thresh., threshold; ang. vel., angular velocity. \relax }}{7}
+\contentsline {figure}{\numberline {2}{\ignorespaces The OF filter model: (Caption from \textit {Stewart et al.} Figure 7): Collision avoidance (CA). (A)The CA filters used in the model. Each covers \nobreakspace {}105 deg. of azimuth but they are centred at $\pm 3$ deg. (elevation = 0 deg.). [Left and right filters are blue and red respectively.] (B) Control diagram for collision avoidance. Only the half of the system that triggers rightward saccades is shown for clarity; the other half has an identical configuration. The dark blue box represents the blue wide-field filter in A. The reset operation also applies to the other half of the system, i.e. a saccade in one direction sets both accumulators to 0. Thresh., threshold; ang. vel., angular velocity. \relax }}{7}
 \contentsline {figure}{\numberline {3}{\ignorespaces The Mushroom Body circuit: (Caption from \textit {Ardin et al.} Figure 2): Images (see Fig 1) activate the visual projection neurons (vPNs). Each Kenyon cell (KC) receives input from 10 (random) vPNs and exceeds firing threshold only for coincident activation from several vPNs, thus images are encoded as a sparse pattern of KC activation. All KCs converge on a single extrinsic neuron (EN) and if activation coincides with a reward signal, the connection strength is decreased. After training the EN output to previously rewarded (familiar) images is few or no spikes. \relax }}{9}
 \contentsline {figure}{\numberline {4}{\ignorespaces The original network figure (Fig. 4) from \textit {Willshaw et al.} \cite {Willshaw1969}. \relax }}{10}
 \contentsline {figure}{\numberline {5}{\ignorespaces Our modified Willshaw network which models the Mushroom Body circuit. The input ($KC_{in}$ / $N_b$) represents a pattern of KC activation. The synapses represent the weight of the connection between each KC and the EN. The output represents the output of the EN. \relax }}{11}
@@ -12,9 +12,9 @@
 \contentsline {figure}{\numberline {12}{\ignorespaces The empty experimental arena. \relax }}{27}
 \contentsline {figure}{\numberline {13}{\ignorespaces An example of the tussocks used during experiments. \relax }}{28}
 \contentsline {figure}{\numberline {14}{\ignorespaces The arena used for basic tussock interaction \relax }}{28}
-\contentsline {figure}{\numberline {15}{\ignorespaces One tussock per quadrant. \relax }}{29}
-\contentsline {figure}{\numberline {16}{\ignorespaces Two tussocks per quadrant. \relax }}{30}
-\contentsline {figure}{\numberline {17}{\ignorespaces Three tussocks per quadrant. \relax }}{30}
+\contentsline {figure}{\numberline {15}{\ignorespaces Arena 4. One tussock per quadrant. \relax }}{29}
+\contentsline {figure}{\numberline {16}{\ignorespaces Arena 5. Two tussocks per quadrant. \relax }}{30}
+\contentsline {figure}{\numberline {17}{\ignorespaces Arena 6. Three tussocks per quadrant. \relax }}{30}
 \contentsline {figure}{\numberline {18}{\ignorespaces The autoscaled plot for run MAB-5-2. \relax }}{31}
 \contentsline {figure}{\numberline {19}{\ignorespaces The set-scale plot for run MAB-5-2; forcing the axes to a uniform scale over all runs gives a more accurate immediate view of the runs and their similarity.\relax }}{32}
 \contentsline {figure}{\numberline {20}{\ignorespaces $\pm 45^{\circ }$ offset image frames showing the flow vectors computed at each point (distinct black pixels). The five images were taken over the course of one minute while the robot was stationary in G.17. \relax }}{33}
@@ -29,20 +29,20 @@
 \contentsline {figure}{\numberline {29}{\ignorespaces Trajectory plot of run AB-3-2. \relax }}{44}
 \contentsline {figure}{\numberline {30}{\ignorespaces Trajectory plot of the homeward experiment. The Vicon capture was accidentally stopped early during outward trip \textit {Memory 4} and the last section of the trip was missed. The linkage has been filled in to show where the rough route the robot took but it must be understood that this is not part of the recording, the line was simply drawn to fill in the gap. \relax }}{45}
 \contentsline {figure}{\numberline {31}{\ignorespaces Run AB-1-1. \relax }}{53}
-\contentsline {figure}{\numberline {32}{\ignorespaces Run AB-1-2. \relax }}{54}
+\contentsline {figure}{\numberline {32}{\ignorespaces Run AB-1-2. \relax }}{53}
 \contentsline {figure}{\numberline {33}{\ignorespaces Run AB-2-1. \relax }}{54}
-\contentsline {figure}{\numberline {34}{\ignorespaces Run AB-2-2. \relax }}{55}
+\contentsline {figure}{\numberline {34}{\ignorespaces Run AB-2-2. \relax }}{54}
 \contentsline {figure}{\numberline {35}{\ignorespaces Run AB-3-1. \relax }}{55}
-\contentsline {figure}{\numberline {36}{\ignorespaces Run AB-3-2. \relax }}{56}
+\contentsline {figure}{\numberline {36}{\ignorespaces Run AB-3-2. \relax }}{55}
 \contentsline {figure}{\numberline {37}{\ignorespaces Run AB-4-1. \relax }}{56}
-\contentsline {figure}{\numberline {38}{\ignorespaces Run AB-4-2. \relax }}{57}
-\contentsline {figure}{\numberline {39}{\ignorespaces Run MAB-1-1. \relax }}{58}
-\contentsline {figure}{\numberline {40}{\ignorespaces Run MAB-1-2. \relax }}{58}
-\contentsline {figure}{\numberline {41}{\ignorespaces Run MAB-2-1. \relax }}{59}
-\contentsline {figure}{\numberline {42}{\ignorespaces Run MAB-2-2. \relax }}{59}
-\contentsline {figure}{\numberline {43}{\ignorespaces Run MAB-3-1. \relax }}{60}
-\contentsline {figure}{\numberline {44}{\ignorespaces Run MAB-3-2. \relax }}{60}
-\contentsline {figure}{\numberline {45}{\ignorespaces Run MAB-4-1. \relax }}{61}
-\contentsline {figure}{\numberline {46}{\ignorespaces Run MAB-4-2. \relax }}{61}
-\contentsline {figure}{\numberline {47}{\ignorespaces Run MAB-5-1. \relax }}{62}
-\contentsline {figure}{\numberline {48}{\ignorespaces Run MAB-5-2. \relax }}{62}
+\contentsline {figure}{\numberline {38}{\ignorespaces Run AB-4-2. \relax }}{56}
+\contentsline {figure}{\numberline {39}{\ignorespaces Run MAB-1-1. \relax }}{57}
+\contentsline {figure}{\numberline {40}{\ignorespaces Run MAB-1-2. \relax }}{57}
+\contentsline {figure}{\numberline {41}{\ignorespaces Run MAB-2-1. \relax }}{58}
+\contentsline {figure}{\numberline {42}{\ignorespaces Run MAB-2-2. \relax }}{58}
+\contentsline {figure}{\numberline {43}{\ignorespaces Run MAB-3-1. \relax }}{59}
+\contentsline {figure}{\numberline {44}{\ignorespaces Run MAB-3-2. \relax }}{59}
+\contentsline {figure}{\numberline {45}{\ignorespaces Run MAB-4-1. \relax }}{60}
+\contentsline {figure}{\numberline {46}{\ignorespaces Run MAB-4-2. \relax }}{60}
+\contentsline {figure}{\numberline {47}{\ignorespaces Run MAB-5-1. \relax }}{61}
+\contentsline {figure}{\numberline {48}{\ignorespaces Run MAB-5-2. \relax }}{61}

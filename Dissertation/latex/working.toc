@@ -51,4 +51,4 @@
 \contentsline {section}{\numberline {8}References}{51}
 \contentsline {section}{\numberline {A}Visual Navigation trajectory plots}{53}
 \contentsline {subsection}{\numberline {A.1}AB Runs}{53}
-\contentsline {subsection}{\numberline {A.2}MAB Runs}{58}
+\contentsline {subsection}{\numberline {A.2}MAB Runs}{57}

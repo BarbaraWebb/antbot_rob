@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  5 APR 2018 10:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2017.12.29)  5 APR 2018 12:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -340,10 +340,7 @@ Package pdftex.def Info: Images/LowOFModel.png  used on input line 312. on inpu
 t line 312.
 Package pdftex.def Info: Requested size: 407.66833pt x 233.1456pt on input line
  312.
- [5]
-Underfull \vbox (badness 1389) has occurred while \output is active []
-
- [6 <./Images/LowOFModel.png>]
+ [5] [6 <./Images/LowOFModel.png>]
 <Images/Stewart2010CAModel.png, id=87, 1046.91125pt x 770.88pt>
 File: Images/Stewart2010CAModel.png Graphic file (type png)
 <use Images/Stewart2010CAModel.png>
@@ -626,179 +623,176 @@ Underfull \vbox (badness 4341) has occurred while \output is active []
 <Images/AB-1-1.png, id=286, 367.1316pt x 328.8285pt>
 File: Images/AB-1-1.png Graphic file (type png)
 <use Images/AB-1-1.png>
-Package pdftex.def Info: Images/AB-1-1.png  used on input line 1753. on input l
-ine 1753.
+Package pdftex.def Info: Images/AB-1-1.png  used on input line 1750. on input l
+ine 1750.
 Package pdftex.def Info: Requested size: 317.07614pt x 283.99622pt on input lin
-e 1753.
+e 1750.
 File: Images/AB-1-2.png Graphic file (type png)
 <use Images/AB-1-2.png>
-Package pdftex.def Info: Images/AB-1-2.png  used on input line 1761. on input l
-ine 1761.
+Package pdftex.def Info: Images/AB-1-2.png  used on input line 1758. on input l
+ine 1758.
 Package pdftex.def Info: Requested size: 317.07614pt x 283.99622pt on input lin
-e 1761.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
+e 1758.
 <Images/AB-2-1.png, id=287, 367.1316pt x 328.8285pt>
 File: Images/AB-2-1.png Graphic file (type png)
 <use Images/AB-2-1.png>
-Package pdftex.def Info: Images/AB-2-1.png  used on input line 1769. on input l
-ine 1769.
+Package pdftex.def Info: Images/AB-2-1.png  used on input line 1766. on input l
+ine 1766.
 Package pdftex.def Info: Requested size: 317.07614pt x 283.99622pt on input lin
-e 1769.
+e 1766.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <Images/AB-2-2.png, id=288, 367.1316pt x 328.8285pt>
 File: Images/AB-2-2.png Graphic file (type png)
 <use Images/AB-2-2.png>
-Package pdftex.def Info: Images/AB-2-2.png  used on input line 1777. on input l
-ine 1777.
+Package pdftex.def Info: Images/AB-2-2.png  used on input line 1774. on input l
+ine 1774.
 Package pdftex.def Info: Requested size: 317.07614pt x 283.99622pt on input lin
-e 1777.
+e 1774.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: Images/AB-3-1.png Graphic file (type png)
 <use Images/AB-3-1.png>
-Package pdftex.def Info: Images/AB-3-1.png  used on input line 1785. on input l
-ine 1785.
+Package pdftex.def Info: Images/AB-3-1.png  used on input line 1782. on input l
+ine 1782.
 Package pdftex.def Info: Requested size: 317.07614pt x 283.99622pt on input lin
-e 1785.
+e 1782.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: Images/AB-3-2.png Graphic file (type png)
 <use Images/AB-3-2.png>
-Package pdftex.def Info: Images/AB-3-2.png  used on input line 1793. on input l
-ine 1793.
+Package pdftex.def Info: Images/AB-3-2.png  used on input line 1790. on input l
+ine 1790.
 Package pdftex.def Info: Requested size: 317.07614pt x 283.99622pt on input lin
-e 1793.
+e 1790.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: Images/AB-4-1.png Graphic file (type png)
 <use Images/AB-4-1.png>
-Package pdftex.def Info: Images/AB-4-1.png  used on input line 1801. on input l
-ine 1801.
+Package pdftex.def Info: Images/AB-4-1.png  used on input line 1798. on input l
+ine 1798.
 Package pdftex.def Info: Requested size: 317.07614pt x 284.55316pt on input lin
-e 1801.
+e 1798.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <Images/AB-4-2.png, id=289, 366.4089pt x 328.8285pt>
 File: Images/AB-4-2.png Graphic file (type png)
 <use Images/AB-4-2.png>
-Package pdftex.def Info: Images/AB-4-2.png  used on input line 1809. on input l
-ine 1809.
+Package pdftex.def Info: Images/AB-4-2.png  used on input line 1806. on input l
+ine 1806.
 Package pdftex.def Info: Requested size: 317.07614pt x 284.55316pt on input lin
-e 1809.
+e 1806.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [53
 
- <./Images/AB-1-1.png>] [54 <./Images/AB-2-1.png>] [55 <./Images/AB-2-2.png>] [
-56] [57 <./Images/AB-4-2.png>]
-<Images/MAB-1-1.png, id=310, 372.1905pt x 328.8285pt>
+ <./Images/AB-1-1.png>] [54 <./Images/AB-2-1.png> <./Images/AB-2-2.png>]
+[55] [56 <./Images/AB-4-2.png>]
+<Images/MAB-1-1.png, id=306, 372.1905pt x 328.8285pt>
 File: Images/MAB-1-1.png Graphic file (type png)
 <use Images/MAB-1-1.png>
-Package pdftex.def Info: Images/MAB-1-1.png  used on input line 1821. on input 
-line 1821.
+Package pdftex.def Info: Images/MAB-1-1.png  used on input line 1818. on input 
+line 1818.
 Package pdftex.def Info: Requested size: 317.07614pt x 280.13274pt on input lin
-e 1821.
-<Images/MAB-1-2.png, id=311, 372.1905pt x 328.8285pt>
+e 1818.
+<Images/MAB-1-2.png, id=307, 372.1905pt x 328.8285pt>
 File: Images/MAB-1-2.png Graphic file (type png)
 <use Images/MAB-1-2.png>
-Package pdftex.def Info: Images/MAB-1-2.png  used on input line 1829. on input 
-line 1829.
+Package pdftex.def Info: Images/MAB-1-2.png  used on input line 1826. on input 
+line 1826.
 Package pdftex.def Info: Requested size: 317.07614pt x 280.13274pt on input lin
-e 1829.
-<Images/MAB-2-1.png, id=312, 372.1905pt x 328.8285pt>
+e 1826.
+<Images/MAB-2-1.png, id=308, 372.1905pt x 328.8285pt>
 File: Images/MAB-2-1.png Graphic file (type png)
 <use Images/MAB-2-1.png>
-Package pdftex.def Info: Images/MAB-2-1.png  used on input line 1837. on input 
-line 1837.
+Package pdftex.def Info: Images/MAB-2-1.png  used on input line 1834. on input 
+line 1834.
 Package pdftex.def Info: Requested size: 317.07614pt x 280.13274pt on input lin
-e 1837.
+e 1834.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: Images/MAB-2-2.png Graphic file (type png)
 <use Images/MAB-2-2.png>
-Package pdftex.def Info: Images/MAB-2-2.png  used on input line 1845. on input 
-line 1845.
+Package pdftex.def Info: Images/MAB-2-2.png  used on input line 1842. on input 
+line 1842.
 Package pdftex.def Info: Requested size: 317.07614pt x 280.13274pt on input lin
-e 1845.
+e 1842.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/MAB-3-1.png, id=313, 372.1905pt x 328.8285pt>
+<Images/MAB-3-1.png, id=309, 372.1905pt x 328.8285pt>
 File: Images/MAB-3-1.png Graphic file (type png)
 <use Images/MAB-3-1.png>
-Package pdftex.def Info: Images/MAB-3-1.png  used on input line 1853. on input 
-line 1853.
+Package pdftex.def Info: Images/MAB-3-1.png  used on input line 1850. on input 
+line 1850.
 Package pdftex.def Info: Requested size: 317.07614pt x 280.13274pt on input lin
-e 1853.
+e 1850.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/MAB-3-2.png, id=314, 372.1905pt x 328.8285pt>
+<Images/MAB-3-2.png, id=310, 372.1905pt x 328.8285pt>
 File: Images/MAB-3-2.png Graphic file (type png)
 <use Images/MAB-3-2.png>
-Package pdftex.def Info: Images/MAB-3-2.png  used on input line 1861. on input 
-line 1861.
+Package pdftex.def Info: Images/MAB-3-2.png  used on input line 1858. on input 
+line 1858.
 Package pdftex.def Info: Requested size: 317.07614pt x 280.13274pt on input lin
-e 1861.
+e 1858.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/MAB-4-1.png, id=315, 372.1905pt x 328.8285pt>
+<Images/MAB-4-1.png, id=311, 372.1905pt x 328.8285pt>
 File: Images/MAB-4-1.png Graphic file (type png)
 <use Images/MAB-4-1.png>
-Package pdftex.def Info: Images/MAB-4-1.png  used on input line 1869. on input 
-line 1869.
+Package pdftex.def Info: Images/MAB-4-1.png  used on input line 1866. on input 
+line 1866.
 Package pdftex.def Info: Requested size: 317.07614pt x 280.13274pt on input lin
-e 1869.
+e 1866.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/MAB-4-2.png, id=316, 372.1905pt x 328.8285pt>
+<Images/MAB-4-2.png, id=312, 372.1905pt x 328.8285pt>
 File: Images/MAB-4-2.png Graphic file (type png)
 <use Images/MAB-4-2.png>
-Package pdftex.def Info: Images/MAB-4-2.png  used on input line 1877. on input 
-line 1877.
+Package pdftex.def Info: Images/MAB-4-2.png  used on input line 1874. on input 
+line 1874.
 Package pdftex.def Info: Requested size: 317.07614pt x 280.13274pt on input lin
-e 1877.
+e 1874.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/MAB-5-1.png, id=317, 372.1905pt x 328.8285pt>
+<Images/MAB-5-1.png, id=313, 372.1905pt x 328.8285pt>
 File: Images/MAB-5-1.png Graphic file (type png)
 <use Images/MAB-5-1.png>
-Package pdftex.def Info: Images/MAB-5-1.png  used on input line 1885. on input 
-line 1885.
+Package pdftex.def Info: Images/MAB-5-1.png  used on input line 1882. on input 
+line 1882.
 Package pdftex.def Info: Requested size: 317.07614pt x 280.13274pt on input lin
-e 1885.
+e 1882.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: Images/MAB-5-2.png Graphic file (type png)
 <use Images/MAB-5-2.png>
-Package pdftex.def Info: Images/MAB-5-2.png  used on input line 1893. on input 
-line 1893.
+Package pdftex.def Info: Images/MAB-5-2.png  used on input line 1890. on input 
+line 1890.
 Package pdftex.def Info: Requested size: 317.07614pt x 280.13274pt on input lin
-e 1893.
+e 1890.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[58
+[57
 
- <./Images/MAB-1-1.png> <./Images/MAB-1-2.png>] [59 <./Images/MAB-2-1.png>]
-[60 <./Images/MAB-3-1.png> <./Images/MAB-3-2.png>] [61 <./Images/MAB-4-1.png> <
-./Images/MAB-4-2.png>] [62 <./Images/MAB-5-1.png>] (./working.aux) ) 
+ <./Images/MAB-1-1.png> <./Images/MAB-1-2.png>] [58 <./Images/MAB-2-1.png>]
+[59 <./Images/MAB-3-1.png> <./Images/MAB-3-2.png>] [60 <./Images/MAB-4-1.png> <
+./Images/MAB-4-2.png>] [61 <./Images/MAB-5-1.png>] (./working.aux) ) 
 Here is how much of TeX's memory you used:
  4306 strings out of 492985
  65185 string characters out of 6138637
@@ -823,10 +817,10 @@ fonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.
 pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on working.pdf (78 pages, 79939966 bytes).
+Output written on working.pdf (77 pages, 79939431 bytes).
 PDF statistics:
- 402 PDF objects out of 1000 (max. 8388607)
- 229 compressed objects within 3 object streams
+ 399 PDF objects out of 1000 (max. 8388607)
+ 227 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
  221 words of extra memory for PDF output out of 10000 (max. 10000000)
 
