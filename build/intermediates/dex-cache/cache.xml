@@ -3,129 +3,129 @@
 
     <item
         is-multidex="false"
-        jar="/home/refmitchell/.gradle/caches/modules-2/files-2.1/org.ejml/dense64/0.29/3cae6162c012153c7e9a8e5b14682e39a69ee276/dense64-0.29.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3cae6162c012153c7e9a8e5b14682e39a69ee276">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/dense64-0.29_fdbf167aab69db88adc3e76c52cbab8ac72d5842.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/refmitchell/Uni/4/Project/antbot_rob/Broadcast_Library/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="2507ee2366b22285b2a5a7990cbd10ee41d20582">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_64b1be0691064ebf7ff746f5adf48e3789fa3e38.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/refmitchell/.gradle/caches/modules-2/files-2.1/com.github.wendykierp/JTransforms/3.0/79477aec6929cd64cd863d6ac59c2445d00239a3/JTransforms-3.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="79477aec6929cd64cd863d6ac59c2445d00239a3">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/JTransforms-3.0_93097574de89a6d0e7726a662004570aaba9a716.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/refmitchell/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/support-annotations-23.0.1_aba3b4f5d65dee1f55201eb1ba5e926f994ab560.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/refmitchell/.gradle/caches/modules-2/files-2.1/org.ejml/all/0.29/31b3729d222d3ea055bb691213746e471fc1b474/all-0.29.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="31b3729d222d3ea055bb691213746e471fc1b474">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/all-0.29_47d1cc22b579db4c1ede3ca2f327a815a87c32eb.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/refmitchell/.gradle/caches/modules-2/files-2.1/org.ejml/denseC64/0.29/1c9016de9f3f6a96011c7487315953f7ccf2e9cd/denseC64-0.29.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="1c9016de9f3f6a96011c7487315953f7ccf2e9cd">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/denseC64-0.29_81d8a3bb518d6cfb61f8fac9bf178d7117bc4b16.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/refmitchell/Uni/4/Project/antbot_rob/openCVLibrary300/build/intermediates/bundles/default/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="b30f06991acf1b69124b78e178b0cbc684fe13f1">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_d991df4776a6cd6e0429c785d6ed03d1e32f6b91.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/refmitchell/.android/build-cache/2dffff6d15518eacf3fead2e5550344774d591f6/output/jars/classes.jar"
+        jar="/home/robert/.android/build-cache/19d674045fd335bf1846468f4f8c56a51756b295/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_e88efa51c0126f66d700f3d33c54f5c52d99ef08.jar" />
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_5802550fd815030d568a38a0b66e56d2731bfeac.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/refmitchell/.gradle/caches/modules-2/files-2.1/pl.edu.icm/JLargeArrays/1.2/85c8cd79cc2865ef37cd70f96cd82246ee642d58/JLargeArrays-1.2.jar"
+        jar="/home/robert/.gradle/caches/modules-2/files-2.1/com.github.wendykierp/JTransforms/3.0/79477aec6929cd64cd863d6ac59c2445d00239a3/JTransforms-3.0.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="85c8cd79cc2865ef37cd70f96cd82246ee642d58">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/JLargeArrays-1.2_9ded9c2cd13a55ebd1f02ce5ead2ed9fd4e52fc4.jar" />
+        sha1="79477aec6929cd64cd863d6ac59c2445d00239a3">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/JTransforms-3.0_1c39430b35d957269979edaf576fb694d542a0f6.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/refmitchell/.android/build-cache/e826bf77af72a758051336583fad51dd7fa24368/output/jars/libs/internal_impl-23.0.1.jar"
+        jar="/home/robert/Uni/Project/antbot_rob/Broadcast_Library/build/intermediates/bundles/default/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d0fa85845a53d8f98a032827f0bf62a9c231fb13">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_92a075605c1939c0afb8bc1151b18ca22a80abc7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/robert/.android/build-cache/9033a5d7a4685b20e4c3bba22f2fcd307e684cbe/output/jars/libs/internal_impl-23.0.1.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_2ec30d957a08e1ca31df018d9a85b504ca3af42b.jar" />
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_1abc6935e7ecab94947deffbd055e510996b1b2b.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/refmitchell/.gradle/caches/modules-2/files-2.1/org.ejml/simple/0.29/d3cfefc0d9d0fcbcd37014bbe33da836fe47464f/simple-0.29.jar"
+        jar="/home/robert/.gradle/caches/modules-2/files-2.1/pl.edu.icm/JLargeArrays/1.2/85c8cd79cc2865ef37cd70f96cd82246ee642d58/JLargeArrays-1.2.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="d3cfefc0d9d0fcbcd37014bbe33da836fe47464f">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/simple-0.29_71747558bfe007294b884af3ed59b208784ea8d4.jar" />
+        sha1="85c8cd79cc2865ef37cd70f96cd82246ee642d58">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/JLargeArrays-1.2_ca6696888fcca876b66c04bd420abad2bd8be21c.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/refmitchell/.android/build-cache/e826bf77af72a758051336583fad51dd7fa24368/output/jars/classes.jar"
+        jar="/home/robert/Uni/Project/antbot_rob/openCVLibrary300/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_9057d78423bf9692ac562bb27621ca1dfb2fefca.jar" />
+        sha1="572fab94e9fa31b7f97cb68db4b0b468bfb9deb3">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_878015f64d1e2dfd76ea9adbf3d0b0d90480dff1.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/refmitchell/.gradle/caches/modules-2/files-2.1/org.ejml/equation/0.29/7aa8d21a40e9b8dcb0f6cb7bdcea921239e5863c/equation-0.29.jar"
+        jar="/home/robert/.gradle/caches/modules-2/files-2.1/org.ejml/all/0.29/31b3729d222d3ea055bb691213746e471fc1b474/all-0.29.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="7aa8d21a40e9b8dcb0f6cb7bdcea921239e5863c">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/equation-0.29_9136df3933f26b0ec847a11e090998e5769fc93d.jar" />
+        sha1="31b3729d222d3ea055bb691213746e471fc1b474">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/all-0.29_8701d3f18239e389dcf5ffbdce89a4264bde74a1.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/refmitchell/.gradle/caches/modules-2/files-2.1/org.ejml/core/0.29/d22f8314e3d7fa637aec33571c0734c58892aa29/core-0.29.jar"
+        jar="/home/robert/.gradle/caches/modules-2/files-2.1/org.ejml/dense64/0.29/3cae6162c012153c7e9a8e5b14682e39a69ee276/dense64-0.29.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3cae6162c012153c7e9a8e5b14682e39a69ee276">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/dense64-0.29_9b09e0e91e9eb027ab9bc9207559bb033aeddb2d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/robert/.gradle/caches/modules-2/files-2.1/org.ejml/denseC64/0.29/1c9016de9f3f6a96011c7487315953f7ccf2e9cd/denseC64-0.29.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1c9016de9f3f6a96011c7487315953f7ccf2e9cd">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/denseC64-0.29_006b6fcf83ae8263d1df8596872433721b72c8a2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/robert/.gradle/caches/modules-2/files-2.1/org.ejml/core/0.29/d22f8314e3d7fa637aec33571c0734c58892aa29/core-0.29.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="d22f8314e3d7fa637aec33571c0734c58892aa29">
-        <dex dex="/home/refmitchell/Uni/4/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/core-0.29_9245054ed143247a761a1ad38ac141cf6ec4484d.jar" />
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/core-0.29_ec45aaa85383ba700f5e41ca856ca5a6c61cdadb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/robert/.android/build-cache/9033a5d7a4685b20e4c3bba22f2fcd307e684cbe/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_106fac4a56e2f3dba98f63a0aeef9d39681d7cbf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/robert/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/support-annotations-23.0.1_e265edd397ffc38834478989e39af5e9475ba457.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/robert/.gradle/caches/modules-2/files-2.1/org.ejml/simple/0.29/d3cfefc0d9d0fcbcd37014bbe33da836fe47464f/simple-0.29.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d3cfefc0d9d0fcbcd37014bbe33da836fe47464f">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/simple-0.29_f4e0facd0ec79abff0069060e1a0887cf431ff60.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/robert/.gradle/caches/modules-2/files-2.1/org.ejml/equation/0.29/7aa8d21a40e9b8dcb0f6cb7bdcea921239e5863c/equation-0.29.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7aa8d21a40e9b8dcb0f6cb7bdcea921239e5863c">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/equation-0.29_b0fc655ed6f4aca2dcf0a466dfc95ef8f3c0450c.jar" />
     </item>
 
 </items>
