@@ -1,6 +1,8 @@
 byte msgChars[64];
 int charCounter = 0;
 int charsInMessage = 0;
+String message = "";
+
 void parseMessageNew(){
   charCounter = 0;
   while(Serial.peek() != -1){
@@ -11,11 +13,43 @@ void parseMessageNew(){
   charsInMessage = charCounter;
   charCounter = 0;
   //New String to put in the Queue.
-  String message = "";
+  message = "";
   //Check what is coming in. If it starts with a 't' it's a new moving command.
   //If it starts with an 'h' the Rover should stop everything.
   if(msgChars[charCounter] == 't') {
     //Set Flags for state distinguishing.
+    parseSegCommand();
+    leftCurve = false;
+    rightCurve = false; 
+  } else if (msgChars[charCounter] == 'g'){
+    parseContCommand();
+    leftCurve = false;
+    rightCurve = false; 
+  } else if (msgChars[charCounter] == 'h'){
+    lastChar = msgChars[charCounter];
+    //Serial.println("HALT");
+    commandQueue = "";
+    finished = true;
+  } else if(msgChars[charCounter] == 'l'){
+    charCounter++;
+    parseSegCommand();
+    leftCurve = true;
+    rightCurve = false;
+  } else if(msgChars[charCounter] == 'r'){
+    charCounter++;
+    parseSegCommand();
+    rightCurve = true;
+    leftCurve = false;
+  } else {
+    //Unknown Message Type -> Do nothing
+  }
+  for(int n = 0; n < sizeof(msgChars); n++){
+    msgChars[n] = 0;
+  }
+}
+
+
+void parseSegCommand(){
     message = "";
     messageBegin = true;
     decimal = false;
@@ -165,15 +199,87 @@ void parseMessageNew(){
         commandQueue += ",";
       }
     }
-  } else if (msgChars[charCounter] == 'h'){
-    lastChar = msgChars[charCounter];
-    //Serial.println("HALT");
-    commandQueue = "";
-    finished = true;
-  } else{
-    //Unknown Message Type -> Do nothing
-  }
-  for(int n = 0; n < sizeof(msgChars); n++){
-    msgChars[n] = 0;
-  }
 }
+
+void parseContCommand(){    
+    //The next step is to get the continuous motion command. 
+    message = "";
+    messageBegin = true;
+    decimal = false;
+    decimalCounter = 0;
+    breakCounter = 0;
+    deletedZero = false;
+    boolean appended = false;
+    while(msgChars[charCounter] != 'n' && msgChars[charCounter] != -1 && breakCounter < 64){
+      if(!decimal || (decimal && decimalCounter <= decimalAccuracy)){
+
+        //Again we don't want the information filling up the queue if there is no command.
+        //So we check, if the predecimal of the move command is 0. If so we check, if there is a decimal part.
+        //Never trust the user so also check, if the move command equals "-0" or something like "0.00"
+        //Or if there are any leading zeros or letters in between (typo or something) and get rid of all of those.
+        
+        if((message.equals("g ") || message.equals("g -")) && msgChars[charCounter] == '0'){
+          // here in a situation like g 00. removes the first 0
+          lastChar = msgChars[charCounter];
+          charCounter++;
+          String tmp_ = String(lastChar);
+          message += tmp_;
+          appended = true;
+          if(msgChars[charCounter] != '.' && msgChars[charCounter] != ','){
+            message.remove(message.length()-1);
+            appended = false;
+            deletedZero = true;
+          }
+        } else if((msgChars[charCounter] >= '0' && msgChars[charCounter] <= '9') 
+                  || msgChars[charCounter] == '.' 
+                  || msgChars[charCounter] == ',' 
+                  || messageBegin 
+                  || (msgChars[charCounter]==' ' && (lastChar >= '0' && lastChar <= '9') && (msgChars[charCounter+1] >= '0' && msgChars[charCounter+1] <= '9'))){
+          if(msgChars[charCounter] == '.' || msgChars[charCounter] == ','){
+            decimal = true;
+          }
+          lastChar = msgChars[charCounter];
+          charCounter++;
+          if(lastChar == ','){
+            lastChar = '.';
+          }
+          String tmp_ = String(lastChar);
+          message += tmp_;
+          appended = true;
+          if(messageBegin){
+            if((lastChar == ' ' && msgChars[charCounter] != '-') || lastChar == '-'){
+              messageBegin = false;
+            }
+          }
+        } else {
+          lastChar = msgChars[charCounter];
+          charCounter++;
+          appended = false;
+        }
+        if(decimal && appended){
+          decimalCounter++;
+        }
+      } else {
+        lastChar = msgChars[charCounter];
+        charCounter++;
+        appended = false;
+      }
+      if(msgChars[charCounter] == 'n'){
+        if(lastChar != ' ' || message.equals("g ") && !deletedZero){
+          lastChar = msgChars[charCounter];
+          charCounter++;
+        }
+      }
+      breakCounter++;
+      //Delay is needed here because the Serial.read() commands can't execute fast enough and the system crashes.
+      delayMicroseconds(50);
+    }
+    lastChar = Serial.read();
+    if(message.length() != 0 && !message.equals("g ") && !message.equals("g -")){
+      if(message.substring(message.length()-4) != "0.00"){
+        commandQueue += message;
+        commandQueue += ",";
+      }
+    }
+}
+

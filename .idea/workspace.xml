@@ -6,52 +6,45 @@
     </shared>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" line="90" />
+    <bookmark url="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" line="69" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8af3e477-3606-4489-954e-dd5feaf85ae1" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivityOld.java" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_CombinerApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_CombinerApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_CombinerApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_CombinerApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_CombinerApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_CombinerApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_CombinerApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_CombinerApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_PathIntegrationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_PathIntegrationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_PathIntegrationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_PathIntegrationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_PathIntegrationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_PathIntegrationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_PathIntegrationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_PathIntegrationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_SerialCommunicationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_SerialCommunicationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_SerialCommunicationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_SerialCommunicationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_SerialCommunicationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_SerialCommunicationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_SerialCommunicationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_SerialCommunicationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_VisualNavigationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_VisualNavigationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_VisualNavigationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_VisualNavigationApp_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_VisualNavigationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_VisualNavigationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_VisualNavigationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_VisualNavigationApp_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/AntEye/AntEye.iml" afterPath="$PROJECT_DIR$/AntEye/AntEye.iml" />
-      <change beforePath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" afterPath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" />
+      <change beforePath="$PROJECT_DIR$/AntBotArduino/AntBotArduino.ino" afterPath="$PROJECT_DIR$/AntBotArduino/AntBotArduino.ino" />
+      <change beforePath="$PROJECT_DIR$/AntBotArduino/ParseMessage.ino" afterPath="$PROJECT_DIR$/AntBotArduino/ParseMessage.ino" />
+      <change beforePath="$PROJECT_DIR$/AntBotArduino/TaskExecution.ino" afterPath="$PROJECT_DIR$/AntBotArduino/TaskExecution.ino" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" />
       <change beforePath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" afterPath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" />
       <change beforePath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" afterPath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" />
       <change beforePath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" afterPath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" />
       <change beforePath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" afterPath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" />
-      <change beforePath="$PROJECT_DIR$/antbot_rob.iml" afterPath="$PROJECT_DIR$/antbot_rob.iml" />
       <change beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/debug/org/opencv/engine/OpenCVEngineInterface.java" afterPath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/debug/org/opencv/engine/OpenCVEngineInterface.java" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/release/org/opencv/engine/OpenCVEngineInterface.java" afterPath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/release/org/opencv/engine/OpenCVEngineInterface.java" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/default/classes.jar" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/default/classes.jar" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileDebugAidl/dependency.store" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileDebugAidl/dependency.store" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileReleaseAidl/dependency.store" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileReleaseAidl/dependency.store" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseAssets/merger.xml" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseAssets/merger.xml" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseShaders/merger.xml" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseShaders/merger.xml" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/merger.xml" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/merger.xml" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/merger.xml" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/merger.xml" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-release.aar" afterPath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-release.aar" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" afterPath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" />
+      <change beforePath="$PROJECT_DIR$/todo.txt" afterPath="$PROJECT_DIR$/todo.txt" />
       <change beforePath="$PROJECT_DIR$/visualsandbox/visualsandbox.iml" afterPath="$PROJECT_DIR$/visualsandbox/visualsandbox.iml" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -79,87 +72,205 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-846">
-              <caret line="90" column="13" lean-forward="false" selection-start-line="90" selection-start-column="13" selection-end-line="90" selection-end-column="13" />
+            <state relative-caret-position="101">
+              <caret line="1102" column="0" lean-forward="false" selection-start-line="1102" selection-start-column="0" selection-end-line="1102" selection-end-column="0" />
               <folding>
-                <element signature="e#12438#12959#0" expanded="true" />
-                <element signature="e#12958#12959#0" expanded="true" />
-                <element signature="e#17023#17046#0" expanded="true" />
-                <element signature="e#17076#17100#0" expanded="true" />
-                <element signature="e#17138#17150#0" expanded="true" />
-                <element signature="e#17152#17396#0" expanded="true" />
-                <element signature="e#17395#17396#0" expanded="true" />
-                <element signature="e#48575#49710#0" expanded="true" />
-                <element signature="e#49709#49710#0" expanded="true" />
-                <element signature="e#56029#64733#0" expanded="true" />
-                <element signature="e#59104#59844#0" expanded="true" />
-                <element signature="e#59843#59844#0" expanded="true" />
-                <element signature="e#64190#64452#0" expanded="true" />
-                <element signature="e#64451#64452#0" expanded="true" />
-                <element signature="e#64732#64733#0" expanded="true" />
-                <element signature="e#64965#79562#0" expanded="true" />
-                <element signature="e#71225#71950#0" expanded="true" />
-                <element signature="e#71949#71950#0" expanded="true" />
-                <element signature="e#76719#77104#0" expanded="true" />
-                <element signature="e#77103#77104#0" expanded="true" />
-                <element signature="e#79561#79562#0" expanded="true" />
-                <element signature="e#79590#87322#0" expanded="true" />
-                <element signature="e#86779#87054#0" expanded="true" />
-                <element signature="e#87053#87054#0" expanded="true" />
-                <element signature="e#87321#87322#0" expanded="true" />
-                <element signature="e#87430#93068#0" expanded="true" />
-                <element signature="e#93067#93068#0" expanded="true" />
-                <element signature="e#94833#95070#0" expanded="true" />
-                <element signature="e#95069#95070#0" expanded="true" />
-                <element signature="e#95096#104686#0" expanded="true" />
-                <element signature="e#96616#97276#0" expanded="true" />
-                <element signature="e#97275#97276#0" expanded="true" />
-                <element signature="e#102766#103642#0" expanded="true" />
-                <element signature="e#103641#103642#0" expanded="true" />
-                <element signature="e#104111#104581#0" expanded="true" />
-                <element signature="e#104580#104581#0" expanded="true" />
-                <element signature="e#104685#104686#0" expanded="true" />
-                <element signature="e#104713#114855#0" expanded="true" />
-                <element signature="e#106313#107005#0" expanded="true" />
-                <element signature="e#107004#107005#0" expanded="true" />
-                <element signature="e#112839#113868#0" expanded="true" />
-                <element signature="e#113867#113868#0" expanded="true" />
-                <element signature="e#114337#114750#0" expanded="true" />
-                <element signature="e#114749#114750#0" expanded="true" />
-                <element signature="e#114854#114855#0" expanded="true" />
-                <element signature="e#114890#124750#0" expanded="true" />
-                <element signature="e#116498#117140#0" expanded="true" />
-                <element signature="e#117139#117140#0" expanded="true" />
-                <element signature="e#122802#123784#0" expanded="true" />
-                <element signature="e#123783#123784#0" expanded="true" />
-                <element signature="e#124292#124645#0" expanded="true" />
-                <element signature="e#124644#124645#0" expanded="true" />
-                <element signature="e#124749#124750#0" expanded="true" />
-                <element signature="e#149372#149380#0" expanded="true" />
-                <element signature="e#167522#167966#0" expanded="true" />
-                <element signature="e#167965#167966#0" expanded="true" />
-                <element signature="e#170104#172772#0" expanded="true" />
-                <element signature="e#172771#172772#0" expanded="true" />
-                <element signature="e#172809#175474#0" expanded="true" />
-                <element signature="e#175473#175474#0" expanded="true" />
-                <element signature="e#175507#181719#0" expanded="true" />
-                <element signature="e#179867#180787#0" expanded="true" />
-                <element signature="e#180786#180787#0" expanded="true" />
-                <element signature="e#181257#181614#0" expanded="true" />
-                <element signature="e#181613#181614#0" expanded="true" />
-                <element signature="e#181718#181719#0" expanded="true" />
-                <element signature="e#181791#182240#0" expanded="true" />
-                <element signature="e#182239#182240#0" expanded="true" />
-                <element signature="e#182275#182711#0" expanded="true" />
-                <element signature="e#182710#182711#0" expanded="true" />
-                <element signature="e#182751#183382#0" expanded="true" />
-                <element signature="e#183381#183382#0" expanded="true" />
+                <element signature="class#7994:8280" expanded="false" />
+                <element signature="class#8334:8560" expanded="false" />
+                <element signature="class#8616:8842" expanded="false" />
+                <element signature="class#8900:9128" expanded="false" />
+                <element signature="class#9504:10740" expanded="false" />
+                <element signature="class#11022:12961" expanded="false" />
+                <element signature="method#showDialog#0;class#MainActivity#0" expanded="false" />
+                <element signature="e#13146#13169#0" expanded="true" />
+                <element signature="e#13199#13223#0" expanded="true" />
+                <element signature="e#13261#13273#0" expanded="true" />
+                <element signature="e#13275#13519#0" expanded="true" />
+                <element signature="e#13518#13519#0" expanded="true" />
+                <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#onPause#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#onSensorChanged#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#onResume#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#onDestroy#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#onCameraViewStarted#0;class#MainActivity#0" expanded="false" />
+                <element signature="docComment;method#unwrapMap#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#unwrapMap#0;class#MainActivity#0" expanded="false" />
+                <element signature="docComment;method#onCameraFrame#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#onCameraFrame#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#computeSparseOpticFlow#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#computeDenseOpticFlow#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#getSpeedsFromSparseFlow#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#getSpeedsFromDenseFlow#0;class#MainActivity#0" expanded="false" />
+                <element signature="method#filterCollisionAvoidance#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#SaveImages#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#LearnDirectionImages#0;class#MainActivity#0" expanded="false" />
+                <element signature="class#Startback#0;class#MainActivity#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ThreadCode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadCode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="452" column="57" lean-forward="false" selection-start-line="452" selection-start-column="57" selection-end-line="452" selection-end-column="57" />
+              <folding>
+                <element signature="e#2710#17375#0" expanded="true" />
+                <element signature="e#8986#9711#0" expanded="true" />
+                <element signature="e#9710#9711#0" expanded="true" />
+                <element signature="e#14520#14905#0" expanded="true" />
+                <element signature="e#14904#14905#0" expanded="true" />
+                <element signature="e#17374#17375#0" expanded="true" />
+                <element signature="e#17460#25222#0" expanded="true" />
+                <element signature="e#24679#24954#0" expanded="true" />
+                <element signature="e#24953#24954#0" expanded="true" />
+                <element signature="e#25221#25222#0" expanded="true" />
+                <element signature="e#25294#26459#0" expanded="true" />
+                <element signature="e#26458#26459#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OldThreadCode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/OldThreadCode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="10566">
+              <caret line="869" column="6" lean-forward="false" selection-start-line="869" selection-start-column="6" selection-end-line="869" selection-end-column="6" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3002#13243#0" expanded="true" />
+                <element signature="e#4522#5214#0" expanded="true" />
+                <element signature="e#5213#5214#0" expanded="true" />
+                <element signature="e#11270#12186#0" expanded="true" />
+                <element signature="e#12185#12186#0" expanded="true" />
+                <element signature="e#12668#13138#0" expanded="true" />
+                <element signature="e#13137#13138#0" expanded="true" />
+                <element signature="e#13242#13243#0" expanded="true" />
+                <element signature="e#13270#23988#0" expanded="true" />
+                <element signature="e#14870#15562#0" expanded="true" />
+                <element signature="e#15561#15562#0" expanded="true" />
+                <element signature="e#21959#22988#0" expanded="true" />
+                <element signature="e#22987#22988#0" expanded="true" />
+                <element signature="e#23470#23883#0" expanded="true" />
+                <element signature="e#23882#23883#0" expanded="true" />
+                <element signature="e#23987#23988#0" expanded="true" />
+                <element signature="e#24023#34440#0" expanded="true" />
+                <element signature="e#25631#26297#0" expanded="true" />
+                <element signature="e#26296#26297#0" expanded="true" />
+                <element signature="e#32520#33502#0" expanded="true" />
+                <element signature="e#33501#33502#0" expanded="true" />
+                <element signature="e#33982#34335#0" expanded="true" />
+                <element signature="e#34334#34335#0" expanded="true" />
+                <element signature="e#34439#34440#0" expanded="true" />
+                <element signature="e#34533#34770#0" expanded="true" />
+                <element signature="e#34769#34770#0" expanded="true" />
+                <element signature="e#34868#43636#0" expanded="true" />
+                <element signature="e#37960#38699#0" expanded="true" />
+                <element signature="e#38698#38699#0" expanded="true" />
+                <element signature="e#43085#43347#0" expanded="true" />
+                <element signature="e#43346#43347#0" expanded="true" />
+                <element signature="e#43635#43636#0" expanded="true" />
+                <element signature="e#43673#46354#0" expanded="true" />
+                <element signature="e#46353#46354#0" expanded="true" />
+                <element signature="e#46387#52641#0" expanded="true" />
+                <element signature="e#50776#51696#0" expanded="true" />
+                <element signature="e#51695#51696#0" expanded="true" />
+                <element signature="e#52179#52536#0" expanded="true" />
+                <element signature="e#52535#52536#0" expanded="true" />
+                <element signature="e#52640#52641#0" expanded="true" />
+                <element signature="e#52674#55379#0" expanded="true" />
+                <element signature="e#55378#55379#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Command.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Command.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="42" lean-forward="false" selection-start-line="0" selection-start-column="42" selection-end-line="0" selection-end-column="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#781#782#0" expanded="true" />
+                <element signature="e#822#823#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Util.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#getMinIndex#0;class#Util#0" expanded="false" />
+                <element signature="method#mod#0;class#Util#0" expanded="false" />
+                <element signature="method#saveImageToFolder#0;class#Util#0" expanded="false" />
+                <element signature="method#log#0;class#Util#0" expanded="false" />
+                <element signature="method#printMemory#0;class#Util#0" expanded="false" />
+                <element signature="method#rmsDifference#0;class#Util#0" expanded="false" />
+                <element signature="method#rotateImage#0;class#Util#0" expanded="false" />
+                <element signature="method#rotateFullImage#0;class#Util#0" expanded="false" />
+                <element signature="method#rotateSnapShot#0;class#Util#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>selectedModule</find>
+      <find>Log</find>
+      <find>FileOutput</find>
+      <find>Environment</find>
+      <find>saveImage</find>
+      <find>log</find>
+      <find>log</find>
+      <find>log(</find>
+      <find>printMemory</find>
+      <find>printMemory(S</find>
+      <find>SimpleMat</find>
+      <find>SimpleMatr</find>
+      <find>printMemory(</find>
+      <find>SysteC</find>
+      <find>frame_rate_cx</find>
+      <find>CURRiteration</find>
+      <find>currentDegree</find>
+      <find>get_logging</find>
+      <find>writeToFile</find>
+      <find>isHome(</find>
+      <find>isHome</find>
+      <find>opticalFlowAvoidance</find>
+      <find>MAT</find>
+      <find>Asy</find>
+      <find>navMemory</find>
+      <find>rotateMatIn</find>
+      <find>CURR</find>
+      <find>navLearning</find>
+      <find>TAG</find>
+      <find>showDialog</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Command.move(</replace>
+      <replace>Command.moveForward(</replace>
+      <replace>Util.printMemory(</replace>
+      <replace>Util.isHome(</replace>
+      <replace>Util.isHome</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -7659,11 +7770,55 @@
       </map>
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivityOld.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Command.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/SaveImages.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadCode.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/OldThreadCode.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="10" />
-    <option name="y" value="48" />
-    <option name="width" value="1346" />
-    <option name="height" value="672" />
+    <option name="x" value="-44" />
+    <option name="y" value="32" />
+    <option name="width" value="1338" />
+    <option name="height" value="671" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Compiler issuesJava</id>
+          </State>
+          <State>
+            <id>Gradle</id>
+          </State>
+          <State>
+            <id>Internationalization issues</id>
+          </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Probable bugsGradle</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Compiler issuesJava</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -7683,9 +7838,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -7708,14 +7864,18 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="2.3.3" />
     <property name="device.picker.selection" value="0529f340f0c9e4d6" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="insectsrobotics.imagemaipulations" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -8115,16 +8275,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="10" y="48" width="1368" height="713" extended-state="7" />
+    <frame x="-1" y="28" width="1368" height="713" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0651801" sideWeight="0.5030303" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -8132,12 +8292,12 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13409092" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.09948542" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21363637" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0651801" sideWeight="0.4969697" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -8154,7 +8314,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="10" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -8163,78 +8325,114 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#12438#12959#0" expanded="true" />
-            <element signature="e#12958#12959#0" expanded="true" />
-            <element signature="e#17023#17046#0" expanded="true" />
-            <element signature="e#17076#17100#0" expanded="true" />
-            <element signature="e#17138#17150#0" expanded="true" />
-            <element signature="e#17152#17396#0" expanded="true" />
-            <element signature="e#17395#17396#0" expanded="true" />
-            <element signature="e#48575#49710#0" expanded="true" />
-            <element signature="e#49709#49710#0" expanded="true" />
-            <element signature="e#56029#64733#0" expanded="true" />
-            <element signature="e#59104#59844#0" expanded="true" />
-            <element signature="e#59843#59844#0" expanded="true" />
-            <element signature="e#64190#64452#0" expanded="true" />
-            <element signature="e#64451#64452#0" expanded="true" />
-            <element signature="e#64732#64733#0" expanded="true" />
-            <element signature="e#64965#79562#0" expanded="true" />
-            <element signature="e#71225#71950#0" expanded="true" />
-            <element signature="e#71949#71950#0" expanded="true" />
-            <element signature="e#76719#77104#0" expanded="true" />
-            <element signature="e#77103#77104#0" expanded="true" />
-            <element signature="e#79561#79562#0" expanded="true" />
-            <element signature="e#79590#87322#0" expanded="true" />
-            <element signature="e#86779#87054#0" expanded="true" />
-            <element signature="e#87053#87054#0" expanded="true" />
-            <element signature="e#87321#87322#0" expanded="true" />
-            <element signature="e#87430#93068#0" expanded="true" />
-            <element signature="e#93067#93068#0" expanded="true" />
-            <element signature="e#94833#95070#0" expanded="true" />
-            <element signature="e#95069#95070#0" expanded="true" />
-            <element signature="e#95096#104686#0" expanded="true" />
-            <element signature="e#96616#97276#0" expanded="true" />
-            <element signature="e#97275#97276#0" expanded="true" />
-            <element signature="e#102766#103642#0" expanded="true" />
-            <element signature="e#103641#103642#0" expanded="true" />
-            <element signature="e#104111#104581#0" expanded="true" />
-            <element signature="e#104580#104581#0" expanded="true" />
-            <element signature="e#104685#104686#0" expanded="true" />
-            <element signature="e#104713#114855#0" expanded="true" />
-            <element signature="e#106313#107005#0" expanded="true" />
-            <element signature="e#107004#107005#0" expanded="true" />
-            <element signature="e#112839#113868#0" expanded="true" />
-            <element signature="e#113867#113868#0" expanded="true" />
-            <element signature="e#114337#114750#0" expanded="true" />
-            <element signature="e#114749#114750#0" expanded="true" />
-            <element signature="e#114854#114855#0" expanded="true" />
-            <element signature="e#114890#124750#0" expanded="true" />
-            <element signature="e#116498#117140#0" expanded="true" />
-            <element signature="e#117139#117140#0" expanded="true" />
-            <element signature="e#122802#123784#0" expanded="true" />
-            <element signature="e#123783#123784#0" expanded="true" />
-            <element signature="e#124292#124645#0" expanded="true" />
-            <element signature="e#124644#124645#0" expanded="true" />
-            <element signature="e#124749#124750#0" expanded="true" />
-            <element signature="e#149372#149380#0" expanded="true" />
-            <element signature="e#167522#167966#0" expanded="true" />
-            <element signature="e#167965#167966#0" expanded="true" />
-            <element signature="e#170104#172772#0" expanded="true" />
-            <element signature="e#172771#172772#0" expanded="true" />
-            <element signature="e#172809#175474#0" expanded="true" />
-            <element signature="e#175473#175474#0" expanded="true" />
-            <element signature="e#175507#181719#0" expanded="true" />
-            <element signature="e#179867#180787#0" expanded="true" />
-            <element signature="e#180786#180787#0" expanded="true" />
-            <element signature="e#181257#181614#0" expanded="true" />
-            <element signature="e#181613#181614#0" expanded="true" />
-            <element signature="e#181718#181719#0" expanded="true" />
-            <element signature="e#181791#182240#0" expanded="true" />
-            <element signature="e#182239#182240#0" expanded="true" />
-            <element signature="e#182275#182711#0" expanded="true" />
-            <element signature="e#182710#182711#0" expanded="true" />
-            <element signature="e#182751#183382#0" expanded="true" />
-            <element signature="e#183381#183382#0" expanded="true" />
+            <element signature="class#7994:8280" expanded="false" />
+            <element signature="class#8334:8560" expanded="false" />
+            <element signature="class#8616:8842" expanded="false" />
+            <element signature="class#8900:9128" expanded="false" />
+            <element signature="class#9504:10740" expanded="false" />
+            <element signature="class#11022:12961" expanded="false" />
+            <element signature="method#showDialog#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#13146#13169#0" expanded="true" />
+            <element signature="e#13199#13223#0" expanded="true" />
+            <element signature="e#13261#13273#0" expanded="true" />
+            <element signature="e#13275#13519#0" expanded="true" />
+            <element signature="e#13518#13519#0" expanded="true" />
+            <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onPause#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onSensorChanged#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onResume#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onCameraViewStarted#0;class#MainActivity#0" expanded="false" />
+            <element signature="docComment;method#unwrapMap#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#unwrapMap#0;class#MainActivity#0" expanded="false" />
+            <element signature="docComment;method#onCameraFrame#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onCameraFrame#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#computeSparseOpticFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#computeDenseOpticFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getSpeedsFromSparseFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getSpeedsFromDenseFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#filterCollisionAvoidance#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#SaveImages#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#LearnDirectionImages#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#Startback#0;class#MainActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="class#7994:8280" expanded="false" />
+            <element signature="class#8334:8560" expanded="false" />
+            <element signature="class#8616:8842" expanded="false" />
+            <element signature="class#8900:9128" expanded="false" />
+            <element signature="class#9504:10740" expanded="false" />
+            <element signature="class#11022:12961" expanded="false" />
+            <element signature="method#showDialog#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#13146#13169#0" expanded="true" />
+            <element signature="e#13199#13223#0" expanded="true" />
+            <element signature="e#13261#13273#0" expanded="true" />
+            <element signature="e#13275#13519#0" expanded="true" />
+            <element signature="e#13518#13519#0" expanded="true" />
+            <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onPause#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onSensorChanged#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onResume#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onCameraViewStarted#0;class#MainActivity#0" expanded="false" />
+            <element signature="docComment;method#unwrapMap#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#unwrapMap#0;class#MainActivity#0" expanded="false" />
+            <element signature="docComment;method#onCameraFrame#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onCameraFrame#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#computeSparseOpticFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#computeDenseOpticFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getSpeedsFromSparseFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getSpeedsFromDenseFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#filterCollisionAvoidance#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#SaveImages#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#LearnDirectionImages#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#Startback#0;class#MainActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="class#7994:8280" expanded="false" />
+            <element signature="class#8334:8560" expanded="false" />
+            <element signature="class#8616:8842" expanded="false" />
+            <element signature="class#8900:9128" expanded="false" />
+            <element signature="class#9504:10740" expanded="false" />
+            <element signature="class#11022:12961" expanded="false" />
+            <element signature="method#showDialog#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#13146#13169#0" expanded="true" />
+            <element signature="e#13199#13223#0" expanded="true" />
+            <element signature="e#13261#13273#0" expanded="true" />
+            <element signature="e#13275#13519#0" expanded="true" />
+            <element signature="e#13518#13519#0" expanded="true" />
+            <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onPause#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onSensorChanged#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onResume#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onCameraViewStarted#0;class#MainActivity#0" expanded="false" />
+            <element signature="docComment;method#unwrapMap#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#unwrapMap#0;class#MainActivity#0" expanded="false" />
+            <element signature="docComment;method#onCameraFrame#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onCameraFrame#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#computeSparseOpticFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#computeDenseOpticFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getSpeedsFromSparseFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getSpeedsFromDenseFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#filterCollisionAvoidance#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#SaveImages#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#LearnDirectionImages#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#Startback#0;class#MainActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -8244,83 +8442,195 @@
         <state theme-name="AppTheme" module-name="AntEye" proportion="0.67" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Receiver_and_Broadcaster/Broadcast.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="80" column="16" lean-forward="false" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivityOld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="80" column="73" lean-forward="false" selection-start-line="80" selection-start-column="73" selection-end-line="80" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Android/Sdk/platforms/android-23/android.jar!/java/lang/Object.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Android/Sdk/platforms/android-23/android.jar!/java/lang/Runnable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="7" column="9" lean-forward="false" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/SaveImages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/SaveImages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="6" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="452" column="57" lean-forward="false" selection-start-line="452" selection-start-column="57" selection-end-line="452" selection-end-column="57" />
+          <folding>
+            <element signature="e#2710#17375#0" expanded="true" />
+            <element signature="e#8986#9711#0" expanded="true" />
+            <element signature="e#9710#9711#0" expanded="true" />
+            <element signature="e#14520#14905#0" expanded="true" />
+            <element signature="e#14904#14905#0" expanded="true" />
+            <element signature="e#17374#17375#0" expanded="true" />
+            <element signature="e#17460#25222#0" expanded="true" />
+            <element signature="e#24679#24954#0" expanded="true" />
+            <element signature="e#24953#24954#0" expanded="true" />
+            <element signature="e#25221#25222#0" expanded="true" />
+            <element signature="e#25294#26459#0" expanded="true" />
+            <element signature="e#26458#26459#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/OldThreadCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10566">
+          <caret line="869" column="6" lean-forward="false" selection-start-line="869" selection-start-column="6" selection-end-line="869" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3002#13243#0" expanded="true" />
+            <element signature="e#4522#5214#0" expanded="true" />
+            <element signature="e#5213#5214#0" expanded="true" />
+            <element signature="e#11270#12186#0" expanded="true" />
+            <element signature="e#12185#12186#0" expanded="true" />
+            <element signature="e#12668#13138#0" expanded="true" />
+            <element signature="e#13137#13138#0" expanded="true" />
+            <element signature="e#13242#13243#0" expanded="true" />
+            <element signature="e#13270#23988#0" expanded="true" />
+            <element signature="e#14870#15562#0" expanded="true" />
+            <element signature="e#15561#15562#0" expanded="true" />
+            <element signature="e#21959#22988#0" expanded="true" />
+            <element signature="e#22987#22988#0" expanded="true" />
+            <element signature="e#23470#23883#0" expanded="true" />
+            <element signature="e#23882#23883#0" expanded="true" />
+            <element signature="e#23987#23988#0" expanded="true" />
+            <element signature="e#24023#34440#0" expanded="true" />
+            <element signature="e#25631#26297#0" expanded="true" />
+            <element signature="e#26296#26297#0" expanded="true" />
+            <element signature="e#32520#33502#0" expanded="true" />
+            <element signature="e#33501#33502#0" expanded="true" />
+            <element signature="e#33982#34335#0" expanded="true" />
+            <element signature="e#34334#34335#0" expanded="true" />
+            <element signature="e#34439#34440#0" expanded="true" />
+            <element signature="e#34533#34770#0" expanded="true" />
+            <element signature="e#34769#34770#0" expanded="true" />
+            <element signature="e#34868#43636#0" expanded="true" />
+            <element signature="e#37960#38699#0" expanded="true" />
+            <element signature="e#38698#38699#0" expanded="true" />
+            <element signature="e#43085#43347#0" expanded="true" />
+            <element signature="e#43346#43347#0" expanded="true" />
+            <element signature="e#43635#43636#0" expanded="true" />
+            <element signature="e#43673#46354#0" expanded="true" />
+            <element signature="e#46353#46354#0" expanded="true" />
+            <element signature="e#46387#52641#0" expanded="true" />
+            <element signature="e#50776#51696#0" expanded="true" />
+            <element signature="e#51695#51696#0" expanded="true" />
+            <element signature="e#52179#52536#0" expanded="true" />
+            <element signature="e#52535#52536#0" expanded="true" />
+            <element signature="e#52640#52641#0" expanded="true" />
+            <element signature="e#52674#55379#0" expanded="true" />
+            <element signature="e#55378#55379#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="42" lean-forward="false" selection-start-line="0" selection-start-column="42" selection-end-line="0" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#781#782#0" expanded="true" />
+            <element signature="e#822#823#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#getMinIndex#0;class#Util#0" expanded="false" />
+            <element signature="method#mod#0;class#Util#0" expanded="false" />
+            <element signature="method#saveImageToFolder#0;class#Util#0" expanded="false" />
+            <element signature="method#log#0;class#Util#0" expanded="false" />
+            <element signature="method#printMemory#0;class#Util#0" expanded="false" />
+            <element signature="method#rmsDifference#0;class#Util#0" expanded="false" />
+            <element signature="method#rotateImage#0;class#Util#0" expanded="false" />
+            <element signature="method#rotateFullImage#0;class#Util#0" expanded="false" />
+            <element signature="method#rotateSnapShot#0;class#Util#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-846">
-          <caret line="90" column="13" lean-forward="false" selection-start-line="90" selection-start-column="13" selection-end-line="90" selection-end-column="13" />
+        <state relative-caret-position="101">
+          <caret line="1102" column="0" lean-forward="false" selection-start-line="1102" selection-start-column="0" selection-end-line="1102" selection-end-column="0" />
           <folding>
-            <element signature="e#12438#12959#0" expanded="true" />
-            <element signature="e#12958#12959#0" expanded="true" />
-            <element signature="e#17023#17046#0" expanded="true" />
-            <element signature="e#17076#17100#0" expanded="true" />
-            <element signature="e#17138#17150#0" expanded="true" />
-            <element signature="e#17152#17396#0" expanded="true" />
-            <element signature="e#17395#17396#0" expanded="true" />
-            <element signature="e#48575#49710#0" expanded="true" />
-            <element signature="e#49709#49710#0" expanded="true" />
-            <element signature="e#56029#64733#0" expanded="true" />
-            <element signature="e#59104#59844#0" expanded="true" />
-            <element signature="e#59843#59844#0" expanded="true" />
-            <element signature="e#64190#64452#0" expanded="true" />
-            <element signature="e#64451#64452#0" expanded="true" />
-            <element signature="e#64732#64733#0" expanded="true" />
-            <element signature="e#64965#79562#0" expanded="true" />
-            <element signature="e#71225#71950#0" expanded="true" />
-            <element signature="e#71949#71950#0" expanded="true" />
-            <element signature="e#76719#77104#0" expanded="true" />
-            <element signature="e#77103#77104#0" expanded="true" />
-            <element signature="e#79561#79562#0" expanded="true" />
-            <element signature="e#79590#87322#0" expanded="true" />
-            <element signature="e#86779#87054#0" expanded="true" />
-            <element signature="e#87053#87054#0" expanded="true" />
-            <element signature="e#87321#87322#0" expanded="true" />
-            <element signature="e#87430#93068#0" expanded="true" />
-            <element signature="e#93067#93068#0" expanded="true" />
-            <element signature="e#94833#95070#0" expanded="true" />
-            <element signature="e#95069#95070#0" expanded="true" />
-            <element signature="e#95096#104686#0" expanded="true" />
-            <element signature="e#96616#97276#0" expanded="true" />
-            <element signature="e#97275#97276#0" expanded="true" />
-            <element signature="e#102766#103642#0" expanded="true" />
-            <element signature="e#103641#103642#0" expanded="true" />
-            <element signature="e#104111#104581#0" expanded="true" />
-            <element signature="e#104580#104581#0" expanded="true" />
-            <element signature="e#104685#104686#0" expanded="true" />
-            <element signature="e#104713#114855#0" expanded="true" />
-            <element signature="e#106313#107005#0" expanded="true" />
-            <element signature="e#107004#107005#0" expanded="true" />
-            <element signature="e#112839#113868#0" expanded="true" />
-            <element signature="e#113867#113868#0" expanded="true" />
-            <element signature="e#114337#114750#0" expanded="true" />
-            <element signature="e#114749#114750#0" expanded="true" />
-            <element signature="e#114854#114855#0" expanded="true" />
-            <element signature="e#114890#124750#0" expanded="true" />
-            <element signature="e#116498#117140#0" expanded="true" />
-            <element signature="e#117139#117140#0" expanded="true" />
-            <element signature="e#122802#123784#0" expanded="true" />
-            <element signature="e#123783#123784#0" expanded="true" />
-            <element signature="e#124292#124645#0" expanded="true" />
-            <element signature="e#124644#124645#0" expanded="true" />
-            <element signature="e#124749#124750#0" expanded="true" />
-            <element signature="e#149372#149380#0" expanded="true" />
-            <element signature="e#167522#167966#0" expanded="true" />
-            <element signature="e#167965#167966#0" expanded="true" />
-            <element signature="e#170104#172772#0" expanded="true" />
-            <element signature="e#172771#172772#0" expanded="true" />
-            <element signature="e#172809#175474#0" expanded="true" />
-            <element signature="e#175473#175474#0" expanded="true" />
-            <element signature="e#175507#181719#0" expanded="true" />
-            <element signature="e#179867#180787#0" expanded="true" />
-            <element signature="e#180786#180787#0" expanded="true" />
-            <element signature="e#181257#181614#0" expanded="true" />
-            <element signature="e#181613#181614#0" expanded="true" />
-            <element signature="e#181718#181719#0" expanded="true" />
-            <element signature="e#181791#182240#0" expanded="true" />
-            <element signature="e#182239#182240#0" expanded="true" />
-            <element signature="e#182275#182711#0" expanded="true" />
-            <element signature="e#182710#182711#0" expanded="true" />
-            <element signature="e#182751#183382#0" expanded="true" />
-            <element signature="e#183381#183382#0" expanded="true" />
+            <element signature="class#7994:8280" expanded="false" />
+            <element signature="class#8334:8560" expanded="false" />
+            <element signature="class#8616:8842" expanded="false" />
+            <element signature="class#8900:9128" expanded="false" />
+            <element signature="class#9504:10740" expanded="false" />
+            <element signature="class#11022:12961" expanded="false" />
+            <element signature="method#showDialog#0;class#MainActivity#0" expanded="false" />
+            <element signature="e#13146#13169#0" expanded="true" />
+            <element signature="e#13199#13223#0" expanded="true" />
+            <element signature="e#13261#13273#0" expanded="true" />
+            <element signature="e#13275#13519#0" expanded="true" />
+            <element signature="e#13518#13519#0" expanded="true" />
+            <element signature="method#onCreate#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onPause#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onSensorChanged#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onResume#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onDestroy#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onCameraViewStarted#0;class#MainActivity#0" expanded="false" />
+            <element signature="docComment;method#unwrapMap#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#unwrapMap#0;class#MainActivity#0" expanded="false" />
+            <element signature="docComment;method#onCameraFrame#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#onCameraFrame#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#computeSparseOpticFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#computeDenseOpticFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getSpeedsFromSparseFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getSpeedsFromDenseFlow#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#filterCollisionAvoidance#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#SaveImages#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#LearnDirectionImages#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#Startback#0;class#MainActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>
