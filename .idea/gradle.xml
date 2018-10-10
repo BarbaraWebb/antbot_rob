@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/SerialCommunicationApp" />
             <option value="$PROJECT_DIR$/VisualNavigationApp" />
             <option value="$PROJECT_DIR$/openCVLibrary300" />
-            <option value="$PROJECT_DIR$/visualsandbox" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

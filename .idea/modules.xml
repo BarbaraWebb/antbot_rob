@@ -10,7 +10,6 @@
       <module fileurl="file://$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" filepath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/antbot_rob.iml" filepath="$PROJECT_DIR$/antbot_rob.iml" />
       <module fileurl="file://$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" filepath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" />
-      <module fileurl="file://$PROJECT_DIR$/visualsandbox/visualsandbox.iml" filepath="$PROJECT_DIR$/visualsandbox/visualsandbox.iml" />
     </modules>
   </component>
 </project>

@@ -1,4 +1,16 @@
 Todo file for 2018:
+10 / 10 / 18:
+Notes:
+- Project has been upticked. Android Studio on the laptop should be updated
+  to reflect this.
+
+- Gradle scripts have been modified to facilitate this. There is a concern for
+  potential deprecation of existing code. 
+
+- Now code formatting must start. 80 char limit on lines up to 100 char hard 
+  limit. This to make it easier to read and work on in portrait mode and 
+  generally improve readability.
+
 09 / 10 / 18:
 Todo:
 - Read CX model stuff from Stone et al.
@@ -24,7 +36,7 @@ Todo:
 
 Blocked:
 Notes:
-- Found an error from last year; I was stil using the getAvgMinIndex function
+- Found an error from last year; I was still using the getAvgMinIndex function
   which seems to be returning the correct information, but still, this may
   explain the odd instances of erratic behaviour.
 
