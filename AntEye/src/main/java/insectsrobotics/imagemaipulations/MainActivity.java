@@ -429,13 +429,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById
                 (insectsrobotics.imagemaipulations.Build.R.id.main_activity_surface_view);
 
-        if (this != null)
+        if (mOpenCvCameraView != null)
         {
-            Log.e("INFO", "MainActivity is not null!");
+            Log.e("INFO", "CameraView is not null!");
         }
         else
         {
-            Log.e("INFO", "MainActivity is null!");
+            Log.e("INFO", "CameraView is null!");
         }
 
 
