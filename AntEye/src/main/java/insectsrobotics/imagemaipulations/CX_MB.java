@@ -103,7 +103,7 @@ public class CX_MB extends NavigationModules{
 
         super();
         willshawConnectionArray = new int[20000][10];
-        Log.e(TAG, "Constructor Called");
+        Log.i(TAG, "Constructor Called");
         LogToFileUtils.write("Willshaw Module Constructor Called");
 
         // parameter initialisation

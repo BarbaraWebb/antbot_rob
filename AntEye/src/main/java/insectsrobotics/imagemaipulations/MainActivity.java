@@ -279,8 +279,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     //
     // Thread containers. The oldThreads object holds threads pre-2018 project, threads holds 2018+
     //
-    OldThreadCode oldThreads = new OldThreadCode();
-    ThreadCode threads = new ThreadCode();
+    OldThreadCode oldThreads;
+    ThreadCode threads;
 
     //The UI Views
     private CameraBridgeViewBase mOpenCvCameraView;
@@ -428,6 +428,17 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         setContentView(R.layout.activity_image_manipulations);
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById
                 (insectsrobotics.imagemaipulations.Build.R.id.main_activity_surface_view);
+
+        if (this != null)
+        {
+            Log.e("INFO", "MainActivity is not null!");
+        }
+        else
+        {
+            Log.e("INFO", "MainActivity is null!");
+        }
+
+
         mOpenCvCameraView.setCvCameraViewListener(this);
 
         mSensorManager = (SensorManager) getSystemService(this.SENSOR_SERVICE);
@@ -457,6 +468,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         LogToFileUtils.init(this.getApplicationContext());
         StatFileUtils.init(this.getApplicationContext()); //Statistical log file
         StatFileUtils.write("new", "new", "new"); //Add comments to delimit the instances of MainActivity in the stats file
+
+        //threads = new ThreadCode(this);
+        //oldThreads = new OldThreadCode(this);
 
         try {
             FileOutputStream f = new FileOutputStream(file);
@@ -1280,7 +1294,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     //
 
     public class SaveImages extends AsyncTask<Object, Integer, Boolean> {
-
         @Override
         protected Boolean doInBackground(Object... transmission) {
             Mat matImage = (Mat) transmission[0];
@@ -1310,7 +1323,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
     }
 
-    protected class LearnDirectionImages extends AsyncTask<Object, Integer, Boolean> {
+    public class LearnDirectionImages extends AsyncTask<Object, Integer, Boolean> {
 
         @Override
         protected Boolean doInBackground(Object... transmission) {

@@ -68,7 +68,11 @@ import static org.opencv.imgproc.Imgproc.resize;
 import static org.opencv.video.Video.calcOpticalFlowFarneback;
 import static org.opencv.video.Video.calcOpticalFlowPyrLK;
 
-public class ThreadCode extends MainActivity {
+public class ThreadCode {
+    private MainActivity app;
+    public ThreadCode(MainActivity app){
+        this.app = app;
+    }
 
     //
     // Binary MB Learning thread
@@ -82,15 +86,15 @@ public class ThreadCode extends MainActivity {
                 e.printStackTrace();
             }
 
-            mushroom_body = new WillshawModule();
-            real_mushroom_body = new RealWillshawModule();
+            app.mushroom_body = new WillshawModule();
+            app.real_mushroom_body = new RealWillshawModule();
 
             //Setup the model
             boolean model_not_initialised = true;
             while (model_not_initialised) { //Spin until we can initialise the model
-                if (images_access) {
+                if (app.images_access) {
                     //Can't send a matrix, need to send an array
-                    Mat matImage = processedDestImage; //get current image
+                    Mat matImage = app.processedDestImage; //get current image
                     byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()]; //Process into an array
                     matImage.get(0, 0, imageArray_tmp);
                     int[] imageArray = new int[imageArray_tmp.length];
@@ -99,10 +103,10 @@ public class ThreadCode extends MainActivity {
                     }
 
                     //Call the method to construct the network ( for the chosen network type );
-                    if (real) {
-                        real_mushroom_body.setupLearningAlgorithm(imageArray);
+                    if (app.real) {
+                        app.real_mushroom_body.setupLearningAlgorithm(imageArray);
                     } else {
-                        mushroom_body.setupLearningAlgorithm(imageArray);
+                        app.mushroom_body.setupLearningAlgorithm(imageArray);
                     }
 
                     model_not_initialised = false; //Model is now ready, can exit the loop
@@ -146,17 +150,17 @@ public class ThreadCode extends MainActivity {
                 }
 
                 //Print out debug information, catch exceptions
-                ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
+                app.ca_flow_diff = app.leftCAFlow - app.rightCAFlow; //If positive, left detection, else right detection
 
                 //Flow accumulators
-                if (ca_flow_diff >= accumulation_threshold) {
-                    left_accumulator = left_accumulator + (int) ca_flow_diff;
-                } else if (ca_flow_diff <= -accumulation_threshold) {
-                    right_accumulator = right_accumulator + Math.abs((int) ca_flow_diff);
+                if (app.ca_flow_diff >= accumulation_threshold) {
+                    left_accumulator = left_accumulator + (int) app.ca_flow_diff;
+                } else if (app.ca_flow_diff <= -accumulation_threshold) {
+                    right_accumulator = right_accumulator + Math.abs((int) app.ca_flow_diff);
                 }
 
-                if (Math.abs(ca_flow_diff) >= accumulation_threshold) {
-                    dual_accumulator = dual_accumulator + (int) ca_flow_diff;
+                if (Math.abs(app.ca_flow_diff) >= accumulation_threshold) {
+                    dual_accumulator = dual_accumulator + (int) app.ca_flow_diff;
                 }
 
                 //If accumulation time limit reached, reset timer and accumulators
@@ -167,9 +171,9 @@ public class ThreadCode extends MainActivity {
                     loop_count = 0; //Reset loop counter
                 }
 
-                if (images_access){
-                    new_image = new SaveImages();
-                    new_image.execute(processedDestImage, LEARN_IMAGE);
+                if (app.images_access){
+                    app.new_image = app.new SaveImages();
+                    app.new_image.execute(app.processedDestImage, app.LEARN_IMAGE);
                 }
                     /*boolean image_not_learned = true;
                     Command.go(new double[]{0, 0});
@@ -179,8 +183,8 @@ public class ThreadCode extends MainActivity {
                         //DEBUG NOTE: This shouldn't cause any problems but it's
                         //possible that this delay could cause problems with the CA
                         //by spinning too long. Keep an eye out
-                        if (images_access) {
-                            Mat matImage = processedDestImage; //get current image
+                        if (app.images_access) {
+                            Mat matImage = app.processedDestImage; //get current image
                             byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()]; //Process into an array
                             matImage.get(0, 0, imageArray_tmp);
                             int[] imageArray = new int[imageArray_tmp.length];
@@ -189,10 +193,10 @@ public class ThreadCode extends MainActivity {
                             }
 
                             //Call the method to construct the network
-                            if (real) {
-                                real_mushroom_body.learnImage(imageArray);
+                            if (app.real) {
+                                app.real_mushroom_body.learnImage(imageArray);
                             } else {
-                                mushroom_body.learnImage(imageArray);
+                                app.mushroom_body.learnImage(imageArray);
                             }
 
                             image_not_learned = false; //Image has been learned, we can exit the loop
@@ -205,19 +209,19 @@ public class ThreadCode extends MainActivity {
 
 
                 try {
-                    runOnUiThread(new Runnable() {
+                    app.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            debugTextView.setText(String.format(
+                            app.debugTextView.setText(String.format(
                                     "Speed: %f \n" +
                                             "Left CA flow: %f \n" +
                                             "Right CA flow: %f \n" +
                                             "Flow Difference: %f \n"
                                     ,
-                                    speed,
-                                    leftCAFlow,
-                                    rightCAFlow,
-                                    ca_flow_diff
+                                    app.speed,
+                                    app.leftCAFlow,
+                                    app.rightCAFlow,
+                                    app.ca_flow_diff
                             ));
                         }
                     });
@@ -270,9 +274,9 @@ public class ThreadCode extends MainActivity {
                         e.printStackTrace();
                     }
 
-                    if (images_access){
-                        new_image = new SaveImages();
-                        new_image.execute(processedDestImage, LEARN_IMAGE);
+                    if (app.images_access){
+                        app.new_image = app.new SaveImages();
+                        app.new_image.execute(app.processedDestImage, app.LEARN_IMAGE);
                     }
 
                     /*
@@ -299,9 +303,9 @@ public class ThreadCode extends MainActivity {
                         e.printStackTrace();
                     }
 
-                    if (images_access){
-                        new_image = new SaveImages();
-                        new_image.execute(processedDestImage, LEARN_IMAGE);
+                    if (app.images_access){
+                        app.new_image = app.new SaveImages();
+                        app.new_image.execute(app.processedDestImage, app.LEARN_IMAGE);
                     }
                     /*lft_speed = 100; //Right turn
                     rgt_speed = 10; //Right turn*/
@@ -321,9 +325,9 @@ public class ThreadCode extends MainActivity {
                 }
 
 
-                if (images_access){
-                    new_image = new SaveImages();
-                    new_image.execute(processedDestImage, LEARN_IMAGE);
+                if (app.images_access){
+                    app.new_image = app.new SaveImages();
+                    app.new_image.execute(app.processedDestImage, app.LEARN_IMAGE);
                 } //Just throwing the code in to learn as many images as possible.
 
                 loop_count++;
@@ -333,10 +337,10 @@ public class ThreadCode extends MainActivity {
             }
 
             try {
-                runOnUiThread(new Runnable() {
+                app.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        debugTextView.setText(String.format(
+                        app.debugTextView.setText(String.format(
                                 "End of learning run. Replace the robot at the start of the course " +
                                         "to allow recapitulation."
                         ));
@@ -355,10 +359,10 @@ public class ThreadCode extends MainActivity {
                 e.printStackTrace();
             }
 
-            if (real) {
+            if (app.real) {
                 //For real values, want to do multiple memory runs to see how well the model
                 //learns over time
-                memory_trip = new Thread(navMemory); //Make sure using the real valued nav.
+                app.memory_trip = new Thread(navMemory); //Make sure using the real valued nav.
                 for ( int run_count = 0; run_count < 5; ++run_count ) {
                     try {
                         sleep(30000); //Wait for 30 Seconds to allow the robot to be replaced at the start of the course
@@ -367,9 +371,9 @@ public class ThreadCode extends MainActivity {
                     }
 
                     //Start the attempted reconstruction of the route
-                    memory_trip.start();
+                    app.memory_trip.start();
                     try {
-                        memory_trip.join(); //Wait for the thread to finish before next iteration
+                        app.memory_trip.join(); //Wait for the thread to finish before next iteration
                     } catch ( Exception e ){ e.printStackTrace(); }
                 }
             }else{
@@ -380,8 +384,8 @@ public class ThreadCode extends MainActivity {
                 }
 
                 //Start the attempted reconstruction of the route
-                memory_trip = new Thread(navMemory);
-                memory_trip.start();*/
+                app.memory_trip = new Thread(navMemory);
+                app.memory_trip.start();*/
 
 
 
@@ -393,12 +397,12 @@ public class ThreadCode extends MainActivity {
                         e.printStackTrace();
                     }
 
-                    memory_trip = new Thread(navMemory); //Make sure using the real valued nav.
+                    app.memory_trip = new Thread(navMemory); //Make sure using the real valued nav.
                     //Start the attempted reconstruction of the route
-                    memory_trip.start();
+                    app.memory_trip.start();
 
                     try {
-                        memory_trip.join(); //Wait for the thread to finish before next iteration
+                        app.memory_trip.join(); //Wait for the thread to finish before next iteration
                     } catch ( Exception e ){ e.printStackTrace(); }
                 }
 
@@ -442,8 +446,8 @@ public class ThreadCode extends MainActivity {
                 for (int i = 0; i < 17; i++) {
                     image_not_accessed = true;
                     while (image_not_accessed){
-                        if (images_access){
-                            Mat matImage = processedDestImage;
+                        if (app.images_access){
+                            Mat matImage = app.processedDestImage;
                             //Since there is no possibility to send a 2D array or Mat file the image is transformed to a 1D int array
                             //byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
                             //matImage.get(0, 0, imageArray_tmp);
@@ -455,8 +459,8 @@ public class ThreadCode extends MainActivity {
                             for (int n = 0; n < imageArray_tmp.length; n++) {
                                 imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
                             }
-                            familiarity_array[i] = mushroom_body.calculateFamiliarity(imageArray);
-                            unfamiliarity_distribution += familiarity_array[i] + ",";
+                            app.familiarity_array[i] = app.mushroom_body.calculateFamiliarity(imageArray);
+                            unfamiliarity_distribution += app.familiarity_array[i] + ",";
                             image_not_accessed = false;
                         }
                     }
@@ -470,7 +474,7 @@ public class ThreadCode extends MainActivity {
 
                 LogToFileUtils.write(unfamiliarity_distribution+'\n');
 
-                min_index = Util.getMinIndex(familiarity_array);
+                min_index = Util.getMinIndex(app.familiarity_array);
                 output = "Chosen index: " + min_index;
                 StatFileUtils.write(task_code, info_str, output);
 
@@ -521,13 +525,13 @@ public class ThreadCode extends MainActivity {
                     try { sleep(600); } catch ( Exception e ){ e.printStackTrace(); }
                     t_delta = (int) SystemClock.elapsedRealtime() - t_start;
                     //Print out debug information, catch exceptions
-                    ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
+                    app.ca_flow_diff = app.leftCAFlow - app.rightCAFlow; //If positive, left detection, else right detection
 
                     //Flow accumulators
-                    if ( ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) ca_flow_diff; }
-                    else if ( ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) ca_flow_diff); }
+                    if ( app.ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) app.ca_flow_diff; }
+                    else if ( app.ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) app.ca_flow_diff); }
 
-                    if ( Math.abs(ca_flow_diff) >= accumulation_threshold ){ dual_accumulator = dual_accumulator + (int) ca_flow_diff; }
+                    if ( Math.abs(app.ca_flow_diff) >= accumulation_threshold ){ dual_accumulator = dual_accumulator + (int) app.ca_flow_diff; }
 
                     //If accumulation time limit reached, reset timer and accumulators
                     if ( loop_count >= 2){
@@ -556,10 +560,10 @@ public class ThreadCode extends MainActivity {
             }
 
             try {
-                runOnUiThread(new Runnable() {
+                app.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        debugTextView.setText(String.format(
+                        app.debugTextView.setText(String.format(
                                 "End of visual memory run."
                         ));
                     }
@@ -569,7 +573,7 @@ public class ThreadCode extends MainActivity {
                 e.printStackTrace();
             }
 
-            int num_images = mushroom_body.imagesLearned();
+            int num_images = app.mushroom_body.imagesLearned();
             StatFileUtils.write("WN", "IL", "Number of images learned for this run: " + num_images);
         }
     };

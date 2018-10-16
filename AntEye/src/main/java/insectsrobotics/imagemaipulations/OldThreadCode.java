@@ -75,10 +75,14 @@ import static org.opencv.video.Video.calcOpticalFlowPyrLK;
 // runnables from previous years of this project. The class will be instantiated as a member in
 // MainActivity so these threads can be accessed.
 //
-public class OldThreadCode extends MainActivity{
+public class OldThreadCode{
+    MainActivity app;
+    public OldThreadCode(insectsrobotics.imagemaipulations.MainActivity app){
+        this.app = app;
+    }
 
 
-    Runnable CXthread=new Runnable() {
+     Runnable CXthread=new Runnable() {
         @Override
         public void run() {
             try {
@@ -105,31 +109,31 @@ public class OldThreadCode extends MainActivity{
             SimpleMatrix cpu1 = new SimpleMatrix(CX.n_cpu1, 1);
             cpu1.set(0);
 
-            startTime = (int) SystemClock.elapsedRealtime();
+            app.startTime = (int) SystemClock.elapsedRealtime();
             int t0 = (int) SystemClock.elapsedRealtime();
             int t = 0;
-            CURRiteration = 0;
-            int currentTime = (int)SystemClock.elapsedRealtime()-startTime;
+            app.CURRiteration = 0;
+            int currentTime = (int)SystemClock.elapsedRealtime()-app.startTime;
             while (currentTime<T_outbound*1000) {
-                CURRiteration++;
+                app.CURRiteration++;
                 try {
                     sleep(600);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 try {
-                    runOnUiThread(new Runnable() {
+                    app.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            debugTextView.setText(String.format("outbound " +
+                            app.debugTextView.setText(String.format("outbound " +
                                             "\nLeft Speed: %f"+
                                             "\nRight Speed: %f"+
                                             "\ncurrent iteration: %d"+
                                             "\ncurrent direction: %f",
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    CURRiteration,
-                                    currentDegree));
+                                    app.leftCXFlow,
+                                    app.rightCXFlow,
+                                    app.CURRiteration,
+                                    app.currentDegree));
                         }
                     });
                 } catch (Exception e) {
@@ -143,55 +147,55 @@ public class OldThreadCode extends MainActivity{
                 if(t>300) {
                     if (currentTime < 3500) {
                         Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.0;
+                        app.ANT_SPEED = 4.0;
                         direction = "straight";
                     } else if (currentTime < 8000) {
                         Command.go(new double[]{10, 100});
-                        ANT_SPEED = 2.0;
+                        app.ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 11000) {
                         Command.go(new double[]{100, 10});
-                        ANT_SPEED = 2.0;
+                        app.ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 25000) {
                         Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
+                        app.ANT_SPEED = 4.;
                         direction = "straight";
                     } else {
                         Command.go(new double[]{100, 10});
-                        ANT_SPEED = 4.;
+                        app.ANT_SPEED = 4.;
                         direction = "straight";
                     }
                     // based on odometry
-                    //ANT_SPEED = ()
+                    //app.ANT_SPEED = ()
 
                     t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, "facing " + currentDegree + ", going " + direction);
-                    Log.d(TAG, Util.printMemory(memory));
+                    Log.d(app.TAG, "facing " + app.currentDegree + ", going " + direction);
+                    Log.d(app.TAG, Util.printMemory(memory));
                 }
                 // updates in memory structure as we move which will allow return to nest
                 //------   COMPASS UPDATE  -----
-                tl2 = c.tl2Output(Math.toRadians(currentDegree));
+                tl2 = c.tl2Output(Math.toRadians(app.currentDegree));
                 cl1 = c.cl1Output(tl2);
                 tb1 = c.tb1Output(cl1, tb1);
 
                 // ------ DISPLACEMENT UPDATE -----
-                memory = c.cpu4Update(memory, tb1, ANT_SPEED);
+                memory = c.cpu4Update(memory, tb1, app.ANT_SPEED);
                 cpu4 = c.cpu4Output(memory.copy());
 
                 // ----- TURNING GENERATION ------
                 cpu1 = c.cpu1Output(tb1, cpu4);
-                CXmotor = c.motorOutput(cpu1);
+                app.CXmotor = c.motorOutput(cpu1);
                 Util.writeToFile(
                         memory,
-                        leftCXFlow,
-                        rightCXFlow,
+                        app.leftCXFlow,
+                        app.rightCXFlow,
                         "run_1",
-                        frame_rate_cx,
-                        CURRiteration,
-                        currentDegree
+                        app.frame_rate_cx,
+                        app.CURRiteration,
+                        app.currentDegree
                 );
-                currentTime = (int) SystemClock.elapsedRealtime()-startTime;
+                currentTime = (int) SystemClock.elapsedRealtime()-app.startTime;
             }
 
             // turn to offset pull, and allow network to redirect antbot
@@ -208,99 +212,99 @@ public class OldThreadCode extends MainActivity{
             }
             currentTime = (int)SystemClock.elapsedRealtime()-t0;
 
-            startTime = (int) SystemClock.elapsedRealtime();
+            app.startTime = (int) SystemClock.elapsedRealtime();
             t0 = (int)SystemClock.elapsedRealtime();
             t = 0;
 
             Boolean algorithm_not_setted = true;
 
             while (algorithm_not_setted){
-                if (images_access){
-                    new_image = new SaveImages();
-                    new_image.execute(processedDestImage, 7);
+                if (app.images_access){
+                    app.new_image = app.new SaveImages();
+                    app.new_image.execute(app.processedDestImage, 7);
                     algorithm_not_setted = false;
                 }
             }
 
             // INBOUND ROUTE
             while (currentTime < T_inbound*1000){
-                CURRiteration++;
+                app.CURRiteration++;
                 try {
                     sleep(900);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                if (images_access) {
-                    new_image = new SaveImages();
-                    new_image.execute(processedDestImage, 5);
+                if (app.images_access) {
+                    app.new_image = app.new SaveImages();
+                    app.new_image.execute(app.processedDestImage, 5);
                 }
 
                 //------   COMPASS UPDATE  -----
-                tl2 = c.tl2Output(Math.toRadians(currentDegree));
+                tl2 = c.tl2Output(Math.toRadians(app.currentDegree));
                 cl1 = c.cl1Output(tl2);
                 tb1 = c.tb1Output(cl1, tb1);
 
                 // ------ DISPLACEMENT UPDATE -----
-                memory = c.cpu4Update(memory, tb1, ANT_SPEED);
+                memory = c.cpu4Update(memory, tb1, app.ANT_SPEED);
                 cpu4 = c.cpu4Output(memory.copy());
 
                 // ----- TURNING GENERATION ------
                 cpu1 = c.cpu1Output(tb1, cpu4);
-                CXmotor = c.motorOutput(cpu1);
+                app.CXmotor = c.motorOutput(cpu1);
                 Util.writeToFile(
                         memory,
-                        leftCXFlow,
-                        rightCXFlow,
+                        app.leftCXFlow,
+                        app.rightCXFlow,
                         "run_1",
-                        frame_rate_cx,
-                        CURRiteration,
-                        currentDegree
+                        app.frame_rate_cx,
+                        app.CURRiteration,
+                        app.currentDegree
                 );
 
                 // ----- ANTBOT DRIVING--------
-                CXnewHeading = Math.toDegrees(Math.toRadians(currentDegree) - CXmotorChange * CXmotor);
-                CXtheta = (CXnewHeading - currentDegree)%360;
+                app.CXnewHeading = Math.toDegrees(Math.toRadians(app.currentDegree) - app.CXmotorChange * app.CXmotor);
+                app.CXtheta = (app.CXnewHeading - app.currentDegree)%360;
 
                 t = (int)SystemClock.elapsedRealtime() - t0;
                 String direction = "not sure";
                 if(t > 300){
                     // speed in dm/sec
-                    if (CXtheta<-1.5){
+                    if (app.CXtheta<-1.5){
                         Command.go(new double[]{10, 100});
-                        ANT_SPEED = 0.5;
+                        app.ANT_SPEED = 0.5;
                         direction = "left";
-                    } else if (CXtheta>1.5){
+                    } else if (app.CXtheta>1.5){
                         Command.go(new double[]{100, 10});
-                        ANT_SPEED = 0.5;
+                        app.ANT_SPEED = 0.5;
                         direction = "right";
                     } else {
                         Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
+                        app.ANT_SPEED = 4.;
                         direction = "straight";
                     }
-                    Log.d(TAG, "facing " + currentDegree + ", going " + direction + "\nwant to go to " + CXnewHeading);
+                    Log.d(app.TAG, "facing " + app.currentDegree + ", going " + direction + "\nwant to go to " + app.CXnewHeading);
                     t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, Util.printMemory(memory));
+                    Log.d(app.TAG, Util.printMemory(memory));
                 }
 
                 try {
-                    runOnUiThread(new Runnable() {
+                    app.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            debugTextView.setText(String.format("inbound " +
+                            app.debugTextView.setText(String.format("inbound " +
                                             "\ncurrent iteration: %d"+
 //                                    "\ncurrent direction: %f"+
                                             "\nLeft Speed: %f"+
                                             "\nRight Speed: %f"+
                                             "\nWant to go to: %f"+
                                             "\nSo turning of: %f",
-                                    CURRiteration,
-//                                    currentDegree,
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    CXnewHeading,
-                                    CXtheta));
+                                    app.CURRiteration,
+//                                    app.currentDegree,
+                                    app.leftCXFlow,
+                                    app.rightCXFlow,
+                                    app.CXnewHeading,
+                                    app.CXtheta));
                         }
                     });
 
@@ -308,7 +312,7 @@ public class OldThreadCode extends MainActivity{
                     e.printStackTrace();
                 }
                 if(Util.isHome(memory)) break;
-                currentTime = (int) SystemClock.elapsedRealtime() - startTime;
+                currentTime = (int) SystemClock.elapsedRealtime() - app.startTime;
             }
 
             try {
@@ -319,15 +323,15 @@ public class OldThreadCode extends MainActivity{
             Command.go(new double[]{0, 0});
 
             try {
-                runOnUiThread(new Runnable() {
+                app.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        debugTextView.setText(String.format("The PI Run is over! "+
+                        app.debugTextView.setText(String.format("The PI Run is over! "+
                                 "\nTo start again please return to the " +
                                 "\nprevious page and click -Start-"));
 
                         // Show the "Put Robot Back to Food" Alert Dialog!
-                        showDialog();
+                        app.showDialog();
                     }
                 });
             } catch (Exception e) {
@@ -366,31 +370,31 @@ public class OldThreadCode extends MainActivity{
             SimpleMatrix en = new SimpleMatrix(CX_MB.n_tb1, 1);
             cpu1.set(0);
 
-            startTime = (int) SystemClock.elapsedRealtime();
+            app.startTime = (int) SystemClock.elapsedRealtime();
             int t0 = (int) SystemClock.elapsedRealtime();
             int t = 0;
-            CURRiteration = 0;
-            int currentTime = (int)SystemClock.elapsedRealtime()-startTime;
+            app.CURRiteration = 0;
+            int currentTime = (int)SystemClock.elapsedRealtime()-app.startTime;
             while (currentTime<T_outbound*1000) {
-                CURRiteration++;
+                app.CURRiteration++;
                 try {
                     sleep(600);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 try {
-                    runOnUiThread(new Runnable() {
+                    app.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            debugTextView.setText(String.format("outbound " +
+                            app.debugTextView.setText(String.format("outbound " +
                                             "\nLeft Speed: %f"+
                                             "\nRight Speed: %f"+
                                             "\ncurrent iteration: %d"+
                                             "\ncurrent direction: %f",
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    CURRiteration,
-                                    currentDegree));
+                                    app.leftCXFlow,
+                                    app.rightCXFlow,
+                                    app.CURRiteration,
+                                    app.currentDegree));
                         }
                     });
                 } catch (Exception e) {
@@ -404,37 +408,37 @@ public class OldThreadCode extends MainActivity{
                 if(t>300) {
                     if (currentTime < 3500) {
                         Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.0;
+                        app.ANT_SPEED = 4.0;
                         direction = "straight";
                     } else if (currentTime < 8000) {
                         Command.go(new double[]{10, 100});
-                        ANT_SPEED = 2.0;
+                        app.ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 11000) {
                         Command.go(new double[]{100, 10});
-                        ANT_SPEED = 2.0;
+                        app.ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 25000) {
                         Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
+                        app.ANT_SPEED = 4.;
                         direction = "straight";
                     } else {
                         Command.go(new double[]{100, 10});
-                        ANT_SPEED = 4.;
+                        app.ANT_SPEED = 4.;
                         direction = "straight";
                     }
                     // based on odometry
-                    //ANT_SPEED = ()
+                    //app.ANT_SPEED = ()
 
                     t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, "facing " + currentDegree + ", going " + direction);
-                    Log.d(TAG, Util.printMemory(memory));
+                    Log.d(app.TAG, "facing " + app.currentDegree + ", going " + direction);
+                    Log.d(app.TAG, Util.printMemory(memory));
                 }
                 // updates in memory structure as we move which will allow return to nest
                 //------   COMPASS UPDATE  -----
-                tl2 = cxmb.tl2Output(Math.toRadians(currentDegree));
-                cl1 = cxmb.cl1Output(tl2);
-                tb1 = cxmb.tb1Output(cl1, tb1);
+                tl2 = app.cxmb.tl2Output(Math.toRadians(app.currentDegree));
+                cl1 = app.cxmb.cl1Output(tl2);
+                tb1 = app.cxmb.tb1Output(cl1, tb1);
 
 //                String tb1_str = "";
 //                for(int i = 0; i < 8; i++){
@@ -443,23 +447,23 @@ public class OldThreadCode extends MainActivity{
 //                LogToFileUtils.write(tb1_str);
 
                 // ------ DISPLACEMENT UPDATE -----
-                memory = cxmb.cpu4Update(memory, tb1, ANT_SPEED);
-                cpu4 = cxmb.cpu4Output(memory.copy());
+                memory = app.cxmb.cpu4Update(memory, tb1, app.ANT_SPEED);
+                cpu4 = app.cxmb.cpu4Output(memory.copy());
 
                 // ----- TURNING GENERATION ------
-                cpu1 = cxmb.cpu1Output(tb1, cpu4, en, true);
-                CXmotor = cxmb.motorOutput(cpu1);
+                cpu1 = app.cxmb.cpu1Output(tb1, cpu4, en, true);
+                app.CXmotor = app.cxmb.motorOutput(cpu1);
                 Util.writeToFile(
                         memory,
-                        leftCXFlow,
-                        rightCXFlow,
+                        app.leftCXFlow,
+                        app.rightCXFlow,
                         "run_1",
-                        frame_rate_cx,
-                        CURRiteration,
-                        currentDegree
+                        app.frame_rate_cx,
+                        app.CURRiteration,
+                        app.currentDegree
                 );
 
-                currentTime = (int) SystemClock.elapsedRealtime()-startTime;
+                currentTime = (int) SystemClock.elapsedRealtime()-app.startTime;
             }
 
             // turn to offset pull, and allow network to redirect antbot
@@ -476,25 +480,25 @@ public class OldThreadCode extends MainActivity{
             }
             currentTime = (int)SystemClock.elapsedRealtime()-t0;
 
-            startTime = (int) SystemClock.elapsedRealtime();
+            app.startTime = (int) SystemClock.elapsedRealtime();
             t0 = (int)SystemClock.elapsedRealtime();
             t = 0;
 
-            stored_memory = memory.copy();
+            app.stored_memory = memory.copy();
 
             Boolean algorithm_not_setted = true;
 
             while (algorithm_not_setted){
-                if (images_access){
-                    new_image = new LearnDirectionImages();
-                    new_image.execute(processedDestImage, 7);
+                if (app.images_access){
+                    app.new_image = app.new LearnDirectionImages();
+                    app.new_image.execute(app.processedDestImage, 7);
                     algorithm_not_setted = false;
                 }
             }
 
             // INBOUND ROUTE
             while (currentTime < T_inbound*1000){
-                CURRiteration++;
+                app.CURRiteration++;
                 try {
                     sleep(400);
                 } catch (InterruptedException e) {
@@ -502,75 +506,75 @@ public class OldThreadCode extends MainActivity{
                 }
 
                 //------   COMPASS UPDATE  -----
-                tl2 = cxmb.tl2Output(Math.toRadians(currentDegree));
-                cl1 = cxmb.cl1Output(tl2);
-                tb1 = cxmb.tb1Output(cl1, tb1);
+                tl2 = app.cxmb.tl2Output(Math.toRadians(app.currentDegree));
+                cl1 = app.cxmb.cl1Output(tl2);
+                tb1 = app.cxmb.tb1Output(cl1, tb1);
 
-                if (images_access) {
-                    new_image = new LearnDirectionImages();
-                    new_image.execute(processedDestImage, 5, tb1);
+                if (app.images_access) {
+                    app.new_image = app.new LearnDirectionImages();
+                    app.new_image.execute(app.processedDestImage, 5, tb1);
                 }
 
                 // ------ DISPLACEMENT UPDATE -----
-                memory = cxmb.cpu4Update(memory, tb1, ANT_SPEED);
-                cpu4 = cxmb.cpu4Output(memory.copy());
+                memory = app.cxmb.cpu4Update(memory, tb1, app.ANT_SPEED);
+                cpu4 = app.cxmb.cpu4Output(memory.copy());
 
                 // ----- TURNING GENERATION ------
-                cpu1 = cxmb.cpu1Output(tb1, cpu4, en, true);
-                CXmotor = cxmb.motorOutput(cpu1);
+                cpu1 = app.cxmb.cpu1Output(tb1, cpu4, en, true);
+                app.CXmotor = app.cxmb.motorOutput(cpu1);
                 Util.writeToFile(
                         memory,
-                        leftCXFlow,
-                        rightCXFlow,
+                        app.leftCXFlow,
+                        app.rightCXFlow,
                         "run_1",
-                        frame_rate_cx,
-                        CURRiteration,
-                        currentDegree
+                        app.frame_rate_cx,
+                        app.CURRiteration,
+                        app.currentDegree
                 );
 
                 // ----- ANTBOT DRIVING--------
-                CXnewHeading = Math.toDegrees(Math.toRadians(currentDegree) - CXmotorChange * CXmotor);
-                CXtheta = (CXnewHeading - currentDegree)%360;
+                app.CXnewHeading = Math.toDegrees(Math.toRadians(app.currentDegree) - app.CXmotorChange * app.CXmotor);
+                app.CXtheta = (app.CXnewHeading - app.currentDegree)%360;
 
                 t = (int)SystemClock.elapsedRealtime() - t0;
                 String direction = "not sure";
                 if(t > 300){
                     // speed in dm/sec
-                    if (CXtheta<-1.5){
+                    if (app.CXtheta<-1.5){
                         Command.go(new double[]{10, 100});
-                        ANT_SPEED = 0.5;
+                        app.ANT_SPEED = 0.5;
                         direction = "left";
-                    } else if (CXtheta>1.5){
+                    } else if (app.CXtheta>1.5){
                         Command.go(new double[]{100, 10});
-                        ANT_SPEED = 0.5;
+                        app.ANT_SPEED = 0.5;
                         direction = "right";
                     } else {
                         Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
+                        app.ANT_SPEED = 4.;
                         direction = "straight";
                     }
-                    Log.d(TAG, "facing " + currentDegree + ", going " + direction + "\nwant to go to " + CXnewHeading);
+                    Log.d(app.TAG, "facing " + app.currentDegree + ", going " + direction + "\nwant to go to " + app.CXnewHeading);
                     t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, Util.printMemory(memory));
+                    Log.d(app.TAG, Util.printMemory(memory));
                 }
 
                 try {
-                    runOnUiThread(new Runnable() {
+                    app.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            debugTextView.setText(String.format("inbound " +
+                            app.debugTextView.setText(String.format("inbound " +
                                             "\ncurrent iteration: %d"+
 //                                    "\ncurrent direction: %f"+
                                             "\nLeft Speed: %f"+
                                             "\nRight Speed: %f"+
                                             "\nWant to go to: %f"+
                                             "\nSo turning of: %f",
-                                    CURRiteration,
-//                                    currentDegree,
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    CXnewHeading,
-                                    CXtheta));
+                                    app.CURRiteration,
+//                                    app.currentDegree,
+                                    app.leftCXFlow,
+                                    app.rightCXFlow,
+                                    app.CXnewHeading,
+                                    app.CXtheta));
                             //Toast.makeText(getApplication(), "famialarity:" + familarity, Toast.LENGTH_SHORT);
                         }
                     });
@@ -579,7 +583,7 @@ public class OldThreadCode extends MainActivity{
                     e.printStackTrace();
                 }
                 if(Util.isHome(memory)) break;
-                currentTime = (int) SystemClock.elapsedRealtime() - startTime;
+                currentTime = (int) SystemClock.elapsedRealtime() - app.startTime;
             }
 
             try {
@@ -590,13 +594,13 @@ public class OldThreadCode extends MainActivity{
             Command.go(new double[]{0, 0});
 
             try {
-                runOnUiThread(new Runnable() {
+                app.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        debugTextView.setText(String.format("The PI Run is over! "+
+                        app.debugTextView.setText(String.format("The PI Run is over! "+
                                 "\nPlease Push the \"yes\" button when you are ready."));
                         // Show the "Put Robot Back to Food" Alert Dialog!
-                        showDialog();
+                        app.showDialog();
                     }
                 });
             } catch (Exception e) {
@@ -636,11 +640,11 @@ public class OldThreadCode extends MainActivity{
             int startTime = (int) SystemClock.elapsedRealtime();
             int t0 = (int) SystemClock.elapsedRealtime();
             int t = 0;
-            CURRiteration = 0;
+            app.CURRiteration = 0;
             int currentTime = (int)SystemClock.elapsedRealtime()-startTime;
 
             while (currentTime<T_outbound*1000) {
-                CURRiteration++;
+                app.CURRiteration++;
                 try {
                     sleep(400);
                 } catch (InterruptedException e) {
@@ -648,17 +652,17 @@ public class OldThreadCode extends MainActivity{
                 }
                 // print output to screen - useful for DEBUG
                 try {
-                    runOnUiThread(new Runnable() {
+                    app.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            debugTextView.setText(String.format(
+                            app.debugTextView.setText(String.format(
                                     "outbound " +
                                             "\nLeft Speed: %f"+
                                             "\nRight Speed: %f" +
                                             "\nFrameRate: %f",
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    frame_rate_cx
+                                    app.leftCXFlow,
+                                    app.rightCXFlow,
+                                    app.frame_rate_cx
                                     )
                             );
                         }
@@ -675,37 +679,37 @@ public class OldThreadCode extends MainActivity{
                 if(t>300) {
                     if (currentTime < 3500) {
                         Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.0;
+                        app.ANT_SPEED = 4.0;
                         direction = "straight";
                     } else if (currentTime < 8000) {
                         Command.go(new double[]{10, 100});
-                        ANT_SPEED = 2.0;
+                        app.ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 11000) {
                         Command.go(new double[]{100, 10});
-                        ANT_SPEED = 2.0;
+                        app.ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 25000) {
                         Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
+                        app.ANT_SPEED = 4.;
                         direction = "straight";
                     } else {
                         Command.go(new double[]{100, 10});
-                        ANT_SPEED = 4.;
+                        app.ANT_SPEED = 4.;
                         direction = "straight";
                     }
                 }
                 t0 = (int) SystemClock.elapsedRealtime();
-                Log.d(TAG, "facing " + currentDegree + ", going " + direction);
-                Log.d(TAG, Util.printMemory(memory));
+                Log.d(app.TAG, "facing " + app.currentDegree + ", going " + direction);
+                Log.d(app.TAG, Util.printMemory(memory));
                 // updates in memory structure as we move which will allow return to nest
                 //------   COMPASS UPDATE  -----
-                tl2 = c.tl2Output(Math.toRadians(currentDegree));
+                tl2 = c.tl2Output(Math.toRadians(app.currentDegree));
                 cl1 = c.cl1Output(tl2);
                 tb1 = c.tb1Output(cl1, tb1);
 
                 //---- Speed retrieval ------------
-                SimpleMatrix flow = new SimpleMatrix(new double[][]{{leftCXFlow},{rightCXFlow}});
+                SimpleMatrix flow = new SimpleMatrix(new double[][]{{app.leftCXFlow},{app.rightCXFlow}});
                 SimpleMatrix tn1 = c.tn1Output(flow);
                 SimpleMatrix tn2 = c.tn2Output(flow);
 
@@ -715,16 +719,16 @@ public class OldThreadCode extends MainActivity{
 
                 // ----- TURNING GENERATION ------
                 cpu1 = c.cpu1Output(tb1, cpu4);
-                CXmotor = c.motorOutput(cpu1);
-                currentTime = (int) SystemClock.elapsedRealtime()-startTime;
+                app.CXmotor = c.motorOutput(cpu1);
+                currentTime = (int) SystemClock.elapsedRealtime()-app.startTime;
                 Util.writeToFile(
                         memory,
-                        leftCXFlow,
-                        rightCXFlow,
+                        app.leftCXFlow,
+                        app.rightCXFlow,
                         "run",
-                        frame_rate_cx,
-                        CURRiteration,
-                        currentDegree
+                        app.frame_rate_cx,
+                        app.CURRiteration,
+                        app.currentDegree
                 );
             }
 
@@ -742,14 +746,14 @@ public class OldThreadCode extends MainActivity{
             }
             currentTime = (int)SystemClock.elapsedRealtime()-t0;
 
-            startTime = (int) SystemClock.elapsedRealtime();
+            app.startTime = (int) SystemClock.elapsedRealtime();
             t0 = (int)SystemClock.elapsedRealtime();
             t = 0;
 
             // INBOUND ROUTE
             while (currentTime < T_inbound*1000){
 
-                CURRiteration++;
+                app.CURRiteration++;
                 try {
                     sleep(400);
                 } catch (InterruptedException e) {
@@ -757,7 +761,7 @@ public class OldThreadCode extends MainActivity{
                 }
 
                 //------   COMPASS UPDATE  -----
-                tl2 = c.tl2Output(Math.toRadians(currentDegree));
+                tl2 = c.tl2Output(Math.toRadians(app.currentDegree));
                 cl1 = c.cl1Output(tl2);
                 tb1 = c.tb1Output(cl1, tb1);
 
@@ -772,67 +776,67 @@ public class OldThreadCode extends MainActivity{
 
                 // ----- TURNING GENERATION ------
                 cpu1 = c.cpu1Output(tb1, cpu4);
-                CXmotor = c.motorOutput(cpu1);
+                app.CXmotor = c.motorOutput(cpu1);
                 Util.writeToFile(
                         memory,
-                        leftCXFlow,
-                        rightCXFlow,
+                        app.leftCXFlow,
+                        app.rightCXFlow,
                         "run",
-                        frame_rate_cx,
-                        CURRiteration,
-                        currentDegree
+                        app.frame_rate_cx,
+                        app.CURRiteration,
+                        app.currentDegree
                 );
 
                 // ----- ANTBOT DRIVING--------
 
                 // new direction based on memory
-                CXnewHeading = Math.toDegrees(
-                        (Math.toRadians(currentDegree) + CXmotor + Math.PI)
+                app.CXnewHeading = Math.toDegrees(
+                        (Math.toRadians(app.currentDegree) + app.CXmotor + Math.PI)
                                 %(2.0 * Math.PI) - Math.PI
                 );
 
                 // given new direction, turn a litte right/left to approach it
-                CXtheta = ((CXnewHeading - currentDegree) % 360);
+                app.CXtheta = ((app.CXnewHeading - app.currentDegree) % 360);
 
                 t = (int)SystemClock.elapsedRealtime() - t0;
                 String direction = "";
                 if(t > 300){
                     // speed in dm/sec
-                    if (CXtheta < -1.5){
+                    if (app.CXtheta < -1.5){
                         Command.go(new double[]{10, 100});
-                        ANT_SPEED = 0.5;
+                        app.ANT_SPEED = 0.5;
                         direction = "left";
-                    } else if (CXtheta>1.5){
+                    } else if (app.CXtheta>1.5){
                         Command.go(new double[]{100, 10});
-                        ANT_SPEED = 0.5;
+                        app.ANT_SPEED = 0.5;
                         direction = "right";
                     } else {
                         Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
+                        app.ANT_SPEED = 4.;
                         direction = "straight";
                     }
-                    Log.d(TAG, "facing " + currentDegree + ", going " + direction + "\nwant to go to " + CXnewHeading);
+                    Log.d(app.TAG, "facing " + app.currentDegree + ", going " + direction + "\nwant to go to " + app.CXnewHeading);
                     t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, Util.printMemory(memory));
+                    Log.d(app.TAG, Util.printMemory(memory));
                 }
 
                 try {
-                    runOnUiThread(new Runnable() {
+                    app.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             float frame_rate;
-                            if (currentFrameTime-prevFrameTime != 0){
-                                frame_rate = 1/((currentFrameTime-prevFrameTime)*1000);
+                            if (app.currentFrameTime-app.prevFrameTime != 0){
+                                frame_rate = 1/((app.currentFrameTime-app.prevFrameTime)*1000);
                             } else {
                                 frame_rate = 0;
                             }
-                            debugTextView.setText(String.format(
+                            app.debugTextView.setText(String.format(
                                     "iutbound " +
                                             "\nLeft Speed: %f"+
                                             "\nRight Speed: %f" +
                                             "\nFrameRate: %f",
-                                    leftCXFlow,
-                                    rightCXFlow,
+                                    app.leftCXFlow,
+                                    app.rightCXFlow,
                                     frame_rate
                                     )
                             );
@@ -842,7 +846,7 @@ public class OldThreadCode extends MainActivity{
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                currentTime = (int) SystemClock.elapsedRealtime() - startTime;
+                currentTime = (int) SystemClock.elapsedRealtime() - app.startTime;
 
             }
 
@@ -855,10 +859,10 @@ public class OldThreadCode extends MainActivity{
             Command.go(new double[]{0, 0});
 
             try {
-                runOnUiThread(new Runnable() {
+                app.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        debugTextView.setText(String.format("The Run is over! "+
+                        app.debugTextView.setText(String.format("The Run is over! "+
                                 "\nTo start again please return to the " +
                                 "\nprevious page and click -Start-"));
                     }
@@ -875,7 +879,7 @@ public class OldThreadCode extends MainActivity{
         @Override
         public void run() {
             try {
-                sleep(integratorRunTime);
+                sleep(app.integratorRunTime);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -897,7 +901,7 @@ public class OldThreadCode extends MainActivity{
                 e.printStackTrace();
             }
 
-            Util.log(log_file, "CA run started");
+            Util.log(app.log_file, "CA run started");
             boolean avoid = false; //Is the robot currently avoiding an obstacle?
             boolean stop = false; //Halt flag
             boolean initialise = true; //Loop initialisation flag
@@ -932,13 +936,13 @@ public class OldThreadCode extends MainActivity{
                 try { sleep(600); } catch ( Exception e ){ e.printStackTrace(); }
 
                 //Print out debug information, catch exceptions
-                ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
+                app.ca_flow_diff = app.leftCAFlow - app.rightCAFlow; //If positive, left detection, else right detection
 
                 //Flow accumulators
-                if ( ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) ca_flow_diff; }
-                else if ( ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) ca_flow_diff); }
+                if ( app.ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) app.ca_flow_diff; }
+                else if ( app.ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) app.ca_flow_diff); }
 
-                if ( Math.abs(ca_flow_diff) >= accumulation_threshold ){ dual_accumulator = dual_accumulator + (int) ca_flow_diff; }
+                if ( Math.abs(app.ca_flow_diff) >= accumulation_threshold ){ dual_accumulator = dual_accumulator + (int) app.ca_flow_diff; }
 
                 //If accumulation time limit reached, reset timer and accumulators
                 if ( loop_count >= 2/*t_delta >= 2000 */){
@@ -950,19 +954,19 @@ public class OldThreadCode extends MainActivity{
                 }
 
                 try {
-                    runOnUiThread(new Runnable() {
+                    app.runOnUiThread(new Runnable() {
                         @Override
                         public void run(){
-                            debugTextView.setText(String.format(Locale.ENGLISH,
+                            app.debugTextView.setText(String.format(Locale.ENGLISH,
                                     "Speed: %f \n" +
                                             "Left CA flow: %f \n" +
                                             "Right CA flow: %f \n" +
                                             "Flow Difference: %f \n"
                                     ,
-                                    speed,
-                                    leftCAFlow,
-                                    rightCAFlow,
-                                    ca_flow_diff
+                                    app.speed,
+                                    app.leftCAFlow,
+                                    app.rightCAFlow,
+                                    app.ca_flow_diff
                             ));
                         }
                     });
@@ -1051,10 +1055,10 @@ public class OldThreadCode extends MainActivity{
             }
 
             try {
-                runOnUiThread(new Runnable() {
+                app.runOnUiThread(new Runnable() {
                     @Override
                     public void run(){
-                        debugTextView.setText(String.format(
+                        app.debugTextView.setText(String.format(
                                 "Obstacle seen"
                         ));
                     }
@@ -1086,7 +1090,7 @@ public class OldThreadCode extends MainActivity{
             }
 
             double current_familiarity;
-            double maximum_unfamiliarity = model.calculateMaximumUnfamiliarity();
+            double maximum_unfamiliarity = app.model.calculateMaximumUnfamiliarity();
             LogToFileUtils.write("Maximum Unfamiliarity: " + maximum_unfamiliarity + "\n");
             double normalised_familiarity;
 
@@ -1101,8 +1105,8 @@ public class OldThreadCode extends MainActivity{
             int flag = 1;
 
             while(true) {
-                if (images_access){
-                    Mat matImage = processedDestImage;
+                if (app.images_access){
+                    Mat matImage = app.processedDestImage;
                     //Since there is no possibility to send a 2D array or Mat file the image is transformed to a 1D int array
                     byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
                     matImage.get(0, 0, imageArray_tmp);
@@ -1111,7 +1115,7 @@ public class OldThreadCode extends MainActivity{
                         imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
                     }
 
-                    current_familiarity = model.calculateFamiliarity(imageArray);
+                    current_familiarity = app.model.calculateFamiliarity(imageArray);
                     LogToFileUtils.write("Current Familiarity: " + current_familiarity+ "\n");
 
                     normalised_familiarity = current_familiarity / maximum_unfamiliarity;
@@ -1168,7 +1172,7 @@ public class OldThreadCode extends MainActivity{
             SimpleMatrix tb1 = new SimpleMatrix(CX_MB.n_tb1, 1);
             tb1.set(0);
             SimpleMatrix memory = new SimpleMatrix(CX_MB.n_cpu4, 1);
-            memory = stored_memory.copy();
+            memory = app.stored_memory.copy();
             SimpleMatrix cpu4 = new SimpleMatrix(CX_MB.n_cpu4, 1);
             cpu4.set(0);
             SimpleMatrix cpu1 = new SimpleMatrix(CX_MB.n_cpu1, 1);
@@ -1180,16 +1184,16 @@ public class OldThreadCode extends MainActivity{
 
             int T_inbound = 30;
 
-            startTime = (int) SystemClock.elapsedRealtime();
+            app.startTime = (int) SystemClock.elapsedRealtime();
             int t0 = (int) SystemClock.elapsedRealtime();
             int t = 0;
-            CURRiteration = 0;
+            app.CURRiteration = 0;
             int currentTime = (int) SystemClock.elapsedRealtime() - t0;
 
             Boolean image_not_accessed;
 
             while (currentTime < T_inbound * 1000) {
-                CURRiteration++;
+                app.CURRiteration++;
                 try {
                     sleep(400);
                 } catch (InterruptedException e) {
@@ -1198,8 +1202,8 @@ public class OldThreadCode extends MainActivity{
 
                 image_not_accessed = true;
                 while (image_not_accessed){
-                    if (images_access){
-                        Mat matImage = processedDestImage;
+                    if (app.images_access){
+                        Mat matImage = app.processedDestImage;
                         //Since there is no possibility to send a 2D array or Mat file the image is transformed to a 1D int array
                         byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
                         matImage.get(0, 0, imageArray_tmp);
@@ -1207,70 +1211,70 @@ public class OldThreadCode extends MainActivity{
                         for (int n = 0; n < imageArray_tmp.length; n++) {
                             imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
                         }
-                        en = cxmb.calculateFamiliarityDistribution(imageArray);
+                        en = app.cxmb.calculateFamiliarityDistribution(imageArray);
                         image_not_accessed = false;
                         LogToFileUtils.write("Image Updated");
                     }
                 }
 
                 //------   COMPASS UPDATE  -----
-                tl2 = cxmb.tl2Output(Math.toRadians(currentDegree));
-                cl1 = cxmb.cl1Output(tl2);
-                tb1 = cxmb.tb1Output(cl1, tb1);
+                tl2 = app.cxmb.tl2Output(Math.toRadians(app.currentDegree));
+                cl1 = app.cxmb.cl1Output(tl2);
+                tb1 = app.cxmb.tb1Output(cl1, tb1);
 
                 // ------ DISPLACEMENT UPDATE -----
-                memory = cxmb.cpu4Update(memory, tb1, ANT_SPEED);
-                cpu4 = cxmb.cpu4Output(memory.copy());
+                memory = app.cxmb.cpu4Update(memory, tb1, app.ANT_SPEED);
+                cpu4 = app.cxmb.cpu4Output(memory.copy());
 
                 // ----- TURNING GENERATION ------
-                cpu1 = cxmb.cpu1Output(tb1, cpu4, en, false);
-                //cpu1 = cxmb.cpu1EnOutput(tb1, en);
-                CXmotor = cxmb.motorOutput(cpu1);
-                //writeToFile(memory, leftCXFlow, rightCXFlow, "run_1");
+                cpu1 = app.cxmb.cpu1Output(tb1, cpu4, en, false);
+                //cpu1 = app.cxmb.cpu1EnOutput(tb1, en);
+                app.CXmotor = app.cxmb.motorOutput(cpu1);
+                //writeToFile(memory, app.leftCXFlow, app.rightCXFlow, "run_1");
 
                 // ----- ANTBOT DRIVING--------
-                CXnewHeading = Math.toDegrees(Math.toRadians(currentDegree) - CXmotorChange * CXmotor);
-                CXtheta = (CXnewHeading - currentDegree) % 360;
+                app.CXnewHeading = Math.toDegrees(Math.toRadians(app.currentDegree) - app.CXmotorChange * app.CXmotor);
+                app.CXtheta = (app.CXnewHeading - app.currentDegree) % 360;
 
                 t = (int) SystemClock.elapsedRealtime() - t0;
                 String direction = "not sure";
                 if (t > 300) {
                     // speed in dm/sec
-                    if (CXtheta < -1.5) {
+                    if (app.CXtheta < -1.5) {
                         Command.go(new double[]{10, 100});
-                        ANT_SPEED = 0.5;
+                        app.ANT_SPEED = 0.5;
                         direction = "left";
-                    } else if (CXtheta > 1.5) {
+                    } else if (app.CXtheta > 1.5) {
                         Command.go(new double[]{100, 10});
-                        ANT_SPEED = 0.5;
+                        app.ANT_SPEED = 0.5;
                         direction = "right";
                     } else {
                         Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.0;
+                        app.ANT_SPEED = 4.0;
                         direction = "straight";
                     }
-                    Log.d(TAG, "facing " + currentDegree + ", going " + direction + "\nwant to go to " + CXnewHeading);
+                    Log.d(app.TAG, "facing " + app.currentDegree + ", going " + direction + "\nwant to go to " + app.CXnewHeading);
                     t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, Util.printMemory(memory));
+                    Log.d(app.TAG, Util.printMemory(memory));
                 }
 
                 try {
-                    runOnUiThread(new Runnable() {
+                    app.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            debugTextView.setText(String.format("inbound " +
+                            app.debugTextView.setText(String.format("inbound " +
                                             "\ncurrent iteration: %d" +
 //                                    "\ncurrent direction: %f"+
                                             "\nLeft Speed: %f" +
                                             "\nRight Speed: %f" +
                                             "\nWant to go to: %f" +
                                             "\nSo turning of: %f",
-                                    CURRiteration,
-//                                    currentDegree,
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    CXnewHeading,
-                                    CXtheta));
+                                    app.CURRiteration,
+//                                    app.currentDegree,
+                                    app.leftCXFlow,
+                                    app.rightCXFlow,
+                                    app.CXnewHeading,
+                                    app.CXtheta));
                         }
                     });
 
@@ -1278,7 +1282,7 @@ public class OldThreadCode extends MainActivity{
                     e.printStackTrace();
                 }
                 if (Util.isHome(memory)) break;
-                currentTime = (int) SystemClock.elapsedRealtime() - startTime;
+                currentTime = (int) SystemClock.elapsedRealtime() - app.startTime;
             }
 
             try {
@@ -1289,10 +1293,10 @@ public class OldThreadCode extends MainActivity{
             Command.go(new double[]{0, 0});
 
             try {
-                runOnUiThread(new Runnable() {
+                app.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        debugTextView.setText(String.format("The PI Run is over! " +
+                        app.debugTextView.setText(String.format("The PI Run is over! " +
                                 "\nTo start again please return to the " +
                                 "\nprevious page and click -Start-"));
                     }
@@ -1330,8 +1334,8 @@ public class OldThreadCode extends MainActivity{
                 for (int i = 0; i < 11; i++) {
                     image_not_accessed = true;
                     while (image_not_accessed){
-                        if (images_access){
-                            Mat matImage = processedDestImage;
+                        if (app.images_access){
+                            Mat matImage = app.processedDestImage;
                             //Since there is no possibility to send a 2D array or Mat file the image is transformed to a 1D int array
                             byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()];
                             matImage.get(0, 0, imageArray_tmp);
@@ -1339,8 +1343,8 @@ public class OldThreadCode extends MainActivity{
                             for (int n = 0; n < imageArray_tmp.length; n++) {
                                 imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
                             }
-                            familarity_array[i] = model.calculateFamiliarity(imageArray);
-                            unfarmiliarity_distribution += familarity_array[i] + ",";
+                            app.familarity_array[i] = app.model.calculateFamiliarity(imageArray);
+                            unfarmiliarity_distribution += app.familarity_array[i] + ",";
                             image_not_accessed = false;
                         }}
 
@@ -1355,7 +1359,7 @@ public class OldThreadCode extends MainActivity{
 
                 LogToFileUtils.write(unfarmiliarity_distribution+'\n');
 
-                min_index = Util.getMinIndex(familarity_array);
+                min_index = Util.getMinIndex(app.familarity_array);
 
                 LogToFileUtils.write("Seleted index: " + min_index + "\n");
 

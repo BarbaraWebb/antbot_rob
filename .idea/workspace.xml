@@ -5,6 +5,9 @@
       <config />
     </shared>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
@@ -12,407 +15,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2882b1b-9222-4f6a-9411-01c55a3a8d5c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.gradle/4.6/fileChanges/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/vcsWorkingDirs/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-10-10-11-58-37-061.rawproto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-10-10-12-01-35-178.rawproto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-10-10-12-01-51-673.rawproto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-10-10-12-03-18-581.rawproto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-10-10-12-03-50-590.rawproto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/android-profile/profile-2018-10-10-12-04-54-773.rawproto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/openCVLibrary300/build/generated/not_namespaced_r_class_sources/debug/generateDebugRFile/out/org/opencv/R.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/merged_manifests/debug/processDebugManifest/merged/output.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/packaged_res/debug/values/values.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/res/symbol-table-with-package/debug/package-aware-r.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/symbols/debug/R.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/openCVLibrary300/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_26_0_0_alpha1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_23_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_23_0_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_26_0_0_alpha1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_1_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_solver_1_0_2_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_23_0_1_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_23_0_1_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_26_0_0_alpha1_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_26_0_0_alpha1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_26_0_0_alpha1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_26_0_0_alpha1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_26_0_0_alpha1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_26_0_0_alpha1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_23_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_23_0_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_26_0_0_alpha1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_26_0_0_alpha1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_2_2_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_2_2_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_exposed_instrumentation_api_publish_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_rules_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_findbugs_jsr305_2_0_1_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_javawriter_2_1_1_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_annotation_javax_annotation_api_1_2_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_inject_javax_inject_1_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_12_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_integration_1_3_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_library_1_3_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AntBot_Rob.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AntBot_Rob.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AntEye/AntEye.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/AntEye.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AntEye/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Broadcast_Library/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Broadcast_Library/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CombinerApp/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/CombinerApp/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathIntegrationApp/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/PathIntegrationApp/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SerialCommunicationApp/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/SerialCommunicationApp/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisualNavigationApp/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/VisualNavigationApp/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/debug/org/opencv/engine/OpenCVEngineInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/debug/org/opencv/engine/OpenCVEngineInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/release/org/opencv/engine/OpenCVEngineInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/buildConfig/androidTest/debug/org/opencv/test/BuildConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/buildConfig/release/org/opencv/BuildConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/r/androidTest/debug/org/opencv/R.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/r/androidTest/debug/org/opencv/test/R.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/r/debug/org/opencv/R.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/r/release/org/opencv/R.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/blame/res/androidTest/debug/multi/values.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/debug/R.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/debug/classes.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/debug/res/values/values.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/default/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/default/R.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/default/classes.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/default/res/values/values.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/androidTest/debug/org/opencv/R$attr.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/androidTest/debug/org/opencv/R$id.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/androidTest/debug/org/opencv/R$styleable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/androidTest/debug/org/opencv/R.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/androidTest/debug/org/opencv/test/BuildConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/androidTest/debug/org/opencv/test/R$attr.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/androidTest/debug/org/opencv/test/R$id.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/androidTest/debug/org/opencv/test/R$styleable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/androidTest/debug/org/opencv/test/R.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/BuildConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/R$attr.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/R$id.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/R$styleable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/R.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/AsyncServiceHelper$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/AsyncServiceHelper$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/AsyncServiceHelper$3$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/AsyncServiceHelper$3$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/AsyncServiceHelper$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/AsyncServiceHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/BaseLoaderCallback$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/BaseLoaderCallback$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/BaseLoaderCallback$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/BaseLoaderCallback$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/BaseLoaderCallback$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/BaseLoaderCallback$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/BaseLoaderCallback$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/BaseLoaderCallback.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/CameraBridgeViewBase$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/CameraBridgeViewBase$CvCameraViewFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/CameraBridgeViewBase$CvCameraViewListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/CameraBridgeViewBase$CvCameraViewListener2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/CameraBridgeViewBase$CvCameraViewListenerAdapter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/CameraBridgeViewBase$ListItemAccessor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/CameraBridgeViewBase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/FpsMeter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/InstallCallbackInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/JavaCameraView$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/JavaCameraView$CameraWorker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/JavaCameraView$JavaCameraFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/JavaCameraView$JavaCameraSizeAccessor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/JavaCameraView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/LoaderCallbackInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/OpenCVLoader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/StaticHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/android/Utils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/calib3d/Calib3d.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/calib3d/StereoBM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/calib3d/StereoMatcher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/calib3d/StereoSGBM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/Algorithm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/Core$MinMaxLocResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/Core.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/CvException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/CvType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/DMatch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/KeyPoint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/Mat.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfByte.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfDMatch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfDouble.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfFloat.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfFloat4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfFloat6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfInt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfInt4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfKeyPoint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfPoint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfPoint2f.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfPoint3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfPoint3f.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/MatOfRect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/Point.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/Point3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/Range.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/Rect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/RotatedRect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/Scalar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/Size.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/core/TermCriteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/engine/OpenCVEngineInterface$Stub$Proxy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/engine/OpenCVEngineInterface$Stub.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/engine/OpenCVEngineInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/features2d/DescriptorExtractor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/features2d/DescriptorMatcher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/features2d/FeatureDetector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/features2d/Features2d.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/imgcodecs/Imgcodecs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/imgproc/CLAHE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/imgproc/Imgproc.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/imgproc/LineSegmentDetector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/imgproc/Subdiv2D.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/ANN_MLP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/Boost.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/DTrees.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/EM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/KNearest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/LogisticRegression.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/Ml.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/NormalBayesClassifier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/RTrees.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/SVM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/StatModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/ml/TrainData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/objdetect/BaseCascadeClassifier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/objdetect/CascadeClassifier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/objdetect/HOGDescriptor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/objdetect/Objdetect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/AlignExposures.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/AlignMTB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/CalibrateCRF.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/CalibrateDebevec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/CalibrateRobertson.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/MergeDebevec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/MergeExposures.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/MergeMertens.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/MergeRobertson.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/Photo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/Tonemap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/TonemapDrago.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/TonemapDurand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/TonemapMantiuk.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/photo/TonemapReinhard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/utils/Converters.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/video/BackgroundSubtractor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/video/BackgroundSubtractorKNN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/video/BackgroundSubtractorMOG2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/video/DenseOpticalFlow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/video/DualTVL1OpticalFlow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/video/KalmanFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/video/Video.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/videoio/VideoCapture.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/debug/org/opencv/videoio/Videoio.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/BuildConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/R$attr.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/R$id.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/R$styleable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/R.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/AsyncServiceHelper$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/AsyncServiceHelper$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/AsyncServiceHelper$3$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/AsyncServiceHelper$3$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/AsyncServiceHelper$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/AsyncServiceHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/BaseLoaderCallback$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/BaseLoaderCallback$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/BaseLoaderCallback$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/BaseLoaderCallback$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/BaseLoaderCallback$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/BaseLoaderCallback$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/BaseLoaderCallback$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/BaseLoaderCallback.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/CameraBridgeViewBase$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/CameraBridgeViewBase$CvCameraViewFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/CameraBridgeViewBase$CvCameraViewListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/CameraBridgeViewBase$CvCameraViewListener2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/CameraBridgeViewBase$CvCameraViewListenerAdapter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/CameraBridgeViewBase$ListItemAccessor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/CameraBridgeViewBase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/FpsMeter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/InstallCallbackInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/JavaCameraView$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/JavaCameraView$CameraWorker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/JavaCameraView$JavaCameraFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/JavaCameraView$JavaCameraSizeAccessor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/JavaCameraView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/LoaderCallbackInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/OpenCVLoader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/StaticHelper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/android/Utils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/calib3d/Calib3d.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/calib3d/StereoBM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/calib3d/StereoMatcher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/calib3d/StereoSGBM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/Algorithm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/Core$MinMaxLocResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/Core.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/CvException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/CvType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/DMatch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/KeyPoint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/Mat.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfByte.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfDMatch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfDouble.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfFloat.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfFloat4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfFloat6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfInt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfInt4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfKeyPoint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfPoint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfPoint2f.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfPoint3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfPoint3f.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/MatOfRect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/Point.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/Point3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/Range.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/Rect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/RotatedRect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/Scalar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/Size.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/core/TermCriteria.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/engine/OpenCVEngineInterface$Stub$Proxy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/engine/OpenCVEngineInterface$Stub.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/engine/OpenCVEngineInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/features2d/DescriptorExtractor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/features2d/DescriptorMatcher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/features2d/FeatureDetector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/features2d/Features2d.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/imgcodecs/Imgcodecs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/imgproc/CLAHE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/imgproc/Imgproc.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/imgproc/LineSegmentDetector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/imgproc/Subdiv2D.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/ANN_MLP.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/Boost.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/DTrees.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/EM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/KNearest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/LogisticRegression.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/Ml.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/NormalBayesClassifier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/RTrees.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/SVM.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/StatModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/ml/TrainData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/objdetect/BaseCascadeClassifier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/objdetect/CascadeClassifier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/objdetect/HOGDescriptor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/objdetect/Objdetect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/AlignExposures.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/AlignMTB.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/CalibrateCRF.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/CalibrateDebevec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/CalibrateRobertson.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/MergeDebevec.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/MergeExposures.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/MergeMertens.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/MergeRobertson.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/Photo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/Tonemap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/TonemapDrago.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/TonemapDurand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/TonemapMantiuk.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/photo/TonemapReinhard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/utils/Converters.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/video/BackgroundSubtractor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/video/BackgroundSubtractorKNN.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/video/BackgroundSubtractorMOG2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/video/DenseOpticalFlow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/video/DualTVL1OpticalFlow.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/video/KalmanFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/video/Video.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/videoio/VideoCapture.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/classes/release/org/opencv/videoio/Videoio.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental-safeguard/androidTest/debug/tag.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental-safeguard/debug/tag.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental-safeguard/release/tag.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileDebugAidl/dependency.store" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileDebugAidl/dependency.store" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileDebugAndroidTestAidl/dependency.store" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileReleaseAidl/dependency.store" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeDebugAndroidTestResources/merger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeDebugAssets/merger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeDebugShaders/merger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseAssets/merger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseShaders/merger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/merged.dir/values/values.xml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/merged.dir/values/values.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/merged.dir/values/values.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/merger.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/manifest/androidTest/debug/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/manifests/aapt/debug/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/manifests/aapt/release/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/res/merged/androidTest/debug/values/values.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/res/resources-debug-androidTest.ap_" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/symbols/androidTest/debug/R.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-debug.aar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-release.aar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/proguard-rules.pro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/layout/start_screen.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/values/colors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/src/main/res/values/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/visualsandbox.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/AntEye/AntEye.iml" afterPath="$PROJECT_DIR$/AntEye/AntEye.iml" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX_MB.java" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX_MB.java" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/WillshawModule.java" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/WillshawModule.java" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/OldThreadCode.java" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/OldThreadCode.java" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadCode.java" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadCode.java" />
+      <change beforePath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" afterPath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" />
+      <change beforePath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" afterPath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" />
+      <change beforePath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" afterPath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" />
+      <change beforePath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" afterPath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" />
+      <change beforePath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" afterPath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" />
+      <change beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/debug/org/opencv/engine/OpenCVEngineInterface.java" afterPath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/debug/org/opencv/engine/OpenCVEngineInterface.java" />
+      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileDebugAidl/dependency.store" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileDebugAidl/dependency.store" />
+      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" />
+      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/merger.xml" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/merger.xml" />
+      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/openCVLibrary300/build/outputs/logs/manifest-merger-debug-report.txt" />
+      <change beforePath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" afterPath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" />
+      <change beforePath="$PROJECT_DIR$/todo.txt" afterPath="$PROJECT_DIR$/todo.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -438,22 +68,107 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4338">
-              <caret line="306" selection-start-line="306" selection-end-line="306" />
+            <state relative-caret-position="638">
+              <caret line="472" column="10" lean-forward="false" selection-start-line="472" selection-start-column="10" selection-end-line="472" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
+      <file leaf-file-name="CameraBridgeViewBase.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/openCVLibrary300/src/main/java/org/opencv/android/CameraBridgeViewBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+            <state relative-caret-position="-1430">
+              <caret line="114" column="42" lean-forward="false" selection-start-line="114" selection-start-column="21" selection-end-line="114" selection-end-column="42" />
+              <folding>
+                <element signature="e#9173#9174#0" expanded="true" />
+                <element signature="e#9209#9210#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogToFileUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/LogToFileUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-482">
+              <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WillshawModule.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/WillshawModule.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PreferencesManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/PreferencesManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1476">
+              <caret line="92" column="15" lean-forward="false" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CX_MB.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX_MB.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="105" column="13" lean-forward="false" selection-start-line="105" selection-start-column="13" selection-end-line="105" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>tl2_prefs_def</find>
+      <find>broadcastMove</find>
+      <find>initiateBroadcast</find>
+      <find>initiateBroadcast(</find>
+      <find>C</find>
+      <find>Willshaw</find>
+      <find>SaveImages()</find>
+      <find>new LearnDirectionImages();</find>
+      <find>mushroom_body</find>
+      <find>new SaveImages();</find>
+      <find>LEARN_IMAGE</find>
+      <find>Old</find>
+      <find>speed,</find>
+      <find>ThreadCode</find>
+      <find>LogTo</find>
+      <find>LogToFile</find>
+      <find>Log.e</find>
+      <find>log_file</find>
+      <find>familiarity_array</find>
+      <find>CvCamera</find>
+      <find>Construc</find>
+      <find>setCvC</find>
+      <find>mListener</find>
+      <find>CvCameraViewListener2</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>app.runOnUiThread</replace>
+      <replace>app.debugTextView</replace>
+      <replace>app.TAG</replace>
+      <replace>insectsrobotics.imagemaipulations.SaveImages()</replace>
+      <replace>app.SaveImages()</replace>
+      <replace>app.LEARN_IMAGE</replace>
+      <replace>app.log_file</replace>
+      <replace>app.familiarity_array</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -461,7 +176,7 @@
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
       <map>
-        <entry key="$PROJECT_DIR$" value="C:\Users\Robert Mitchell\.gradle\wrapper\dists\gradle-4.6-all\bcst21l2brirad8k2ben1letg\gradle-4.6" />
+        <entry key="$PROJECT_DIR$" value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6" />
       </map>
     </option>
     <option name="myGradleVersions">
@@ -8745,151 +8460,151 @@
               <option name="name" value="antbot_rob" />
               <option name="projectBuildClasspath">
                 <list>
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/announce" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/antlr" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/base-services" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/base-services-groovy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/build-cache" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/build-cache-http" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/build-comparison" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/build-init" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/build-option" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/cli" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/code-quality" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/composite-builds" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/core" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/core-api" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/dependency-management" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/diagnostics" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/ear" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/ide" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/ide-native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/ide-play" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/installation-beacon" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/internal-android-performance-testing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/internal-integ-testing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/internal-performance-testing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/internal-testing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/ivy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/jacoco" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/javascript" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/jvm-services" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/language-groovy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/language-java" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/language-jvm" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/language-native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/language-scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/platform-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/ide-play" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/ear" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/dependency-management" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/resources-s3" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/wrapper" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/tooling-api" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/base-services" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/launcher" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/build-init" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/platform-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/cli" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/language-java" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/process-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/reporting" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/resources-http" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/resources-sftp" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/language-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/testing-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/resources-gcs" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/testing-junit-platform" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/logging" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/maven" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/messaging" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/ide" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/model-core" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/model-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/composite-builds" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/ivy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/build-option" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/code-quality" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/jvm-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/announce" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/javascript" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/resources" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/testing-base" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/jacoco" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/ide-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/language-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/tooling-api-builders" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/base-services-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/internal-performance-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/core" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/internal-integ-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/maven" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/build-cache" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/messaging" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/workers" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/diagnostics" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/platform-play" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/plugins" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/osgi" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/persistent-cache" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/platform-base" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/platform-jvm" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/platform-native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/platform-play" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/plugin-development" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/build-cache-http" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/installation-beacon" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/plugin-use" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/plugins" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/process-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/platform-base" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/publish" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/reporting" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/resources" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/resources-gcs" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/resources-http" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/resources-s3" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/resources-sftp" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/scala" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/signing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/test-kit" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/testing-base" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/testing-junit-platform" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/testing-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/internal-testing" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/testing-native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/tooling-api" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/tooling-api-builders" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/test-kit" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/signing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/build-comparison" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/language-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/antlr" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/version-control" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/workers" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/wrapper" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/ant-1.9.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/ant-launcher-1.9.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-base-services-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-base-services-groovy-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-build-cache-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-build-option-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-cli-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-core-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-core-api-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-docs-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-installation-beacon-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/plugin-development" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/model-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/core-api" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/src/language-scala" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-jvm-services-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-kotlin-dsl-0.15.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-kotlin-dsl-tooling-builders-0.15.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-kotlin-dsl-tooling-models-0.15.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-launcher-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-logging-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-messaging-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-cli-4.6.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-model-core-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-model-groovy-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-native-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-persistent-cache-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-process-services-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-resources-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-runtime-api-info-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-base-services-groovy-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/ant-1.9.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-tooling-api-4.6.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-wrapper-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-build-option-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/ant-launcher-1.9.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-model-groovy-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-core-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-base-services-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-kotlin-dsl-tooling-builders-0.15.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-docs-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-logging-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-runtime-api-info-4.6.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/groovy-all-2.4.12.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-announce-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-antlr-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-build-cache-http-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-build-comparison-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-build-init-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-code-quality-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-composite-builds-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-dependency-management-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-diagnostics-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-ear-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-ide-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-ide-native-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-process-services-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-persistent-cache-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-installation-beacon-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-resources-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-kotlin-dsl-tooling-models-0.15.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-launcher-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-messaging-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-build-cache-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-native-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-kotlin-dsl-0.15.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/gradle-core-api-4.6.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-ide-play-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-ivy-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-jacoco-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-announce-4.6.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-javascript-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-language-groovy-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-language-java-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-language-jvm-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-language-native-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-language-scala-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-maven-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-osgi-4.6.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-platform-base-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-platform-jvm-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-platform-native-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-platform-play-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-plugin-development-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-plugin-use-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-plugins-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-publish-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-reporting-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-test-kit-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-build-cache-http-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-testing-base-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-ide-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-jacoco-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-ear-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/ivy-2.2.0.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-antlr-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-workers-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-code-quality-4.6.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-resources-gcs-4.6.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-resources-http-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-resources-s3-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-resources-sftp-4.6.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-scala-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-signing-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-test-kit-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-testing-base-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-testing-junit-platform-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-ide-native-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-reporting-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-osgi-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-build-init-4.6.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-testing-jvm-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-testing-native-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-tooling-api-builders-4.6.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-version-control-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-workers-4.6.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/ivy-2.2.0.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-plugin-development-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-resources-sftp-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-dependency-management-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-tooling-api-builders-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-signing-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-language-java-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-platform-jvm-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-testing-junit-platform-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-plugins-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-language-scala-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-build-comparison-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-maven-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-diagnostics-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-platform-native-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-testing-native-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-language-native-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-language-groovy-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-resources-s3-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-composite-builds-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-publish-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-ivy-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-language-jvm-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-platform-play-4.6.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.6-all/bcst21l2brirad8k2ben1letg/gradle-4.6/lib/plugins/gradle-plugin-use-4.6.jar" />
                   <option value="$PROJECT_DIR$/buildSrc/src/main/java" />
                   <option value="$PROJECT_DIR$/buildSrc/src/main/groovy" />
                 </list>
@@ -8909,21 +8624,36 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/OldThreadCode.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadCode.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/WillshawModule.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX_MB.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="1862" />
     <option name="y" value="-619" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -8942,19 +8672,29 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="imagemaipulations" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
+            <path>
+              <item name="antbot_rob" type="1abcf292:AndroidViewProjectNode" />
+              <item name="AntEye" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="imagemaipulations" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="NavigationModules" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="device.picker.selection" value="0529f340f0c9e4d6" />
+    <property name="android.profiler.active" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -8970,6 +8710,8 @@
   </component>
   <component name="RunManager" selected="Android App.AntEye">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" />
@@ -8979,23 +8721,22 @@
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
+      <envs />
       <patterns />
       <method>
-        <option name="Make" enabled="false" />
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AntEye" type="AndroidRunConfigurationType" factoryName="Android App">
+    <configuration name="AntEye" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="AntEye" />
       <option name="DEPLOY" value="true" />
-      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
@@ -9032,8 +8773,6 @@
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -9041,10 +8780,8 @@
     <configuration name="CombinerApp" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="CombinerApp" />
       <option name="DEPLOY" value="true" />
-      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
@@ -9081,8 +8818,6 @@
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -9090,10 +8825,8 @@
     <configuration name="PathIntegrationApp" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="PathIntegrationApp" />
       <option name="DEPLOY" value="true" />
-      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
@@ -9130,8 +8863,6 @@
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -9139,10 +8870,8 @@
     <configuration name="SerialCommunicationApp" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="SerialCommunicationApp" />
       <option name="DEPLOY" value="true" />
-      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
@@ -9179,8 +8908,6 @@
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -9188,10 +8915,8 @@
     <configuration name="VisualNavigationApp" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="VisualNavigationApp" />
       <option name="DEPLOY" value="true" />
-      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
@@ -9228,8 +8953,6 @@
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -9237,10 +8960,8 @@
     <configuration name="visualsandbox" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="visualsandbox" />
       <option name="DEPLOY" value="true" />
-      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
-      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="CLEAR_LOGCAT" value="false" />
@@ -9277,16 +8998,27 @@
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
-        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sampled (Java)" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
@@ -9299,12 +9031,15 @@
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
       </option>
       <option name="USE_DEFAULT_REPORTERS" value="false" />
       <option name="PROPERTIES_FILE" />
+      <envs />
       <properties />
       <listeners />
     </configuration>
@@ -9312,14 +9047,17 @@
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
     </configuration>
-    <list>
-      <item itemvalue="Android App.AntEye" />
-      <item itemvalue="Android App.CombinerApp" />
-      <item itemvalue="Android App.PathIntegrationApp" />
-      <item itemvalue="Android App.SerialCommunicationApp" />
-      <item itemvalue="Android App.VisualNavigationApp" />
-      <item itemvalue="Android App.visualsandbox" />
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="Android App.AntEye" />
+      <item index="1" class="java.lang.String" itemvalue="Android App.CombinerApp" />
+      <item index="2" class="java.lang.String" itemvalue="Android App.PathIntegrationApp" />
+      <item index="3" class="java.lang.String" itemvalue="Android App.SerialCommunicationApp" />
+      <item index="4" class="java.lang.String" itemvalue="Android App.VisualNavigationApp" />
+      <item index="5" class="java.lang.String" itemvalue="Android App.visualsandbox" />
     </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -9335,62 +9073,326 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-609" width="1096" height="1936" extended-state="6" />
+    <frame x="1862" y="-619" width="1368" height="713" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="0" />
-      <window_info id="Image Layers" order="0" />
-      <window_info id="Build Variants" order="1" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Logcat" order="7" />
-      <window_info id="Captures" order="6" weight="0.4527027" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info active="true" anchor="right" content_ui="combo" id="Project" order="9" visible="true" weight="0.08494209" />
-      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.13626252" />
-      <window_info anchor="right" id="Gradle" order="3" />
-      <window_info id="Structure" order="5" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Device File Explorer" order="5" side_tool="true" />
-      <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info id="Favorites" order="4" side_tool="true" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Assistant" order="2" weight="0.32985073" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2607204" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.83361924" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32933104" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24185249" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12651515" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.516295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32933104" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6588">
-          <caret line="366" lean-forward="true" selection-start-line="366" selection-end-line="366" />
+        <state relative-caret-position="4338">
+          <caret line="306" column="0" lean-forward="false" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadCode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        <state relative-caret-position="90">
+          <caret line="70" column="13" lean-forward="false" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/OldThreadCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="77" column="13" lean-forward="false" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="882">
+          <caret line="49" column="53" lean-forward="false" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4338">
-          <caret line="306" selection-start-line="306" selection-end-line="306" />
+          <caret line="306" column="0" lean-forward="false" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="70" column="13" lean-forward="false" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/OldThreadCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="77" column="13" lean-forward="false" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="882">
+          <caret line="49" column="53" lean-forward="false" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+          <folding>
+            <marker date="1539246844391" expanded="true" signature="132:142" ph="{" />
+            <marker date="1539246844391" expanded="true" signature="151:156" ph="}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6588">
+          <caret line="366" column="0" lean-forward="true" selection-start-line="366" selection-start-column="0" selection-end-line="366" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="19" column="5" lean-forward="false" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+          <folding>
+            <marker date="1539246844391" expanded="true" signature="132:142" ph="{" />
+            <marker date="1539246844391" expanded="true" signature="151:156" ph="}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Broadcast_Library/src/main/java/insectrobotics/broadcastlibrary/BroadcastValues.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="68" column="11" lean-forward="false" selection-start-line="68" selection-start-column="11" selection-end-line="68" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-627">
+          <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="49" column="53" lean-forward="false" selection-start-line="49" selection-start-column="53" selection-end-line="49" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Receiver_and_Broadcaster/Receive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-92">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="e#788#1707#0" expanded="false" />
+            <element signature="e#1706#1707#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Receiver_and_Broadcaster/Broadcast.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="41" column="14" lean-forward="false" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/LogToFileUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-482">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/WillshawModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivityOld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="93" column="24" lean-forward="true" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/NavigationModules/PreferencesManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1476">
+          <caret line="92" column="15" lean-forward="false" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/OldThreadCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="903" column="33" lean-forward="false" selection-start-line="903" selection-start-column="25" selection-end-line="903" selection-end-column="33" />
+          <folding>
+            <element signature="e#3055#3056#0" expanded="false" />
+            <element signature="e#3085#3086#0" expanded="false" />
+            <element signature="e#3112#13657#0" expanded="false" />
+            <element signature="e#4652#5364#0" expanded="false" />
+            <element signature="e#5363#5364#0" expanded="false" />
+            <element signature="e#11640#12584#0" expanded="false" />
+            <element signature="e#12583#12584#0" expanded="false" />
+            <element signature="e#13074#13552#0" expanded="false" />
+            <element signature="e#13551#13552#0" expanded="false" />
+            <element signature="e#13656#13657#0" expanded="false" />
+            <element signature="e#13684#24766#0" expanded="false" />
+            <element signature="e#15304#16016#0" expanded="false" />
+            <element signature="e#16015#16016#0" expanded="false" />
+            <element signature="e#22693#23750#0" expanded="false" />
+            <element signature="e#23749#23750#0" expanded="false" />
+            <element signature="e#24240#24661#0" expanded="false" />
+            <element signature="e#24660#24661#0" expanded="false" />
+            <element signature="e#24765#24766#0" expanded="false" />
+            <element signature="e#24801#35458#0" expanded="false" />
+            <element signature="e#26421#27103#0" expanded="false" />
+            <element signature="e#27102#27103#0" expanded="false" />
+            <element signature="e#33498#34508#0" expanded="false" />
+            <element signature="e#34507#34508#0" expanded="false" />
+            <element signature="e#34996#35353#0" expanded="false" />
+            <element signature="e#35352#35353#0" expanded="false" />
+            <element signature="e#35457#35458#0" expanded="false" />
+            <element signature="e#35551#35792#0" expanded="false" />
+            <element signature="e#35791#35792#0" expanded="false" />
+            <element signature="e#35890#44730#0" expanded="false" />
+            <element signature="e#39026#39785#0" expanded="false" />
+            <element signature="e#39784#39785#0" expanded="false" />
+            <element signature="e#44175#44441#0" expanded="false" />
+            <element signature="e#44440#44441#0" expanded="false" />
+            <element signature="e#44729#44730#0" expanded="false" />
+            <element signature="e#44767#47464#0" expanded="false" />
+            <element signature="e#47463#47464#0" expanded="false" />
+            <element signature="e#47497#53939#0" expanded="false" />
+            <element signature="e#52034#52982#0" expanded="false" />
+            <element signature="e#52981#52982#0" expanded="false" />
+            <element signature="e#53473#53834#0" expanded="false" />
+            <element signature="e#53833#53834#0" expanded="false" />
+            <element signature="e#53938#53939#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-577">
+          <caret line="476" column="66" lean-forward="false" selection-start-line="476" selection-start-column="66" selection-end-line="476" selection-end-column="66" />
+          <folding>
+            <element signature="e#2683#2684#0" expanded="false" />
+            <element signature="e#2713#2714#0" expanded="false" />
+            <element signature="e#9178#9923#0" expanded="false" />
+            <element signature="e#9922#9923#0" expanded="false" />
+            <element signature="e#14808#15197#0" expanded="false" />
+            <element signature="e#15196#15197#0" expanded="false" />
+            <element signature="e#25071#25350#0" expanded="false" />
+            <element signature="e#25349#25350#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX_MB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="105" column="13" lean-forward="false" selection-start-line="105" selection-start-column="13" selection-end-line="105" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVLibrary300/src/main/java/org/opencv/android/CameraBridgeViewBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1430">
+          <caret line="114" column="42" lean-forward="false" selection-start-line="114" selection-start-column="21" selection-end-line="114" selection-end-column="42" />
+          <folding>
+            <element signature="e#9173#9174#0" expanded="true" />
+            <element signature="e#9209#9210#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="472" column="10" lean-forward="false" selection-start-line="472" selection-start-column="10" selection-end-line="472" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

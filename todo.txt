@@ -1,4 +1,13 @@
 Todo file for 2018:
+15 / 10 / 18:
+Todo:
+- Establish a way of retrieving encoder information from the arduino
+- Check the robot actually works after all the software stuf.
+
+11 / 10 / 18:
+Notes:
+- May need to move CX representation into its own class. Network updates
+  could be done using functions.
 10 / 10 / 18:
 Notes:
 - Project has been upticked. Android Studio on the laptop should be updated

@@ -27,7 +27,7 @@ public class WillshawModule extends NavigationModules {
     public WillshawModule() { //Willshaw constructor
         super(); //Call super
         willshawConnectionArray = new int[20000][10]; // Connection array, 20,000 KCs each with input from 10 random vPNs
-        Log.e(TAG, "Constructor Called");
+        Log.i(TAG, "Constructor Called");
         LogToFileUtils.write("Willshaw Module Constructor Called");
     }
 
