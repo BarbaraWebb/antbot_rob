@@ -3,12 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="/home/robert/.android/build-cache/19d674045fd335bf1846468f4f8c56a51756b295/output/jars/classes.jar"
+        jar="/home/robert/.android/build-cache/77af8f5c490570bf41206767a76ad90bcea27681/output/jars/libs/internal_impl-23.0.1.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_5802550fd815030d568a38a0b66e56d2731bfeac.jar" />
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_c6e3a72e6d0aa9ff04e6e9d2c8fa88238e5ef237.jar" />
     </item>
     <item
         is-multidex="false"
@@ -25,17 +25,8 @@
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="d0fa85845a53d8f98a032827f0bf62a9c231fb13">
+        sha1="bf8ae107b33b7fc206b26745b084521b5f9b804a">
         <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_92a075605c1939c0afb8bc1151b18ca22a80abc7.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/robert/.android/build-cache/9033a5d7a4685b20e4c3bba22f2fcd307e684cbe/output/jars/libs/internal_impl-23.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_1abc6935e7ecab94947deffbd055e510996b1b2b.jar" />
     </item>
     <item
         is-multidex="false"
@@ -52,7 +43,7 @@
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="572fab94e9fa31b7f97cb68db4b0b468bfb9deb3">
+        sha1="30188882ef280962379967435a529039ef0c2102">
         <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_878015f64d1e2dfd76ea9adbf3d0b0d90480dff1.jar" />
     </item>
     <item
@@ -93,12 +84,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/home/robert/.android/build-cache/9033a5d7a4685b20e4c3bba22f2fcd307e684cbe/output/jars/classes.jar"
+        jar="/home/robert/.android/build-cache/9ba1c5f8027d2b7a2b96956ce76f809dbd9231d4/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_59a7eb9aa000c318320dd8fee1f4842aa70e0a84.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/robert/.android/build-cache/77af8f5c490570bf41206767a76ad90bcea27681/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_106fac4a56e2f3dba98f63a0aeef9d39681d7cbf.jar" />
+        <dex dex="/home/robert/Uni/Project/antbot_rob/AntEye/build/intermediates/pre-dexed/debug/classes_80afba28fac34624b6aac0d7ffce6f62b5338024.jar" />
     </item>
     <item
         is-multidex="false"

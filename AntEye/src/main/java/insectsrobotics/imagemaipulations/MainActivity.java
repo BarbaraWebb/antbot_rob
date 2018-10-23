@@ -89,6 +89,7 @@ import static org.opencv.video.Video.calcOpticalFlowPyrLK;
 //to make the code more readable, it does not mean that I wrote the code there.
 
 public class MainActivity extends Activity implements CvCameraViewListener2 , BroadcastValues, SensorEventListener{
+    float global_x, global_y, global_z;
     private static final String TAG = "OCVSample::Activity";
     boolean opticCheck = false;
     public Mat processedSourceImage;
@@ -122,11 +123,11 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     // ----- CX variables ------
     int startTime;
     float frame_rate_cx = 0;
-    private double currentDegree = 0.;
-    private double CXnewHeading;
-    private double CXtheta;
-    private double CXmotor = 0;
-    private double CXmotorChange = 0.5;
+    public double currentDegree = 0.;
+    public double CXnewHeading;
+    public double CXtheta;
+    public double CXmotor = 0;
+    public double CXmotorChange = 0.5;
     double ANT_SPEED = 1.;
     SimpleMatrix holonominc_speed = new SimpleMatrix(new double[][] {{1.},{1.}});
     private SensorManager mSensorManager;
@@ -309,6 +310,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     //Single thread will be used for both runnables: Detection and avoidance
     Thread opticalFlowThread; //Bot will detect obstacle and try to navigate it
+    CombinedThread combiner;
 
     Mat global_foe;
     Mat sample_foe; //NOT TRUE FOE, DO NOT USE FOR CALCS, used to store summed FOE x and y for mean FOE
@@ -591,6 +593,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         StatFileUtils.init(this.getApplicationContext()); //Statistical log file
         StatFileUtils.write("new", "new", "new"); //Add comments to delimit the instances of MainActivity in the stats file
 
+        //Initialise the combiner module
+        combiner = new CombinedThread(this);
+
         try {
             FileOutputStream f = new FileOutputStream(file);
             f.write(("Measurements: " + "\n").getBytes());
@@ -643,6 +648,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         float y = event.values[1];
         float z = event.values[2];
         float w = event.values[3];
+
+        global_x = x;
+        global_y = y;
+        global_z = z;
 
 
         double ysqr = y * y;
@@ -1042,7 +1051,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             if(selectedModule==0){
                 // Uncomment to start recular CX (one speed input)
                 //obstacleAvoid=new Thread(CXthread);
-                // Uncomment to start Holonomic CX (two speed inputs)
+                // Uncomment to start Holonomic CS(two speed inputs)
                 obstacleAvoid=new Thread(CXHolonomicThread);
                 obstacleAvoid.start();
             }else if (selectedModule == 1){ //If selected module is for visual navigation
@@ -1106,7 +1115,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 switch(opticalFlowModule){
                     case OF_DETECT:
                         Log.i("OF: ", "Thread started");
-                        opticalFlowThread = new Thread(opticalFlowDetection);
+                        opticalFlowThread = new Thread(combiner.sequentialThread);
                         opticalFlowThread.start();
                         break;
                     case OF_AVOID:
@@ -1277,35 +1286,16 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //Convert resource into test thread for basic algorithms
         @Override
         public void run() {
-            String tag = "OFTST";
+            String tag = "TEST";
             String output = "";
-            Mat ident = Mat.eye(3, 3, CvType.CV_8UC1);
-            output = "3x3 Identity: \n" + ident.dump();
 
-            Log.e(tag, output);
-            rotateMatInAzimuth(1, ident);
-            output = "3x3 rotated: \n" + ident.dump();
-            Log.e(tag, output);
+            int t0 = (int) SystemClock.elapsedRealtime();
+            int t = (int) SystemClock.elapsedRealtime() - t0;
 
-            rotateMatInAzimuth(1, ident);
-            output = "3x3 rotated: \n" + ident.dump();
-            Log.e(tag, output);
-
-            rotateMatInAzimuth(1, ident);
-            output = "3x3 rotated: \n" + ident.dump();
-            Log.e(tag, output);
-
-            rotateMatInAzimuth(-1, ident);
-            output = "3x3 rotated: \n" + ident.dump();
-            Log.e(tag, output);
-
-            rotateMatInAzimuth(-1, ident);
-            output = "3x3 rotated: \n" + ident.dump();
-            Log.e(tag, output);
-
-            rotateMatInAzimuth(-1, ident);
-            output = "3x3 rotated: \n" + ident.dump();
-            Log.e(tag, output);
+            while(t < 40000) {
+                output = "[ (X, " + global_x + ") ]";
+                Log.i(tag, output);
+            }
         }
     };
           /*
@@ -2489,6 +2479,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             Boolean algorithm_not_setted = true;
 
+            //
+            // Image storage lock mechanism
+            //
             while (algorithm_not_setted){
                 if (images_access){
                     new_image = new SaveImages();
@@ -4517,6 +4510,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
     };
 
+
+
     /**
      * The broadcast of the image takes place in a different thread so we have a proper running UI
      */
@@ -4538,7 +4533,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
     }
 
-    private class SaveImages extends AsyncTask<Object, Integer, Boolean> {
+    public class SaveImages extends AsyncTask<Object, Integer, Boolean> {
 
         @Override
         protected Boolean doInBackground(Object... transmission) {
@@ -4549,7 +4544,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             matImage.get(0, 0, imageArray_tmp);
 
             //imageArray_tmp = rotateMatInAzimuth(0, matImage); //For curiosity
-            revArray_tmp = rotateMatInAzimuth(45, matImage); //Array of reverse image (for homeward route)
+            revArray_tmp = rotateMatInAzimuth(45, matImage); //Array of rotated image (for homeward route)
 
             int[] imageArray = new int[imageArray_tmp.length];
             int[] revImageArray = new int[imageArray_tmp.length];
@@ -4561,7 +4556,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
             //model.onNewImage... for Zhaoyu's code
             mushroom_body.onNewImage(imageArray, (int) transmission[1]); //Learn image,
-            mushroom_body.onNewImage(revImageArray, (int) transmission[1]); //Learn reversed image
+            mushroom_body.onNewImage(revImageArray, (int) transmission[1]); //Learn rotated image
             //StatFileUtils.write("SI", "MB", "Image: " + image_string);
             // LogToFileUtils.write("IMAGE: " + image_string);
             // LogToFileUtils.write("REQUEST CODE: " + (int) transmission[1]);
