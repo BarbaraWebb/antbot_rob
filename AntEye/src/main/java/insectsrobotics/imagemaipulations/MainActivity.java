@@ -341,6 +341,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     WillshawModule mushroom_body;
     RealWillshawModule real_mushroom_body;
 
+
     //Initiate all ServiceConnections for all Background Services
     ServiceConnection visualNavigationServiceConnection = new ServiceConnection() {
         @Override
@@ -2040,7 +2041,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                             int rotation = 2 * (i - 8);
                             Log.e("NM", "Image rotation: " + rotation);
 
-                            byte[] imageArray_tmp = rotateMatInAzimuth(rotation, matImage); //Commented to check correctness -
+                            byte[] imageArray_tmp = Util.rotateMatInAzimuth(rotation, matImage); //Commented to check correctness -
                             int[] imageArray = new int[imageArray_tmp.length];
                             for (int n = 0; n < imageArray_tmp.length; n++) {
                                 imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
@@ -2215,7 +2216,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 LogToFileUtils.write(unfarmiliarity_distribution+'\n');
 
-                min_index = getMinIndex(familarity_array);
+                min_index = Util.getMinIndex(familarity_array);
 
                 LogToFileUtils.write("Seleted index: " + min_index + "\n");
 
@@ -2292,50 +2293,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     };
 
 
-    byte[] rotateMatInAzimuth( int pixels, Mat image_in ) {
-        String tag = "OFTST";
-        String output = "";
 
-        //IMPORTANT: need to copy the image so we don't modify the original, they're referenced
-        //unlike everything else in Java.
-        Mat image = new Mat(image_in.rows(), image_in.cols(), image_in.type());
-        image_in.copyTo(image);
-
-        byte[] byte_image_array = new byte[image.rows() * image.cols()];
-
-        //Rotate matrix using a temporary matrix to store the rotated columns
-        if ( pixels > 0 ) {
-
-            for ( int j = 0; j < pixels; ++j ) {
-                Mat first = new Mat(image.rows(), 1, CvType.CV_8UC1);
-                Mat tmp = new Mat(image.rows(), 1, CvType.CV_8UC1);
-                image.col(0).copyTo(first);
-                for ( int i = 1; i < image.cols(); ++i ) {
-                    image.col(i).copyTo(image.col(i - 1));
-                }
-                first.copyTo( image.col(image.cols() - 1) );
-            }
-
-
-        } else if ( pixels < 0 ){
-            //Negative pixel reading, right rotation
-
-            for ( int j = 0; j < Math.abs(pixels); ++j ) {
-                Mat last = new Mat(image.rows(), 1, CvType.CV_8UC1);
-                Mat tmp = new Mat(image.rows(), 1, CvType.CV_8UC1);
-                image.col( image.cols() - 1 ).copyTo(last);
-                for ( int i = image.cols() - 2; i >= 0; --i ) {
-                    image.col(i).copyTo(image.col(i + 1));
-                }
-                last.copyTo( image.col(0) );
-            }
-
-        }
-
-        image.get(0, 0, byte_image_array);  //get byte array from rotated image
-
-        return byte_image_array;
-    }
 
     // Monitoring time to stop outbound PI and start Inbound
     Runnable startInbound = new Runnable() {
@@ -2440,7 +2398,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                     t0 = (int) SystemClock.elapsedRealtime();
                     Log.d(TAG, "facing " + currentDegree + ", going " + direction);
-                    Log.d(TAG, printMemory(memory));
+                    Log.d(TAG, Util.printMemory(memory));
                 }
                 // updates in memory structure as we move which will allow return to nest
                 //------   COMPASS UPDATE  -----
@@ -2455,7 +2413,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 // ----- TURNING GENERATION ------
                 cpu1 = c.cpu1Output(tb1, cpu4);
                 CXmotor = c.motorOutput(cpu1);
-                writeToFile(memory, leftCXFlow, rightCXFlow, "run_1");
+                Util.writeToFile(memory, leftCXFlow, rightCXFlow, "run_1", frame_rate_cx, CURRiteration, CXnewHeading);
                 currentTime = (int) SystemClock.elapsedRealtime()-startTime;
             }
 
@@ -2516,7 +2474,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 // ----- TURNING GENERATION ------
                 cpu1 = c.cpu1Output(tb1, cpu4);
                 CXmotor = c.motorOutput(cpu1);
-                writeToFile(memory, leftCXFlow, rightCXFlow, "run_1");
+                Util.writeToFile(memory, leftCXFlow, rightCXFlow, "run_1",frame_rate_cx, CURRiteration, CXnewHeading);
 
                 // ----- ANTBOT DRIVING--------
                 CXnewHeading = Math.toDegrees(Math.toRadians(currentDegree) - CXmotorChange * CXmotor);
@@ -2541,7 +2499,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     }
                     Log.d(TAG, "facing " + currentDegree + ", going " + direction + "\nwant to go to " + CXnewHeading);
                     t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, printMemory(memory));
+                    Log.d(TAG, Util.printMemory(memory));
                 }
 
                 try {
@@ -2567,7 +2525,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if(isHome(memory)) break;
+                if(Util.isHome(memory)) break;
                 currentTime = (int) SystemClock.elapsedRealtime() - startTime;
             }
 
@@ -2688,7 +2646,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                     t0 = (int) SystemClock.elapsedRealtime();
                     Log.d(TAG, "facing " + currentDegree + ", going " + direction);
-                    Log.d(TAG, printMemory(memory));
+                    Log.d(TAG, Util.printMemory(memory));
                 }
                 // updates in memory structure as we move which will allow return to nest
                 //------   COMPASS UPDATE  -----
@@ -2709,7 +2667,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 // ----- TURNING GENERATION ------
                 cpu1 = cxmb.cpu1Output(tb1, cpu4, en, true);
                 CXmotor = cxmb.motorOutput(cpu1);
-                writeToFile(memory, leftCXFlow, rightCXFlow, "run_1");
+                Util.writeToFile(memory, leftCXFlow, rightCXFlow, "run_1", frame_rate_cx, CURRiteration, CXnewHeading);
                 currentTime = (int) SystemClock.elapsedRealtime()-startTime;
             }
 
@@ -2769,7 +2727,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 // ----- TURNING GENERATION ------
                 cpu1 = cxmb.cpu1Output(tb1, cpu4, en, true);
                 CXmotor = cxmb.motorOutput(cpu1);
-                writeToFile(memory, leftCXFlow, rightCXFlow, "run_1");
+                Util.writeToFile(memory, leftCXFlow, rightCXFlow, "run_1",frame_rate_cx, CURRiteration, CXnewHeading);
 
                 // ----- ANTBOT DRIVING--------
                 CXnewHeading = Math.toDegrees(Math.toRadians(currentDegree) - CXmotorChange * CXmotor);
@@ -2794,7 +2752,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     }
                     Log.d(TAG, "facing " + currentDegree + ", going " + direction + "\nwant to go to " + CXnewHeading);
                     t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, printMemory(memory));
+                    Log.d(TAG, Util.printMemory(memory));
                 }
 
                 try {
@@ -2821,7 +2779,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if(isHome(memory)) break;
+                if(Util.isHome(memory)) break;
                 currentTime = (int) SystemClock.elapsedRealtime() - startTime;
             }
 
@@ -2940,7 +2898,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 }
                 t0 = (int) SystemClock.elapsedRealtime();
                 Log.d(TAG, "facing " + currentDegree + ", going " + direction);
-                Log.d(TAG, printMemory(memory));
+                Log.d(TAG, Util.printMemory(memory));
                 // updates in memory structure as we move which will allow return to nest
                 //------   COMPASS UPDATE  -----
                 tl2 = c.tl2Output(Math.toRadians(currentDegree));
@@ -2960,7 +2918,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 cpu1 = c.cpu1Output(tb1, cpu4);
                 CXmotor = c.motorOutput(cpu1);
                 currentTime = (int) SystemClock.elapsedRealtime()-startTime;
-                writeToFile(memory, leftCXFlow, rightCXFlow, "run");
+                Util.writeToFile(memory, leftCXFlow, rightCXFlow, "run",frame_rate_cx, CURRiteration, CXnewHeading);
             }
 
             // offset turn, to allow network to redirect antbot
@@ -3008,7 +2966,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 // ----- TURNING GENERATION ------
                 cpu1 = c.cpu1Output(tb1, cpu4);
                 CXmotor = c.motorOutput(cpu1);
-                writeToFile(memory, leftCXFlow, rightCXFlow,  "run");
+                Util.writeToFile(memory, leftCXFlow, rightCXFlow,  "run",frame_rate_cx, CURRiteration, CXnewHeading);
 
                 // ----- ANTBOT DRIVING--------
 
@@ -3040,7 +2998,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     }
                     Log.d(TAG, "facing " + currentDegree + ", going " + direction + "\nwant to go to " + CXnewHeading);
                     t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, printMemory(memory));
+                    Log.d(TAG, Util.printMemory(memory));
                 }
 
                 try {
@@ -3256,13 +3214,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     // If the current point has moved far enough between the two frames we can
                     // compute a flow vector (+12 is for left side offset)
                     if (Math.abs(
-                            mod((int) currentPointsToTrack.get(i, j)[0] + 12, 90)
-                            - mod((int) prevPointsToTrack.get(i, j)[0] + 12, 90))
+                            Util.mod((int) currentPointsToTrack.get(i, j)[0] + 12, 90)
+                            - Util.mod((int) prevPointsToTrack.get(i, j)[0] + 12, 90))
                             < 70){
 
                         //Compute previous and current flow vectors
-                        current_left_flow_vector = new double[]{mod((int) currentPointsToTrack.get(i, j)[0] + 12, 90), (int) currentPointsToTrack.get(i, j)[1]};
-                        previous_left_flow_vector = new double[]{mod((int) prevPointsToTrack.get(i, j)[0] + 12, 90), (int) prevPointsToTrack.get(i, j)[1]};
+                        current_left_flow_vector = new double[]{Util.mod((int) currentPointsToTrack.get(i, j)[0] + 12, 90), (int) currentPointsToTrack.get(i, j)[1]};
+                        previous_left_flow_vector = new double[]{Util.mod((int) prevPointsToTrack.get(i, j)[0] + 12, 90), (int) prevPointsToTrack.get(i, j)[1]};
 
                         //   print arrows on debugFlowImage image - DEBUG
                         org.opencv.core.Point pt1_left = new org.opencv.core.Point(
@@ -3291,13 +3249,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     // Again, compute the difference between the x coordinates to see if we have
                     // enough info to form an informative flow vector
                     if (Math.abs(
-                            mod((int) currentPointsToTrack.get(i, j)[0] - 12, 90)
-                            - mod((int) prevPointsToTrack.get(i, j)[0] - 12, 90))
+                            Util.mod((int) currentPointsToTrack.get(i, j)[0] - 12, 90)
+                            - Util.mod((int) prevPointsToTrack.get(i, j)[0] - 12, 90))
                             < 70){
 
                         //Compute current and previous point vectors
-                        double[] current_right_flow_vector = {mod((int) currentPointsToTrack.get(i, j)[0] - 12, 90), (int) currentPointsToTrack.get(i, j)[1]};
-                        double[] previous_right_flow_vector = {mod((int) prevPointsToTrack.get(i, j)[0] - 12, 90), (int) prevPointsToTrack.get(i, j)[1]};
+                        double[] current_right_flow_vector = {Util.mod((int) currentPointsToTrack.get(i, j)[0] - 12, 90), (int) currentPointsToTrack.get(i, j)[1]};
+                        double[] previous_right_flow_vector = {Util.mod((int) prevPointsToTrack.get(i, j)[0] - 12, 90), (int) prevPointsToTrack.get(i, j)[1]};
 
                         //   print arrows on debugFlowImage image - DEBUG
                         org.opencv.core.Point pt1_right = new org.opencv.core.Point(
@@ -3370,9 +3328,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 // ------------------- compute left flow --------------------
                 //-----------------------------------------------------------
 
-                current_left_flow_vector = new double[]{mod((int) currentPointsToTrack.get(y, x)[0] + x + 12, 90),
-                                                        mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)};
-                previous_left_flow_vector = new double[]{mod(x + 12, 90), y};
+                current_left_flow_vector = new double[]{Util.mod((int) currentPointsToTrack.get(y, x)[0] + x + 12, 90),
+                                                        Util.mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)};
+                previous_left_flow_vector = new double[]{Util.mod(x + 12, 90), y};
 
                 if (Math.abs(previous_left_flow_vector[0] - current_left_flow_vector[0]) < 70) {
                     //   print arrows on debugFlowImage image - DEBUG
@@ -3402,9 +3360,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 // ------------------- compute right flow --------------------
                 //-----------------------------------------------------------
 
-                current_right_flow_vector = new double[] {mod((int) currentPointsToTrack.get(y, x)[0] + x - 12, 90),
-                                                          mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)};
-                previous_right_flow_vector = new double[] {mod(x - 12, 90), y};
+                current_right_flow_vector = new double[] {Util.mod((int) currentPointsToTrack.get(y, x)[0] + x - 12, 90),
+                                                          Util.mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)};
+                previous_right_flow_vector = new double[] {Util.mod(x - 12, 90), y};
 
                 if (previous_right_flow_vector[0] - current_right_flow_vector[0] < 70) {
                     //   print arrows on debugFlowImage image - DEBUG
@@ -3471,9 +3429,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 //+-4 is the left/right offset for the flow frame; e.g. -4 centres the frame at -16deg.
                 //The narrower this is, the closer we are to considering the original flow filter.
                 //So this may effectively act as our rather than the raw pixel values.
-                previous_left_flow_vector = new double[]{mod(x + offset, 90), y}; //((x+12), y)
-                current_left_flow_vector = new double[]{mod((int) currentPointsToTrack.get(y, x)[0] + x + offset, 90),
-                        mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)}; //Flow info returned by farneback
+                previous_left_flow_vector = new double[]{Util.mod(x + offset, 90), y}; //((x+12), y)
+                current_left_flow_vector = new double[]{Util.mod((int) currentPointsToTrack.get(y, x)[0] + x + offset, 90),
+                        Util.mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)}; //Flow info returned by farneback
 
                 if ( (x >= 40) || (x < 50) ) { 
                     left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]);
@@ -3486,9 +3444,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     left_flow_sum += left_filter_vector.dot(flow_vector); //Filter and sum
                 }
                 //Compute right flow vector
-                previous_right_flow_vector = new double[] { mod(x - offset, 90), y };
-                current_right_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x - offset, 90),
-                        mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
+                previous_right_flow_vector = new double[] { Util.mod(x - offset, 90), y };
+                current_right_flow_vector = new double[] { Util.mod((int) currentPointsToTrack.get(y,x)[0] + x - offset, 90),
+                        Util.mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
 
                 if ( (x >= 40) || (x < 50) ) {
                     right_filter_vector = right_filter.row((int) previous_right_flow_vector[0]); //Vector for x + 12 mod 90
@@ -3703,8 +3661,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 float x = (float) j; //Math.abs( mod( (int) prevPointsToTrack.get(i,j)[0], 90));
                 float y = (float) i; //Math.abs( mod( (int) prevPointsToTrack.get(i,j)[1], 90));
                 //New location of the pixel from Farneback flow
-                float u = mod((int) (currentPointsToTrack.get(i, j)[0] + x), 90); //New x position of the pixel
-                float v = mod((int) (currentPointsToTrack.get(i, j)[1] + y), 10); //New y position of the pixel
+                float u = Util.mod((int) (currentPointsToTrack.get(i, j)[0] + x), 90); //New x position of the pixel
+                float v = Util.mod((int) (currentPointsToTrack.get(i, j)[1] + y), 10); //New y position of the pixel
 
                 //Used these for sparse flow
                 //float[] u =  {Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[0], 90)) + (int) x)};
@@ -3955,84 +3913,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     }
 
-    private int mod(int x, int y)
-    {
-        int result = x % y;
-        return result < 0 ? result + y : result;
-    }
-
-    private void writeToFile(SimpleMatrix memory, double left_speed, double right_speed, String filename) {
-
-        File sd = new File(Environment.getExternalStorageDirectory(),"/DCIM/");
-        filename += ".txt";
-        File dest = new File(sd, filename);
-        try {
-            FileOutputStream stream = new FileOutputStream(dest, true);
-            String logging_info = get_logging_data(memory, left_speed, right_speed);
-            stream.write(logging_info.getBytes());
-            stream.flush();
-            stream.close();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    private String get_logging_data(SimpleMatrix memory, double left_speed, double right_speed) {
-        int time = (int) SystemClock.elapsedRealtime();
-        return  ""+myFormat(frame_rate_cx)+" || "+myFormat(CURRiteration)+" || "+
-                ""+myFormat(currentDegree)+" || "+myFormat(time/1000)+" || "+
-                ""+myFormat(left_speed)+"|"+ myFormat(right_speed)+" || "+
-                ""+myFormat(memory.get(0))+","+myFormat(memory.get(8))+"|" +
-                ""+myFormat(memory.get(7))+","+myFormat(memory.get(15))+"|" +
-                ""+myFormat(memory.get(6))+","+myFormat(memory.get(14))+"|" +
-                ""+myFormat(memory.get(5))+","+myFormat(memory.get(13))+"|" +
-                ""+myFormat(memory.get(4))+","+myFormat(memory.get(12))+"|" +
-                ""+myFormat(memory.get(3))+","+myFormat(memory.get(11))+"|" +
-                ""+myFormat(memory.get(2))+","+myFormat(memory.get(10))+"|" +
-                ""+myFormat(memory.get(1))+","+myFormat(memory.get(9))+"\n";
-    }
-
-    private String myFormat(float num){
-        if (num< 0) return String.format("%02.4f", num);
-        else return " "+String.format("%02.4f", num);
-    }
-
-    private String myFormat(double num){
-        if (num< 0) return String.format("%02.4f", num);
-        else return " "+String.format("%02.4f", num);
-    }
-
-    private String myformat(int num){
-        if (num< 0) return String.format("%5d", num);
-        else return " "+String.format("%5d", num);
-    }
-
-
-    private boolean isHome(SimpleMatrix memory){
-        int time = (int) SystemClock.elapsedRealtime();
-        int count = 0;
-        for(int i=0; i< 16; i++){
-            if (Math.abs(memory.get(i) - 0.5) < 0.01){
-                count ++;
-            }
-        }
-        return count>14 & time>45000;
-    }
-
-
-    static String printMemory(SimpleMatrix memory){
-        return  "                "+memory.get(0) +"\n"+
-                "                "+memory.get(8)+"\n"+
-                "      "+memory.get(1)+"     "+memory.get(7)+"\n"+
-                "      "+memory.get(9)+"     "+memory.get(15)+"\n"+
-                memory.get(2)+"             "+memory.get(6)+"\n"+
-                memory.get(10)+"             "+memory.get(14)+"\n"+
-                "      "+memory.get(3)+"     "+memory.get(5)+"\n"+
-                "      "+memory.get(11)+"     "+memory.get(13)+"\n"+
-                "                "+memory.get(4)+"\n"+
-                "                "+memory.get(12);
-    }
-
     private int log(File file, String output) { //Function to log information to an output file;
         //Note to whoever inherits this monstrous code: This function does work but its deprecated
         //You should instead use LogToFileUtils; StatFileUtils (see guide or contact me for formatting
@@ -4071,45 +3951,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         }
     };
-
-    public static int getMinIndex(double[] arr){
-        double minNum = arr[0];
-        int flag = 0;
-        for(int i = 0; i < arr.length; i++){
-            if(arr[i] < minNum){
-                minNum = arr[i];
-                flag = i;
-            }
-        }
-        return flag;
-    }
-
-    public static int getMinIndexNotZero(double[] arr){
-        double minNum = arr[0];
-        int flag = 0;
-        for(int i = 0; i < arr.length; i++){
-
-            if(arr[i] < minNum && arr[i] != 0){
-                minNum = arr[i];
-                flag = i;
-            } else if ( minNum == 0 ) { //If it's been initialised to 0, then take the first value
-                minNum = arr[i];
-                flag = i;
-            }
-        }
-        return flag;
-    }
-    public static int getMaxIndex(double[] arr) {
-        double max = 0;
-        int index = 0;
-        for ( int i = 0; i < arr.length; ++i ){
-            if ( arr[i] > max ) {
-                index = i;
-                max = arr[i];
-            }
-        }
-        return index;
-    }
 
     public int getAvgMinIndex(double[] arr) {
         //In unfamiliarity distributions, there can be a lot of 0 values; rather than
@@ -4191,7 +4032,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 LogToFileUtils.write(unfarmiliarity_distribution+'\n');
 
-                min_index = getMinIndex(familarity_array);
+                min_index = Util.getMinIndex(familarity_array);
 
                 LogToFileUtils.write("Seleted index: " + min_index + "\n");
 
@@ -4371,7 +4212,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 cpu1 = cxmb.cpu1Output(tb1, cpu4, en, false);
                 //cpu1 = cxmb.cpu1EnOutput(tb1, en);
                 CXmotor = cxmb.motorOutput(cpu1);
-                //writeToFile(memory, leftCXFlow, rightCXFlow, "run_1");
+                //Util.writeToFile(memory, leftCXFlow, rightCXFlow, "run_1");
 
                 // ----- ANTBOT DRIVING--------
                 CXnewHeading = Math.toDegrees(Math.toRadians(currentDegree) - CXmotorChange * CXmotor);
@@ -4396,7 +4237,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     }
                     Log.d(TAG, "facing " + currentDegree + ", going " + direction + "\nwant to go to " + CXnewHeading);
                     t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, printMemory(memory));
+                    Log.d(TAG, Util.printMemory(memory));
                 }
 
                 try {
@@ -4422,7 +4263,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (isHome(memory)) break;
+                if (Util.isHome(memory)) break;
                 currentTime = (int) SystemClock.elapsedRealtime() - startTime;
             }
 
@@ -4494,7 +4335,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 Log.i(flowTag,"start with list "+(n+1));
                 Mat temp=new Mat();
                 for(int i=0;i<360;i=i+4){
-                    temp=rotateImage(imageToDisplay, i);
+                    temp=Util.rotateImage(imageToDisplay, i);
                 }
                 Log.i(flowTag,"Done with list "+(n+1));
                 try {
@@ -4544,7 +4385,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             matImage.get(0, 0, imageArray_tmp);
 
             //imageArray_tmp = rotateMatInAzimuth(0, matImage); //For curiosity
-            revArray_tmp = rotateMatInAzimuth(45, matImage); //Array of rotated image (for homeward route)
+            revArray_tmp = Util.rotateMatInAzimuth(45, matImage); //Array of rotated image (for homeward route)
 
             int[] imageArray = new int[imageArray_tmp.length];
             int[] revImageArray = new int[imageArray_tmp.length];
