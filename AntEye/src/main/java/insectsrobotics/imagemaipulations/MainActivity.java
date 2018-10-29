@@ -71,6 +71,7 @@ import insectsrobotics.imagemaipulations.Receiver_and_Broadcaster.Receive;
 import insectsrobotics.imagemaipulations.NavigationModules.WillshawModule;
 import insectsrobotics.imagemaipulations.NavigationModules.RealWillshawModule;
 import insectsrobotics.imagemaipulations.NavigationModules.PerfectMemoryModule;
+import insectsrobotics.imagemaipulations.ThreadArchive.*;
 
 import static java.lang.Thread.sleep;
 import static org.opencv.imgproc.Imgproc.COLOR_BayerRG2RGB_EA;
@@ -89,6 +90,14 @@ import static org.opencv.video.Video.calcOpticalFlowPyrLK;
 //to make the code more readable, it does not mean that I wrote the code there.
 
 public class MainActivity extends Activity implements CvCameraViewListener2 , BroadcastValues, SensorEventListener{
+    //
+    // Thread libs; initialised in onCreate
+    //
+    CentralComplexThreads CXT;
+    MushroomBodyThreads MBT;
+    OldNavThreads ONT;
+    OpticFlowThreads OFT;
+
     float global_x, global_y, global_z;
     private static final String TAG = "OCVSample::Activity";
     boolean opticCheck = false;
