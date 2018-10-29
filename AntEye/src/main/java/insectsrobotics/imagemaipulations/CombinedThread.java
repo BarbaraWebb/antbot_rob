@@ -103,7 +103,7 @@ public class CombinedThread {
                     //
                     if (motorReset) {
                         motorReset = false;
-                        app.go(new double[]{leftSpeed, rightSpeed});
+                        Command.go(new double[]{leftSpeed, rightSpeed});
                         try {
                             sleep(1000);
                         } catch (Exception e) {
@@ -148,7 +148,7 @@ public class CombinedThread {
                         turnAngle = (leftAccumulator > rightAccumulator) ? 20 : -20;
 
                         // Halt the robot
-                        app.go(new double[]{0, 0});
+                        Command.go(new double[]{0, 0});
 
                         //
                         // Update distance information
@@ -193,7 +193,7 @@ public class CombinedThread {
                         // Perform the avoidance turn
                         //
                         try {
-                            app.turnAround(turnAngle);
+                            Command.turnAround(turnAngle);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -206,7 +206,7 @@ public class CombinedThread {
                 //
                 // Make sure the robot is completely stopped
                 //
-                app.go(new double[]{0, 0});
+                Command.go(new double[]{0, 0});
                 try {
                     sleep(1000);
                 } catch (Exception e) {
@@ -268,7 +268,7 @@ public class CombinedThread {
                 // Generate motor commands
                 //
                 try {
-                    app.turnAround(app.CXtheta);
+                    Command.turnAround(app.CXtheta);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -289,7 +289,7 @@ public class CombinedThread {
                     //
                     if (motorReset) {
                         motorReset = false;
-                        app.go(new double[]{leftSpeed, rightSpeed});
+                        Command.go(new double[]{leftSpeed, rightSpeed});
                         try {
                             sleep(1000);
                         } catch (Exception e) {
@@ -326,7 +326,7 @@ public class CombinedThread {
                         distance = (interval / 1000) * averageIntervalSpeed; // D = VT
                         measurementCounter = 0; // Reset counter
 
-                        app.go(new double[] {0, 0});
+                        Command.go(new double[] {0, 0});
                         try { sleep(1000); } catch (Exception e) { e.printStackTrace(); }
 
                         //
@@ -358,7 +358,7 @@ public class CombinedThread {
                         // Generate motor commands
                         //
                         try {
-                            app.turnAround(app.CXtheta);
+                            Command.turnAround(app.CXtheta);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

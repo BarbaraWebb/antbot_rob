@@ -482,7 +482,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             switch (action){
                 case TURN_AE_DATA:
                     try {
-                        turnAround(intent.getDoubleExtra("MainData",0));
+                        Command.turnAround(intent.getDoubleExtra("MainData",0));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -551,6 +551,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         receive = new Receive(receiveListener);
         IntentFilter intentFilter = receive.getIntentFilter();
         registerReceiver(receive, intentFilter);
+        Command.setBroadcast(broadcast);
 
         //Inflate Layout and initiate the Views
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -1347,7 +1348,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
               //Initialise if 1st iteration
               if ( initialise ){
                   initialise = false; //Unset flag
-                  go( new double[] { lft_speed, rgt_speed } ); // Tell the robot to move until told otherwise
+                  Command.go( new double[] { lft_speed, rgt_speed } ); // Tell the robot to move until told otherwise
               }
               /*
               if (  ){ //Try to trigger a speed change
@@ -1376,7 +1377,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
               e.printStackTrace();
           }
 
-          go( new double[] { 0, 0} );
+          Command.go( new double[] { 0, 0} );
           try{
               sleep( 1000 );
           } catch (Exception e){
@@ -1445,7 +1446,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 currentTime = (int) SystemClock.elapsedRealtime() - startTime; //Update elapsed time
                 if ( !initial ) { //If this is the first loop iteration
-                    go(new double[]{50, 50}); //Issue new go command
+                    Command.go(new double[]{50, 50}); //Issue new go command
                     initial = true; //Set flag so we don't send more movement commands
                 }
             }
@@ -1559,7 +1560,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 //Initialise if 1st iteration (re-used to reset speeds mid-run)
                 if ( initialise ){
                     initialise = false;
-                    go( new double[] { lft_speed, rgt_speed } );
+                    Command.go( new double[] { lft_speed, rgt_speed } );
                     try{ sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Command delay
                     t_interval_start = (int) SystemClock.elapsedRealtime(); //Start the time interval for accumulation
                 }
@@ -1591,10 +1592,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                         StatFileUtils.write("OF", "RCTIME", "Reaction time: " + reaction_time + "; for speeds {" + lft_speed + ", " + rgt_speed + "}");
                     }
 
-                    go( new double[]{0, 0});
+                    Command.go( new double[]{0, 0});
                     try { sleep(1000); } catch( Exception e ){ e.printStackTrace(); }
                     try {
-                        turnAround(turn);
+                        Command.turnAround(turn);
                     }catch(Exception e){ e.printStackTrace(); }
                     /*
                     lft_speed = 10; //Left turn
@@ -1608,10 +1609,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 } else if ( right && (!avoid) ){ //Right turn required
                     Log.i("CA:", "Right turn triggered");
-                    go( new double[]{0, 0});
+                    Command.go( new double[]{0, 0});
                     try { sleep(1000); } catch( Exception e ){ e.printStackTrace(); }
                     try {
-                        turnAround(-turn);
+                        Command.turnAround(-turn);
                     }catch(Exception e){ e.printStackTrace(); }
                     /*lft_speed = 100; //Right turn
                     rgt_speed = 10; //Right turn*/
@@ -1649,7 +1650,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 e.printStackTrace();
             }
 
-            go( new double[] { 0, 0} );
+            Command.go( new double[] { 0, 0} );
             try{
                 sleep( 1000 );
             } catch (Exception e){
@@ -1766,7 +1767,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     new_image.execute(processedDestImage, LEARN_IMAGE);
                 }
                     /*boolean image_not_learned = true;
-                    go(new double[]{0, 0});
+                    Command.go(new double[]{0, 0});
                     try{ sleep(1000); } catch (Exception e){ e.printStackTrace(); }
 
                     while (image_not_learned) { //Spin until image becomes available
@@ -1792,7 +1793,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                             image_not_learned = false; //Image has been learned, we can exit the loop
                         }
                     }
-                    go( new double[]{lft_speed, rgt_speed});
+                    Command.go( new double[]{lft_speed, rgt_speed});
                     try { sleep(1000); } catch (Exception e){ e.printStackTrace(); }
 
                     t_interval_start = (int) SystemClock.elapsedRealtime();*/
@@ -1823,7 +1824,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 //Initialise if 1st iteration (re-used to reset speeds mid-run)
                 if (initialise) {
                     initialise = false;
-                    go(new double[]{lft_speed, rgt_speed});
+                    Command.go(new double[]{lft_speed, rgt_speed});
                     try {
                         sleep(1000);
                     } catch (Exception e) {
@@ -1855,11 +1856,11 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 if (left && (!avoid)) { //Left turn required
                     Log.i("CA:", "Left turn triggered");
 
-                    go( new double[]{ 0, 0 });
+                    Command.go( new double[]{ 0, 0 });
                     try{ sleep(1000); } catch ( Exception e ){ e.printStackTrace(); }
 
                     try {
-                        turnAround(20);
+                        Command.turnAround(20);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1882,13 +1883,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 } else if (right && (!avoid)) { //Right turn required
                     Log.i("CA:", "Right turn triggered");
 
-                    go( new double[]{ 0, 0 });
+                    Command.go( new double[]{ 0, 0 });
                     try{ sleep(1000); } catch ( Exception e ){ e.printStackTrace(); }
 
 
 
                     try {
-                        turnAround(-20);
+                        Command.turnAround(-20);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1941,7 +1942,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 e.printStackTrace();
             }
 
-            go(new double[]{0, 0}); //Stop
+            Command.go(new double[]{0, 0}); //Stop
 
             try {
                 sleep(1000);
@@ -1980,7 +1981,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
 
                 for ( int run_count = 0; run_count < 5; ++run_count ) {
-                    try { turnAround(170); } catch ( Exception e ){ e.printStackTrace(); }
+                    try { Command.turnAround(170); } catch ( Exception e ){ e.printStackTrace(); }
                     try {
                         sleep(5000); //Wait for 30 Seconds to allow the robot to be replaced at the start of the course
                     } catch (Exception e) {
@@ -2077,7 +2078,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 output = "Rotation: " + degrees;
                 StatFileUtils.write(task_code, info_str, output);
                 try {
-                    turnAround(degrees);
+                    Command.turnAround(degrees);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -2090,7 +2091,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 //We will instead move for a set time, instead of a distance 2 seconds
 
-                go( new double[]{ 15, 14 } );
+                Command.go( new double[]{ 15, 14 } );
                 try { sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Wait for the command to start
 
                 //Time tracking:
@@ -2130,7 +2131,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                     if ( (left_accumulator >= reaction_threshold) ||
                             (right_accumulator >= reaction_threshold) || t_delta >=t_interval ) {
-                        go (new double[]{0, 0}); //Halt the robot
+                        Command.go(new double[]{0, 0}); //Halt the robot
                         try { sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Wait
                         break; //Break the loop (trigger an early scan)
                     }
@@ -2179,7 +2180,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             while (interval_t < end_t) {
                 interval_t = (int) SystemClock.elapsedRealtime() - start_t;
                 try {
-                    turnAround(30.00);
+                    Command.turnAround(30.00);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -2207,7 +2208,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                     if (i != 10) {
                         try {
-                            turnAround(-6.00);
+                            Command.turnAround(-6.00);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -2221,7 +2222,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 LogToFileUtils.write("Seleted index: " + min_index + "\n");
 
                 try {
-                    turnAround((10 - min_index) * 6.0);
+                    Command.turnAround((10 - min_index) * 6.0);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -2234,7 +2235,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 //We will instead move for a set time, instead of a distance 2 seconds
 
-                go( new double[]{ 25, 22 } );
+                Command.go( new double[]{ 25, 22 } );
                 try { sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Wait for the command to start
 
                 //Time tracking:
@@ -2274,7 +2275,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                     if ( (left_accumulator >= reaction_threshold) ||
                             (right_accumulator >= reaction_threshold) ) {
-                        go (new double[]{0, 0}); //Halt the robot
+                        Command.go(new double[]{0, 0}); //Halt the robot
                         try { sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Wait
                         break; //Break the loop (trigger an early scan)
                     }
@@ -2373,23 +2374,23 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 String direction = "not sure";
                 if(t>300) {
                     if (currentTime < 3500) {
-                        go(new double[]{100, 100});
+                        Command.go(new double[]{100, 100});
                         ANT_SPEED = 4.0;
                         direction = "straight";
                     } else if (currentTime < 8000) {
-                        go(new double[]{10, 100});
+                        Command.go(new double[]{10, 100});
                         ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 11000) {
-                        go(new double[]{100, 10});
+                        Command.go(new double[]{100, 10});
                         ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 25000) {
-                        go(new double[]{100, 100});
+                        Command.go(new double[]{100, 100});
                         ANT_SPEED = 4.;
                         direction = "straight";
                     } else {
-                        go(new double[]{100, 10});
+                        Command.go(new double[]{100, 10});
                         ANT_SPEED = 4.;
                         direction = "straight";
                     }
@@ -2418,14 +2419,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
 
             // turn to offset pull, and allow network to redirect antbot
-            go(new double[]{0, 0});
+            Command.go(new double[]{0, 0});
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             try{
-                turnAround(45);
+                Command.turnAround(45);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -2485,15 +2486,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 if(t > 300){
                 // speed in dm/sec
                     if (CXtheta<-1.5){
-                        go(new double[]{10, 100});
+                        Command.go(new double[]{10, 100});
                         ANT_SPEED = 0.5;
                         direction = "left";
                     } else if (CXtheta>1.5){
-                        go(new double[]{100, 10});
+                        Command.go(new double[]{100, 10});
                         ANT_SPEED = 0.5;
                         direction = "right";
                     } else {
-                        go(new double[]{100, 100});
+                        Command.go(new double[]{100, 100});
                         ANT_SPEED = 4.;
                         direction = "straight";
                     }
@@ -2534,7 +2535,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            go(new double[]{0, 0});
+            Command.go(new double[]{0, 0});
 
             try {
                 runOnUiThread(new Runnable() {
@@ -2621,23 +2622,23 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 String direction = "not sure";
                 if(t>300) {
                     if (currentTime < 3500) {
-                        go(new double[]{100, 100});
+                        Command.go(new double[]{100, 100});
                         ANT_SPEED = 4.0;
                         direction = "straight";
                     } else if (currentTime < 8000) {
-                        go(new double[]{10, 100});
+                        Command.go(new double[]{10, 100});
                         ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 11000) {
-                        go(new double[]{100, 10});
+                        Command.go(new double[]{100, 10});
                         ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 25000) {
-                        go(new double[]{100, 100});
+                        Command.go(new double[]{100, 100});
                         ANT_SPEED = 4.;
                         direction = "straight";
                     } else {
-                        go(new double[]{100, 10});
+                        Command.go(new double[]{100, 10});
                         ANT_SPEED = 4.;
                         direction = "straight";
                     }
@@ -2672,14 +2673,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
 
             // turn to offset pull, and allow network to redirect antbot
-            go(new double[]{0, 0});
+            Command.go(new double[]{0, 0});
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             try{
-                turnAround(45);
+                Command.turnAround(45);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -2738,15 +2739,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 if(t > 300){
                     // speed in dm/sec
                     if (CXtheta<-1.5){
-                        go(new double[]{10, 100});
+                        Command.go(new double[]{10, 100});
                         ANT_SPEED = 0.5;
                         direction = "left";
                     } else if (CXtheta>1.5){
-                        go(new double[]{100, 10});
+                        Command.go(new double[]{100, 10});
                         ANT_SPEED = 0.5;
                         direction = "right";
                     } else {
-                        go(new double[]{100, 100});
+                        Command.go(new double[]{100, 100});
                         ANT_SPEED = 4.;
                         direction = "straight";
                     }
@@ -2788,7 +2789,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            go(new double[]{0, 0});
+            Command.go(new double[]{0, 0});
 
             try {
                 runOnUiThread(new Runnable() {
@@ -2875,23 +2876,23 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 String direction = "";
                 if(t>300) {
                     if (currentTime < 3500) {
-                        go(new double[]{100, 100});
+                        Command.go(new double[]{100, 100});
                         ANT_SPEED = 4.0;
                         direction = "straight";
                     } else if (currentTime < 8000) {
-                        go(new double[]{10, 100});
+                        Command.go(new double[]{10, 100});
                         ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 11000) {
-                        go(new double[]{100, 10});
+                        Command.go(new double[]{100, 10});
                         ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 25000) {
-                        go(new double[]{100, 100});
+                        Command.go(new double[]{100, 100});
                         ANT_SPEED = 4.;
                         direction = "straight";
                     } else {
-                        go(new double[]{100, 10});
+                        Command.go(new double[]{100, 10});
                         ANT_SPEED = 4.;
                         direction = "straight";
                     }
@@ -2922,14 +2923,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
 
             // offset turn, to allow network to redirect antbot
-            go(new double[]{0, 0});
+            Command.go(new double[]{0, 0});
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             try{
-                turnAround(45);
+                Command.turnAround(45);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -2984,15 +2985,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 if(t > 300){
                     // speed in dm/sec
                     if (CXtheta < -1.5){
-                        go(new double[]{10, 100});
+                        Command.go(new double[]{10, 100});
                         ANT_SPEED = 0.5;
                         direction = "left";
                     } else if (CXtheta>1.5){
-                        go(new double[]{100, 10});
+                        Command.go(new double[]{100, 10});
                         ANT_SPEED = 0.5;
                         direction = "right";
                     } else {
-                        go(new double[]{100, 100});
+                        Command.go(new double[]{100, 100});
                         ANT_SPEED = 4.;
                         direction = "straight";
                     }
@@ -3032,13 +3033,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             }
 
-            go(new double[]{0, 0});
+            Command.go(new double[]{0, 0});
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            go(new double[]{0, 0});
+            Command.go(new double[]{0, 0});
 
             try {
                 runOnUiThread(new Runnable() {
@@ -3866,54 +3867,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     }
 
-    // Drive forward
-    public void moveForward(double dist){
-        try{
-            sleep(100);
-        }catch(InterruptedException e){
-            e.printStackTrace();
-        }
-        broadcast.broadcastDistance(dist);
-
-    }
-
-    public void go(double[] speeds){
-        try{
-            sleep(100);
-        }catch(InterruptedException e){
-            e.printStackTrace();
-        }
-        broadcast.broadcastMove(speeds);
-    }
-
-    // Turn by an angle
-    public void turnAround(double theta) throws InterruptedException {
-        try {
-            sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if(theta>180){
-            theta=theta-360;
-        }else if(theta<-180){
-            theta=theta+360;
-        }
-        beginTurn=true;
-        xTotal=0;
-        if(theta<0){
-            direction=2;
-        }else if(theta>0){
-            direction=1;
-        }else{
-            direction=0;
-        }
-        broadcast.broadcastAngle(theta);
-        sleep(3000);
-        broadcast.broadcastOpticalFlowAngle(xTotal);
-
-    }
-
-    private int log(File file, String output) { //Function to log information to an output file;
+     private int log(File file, String output) { //Function to log information to an output file;
         //Note to whoever inherits this monstrous code: This function does work but its deprecated
         //You should instead use LogToFileUtils; StatFileUtils (see guide or contact me for formatting
         //information); or create your own logging utility based on LogToFileUtils.
@@ -3995,7 +3949,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             while (true) {
                 try {
-                    turnAround(30.00);
+                    Command.turnAround(30.00);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -4023,7 +3977,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                     if (i != 10) {
                         try {
-                            turnAround(-6.00);
+                            Command.turnAround(-6.00);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -4037,7 +3991,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 LogToFileUtils.write("Seleted index: " + min_index + "\n");
 
                 try {
-                    turnAround((10 - min_index) * 6.0);
+                    Command.turnAround((10 - min_index) * 6.0);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -4048,7 +4002,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     e.printStackTrace();
                 }
 
-                moveForward(0.10);
+                Command.moveForward(0.10);
 
                 try {
                     sleep(2000);
@@ -4111,7 +4065,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
 
                     try {
-                        turnAround(flag * turn_angle);
+                        Command.turnAround(flag * turn_angle);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -4122,7 +4076,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                         e.printStackTrace();
                     }
 
-                    moveForward(step_size);
+                    Command.moveForward(step_size);
 
                     try {
                         sleep(2000);
@@ -4223,15 +4177,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 if (t > 300) {
                     // speed in dm/sec
                     if (CXtheta < -1.5) {
-                        go(new double[]{10, 100});
+                        Command.go(new double[]{10, 100});
                         ANT_SPEED = 0.5;
                         direction = "left";
                     } else if (CXtheta > 1.5) {
-                        go(new double[]{100, 10});
+                        Command.go(new double[]{100, 10});
                         ANT_SPEED = 0.5;
                         direction = "right";
                     } else {
-                        go(new double[]{100, 100});
+                        Command.go(new double[]{100, 100});
                         ANT_SPEED = 4.0;
                         direction = "straight";
                     }
@@ -4272,7 +4226,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            go(new double[]{0, 0});
+            Command.go(new double[]{0, 0});
 
             try {
                 runOnUiThread(new Runnable() {
