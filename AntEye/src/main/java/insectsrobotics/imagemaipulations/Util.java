@@ -350,8 +350,12 @@ public class Util {
     // Image rotation and down sampling. Could split this into two functions.
     // Refers to old globals and some libs not yet imported here.
     //
-    private static Mat rotateFullImage(Mat pic, int angle){
+    public static Mat rotateFullImage(Mat pic, int angle){
         /*
+        Commented out because the function structure will not work as intended
+        Use rotateMatInAximuth with a pixel rotation
+
+
         Mat processedMat;
         processedMat=Mat.zeros(processedDestImage.size(),processedDestImage.type());
         int counter1;
