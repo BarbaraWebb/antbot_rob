@@ -14,12 +14,12 @@ public class CX {
     //---------------------------------------------------------------------------------------
 
     // ---------------   PARAMETERS  ---------------------
-    static int n_tl2 = 16;
-    static int n_cl1 = 16;
-    static int n_tb1 = 8;
-    static int n_cpu4 = 16;
-    static int n_cpu1 = 16;
-    static double tb_tb_weight = 1.;
+    public static int n_tl2 = 16;
+    public static int n_cl1 = 16;
+    public static int n_tb1 = 8;
+    public static int n_cpu4 = 16;
+    public static int n_cpu1 = 16;
+    public static double tb_tb_weight = 1.;
     SimpleMatrix tl2_prefs_default = new SimpleMatrix(new double[][] { 
     	{0.},  {0.78539816}, {1.57079633}, {2.35619449},  {3.14159265},
         {3.92699082},  {4.71238898},  {5.49778714},  {0.},  {0.78539816},

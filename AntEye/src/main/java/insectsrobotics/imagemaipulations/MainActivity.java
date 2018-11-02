@@ -91,7 +91,7 @@ import static org.opencv.video.Video.calcOpticalFlowPyrLK;
 
 public class MainActivity extends Activity implements CvCameraViewListener2 , BroadcastValues, SensorEventListener{
     //
-    // Thread libs; initialised in onCreate
+    // Thread libsL; initialised in onCreate
     //
     CentralComplexThreads CXT;
     MushroomBodyThreads MBT;
@@ -99,7 +99,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     OpticFlowThreads OFT;
 
     float global_x, global_y, global_z;
-    private static final String TAG = "OCVSample::Activity";
+    public static final String TAG = "OCVSample::Activity";
     boolean opticCheck = false;
     public Mat processedSourceImage;
     public Mat processedDestImage;
@@ -130,18 +130,18 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     Mat[] storedPics = new Mat[4];
 
     // ----- CX variables ------
-    int startTime;
-    float frame_rate_cx = 0;
+    public int startTime;
+    public float frame_rate_cx = 0;
     public double currentDegree = 0.;
     public double CXnewHeading;
     public double CXtheta;
     public double CXmotor = 0;
     public double CXmotorChange = 0.5;
-    double ANT_SPEED = 1.;
+    public double ANT_SPEED = 1.;
     SimpleMatrix holonominc_speed = new SimpleMatrix(new double[][] {{1.},{1.}});
     private SensorManager mSensorManager;
     private Sensor mSensor;
-    private int CURRiteration;
+    public int CURRiteration;
 
     Mat leftCXFlowImage = null;
     Mat rightCXFlowImage = null;
@@ -159,12 +159,12 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     MatOfFloat Err;
     Mat debugFlowImage;
     boolean tracked = false;
-    float prevFrameTime = 0;
-    float currentFrameTime;
+    public float prevFrameTime = 0;
+    public float currentFrameTime;
 
 
-    float rightCXFlow = 0;
-    float leftCXFlow = 0;
+    public float rightCXFlow = 0;
+    public float leftCXFlow = 0;
     int flowTime = 0;
 
     int cfn = 0;
@@ -210,7 +210,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     //Layout Views
     TextView serialConnectionTextView;
     //TextView serverConnectionTextView;
-    TextView debugTextView;
+    public TextView debugTextView;
     ProgressBar serialProgressBar;
     ProgressBar serverProgressBar;
     ImageView serialCheckImageView;
@@ -228,7 +228,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     File sdCard = Environment.getExternalStorageDirectory();
     File dir = new File(sdCard.getAbsolutePath() + "/");
     File file = new File(dir, "text.txt");
-    File log_file = new File( dir, "log_file.txt");
+    public File log_file = new File( dir, "log_file.txt");
 
 
 
@@ -290,7 +290,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     int integratorRunTime=35000; //outbound time (milliseconds)
     boolean outboundStop =false;
 
-    Thread testThread;
     int selectedModule=0;
 
     //Combiner
@@ -300,14 +299,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     // PerfectMemoryModule model = new PerfectMemoryModule();
 
     // The combined CX and MB model
-    CX_MB cxmb = new CX_MB();
+    public CX_MB cxmb = new CX_MB();
     // Stored memory to retrieve the CPU memory again
-    SimpleMatrix stored_memory = new SimpleMatrix(CX.n_cpu4, 1);
+    public SimpleMatrix stored_memory = new SimpleMatrix(CX.n_cpu4, 1);
 
-    AsyncTask<Object, Integer, Boolean> new_image = null;
+    public AsyncTask<Object, Integer, Boolean> new_image = null;
     AsyncTask<Object, Integer, Boolean> start_home = null;
     double familarity;
-    Boolean images_access = false;
+    public Boolean images_access = false;
     double[] familiarity_array = new double[17]; //Rob
     double[] familarity_array = new double[11]; //Zhaoyu
     double distance_travelled;
@@ -331,13 +330,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     int sample_no = 0; //The sample we're currently on (incremented by fromFlowComputeFOE)
     int threshold_ttc = 0;
     double global_ttc = threshold_ttc + 1;  // Global Time To Contact variable
-    float speed = Math.abs( (leftCXFlow + rightCXFlow) / 2);
+    public float speed = Math.abs( (leftCXFlow + rightCXFlow) / 2);
 
     //Left and right collision avoidances which may be thresholded. If one side exceeds a threshold
     //Saccade in opposite direction
-    float leftCAFlow = 0;
-    float rightCAFlow = 0;
-    float ca_flow_diff = 0;
+    public float leftCAFlow = 0;
+    public float rightCAFlow = 0;
+    public float ca_flow_diff = 0;
 
     int global_start_time = (int) SystemClock.elapsedRealtime();
     int global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time;
@@ -349,7 +348,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     boolean real = false; //Boolean to flag which network we use
     WillshawModule mushroom_body;
     RealWillshawModule real_mushroom_body;
-
 
     //Initiate all ServiceConnections for all Background Services
     ServiceConnection visualNavigationServiceConnection = new ServiceConnection() {
@@ -509,7 +507,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     // Zhaoyu added this to
     // Show the alert dialog after first run.
-    private void showDialog() {
+    public void showDialog() {
 
         builder=new AlertDialog.Builder(this);
 
@@ -606,6 +604,12 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         //Initialise the combiner module
         combiner = new CombinedThread(this);
+
+        //Initialise the thread archives
+        CXT = new CentralComplexThreads(this);
+        MBT = new MushroomBodyThreads(this);
+        OFT = new OpticFlowThreads(this);
+        ONT = new OldNavThreads(this);
 
         try {
             FileOutputStream f = new FileOutputStream(file);
@@ -1063,7 +1067,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 // Uncomment to start recular CX (one speed input)
                 //obstacleAvoid=new Thread(CXthread);
                 // Uncomment to start Holonomic CS(two speed inputs)
-                obstacleAvoid=new Thread(CXHolonomicThread);
+                obstacleAvoid=new Thread(CXT.CXHolonomicThread);
                 obstacleAvoid.start();
             }else if (selectedModule == 1){ //If selected module is for visual navigation
                 switch(visualModule){  //Select type of navigation to be run
@@ -1100,19 +1104,19 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 switch(combinerModule){
                     case BACK_WITH_MB:
                         MethodChosen = 0;
-                        obstacleAvoid=new Thread(CXthread);
+                        obstacleAvoid=new Thread(CXT.CXthread);
                         obstacleAvoid.start();
                         startHoming = new Thread(startScanning);
                         break;
                     case KLINOKINESIS:
                         MethodChosen = 1;
-                        obstacleAvoid=new Thread(CXthread);
+                        obstacleAvoid=new Thread(CXT.CXthread);
                         obstacleAvoid.start();
                         startHoming = new Thread(startKlinokinesis);
                         break;
                     case EIGHT_ENS:
                         MethodChosen = 2;
-                        obstacleAvoid = new Thread(CXMBthread);
+                        obstacleAvoid = new Thread(CXT.CXMBthread);
                         obstacleAvoid.start();
                         startHoming = new Thread(startCombiner);
                         break;
@@ -1130,11 +1134,11 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                         opticalFlowThread.start();
                         break;
                     case OF_AVOID:
-                        opticalFlowThread = new Thread(opticalFlowAvoidance);
+                        opticalFlowThread = new Thread(OFT.opticalFlowAvoidance);
                         opticalFlowThread.start();
                         break;
                     default: //Default to detection
-                        opticalFlowThread = new Thread(opticalFlowDetection);
+                        opticalFlowThread = new Thread(testRun);
                         opticalFlowThread.start();
                         break;
                     }
@@ -1292,8 +1296,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     }
 
-    //Runnables for new optical flow obstacle detection - RM
-    Runnable opticalFlowDetection = new Runnable() {
+    // Test thread code
+    Runnable testRun = new Runnable() {
         //Convert resource into test thread for basic algorithms
         @Override
         public void run() {
@@ -1309,370 +1313,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
         }
     };
-          /*
-          //This version of the thread is for testing the flow filtering collision avoidance
-          try {
-              sleep(3000);
-          } catch (Exception e){
-              e.printStackTrace();
-          }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
-          boolean stop = false; //Halt flag
-          boolean initialise = true; //Loop initialisation flag
-          int start_time = (int) SystemClock.elapsedRealtime(); //Start time for the thread
-          int current_time = (int) SystemClock.elapsedRealtime() - start_time; //Current thread time
-          int lft_speed = 25;
-          int rgt_speed = 25;
-
-
-          //While we've not detected an obstacle, run for at most 10 seconds (testing)
-          while ( !stop /*&& (current_time <= 10000)){
-              try {
-                  sleep(600);
-              } catch (Exception e){
-                  e.printStackTrace();
-              }
-              //Print out debug information, catch exceptions
-              ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
-              try {
-                  runOnUiThread(new Runnable() {
-                      @Override
-                      public void run(){
-                          debugTextView.setText(String.format(
-                                  "Speed: %f \n" +
-                                  "Left CA flow: %f \n" +
-                                  "Right CA flow: %f \n" +
-                                  "Flow Difference: %f \n",
-                                  speed,
-                                  leftCAFlow,
-                                  rightCAFlow,
-                                  ca_flow_diff));
-                      }
-                  });
-              } catch ( Exception e ){
-                  e.printStackTrace();
-              }
-              //End printing
-
-              //Initialise if 1st iteration
-              if ( initialise ){
-                  initialise = false; //Unset flag
-                  Command.go( new double[] { lft_speed, rgt_speed } ); // Tell the robot to move until told otherwise
-              }
-              /*
-              if (  ){ //Try to trigger a speed change
-                  /*lft_speed = 30;
-                  rgt_speed = 10;
-                  initialise = false; //Re-call the go command to trigger the speed change
-                  stop = true;
-                  continue;
-              }
-
-              //current_time = (int) SystemClock.elapsedRealtime() - start_time; //Update current time
-          }
-
-          try {
-              runOnUiThread(new Runnable() {
-
-               @ Opverride
-                  public void run(){
-                      debugTextView.setText(String.format(
-                              "Obstacle seen"
-                      ));
-                  }
-              });
-
-          } catch (Exception e){
-              e.printStackTrace();
-          }
-
-          Command.go( new double[] { 0, 0} );
-          try{
-              sleep( 1000 );
-          } catch (Exception e){
-              e.printStackTrace();
-          }
-      }
-
-    };
-
-    Runnable opticalFlowDetection = new Runnable() {
-        @Override
-        public void run() {
-            // Simple test thread; drive forward, keep watching time-to-contact to know when to stop
-
-            //Need to wait a little
-            try {
-                sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            boolean stop = false;
-            int counter = 0;
-            int startTime = (int) SystemClock.elapsedRealtime(); //Set start time for thread
-            int currentTime = (int) SystemClock.elapsedRealtime() - startTime;
-
-
-
-            boolean initial = false;
-
-            while( !stop && (currentTime <= 30000 )) { //Set timelimit of 10 seconds
-                try{
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run(){
-                            debugTextView.setText(String.format("Time to contact: %f\n" +
-                                                                "Speed: %f"
-                                                                , global_ttc
-                                                                , Math.abs( (leftCXFlow + rightCXFlow )/ 2)));
-                        }
-                    });
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                if ( global_ttc < threshold_ttc){ //If ttc less than threshold (2 seconds)
-                    try {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                debugTextView.setText(String.format("Obstacle detected!")); //Show output
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    counter++;
-                    stop = true; //Set stop flag
-                    continue; //Jump to next loop iteration (effectively a break, consider replacing)
-                }
-
-                if (counter > 1) {
-                    stop = true;
-                    continue;
-                }
-
-                currentTime = (int) SystemClock.elapsedRealtime() - startTime; //Update elapsed time
-                if ( !initial ) { //If this is the first loop iteration
-                    Command.go(new double[]{50, 50}); //Issue new go command
-                    initial = true; //Set flag so we don't send more movement commands
-                }
-            }
-
-            go (new double[]{0,0}); //Stop command
-
-            try {
-                sleep(1000); //Delay time for stop to execute
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-
-            try {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        debugTextView.setText(String.format("Obstacle detection run completed. "));
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-    };
-*/
-    Runnable opticalFlowAvoidance = new Runnable() {
-        @Override
-        public void run() { //Should really be worked in with existing PI stuff
-            //This version of the thread is for testing the flow filtering collision avoidance
-            try {
-                sleep(3000);
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-
-            log(log_file, "CA run started");
-            boolean avoid = false; //Is the robot currently avoiding an obstacle?
-            boolean stop = false; //Halt flag
-            boolean initialise = true; //Loop initialisation flag
-            int start_time = (int) SystemClock.elapsedRealtime(); //Start time for the thread
-            int current_time = (int) SystemClock.elapsedRealtime() - start_time; //Current thread time
-            int t_move_start = 0; //Time that a saccade started
-
-            //Accumulation time intervals
-            int t_interval_start = current_time; //Start of the time interval
-            int t_delta = (int) SystemClock.elapsedRealtime() - current_time; //Time interval
-
-            //Left and right motor speeds
-            int lft_speed = 15;
-            int rgt_speed = 14;
-
-            //Accumulators for left and right flow
-            int dual_accumulator = 0; //Add both values and see if there's significant bias
-            int left_accumulator = 0; //Add only left values
-            int right_accumulator = 0; //Add only right values
-            int accumulation_threshold = 5000; //Threshold for a value to be accumulated (ignore all others) (def = 5000)
-            int reaction_threshold = 10000; //Value to be met for a reaction to be triggered. (need at most four readings) (def = 1000)
-            int turn = 20;
-
-            boolean reaction_taken = false;
-            int reaction_time;
-
-            int loop_count = 0;
-
-
-            //While
-            while ( !stop && (current_time <= 30000) ){
-                try { sleep(600); } catch ( Exception e ){ e.printStackTrace(); }
-
-                //Print out debug information, catch exceptions
-                ca_flow_diff = leftCAFlow - rightCAFlow; //If positive, left detection, else right detection
-
-                //Flow accumulators
-                if ( ca_flow_diff >= accumulation_threshold ){ left_accumulator = left_accumulator + (int) ca_flow_diff; }
-                else if ( ca_flow_diff <= -accumulation_threshold ){ right_accumulator = right_accumulator + Math.abs((int) ca_flow_diff); }
-
-                if ( Math.abs(ca_flow_diff) >= accumulation_threshold ){ dual_accumulator = dual_accumulator + (int) ca_flow_diff; }
-
-                //If accumulation time limit reached, reset timer and accumulators
-                if ( loop_count >= 2/*t_delta >= 2000 */){
-                    left_accumulator = 0;
-                    right_accumulator = 0;
-                    dual_accumulator = 0;
-                    loop_count = 0; //Reset loop counter
-                    t_interval_start = (int) SystemClock.elapsedRealtime();
-                }
-
-                try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run(){
-                            debugTextView.setText(String.format(
-                                    "Speed: %f \n" +
-                                            "Left CA flow: %f \n" +
-                                            "Right CA flow: %f \n" +
-                                            "Flow Difference: %f \n"
-                                            ,
-                                    speed,
-                                    leftCAFlow,
-                                    rightCAFlow,
-                                    ca_flow_diff
-                                    ));
-                        }
-                    });
-                } catch ( Exception e ){
-                    e.printStackTrace();
-                }
-                //End printing
-
-                //Initialise if 1st iteration (re-used to reset speeds mid-run)
-                if ( initialise ){
-                    initialise = false;
-                    Command.go( new double[] { lft_speed, rgt_speed } );
-                    try{ sleep(1000); } catch ( Exception e ){ e.printStackTrace(); } //Command delay
-                    t_interval_start = (int) SystemClock.elapsedRealtime(); //Start the time interval for accumulation
-                }
-
-                //Figure out which way to turn
-                boolean left = false;
-                boolean right = false;
-
-                //Dual decision (contiguous results)
-                //if ( dual_accumulator >= reaction_threshold ){ right = true; }
-                //else if ( dual_accumulator <= -reaction_threshold ){ left = true; }
-
-
-
-                //Uncomment to use the individual method for accumulation.
-                //Individual decision
-                if ( left_accumulator >= reaction_threshold ){ right = true; }
-                else if ( right_accumulator >= reaction_threshold ){ left = true; }
-                //Left accumulator keeps track of left flow and so should trigger a right turn
-                //Right accumulator keeps track of right flow and so should trigger a left turn
-
-
-                if ( left && (!avoid) ){ //Left turn required
-                    Log.i("CA:", "Left turn triggered");
-                    if ( !reaction_taken ){
-                        reaction_taken = true;
-                        reaction_time = (int) SystemClock.elapsedRealtime() - t_interval_start;
-                        //Reaction time in milliseconds. Print to stats file
-                        StatFileUtils.write("OF", "RCTIME", "Reaction time: " + reaction_time + "; for speeds {" + lft_speed + ", " + rgt_speed + "}");
-                    }
-
-                    Command.go( new double[]{0, 0});
-                    try { sleep(1000); } catch( Exception e ){ e.printStackTrace(); }
-                    try {
-                        Command.turnAround(turn);
-                    }catch(Exception e){ e.printStackTrace(); }
-                    /*
-                    lft_speed = 10; //Left turn
-                    rgt_speed = 100; //Left turn*/
-                    initialise = true; //Re-call the go command to trigger the speed change
-                    avoid = true; //Flag so we know to ignore this code snippet when avoiding
-                    dual_accumulator = 0;
-                    left_accumulator = 0;
-                    right_accumulator = 0;
-                    t_move_start = current_time; //Time the saccade started
-
-                } else if ( right && (!avoid) ){ //Right turn required
-                    Log.i("CA:", "Right turn triggered");
-                    Command.go( new double[]{0, 0});
-                    try { sleep(1000); } catch( Exception e ){ e.printStackTrace(); }
-                    try {
-                        Command.turnAround(-turn);
-                    }catch(Exception e){ e.printStackTrace(); }
-                    /*lft_speed = 100; //Right turn
-                    rgt_speed = 10; //Right turn*/
-                    initialise = true; //Re-call the go command to trigger the speed change
-                    avoid = true; //Flag so we know to ignore this code snippet when avoiding
-                    dual_accumulator = 0;
-                    left_accumulator = 0;
-                    right_accumulator = 0;
-                    t_move_start = current_time; //Time the saccade started
-
-                } else if ( avoid && ((current_time - t_move_start ) >= 500)){
-                    //Make adjustments in half second intervals
-                    lft_speed = 15; //Back to default
-                    rgt_speed = 14; //Back to default
-                    avoid = false; //No longer avoiding an obstacle
-                    initialise = true; //Need to reset robot speeds
-                }
-
-                loop_count++;
-                current_time = (int) SystemClock.elapsedRealtime() - start_time; //Update current time
-                t_delta = (int) SystemClock.elapsedRealtime() - t_interval_start; //Update accumulation interval
-            }
-
-            try {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run(){
-                        debugTextView.setText(String.format(
-                                "Obstacle seen"
-                        ));
-                    }
-                });
-
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-
-            Command.go( new double[] { 0, 0} );
-            try{
-                sleep( 1000 );
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-
-    };
-
-
-
-    //End of OF threads - RM
-    //-------------------------------------------------------
 
     //Visual Navigation Threads
     //Thread for the outbound learning route.
@@ -1775,38 +1417,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     new_image = new SaveImages();
                     new_image.execute(processedDestImage, LEARN_IMAGE);
                 }
-                    /*boolean image_not_learned = true;
-                    Command.go(new double[]{0, 0});
-                    try{ sleep(1000); } catch (Exception e){ e.printStackTrace(); }
-
-                    while (image_not_learned) { //Spin until image becomes available
-                        //DEBUG NOTE: This shouldn't cause any problems but it's
-                        //possible that this delay could cause problems with the CA
-                        //by spinning too long. Keep an eye out
-                        if (images_access) {
-                            Mat matImage = processedDestImage; //get current image
-                            byte[] imageArray_tmp = new byte[matImage.height() * matImage.width()]; //Process into an array
-                            matImage.get(0, 0, imageArray_tmp);
-                            int[] imageArray = new int[imageArray_tmp.length];
-                            for (int n = 0; n < imageArray_tmp.length; n++) {
-                                imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
-                            }
-
-                            //Call the method to construct the network
-                            if (real) {
-                                real_mushroom_body.learnImage(imageArray);
-                            } else {
-                                mushroom_body.learnImage(imageArray);
-                            }
-
-                            image_not_learned = false; //Image has been learned, we can exit the loop
-                        }
-                    }
-                    Command.go( new double[]{lft_speed, rgt_speed});
-                    try { sleep(1000); } catch (Exception e){ e.printStackTrace(); }
-
-                    t_interval_start = (int) SystemClock.elapsedRealtime();*/
-
 
                 try {
                     runOnUiThread(new Runnable() {
@@ -2071,7 +1681,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 LogToFileUtils.write(unfamiliarity_distribution+'\n');
 
-                min_index = getAvgMinIndex(familiarity_array);
+                min_index = Util.getMinIndex(familiarity_array);
                 output = "Chosen index: " + min_index;
                 StatFileUtils.write(task_code, info_str, output);
 
@@ -2302,817 +1912,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
     };
 
-
-
-
-    // Monitoring time to stop outbound PI and start Inbound
-    Runnable startInbound = new Runnable() {
-        @Override
-        public void run() {
-            try {
-                sleep(integratorRunTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-    };
-
-
-    Runnable CXthread=new Runnable() {
-        @Override
-        public void run() {
-            try {
-                sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            //Log.i(flowTag, "" + xPosOF + "," + yPosOF+","+orientation)
-            CX c = new CX();
-            Integer T_outbound = 40;
-            Integer T_inbound = 30;//55;
-            Integer T = T_inbound + T_outbound;
-
-            SimpleMatrix tl2 = new SimpleMatrix(CX.n_tl2, 1);
-            tl2.set(0);
-            SimpleMatrix cl1 = new SimpleMatrix(CX.n_cl1, 1);
-            cl1.set(0);
-            SimpleMatrix tb1 = new SimpleMatrix(CX.n_tb1, 1);
-            tb1.set(0);
-            SimpleMatrix memory = new SimpleMatrix(CX.n_cpu4, 1);
-            memory.set(.5);
-            SimpleMatrix cpu4 = new SimpleMatrix(CX.n_cpu4, 1);
-            cpu4.set(0);
-            SimpleMatrix cpu1 = new SimpleMatrix(CX.n_cpu1, 1);
-            cpu1.set(0);
-
-            startTime = (int) SystemClock.elapsedRealtime();
-            int t0 = (int) SystemClock.elapsedRealtime();
-            int t = 0;
-            CURRiteration = 0;
-            int currentTime = (int)SystemClock.elapsedRealtime()-startTime;
-            while (currentTime<T_outbound*1000) {
-                CURRiteration++;
-                try {
-                    sleep(600);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            debugTextView.setText(String.format("outbound " +
-                                    "\nLeft Speed: %f"+
-                                    "\nRight Speed: %f"+
-                                    "\ncurrent iteration: %d"+
-                                    "\ncurrent direction: %f",
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    CURRiteration,
-                                    currentDegree));
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                // OUTBOUND ROUTE
-                t = (int) SystemClock.elapsedRealtime() - t0;
-
-                String direction = "not sure";
-                if(t>300) {
-                    if (currentTime < 3500) {
-                        Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.0;
-                        direction = "straight";
-                    } else if (currentTime < 8000) {
-                        Command.go(new double[]{10, 100});
-                        ANT_SPEED = 2.0;
-                        direction = "left";
-                    } else if (currentTime < 11000) {
-                        Command.go(new double[]{100, 10});
-                        ANT_SPEED = 2.0;
-                        direction = "left";
-                    } else if (currentTime < 25000) {
-                        Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
-                        direction = "straight";
-                    } else {
-                        Command.go(new double[]{100, 10});
-                        ANT_SPEED = 4.;
-                        direction = "straight";
-                    }
-                    // based on odometry
-                    //ANT_SPEED = ()
-
-                    t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, "facing " + currentDegree + ", going " + direction);
-                    Log.d(TAG, Util.printMemory(memory));
-                }
-                // updates in memory structure as we move which will allow return to nest
-                //------   COMPASS UPDATE  -----
-                tl2 = c.tl2Output(Math.toRadians(currentDegree));
-                cl1 = c.cl1Output(tl2);
-                tb1 = c.tb1Output(cl1, tb1);
-
-                // ------ DISPLACEMENT UPDATE -----
-                memory = c.cpu4Update(memory, tb1, ANT_SPEED);
-                cpu4 = c.cpu4Output(memory.copy());
-
-                // ----- TURNING GENERATION ------
-                cpu1 = c.cpu1Output(tb1, cpu4);
-                CXmotor = c.motorOutput(cpu1);
-                Util.writeToFile(memory, leftCXFlow, rightCXFlow, "run_1", frame_rate_cx, CURRiteration, CXnewHeading);
-                currentTime = (int) SystemClock.elapsedRealtime()-startTime;
-            }
-
-            // turn to offset pull, and allow network to redirect antbot
-            Command.go(new double[]{0, 0});
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            try{
-                Command.turnAround(45);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            currentTime = (int)SystemClock.elapsedRealtime()-t0;
-
-            startTime = (int) SystemClock.elapsedRealtime();
-            t0 = (int)SystemClock.elapsedRealtime();
-            t = 0;
-
-            Boolean algorithm_not_setted = true;
-
-            //
-            // Image storage lock mechanism
-            //
-            while (algorithm_not_setted){
-                if (images_access){
-                    new_image = new SaveImages();
-                    new_image.execute(processedDestImage, 7);
-                    algorithm_not_setted = false;
-                }
-            }
-
-            // INBOUND ROUTE
-            while (currentTime < T_inbound*1000){
-                CURRiteration++;
-                try {
-                    sleep(900);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                if (images_access) {
-                    new_image = new SaveImages();
-                    new_image.execute(processedDestImage, 5);
-                }
-
-                //------   COMPASS UPDATE  -----
-                tl2 = c.tl2Output(Math.toRadians(currentDegree));
-                cl1 = c.cl1Output(tl2);
-                tb1 = c.tb1Output(cl1, tb1);
-
-                // ------ DISPLACEMENT UPDATE -----
-                memory = c.cpu4Update(memory, tb1, ANT_SPEED);
-                cpu4 = c.cpu4Output(memory.copy());
-
-                // ----- TURNING GENERATION ------
-                cpu1 = c.cpu1Output(tb1, cpu4);
-                CXmotor = c.motorOutput(cpu1);
-                Util.writeToFile(memory, leftCXFlow, rightCXFlow, "run_1",frame_rate_cx, CURRiteration, CXnewHeading);
-
-                // ----- ANTBOT DRIVING--------
-                CXnewHeading = Math.toDegrees(Math.toRadians(currentDegree) - CXmotorChange * CXmotor);
-                CXtheta = (CXnewHeading - currentDegree)%360;
-
-                t = (int)SystemClock.elapsedRealtime() - t0;
-                String direction = "not sure";
-                if(t > 300){
-                // speed in dm/sec
-                    if (CXtheta<-1.5){
-                        Command.go(new double[]{10, 100});
-                        ANT_SPEED = 0.5;
-                        direction = "left";
-                    } else if (CXtheta>1.5){
-                        Command.go(new double[]{100, 10});
-                        ANT_SPEED = 0.5;
-                        direction = "right";
-                    } else {
-                        Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
-                        direction = "straight";
-                    }
-                    Log.d(TAG, "facing " + currentDegree + ", going " + direction + "\nwant to go to " + CXnewHeading);
-                    t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, Util.printMemory(memory));
-                }
-
-                try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            debugTextView.setText(String.format("inbound " +
-                                    "\ncurrent iteration: %d"+
-//                                    "\ncurrent direction: %f"+
-                                    "\nLeft Speed: %f"+
-                                    "\nRight Speed: %f"+
-                                    "\nWant to go to: %f"+
-                                    "\nSo turning of: %f",
-                                    CURRiteration,
-//                                    currentDegree,
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    CXnewHeading,
-                                    CXtheta));
-                        }
-                    });
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if(Util.isHome(memory)) break;
-                currentTime = (int) SystemClock.elapsedRealtime() - startTime;
-            }
-
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Command.go(new double[]{0, 0});
-
-            try {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        debugTextView.setText(String.format("The PI Run is over! "+
-                                "\nTo start again please return to the " +
-                                "\nprevious page and click -Start-"));
-
-                        // Show the "Put Robot Back to Food" Alert Dialog!
-                        showDialog();
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
-    Runnable CXMBthread=new Runnable() {
-        @Override
-        public void run() {
-            try {
-                sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            //Log.i(flowTag, "" + xPosOF + "," + yPosOF+","+orientation)
-
-            Integer T_outbound = 40;
-            Integer T_inbound = 30;//55;
-            Integer T = T_inbound + T_outbound;
-
-            SimpleMatrix tl2 = new SimpleMatrix(CX_MB.n_tl2, 1);
-            tl2.set(0);
-            SimpleMatrix cl1 = new SimpleMatrix(CX_MB.n_cl1, 1);
-            cl1.set(0);
-            SimpleMatrix tb1 = new SimpleMatrix(CX_MB.n_tb1, 1);
-            tb1.set(0);
-            SimpleMatrix memory = new SimpleMatrix(CX_MB.n_cpu4, 1);
-            memory.set(.5);
-            SimpleMatrix cpu4 = new SimpleMatrix(CX_MB.n_cpu4, 1);
-            cpu4.set(0);
-            SimpleMatrix cpu1 = new SimpleMatrix(CX_MB.n_cpu1, 1);
-            cpu1.set(0);
-
-            SimpleMatrix en = new SimpleMatrix(CX_MB.n_tb1, 1);
-            cpu1.set(0);
-
-            startTime = (int) SystemClock.elapsedRealtime();
-            int t0 = (int) SystemClock.elapsedRealtime();
-            int t = 0;
-            CURRiteration = 0;
-            int currentTime = (int)SystemClock.elapsedRealtime()-startTime;
-            while (currentTime<T_outbound*1000) {
-                CURRiteration++;
-                try {
-                    sleep(600);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            debugTextView.setText(String.format("outbound " +
-                                            "\nLeft Speed: %f"+
-                                            "\nRight Speed: %f"+
-                                            "\ncurrent iteration: %d"+
-                                            "\ncurrent direction: %f",
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    CURRiteration,
-                                    currentDegree));
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                // OUTBOUND ROUTE
-                t = (int) SystemClock.elapsedRealtime() - t0;
-
-                String direction = "not sure";
-                if(t>300) {
-                    if (currentTime < 3500) {
-                        Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.0;
-                        direction = "straight";
-                    } else if (currentTime < 8000) {
-                        Command.go(new double[]{10, 100});
-                        ANT_SPEED = 2.0;
-                        direction = "left";
-                    } else if (currentTime < 11000) {
-                        Command.go(new double[]{100, 10});
-                        ANT_SPEED = 2.0;
-                        direction = "left";
-                    } else if (currentTime < 25000) {
-                        Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
-                        direction = "straight";
-                    } else {
-                        Command.go(new double[]{100, 10});
-                        ANT_SPEED = 4.;
-                        direction = "straight";
-                    }
-                    // based on odometry
-                    //ANT_SPEED = ()
-
-                    t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, "facing " + currentDegree + ", going " + direction);
-                    Log.d(TAG, Util.printMemory(memory));
-                }
-                // updates in memory structure as we move which will allow return to nest
-                //------   COMPASS UPDATE  -----
-                tl2 = cxmb.tl2Output(Math.toRadians(currentDegree));
-                cl1 = cxmb.cl1Output(tl2);
-                tb1 = cxmb.tb1Output(cl1, tb1);
-
-//                String tb1_str = "";
-//                for(int i = 0; i < 8; i++){
-//                    tb1_str += tb1.get(i, 0) + " ";
-//                }
-//                LogToFileUtils.write(tb1_str);
-
-                // ------ DISPLACEMENT UPDATE -----
-                memory = cxmb.cpu4Update(memory, tb1, ANT_SPEED);
-                cpu4 = cxmb.cpu4Output(memory.copy());
-
-                // ----- TURNING GENERATION ------
-                cpu1 = cxmb.cpu1Output(tb1, cpu4, en, true);
-                CXmotor = cxmb.motorOutput(cpu1);
-                Util.writeToFile(memory, leftCXFlow, rightCXFlow, "run_1", frame_rate_cx, CURRiteration, CXnewHeading);
-                currentTime = (int) SystemClock.elapsedRealtime()-startTime;
-            }
-
-            // turn to offset pull, and allow network to redirect antbot
-            Command.go(new double[]{0, 0});
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            try{
-                Command.turnAround(45);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            currentTime = (int)SystemClock.elapsedRealtime()-t0;
-
-            startTime = (int) SystemClock.elapsedRealtime();
-            t0 = (int)SystemClock.elapsedRealtime();
-            t = 0;
-
-            stored_memory = memory.copy();
-
-            Boolean algorithm_not_setted = true;
-
-            while (algorithm_not_setted){
-                if (images_access){
-                    new_image = new LearnDirectionImages();
-                    new_image.execute(processedDestImage, 7);
-                    algorithm_not_setted = false;
-                }
-            }
-
-            // INBOUND ROUTE
-            while (currentTime < T_inbound*1000){
-                CURRiteration++;
-                try {
-                    sleep(400);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                //------   COMPASS UPDATE  -----
-                tl2 = cxmb.tl2Output(Math.toRadians(currentDegree));
-                cl1 = cxmb.cl1Output(tl2);
-                tb1 = cxmb.tb1Output(cl1, tb1);
-
-                if (images_access) {
-                    new_image = new LearnDirectionImages();
-                    new_image.execute(processedDestImage, 5, tb1);
-                }
-
-                // ------ DISPLACEMENT UPDATE -----
-                memory = cxmb.cpu4Update(memory, tb1, ANT_SPEED);
-                cpu4 = cxmb.cpu4Output(memory.copy());
-
-                // ----- TURNING GENERATION ------
-                cpu1 = cxmb.cpu1Output(tb1, cpu4, en, true);
-                CXmotor = cxmb.motorOutput(cpu1);
-                Util.writeToFile(memory, leftCXFlow, rightCXFlow, "run_1",frame_rate_cx, CURRiteration, CXnewHeading);
-
-                // ----- ANTBOT DRIVING--------
-                CXnewHeading = Math.toDegrees(Math.toRadians(currentDegree) - CXmotorChange * CXmotor);
-                CXtheta = (CXnewHeading - currentDegree)%360;
-
-                t = (int)SystemClock.elapsedRealtime() - t0;
-                String direction = "not sure";
-                if(t > 300){
-                    // speed in dm/sec
-                    if (CXtheta<-1.5){
-                        Command.go(new double[]{10, 100});
-                        ANT_SPEED = 0.5;
-                        direction = "left";
-                    } else if (CXtheta>1.5){
-                        Command.go(new double[]{100, 10});
-                        ANT_SPEED = 0.5;
-                        direction = "right";
-                    } else {
-                        Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
-                        direction = "straight";
-                    }
-                    Log.d(TAG, "facing " + currentDegree + ", going " + direction + "\nwant to go to " + CXnewHeading);
-                    t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, Util.printMemory(memory));
-                }
-
-                try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            debugTextView.setText(String.format("inbound " +
-                                            "\ncurrent iteration: %d"+
-//                                    "\ncurrent direction: %f"+
-                                            "\nLeft Speed: %f"+
-                                            "\nRight Speed: %f"+
-                                            "\nWant to go to: %f"+
-                                            "\nSo turning of: %f",
-                                    CURRiteration,
-//                                    currentDegree,
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    CXnewHeading,
-                                    CXtheta));
-                            //Toast.makeText(getApplication(), "famialarity:" + familarity, Toast.LENGTH_SHORT);
-                        }
-                    });
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if(Util.isHome(memory)) break;
-                currentTime = (int) SystemClock.elapsedRealtime() - startTime;
-            }
-
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Command.go(new double[]{0, 0});
-
-            try {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        debugTextView.setText(String.format("The PI Run is over! "+
-                                "\nPlease Push the \"yes\" button when you are ready."));
-                        // Show the "Put Robot Back to Food" Alert Dialog!
-                        showDialog();
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-
-
-    Runnable CXHolonomicThread=new Runnable() {
-        @Override
-        public void run() {
-            try {
-                sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            CX_H_Pontin c = new CX_H_Pontin();
-            Integer T_outbound = 40;            // outbound for 40 sec
-            Integer T_inbound = 55;             // inbound for 55 sec
-            Integer T = T_inbound + T_outbound; // total run
-
-            SimpleMatrix tl2 = new SimpleMatrix(CX.n_tl2, 1);
-            tl2.set(0);
-            SimpleMatrix cl1 = new SimpleMatrix(CX.n_cl1, 1);
-            cl1.set(0);
-            SimpleMatrix tb1 = new SimpleMatrix(CX.n_tb1, 1);
-            tb1.set(0);
-            SimpleMatrix memory = new SimpleMatrix(CX.n_cpu4, 1);
-            memory.set(.5);
-            SimpleMatrix cpu4 = new SimpleMatrix(CX.n_cpu4, 1);
-            cpu4.set(0);
-            SimpleMatrix cpu1 = new SimpleMatrix(CX.n_cpu1, 1);
-            cpu1.set(0);
-
-            int startTime = (int) SystemClock.elapsedRealtime();
-            int t0 = (int) SystemClock.elapsedRealtime();
-            int t = 0;
-            CURRiteration = 0;
-            int currentTime = (int)SystemClock.elapsedRealtime()-startTime;
-
-            while (currentTime<T_outbound*1000) {
-                CURRiteration++;
-                try {
-                    sleep(400);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                // print output to screen - useful for DEBUG
-                try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            debugTextView.setText(String.format(
-                                    "outbound " +
-                                    "\nLeft Speed: %f"+
-                                    "\nRight Speed: %f" +
-                                    "\nFrameRate: %f",
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    frame_rate_cx
-                                    )
-                            );
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                // OUTBOUND ROUTE
-                t = (int) SystemClock.elapsedRealtime() - t0;
-
-                // hard coded outbound route
-                String direction = "";
-                if(t>300) {
-                    if (currentTime < 3500) {
-                        Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.0;
-                        direction = "straight";
-                    } else if (currentTime < 8000) {
-                        Command.go(new double[]{10, 100});
-                        ANT_SPEED = 2.0;
-                        direction = "left";
-                    } else if (currentTime < 11000) {
-                        Command.go(new double[]{100, 10});
-                        ANT_SPEED = 2.0;
-                        direction = "left";
-                    } else if (currentTime < 25000) {
-                        Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
-                        direction = "straight";
-                    } else {
-                        Command.go(new double[]{100, 10});
-                        ANT_SPEED = 4.;
-                        direction = "straight";
-                    }
-                }
-                t0 = (int) SystemClock.elapsedRealtime();
-                Log.d(TAG, "facing " + currentDegree + ", going " + direction);
-                Log.d(TAG, Util.printMemory(memory));
-                // updates in memory structure as we move which will allow return to nest
-                //------   COMPASS UPDATE  -----
-                tl2 = c.tl2Output(Math.toRadians(currentDegree));
-                cl1 = c.cl1Output(tl2);
-                tb1 = c.tb1Output(cl1, tb1);
-
-                //---- Speed retrieval ------------
-                SimpleMatrix flow = new SimpleMatrix(new double[][]{{leftCXFlow},{rightCXFlow}});
-                SimpleMatrix tn1 = c.tn1Output(flow);
-                SimpleMatrix tn2 = c.tn2Output(flow);
-
-                // ------ DISPLACEMENT UPDATE -----
-                memory = c.cpu4Update(memory, tb1, tn1, tn2);
-                cpu4 = c.cpu4Output(memory.copy());
-
-                // ----- TURNING GENERATION ------
-                cpu1 = c.cpu1Output(tb1, cpu4);
-                CXmotor = c.motorOutput(cpu1);
-                currentTime = (int) SystemClock.elapsedRealtime()-startTime;
-                Util.writeToFile(memory, leftCXFlow, rightCXFlow, "run",frame_rate_cx, CURRiteration, CXnewHeading);
-            }
-
-            // offset turn, to allow network to redirect antbot
-            Command.go(new double[]{0, 0});
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            try{
-                Command.turnAround(45);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            currentTime = (int)SystemClock.elapsedRealtime()-t0;
-
-            startTime = (int) SystemClock.elapsedRealtime();
-            t0 = (int)SystemClock.elapsedRealtime();
-            t = 0;
-
-            // INBOUND ROUTE
-            while (currentTime < T_inbound*1000){
-
-                CURRiteration++;
-                try {
-                    sleep(400);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                //------   COMPASS UPDATE  -----
-                tl2 = c.tl2Output(Math.toRadians(currentDegree));
-                cl1 = c.cl1Output(tl2);
-                tb1 = c.tb1Output(cl1, tb1);
-
-                //---- Speed retrieval ------------
-                SimpleMatrix flow = new SimpleMatrix(new double[][]{{1.},{1.}});
-                SimpleMatrix tn1 = c.tn1Output(flow);
-                SimpleMatrix tn2 = c.tn2Output(flow);
-
-                // ------ DISPLACEMENT UPDATE -----
-                memory = c.cpu4Update(memory, tb1, tn1, tn2);
-                cpu4 = c.cpu4Output(memory.copy());
-
-                // ----- TURNING GENERATION ------
-                cpu1 = c.cpu1Output(tb1, cpu4);
-                CXmotor = c.motorOutput(cpu1);
-                Util.writeToFile(memory, leftCXFlow, rightCXFlow,  "run",frame_rate_cx, CURRiteration, CXnewHeading);
-
-                // ----- ANTBOT DRIVING--------
-
-                // new direction based on memory
-                CXnewHeading = Math.toDegrees(
-                        (Math.toRadians(currentDegree) + CXmotor + Math.PI)
-                                %(2.0 * Math.PI) - Math.PI
-                );
-
-                // given new direction, turn a litte right/left to approach it
-                CXtheta = ((CXnewHeading - currentDegree) % 360);
-
-                t = (int)SystemClock.elapsedRealtime() - t0;
-                String direction = "";
-                if(t > 300){
-                    // speed in dm/sec
-                    if (CXtheta < -1.5){
-                        Command.go(new double[]{10, 100});
-                        ANT_SPEED = 0.5;
-                        direction = "left";
-                    } else if (CXtheta>1.5){
-                        Command.go(new double[]{100, 10});
-                        ANT_SPEED = 0.5;
-                        direction = "right";
-                    } else {
-                        Command.go(new double[]{100, 100});
-                        ANT_SPEED = 4.;
-                        direction = "straight";
-                    }
-                    Log.d(TAG, "facing " + currentDegree + ", going " + direction + "\nwant to go to " + CXnewHeading);
-                    t0 = (int) SystemClock.elapsedRealtime();
-                    Log.d(TAG, Util.printMemory(memory));
-                }
-
-                try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            float frame_rate;
-                            if (currentFrameTime-prevFrameTime != 0){
-                                frame_rate = 1/((currentFrameTime-prevFrameTime)*1000);
-                            } else {
-                                frame_rate = 0;
-                            }
-                            debugTextView.setText(String.format(
-                                    "iutbound " +
-                                            "\nLeft Speed: %f"+
-                                            "\nRight Speed: %f" +
-                                            "\nFrameRate: %f",
-                                    leftCXFlow,
-                                    rightCXFlow,
-                                    frame_rate
-                                    )
-                            );
-                        }
-                    });
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                currentTime = (int) SystemClock.elapsedRealtime() - startTime;
-//                if(isHome(memory)) break;
-
-            }
-
-            Command.go(new double[]{0, 0});
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Command.go(new double[]{0, 0});
-
-            try {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        debugTextView.setText(String.format("The Run is over! "+
-                                "\nTo start again please return to the " +
-                                "\nprevious page and click -Start-"));
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
-    // Calculate the rms difference between two images
-    private double rmsDifference(Mat current, Mat ref){
-        int counter1 = 0;
-        int counter3;
-        double rootSum=0;
-        int count =0;
-        for (int cols = 0; cols < current.cols(); cols++) {
-            counter3 = 0;
-            for (int rows = 0; rows < current.rows(); rows++) {
-                double xDiff = current.get(counter3,counter1)[0]-ref.get(counter3,counter1)[0];
-                rootSum = rootSum + (Math.pow(xDiff,2));
-                count++;
-                counter3++;
-
-            }
-            counter1++;
-        }
-        return (Math.sqrt(rootSum/count));
-    }
-
-    //Rotate a 90x10 image (4 degrees intervals)
-    private Mat rotateImage(Mat image, int theta){
-        int counter1 = 0;
-        int counter3;
-        int colPosition;
-        double[] rotPixel;
-        if(theta<0){
-            theta=theta+360;
-        }
-        theta = theta/4;
-        Mat rotatedImage = Mat.zeros(image.size(),image.type());
-
-        for (int phi = 0; phi < image.cols(); phi++) {
-            counter3 = 0;
-            for (int theta_tmp = 0; theta_tmp < image.rows(); theta_tmp++) {
-                colPosition=counter1+theta;
-                if(colPosition >=90){
-                    colPosition=colPosition - 90;
-                }
-                rotPixel = image.get(counter3,colPosition);
-                rotatedImage.put(counter3, counter1, rotPixel);
-                counter3++;
-            }
-            counter1++;
-        }
-        broadcast.broadcastRotatedImage(rotatedImage);
-        return rotatedImage;
-    }
-
     private void computeSparseOpticFlow() {
         // first time around we initialize all
         // Looking at repurposing this method for optical flow obstacle avoidance - RM
@@ -3183,7 +1982,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         );
         tracked = true;
     }
-
 
     private void getSpeedsFromSparseFlow() {
 
@@ -3412,7 +2210,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         int delta = (int) SystemClock.elapsedRealtime() - global_current_time; //Change in time since last read
         global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time; //Time since start
 
-        Mat focus_of_expansion = fromFlowComputeFOE(); //Need this to know which way to saccade.
         Mat left_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), true); //Left flow filter
         Mat right_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), false); //Right flow filter
 
@@ -3480,423 +2277,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     }
 
 
-
-/*    public void filterCollisionAvoidance() {
-        int delta = (int) SystemClock.elapsedRealtime() - global_current_time; //Change in time since last read
-        global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time; //Time since start
-
-        Mat focus_of_expansion = fromFlowComputeFOE(); //Need this to know which way to saccade.
-        Mat left_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), true); //Left flow filter
-        Mat right_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), false); //Right flow filter
-
-        //Filters are functionally identical, see Lucas' dissertation for the method used
-
-        double[] current_left_flow_vector;
-        double[] current_right_flow_vector;
-        double[] previous_left_flow_vector;
-        double[] previous_right_flow_vector;
-
-        Mat left_filter_vector;
-        Mat right_filter_vector;
-
-        Mat flow_vector = new Mat(1, 3, CvType.CV_32FC1);
-
-        float left_flow_sum = 0;
-        float right_flow_sum = 0;
-
-        for ( int y = 0; y < currentPointsToTrack.rows(); y++ ){
-            for ( int x = 0; x < currentPointsToTrack.cols(); x++ ){//These filters are functionally identical, see Luca's dissertation for the method used to compute the filter
-                //Compute left flow vector
-                previous_left_flow_vector = new double[]{ mod(x + 12, 90), y }; //((x+12), y)
-                current_left_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x + 12, 90),
-                        mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) }; //Flow info returned by farneback
-
-                left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]); //Vector for x - 12 mod 90
-
-                //Create 1x3 flow vector (the current flow vector)
-                flow_vector.put(0, 0, current_left_flow_vector[0]);
-                flow_vector.put(0, 1, current_left_flow_vector[1]);
-                flow_vector.put(0, 2, 0);
-
-                left_flow_sum += left_filter_vector.dot(flow_vector); //Filter and sum
-
-                //Compute right flow vector
-                previous_right_flow_vector = new double[] { mod(x - 12, 90), y };
-                current_right_flow_vector = new double[] { mod((int) currentPointsToTrack.get(y,x)[0] + x - 12, 90),
-                        mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
-
-                right_filter_vector = right_filter.row((int) previous_right_flow_vector[0]); //Vector for x + 12 mod 90
-
-                //Create 1x3 flow vector (the current flow vector)
-                flow_vector.put(0, 0, current_right_flow_vector[0]);
-                flow_vector.put(0, 1, current_right_flow_vector[1]);
-                flow_vector.put(0, 2, 0);
-
-                right_flow_sum += right_filter_vector.dot(flow_vector); //Filter and sum
-            }
-        }
-
-
-
-        //Again image shifting, left is right and right is left.
-        rightCAFlow =  1000 * left_flow_sum;// / (delta 900);
-        leftCAFlow = 1000 * right_flow_sum; // / (delta 900);
-
-    }*/
-
-    //Collision avoidance using Time to Contact; set up to use dense flow
-    public void getObstaclesFromSparseFlow(){
-        Mat focus_of_expansion = fromFlowComputeFOE();
-        //FOE is 2x1 despite what output is saying, use FOE.get(0,0) and (1,0) respectively, remember [0]
-        //Now get Time To Contact (TTC)
-        //Rotational Velocity Vr is just 0, so V = Vt - Vr = Vt - 0 = Vt
-        //Is delta_i the change in distance? Or the real distance?
-
-        //Try real distance first
-        float ttc = 1; //Time to contact
-        float speed; //Take speed from OF, would be more accurate, but more work needed
-
-        String tag ="Obstacle Debug: ";
-        String output = " === DEBUG START === ";
-       // Log.i(tag, output);
-
-        //output = "global_foe.dump()" + global_foe.dump();
-        //Log.i(tag, output);
-
-        //output = "FOE.size(): " + focus_of_expansion.size();
-        //Log.i(tag, output);
-        //output = "FOE.dump(): " + focus_of_expansion.dump();
-        //Log.i(tag, output);
-
-        double[] foe_as_point = {focus_of_expansion.get(0,0)[0], focus_of_expansion.get(1,0)[0]};
-
-        //org.opencv.core.Point foe_point = new org.opencv.core.Point(focus_of_expansion.get(0,0)[0], focus_of_expansion.get(0,1)[0]);
-
-        //arrowedLine(debugFlowImage, foe_point, foe_point, new Scalar(0));
-
-        ArrayList<Double> dists_from_foe = new ArrayList<Double>(); //ArrayList to hold distance of each current point from the FOE
-
-        //Get speed from Optical Flow variables (take average of L and R flows)
-        speed = Math.abs( (leftCXFlow + rightCXFlow) / 2 );
-        speed = speed * 1000; //Scale
-        //output = "Speed : " + speed;
-        //Log.i(tag, output);
-        /*
-        if (speed > 9){
-            output = "Speed: " + speed;
-            Log.i(tag, output);
-
-        }*/
-
-        //Build dists_from_foe
-        for ( int i = 0; i < currentPointsToTrack.rows(); i++ ){
-            for ( int j = 0; j < currentPointsToTrack.cols(); j++ ){
-                // Each entry is given as delta_i / |Vt|, in our case delta_i / |V| as we have no rotation
-                //Compute euclidean distance of current point of interest from FOE
-                float x1 = (float)foe_as_point[0];
-                float y1 = (float)foe_as_point[1];
-                float x2 = (float)currentPointsToTrack.get(i,j)[0];
-                float y2 = (float)currentPointsToTrack.get(i,j)[1];
-
-                float dist = (float) Math.sqrt( Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2) );
-
-                dists_from_foe.add(new Double(dist)); //Add new distance to list
-            }
-        }
-
-
-        //TTC is a product of all the distances divided by the velocity
-        //output = " - BEFORE LOOP - ";
-        //Log.i(tag, output);
-        //output = " - ttc_out : " + ttc; //Should be 1
-        //Log.i(tag, output);
-        //output = " - dists_from_foe.size() : " + dists_from_foe.size();
-        //Log.i(tag, output);
-        for ( int k = 0; k < dists_from_foe.size(); k++ ){
-            //output = " - dist(k) : " + dists_from_foe.get(k);
-          //  Log.i(tag, output);
-
-            ttc = ttc * dists_from_foe.get(k).floatValue();
-            //output = " - ttc_1 : " + ttc;
-            //Log.i(tag, output);
-
-            //output = " - Speed " + speed + " Math.pow(...) " + Math.pow(speed, dists_from_foe.size());
-            //Log.i(tag, output);
-            ttc = ttc / (float) Math.pow(speed, 9); //Division by V, elementwise
-            //output = " - ttc_2 : " + ttc ;
-            //Log.i(tag, output);
-        }
-        //output = " - END LOOP - ";
-        //Log.i(tag, output);
-
-        //Divide twice to make TTC manageable
-        //ttc = ttc / (float) Math.pow(speed, dists_from_foe.size()); //Division by V, elementwise
-
-
-        //If we need samples
-        /*
-        if ( sample_no < sample_size ){
-            sample_ttc = sample_ttc + ttc; //Add current ttc to cumulative sum of ttcs
-            //sample_no is incremented in fromFlowComputeFOE, DO NOT DO IT HERE
-        } else { //sample_no >= sample_size, we have enough samples
-            global_ttc = sample_ttc / sample_size; //Mean time to contact
-            sample_ttc = 0; // reset cumulative sum variable
-            //Again, do not modify sample_no here!
-        }*/
-
-
-        //output = "TTC: " + ttc;
-        //Log.i(tag, output);
-        global_ttc = ttc;
-        //Now have ttc to store globally or locally and return
-
-    }
-
-    public Mat fromFlowComputeFOE(){ //Compute the focus of expansion from the sparse optical flow - RM
-        String tag = "FOE_COMP_DEBUG"; //Debug parameters
-        String output = tag + "=== DEBUG START ===";
-        //Log.i(tag, output);
-
-        //For method see: http://www.dgp.toronto.edu/~donovan/stabilization/opticalflow.pdf pages 13 and 14
-
-        //Matrices initialised with 0 rows as we build them from scratch, row by row
-        Mat A = new Mat(0, 2, CvType.CV_32FC1); //Matrix A for Focus of Expansion calculation
-        Mat b = new Mat(0, 1, CvType.CV_32FC1); //Vector b for Focus of Expansion calculation
-
-        //Iterate through all points of interest
-        for (int i = 0; i < currentPointsToTrack.rows(); i++) {
-            for (int j = 0; j < currentPointsToTrack.cols(); j++) {
-                //Get xy uv, (x,y) being the ith point, (u,v) being the displacement vector
-                //Previous location of the pixel.
-                float x = (float) j; //Math.abs( mod( (int) prevPointsToTrack.get(i,j)[0], 90));
-                float y = (float) i; //Math.abs( mod( (int) prevPointsToTrack.get(i,j)[1], 90));
-                //New location of the pixel from Farneback flow
-                float u = Util.mod((int) (currentPointsToTrack.get(i, j)[0] + x), 90); //New x position of the pixel
-                float v = Util.mod((int) (currentPointsToTrack.get(i, j)[1] + y), 10); //New y position of the pixel
-
-                //Used these for sparse flow
-                //float[] u =  {Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[0], 90)) + (int) x)};
-                //float[] v =  {Math.abs( Math.abs(mod( (int) currentPointsToTrack.get(i,j)[1], 10) + (int) y))};
-
-                //Matrices for the next rows to be added
-                Mat next_uv = new Mat(1, 2, CvType.CV_32FC1);
-                Mat next_bi = new Mat(1, 1, CvType.CV_32FC1);
-
-                //Initialise new row
-                next_uv.put(0,0, u);
-                next_uv.put(0,1, v);
-                //output = "In, loop next_uv.dump(): " + next_uv.dump();
-                //Log.i(tag, output);
-
-                double bi = (x * v) - (y * u);
-                next_bi.put(0, 0, bi);
-
-                //Add new point and vector information to A and b
-                A.push_back(next_uv); //This doesn't work for some reason
-                //output = "In loop, A.dump(): " + A.dump();
-                //Log.i(tag, output);
-
-                b.push_back(next_bi); // Check this
-                //output = "b.dump(): " + b.dump();
-                //Log.i(tag, output);
-            }
-        }
-
-
-        Mat FOE = new Mat(2,1, CvType.CV_32FC1); // Should return a 2x1 representing the point that is the focus of expansion
-        //output = "A.size(): " + A.size();
-        //Log.i(tag, output);
-        //output = "A.dump(): " + A.dump();
-        //Log.i(tag, output);
-
-        //FOE: Given as FOE = (A'A)^-1A'b
-        //If this is the very first call initialise global_foe to front centre
-        if (init_foe) {
-            global_foe = new Mat(2,1,CvType.CV_32FC1);
-            global_foe.put(0,0,45);
-            global_foe.put(1,0,5);
-            init_foe = false;
-        }
-
-        try {
-            int n = A.cols();//Always two, but keep general
-            Mat AtA = new Mat(n, n, CvType.CV_32FC1); //Init new matrix of size nxn where n is the number of rows of A
-            Mat AtAinvAt = new Mat(A.cols(), A.rows(), CvType.CV_32FC1); //Init new matrix to hold ((A'A)^-1)A'
-
-            Core.gemm(A.t(), A, 1, new Mat(), 0, AtA, 0); //Step one of FOE: A'A
-            //output = "AtA.dump(): " + AtA.dump();
-            //Log.i(tag, output);
-
-            Mat AtAinv = AtA.inv(); // Step two of FOE: Invert A'A
-            Core.gemm(AtAinv, A.t(), 1, new Mat(), 0, AtAinvAt, 0); // Step three of FOE: Multiply by A' again
-            Core.gemm(AtAinvAt, b, 1, new Mat(), 0, FOE, 0); // Final step: Multiply ((A'A)^-1)A' by b
-
-            //Final bounds check to make sure we're in 0, 89 range in x and 0,9 in y
-            //If out of bounds, treat as if "wrapped", modulo if positive,
-
-            //output = "FOE.dump() before: " + FOE.dump();
-            //Log.i(tag, output);
-            double fx = FOE.get(0, 0)[0];
-            if (fx >= 90) {
-                fx = fx % 90;
-                FOE.put(0, 0, fx); //Replace the fixed value
-            } else if (fx < 0) {
-                fx = Math.abs(fx); //Absolute value
-                fx = fx % 90; //Get in range
-                fx = 89 - fx; // Sub from 90 to get "wrapped position"
-                FOE.put(0, 0, fx); //Replace the fixed value
-            }
-
-            double fy = FOE.get(1, 0)[0];
-            if (fy >= 10) {
-                fy = fy % 10;
-                FOE.put(0, 1, fy);
-            } else if (fy < 0) {
-                //output = "fy < 0 - START";
-                //Log.i(tag, output);
-                fy = Math.abs(fy);
-                //Log.i(tag, Double.toString(fy));
-                fy = fy % 10;
-                //Log.i(tag, Double.toString(fy));
-                fy = 9 - fy;
-                //Log.i(tag, Double.toString(fy));
-                FOE.put(1, 0, fy); //Replace the fixed y value
-                //output = "fy < 0 - END";
-                //Log.i(tag, output);
-
-
-            }
-
-            //output = "FOE.size() : " + FOE.size();
-            //Log.i(tag, output);
-
-            //output = "FOE.dump() : " + FOE.dump();
-            //Log.i(tag, output);
-
-            //End debug output and return
-            //output = tag + "=== DEBUG END ===";
-            //Log.i(tag, output);
-
-            //Making sure foe is averaged
-            if ( sample_no >= sample_size ) { //If we have enough samples, update FOE
-                //Extract FOE info and divide by sample size
-                double temp_x = sample_foe.get(0,0)[0];
-                double temp_y = sample_foe.get(1,0)[0];
-
-                //Take average x and y
-                temp_x = temp_x / sample_size;
-                temp_y = temp_y / sample_size;
-
-                //Update global FOE
-                global_foe.put(0,0, temp_x);
-                global_foe.put(1,0, temp_y);
-
-                sample_no = 0; //Reset sample count
-                sample_foe = new Mat(2,1, CvType.CV_32FC1); //Re-instantiate sample FOE
-            }
-
-            if (sample_no < sample_size) { //Done this way to avoid skipping a frame
-                //Extraction
-                if (sample_no == 0){ //If this is the first sample, initialise to (0,0)
-                    sample_foe = new Mat(2,1, CvType.CV_32FC1);
-                    sample_foe.put(0,0,0);
-                    sample_foe.put(1,0,0);
-                }
-                double temp_x1 = sample_foe.get(0,0)[0]; //Current sample_FOE x
-                double temp_y1 = sample_foe.get(1,0)[0]; //Current sample_FOE y
-                //output = "FOE.dump() try" + FOE.dump();
-                //Log.i(tag,output);
-                double temp_x2 = FOE.get(0,0)[0]; //Current computed FOE x
-                double temp_y2 = FOE.get(1,0)[0]; //Current computed FOE y
-
-                sample_foe.put(0, 0, (temp_x1 + temp_x2)); //Add new x to cumulative sum
-                sample_foe.put(1, 0, (temp_y1 + temp_y2)); //Add new y to cumulative sum
-
-                sample_no++; //new sample has been taken, increment sample counter
-            }
-            return global_foe; //Return current global, our curent foe
-        }catch( Exception e ){
-            e.printStackTrace();
-        }
-
-        //If, for some reason we could not compute the FOE properly, default to front, center
-        FOE.put(0, 0, 45);
-        FOE.put(1, 0, 5);
-
-        //Exactly the same as the above code, could clean up by moving to a function
-        //Making sure foe is averaged
-        if ( sample_no >= sample_size ) { //If we have enough samples, update FOE
-            //Extract FOE info and divide by sample size
-            double temp_x = sample_foe.get(0,0)[0];
-            double temp_y = sample_foe.get(1,0)[0];
-
-            //Take average x and y
-            temp_x = temp_x / sample_size;
-            temp_y = temp_y / sample_size;
-
-            //Update global FOE
-            global_foe.put(0,0, temp_x);
-            global_foe.put(1,0, temp_y);
-
-            sample_no = 0; //Reset sample count
-            sample_foe = new Mat(2,1, CvType.CV_32FC1); //Re-instantiate sample FOE
-        }
-
-        if (sample_no < sample_size) { //Done this way to avoid skipping a frame
-            //Extraction
-            if (sample_no == 0){ //If this is the first sample, initialise to (0,0)
-                sample_foe = new Mat(2,1, CvType.CV_32FC1);
-                sample_foe.put(0,0,0);
-                sample_foe.put(1,0,0);
-            }
-            double temp_x1 = sample_foe.get(0,0)[0]; //Current sample_FOE x
-            double temp_y1 = sample_foe.get(1,0)[0]; //Current sample_FOE y
-            //output = "FOE.dump() catch" + FOE.dump();
-            //Log.i(tag,output);
-            double temp_x2 = FOE.get(0,0)[0]; //Current computed FOE x
-            double temp_y2 = FOE.get(1,0)[0]; //Current computed FOE y
-
-            sample_foe.put(0, 0, (temp_x1 + temp_x2)); //Add new x to cumulative sum
-            sample_foe.put(1, 0, (temp_y1 + temp_y2)); //Add new y to cumulative sum
-
-            sample_no++; //new sample has been taken, increment sample counter
-        }
-
-        //Debug - Draw the FOE on the debug image
-        org.opencv.core.Point pt1_right = new org.opencv.core.Point(
-                global_foe.get(0,0)[0],
-                global_foe.get(1,0)[0]);
-        org.opencv.core.Point pt2_right = new org.opencv.core.Point(
-                global_foe.get(0,0)[0],
-                global_foe.get(1,0)[0]);
-        arrowedLine(debugFlowImage, pt1_right, pt2_right, new Scalar(0));
-
-        return global_foe;
-
-
-    }
-
-     private int log(File file, String output) { //Function to log information to an output file;
-        //Note to whoever inherits this monstrous code: This function does work but its deprecated
-        //You should instead use LogToFileUtils; StatFileUtils (see guide or contact me for formatting
-        //information); or create your own logging utility based on LogToFileUtils.
-        output = output.concat("\n"); //Add an implicit newline character
-        try {
-            FileOutputStream stream = new FileOutputStream(file);
-            stream.write(output.getBytes()); //Write to the output stream
-            stream.close();
-        } catch (Exception e) { //Catch FileIO exception
-            e.printStackTrace();
-            System.exit(-1);
-            return 1; //Return flag
-        }
-        return 0;
-    }
-
     /**
      * start searching
      */
-
     Runnable startSearch=new Runnable() {
         @Override
         public void run() {
@@ -3914,35 +2297,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         }
     };
-
-    public int getAvgMinIndex(double[] arr) {
-        //In unfamiliarity distributions, there can be a lot of 0 values; rather than
-        //taking the first, we take the midpoint of a series of minimum values.
-        //If the minimum values appear in a cluster (e.g. {34, 23, 0, 0, 0, 0, 0, 10, 23, 56});
-        //We return the index which is the midpoint of this group (e.g. 4 in the above array);
-        //If the minimum is alone, we return the index of it
-        int index = 0;
-        double minimum = arr[0];
-        int max_kcs = (int) mushroom_body.calculateMaximumUnfamiliarity();
-        int count = 0;
-
-        for ( int i = 0; i < arr.length; ++i ) {
-            if ( arr[i] >= max_kcs ){ ++count; }
-
-            if ( arr[i] <= minimum ){
-                minimum = arr[i];
-                index = i;
-            }
-
-        }
-
-        if ( count == arr.length ) {
-            //If all array elements are >= max_kcs, then we don't want to turn the robot at all.
-            index = arr.length / 2;
-        }
-
-        return index;
-    }
 
     Runnable startScanning = new Runnable() {
         @Override
@@ -4368,7 +2722,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
     }
 
-    private class LearnDirectionImages extends AsyncTask<Object, Integer, Boolean> {
+    public class LearnDirectionImages extends AsyncTask<Object, Integer, Boolean> {
 
         @Override
         protected Boolean doInBackground(Object... transmission) {

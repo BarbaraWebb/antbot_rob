@@ -32,11 +32,11 @@ public class CX_MB extends NavigationModules{
     private int learned_images= 0;
 
     // ---------------   PARAMETERS  ---------------------
-    static int n_tl2 = 16;
-    static int n_cl1 = 16;
-    static int n_tb1 = 8;
-    static int n_cpu4 = 16;
-    static int n_cpu1 = 16;
+    public static int n_tl2 = 16;
+    public static int n_cl1 = 16;
+    public static int n_tb1 = 8;
+    public static int n_cpu4 = 16;
+    public static int n_cpu1 = 16;
     // Zhaoyu added this for right ENs
     static int n_en = 8;
 
