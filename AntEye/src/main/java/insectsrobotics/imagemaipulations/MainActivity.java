@@ -107,6 +107,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     Button calcErrorBtn;
     int counting =0;
     public Mat imageToDisplay;
+    boolean firstFrame = true;
 
     //Receiver and Broadcaster
     public Broadcast broadcast;
@@ -207,8 +208,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     //*** Camera calibration data
     double R1 = 104.7; //radius of the inner circle
     double R2 = 217.2; //radius of the outer circle
-    double centreX = 527; // X coordinate of the image centre
-    double centreY = 406; // Y coordiate of the image centre
+    double centreX = 546.5; // X coordinate of the image centre
+    double centreY = 425.5; // Y coordiate of the image centre
     double[] affine = new double[]{1.000329,0.000171,-0.000339,1.0}; // Affine parameters c, d, e and 1
     Mat affineMat;
 
@@ -356,8 +357,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     Log.i(TAG, "OpenCV loaded successfully");
                     imageToDisplay=Mat.zeros(10,90,CvType.CV_8UC1);
                     // Set Camera parameters
-                    unwrapHeight = scale*(R2-R1);
-                    unwrapWidth = scale*2*Math.PI*(R1+R2)/2;
+                    unwrapHeight = scale * (R2-R1);
+                    unwrapWidth = scale * 2 * Math.PI * (R1+R2) / 2;
                     imageMapX = Mat.zeros(((int)unwrapHeight),((int) unwrapWidth),CvType.CV_32FC1);
                     imageMapY = Mat.zeros(((int)unwrapHeight),((int) unwrapWidth),CvType.CV_32FC1);
                     affineMat = new Mat(2,2,CvType.CV_32FC1);
@@ -709,10 +710,11 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         int l=0;
         Mat temp= Mat.zeros(2,2,CvType.CV_32FC1);
 
-
+        //
+        // Build the Affine Matrix
+        //
         for(int x=0;x<affineMat.rows();x++){
             for(int y=0;y<affineMat.cols();y++){
-
                 affineMat.put(x,y,affine[l]);
                 l++;
             }
@@ -720,23 +722,88 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         for(int y=0; y<(int)unwrapHeight; y++){
             for(int x=0; x<(int)unwrapWidth; x++){
-                r = ((double)y/unwrapHeight)*(R2-R1)+R1;
+                r = ((double) y / unwrapHeight) * (R2 - R1) + R1;
                 theta = ((double)x/ unwrapWidth) * 2 * Math.PI;
+
+                //
+                // Polar coordinates the current pixel
+                //
                 xS = (int) (centreX + r*Math.sin(theta));
                 yS = (int) (centreY + r*Math.cos(theta));
 
+
                 temp.put(0, 0, xS);
                 temp.put(1, 0, yS);
-                Core.gemm(affineMat.inv(),temp,1,new Mat(),0,temp,0);
-                xS=(int)(temp.get(0,0)[0]);
-                yS=(int)temp.get(1,0)[0];
+                Core.gemm(affineMat.inv(), temp,1,new Mat(),0, temp,0);
 
+                xS = (int)(temp.get(0,0)[0]);
+                yS = (int)temp.get(1,0)[0];
 
                 imageMapX.put(y, x, xS);
-                imageMapY.put(y,x,yS);
-
+                imageMapY.put(y, x, yS);
             }
         }
+    }
+
+    //
+    // Auto-detect the 360deg mirror ring in the lens attachment; then build the map based
+    // on this position.
+    //
+    private void calibrate(Mat rgb_image){
+        Util.saveImageToFolder(rgb_image, "image_from__calibrate", "cal");
+        Mat hsv = new Mat(rgb_image.rows(), rgb_image.cols(), CvType.CV_8UC1);
+        List<Mat> hsv_split = new ArrayList<Mat>();
+
+        Mat blurred = new Mat(rgb_image.rows(), rgb_image.cols(), rgb_image.type());
+        Mat circles = new Mat();
+
+        Log.i("CAL_FUN", "Calibrating");
+        Imgproc.cvtColor(rgb_image, hsv, Imgproc.COLOR_BGR2HSV);
+        Log.i("CAL_FUN", "Extracting saturation");
+
+        //
+        // Extract the saturation channel from the HSV image
+        //
+        Core.split(hsv, hsv_split);
+        //for (int i = 0; i < rgb_image.rows(); i++){
+          //  for(int j = 0; j < rgb_image.cols(); j++){
+            //    double s = hsv.get(i,j)[1];
+              //  saturation.put(i, j, s);
+            //}
+        //}
+
+        // Blur the saturation
+        // The blurring factor (the Size) can be modified to get a more blurred image, which
+        // will be quicker for the Hough transform; however, if you lose too much detail you
+        // can no longer detect circles. Size(10,10) as well as param2 == 300 known to work
+        // on the brightly lit football pitch; this really would be good if it were more consistent
+        Imgproc.blur(hsv_split.get(1), blurred, new Size(10,10));
+        Util.saveImageToFolder(blurred, "blurred", "");
+        Log.i("CAL_FUN", "Hough transform . . .");
+        Imgproc.HoughCircles(
+                blurred,
+                circles,
+                Imgproc.CV_HOUGH_GRADIENT,
+                1,
+                20,
+                30,
+                300,
+                0,
+                0);
+
+        // With these parameters on the blurred image, HoughCircles should detect one circle
+        // with its centre at the centre of the camera attachment.
+        Log.i("CAL_FUN", "# Circles : " + circles.cols());
+        for (int i = 0; i < circles.cols(); i++){
+            double[] circle = circles.get(0, i);
+            centreX = circle[0];
+            centreY = circle[1];
+        }
+
+        Log.i("CAL_FUN", "Detected centre : (" + centreX + ", " + centreY + ")");
+        // Build the unwrap map based on the computed centre (will default to the manually set
+        // values if no centre is detected).
+        unwrapMap();
     }
 
     /**
@@ -764,18 +831,17 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         leftCXFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
         rightCXFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
 
-        //Centered flow image - For obstacle detection - RM
-        //centeredFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
-
         current_image = Mat.zeros(10, 90, CvType.CV_8UC1);
         debugFlowImage = Mat.zeros(10, 90, CvType.CV_8UC1);
 
         processedSourceImage = Mat.zeros(theta_new.length / sourceResolution, 360 / sourceResolution, CvType.CV_8UC1);
 
         processedDestImage = Mat.zeros(theta_new.length / resolution, 360 / resolution, processedSourceImage.type());
-        images_access = false;
+
+        images_access = false; // Image access lock
+
         Mat tempRotate = Mat.zeros(processedSourceImage.size(), processedSourceImage.type());
-        fullImageToDisplay=Mat.zeros(processedSourceImage.size(),processedSourceImage.type());
+        fullImageToDisplay = Mat.zeros(processedSourceImage.size(), processedSourceImage.type());
 
         //We have frame rate information computed here
         prevFrameTime = currentFrameTime;
@@ -787,11 +853,25 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
 
         //Get input frame in RGBA then copy to BlueChannel Mat - RM
-        rgba = inputFrame.rgba();                                           //Input Frame in rgba format
+        rgba = inputFrame.rgba(); // Input Frame in rgba format
+
+        //
+        // Calibration: If the camera mount position needs re-calibrated then comment the
+        // line "firstFrame = false". Run some thread with the robot connected to the PC
+        // and filter Logcat using the tag CAL_FUN. Calibrate should auto-detect the position
+        // of the ring and give you the centre coordinates. Check the image on the robot is
+        // correct. Once you have these, set the values for centreX and centreY accordingly.
+        //
+        firstFrame = false;
+        if (firstFrame) {
+            firstFrame = false;
+            calibrate(rgba);
+        }
+
         //Log.i("Channels : ", Integer.toString(rgba.channels()));
         //RGB normalisation here!!
         String op = "RGBA.size()" + rgba.size();
-       // Log.i("RGBA shape : ",op);
+        Log.i("RGBA shape : ",op);
         //normalizeRgbaImage(); //Normalise the global rgba image
 
         BlueChannel = new Mat(rgba.rows(), rgba.cols(), CvType.CV_8UC1);    //Mat for later image processing
@@ -1016,7 +1096,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 switch(opticalFlowModule){
                     case OF_DETECT:
                         Log.i("OF: ", "Thread started");
-                        opticalFlowThread = new Thread(combiner.sequentialThread);
+                        //opticalFlowThread = new Thread(combiner.sequentialThread);
+                        opticalFlowThread = new Thread(testRun);
                         opticalFlowThread.start();
                         break;
                     case OF_AVOID:
@@ -1089,9 +1170,12 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             int t0 = (int) SystemClock.elapsedRealtime();
             int t = (int) SystemClock.elapsedRealtime() - t0;
 
-            while(t < 40000) {
-                output = "[ (X, " + global_x + ") ]";
-                Log.i(tag, output);
+            try {
+                Command.turnAround(180);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
             }
         }
     };

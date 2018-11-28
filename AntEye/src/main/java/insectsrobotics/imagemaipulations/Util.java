@@ -109,10 +109,10 @@ public class Util {
     //
     // Method to save the frames on the DCIM folder in the android phone.
     //
-    public void saveImageToFolder(Mat image, String filename, String tag)
+    public static void saveImageToFolder(Mat image, String filename, String tag)
     {
         Bitmap bmp = null;
-        tag = "";
+        tag = "SAVE";
 
         try
         {
@@ -134,7 +134,7 @@ public class Util {
         }
         if (success) {
             File dest = new File(sd, filename);
-
+            Log.d(tag, dest.getAbsolutePath());
             try {
                 out = new FileOutputStream(dest);
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance

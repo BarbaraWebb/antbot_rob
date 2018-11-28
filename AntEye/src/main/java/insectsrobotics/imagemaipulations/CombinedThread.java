@@ -17,7 +17,6 @@ public class CombinedThread {
 
     public CombinedThread(MainActivity app){ this.app = app; }
 
-
     Runnable sequentialThread;
 
     {
@@ -38,7 +37,7 @@ public class CombinedThread {
 
                 int startTime = (int) SystemClock.elapsedRealtime();
                 int currentTime = (int) SystemClock.elapsedRealtime() - startTime;
-                int outboundTime = 40000;
+                int outboundTime = 30000;
                 int inboundTime = outboundTime;
 
                 //
@@ -62,7 +61,7 @@ public class CombinedThread {
                 cpu1.set(0);
 
                 //
-                // Motor settings
+                // Motor settings - Different speeds account for motor differences
                 //
                 int leftSpeed = 15;
                 int rightSpeed = 14;
@@ -81,8 +80,6 @@ public class CombinedThread {
                 //
                 // Distance and interval measurements
                 //
-                int averageIntervalSpeed = 0;
-                int measurementCounter = 0;
                 int intervalStart = (int) SystemClock.elapsedRealtime();
 
                 //
@@ -96,6 +93,27 @@ public class CombinedThread {
                         sleep(600);
                     } catch (Exception e) {
                         e.printStackTrace();
+                    }
+
+                    // Compute flow difference between the sides
+                    app.ca_flow_diff = app.leftCAFlow - app.rightCAFlow;
+
+                    //
+                    // Accumulate values if they are great enough
+                    //
+                    if (app.ca_flow_diff >= accumulationThreshold) {
+                        leftAccumulator += (int) app.ca_flow_diff;
+                    } else if (app.ca_flow_diff <= -(accumulationThreshold)) {
+                        rightAccumulator += Math.abs((int) app.ca_flow_diff);
+                    }
+
+                    //
+                    // Reset values if they are stale
+                    //
+                    if (loopCounter >= 2) {
+                        leftAccumulator = 0;
+                        rightAccumulator = 0;
+                        loopCounter = 0;
                     }
 
                     //
@@ -112,51 +130,22 @@ public class CombinedThread {
                         intervalStart = (int) SystemClock.elapsedRealtime();
                     }
 
-                    // Compute flow difference between the sides
-                    app.ca_flow_diff = app.leftCAFlow - app.rightCAFlow;
-
-                    // Compute average speed from this measurement
-                    double averageInstantSpeed = (app.leftCAFlow + app.rightCAFlow) / 2;
-                    averageIntervalSpeed += averageInstantSpeed;
-                    measurementCounter++;
-
-                    //
-                    // Accumulate values if they are great enough
-                    //
-                    if (app.ca_flow_diff >= accumulationThreshold) {
-                        leftAccumulator += (int) app.ca_flow_diff;
-                    } else if (app.ca_flow_diff <= -(accumulationThreshold)) {
-                        rightAccumulator += (int) Math.abs(app.ca_flow_diff);
-                    }
-
-                    //
-                    // Reset values if they are stale
-                    //
-                    if (loopCounter >= 2) {
-                        leftAccumulator = 0;
-                        rightAccumulator = 0;
-                        loopCounter = 0;
-                    }
-
                     // Check to see if one of the accumulators exceeds the threshold
                     boolean turn =
-                            (leftAccumulator >= reactionThreshold);
+                            (leftAccumulator >= reactionThreshold) ||
+                                    (rightAccumulator >= reactionThreshold);
                     
 
                     if (turn) {
                         // If leftAcc > rightAcc set the angle to 20deg, else, -20deg
                         turnAngle = (leftAccumulator > rightAccumulator) ? 20 : -20;
 
+                        // Compute the distance. We assume the robot travels one "unit" per second
+                        // that it is mobile.
+                        distance = ((int) SystemClock.elapsedRealtime() - intervalStart) / 1000;
+
                         // Halt the robot
                         Command.go(new double[]{0, 0});
-
-                        //
-                        // Update distance information
-                        //
-                        double interval = SystemClock.elapsedRealtime() - intervalStart;
-                        averageIntervalSpeed = averageIntervalSpeed / measurementCounter;
-                        measurementCounter = 0;
-                        distance = (interval / 1000) * averageIntervalSpeed; // D = VT
 
                         //
                         // Command delay
@@ -166,6 +155,25 @@ public class CombinedThread {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+
+
+                        //
+                        // UI information
+                        //
+                        try {
+                            app.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    app.debugTextView.setText(String.format(
+                                            "Distance travelled: %f",
+                                            distance
+                                    ));
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
 
                         // Set the flag to restart the motors on the next iteration
                         motorReset = true;
@@ -198,8 +206,13 @@ public class CombinedThread {
                             e.printStackTrace();
                         }
 
+                        // Reset the accumulators and interval distance
+                        leftAccumulator = 0;
+                        rightAccumulator = 0;
+                        distance = 0;
                     }
 
+                    loopCounter++;
                     currentTime = (int) SystemClock.elapsedRealtime() - startTime;
                 } // End of outbound route
 
@@ -238,8 +251,8 @@ public class CombinedThread {
                 currentTime = (int) SystemClock.elapsedRealtime() - startTime;
                 intervalStart = (int) SystemClock.elapsedRealtime();
                 motorReset = false;
-                averageIntervalSpeed = 0;
                 distance = 0;
+                loopCounter = 0;
 
                 //
                 // Prerequisite; initialise willshaw net, and turn to correct starting angle
@@ -309,22 +322,15 @@ public class CombinedThread {
                     // Compute flow difference between the sides
                     app.ca_flow_diff = app.leftCAFlow - app.rightCAFlow;
 
-                    // Compute average speed from this measurement
-                    double averageInstantSpeed = (app.leftCAFlow + app.rightCAFlow) / 2;
-                    averageIntervalSpeed += averageInstantSpeed; //Division to compress the value
-                    measurementCounter++;
-
                     //
                     // Time based navigational update
                     //
-                    if (measurementCounter >= 2) {
+                    if (loopCounter >= 2) {
                         //
-                        // Update distance information
+                        // Update distance information; again, one unit per second travelled
                         //
-                        double interval = SystemClock.elapsedRealtime() - intervalStart;
-                        averageIntervalSpeed = averageIntervalSpeed / measurementCounter;
-                        distance = (interval / 1000) * averageIntervalSpeed; // D = VT
-                        measurementCounter = 0; // Reset counter
+                        int interval = (int) SystemClock.elapsedRealtime() - intervalStart;
+                        distance = (interval / 1000);
 
                         Command.go(new double[] {0, 0});
                         try { sleep(1000); } catch (Exception e) { e.printStackTrace(); }
@@ -355,6 +361,23 @@ public class CombinedThread {
                         app.CXtheta = (app.CXnewHeading - app.currentDegree) % 360;
 
                         //
+                        // Print out the turning angle
+                        //
+                        try {
+                            app.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    app.debugTextView.setText(String.format(
+                                            "CXTheta: %f",
+                                            distance
+                                    ));
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        //
                         // Generate motor commands
                         //
                         try {
@@ -363,15 +386,13 @@ public class CombinedThread {
                             e.printStackTrace();
                         }
 
-                        // Restart motors
+                        // Restart motors; will reset time interval too.
                         motorReset = true;
-
-                        // Reset interval
-                        intervalStart = (int) SystemClock.elapsedRealtime();
                     }
 
                     // Update current time
                     currentTime = (int) SystemClock.elapsedRealtime() - startTime;
+                    loopCounter++;
                 }
             } // Run
         };

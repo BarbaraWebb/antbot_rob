@@ -1,0 +1,12 @@
+- Sensor research
+- Sensor added
+- Code refactored (dead code removed)
+- Calibration code added to allow auto-detection of the camera mount with
+  calibration method.
+	Place the robot on the pitch, connected to a laptop via USB. Enable
+	calibration on the robot by commenting the required line. Run any
+	thread which uses the camera. Check the image displayed and the
+	coordinates visible in logcat (filtered with CAL_FUN). Set coordinates.
+	Disable calibration mode. There's probably no harm in leaving it on, but
+	it gives more consistency in experiments and is faster to turn off. 
+

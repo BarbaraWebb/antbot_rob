@@ -13,7 +13,7 @@ import android.util.Log;
 public class CentralComplexThreads {
     private MainActivity main = null;
     //
-    // Constructor. For legecay reasons we need access to MainActivity for various global variables
+    // Constructor. For legacy reasons we need access to MainActivity for various global variables
     //
     public CentralComplexThreads(MainActivity main){
         this.main = main;
@@ -516,6 +516,9 @@ public class CentralComplexThreads {
         }
     };
 
+    //
+    // Modified by RM, outbound time reduced to 25 seconds and speeds adjusted for new power supply
+    //
     public Runnable CXHolonomicThread=new Runnable() {
         @Override
         public void run() {
@@ -526,7 +529,7 @@ public class CentralComplexThreads {
             }
 
             CX_H_Pontin c = new CX_H_Pontin();
-            Integer T_outbound = 40;            // outbound for 40 sec
+            Integer T_outbound = 25;            // outbound for 40 sec
             Integer T_inbound = 55;             // inbound for 55 sec
             Integer T = T_inbound + T_outbound; // total run
 
@@ -547,7 +550,7 @@ public class CentralComplexThreads {
             int t0 = (int) SystemClock.elapsedRealtime();
             int t = 0;
             main.CURRiteration = 0;
-            int currentTime = (int)SystemClock.elapsedRealtime()-main.startTime;
+            int currentTime = (int)SystemClock.elapsedRealtime()-startTime;
 
             while (currentTime<T_outbound*1000) {
                 main.CURRiteration++;
@@ -584,27 +587,28 @@ public class CentralComplexThreads {
                 String direction = "";
                 if(t>300) {
                     if (currentTime < 3500) {
-                        Command.go(new double[]{100, 100});
+                        Command.go(new double[]{15, 15});
                         main.ANT_SPEED = 4.0;
                         direction = "straight";
                     } else if (currentTime < 8000) {
-                        Command.go(new double[]{10, 100});
+                        Command.go(new double[]{5, 15});
                         main.ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 11000) {
-                        Command.go(new double[]{100, 10});
+                        Command.go(new double[]{15, 5});
                         main.ANT_SPEED = 2.0;
                         direction = "left";
                     } else if (currentTime < 25000) {
-                        Command.go(new double[]{100, 100});
+                        Command.go(new double[]{15, 15});
                         main.ANT_SPEED = 4.;
                         direction = "straight";
                     } else {
-                        Command.go(new double[]{100, 10});
+                        Command.go(new double[]{15, 5});
                         main.ANT_SPEED = 4.;
                         direction = "straight";
                     }
                 }
+
                 t0 = (int) SystemClock.elapsedRealtime();
                 Log.d(MainActivity.TAG, "facing " + main.currentDegree + ", going " + direction);
                 Log.d(MainActivity.TAG, Util.printMemory(memory));
@@ -626,7 +630,7 @@ public class CentralComplexThreads {
                 // ----- TURNING GENERATION ------
                 cpu1 = c.cpu1Output(tb1, cpu4);
                 main.CXmotor = c.motorOutput(cpu1);
-                currentTime = (int) SystemClock.elapsedRealtime()-main.startTime;
+                currentTime = (int) SystemClock.elapsedRealtime()-startTime;
                 Util.writeToFile(memory, main.leftCXFlow, main.rightCXFlow, "run",main.frame_rate_cx, main.CURRiteration, main.CXnewHeading);
             }
 
@@ -644,7 +648,7 @@ public class CentralComplexThreads {
             }
             currentTime = (int)SystemClock.elapsedRealtime()-t0;
 
-            main.startTime = (int) SystemClock.elapsedRealtime();
+            startTime = (int) SystemClock.elapsedRealtime();
             t0 = (int)SystemClock.elapsedRealtime();
             t = 0;
 
@@ -693,15 +697,15 @@ public class CentralComplexThreads {
                 if(t > 300){
                     // speed in dm/sec
                     if (main.CXtheta < -1.5){
-                        Command.go(new double[]{10, 100});
+                        Command.go(new double[]{5, 15});
                         main.ANT_SPEED = 0.5;
                         direction = "left";
                     } else if (main.CXtheta>1.5){
-                        Command.go(new double[]{100, 10});
+                        Command.go(new double[]{15, 5});
                         main.ANT_SPEED = 0.5;
                         direction = "right";
                     } else {
-                        Command.go(new double[]{100, 100});
+                        Command.go(new double[]{15, 15});
                         main.ANT_SPEED = 4.;
                         direction = "straight";
                     }
@@ -721,7 +725,7 @@ public class CentralComplexThreads {
                                 frame_rate = 0;
                             }
                             main.debugTextView.setText(String.format(
-                                    "iutbound " +
+                                    "inbound " +
                                             "\nLeft Speed: %f"+
                                             "\nRight Speed: %f" +
                                             "\nFrameRate: %f",
@@ -736,9 +740,8 @@ public class CentralComplexThreads {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                currentTime = (int) SystemClock.elapsedRealtime() - main.startTime;
-//                if(isHome(memory)) break;
-
+                currentTime = (int) SystemClock.elapsedRealtime() - startTime;
+                if(Util.isHome(memory)) break;
             }
 
             Command.go(new double[]{0, 0});
