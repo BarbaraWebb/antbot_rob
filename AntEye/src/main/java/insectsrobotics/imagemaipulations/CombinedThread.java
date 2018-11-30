@@ -37,8 +37,8 @@ public class CombinedThread {
 
                 int startTime = (int) SystemClock.elapsedRealtime();
                 int currentTime = (int) SystemClock.elapsedRealtime() - startTime;
-                int outboundTime = 30000;
-                int inboundTime = outboundTime;
+                int outboundTime = 20000;
+                int inboundTime = 80000;
 
                 //
                 // Connectivity matrix declarations
@@ -102,9 +102,9 @@ public class CombinedThread {
                     // Accumulate values if they are great enough
                     //
                     if (app.ca_flow_diff >= accumulationThreshold) {
-                        leftAccumulator += (int) app.ca_flow_diff;
+                        leftAccumulator = leftAccumulator + (int) app.ca_flow_diff;
                     } else if (app.ca_flow_diff <= -(accumulationThreshold)) {
-                        rightAccumulator += Math.abs((int) app.ca_flow_diff);
+                        rightAccumulator = rightAccumulator + Math.abs((int) app.ca_flow_diff);
                     }
 
                     //
@@ -114,6 +114,43 @@ public class CombinedThread {
                         leftAccumulator = 0;
                         rightAccumulator = 0;
                         loopCounter = 0;
+                    }
+
+                    //
+                    // Update the directional neurons from the compass
+                    //
+                    tl2 = centralComplex.tl2Output(Math.toRadians(app.currentDegree));
+                    cl1 = centralComplex.cl1Output(tl2);
+                    tb1 = centralComplex.tb1Output(cl1, tb1);
+
+                    //
+                    // Displacement update
+                    //
+                    double speed = 4; // Arbitrary speed value for the CX
+                    memory = centralComplex.cpu4Update(memory, tb1, speed);
+                    cpu4 = centralComplex.cpu4Output(memory.copy());
+
+                    try {
+                        app.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                app.debugTextView.setText(String.format(
+                                        "Speed: %f \n" +
+                                                "Left CA flow: %f \n" +
+                                                "Right CA flow: %f \n" +
+                                                "Flow Difference: %f \n" +
+                                                "Current Degree: %f"
+                                        ,
+                                        app.speed,
+                                        app.leftCAFlow,
+                                        app.rightCAFlow,
+                                        app.ca_flow_diff,
+                                        app.currentDegree
+                                ));
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
                     //
@@ -130,86 +167,45 @@ public class CombinedThread {
                         intervalStart = (int) SystemClock.elapsedRealtime();
                     }
 
-                    // Check to see if one of the accumulators exceeds the threshold
-                    boolean turn =
-                            (leftAccumulator >= reactionThreshold) ||
-                                    (rightAccumulator >= reactionThreshold);
-                    
+                    boolean left = false;
+                    boolean right = false;
 
-                    if (turn) {
-                        // If leftAcc > rightAcc set the angle to 20deg, else, -20deg
-                        turnAngle = (leftAccumulator > rightAccumulator) ? 20 : -20;
+                    if (leftAccumulator >= reactionThreshold) {
+                        right = true;
+                    } else if (rightAccumulator >= reactionThreshold){
+                        left = true;
+                    }
 
-                        // Compute the distance. We assume the robot travels one "unit" per second
-                        // that it is mobile.
-                        distance = ((int) SystemClock.elapsedRealtime() - intervalStart) / 1000;
+                    //
+                    // Turning generation
+                    //
+                    cpu1 = centralComplex.cpu1Output(tb1, cpu4);
+                    app.CXmotor = centralComplex.motorOutput(cpu1);
 
-                        // Halt the robot
+                    if (left){
                         Command.go(new double[]{0, 0});
-
-                        //
-                        // Command delay
-                        //
+                        try { sleep(1000); } catch(Exception e){ e.printStackTrace(); }
                         try {
-                            sleep(1000);
-                        } catch (Exception e) {
+                            Command.turnAround(20);
+                        } catch(Exception e) {
                             e.printStackTrace();
                         }
 
-
-                        //
-                        // UI information
-                        //
-                        try {
-                            app.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    app.debugTextView.setText(String.format(
-                                            "Distance travelled: %f",
-                                            distance
-                                    ));
-                                }
-                            });
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-
-                        // Set the flag to restart the motors on the next iteration
                         motorReset = true;
-
-                        //
-                        // Update the directional neurons from the compass
-                        //
-                        tl2 = centralComplex.tl2Output(Math.toRadians(app.currentDegree));
-                        cl1 = centralComplex.cl1Output(tl2);
-                        tb1 = centralComplex.tb1Output(cl1, tb1);
-
-                        //
-                        // Displacement update
-                        //
-                        memory = centralComplex.cpu4Update(memory, tb1, distance);
-                        cpu4 = centralComplex.cpu4Output(memory.copy());
-
-                        //
-                        // Turning generation
-                        //
-                        cpu1 = centralComplex.cpu1Output(tb1, cpu4);
-                        app.CXmotor = centralComplex.motorOutput(cpu1);
-
-                        //
-                        // Perform the avoidance turn
-                        //
-                        try {
-                            Command.turnAround(turnAngle);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        // Reset the accumulators and interval distance
                         leftAccumulator = 0;
                         rightAccumulator = 0;
-                        distance = 0;
+                    } else if (right){
+                        Command.go(new double[]{0, 0});
+                        try { sleep(1000); } catch(Exception e) { e.printStackTrace(); }
+                        try {
+                            Command.turnAround(-20);
+                        } catch(Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        motorReset = true;
+                        leftAccumulator = 0;
+                        rightAccumulator = 0;
                     }
 
                     loopCounter++;
@@ -243,6 +239,24 @@ public class CombinedThread {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                //
+                // Turn around for the sake of ease.
+                //
+                // try { Command.turnAround(170); } catch(Exception e) { e.printStackTrace(); }
+
+                //
+                // Update the directional neurons from the compass
+                //
+                tl2 = centralComplex.tl2Output(Math.toRadians(app.currentDegree));
+                cl1 = centralComplex.cl1Output(tl2);
+                tb1 = centralComplex.tb1Output(cl1, tb1);
+
+                //
+                // Displacement update; really we just want to update the angle
+                //
+                memory = centralComplex.cpu4Update(memory, tb1, 0.0);
+                cpu4 = centralComplex.cpu4Output(memory.copy());
 
                 //
                 // Inbound route with CXPI parameter reset
@@ -281,6 +295,7 @@ public class CombinedThread {
                 // Generate motor commands
                 //
                 try {
+
                     Command.turnAround(app.CXtheta);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -323,41 +338,43 @@ public class CombinedThread {
                     app.ca_flow_diff = app.leftCAFlow - app.rightCAFlow;
 
                     //
-                    // Time based navigational update
+                    // Compass update
+                    //
+                    tl2 = centralComplex.tl2Output(Math.toRadians(app.currentDegree));
+                    cl1 = centralComplex.cl1Output(tl2);
+                    tb1 = centralComplex.tb1Output(cl1, tb1);
+
+                    //
+                    // Displacement update
+                    //
+                    double speed = 4;
+                    memory = centralComplex.cpu4Update(memory, tb1, speed);
+                    cpu4 = centralComplex.cpu4Output(memory.copy());
+
+                    //
+                    // Time based navigational update; every two loops, turn if necessary.
                     //
                     if (loopCounter >= 2) {
-                        //
-                        // Update distance information; again, one unit per second travelled
-                        //
-                        int interval = (int) SystemClock.elapsedRealtime() - intervalStart;
-                        distance = (interval / 1000);
-
                         Command.go(new double[] {0, 0});
                         try { sleep(1000); } catch (Exception e) { e.printStackTrace(); }
-
-                        //
-                        // Compass update
-                        //
-                        tl2 = centralComplex.tl2Output(Math.toRadians(app.currentDegree));
-                        cl1 = centralComplex.cl1Output(tl2);
-                        tb1 = centralComplex.tb1Output(cl1, tb1);
-
-                        //
-                        // Displacement update
-                        //
-                        memory = centralComplex.cpu4Update(memory, tb1, distance);
-                        cpu4 = centralComplex.cpu4Output(memory.copy());
 
                         //
                         // Generate target angle
                         //
                         cpu1 = centralComplex.cpu1Output(tb1, cpu4);
                         app.CXmotor = centralComplex.motorOutput(cpu1);
+
+                        app.CXnewHeading = Math.toDegrees(
+                                (Math.toRadians(app.currentDegree) + app.CXmotor + Math.PI)
+                                        %(2.0 * Math.PI) - Math.PI
+                        );
+
+                        /*
                         app.CXnewHeading =
                                 Math.toDegrees(
                                         Math.toRadians(app.currentDegree) -
                                                 app.CXmotorChange * app.CXmotor
-                                );
+                                );*/
                         app.CXtheta = (app.CXnewHeading - app.currentDegree) % 360;
 
                         //
@@ -369,7 +386,7 @@ public class CombinedThread {
                                 public void run() {
                                     app.debugTextView.setText(String.format(
                                             "CXTheta: %f",
-                                            distance
+                                            app.CXtheta
                                     ));
                                 }
                             });
@@ -378,12 +395,20 @@ public class CombinedThread {
                         }
 
                         //
-                        // Generate motor commands
+                        // Generate motor commands; if a turn should be generated
                         //
-                        try {
-                            Command.turnAround(app.CXtheta);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        if (app.CXtheta > 1.5 || app.CXtheta < -1.5) {
+                            try {
+                                double angle = 0;
+                                if (app.CXtheta > 1.5) {
+                                    angle = 20;
+                                } else if (app.CXtheta < -1.5) {
+                                    angle = -20;
+                                }
+                                Command.turnAround(app.CXtheta);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
 
                         // Restart motors; will reset time interval too.

@@ -1096,8 +1096,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 switch(opticalFlowModule){
                     case OF_DETECT:
                         Log.i("OF: ", "Thread started");
-                        //opticalFlowThread = new Thread(combiner.sequentialThread);
-                        opticalFlowThread = new Thread(testRun);
+                        opticalFlowThread = new Thread(combiner.sequentialThread);
+                        //opticalFlowThread = new Thread(testRun);
                         opticalFlowThread.start();
                         break;
                     case OF_AVOID:
@@ -1172,11 +1172,20 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             try {
                 Command.turnAround(180);
+                sleep(2000);
+                Command.turnAround(90);
+                sleep(2000);
+                Command.turnAround(45);
+                sleep(2000);
+                Command.turnAround(20);
             }
             catch (Exception e)
             {
                 e.printStackTrace();
             }
+
+            try { sleep(1000);  } catch(Exception e){ e.printStackTrace(); }
+
         }
     };
     ////////////////////////////////////////////////////////////////////////////////////////////////
