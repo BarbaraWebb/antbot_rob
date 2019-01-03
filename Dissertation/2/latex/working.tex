@@ -1,0 +1,219 @@
+
+
+\documentclass[a4paper,11pt,twoside,openright]{article}
+
+\usepackage[toc,page]{appendix}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage[section]{placeins}
+\usepackage{array}
+\usepackage[nottoc,numbib]{tocbibind}
+%\usepackage{titlesec}
+
+\geometry{margin=1in}
+\graphicspath{ {Images/} }
+
+\newcolumntype{?}[1]{!{\vrule width #1}}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+\let\oldsection\section
+\def\section{\cleardoublepage\oldsection}
+
+%\setcounter{tocdepth}{4}
+
+%\titleformat{\paragraph}
+%{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+%\titlespacing*{\paragraph}
+%{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TITLEPAGE                                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{gobble}
+\centering
+\vspace*{6cm}
+        {\huge Developing AntBot: \par A navigational system inspired by \par the
+          insect brain \par}
+\vspace{1cm}
+{\Large \textit{Robert Mitchell}}
+
+\vspace{3cm}
+
+{\large Master of Informatics \par}
+{\large Informatics \par}
+{\large School of Informatics \par}
+{\large The University of Edinburgh \par}
+\large \today \par
+
+\vfill
+Supervised by\par
+Dr. Barbara Webb
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACKNOWLEDGEMENTS                                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{roman}
+\centering
+{\LARGE \textbf{Acknowledgements}}
+\begin{flushleft}
+ {\small \textit{Pending . . .} }
+\end{flushleft}  
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DECLARATION                                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+{\LARGE\textbf{Declaration}}
+\begin{flushleft}
+  {\small
+    I declare that this dissertation was composed by myself, the work
+    contained herein is my own except where explicitly stated otherwise
+    in the text, and that this work has not been submitted for any other
+    degree or professional qualification except as specified.
+    \par 
+
+    \textit{Robert Mitchell}}
+
+\end{flushleft}
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
+{\LARGE\textbf{Abstract}}
+\begin{flushleft}
+  {\small \textit{Pending . . .}}
+\end{flushleft}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONTENTS                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FIGURES                                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\listoffigures
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TABLES                                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\listoftables
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INTRODUCTION                                                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{arabic}
+
+\raggedright
+\section{ Introduction }
+
+
+\subsection{ Motivation }
+
+\subsection { Goals }
+
+\subsection { Results }
+This work is based on work done previously by Leonard Eberding, Luca Scimeca,
+Zhaoyu Zhang, and Robert Mitchell.
+\cite{Eberding2016, Scimeca2017, Zhang2017, Mitchell2018}.
+\newline
+
+Significant contributions of this project:
+\begin{enumerate}
+  \item{Placeholder}
+\end{enumerate}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BACKGROUND                                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Brief summaries of OF and MB, more detailed discussion of CX
+\section{ Background }
+\subsection{ Optical Flow } \label{OFBackground}
+\subsection{ The Mushroom Body for Visual Navigation } \label{MBBackground}
+\subsection{ The Central Complex for Path Integration } \label{CXBackground}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PLATFORM                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% High level description of the platform. This section can be short. Refer back
+% to Part 1 for detail.
+\section{ Platform } \label{sec:platform}
+\subsection{ Hardware }
+\subsection{ Software }
+\subsubsection{ Android } \label{subsubsec:droid}
+\subsubsection{ Arduino }
+\subsection{ Modifications }
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% METHODS                                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{ Methods } \label{sec:methods}
+\textit{
+  Methods not final, these are included as a rough plan/guide.
+  }
+\subsection{ Optical Flow }
+% Discuss new method
+\subsection{ Visual Navigation }
+% Discuss directional recognition, as opposed to scanning.
+\subsection{ Path Integration }
+% Discuss CX implementation
+\subsection{ The Complete System}
+
+\section{Experimentation}\label{sec:test}
+\textit{
+  Experimentation methods not final, anything in this section illustrates a
+  rough plan only.
+}
+\subsection{General}
+\subsection{Collision Avoidance}
+% Write new collision avoidance system, test it independently
+\subsection{Visual Navigation}
+% Do the same for the MB
+\subsection{Path Integration}
+% And for PI
+\newpage
+
+\section{ Results and Evaluation } \label{sec:results}
+\textit{Included for skeleton purposes.}
+\newpage
+
+\section{ Discussion }
+\textit{Included for skeleton purposes.}
+\newpage
+
+\bibliographystyle{plain}
+\bibliography{working}
+\end{document}
+
