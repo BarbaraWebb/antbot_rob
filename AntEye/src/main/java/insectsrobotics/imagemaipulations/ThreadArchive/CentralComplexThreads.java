@@ -823,6 +823,10 @@ public class CentralComplexThreads {
                         for (int n = 0; n < imageArray_tmp.length; n++) {
                             imageArray[n] = (int) imageArray_tmp[n] & 0xFF;
                         }
+												//
+												// Why is this familiarity computed? This is outbound;
+												// if anything this should be a learning run.
+												//
                         en = main.cxmb.calculateFamiliarityDistribution(imageArray);
                         image_not_accessed = false;
                         LogToFileUtils.write("Image Updated");
