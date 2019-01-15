@@ -494,32 +494,33 @@ as opposed to 1.
 \par
 
 \subsubsection{The Eight MBON Model}
-In \cite{Zhang2017} eight parallel MB circuits are created. Each circuit
-corresponds to image memory in a set direction, with each of the eight
-directions corresponding to the eight directional headings given by the TB1 layer
-of the CX model (namely, $0^{\circ}$, $45^{\circ}$, $90^{\circ}$, $135^{\circ}$,
-$180^{\circ}$ ,$225^{\circ}$, $270^{\circ}$, $315^{\circ}$) (see Section
-\ref{CXBackground}). These MB circuits are identical; including the randomised
-mapping from the vPNs to the KCs.
+In \cite{Zhang2017}, the network is modified by adding 7 MBONs. Each MBON has
+its own KC-MBON connection array, each with their own unique weights. Each
+connection array corresponds to one of the eight cardinal directions represented
+by the TB1 layer of the CX model (namely, $0^{\circ}$, $45^{\circ}$, $90^{\circ}$,
+$135^{\circ}$, $180^{\circ}$ ,$225^{\circ}$, $270^{\circ}$, $315^{\circ}$) (see
+Section \ref{CXBackground}).
 \newline
 \par
 
 As image memory now corresponds to a direction, learning must be done with
 respect to orientation. For example, if the robot has a heading of $45^{\circ}$
-when a image is stored, then only the corresponding MB circuit is used for
-learning. This process is visualised in Figure \ref{\fig:eightmbon}. The recall
-process differs slightly. During recall, the image input is sent to all eight
-MB circuits; intuitively, we wish to see which direction looks most familiar.
-%% STOP POINT: FIGURE OUT HOW RECALL WORKS IN ZHANG'S MODEL.
+when a image is stored, then only the corresponding connection array has its
+weights updated during learning. This process is visualised in Figure
+\ref{fig:eightmbon}.
+%% STOP POINT: FIGURE OUT HOW RECALL WORKS; LAST SESSION, FIXED EXPLANATION
+%% FOR THE MODEL AND FIXED THE DIAGRAM.
 
 \begin{figure}[h!]
-  \includegraphics[width=0.7\textwidth]{EightENModel}
+  \centering
+  \includegraphics[width=0.9\textwidth]{EightENModel}
   \caption{\label{fig:eightmbon} Our interpretation of the eight MBON model
-    proposed by \textit{Zhang}. Each of the eight layers is an individual MB
-    circuit bound to a directional heading. Here we try to clarify the learning
-    process; an image frame is received as normal, then the TB1 directional
-    heading (here chosen arbitrarliy as $45^{\circ}$) determines which MB circuit
-    is used for storage.
+    proposed by \textit{Zhang}. Every KC connects to every MBON. All connection
+    weights start out at $w=1$. Following the example presented in the text,
+    if an image being learned corresponds to facing a direction of $45^{\circ}$,
+    then only the conncetions to that MBON (highlighted in red) are eligible to
+    have their weights modified. Recall, however, that these weights will only
+    be modified if the KC was activated (not shown in the figure).
     }
 \end{figure}
 
