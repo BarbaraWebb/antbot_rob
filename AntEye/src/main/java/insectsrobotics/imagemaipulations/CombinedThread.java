@@ -240,10 +240,15 @@ public class CombinedThread {
                     e.printStackTrace();
                 }
 
+                try{
+                    sleep(3000);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
                 //
                 // Turn around for the sake of ease.
                 //
-                // try { Command.turnAround(170); } catch(Exception e) { e.printStackTrace(); }
+                try { Command.turnAround(170); } catch(Exception e) { e.printStackTrace(); }
 
                 //
                 // Update the directional neurons from the compass
@@ -305,7 +310,7 @@ public class CombinedThread {
                 // PI Inbound; Visual Learning of homeward and outward
                 // route.
                 //
-                while (currentTime < inboundTime) {
+                while ( true /*currentTime < inboundTime*/) {
                     try {
                         sleep(600);
                     } catch (Exception e) {
@@ -364,17 +369,18 @@ public class CombinedThread {
                         cpu1 = centralComplex.cpu1Output(tb1, cpu4);
                         app.CXmotor = centralComplex.motorOutput(cpu1);
 
-                        app.CXnewHeading = Math.toDegrees(
+                       /* app.CXnewHeading = Math.toDegrees(
                                 (Math.toRadians(app.currentDegree) + app.CXmotor + Math.PI)
                                         %(2.0 * Math.PI) - Math.PI
-                        );
+                        );*/
 
-                        /*
+
                         app.CXnewHeading =
                                 Math.toDegrees(
-                                        Math.toRadians(app.currentDegree) -
+                                        Math.toRadians(app.currentDegree) +
                                                 app.CXmotorChange * app.CXmotor
-                                );*/
+                                );
+
                         app.CXtheta = (app.CXnewHeading - app.currentDegree) % 360;
 
                         //
@@ -418,6 +424,21 @@ public class CombinedThread {
                     // Update current time
                     currentTime = (int) SystemClock.elapsedRealtime() - startTime;
                     loopCounter++;
+                    if (Util.isHome(memory)){
+                        try {
+                            app.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    app.debugTextView.setText(String.format(
+                                            "I'm home!"
+                                    ));
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    }
                 }
             } // Run
         };
