@@ -587,6 +587,38 @@ $W_{CPU4}$ is a custom matrix\footnote{This is the term used by \textit{Zhang} t
   connections between the CPU4 and CPU1 layers of the CX model.}, $W_{MBON}$ is
 an identity matrix that will expand the MBON response array from 8x1 to 16x1
 \cite{Zhang2017}.
+\newline
+\par
+
+In oreder to test the CXMB model, \textit{Zhang} first demonstrated the
+functionality of a \textit{copied memory model}. The test of the copied memory
+model aimed to prove that the CPU4 state of the agent could be copied and stored,
+the CPU4 state modified, and then restored from the copy to allow the agent to
+navigate home. The copied memory model was tested by sending the agent on a
+pre-determined oubound route to a feeder (chosen at random, but consistent
+between trials), copying the CPU4 state, and allowing the robot to navigate home
+using the CX model; the CPU4 state will be modified by this homeward navigation.
+The agent is then replaced at the feeder, its CPU4 state restored from the copy,
+and tasked with navigating home a second time. The copied memory model was tested
+as a pre-requisite for testing the CXMB model, however, it demonstrates an
+important capability of the CX model; namely, the capability to directly load a
+state into its memory in order to navigate; a concept referred to as
+\textit{vector memory} in \cite{Webb2018}. Indeed, this concept of vector memory
+is shown to be quite a useful tool in insect navigation\cite{Webb2018}.
+\newline
+\par
+
+The CXMB model is then tested in the same way. The agent follows its oubound
+route to the feeder, navigates back once using the CX model (the MB model is
+trained on this first inbound trip), is replaced at the
+feeder, and finally, tasked with navigating back again, this time using the CXMB
+model. To be clear, the CPU4 state of the CX model is stored after the outbound
+route, and loaded back into the network before the second inbound trip.
+\textit{Zhang} reports that the second inbound trip (using both CXMB) showed
+more heading adjustments during its traversal, and, on average, performed
+slightly better than a pure CX implementation\cite{Zhang2017}. It should also
+be noted that the average performance of both models in \textit{Zhang's} work
+was good\cite{Zhang2017}.
 %%STOP POINT: GOOD PROGRESS, NEED TO WRAP UP THIS SECTION (DISCUSS ZHANG's
 %%results)MB SECTION NEEDS FIXED
 %%ALSO
