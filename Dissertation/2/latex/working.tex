@@ -463,9 +463,24 @@ Projection Neurons (PNs), Kenyon Cells (KCs) and Mushroom Body Output Neurons
 (MBONs). The original MB model proposed by \textit{Ardin et al.}
 for navigation in \cite{Ardin2016}, contained 360 visual PNs (vPNs), 20,000 KCs,
 and a single MBON. Each KC connects to the MBON, and each KC also connects to 10
-vPNs chosen uniform randomly. The KC-MBON connections all have weight $w=1$.
-\newline
-\par
+vPNs chosen uniform randomly. The KC-MBON connections all start with weight $w=1$.
+The figure and caption from \textit{Ardin et al.} is given here in Figure
+\ref{fig:mb}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Ardin2010MBModel}
+  \caption{\label{fig:mb} The Mushroom Body circuit: (Caption from
+    \textit{Ardin et al.}, Figure 2; note, their description and figure uses
+    ``EN'' instead of ``MBON''): Images (see Fig 1) activate the visual
+    projection neurons (vPNs). Each Kenyon cell (KC) receives input from 10
+    (random) vPNs and exceeds firing threshold only for coincident activation
+    from several vPNs, thus images are encoded as a sparse pattern of KC
+    activation. All KCs converge on a single extrinsic neuron (EN) and if
+    activation coincides with a reward signal, the connection strength is
+    decreased. After training the EN output to previously rewarded (familiar)
+    images is few or no spikes.}
+\end{figure}
 
 Learning\footnote{Paragraph could do with being restructured} occurs by showing
 patterns (images) to the vPNs. Each vPN has an
@@ -489,12 +504,14 @@ works (albeit using different methods and metrics); the network as presented in
 \cite{Eberding2016, Zhang2017, Mitchell2018} differs only in the number of PNs
 present (900 vPNs are used in all three works). More relevant to this work, is
 the proposed modification given by \textit{Zhang}, whereby, 8 MBONs are present
-as opposed to 1.
+as opposed to 1 (see Section \ref{CXMBBackground}).
 \newline
 \par
 
-\subsubsection{The Eight MBON Model}
-In \cite{Zhang2017}, the network is modified by adding 7 MBONs. Each MBON has
+
+\subsection{ The Central Complex for Path Integration } \label{CXBackground}
+\subsection{ The Eight MBON Model (CXMB) } \label{CXMBBackground}
+In \cite{Zhang2017}, the MB network is modified by adding 7 MBONs. Each MBON has
 its own KC-MBON connection array, each with their own unique weights. Each
 connection array corresponds to one of the eight cardinal directions represented
 by the TB1 layer of the CX model (namely, $0^{\circ}$, $45^{\circ}$, $90^{\circ}$,
@@ -503,13 +520,15 @@ Section \ref{CXBackground}).
 \newline
 \par
 
-As image memory now corresponds to a direction, learning must be done with
-respect to orientation. For example, if the robot has a heading of $45^{\circ}$
+Image memory now has an associated direction, so, training is performed with
+respect to orientation. For example, if the agent has a heading of $45^{\circ}$
 when a image is stored, then only the corresponding connection array has its
-weights updated during learning. This process is visualised in Figure
-\ref{fig:eightmbon}.
-%% STOP POINT: FIGURE OUT HOW RECALL WORKS; LAST SESSION, FIXED EXPLANATION
-%% FOR THE MODEL AND FIXED THE DIAGRAM.
+weights updated during learning. Practically, this is done by querying the TB1
+layer of the CX model to find the current direction according to the model
+(rather than directly querying the robot's onboard compass). This process is
+visualised in Figure \ref{fig:eightmbon}.
+\newline
+\par
 
 \begin{figure}[h!]
   \centering
@@ -524,8 +543,53 @@ weights updated during learning. This process is visualised in Figure
     }
 \end{figure}
 
+While, in theory, this eight MBON model could function independently,
+\textit{Zhang} uses it to (rather neatly) augment the CX model; this allows
+navigation to be performed using a combination of visual memory and path
+integration information. The navigation process can be described by a sequence
+of equations. We modify the notation slightly for clarity, but the
+equations are the same as presented in \cite{Zhang2017}.
+\newline
+\par
 
-\subsection{ The Central Complex for Path Integration } \label{CXBackground}
+The MB circuit is shown an image in the usual way; however, we now
+get eight responses, giving us a response distribution. This distribution can
+be interpreted as giving us the most likely direction of travel, when the image
+presented was first observed. This distribution requires some modification to
+integrate it into the CX response. Let $M_i$ be the familiarity response of the
+$i$th MBON; the responses are normalised as:
+
+\begin{equation}
+  \bar{M}_i = \frac{M_i}{\Sigma^{8}_{k = 0} M_k}
+\end{equation}
+
+Which gives us the normalised response $\bar{M}_i$ between 0 and 1. $\bar{M}_i$
+must be inverted so that the most likely direction has the greatest response
+(in the MB model, the most familiar direction would give the lowest response):
+
+\begin{equation}
+  \bar{M}^{-1}_i = 1 - \bar{M}_i
+\end{equation}
+
+This visual response is then combined with the memory response from the CPU4
+layer of the CX model to give output at the CPU1 layer:
+
+\begin{equation}
+  CPU1_{output} = k \cdot W_{CPU4} \cdot CPU4 + (1 - k) \cdot W_{MBON} \cdot
+  \bar{M}^{-1}
+\end{equation}
+
+where $k$ is a weighting factor that determines the relative stregths of the CX
+response and the MB response in the output ($k = 0.8$ in \cite{Zhang2017}),
+$\bar{M}^{-1}$ is the collection of all inverse normalised MBON responses,
+$W_{CPU4}$ is a custom matrix\footnote{This is the term used by \textit{Zhang} to
+  describe   the $W_{CPU4}$ matrix. More specifically, this matrix describes the
+  connections between the CPU4 and CPU1 layers of the CX model.}, $W_{MBON}$ is
+an identity matrix that will expand the MBON response array from 8x1 to 16x1
+\cite{Zhang2017}.
+%%STOP POINT: GOOD PROGRESS, NEED TO WRAP UP THIS SECTION (DISCUSS ZHANG's
+%%results)MB SECTION NEEDS FIXED
+%%ALSO
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

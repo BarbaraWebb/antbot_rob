@@ -129,7 +129,7 @@ public class CX_MB extends NavigationModules{
         this.W_CL1_TB1 = tmp.combine(
                 0, tmp.numCols(), tmp
         );
-		this.W_TB1_TB1 = genTbTbWeights(1.);
+				this.W_TB1_TB1 = genTbTbWeights(1.);
         this.W_TB1_CPU1 = tmp.combine(
                 tmp.numRows(),0, tmp
         );
