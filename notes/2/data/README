@@ -1,0 +1,10 @@
+This directory contains raw data files for experiments (.csv). These should be
+exactly what was produced by VICON (no modifications to the files herein!).
+
+If you want to modify them, copy them elsewhere.
+
+cx_csv: Contains the initial CX tests. These are simply demonstrations of the
+				existing CX network with a "random" outbound path. These were recorded
+				and exported with multiple tracked objects selected and so may require
+				more processing than other csv files. Also contains the demo recording
+				as a justification for the 180 degree turn.

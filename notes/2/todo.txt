@@ -1,3 +1,17 @@
+17 / 01 / 2019:
+Todo:
+- Run CX baseline tests (see CXE.txt in this directory)
+
+Notes:
+Blocked:
+Done:
+
+
+#
+# Notes from 20/11/18 to 17/01/2019 were kept in a physical journal which is in
+# IF G.17; on 17/01/2019 it was decided to revert to the text file format.
+#
+
 20 / 11 / 2018:
 Notes:
 - Code refactor finished

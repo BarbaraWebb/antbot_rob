@@ -1,0 +1,94 @@
+CX Baseline experiments - Thursday 17th January, 2019:
+These tests aim to demonstrate that the CX network as implemented by Zhang can
+get the agent home after a non-deterministic outbound trip (seems obvious but its
+something he never tested).
+
+Procedure:
+
+The agent will navigate outbound from one of the two existing starting locations
+in the experimental arena (the same as in Part 1).
+
+The agent will use the filter based OFCA system from part 1 to guide its outbound
+trip. Any failure from the OFCA system will result in a reset; the goal is to
+test the CX, OFCA is simply a convenient way to get some kind of non-determinism
+in the outbound routes.
+
+The outbound trip will last 20 seconds (seems short, but is ample in the given
+space).
+
+The agent will be permitted a ~180 degree turn to face back towards the "nest".
+		Reason:
+		A control experiment (CX_Basic_ONT and CX_Basic_INT) shows that the agent can
+		navigate home without this turn given enough time, however, the size of the
+		testing space constricts the robot such that these tests would not be
+		meaningful.
+
+The homeward navigation will be considered "successful" if the agent manages to
+touch the tape marking which indicates its start point. Anything else will be
+deemed a failure.
+
+The inbound trip has no time limit and will be stopped manually by the tester.
+
+Recording:
+Outbound and inbound trips will be done as separate VICON recordings, exported to
+CSV and then stored in the repo for future use.
+
+Each recording will be named as AB_CX_x_I for Inbound, and AB_CX_x_O for Outbound
+where x is the index of the experiment (x in 1-10)
+
+Tests:
+10 tests will be run (20 recordings).
+
+5 will start from the North West corner, 5 will start from the West edge.
+
+Two tussocks will be present in those starting from the NW corner to induce a
+turn as discussed in Part 1.
+
+Results:
+1. NW - Success
+2. NW - Success
+3. NW - Failure; robot navigated in the direction of the nest but arrived
+	 							 just north of the tape marking
+4. NW - Success; just barely, robot travelled over the corner of the start
+	 							 square. This run was very nearly discarded as the OF failed
+								 right at the end. The robot ran into the arena wall, then
+								 reacted, however, this was at the very end of the outbound
+								 trip. This could account for the issue with the homeward
+								 navigation.
+5. NW - Failure; Pretty much the exact same response as (3). The robot began
+	 							 in the right fashion but over-compensated and ended up just
+								 north of the start point. This could provide justification
+								 for a reactionary threshold in the CX response, i.e. only if
+								 CXtheta is greater than 1.5 should the agent actually do
+								 anything.
+
+6. W - Success; robot hit the edge of the tape marking. note: the 180 turn is
+	 	 	 					definitely not 180 degrees, and it appears inconsistent between
+								runs. May be worth discussing, but I need to examine the
+								recordings.
+7. W - Success; almost the same run as (6)
+8. W - Success; Outbound similar to (6,7), but better homing. No overcorrection.
+	 	 	 					Robot arrived exactly in the start box
+9. W - Success; Another very good run; outbound completely different to other
+	 	 	 					W runs.
+10. W - Failure; overcompensaion from start of the inbound. Started good, then
+								 overshot the turn. Arrived north of the start point (this was
+								 the most significant failure).
+
+
+Summary:
+7/10 Experiments considered success, some of these were borderline. One (4) is
+is known to have had an issue with the outbound run that could be responsible
+for its near-failure. All failures navigated in the correct rough direction,
+however they missed the start point, only 10 was considered a significant
+deviation and it was still reasonable (to a point). All csv exports can be
+found in my google drive, or in the notes/2/data directory.
+
+Procedure adendum - Stuff that I only noticed once running the tests:
+All inbound runs were halted as soon as success/failure could be determined.
+
+All outbound recordings were halted after the 180 turn.
+
+The first small adjusting turn may have been missed by the inbound recording.
+This is due to the timer inconsisitency in AntBot; sometimes it was quick,
+sometimes not. These are inconsequential however.
