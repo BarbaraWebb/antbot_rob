@@ -69,6 +69,13 @@ public class Command {
     }
 
     //
+    // Stop command; just makes life easier
+    //
+    public static void stop(){
+        go(new double[]{0,0});
+    }
+
+    //
     // Turn by an angle
     //
     public static void turnAround(double theta) throws InterruptedException {

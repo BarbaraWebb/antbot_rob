@@ -1,3 +1,54 @@
+20 / 01 / 2019:
+Todo:
+- Restructure MB section in Dissertation
+
+Notes:
+- Light work day. The MB background section needs restructured
+  as currently its pretty bad. Also need to look at the review
+	from last year; I don't want to repeat too much between the sections
+
+- Moved review to the end of the background as it worked better, allowing
+  me to actually explain the concepts in the relevant sections.
+
+Blocked:
+Done:
+- (Done) MB section restructured and background re-ordered. Happier now but
+  its not great. I think Webb will be able to give more succinct feedback and
+	I can move onto the CX>
+
+18 / 01 / 2019:
+Todo:
+- Write an implementation for estimating the focus of expansion.
+- Devise a method to move towards the focus of expansion
+- Start trying to split the image into the eight regions.
+	- This literally just needs to be an X value check on the FOE
+
+Notes:
+- The FOE estimation will go in the Util class; pass in the MainActivity object
+  which contains the currentFrame and previousFrame (whatever they're actually
+	called).
+	- Method: Compute matrix A = [ u v ] where V = (u,v) is the flow vector
+		associated with pixel P = (x,y). I'm going to need to figure this out again...
+		Hooray!
+	- Idea; instead of returning the FOE explicitly, you could simply return the
+	  zone in which it resides. (image split into eight even zones -
+		90/8 = 11.25). How do we split into 11.25px windows??? Likely approximate to
+		11px intervals.
+
+- The FOE implementation is written but no testing has been done. The testing
+  will likely take a while. Do the old hope test to see if it magically works
+	first time (it won't), but the matrix ops are going to be a pain. Really
+	triple, quadruple check them at each stage. Key to testing is the matrix size.
+	OpenCV types should be correct.
+
+Blocked:
+- Test FOE computation
+- Devise a method to move towards the focus of expansion
+- Start trying to split the image into the eight regions.
+
+Done:
+- (Done) FOE implementation written, UNTESTED
+
 17 / 01 / 2019:
 Todo:
 - Run CX baseline tests (see CXE.txt in this directory)
@@ -5,7 +56,9 @@ Todo:
 Notes:
 Blocked:
 Done:
-
+- (Done) Recordings for CX completed
+- (Done) Recordings exported to csv
+- (Done) Recordings added to the Repo
 
 #
 # Notes from 20/11/18 to 17/01/2019 were kept in a physical journal which is in

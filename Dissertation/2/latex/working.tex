@@ -295,33 +295,6 @@ ideas further for this project. This will be a very brief summary of the work
 that took place and any relevant results or new perspectives. For more detail,
 please consult \cite{Mitchell2018}.
 
-\subsection{ Review of Part 1 }
-The work in \cite{Mitchell2018} specifically covers the Mushroom Body
-and Optical Flow Collision Avoidance. The Mushroom Body model used in
-\cite{Mitchell2018} is the same as that used by \textit{Ardin et al.} in
-\cite{Ardin2016} though with slightly different parameters. The model consists
-of 900 visual Projection Neurons (vPNs) connected uniform randomly to 20,000
-Kenyon Cells (KCs), all of which connect (with weight $w=1$) to a single
-Extrinsic Neuron. In the context of Mushroom Bodies, extrinsic neurons are now
-commonly referred to as Mushroom Body Output Neurons (MBONs) so we will use this
-terminology herein.
-\newline
-\par
-
-Optical flow is a term used to describe the motion of pixels in a moving image.
-Multiple OFCA systems were tested, however, in final experiments an
-optical flow filtering system is used. In short, a pattern of expected motion is
-created, then the actual observed motion is projected on top of it. An absolute
-difference is computed between the two and this can tell us if part of the image
-is moving faster than we expect. This can be used to detect obstacles. This
-strategy proved simple, but effective. While we move away from it in this
-project, it was used for initial tests of the CX model.
-\newline
-\par
-
-Both systems functioned well and provided a baseline from which we will work
-in this project. The MB model proved very capable at following routes learned
-in a non-deterministic fashion through a cluttered environment.
 
 \subsection{ Optical Flow for Collision Avoidance } \label{OFBackground}
 Optical flow is a large and diverse area of study. As such, we will not provide
@@ -457,15 +430,16 @@ essentially, we try to fit the best FOE to the flow field given.
 %\subsubsection{The direct method}
 
 \subsection{ The Mushroom Body for Visual Navigation } \label{MBBackground}
-The Mushroom Body model is a computational model of the mushroom body structures
-present in the insect brain\cite{Ardin2016}. It consists of three layers:
-Projection Neurons (PNs), Kenyon Cells (KCs) and Mushroom Body Output Neurons
-(MBONs). The original MB model proposed by \textit{Ardin et al.}
-for navigation in \cite{Ardin2016}, contained 360 visual PNs (vPNs), 20,000 KCs,
-and a single MBON. Each KC connects to the MBON, and each KC also connects to 10
-vPNs chosen uniform randomly. The KC-MBON connections all start with weight $w=1$.
-The figure and caption from \textit{Ardin et al.} is given here in Figure
-\ref{fig:mb}.
+The Mushroom Body model is an artificial neural network which models
+the mushroom body structures present in the insect brain\cite{Ardin2016}. It
+consists of three layers: Projection Neurons (PNs), Kenyon Cells (KCs) and
+Mushroom Body Output Neurons (MBONs). These MBONs are also referred to as
+Extrinsic Neurons (ENs) by older works, we use MBON herein. The original MB model
+proposed by \textit{Ardin et al.} for navigation in \cite{Ardin2016} contained
+360 visual PNs (vPNs), 20,000 KCs, and a single MBON. Every KC connects to the
+MBON, and each KC also connects to 10 vPNs chosen uniform randomly. The KC-MBON
+connections all start with weight $w=1$. The figure and caption from
+\textit{Ardin et al.} is given here in Figure \ref{fig:mb}.
 
 \begin{figure}
   \centering
@@ -482,20 +456,34 @@ The figure and caption from \textit{Ardin et al.} is given here in Figure
     images is few or no spikes.}
 \end{figure}
 
-Learning\footnote{Paragraph could do with being restructured} occurs by showing
-patterns (images) to the vPNs. Each vPN has an
-activation (brightness) threshold. A KC is activated when enough connected vPNs
-are activated. In learning, if a KC is activated by a particular image, the
-weight on the connection to the MBON is set to $w=0$. To determine image
-familiarity, a pattern is again shown to the vPNs, which induces a sparse
-activation pattern in the KC layer. The MBON then sums the weights of all
-active KCs to obtain a familiarity measure; the lower the MBON output, the
-more familiar the image. The robot would then scan an arc and select the
-direction matching the most familiar view. We will follow the same convention
-as \cite{Mitchell2018}, whereby, when referring to the weight of the connection
-between a KC and the MBON, we may simply discuss the ``weight of the KC''.
-This has been a brief explanation for context; please see Part 1 for further
-discussion \cite{Mitchell2018}.
+In the implementation by \textit{Ardin et al.}
+and previous AntBot implementations, captured images were converted to greyscale
+and downsampled\cite{Ardin2016, Eberding2016, Zhang2017, Mitchell2018}. As such,
+each pixel can be described by a brightness (greyscale value). Each KC has
+a brightness threshold. Learning occurs by showing patterns (images) to the vPNs.
+KCs each have a brightness activation threshold; each KC sums the brightness of
+all connected vPNs and compares that sum to the threshold. If the total
+brightness is greater than the threshold then the KC is \textit{activated} and
+the weight of the KC-MBON connection is lowered from 1 to 0. Thus, each image
+shown to the vPNs should induce a sparse activation pattern in the KC layer.
+\newline
+\par
+
+To determine image familiarity during the recapitulation process, a pattern is
+projected onto the vPNs (again giving a sparse pattern of KC activation.
+The MBON then sums the weights of all active KCs to obtain a familiarity measure;
+the lower the MBON output, the more familiar the image. Different route following
+strategies have been implemented (scanning\cite{Ardin2016, Eberding2016,
+  Zhang2017}, Klinokinesis\cite{Zhang2017}, combination with the CX
+model\cite{Zhang2017}(see below), and visual scanning\cite{Mitchell2018}); but, most
+commonly, some form of scanning is used whereby the agent scans an arc for the
+most familiar direction.
+\newline
+\par
+
+This has been a brief explanation for context. Part 1 gives slightly deeper
+insight\cite{Mitchell2018} (particularly in relation to AntBot projects), and of
+course the work \textit{Ardin et al.} can give the full details\cite{Ardin2016}
 \newline
 \par
 
@@ -507,7 +495,6 @@ the proposed modification given by \textit{Zhang}, whereby, 8 MBONs are present
 as opposed to 1 (see Section \ref{CXMBBackground}).
 \newline
 \par
-
 
 \subsection{ The Central Complex for Path Integration } \label{CXBackground}
 \subsection{ The Eight MBON Model (CXMB) } \label{CXMBBackground}
@@ -619,9 +606,35 @@ more heading adjustments during its traversal, and, on average, performed
 slightly better than a pure CX implementation\cite{Zhang2017}. It should also
 be noted that the average performance of both models in \textit{Zhang's} work
 was good\cite{Zhang2017}.
-%%STOP POINT: GOOD PROGRESS, NEED TO WRAP UP THIS SECTION (DISCUSS ZHANG's
-%%results)MB SECTION NEEDS FIXED
-%%ALSO
+
+\subsection{ Review of Part 1 }
+The work in \cite{Mitchell2018} specifically covers the Mushroom Body
+and Optical Flow Collision Avoidance. The Mushroom Body model used in
+\cite{Mitchell2018} is the same as that used by \textit{Ardin et al.} in
+\cite{Ardin2016} though with 900 vPNs as opposed to 360. The model tested
+in \cite{Mitchell2018} used a single MBON with a scan-based route following
+strategy. The scanning differed from previous works as it was implemented
+as an image manipulation algorithm (termed \textit{visual scanning}) instead
+of a physical turn performed by the AntBot.
+\newline
+\par
+
+Multiple OFCA systems were tested, however, in final experiments an
+optical flow filtering system is used. In short, a pattern of expected motion is
+created, then the actual observed motion is projected on top of it. An absolute
+difference is computed between the two and this can tell us if part of the image
+is moving faster than we expect. This can be used to detect obstacles. This
+strategy proved simple, but effective. While we move away from it for the
+bulk of this project, it was used for initial tests of the CX model, as it
+provided a simple out-of-the-box method to generate a non-deterministic
+path for the model to integrate.
+\newline
+\par
+
+Both systems functioned well and provided a solid baseline from which we will
+work in this project. The MB model proved very capable at following routes
+learned in a non-deterministic fashion through a cluttered environment.
+
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -150,6 +150,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     MatOfByte Status;
     MatOfFloat Err;
     Mat debugFlowImage;
+    Mat foe;
+
     boolean tracked = false;
     public float prevFrameTime = 0;
     public float currentFrameTime;
@@ -1096,8 +1098,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 switch(opticalFlowModule){
                     case OF_DETECT:
                         Log.i("OF: ", "Thread started");
-                        opticalFlowThread = new Thread(combiner.sequentialThread);
-                        //opticalFlowThread = new Thread(testRun);
+                        //opticalFlowThread = new Thread(combiner.sequentialThread);
+                        opticalFlowThread = new Thread(testRun);
                         opticalFlowThread.start();
                         break;
                     case OF_AVOID:
@@ -1159,7 +1161,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
     }
 
-    // Test thread code
+    //
+    // Test thread code - This is explicitly a test thread for small scenarios. DO NOT WRITE ANY
+    // PROPER THREADS IN THIS FILE.
+    //
     Runnable testRun = new Runnable() {
         //Convert resource into test thread for basic algorithms
         @Override
@@ -1167,23 +1172,59 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             String tag = "TEST";
             String output = "";
 
-            int t0 = (int) SystemClock.elapsedRealtime();
-            int t = (int) SystemClock.elapsedRealtime() - t0;
+            ////////////////////////////////////////////////////////////////////////////////////////
 
+            //
+            // FOE test thread, get the robot to move forward at a steady speed and display the
+            // computed FOE on the screen.
+            //
+
+            ////////////////////////////////////////////////////////////////////////////////////////
+
+            int t0 = (int) SystemClock.elapsedRealtime(); // Start time
+            int t = (int) SystemClock.elapsedRealtime() - t0; // Current time
+            int timeLimit = 20000; // Limit (millis)
+
+
+            // Focus of expansion
+            //Mat foe = new Mat(2,1,CvType.CV_32FC2);
+            foe = Mat.ones(2,1, CvType.CV_8U);
+
+            //
+            // Move forward at a steady speed.
+            //
             try {
-                Command.turnAround(180);
-                sleep(2000);
-                Command.turnAround(90);
-                sleep(2000);
-                Command.turnAround(45);
-                sleep(2000);
-                Command.turnAround(20);
-            }
-            catch (Exception e)
-            {
+                Command.go(new double[]{10,10});
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
+            while(t < timeLimit){
+                Util.computeFocusOfExpansion(prevPointsToTrack, currentPointsToTrack, foe);
+
+                //
+                // Print FOE on the screen
+                //
+                try {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            debugTextView.setText(String.format(
+                                    "FOE: (%f,%f)",
+                                    foe.get(0,0)[0],
+                                    foe.get(1, 0)[0]
+                            ));
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // Update time
+                t = (int) SystemClock.elapsedRealtime() - t0;
+            }
+
+            try { Command.stop(); }catch(Exception e){ e.printStackTrace(); }
             try { sleep(1000);  } catch(Exception e){ e.printStackTrace(); }
 
         }
@@ -1242,11 +1283,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             current_image.copyTo(previous_image);
         }
-        // now we can compute the flow
-        // left flow
 
-        //Again, the flow is not computed as described in his dissertation. - RM
-        // Only computed on the central frame? Not the left and right - RM
+
         calcOpticalFlowFarneback(
                 previous_image,
                 current_image,

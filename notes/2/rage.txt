@@ -11,3 +11,9 @@ This file contains a list of problems I'm finding with the AntBot:
 	 - Even if motors have stopped, sometimes selecting a menu option will
 	   cause the robot to send commands as if it were still performing the task
 		 that was being performed
+	 - UI Output requires variables to be global to the activity for some reason.
+	   This could be to do with the way the output is done in the current software.
+		 Anyway, Android constraints are forcing bad software practices.
+
+   - Matrix multiplication is a pain on Android (OpenCV for Java/Android): Matrix
+	   ops in general tbh. Python would be easier (hint hint, Python)

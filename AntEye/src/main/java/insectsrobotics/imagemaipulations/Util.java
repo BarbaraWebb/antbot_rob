@@ -3,6 +3,7 @@ package insectsrobotics.imagemaipulations;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
@@ -335,6 +336,65 @@ public class Util {
         }
 
         return count>14 & time>45000;
+    }
+
+    //
+    // Given two flow frames and a 2x1 Mat foe, compute the focus of expansion from prevPoints and
+    // currentPoints; store the result in the foe Mat. I don't trust returns using Matrices. The
+    // computation is done using the LSE method from Tistrelli et al.
+    //
+    public static void computeFocusOfExpansion (Mat prevPoints, Mat currentPoints, Mat foe){
+        Mat A = Mat.ones(900, 2, CvType.CV_32FC1);
+        Mat b = Mat.ones(900, 1, CvType.CV_32FC1);
+
+        int k = 0;
+        for (int i = 0; i < currentPoints.rows(); i++){
+            for (int j = 0; j < currentPoints.cols(); j++){
+                //
+                // Extract flow vector f = (u,v) from the vector
+                //
+                double[] flow = currentPoints.get(i,j);
+
+                // bk = xv - yu --> bk = i(flow[1]) - j(flow[0]) (from O'Donovan Optic Flow paper).
+                // u = flow[0]
+                // v = flow[1]
+                // x = j
+                // y = i
+                int bk = (j * (int) flow[1]) - (i * (int) flow[0]);
+
+                // Place the correct data into the kth rows of b and A.
+                b.put(k, 0, bk);
+                A.put(k, 0, flow[1]);
+                A.put(k, 1, flow[0]);
+
+                k++;
+            }
+        }
+
+        //
+        // Now have complete A and b construction; now we compute the FOE as:
+        // FOE = (A'A)^-1A'b; where A' is the matrix transpose
+        //
+
+        // A_inv = (A'A)^-1
+        Mat A_inv = new Mat(A.rows(), A.rows(), CvType.CV_32FC1);
+        Core.gemm(A, A, 1, new Mat(), 0, A_inv);
+        A_inv = A_inv.inv();
+
+
+        // A = ((A'A)^-1)A'
+        // According to the docs, Core.gemm automatically transposes the first matrix, so
+        // we transpose when passing in to "undo" this. The second matrix is not transposed so
+        // we transpose it for the calculation
+        Core.gemm(A_inv.t(), A.t(), 1, new Mat(), 0, A);
+
+        // foe = ((A'A)^-1)A'b
+        // Again we transpose the first matrix passed in to "undo" the auto-transpose
+        Core.gemm(A.t(), b, 1, new Mat(), 0, foe);
+
+        //foe.put(0,0, 45);
+        //foe.put(1,1,5);
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
