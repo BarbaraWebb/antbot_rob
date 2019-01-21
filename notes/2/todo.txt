@@ -1,3 +1,40 @@
+The List: Stuff I have to do but am putting off for time management's sake
+- Platform summary
+- Re-write ABS (Planned to slot into ILW).
+- Build obstacles (Also planned for ILW but could do with being before)
+
+Milestones:
+- (Done!) Get old CX working (and recorded)
+- Complete FOE OFCA model
+- Integrate into CXMB model (I think this is my best bet although there may
+  be scope for modifying the CXMB model).
+- (OPTIONAL; if you have time!) create an alternate 8MBON model (I think Zhaoyu's
+	came from Barbara	and is likely best to stick with); could maybe try real
+	weightings in the KC-MBON synapses?
+
+
+
+22 / 01 / 2019:
+Todo:
+- Write the background for Stone et al's model
+- Add a section header for Haferlach et al's model
+	- This and a little physiological background should be given as part of the
+	  background though I fear they may not make it in for the interim report.
+	- I am significantly behind here (due to more of a break over christmas).
+	  Ideally, by the end of this week I should have a complete background and
+		platform summary but this is likely to extend to next week (this should
+		really be a hard deadline). If I can have the first three chapters
+		completed by the end of Week 3 I'll feel a bit better about shifting
+		focus. 
+21 / 01 / 2019:
+Todo:
+- Make a start on the CX background
+Notes:
+Blocked:
+Done:
+-(Done) Re-read CX paper
+
+
 20 / 01 / 2019:
 Todo:
 - Restructure MB section in Dissertation
