@@ -144,7 +144,10 @@ which may mimic the insect behaviour.
 \newline
 \par
 
-In this paper we introduce a combined model, the One Ring (OR) model for insect
+In this paper we introduce a combined model, the One Ring (OR)\footnote{[DRAFT]
+  This is just a little fun, if it's too on-the-nose I'm happy to change it to
+  Extended CX or something a little more serious.
+} model for insect
 navigation. To be clear, there is no (known) physiological basis for such a
 model; however, it is biologically plausible, and may provide insight into
 the operation of the real insect brain. The OR model combines the tasks of Visual
@@ -518,7 +521,86 @@ this model is actually an advancement of an earlier model presented by
 \textit{Haferlach et al.}, which was \textit{evolved} using a Genetic Algorithm
 (GA). We present this also, purely for the sake of interest.
 
-\subsubsection{The CX Model}
+\subsubsection{The Central Complex Model}
+The Central Complex model is a six layer artificial neural network presented by
+\textit{Stone et al.} which has been shown to provide a plausible neural
+substrate for Path Integration (PI) both in simulation and on the AntBot platform
+\cite{Scimeca2017, Stone2017}. The model presented is shown in Figure
+\ref{fig:cx}. Splitting the model into its six layers, we get a breakdown of
+functionality:
+\newline
+\par
+
+\begin{itemize}
+\item{Layer 1: Heading preprocessing (TL), Speed (TN)}
+\item{Layer 2: Heading preprocessing (CL1)}
+\item{Layer 3: Heading (TB1)}
+\item{Layer 4: Memory (CPU4)}
+\item{Layer 5: Normalisation and Inhibition (Pontine Neurons)}
+\item{Layer 6: Steering/output (CPU1)}
+\end{itemize}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.6\textwidth]{StoneCXModel}
+  \caption{\label{fig:cx} The Central Complex model presented by
+    \textit{Stone et al.}. (Left) This graph demonstrates the basic structure of
+    the CX model (Figure 5G from \cite{Stone2017}).
+    (Right) This graph shows how signals propogate through the network where the
+    current heading lies to the left of the desired heading, i.e. a right turn
+    should be generated (Figure 5I from \cite{Stone2017}). The numbers given at
+    each layer on the right correspond to the numbers given for each neuron
+    in the graph on the left.
+  }
+\end{figure}
+
+Figure \ref{fig:cx} shows four types of neuron: TN (Tangential Neuron), TB1
+(green), CPU4 (yellow and orange), and CPU1 (dark blue, light blue, and purple).
+\newline
+\par
+
+While Figure \ref{fig:cx} (Left) shows a distinction between CPU1a (blue) and
+CPU1b (purple) neurons, we will ignore this distinction; for clarity, the
+physiological mapping between these CPU1 subtypes in the Upper Central Body (CBU)
+and the Protocerebral Bridge (PB) is different, but the function they serve in
+the Central Complex is the same \cite{Stone2017}; thus, the distinction makes
+no difference in the model. Similarly the normalisation and inhibition function
+of the Pontine Neurons only has an effect when the agent experiences holonomic
+motion (motion where the view direction does not match the direction of travel);
+as AntBot is incapable of such motion, we can safely ignore the function of
+the Pontine Neurons also; in our case, the Pontine Neurons would have the
+same activity patterns as the CPU4 neurons \cite{Stone2017}. Figure \ref{fig:cx}
+(Right) shows how the Pontine inhibition is structured.
+\newline
+\par
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.7\textwidth]{Figure5H}
+  \caption{
+    \label{fig:cxlayer} Here we can see the layers of the CX model and
+    how they fit together. A heading signal is input to the TL neurons,
+    propogating through the CL layer to TB1 (heading ring-attractor) and
+    CPU4 (memory). TN neurons (speed sensitivity) input directly to CPU4.
+    So, the combination of heading and speed inputs to CPU4 gives a measure
+    of distance travelled in a particular direction; this facilitates generation
+    of a steering command in CPU1 providing a mechanism for Path Integration.
+  }
+\end{figure}
+
+% Function of CL & TL
+The TL neurons are the input point for heading information. In the ant brain
+this heading information comes from a \textit{sky-compass}; the ant eye contains
+cells sensitive to polarized light which allows the ant to infer an accurate,
+allothetic direction from vision. Interestingly, there is also evidence that ants
+have the capability to infer a direction without a view of celestial cues,
+suggesting they may have access to some other signal, the candidate signal being
+the geomagnetic field \cite{Fleischmann2018, Grob2017}.
+
+
+% Function of TB1
+% Function of CPU4
+% Function of CPU1
 % STOP POINT: Present model by stone et al. then present the old GA model
 
 

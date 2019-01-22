@@ -5,6 +5,8 @@ The List: Stuff I have to do but am putting off for time management's sake
 
 Milestones:
 - (Done!) Get old CX working (and recorded)
+- Finish interim report
+- Finish first three chapters
 - Complete FOE OFCA model
 - Integrate into CXMB model (I think this is my best bet although there may
   be scope for modifying the CXMB model).
@@ -25,7 +27,20 @@ Todo:
 		platform summary but this is likely to extend to next week (this should
 		really be a hard deadline). If I can have the first three chapters
 		completed by the end of Week 3 I'll feel a bit better about shifting
-		focus. 
+		focus.
+Notes:
+- It would be excellent to have an example of the tb1 layer output
+- What do the Pontine neurons actually do?
+	- Identical activity to CPU4 neurons, but they provide a normalisation
+	  effect by subtracive inhibition of neurons with opposite directional
+		sensitivities. (Isn't this also a ring attractor then?)
+- What is the difference between CPU1a and CPU1b?
+	- Distinct connection patterns between the two types from the PB to
+		the CBU. This is preserved across insect species.
+
+- For TL/CL1 neurons have a look at Pfeiffer and Homberg; I'd assume its
+	some kind of polarized light sensitivity cell followed by some kind of
+	processing step.
 21 / 01 / 2019:
 Todo:
 - Make a start on the CX background
