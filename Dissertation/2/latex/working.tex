@@ -576,7 +576,7 @@ same activity patterns as the CPU4 neurons \cite{Stone2017}. Figure \ref{fig:cx}
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.7\textwidth]{Figure5H}
+  \includegraphics[width=0.7\textwidth]{Figure5F}
   \caption{
     \label{fig:cxlayer} Here we can see the layers of the CX model and
     how they fit together. A heading signal is input to the TL neurons,
@@ -595,7 +595,60 @@ cells sensitive to polarized light which allows the ant to infer an accurate,
 allothetic direction from vision. Interestingly, there is also evidence that ants
 have the capability to infer a direction without a view of celestial cues,
 suggesting they may have access to some other signal, the candidate signal being
-the geomagnetic field \cite{Fleischmann2018, Grob2017}.
+the geomagnetic field \cite{Fleischmann2018, Grob2017}. The TL neurons have been
+shown to be polarisation sensiive across multiple insect species \cite{Stone2017}
+(see STAR Methods). Each TL neuron has a preferred direction (i.e. a specific
+direction of poliarisation sensitivity) $\theta_{TL}$, and there are 16 such
+neurons representing the 8 directions around the agent (i.e.
+$\theta_{TL} \in \{ 0^{\circ}, 45^{\circ}, 90^{\circ}, 135^{circ}, 180^{\circ},
+225^{\circ}, 270^{\circ}, 315^{\circ}\} $) \cite{Stone2017}. Together, the 16
+TL neurons encode the heading of the agent in a single timestep; each neuron
+receives input activation as:
+
+\begin{equation}
+  I_{TL} = cos( \theta_{TL} - \theta_{h} )
+\end{equation}
+
+where $\theta_{TL}$ is the preferred heading of the neuron as above, and
+$\theta_{h}$ is the current heading of the agent. In the next heading layer,
+there are 16 CL1 neurons which use inhibition to invert the polarisation
+response \cite{Stone2017}. \textit{Stone et al.} comment that these neurons
+effectively make no difference to the model and are included for completeness.
+They are also included in previous AntBot projects which make use of the CX model
+\cite{Zhang2017, Scimeca2017}.
+\newline
+\par
+
+% Function of TN
+There are 4 TN neurons which act as an input for speed information. The TN
+neurons are sensitive to optical flow, and can be split into two subtypes:
+TN1, and TN2. \textit{Stone et al.} showed that TN1 neurons are inhibited by
+simulated forward flight and excited by simulated backward flight, while TN2
+neurons are inhibited by simulated backward flight and excited by simulated
+forward flight \cite{Stone2017}. Each of the four TN neurons has a tuning
+preference; these tuning preferences were measured in bees as approximately
+$+45^{\circ}$/$-45^{\circ}$ for TN2, and $+135^{\circ}$/$-135^{\circ}$ for TN1
+(where $0^{\circ}$ is straight ahead). In short, we have TN1_{left}, TN1_{right}
+TN2_{left}, and TN2_{right}. It is thought that these neurons provide a
+%% NOTE: NEED A CITATION FOR STEP COUNTING MECHANISM
+(or part of a) mechanism for odometry by allowing the model to integrate
+speed with respect to time giving a distance measure \cite{Stone2017}.
+\textit{Stone et al.} give the speed calculation from the TN neurons
+as:
+
+\begin{equation}
+  I_{TN_{L}} =
+  [ sin(\theta_{h} + \phi_{TN}) \quad cos(\theta_{h} + \phi_{TN}) ]\mathbf{v}
+\end{equation}
+
+\begin{equation}
+  I_{TN_{R}} =
+  [ sin(\theta_{h} - \phi_{TN}) \quad cos(\theta_{h} - \phi_{TN}) ]\mathbf{v}
+\end{equation}
+
+where $\mathbf{v}$ is the velocity of the agent in Cartesian coordinates,
+$\theta_h \in [0, 360^{\circ})$ is the current heading of the agent, and
+$\phi_{TN}$ is the preferred angle of that TN neuron \cite{Stone2017}.
 
 
 % Function of TB1

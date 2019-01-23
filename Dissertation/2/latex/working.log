@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.10.18)  22 JAN 2019 14:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  23 JAN 2019 15:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **working
 (./working.tex
-LaTeX2e <2017/01/01> patch level 3
-Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+LaTeX2e <2017-04-15>
+Babel <3.18> and hyphenation patterns for 3 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
@@ -30,7 +30,7 @@ Package: appendix 2009/09/02 v1.2b extra appendix facilities
 \c@@ppsaveapp=\count89
 )
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2016/11/05 v2.16a AMS math features
+Package: amsmath 2017/09/02 v2.17a AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
@@ -95,7 +95,7 @@ Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks19
 )
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
 )
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
@@ -118,10 +118,10 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks20
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2016/10/09 v1.0u Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
@@ -132,15 +132,7 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2017/01/12 v0.06k Graphics/color for pdfTeX
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count105
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen120
 \Gin@req@width=\dimen121
@@ -162,15 +154,15 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 \caption@parindent=\dimen127
 \caption@hangindent=\dimen128
 )
-\c@ContinuedFloat=\count106
+\c@ContinuedFloat=\count105
 )
-\c@subfigure=\count107
-\c@subtable=\count108
+\c@subfigure=\count106
+\c@subtable=\count107
 )
 (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
 \multirow@colwidth=\skip46
-\multirow@cntb=\count109
+\multirow@cntb=\count108
 \multirow@dima=\skip47
 \bigstrutjot=\dimen129
 )
@@ -249,39 +241,32 @@ LaTeX Font Info:    ... okay on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count110
+\scratchcounter=\count109
 \scratchdimen=\dimen132
 \scratchbox=\box28
-\nofMPsegments=\count111
-\nofMParguments=\count112
+\nofMPsegments=\count110
+\nofMParguments=\count111
 \everyMPshowfont=\toks22
-\MPscratchCnt=\count113
+\MPscratchCnt=\count112
 \MPscratchDim=\dimen133
-\MPnumerator=\count114
-\makeMPintoPDFobject=\count115
+\MPnumerator=\count113
+\makeMPintoPDFobject=\count114
 \everyMPtoPDFconversion=\toks23
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-))
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 
@@ -290,15 +275,28 @@ Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
 Package etexcmds Info: Could not find \expanded.
 (etexcmds)             That can mean that you are not using pdfTeX 1.50 or
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/01/21 v0.26 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 38.
 Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 
@@ -338,43 +336,41 @@ Package caption Info: End \AtBeginDocument code.
 ] [5]
 <Images/Ardin2010MBModel.PNG, id=78, 523.83705pt x 395.91914pt>
 File: Images/Ardin2010MBModel.PNG Graphic file (type png)
-
 <use Images/Ardin2010MBModel.PNG>
-Package pdftex.def Info: Images/Ardin2010MBModel.PNG used on input line 449.
+Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 449.
 (pdftex.def)             Requested size: 317.07614pt x 239.65565pt.
- [6 <./Images/Ardin2010MBModel.PNG>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 532.
+ [6 <./Images/Ardin2010MBModel.PNG>] [7]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 535.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 532.
- [7]
-<Images/StoneCX2017.png, id=86, 501.875pt x 503.8825pt>
-File: Images/StoneCX2017.png Graphic file (type png)
-
-<use Images/StoneCX2017.png>
-Package pdftex.def Info: Images/StoneCX2017.png used on input line 542.
-(pdftex.def)             Requested size: 271.7835pt x 272.88443pt.
-
-<Images/EightENModel.png, id=88, 838.13126pt x 965.6075pt>
-File: Images/EightENModel.png Graphic file (type png)
-
-<use Images/EightENModel.png>
-Package pdftex.def Info: Images/EightENModel.png used on input line 581.
-(pdftex.def)             Requested size: 407.66833pt x 469.6746pt.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 535.
+<Images/StoneCXModel.jpg, id=86, 803.0pt x 520.94624pt>
+File: Images/StoneCXModel.jpg Graphic file (type jpg)
+<use Images/StoneCXModel.jpg>
+Package pdftex.def Info: Images/StoneCXModel.jpg  used on input line 545.
+(pdftex.def)             Requested size: 271.7835pt x 176.32448pt.
+<Images/Figure5F.jpg, id=87, 483.8075pt x 347.2975pt>
+File: Images/Figure5F.jpg Graphic file (type jpg)
+<use Images/Figure5F.jpg>
+Package pdftex.def Info: Images/Figure5F.jpg  used on input line 579.
+(pdftex.def)             Requested size: 317.07614pt x 227.62195pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8 <./Images/StoneCX2017.png>]
-Underfull \vbox (badness 3954) has occurred while \output is active []
+[8 <./Images/StoneCXModel.jpg>] [9 <./Images/Figure5F.jpg>]
+<Images/EightENModel.png, id=94, 838.13126pt x 965.6075pt>
+File: Images/EightENModel.png Graphic file (type png)
+<use Images/EightENModel.png>
+Package pdftex.def Info: Images/EightENModel.png  used on input line 651.
+(pdftex.def)             Requested size: 407.66833pt x 469.6746pt.
+ [10 <./Images/EightENModel.png>] [11] [12] [13
 
- [9 <./Images/EightENModel.png>] [10] [11] [12
-
-] [13] [14
+] [14
 
 ] [15] [16
 
@@ -382,40 +378,47 @@ Underfull \vbox (badness 3954) has occurred while \output is active []
 
 ] [19] [20
 
-]
-[21] (./working.bbl [22
+] [21]
+(./working.bbl [22
 
-]) [23] (./working.aux) ) 
+]
+Missing character: There is no Ã in font cmr12!
+Missing character: There is no ¼ in font cmr12!
+Missing character: There is no Ã in font cmr12!
+Missing character: There is no ¼ in font cmr12!
+Missing character: There is no Ã in font cmr12!
+Missing character: There is no ¶ in font cmr12!
+) [23] (./working.aux) ) 
 Here is how much of TeX's memory you used:
- 4108 strings out of 493013
- 61290 string characters out of 6135681
- 134270 words of memory out of 5000000
- 7569 multiletter control sequences out of 15000+600000
+ 4066 strings out of 494923
+ 60731 string characters out of 6180741
+ 126008 words of memory out of 5000000
+ 7297 multiletter control sequences out of 15000+600000
  14648 words of font info for 51 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 42i,21n,40p,756b,337s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on working.pdf (37 pages, 972299 bytes).
+ 14 hyphenation exceptions out of 8191
+ 42i,21n,40p,756b,335s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex1
+0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on working.pdf (37 pages, 1099892 bytes).
 PDF statistics:
  208 PDF objects out of 1000 (max. 8388607)
  143 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

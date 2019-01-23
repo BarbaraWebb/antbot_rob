@@ -10,8 +10,8 @@
 \contentsline {subsection}{\numberline {2.2} The Mushroom Body for Visual Navigation }{6}
 \contentsline {subsection}{\numberline {2.3} The Central Complex for Path Integration }{7}
 \contentsline {subsubsection}{\numberline {2.3.1}The Central Complex Model}{7}
-\contentsline {subsection}{\numberline {2.4} The Eight MBON Model (CXMB) }{8}
-\contentsline {subsection}{\numberline {2.5} Review of Part 1 }{11}
+\contentsline {subsection}{\numberline {2.4} The Eight MBON Model (CXMB) }{9}
+\contentsline {subsection}{\numberline {2.5} Review of Part 1 }{12}
 \contentsline {section}{\numberline {3} Platform }{13}
 \contentsline {subsection}{\numberline {3.1} Hardware }{13}
 \contentsline {subsection}{\numberline {3.2} Software }{13}

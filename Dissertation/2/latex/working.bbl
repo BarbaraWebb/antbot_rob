@@ -19,6 +19,20 @@ Leonard Eberding.
   the Navigational Toolkit of Desert Ants to control a Rover using Visual
   Navigation and Route Following.}, 2016.
 
+\bibitem{Fleischmann2018}
+Pauline~Nikola Fleischmann, Robin Grob, Valentin~Leander Müller, Rüdiger
+  Wehner, and Wolfgang Rössler.
+\newblock The geomagnetic field is a compass cue in cataglyphis ant navigation.
+\newblock {\em Current Biology}, 28(9):1440 -- 1444.e2, 2018.
+
+\bibitem{Grob2017}
+Robin Grob, Pauline~N Fleischmann, Kornelia Gr{\"u}bel, R{\"u}diger Wehner, and
+  Wolfgang R{\"o}ssler.
+\newblock The role of celestial compass information in cataglyphis ants during
+  learning walks and for neuroplasticity in the central complex and mushroom
+  bodies.
+\newblock {\em Frontiers in behavioral neuroscience}, 11:226, 2017.
+
 \bibitem{Mitchell2018}
 Robert Mitchell.
 \newblock {Developing AntBot: Visual Navigation based on the insect brain},
