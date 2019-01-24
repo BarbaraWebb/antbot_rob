@@ -593,6 +593,26 @@ We now break down the different neuronal types and their proposed functions.
 Citation is given, but for the avoidance of any doubt, the following descriptions
 are adapted from \textit{Stone et al.} (see STAR Methods) \cite{Stone2017}.
 
+\textbf{Simulated Neurons:}
+Each neuron is described by its firing rate, where the firing rate $r$ is
+a sigmoid function of the input $I$:
+
+\begin{equation}
+r = \frac{1}{1 + e^{-(aI - b)}}
+\end{equation}
+
+where $a$ and $b$ are parameters which control the slope and offset of the
+sigmoid function \cite{Stone2017}. Optionally, Gaussian noise may be added
+to the output. The input to each neuron is a weighted sum of the activity
+of each neuron that synapses onto it; say neuron $j$, the input is:
+
+\begin{equation}
+  I_j = \sum_{i} w_{ij} \cdot r_i
+\end{equation}
+
+The weights used by \textit{Stone et al.} can only be 0, 1, or -1 for
+no-connection, excitatory, or inhibitory respectively \cite{Stone2017}.
+
 % Function of CL & TL
 \textbf{TL \& CL1:}
 The TL neurons are the input point for heading information. In the ant brain
@@ -693,14 +713,68 @@ input for the CPU4 layer, underpinning accurate path integration.
 \par
 % Function of CPU4
 \textbf{CPU4:}
+The 16 CPU4 neurons receive input in the form of an accumulation of
+heading $\theta_h^{(t)}$ of the agent, along with a modulated speed response
+from the TN2 neurons \cite{Stone2017}. The CPU4 neurons accumulate distance with
+direction. The input the CPU4 neurons is given by:
+
+\begin{equation}
+I_{CPU4}^{(t)} = I_{CPU4}^{(t - 1)} + h \cdot (r_{TN2}^{(t)} - r_{TN2}^{(t)} - k)
+\end{equation}
+
+where $h = 0.0025$ determines the rate of memory accumulation, and $k = 0.1$ is
+a uniform rate of memory decay \cite{Stone2017}. All memory cells are initialised
+to $I_{CPU4}^{(0)} = 0.5$ and are clipped at each timestep to fall between 0 and
+1 \cite{Stone2017}. As shown in Figure \ref{fig:cx}, each TB1 provides input to
+two CPU4 neuron, each of which receives input from the TN2 cell in the opposite
+hemisphere. As these neurons accumulate distance with respect to a direction,
+they provide a population encoding of the \textit{home vector} (the integrated
+path back to the nest) \cite{Stone2017}. Interestingly, \textit{Zhang} showed
+that the network can be initialised to an arbitrary state, allowing the agent
+to navigate along arbitrary vectors \cite{Zhang2017}. While this seems intuitive,
+the experimental evidence is valuable and demonstrates that the CPU4 layer could
+form a basis for the \textit{vector memory} discussed by \textit{Webb} in
+\cite{Webb2018} (see Section \ref{CXMBBackground}).
+
+\textbf{Pontine:}
+The pontine neurons project contralaterally connecting opposite CBU columns
+(shown in Figure \ref{fig:cx} (Right)). The 16 pontine neurons each receive input
+from one CPU4 column \cite{Stone2017}; pontine input can be given simply as:
+
+\begin{equation}
+  I_{Pontine}^{(t)} = r_{CPU4}^{(t)}
+\end{equation}
+
 % Function of CPU1
 \textbf{CPU1:}
+There are 16 CPU1 neurons present in the model. Each of which
+receives inhibitory input (weight $= -1$) from a TB1 neuron; where, each
+TB1 neuron provides inhibitory input to two CPU1 neurons (in the same pattern
+as the TB1-CPU4 connections - see Figure \ref{fig:cx}). Each CPU4 neuron also
+provides input to a CPU1 neuron (so we get input from vector memory and current
+heading). The CPU1 input can be expressed as:
+
+\begin{equation}
+  I_{CPU1}^{(t)} = r_{CPU1}^{(t)} + r_{Pontine}^{(t)} - r_{TB1}^{(t)}
+\end{equation}
+
+As can be seen the CPU1 neurons also receive input from the pontine neurons.
+The CPU1 neurons form two sets, those connecting to left motor units and those
+connecting to the right. We choose a direction simply by summing the CPU1 outputs
+on both sides and the difference indicates the direction and angle of the
+required heading correction:
+
+\begin{equation}
+  \theta_h^{(t)} = \theta_h^{(t - 1)} +
+  m \cdot (\sum_{i = 1}^{8} r_{CPU1R_{i}} - \sum_{i = 1}^{8} r_{CPU1L_{i}})
+\end{equation}
+
+where $m = 0.5$ is a constant \cite{Stone2017}. This effectively describes
+how the network generates some turning signal from its current state and inputs
+to perform path integration. For further details, please consult \cite{Stone2017}
+(the STAR Methods section describes how the model operates).
+
 % STOP POINT: Present model by stone et al. then present the old GA model
-
-
-
-
-
 
 
 \subsection{ The Eight MBON Model (CXMB) } \label{CXMBBackground}
