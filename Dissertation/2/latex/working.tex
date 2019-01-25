@@ -9,6 +9,8 @@
 \usepackage[section]{placeins}
 \usepackage{array}
 \usepackage[nottoc,numbib]{tocbibind}
+\usepackage{multicol}
+\usepackage{wrapfig}
 %\usepackage{titlesec}
 
 \geometry{margin=1in}
@@ -591,6 +593,16 @@ be seen in Figure \ref{fig:markerbasedencoding}\footnote{[DRAFT] This figure
 \newline
 \par
 
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.9\textwidth]{MarkerBasedEncoding}
+  \caption{\label{fig:markerbasedencoding} (Figure 2 from \cite{Haferlach2007})
+    The Marker-Based encoding scheme used by \textit{Haferlach et al.},
+    demonstrating how a simple neural model would be encoded as a sequence of
+    integers.}
+\end{figure}
+
 Localised \textit{tournament selection}\footnote{Tournament Selection - Two
   solutions are picked randomly, then their fitness compared to determine if they
   will be selected} is used to pick solution for transition into the next
@@ -603,17 +615,71 @@ and progresses to mutation and \textit{crossover}\footnote{Crossover - A
   a particular point and the ends swapped.} This localised selection allows
 the algorithm to find multiple \textit{good} solutions which need not share the
 same genetic information.
+\newline
+\par
 
+The fitness of each solution is evaluated by having the agent navigate an
+outbound path through two randomly chosen points, then testing its ability
+to navigate back to the start point. During the outbound phase, information is
+input into the path integration network via the sensors; the network output is
+ignored. During the inbound route, the agent is steered by the network output.
+An individual is evaluated until some maximum time limit $m$ is reached, and the
+distane to the start point $dist_t$ is computed at each time step. The fitness is
+then the inverse sum of squared distances \cite{Haferlach2007}:
 
+\begin{equation}
+ f = \frac{1}{\sqrt{\int_{0}^m dist_t^2 dt}}
+\end{equation}
 
-\begin{figure}[h!]
+The fitness is then augmented to penalise homeward routes which
+spiral (circling the start point, getting closer with each pass), and
+also to reward networks which are simple in structure; shown in
+Equations \ref{eq:fithead} and \ref{eq:fitsimple} respectively.
+
+\begin{multicols}{2}
+  \begin{equation}
+    \label{eq:fithead}
+   f = \frac{1}{\sqrt{\int_{0}^m dist_t^2 |\theta - \omega | dt}}
+  \end{equation}\break
+  \begin{equation}
+    \label{eq:fitsimple}
+    f = \frac{1}{(1 + k_n)^{c_n}(1 + k_c^{c_c})
+      \sqrt{\int_{0}^m dist_t^2 |\theta - \omega | dt}}
+  \end{equation}
+\end{multicols}
+
+where $\omega$ is the nest heading, $\theta$ is the agent's heading, $k_n$ is
+a neuron penalty constant, $k_c$ is a connection penalty constant, $c_n$ is
+the number of neurons, and $c_c$ is the number of connections (i.e.
+the network is heavily penalised for the number of connections and neurons it
+has, forcing simpler networks) \cite{Haferlach2007}. These are applied as a
+two-stage evolutionary process; evolve a solution first using Equation
+\ref{eq:fithead} to compute the fitness, then use this solution to seed a new
+population and evolve a solution from here using Equation \ref{eq:fitsimple}. The
+two-stage evolutionary processalone did not find acceptable solutions. The search
+space was constrained by providing the following four constraints on network
+topology: Each direction cell had to be connected to at least one memory neuron;
+each direction cell had to be connected to at least one sigmoid neuron; sigmoid
+neurons had to be connected to turn effectors; a maximum of two turn effectors
+(left and right) were allowed \cite{Haferlach2007}.
+\newline
+\par
+
+\textit{Haferlach et al.} present the model shown in Figure
+\ref{fig:evolvednetwork}.
+
+\begin{wrapfigure}{r}{0.5\textwidth}
   \centering
-  \includegraphics[width=0.9\textwidth]{MarkerBasedEncoding}
-  \caption{\label{fig:markerbasedencoding} (Figure 2 from \cite{Haferlach2007})
-    The Marker-Based encoding scheme used by \textit{Haferlach et al.},
-    demonstrating how a simple neural model would be encoded as a sequence of
-    integers.}
-\end{figure}
+  \includegraphics[width=0.48\textwidth]{EvolvedNetwork}
+  \caption{\label{fig:evolvednetwork} (Figure 3 from \cite{Haferlach2007})
+    The high-fitness network, consistently evolved using the constrained
+    two-stage evolution process illustrated by \textit{Haferlach et al.}
+  }
+\end{wrapfigure}
+
+
+
+
 
 \subsubsection{The Central Complex Model}
 The Central Complex model is a six layer artificial neural network presented by
