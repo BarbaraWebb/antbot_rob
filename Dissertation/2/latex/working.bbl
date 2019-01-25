@@ -33,6 +33,11 @@ Robin Grob, Pauline~N Fleischmann, Kornelia Gr{\"u}bel, R{\"u}diger Wehner, and
   bodies.
 \newblock {\em Frontiers in behavioral neuroscience}, 11:226, 2017.
 
+\bibitem{Haferlach2007}
+Thomas Haferlach, Jan Wessnitzer, Michael Mangan, and Barbara Webb.
+\newblock Evolving a neural model of insect path integration.
+\newblock {\em Adaptive Behavior}, 15(3):273--287, 2007.
+
 \bibitem{Mitchell2018}
 Robert Mitchell.
 \newblock {Developing AntBot: Visual Navigation based on the insect brain},
@@ -76,6 +81,11 @@ R\"udiger Wehner.
 \newblock The architecture of the desert ant's navigational toolkit
   (hymenoptera: Formicidae).
 \newblock {\em Myrmecological News}, 12:85--96, 09 2009.
+
+\bibitem{Whitley1994}
+Darrell Whitley.
+\newblock A genetic algorithm tutorial.
+\newblock {\em Statistics and Computing}, 4(2):65--85, Jun 1994.
 
 \bibitem{Zhang2017}
 Zhaoyu Zhang.

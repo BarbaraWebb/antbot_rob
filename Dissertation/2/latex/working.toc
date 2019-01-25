@@ -9,25 +9,26 @@
 \contentsline {subsubsection}{\numberline {2.1.1}The from-flow method}{5}
 \contentsline {subsection}{\numberline {2.2} The Mushroom Body for Visual Navigation }{6}
 \contentsline {subsection}{\numberline {2.3} The Central Complex for Path Integration }{7}
-\contentsline {subsubsection}{\numberline {2.3.1}The Central Complex Model}{7}
-\contentsline {subsection}{\numberline {2.4} The Eight MBON Model (CXMB) }{12}
-\contentsline {subsection}{\numberline {2.5} Review of Part 1 }{14}
-\contentsline {section}{\numberline {3} Platform }{15}
-\contentsline {subsection}{\numberline {3.1} Hardware }{15}
-\contentsline {subsection}{\numberline {3.2} Software }{15}
-\contentsline {subsubsection}{\numberline {3.2.1} Android }{15}
-\contentsline {subsubsection}{\numberline {3.2.2} Arduino }{15}
-\contentsline {subsection}{\numberline {3.3} Modifications }{15}
-\contentsline {section}{\numberline {4} Methods }{17}
-\contentsline {subsection}{\numberline {4.1} Optical Flow }{17}
-\contentsline {subsection}{\numberline {4.2} Visual Navigation }{17}
-\contentsline {subsection}{\numberline {4.3} Path Integration }{17}
-\contentsline {subsection}{\numberline {4.4} The Complete System}{17}
-\contentsline {section}{\numberline {5}Experimentation}{19}
-\contentsline {subsection}{\numberline {5.1}General}{19}
-\contentsline {subsection}{\numberline {5.2}Collision Avoidance}{19}
-\contentsline {subsection}{\numberline {5.3}Visual Navigation}{19}
-\contentsline {subsection}{\numberline {5.4}Path Integration}{19}
-\contentsline {section}{\numberline {6} Results and Evaluation }{21}
-\contentsline {section}{\numberline {7} Discussion }{23}
-\contentsline {section}{\numberline {8}References}{25}
+\contentsline {subsubsection}{\numberline {2.3.1}The Evolved Model for Path Integration}{7}
+\contentsline {subsubsection}{\numberline {2.3.2}The Central Complex Model}{9}
+\contentsline {subsection}{\numberline {2.4} The Eight MBON Model (CXMB) }{13}
+\contentsline {subsection}{\numberline {2.5} Review of Part 1 }{16}
+\contentsline {section}{\numberline {3} Platform }{17}
+\contentsline {subsection}{\numberline {3.1} Hardware }{17}
+\contentsline {subsection}{\numberline {3.2} Software }{17}
+\contentsline {subsubsection}{\numberline {3.2.1} Android }{17}
+\contentsline {subsubsection}{\numberline {3.2.2} Arduino }{17}
+\contentsline {subsection}{\numberline {3.3} Modifications }{17}
+\contentsline {section}{\numberline {4} Methods }{19}
+\contentsline {subsection}{\numberline {4.1} Optical Flow }{19}
+\contentsline {subsection}{\numberline {4.2} Visual Navigation }{19}
+\contentsline {subsection}{\numberline {4.3} Path Integration }{19}
+\contentsline {subsection}{\numberline {4.4} The Complete System}{19}
+\contentsline {section}{\numberline {5}Experimentation}{21}
+\contentsline {subsection}{\numberline {5.1}General}{21}
+\contentsline {subsection}{\numberline {5.2}Collision Avoidance}{21}
+\contentsline {subsection}{\numberline {5.3}Visual Navigation}{21}
+\contentsline {subsection}{\numberline {5.4}Path Integration}{21}
+\contentsline {section}{\numberline {6} Results and Evaluation }{23}
+\contentsline {section}{\numberline {7} Discussion }{25}
+\contentsline {section}{\numberline {8}References}{27}
