@@ -13,10 +13,11 @@ Warning--entry type for "Scimeca2017" isn't style-file defined
 --line 159 of file working.bib
 Warning--entry type for "Zhang2017" isn't style-file defined
 --line 165 of file working.bib
+Warning--I didn't find a database entry for "Eberdnig2016"
 Warning--empty journal in ODonovan2005
 You've used 16 entries,
             2118 wiz_defined-function locations,
-            606 strings with 6947 characters,
+            608 strings with 6971 characters,
 and the built_in function-call counts, 5270 in all, are:
 = -- 499
 > -- 260
@@ -55,4 +56,4 @@ warning$ -- 1
 while$ -- 49
 width$ -- 18
 write$ -- 162
-(There were 6 warnings)
+(There were 7 warnings)

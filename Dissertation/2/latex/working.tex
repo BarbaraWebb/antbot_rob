@@ -134,6 +134,15 @@ Dr. Barbara Webb
 \pagenumbering{arabic}
 
 \raggedright
+\textbf{DRAFT NOTE:} Footnotes marked with [DRAFT] are there purely to comment
+on something that may be relevant, for example, where a paragraph or idea
+will make more sense once the full dissertation is written, or simply to note
+points where I am confused and could do with specific feedback/clarification.
+These will be removed from the final version. Footnotes not marked with [DRAFT]
+are actual footnotes, and will be kept.
+\newline
+\par
+
 \section{ Introduction }
 Navigation is a complex task. Determining a sequence of actions to reach a
 known location, based on a combination of sensory inputs requires a lot of
@@ -149,14 +158,17 @@ which may mimic the insect behaviour.
 In this paper we introduce a combined model, the Extended Central Complex (ECX)
 model for insect
 navigation. To be clear, there is no (known) physiological basis for such a
-model; however, it is biologically plausible, and may provide insight into
+model; however, is not biologically infeasible, and may provide insight into
 the operation of the real insect brain. The CXE model combines the tasks of
 Visual Navigation, Path Integration, and Collision Avoidance; using, the Mushroom
-Body Circuit (MB)\cite{Ardin2016}, the Central Complex model (CX)
-\cite{Stone2017}, and Optical Flow Collision Avoidance (OFCA)\cite{Mitchell2018}
+Body Circuit (MB) \cite{Ardin2016}, the Central Complex model (CX)
+\cite{Stone2017}, and Optical Flow Collision Avoidance (OFCA) \cite{Mitchell2018}
 for each task at a low level, then combining their outputs to get a form of
 higher visual processing (similar to the weighted ``base model'' described in
-\cite{Webb2018}). The CXE model is a modified Central Complex model, named simply
+\cite{Webb2018}\footnote{[DRAFT] This is the review paper that you sent me in
+  prepreint. So far as I can tell, it has not yet been published; will it be out
+  by April? How should I refer to this if the paper has not been published?}).
+The ECX model is a modified Central Complex model, named simply
 to ensure distinction between the two models. The individual components are all
 bioloigically plausible and two of three are known to be physiologically
 plausible. \cite{Ardin2016, Stone2017, Mitchell2018}.
@@ -166,7 +178,7 @@ plausible. \cite{Ardin2016, Stone2017, Mitchell2018}.
 This project primarily extends the work done in \cite{Mitchell2018}. As such we
 continue using the AntBot platform; a robot constructed for the express purpose
 of experimenting with the algorithms in the \textit{Ant Navigational Toolkit}
-\cite{Wehner2009}.
+\cite{Eberdnig2016, Wehner2009}.
 
 \subsection{ Motivation }
 Currently, a full base model for insect navigation does not exist
@@ -176,22 +188,24 @@ approach. Both the MB and CX models have been implemented and tested on AntBot
 previously \cite{Scimeca2017, Mitchell2018, Eberding2016, Zhang2017}, and a model
 combining the two has also been attempted by \textit{Zhang} in \cite{Zhang2017}.
 This is used as an inspiration and will be discussed further in Section
-\ref{MBBackground}.
+\ref{CXMBBackground}.
 \newline
 \par
 
 The previous AntBot implementations have demonstrated good performance of the CX
 and MB models individually \cite{Scimeca2017, Mitchell2018}. Performance of
 a combined system has also been shown to be reasonable, however, it is less
-consistent than we would desire\cite{Zhang2017}. In the combined model from
-\cite{Zhang2017} we note two key problems: A fixed outbound route, and fixed
-component weightings. We address the former by adding the OFCA component to our
-model; as in \cite{Mitchell2018}, the AntBot will follow a non-deterministic
-outbound route through a cluttered arena. The latter brings up the more
-complicated question of plausible synaptic plasticity which, while undoubtedly
-interesting, lies outside the scope of this project. It is worth noting that here
-may also have been unknown tecnical issues with the robot which affected results
-(see \cite{Mitchell2018}).
+consistent than we would desire \cite{Zhang2017}. In the combined model tests
+from \cite{Zhang2017} we note two key methodological problems: A fixed outbound
+route, and fixed component weightings. We address the former by adding the OFCA
+component to our model; as in \cite{Mitchell2018}, the AntBot will follow a
+non-deterministic outbound route through a cluttered arena. The latter brings up
+the more complicated question of plausible synaptic plasticity which, while
+undoubtedly interesting, lies outside the scope of this project (though some
+modelling of plasticity will be included). It is worth noting that here may also
+have been unknown tecnical issues with the robot which affected the results of
+\cite{Zhang2017}, making them less consistent than they should be in reality (see
+\cite{Mitchell2018} and later in this work).
 \newline
 \par
 
@@ -223,15 +237,14 @@ into four components:
   picked up by \cite{Mitchell2018}; making any hardware/software adjustments
   required to provide a solid foundation on which to develop.}
 
-\item{ The second stage
-will involve investigating existing systems and establishing experimental
-metrics. This stage will involve research and review of new topics (the
-main one being the Central Complex model for Path Integration), and their
+\item{We can then begin investigating existing systems and establishing
+  experimental metrics. This stage will involve research and review of new topics
+  (the main one being the Central Complex model for Path Integration), and their
 implementations on the robot (if they exist). This stage will look to establish
 appropriate metrics by testing the existing CX model in a non-deterministic
 navigational task (see Section \ref{sec:methods}).}
 
-\item{This stage will involve the setup and testing of the individual components
+\item{This stage will involve the set up and testing of the individual components
   of the ECX model. Building the modified optical flow system, adapting the work
   from \textit{Zhang} to combine the MB model with the CX, and finally, putting
   the three pieces together.}
@@ -251,7 +264,10 @@ Significant contributions of this project:
 \begin{enumerate}
 \item{
   Research and installation of a new compass sensor for the AntBot control
-  systems.
+  systems.\footnote{[DRAFT] practically, its looking like this will be less
+    and less useful, I've not had a chance to actually try re-writing the control
+    code to use the new sensor. That said, time went into this early on, and it
+    would be nice to include this.}
 }
 
 \item{
@@ -319,23 +335,28 @@ of the FOE can tell us things about the motion, and depth of the image.
 \newline
 \par
 
-In \cite{Mitchell2018}, the FOE was used explicitly to compute time-to-contact
-with an obstacle. In this work, we instead use it simply to determine the
-potential location of an obstacle. As stated in \cite{Burger1989}, computing the
+In \cite{Mitchell2018}, the FOE was used only to compute time-to-contact
+with an obstacle. In this work, we instead use it directly to determine the
+potential location of an obstacle. As stated in \cite{Burger1989}
+\footnote{[DRAFT] This is the source for the 'fuzzy' FOE; not included in this
+  submission
+  but I may revisit it, time-allowing; I have most of the section written},
+computing the
 FOE is not trivial. Following \cite{Mitchell2018} we will be using a dense
 optic flow field (tracking motion for every pixel in the image) as the
 computation of sparse fields was shown to be unreliable on the AntBot. This makes
 the problem more difficult; the basic from-flow method for computing the FOE
 given by \cite{ODonovan2005} is computationally complex for a dense flow field
 \cite{Mitchell2018}. The time taken to compute may become prohibitive. We will
-therefore look at a few different methods including that given by
-\textit{O'Donovan}.
+therefore look at using a \textit{subset}\footnote{[DRAFT]This is a subset of a
+  dense flow field, tracking every $n$th pixel instead of all pixels. This isn't a
+  dense flow field and it isn't sparse in the classical sense so I provide this
+  term; it will be explained in Methods.} (see Section \ref{sec:Methods}) optical
+flow field for the method provided by \textit{O'Donovan}.
 
-\subsubsection{The from-flow method}
+\subsubsection{The Least Squared-Error method}
 This is the method given by \textit{O'Donovan} and discussed in
-\cite{Mitchell2018}. We term it the \textit{from-flow} method, as we must first
-compute an optic flow field, from which we compute the FOE. The FOE is computed
-simply as:
+\cite{Mitchell2018}. The FOE is computed simply as:
 
 \begin{equation}
   \label{eq:foe}
@@ -367,7 +388,7 @@ Where, each pixel $p_i = (x, y)$ has associated flow vector $\mathbf{v} = (u,v)$
 Finally, set $a_{i0} = u$, $a_{i1} = v$ and $b{i} = xv - yu$. Note that this
 computation and explanation have been more or less copied from
 \cite{Mitchell2018} for the benefit of the reader. For more details, the reader
-should consult \cite{ODonovan2005}.
+should consult \cite{Mitchell2018}, or \cite{ODonovan2005}.
 \newline
 \par
 
@@ -461,7 +482,7 @@ connections all start with weight $w=1$. The figure and caption from
 
 In the implementation by \textit{Ardin et al.}
 and previous AntBot implementations, captured images were converted to greyscale
-and downsampled\cite{Ardin2016, Eberding2016, Zhang2017, Mitchell2018}. As such,
+and downsampled \cite{Ardin2016, Eberding2016, Zhang2017, Mitchell2018}. As such,
 each pixel can be described by a brightness (greyscale value). Each KC has
 a brightness threshold. Learning occurs by showing patterns (images) to the vPNs.
 KCs each have a brightness activation threshold; each KC sums the brightness of
@@ -509,8 +530,7 @@ various parts of the CX are given by \textit{Pfeiffer and Homberg} in
 \cite{Pfeiffer2014}\footnote{[DRAFT] I would like to include a short overview
   of the neurobiology but have left it until I can properly read through
   \cite{Pfeiffer2014}. I think I will need to leave this out, however, as I'm
-  not sure where to stop in terms of detail given by
-  \textit{Pfeiffer and Hormberg}; also I may run out of time!
+  not sure how to summarise the most relevant parts of their work.
 }
 \newline
 \par
@@ -518,9 +538,9 @@ various parts of the CX are given by \textit{Pfeiffer and Homberg} in
 We instead direct our attention to the CX model presented by
 \textit{Stone et al.} which is the first neural model for path integration
 in the insect brain, with structure drawn purely from physiology. Interestingly,
-this model is actually an advancement of an earlier model presented by
+this model is a more advanced version of an earlier model presented by
 \textit{Haferlach et al.}, which was \textit{evolved} using a Genetic Algorithm
-(GA). We present this also, purely for the sake of interest.
+\cite{Haferlach2007}. We present this also, purely for the sake of interest.
 
 \subsubsection{The Evolved Model for Path Integration}
 \textbf{A Brief Introduction to Genetic Algorithms}\newline
@@ -562,7 +582,8 @@ not captured by (and not necessary for) this paper. A tutorial by
 
 \textbf{The PI Model}\newline
 Prior to the CX model described below, there were several candidate neural
-networks proposed for PI in ants. \textit{Haferlach et al.} report the
+networks proposed for PI in ants \cite{Haferlach2007}. \textit{Haferlach et al.}
+report the
 two best-known candidates being hand-designed, with more recent research
 into an evolutionary approach to network design \cite{Haferlach2007}. The
 approach presented in \cite{Haferlach2007} follows this trend and employs
@@ -634,7 +655,11 @@ then the inverse sum of squared distances \cite{Haferlach2007}:
 The fitness is then augmented to penalise homeward routes which
 spiral (circling the start point, getting closer with each pass), and
 also to reward networks which are simple in structure; shown in
-Equations \ref{eq:fithead} and \ref{eq:fitsimple} respectively.
+Equations \ref{eq:fithead} and \ref{eq:fitsimple} respectively\footnote{
+  [DRAFT] I didn't have time to fix the equation formatting
+  (equation number bumped out of position). This will be sorted
+  in the final version.
+  }.
 
 \begin{multicols}{2}
   \begin{equation}
@@ -643,7 +668,7 @@ Equations \ref{eq:fithead} and \ref{eq:fitsimple} respectively.
   \end{equation}\break
   \begin{equation}
     \label{eq:fitsimple}
-    f = \frac{1}{(1 + k_n)^{c_n}(1 + k_c^{c_c})
+    f = \frac{1}{(1 + k_n)^{c_n}(1 + k_c)^{c_c}
       \sqrt{\int_{0}^m dist_t^2 |\theta - \omega | dt}}
   \end{equation}
 \end{multicols}
@@ -666,20 +691,23 @@ neurons had to be connected to turn effectors; a maximum of two turn effectors
 \par
 
 \textit{Haferlach et al.} present the model shown in Figure
-\ref{fig:evolvednetwork}.
+\ref{fig:evolvednetwork}; notice the evolved structure bears a striking
+resemblance to the CX model presented by \textit{Stone et al.} (Figure
+\ref{fig:cx}). Indeed, this network operates on the same principle; encoding
+a heading vector across multiple neurons with directional preference. This
+network provides a compact, elegant, robust model capable of performing
+path integration with reasonable errors. The network also demonstrated
+some capability for PI with obstacles present (though errors were generally much
+greater) \cite{Haferlach2007}.
 
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{figure}[h!]
   \centering
-  \includegraphics[width=0.48\textwidth]{EvolvedNetwork}
+  \includegraphics[width=0.7\textwidth]{EvolvedNetwork}
   \caption{\label{fig:evolvednetwork} (Figure 3 from \cite{Haferlach2007})
     The high-fitness network, consistently evolved using the constrained
     two-stage evolution process illustrated by \textit{Haferlach et al.}
   }
-\end{wrapfigure}
-
-
-
-
+\end{figure}
 
 \subsubsection{The Central Complex Model}
 The Central Complex model is a six layer artificial neural network presented by
