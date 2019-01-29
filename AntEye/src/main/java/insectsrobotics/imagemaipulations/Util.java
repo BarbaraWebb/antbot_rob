@@ -344,12 +344,13 @@ public class Util {
     // computation is done using the LSE method from Tistrelli et al.
     //
     public static void computeFocusOfExpansion (Mat prevPoints, Mat currentPoints, Mat foe){
+        String tag = "FOEC";
         Mat A = Mat.ones(900, 2, CvType.CV_32FC1);
         Mat b = Mat.ones(900, 1, CvType.CV_32FC1);
 
         int k = 0;
-        for (int i = 0; i < currentPoints.rows(); i++){
-            for (int j = 0; j < currentPoints.cols(); j++){
+        for (int i = 0; i < currentPoints.rows(); i = i + 2){
+            for (int j = 23; j < currentPoints.cols() - 23; j = j + 5){
                 //
                 // Extract flow vector f = (u,v) from the vector
                 //
@@ -377,24 +378,30 @@ public class Util {
         //
 
         // A_inv = (A'A)^-1
-        Mat A_inv = new Mat(A.rows(), A.rows(), CvType.CV_32FC1);
-        Core.gemm(A, A, 1, new Mat(), 0, A_inv);
+        Mat A_inv = new Mat();
+        Log.i(tag, "A size: " + A.rows() + "x" + A.cols());
+        Core.gemm(A.t(), A, 1, new Mat(), 0, A_inv);
+        //Log.i(tag, "A_inv size: " + A_inv.rows() + "x" + A_inv.cols());
         A_inv = A_inv.inv();
 
 
         // A = ((A'A)^-1)A'
-        // According to the docs, Core.gemm automatically transposes the first matrix, so
-        // we transpose when passing in to "undo" this. The second matrix is not transposed so
-        // we transpose it for the calculation
-        Core.gemm(A_inv.t(), A.t(), 1, new Mat(), 0, A);
+        Core.gemm(A_inv, A.t(), 1, new Mat(), 0, A);
+        //Log.i(tag, "A size where A = ((A'A)^-1)A': " + A.rows() + "x" + A.cols());
 
         // foe = ((A'A)^-1)A'b
         // Again we transpose the first matrix passed in to "undo" the auto-transpose
-        Core.gemm(A.t(), b, 1, new Mat(), 0, foe);
+        // Laws of matrix multiplication state that this should be a 2x1 (as foe)
+        Core.gemm(A, b, 1, new Mat(), 0, foe);
 
+        Log.i(tag, "FOE : " + foe.dump());
+
+        // Number formatting.
+        int amp = 10; // Amplification factor
+        foe.put(0,0, Math.abs(foe.get(0,0)[0])*10 % 90);
+        foe.put(1,0, Math.abs(foe.get(1,0)[0])*10 % 90);
         //foe.put(0,0, 45);
-        //foe.put(1,1,5);
-
+        //foe.put(1,0,5);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

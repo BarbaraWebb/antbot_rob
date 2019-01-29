@@ -1183,25 +1183,28 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             int t0 = (int) SystemClock.elapsedRealtime(); // Start time
             int t = (int) SystemClock.elapsedRealtime() - t0; // Current time
-            int timeLimit = 20000; // Limit (millis)
+            int timeLimit = 25000; // Limit (millis)
 
 
             // Focus of expansion
             //Mat foe = new Mat(2,1,CvType.CV_32FC2);
-            foe = Mat.ones(2,1, CvType.CV_8U);
+            foe = Mat.ones(2,1, CvType.CV_32FC1);
 
             //
             // Move forward at a steady speed.
             //
             try {
-                Command.go(new double[]{10,10});
+                Command.go(new double[]{20,20});
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            while(t < timeLimit){
-                Util.computeFocusOfExpansion(prevPointsToTrack, currentPointsToTrack, foe);
 
+            while(t < timeLimit){
+                try{ sleep(600); } catch (Exception e){ e.printStackTrace(); }
+
+                Util.computeFocusOfExpansion(prevPointsToTrack, currentPointsToTrack, foe);
+                Log.i(tag, foe.dump());
                 //
                 // Print FOE on the screen
                 //
@@ -1218,6 +1221,32 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     });
                 } catch (Exception e) {
                     e.printStackTrace();
+                }
+
+                if ( t > 5000 ) {
+                    if (foe.get(0, 0)[0] < 35) {
+                        try {
+                            Command.go(new double[]{20, 10});
+                            sleep(1000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    } else if (foe.get(0, 0)[0] > 55) {
+                        try {
+                            Command.go(new double[]{10, 20});
+                            sleep(1000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        try {
+                            Command.go(new double[]{20, 20});
+                            sleep(1000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
                 // Update time

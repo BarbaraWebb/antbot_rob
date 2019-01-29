@@ -5,7 +5,7 @@ The List: Stuff I have to do but am putting off for time management's sake
 
 Milestones:
 - (Done!) Get old CX working (and recorded)
-- Finish interim report
+- (Done!) Finish interim report
 - Finish first three chapters
 - Complete FOE OFCA model
 - Integrate into CXMB model (I think this is my best bet although there may
@@ -14,7 +14,47 @@ Milestones:
 	came from Barbara	and is likely best to stick with); could maybe try real
 	weightings in the KC-MBON synapses?
 
+28 / 01 / 2019:
+-
+Time since last entry spent writing the interim report and catching up on
+course material.
+-
 
+Todo:
+- Test and debug the FOE computation; be mindful, this will likely not be finished
+  today.
+
+Blocked:
+Notes:
+- FOE calculation will now compute something, let's see what...
+	- AntEye Stopped: CvException; Hooray, first invocation of Core.gemm
+		- Error: (-215) a_size.width == len
+		- Not a solution, but worth noting; Mat.size() gives a string in the form
+		  COLSxROWS rather than the expected ROWSxCOLS
+		- Okay, so gemm docs claim that the first matrix is automatically transposed,
+		  which does not seem to be the case.
+		- Don't reinitialise Mats inside a function; the Mat Header will only last
+		  for the scope of the function.
+
+- I'm now computing, well, something. Reminding me a tad of last year. The FOE
+  is coming out as 0.0...; 0.0.. in most cases and at some points it is negative;
+	I have no idea how the negative values work...
+- Try using a subset of pixels to clear out some noise.
+- Taking every 10th column provides a much more consistent measurement.
+- Still behaviour isn't great.
+- I'm dumb, you can account for negative flow readings because of the 360 camera;
+	going to try reading only from the front facing pixels.
+
+- On closing; FOE still very small (less than 1 without amplification factor).
+  I really could do with figuring out what causes this. Given that the FOE is
+	arrived at by summing flow vectors, it could be to do with the 360 camera.
+	Token attempt made to work with only the frontal pixels but this isn't working
+	any better so far as I can tell. Re-visit this idea and perhaps break down the
+	calculation. Yes this is horrible but it could provide your solution.
+
+Done:
+- (Done) FOE is being computed, but I'm not convinced as to its accuracy. See
+				 notes
 
 22 / 01 / 2019:
 Todo:
