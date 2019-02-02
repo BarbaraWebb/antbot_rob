@@ -1114,7 +1114,33 @@ learned in a non-deterministic fashion through a cluttered environment.
 % High level description of the platform. This section can be short. Refer back
 % to Part 1 for detail.
 \section{ Platform } \label{sec:platform}
+The AntBot is a small autonomous robot built to allow easy testing of the
+various navigational algorithms in the \textit{Ant Navigational Toolkit}
+on a physical agent. AntBot is assembled using off-the-shelf parts with an
+Android phone at its heart. We give a high level description here; additional
+detail can be found in \cite{Mitchell2018}.
+
 \subsection{ Hardware }
+The robot is composed of three main parts: a Dangu Rover 5 chassis, an Arduino,
+and a Google Nexus 5 Android smartphone. The smartphone provides a
+(theoretically) solid base for an autonomous agent, with sufficient processing
+power and memory to run the models, a convenient touchscreen interface to display
+information and an adaptable control interface, and a built-in camera and
+extensive software libraries. As such, the smartphone works as the computational
+centre, performing all higher sensory processing and decision making. Once the
+algorithm running on the phone has decided on a course of action, it sends a
+command via a serial connection to the Arduino board; the board, then parses
+the command and translates it into a sequence of motor commands which are sent
+to the built-in motor board in the chassis.
+
+Additionally, the robot possesses a $360^{\circ}$ camera attachment, giving the
+robot a panoramic view to match that of the desert ant\footnote{In reality,
+  the desert ant has a visual field of only ~$280^{\circ}$\cite{Ardin2016},
+  however an approxmiation of $360^{\circ}$ was considered appropriate when
+  the robot was built.}. The robot was also modified as part of
+\cite{Mitchell2018} to allow it to be charged with an external charger without
+dismantling it.
+
 \subsection{ Software }
 \subsubsection{ Android } \label{subsubsec:droid}
 \subsubsection{ Arduino }
