@@ -85,7 +85,6 @@ import static org.opencv.imgproc.Imgproc.resize;
 import static org.opencv.video.Video.calcOpticalFlowFarneback;
 import static org.opencv.video.Video.calcOpticalFlowPyrLK;
 
-
 //NOTE: There are many comments suffixed with ' - RM' This means they were left by Robert Mitchell in order
 //to make the code more readable, it does not mean that I wrote the code there.
 
@@ -97,6 +96,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     MushroomBodyThreads MBT;
     OldNavThreads ONT;
     OpticFlowThreads OFT;
+
+    //
+    // Video recording - set to true to perform video capture of the main
+    // processed video frame
+    //
+    boolean recording = true;
+
+    VideoRecorder recorder;
 
     float global_x, global_y, global_z;
     public static final String TAG = "OCVSample::Activity";
@@ -536,6 +543,19 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         LogToFileUtils.init(this.getApplicationContext());
         StatFileUtils.init(this.getApplicationContext()); //Statistical log file
         StatFileUtils.write("new", "new", "new"); //Add comments to delimit the instances of MainActivity in the stats file
+        Context mContext = this.getApplicationContext();
+        //
+        // Initialise the video recorder
+        //
+        recorder = new VideoRecorder(
+                90,
+                10,
+                1,
+                30,
+                mContext,
+                "capture"
+        );
+
 
         //Initialise the combiner module
         combiner = new CombinedThread(this);
@@ -545,6 +565,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         MBT = new MushroomBodyThreads(this);
         OFT = new OpticFlowThreads(this);
         ONT = new OldNavThreads(this);
+
 
         try {
             FileOutputStream f = new FileOutputStream(file);
@@ -967,6 +988,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         GaussianBlur(processedDestImage, processedDestImage, new Size(3, 3), 0, 0);
 
         images_access = true;
+
+
         //broadcastImage = new BroadcastImage();
         //processedDestImage.copyTo(visual_image);
         //broadcastImage.execute(processedDestImage);
@@ -976,6 +999,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         processedDestImage.colRange(0, 68).copyTo(current_image.colRange(22, 90));
         processedDestImage.colRange(68, 90).copyTo(current_image.colRange(0, 22));
 
+        //
+        // Record a video frame if recording is enabled.
+        //
+        if (recording) {
+            byte[] byteFrame = new byte[current_image.rows() * current_image.cols()];
+            current_image.get(0, 0, byteFrame);
+            recorder.onFrame(byteFrame);
+        }
 
         // Left and Right flow images created here - RM
         // takes 360 image with center at 45 deg for left flow
@@ -1183,7 +1214,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             int t0 = (int) SystemClock.elapsedRealtime(); // Start time
             int t = (int) SystemClock.elapsedRealtime() - t0; // Current time
-            int timeLimit = 25000; // Limit (millis)
+            int timeLimit = 30000; // Limit (millis)
 
 
             // Focus of expansion
@@ -1194,12 +1225,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             // Move forward at a steady speed.
             //
             try {
-                Command.go(new double[]{20,20});
+                Command.go(new double[]{14,13});
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-
+            int t_turn = t0;
+            int t_since_turn = t;
             while(t < timeLimit){
                 try{ sleep(600); } catch (Exception e){ e.printStackTrace(); }
 
@@ -1223,34 +1255,36 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     e.printStackTrace();
                 }
 
-                if ( t > 5000 ) {
-                    if (foe.get(0, 0)[0] < 35) {
+                if ( (t > 5000) && (t_since_turn > 3000)) {
+                    if (foe.get(0, 0)[0] < -5) {
                         try {
-                            Command.go(new double[]{20, 10});
+                            Command.turnAround(20);
                             sleep(1000);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
-                    } else if (foe.get(0, 0)[0] > 55) {
+                        t_turn = (int) SystemClock.elapsedRealtime();
+                    } else if (foe.get(0, 0)[0] > 5) {
                         try {
-                            Command.go(new double[]{10, 20});
+                            Command.turnAround(-20);
                             sleep(1000);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                    } else {
-                        try {
-                            Command.go(new double[]{20, 20});
-                            sleep(1000);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        t_turn = (int) SystemClock.elapsedRealtime();
+                    }
+                } else {
+                    try {
+                        Command.go(new double[]{14, 13});
+                        sleep(1000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
 
                 // Update time
                 t = (int) SystemClock.elapsedRealtime() - t0;
+                t_since_turn = (int) SystemClock.elapsedRealtime() - t_turn;
             }
 
             try { Command.stop(); }catch(Exception e){ e.printStackTrace(); }

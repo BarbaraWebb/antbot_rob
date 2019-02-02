@@ -14,6 +14,11 @@
             <option value="$PROJECT_DIR$/PathIntegrationApp" />
             <option value="$PROJECT_DIR$/SerialCommunicationApp" />
             <option value="$PROJECT_DIR$/VisualNavigationApp" />
+            <option value="$PROJECT_DIR$/ffmpeg-2.1.1-android-arm" />
+            <option value="$PROJECT_DIR$/ffmpeg-android-arm" />
+            <option value="$PROJECT_DIR$/ffmpeg-android-x86" />
+            <option value="$PROJECT_DIR$/javacpp" />
+            <option value="$PROJECT_DIR$/javacv" />
             <option value="$PROJECT_DIR$/openCVLibrary300" />
             <option value="$PROJECT_DIR$/visualsandbox" />
           </set>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ffmpeg-android-x86.ffmpeg-android-x86">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ffmpeg-android-x86/ffmpeg-android-x86.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

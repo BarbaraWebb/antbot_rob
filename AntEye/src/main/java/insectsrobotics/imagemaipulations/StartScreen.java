@@ -20,7 +20,7 @@ import insectsrobotics.imagemaipulations.Calibration.PreferencesManager;
 //import static insectsrobotics.imagemaipulations.R.id.Nav_radioGroup;
 
 
-public class StartScreen extends Activity implements BroadcastValues{
+public class  StartScreen extends Activity implements BroadcastValues{
 
     Context context;
     PreferencesManager preferencesManager;

@@ -1,2 +1,2 @@
-include ':AntEye', ':VisualNavigationApp', ':SerialCommunicationApp', ':CombinerApp', ':PathIntegrationApp', ':Broadcast_Library', ':visualsandbox'
+include ':AntEye', ':VisualNavigationApp', ':SerialCommunicationApp', ':CombinerApp', ':PathIntegrationApp', ':Broadcast_Library', ':visualsandbox', ':ffmpeg-2.1.1-android-arm', ':ffmpeg-android-arm', ':ffmpeg-android-x86', ':javacpp', ':javacv'
 include ':openCVLibrary300'

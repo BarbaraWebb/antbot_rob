@@ -1,19 +1,124 @@
 The List: Stuff I have to do but am putting off for time management's sake
-- Platform summary
+- (IP) Platform summary
 - Re-write ABS (Planned to slot into ILW).
 - Build obstacles (Also planned for ILW but could do with being before)
 
 Milestones:
 - (Done!) Get old CX working (and recorded)
 - (Done!) Finish interim report
-- Finish first three chapters
-- Complete FOE OFCA model
+- (IP) Finish first three chapters
+- (IP) Complete FOE OFCA model
 - Integrate into CXMB model (I think this is my best bet although there may
   be scope for modifying the CXMB model).
 - (OPTIONAL; if you have time!) create an alternate 8MBON model (I think Zhaoyu's
 	came from Barbara	and is likely best to stick with); could maybe try real
 	weightings in the KC-MBON synapses?
 
+	Barbara has mentioned that there were issues with Zhang, however, I think these
+	were the methodological issues I have discussed already. I already have CX
+	tests to cover this, however, CXMB + OFCA would be awesome.
+
+01 / 01 / 2019:
+Todo:
+- Try to get the video recording software working, or at least figure out the
+	issue
+- Check out "The Senses: A comprehensive reference" in the library on optical
+  flow sensitive cells (Horizontal and vertical); Jan suggested chapter 6 or 7,
+	paper by Krapp. Ideally this will be relevant to the ant.
+
+
+
+Notes:
+- bytedeco/javacv1.4.4
+- Can now confirm, reoving the bytedeco library has removed the duplicate entry.
+	Fuck.
+- Okay, there are no resources on how to use multiple versions of opencv in the
+	same project.
+- Going to see if I can rebuild the recorder using the utilities available in
+	opencv 3.0.0
+	- I tried to exclude the javacpp subpackage but no joy
+	- javacv seems to wrap OpenCV, FFMPEG and more. So, there should be
+	  equivalent opencv 3.0.0 functions; turning out now that javacv 1.4.4
+		has recently been updated to use OpenCV 4.0.0
+	- What do I actually need, and how can I get them?
+		- org.bytedeco.javacpp.opencv_core : org.opencv.core.Core (I think?)
+		- org.bytedeco.javacv.AndroidFrameConverter :
+		- org.bytedeco.javacv.FFmpegFrameRecorder :
+		- org.bytedeco.javacv.Frame :
+		- org.bytedeco.javacpp.opencv_core.IplImage : (Supposedly IplImage is
+																									 deprecated but the library
+																									 version in javacv isn't
+																									 clear; advice is to use
+																									 Mat)
+		- Another potential solution is to extract exactly the code for the
+		  ffmpeg stuff from the library
+
+- Attempted using the bytedeco javacpp library (does not include OpenCV)
+  then tearing out the parts of the javaCV library that I needed for recordings.
+	Compilation is successful, however there is a runtime error,
+	ClassNotFoundException. THis is a massive issue as I have no idea how to fix it.
+
+- Another potential is to include the javacv library and exclude the opencv parts.
+  This seems to be doable via the compile command in the gradle file.
+
+Blocked:
+- FOE testing
+Done:
+
+31 / 01 / 2019:
+Todo:
+- Continue writing video recording utility for the AntBot
+
+Notes:
+- Video recording utility mostly finished (just need to add stop calls), however
+	a major issue has arisen in that the project won't compile. Gradle sync and
+	build seems to complete successfully, however, compiling for a device does not
+	work.
+
+- The problem appears to be duplicate code (i.e. two things with the same name
+	that the compiler cannot resolve); why this is ocurring I have no idea.
+
+- It appears to be a problem with conflicting android SDK versions being
+	referenced from the Imgproc class, however, I think it is likely related to the
+	dual OpenCV imports. OpenCV is included from the OpenCV300 library, but I
+	needed functionality from the bytedeco/javacv version and I think there may be
+	some overlap. Android Studio is none too helpful in fixing this.
+
+Blocked:
+- Test video recording
+
+Done:
+  ;_;
+
+30 / 01 / 2019:
+Todo:
+- Further debugging on FOE computation
+
+Notes:
+- Problems with FOE:
+	- FOE x and y are almost always small; even after multiplication by 10 and
+	  modulo 90. What could cause this? Working theory is that the motion detected
+		is actually very little; i.e. the sum computed will work out to a very
+		small value. There is also the fact that we consider all motion vectors,
+		so negative flow vectors will draw the FOE to the back, while positive will
+		draw the FOE to the front at (hopefully) an equal rate. In theory, we should
+		also see FOE x-values around 90 if this is the case, but we do not.
+
+	- FOE is negative. As commented in last entry, this is likely to do with
+		negative flow being received from the rear of the robot. Backward motion
+		seems to give similar FOE values so I am hopeful.
+
+	- Even when the computation is limited to the central 30 pixels, the FOE is
+		always computed on the left-hand side. At this point, the idiot notices that,
+		if the origin were centred in the image, then the FOE readings might make
+		more sense
+
+  - It's looking like I'm going to have to record some video from the robot, then
+	  then use opencv on it to see if I can find a solution.
+
+
+Blocked:
+Done:
 28 / 01 / 2019:
 -
 Time since last entry spent writing the interim report and catching up on

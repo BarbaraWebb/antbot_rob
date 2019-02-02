@@ -9,6 +9,11 @@
       <module fileurl="file://$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" filepath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" filepath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/antbot_rob.iml" filepath="$PROJECT_DIR$/antbot_rob.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ffmpeg-2.1.1-android-arm/ffmpeg-2.1.1-android-arm.iml" filepath="$PROJECT_DIR$/ffmpeg-2.1.1-android-arm/ffmpeg-2.1.1-android-arm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ffmpeg-android-arm/ffmpeg-android-arm.iml" filepath="$PROJECT_DIR$/ffmpeg-android-arm/ffmpeg-android-arm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ffmpeg-android-x86/ffmpeg-android-x86.iml" filepath="$PROJECT_DIR$/ffmpeg-android-x86/ffmpeg-android-x86.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javacpp/javacpp.iml" filepath="$PROJECT_DIR$/javacpp/javacpp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javacv/javacv.iml" filepath="$PROJECT_DIR$/javacv/javacv.iml" />
       <module fileurl="file://$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" filepath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" />
       <module fileurl="file://$PROJECT_DIR$/visualsandbox/visualsandbox.iml" filepath="$PROJECT_DIR$/visualsandbox/visualsandbox.iml" />
     </modules>

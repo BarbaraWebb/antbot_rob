@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="javacpp.javacpp">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/javacpp/javacpp.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

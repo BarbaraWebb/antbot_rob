@@ -347,10 +347,10 @@ public class Util {
         String tag = "FOEC";
         Mat A = Mat.ones(900, 2, CvType.CV_32FC1);
         Mat b = Mat.ones(900, 1, CvType.CV_32FC1);
-
+        int border = 0; // Window applied to OF calculation
         int k = 0;
         for (int i = 0; i < currentPoints.rows(); i = i + 2){
-            for (int j = 23; j < currentPoints.cols() - 23; j = j + 5){
+            for (int j = border; j < currentPoints.cols() - border; j = j + 5){
                 //
                 // Extract flow vector f = (u,v) from the vector
                 //
@@ -398,8 +398,8 @@ public class Util {
 
         // Number formatting.
         int amp = 10; // Amplification factor
-        foe.put(0,0, Math.abs(foe.get(0,0)[0])*10 % 90);
-        foe.put(1,0, Math.abs(foe.get(1,0)[0])*10 % 90);
+        foe.put(0,0, foe.get(0,0)[0]);
+        foe.put(1,0, foe.get(1,0)[0]);
         //foe.put(0,0, 45);
         //foe.put(1,0,5);
     }
