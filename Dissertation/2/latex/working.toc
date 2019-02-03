@@ -9,9 +9,9 @@
 \contentsline {subsubsection}{\numberline {2.1.1}The Least Squared-Error method}{7}
 \contentsline {subsection}{\numberline {2.2} The Mushroom Body for Visual Navigation }{8}
 \contentsline {subsection}{\numberline {2.3} The Central Complex for Path Integration }{9}
-\contentsline {subsubsection}{\numberline {2.3.1}The Evolved Model for Path Integration}{9}
+\contentsline {subsubsection}{\numberline {2.3.1}The Evolved Model for Path Integration}{10}
 \contentsline {subsubsection}{\numberline {2.3.2}The Central Complex Model}{12}
-\contentsline {subsection}{\numberline {2.4} The Eight MBON Model (CXMB) }{17}
+\contentsline {subsection}{\numberline {2.4} The Eight MBON Model (CXMB) }{16}
 \contentsline {subsection}{\numberline {2.5} Review of Part 1 }{19}
 \contentsline {section}{\numberline {3} Platform }{21}
 \contentsline {subsection}{\numberline {3.1} Hardware }{21}
@@ -32,3 +32,4 @@
 \contentsline {section}{\numberline {6} Results and Evaluation }{27}
 \contentsline {section}{\numberline {7} Discussion }{29}
 \contentsline {section}{\numberline {8}References}{31}
+\contentsline {section}{\numberline {A}Genetic Algorithms}{33}

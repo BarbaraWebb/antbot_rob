@@ -159,7 +159,7 @@ In this paper we introduce a combined model, the Extended Central Complex (ECX)
 model for insect
 navigation. To be clear, there is no (known) physiological basis for such a
 model; however, is not biologically infeasible, and may provide insight into
-the operation of the real insect brain. The CXE model combines the tasks of
+the operation of the real insect brain. The ECX model combines the tasks of
 Visual Navigation, Path Integration, and Collision Avoidance; using, the Mushroom
 Body Circuit (MB) \cite{Ardin2016}, the Central Complex model (CX)
 \cite{Stone2017}, and Optical Flow Collision Avoidance (OFCA) \cite{Mitchell2018}
@@ -170,7 +170,7 @@ higher visual processing (similar to the weighted ``base model'' described in
   by April? How should I refer to this if the paper has not been published?}).
 The ECX model is a modified Central Complex model, named simply
 to ensure distinction between the two models. The individual components are all
-bioloigically plausible and two of three are known to be physiologically
+biologically plausible and two of three are known to be physiologically
 plausible. \cite{Ardin2016, Stone2017, Mitchell2018}.
 \newline
 \par
@@ -178,7 +178,7 @@ plausible. \cite{Ardin2016, Stone2017, Mitchell2018}.
 This project primarily extends the work done in \cite{Mitchell2018}. As such we
 continue using the AntBot platform; a robot constructed for the express purpose
 of experimenting with the algorithms in the \textit{Ant Navigational Toolkit}
-\cite{Eberdnig2016, Wehner2009}.
+\cite{Eberding2016, Wehner2009}.
 
 \subsection{ Motivation }
 Currently, a full base model for insect navigation does not exist
@@ -351,7 +351,7 @@ given by \cite{ODonovan2005} is computationally complex for a dense flow field
 therefore look at using a \textit{subset}\footnote{[DRAFT]This is a subset of a
   dense flow field, tracking every $n$th pixel instead of all pixels. This isn't a
   dense flow field and it isn't sparse in the classical sense so I provide this
-  term; it will be explained in Methods.} (see Section \ref{sec:Methods}) optical
+  term; it will be explained in Methods.} (see Section \ref{sec:methods}) optical
 flow field for the method provided by \textit{O'Donovan}.
 
 \subsubsection{The Least Squared-Error method}
@@ -365,7 +365,7 @@ This is the method given by \textit{O'Donovan} and discussed in
 
 \begin{equation*}
   \begin{split}
- A = 
+ A =
 \begin{bmatrix}
   a_{00} & a_{01}\\
   \dots  & \dots \\
@@ -463,7 +463,13 @@ proposed by \textit{Ardin et al.} for navigation in \cite{Ardin2016} contained
 360 visual PNs (vPNs), 20,000 KCs, and a single MBON. Every KC connects to the
 MBON, and each KC also connects to 10 vPNs chosen uniform randomly. The KC-MBON
 connections all start with weight $w=1$. The figure and caption from
-\textit{Ardin et al.} is given here in Figure \ref{fig:mb}.
+\textit{Ardin et al.} is given here in Figure \ref{fig:mb}. In the implementation
+by \textit{Ardin et al.} and previous AntBot implementations, captured images
+were converted to greyscale and downsampled \cite{Ardin2016, Eberding2016,
+  Zhang2017, Mitchell2018}. As such, each pixel can be described by its
+brightness (greyscale value) and each KC has a brightness threshold.
+\newline
+\par
 
 \begin{figure}
   \centering
@@ -480,28 +486,26 @@ connections all start with weight $w=1$. The figure and caption from
     images is few or no spikes.}
 \end{figure}
 
-In the implementation by \textit{Ardin et al.}
-and previous AntBot implementations, captured images were converted to greyscale
-and downsampled \cite{Ardin2016, Eberding2016, Zhang2017, Mitchell2018}. As such,
-each pixel can be described by a brightness (greyscale value). Each KC has
-a brightness threshold. Learning occurs by showing patterns (images) to the vPNs.
-KCs each have a brightness activation threshold; each KC sums the brightness of
-all connected vPNs and compares that sum to the threshold. If the total
-brightness is greater than the threshold then the KC is \textit{activated} and
-the weight of the KC-MBON connection is lowered from 1 to 0. Thus, each image
-shown to the vPNs should induce a sparse activation pattern in the KC layer.
+Learning occurs by showing patterns (images) to the vPNs. Each KC sums the
+brightness of all connected vPNs and compares that sum to the activation
+threshold. If the total brightness is greater than the threshold then the KC is
+\textit{activated}. As the connections between the vPN and KC layers are random,
+a given image will generate some sparse pattern of KC activation; to learn this
+pattern, the weight of the KC-MBON connection is lowered from 1 to 0 for the
+active KCs.
 \newline
 \par
 
 To determine image familiarity during the recapitulation process, a pattern is
-projected onto the vPNs (again giving a sparse pattern of KC activation.
-The MBON then sums the weights of all active KCs to obtain a familiarity measure;
-the lower the MBON output, the more familiar the image. Different route following
-strategies have been implemented (scanning\cite{Ardin2016, Eberding2016,
-  Zhang2017}, Klinokinesis\cite{Zhang2017}, combination with the CX
-model\cite{Zhang2017}(see below), and visual scanning\cite{Mitchell2018}); but,
-most commonly, some form of scanning is used whereby the agent scans an arc for
-the most familiar direction.
+projected onto the vPNs (again giving a sparse pattern of KC activation).
+The MBON then sums the synaptic (KC-MBON) weights of all active KCs to obtain a
+\textit{familiarity} measure; recall, these weights are decayed as part of the
+learing process; thus, the lower the MBON output, the more familiar the image
+(and vice versa). Different route following strategies have been implemented
+(scanning \cite{Ardin2016, Eberding2016, Zhang2017}, Klinokinesis
+\cite{Zhang2017}, combination with the CX model \cite{Zhang2017}(see below), and
+visual scanning \cite{Mitchell2018}); but, most commonly, some form of scanning
+is used whereby the agent scans an arc for the most familiar direction.
 \newline
 \par
 
@@ -515,7 +519,12 @@ course the work of \textit{Ardin et al.} can give the full details
 The MB model described above has been tested on the AntBot in three different
 works (albeit using different methods and metrics); the network as presented in
 \cite{Eberding2016, Zhang2017, Mitchell2018} differs only in the number of PNs
-present (900 vPNs are used in all three works). More relevant to this work, is
+present (900 vPNs are used in all three works), and the KC
+modelling (\textit{Ardin et al.} use a spiking model\footnote{The AntBot
+  projects do not explicitly model membrane potentials and realistic responses.
+  They use a simple abstraction for the sake of complexity. The network function
+  is essentially the same.} for the KCs
+\cite{Ardin2016}). More relevant to this work, is
 the proposed modification given by \textit{Zhang}, whereby, 8 MBONs are present
 as opposed to 1 (see Section \ref{CXMBBackground}).
 \newline
@@ -543,52 +552,15 @@ this model is a more advanced version of an earlier model presented by
 \cite{Haferlach2007}. We present this also, purely for the sake of interest.
 
 \subsubsection{The Evolved Model for Path Integration}
-\textbf{A Brief Introduction to Genetic Algorithms}\newline
-Genetic Algorithms (GAs) are metaheuristic
-optimisation algorithms which aim to optimise some (arbitrary) objective
-function. GAs perform this optimisation by taking inspiration from the
-theory of evolution by natural selection wherein species advance by genetic
-mixing (breeding) and a small chance of mutation with each offspring.
-The theory of evolution by natural selection suggests that mutations
-which are useful to the species become more potent over multiple generations
-as they allow the individual to live longer and/or reproduce more than those
-without the mutation; mutations which are useless die out or remain inert, and
-those which are harmful tend not to survive. This is an extremely simplified
-view.
-\newline
-\par
-
-With appropriate representation, this evolutionary concept can be
-translated into an optimisation algorithm. Say we choose to represent our data as
-4-bit binary strings. To start with, we generate some population of $n$ random
-4-bit bitstrings in the set range; two solutions are picked using some selection
-process, usually based on \textit{fitness}\footnote{Fitness - some measure of how
-  \textit{good} the solution is - e.g., minimisation would mean a lower value is
-  fitter.} and ``breed'' with probability $p_c$; the offspring are then mutated
-with (very small) probability $p_m$; finally the
-offspring/mutant-offspring/original bitstrings \footnote{Note that those chosen
-  may not breed with probability $p_c - 1$, and
-similarly, they may not be mutated with probability $p_m - 1$} form the next
-generation and the process repeats until some termination criterion is satisfied;
-this could be time, number of generations, stagnation of the population, etc.
-\newline
-\par
-
-This short explanation is merely to provide a high level idea of the concepts
-employed when working with GAs; there is a great deal of depth and nuance
-not captured by (and not necessary for) this paper. A tutorial by
-\textit{Whitley} can be found in \textit{Statistics and Computing, Volume 4
-  (1994)} \cite{Whitley1994}. Select terms will be defined as required.
-
-\textbf{The PI Model}\newline
 Prior to the CX model described below, there were several candidate neural
 networks proposed for PI in ants \cite{Haferlach2007}. \textit{Haferlach et al.}
 report the
 two best-known candidates being hand-designed, with more recent research
 into an evolutionary approach to network design \cite{Haferlach2007}. The
 approach presented in \cite{Haferlach2007} follows this trend and employs
-a GA to evolve a neural model which is suitable for PI with
-biologically plausible inputs.
+a Genetic Algorithm (GA) (see Appendix \ref{ap:ga} for a brief overview) to
+evolve a neural model which is suitable for PI with biologically plausible
+inputs.
 \newline
 \par
 
@@ -780,6 +752,8 @@ same activity patterns as the CPU4 neurons \cite{Stone2017}. Figure \ref{fig:cx}
 We now break down the different neuronal types and their proposed functions.
 Citation is given, but for the avoidance of any doubt, the following descriptions
 are adapted from \textit{Stone et al.} (see STAR Methods) \cite{Stone2017}.
+\newline
+\par
 
 \textbf{Simulated Neurons:}
 Each neuron is described by its firing rate, where the firing rate $r$ is
@@ -814,7 +788,7 @@ shown to be polarisation sensiive across multiple insect species \cite{Stone2017
 (see STAR Methods). Each TL neuron has a preferred direction (i.e. a specific
 direction of poliarisation sensitivity) $\theta_{TL} $, and there are 16 such
 neurons representing the 8 directions around the agent (i.e.
-$\theta_{TL} \in \{ 0^{\circ}, 45^{\circ}, 90^{\circ}, 135^{circ}, 180^{\circ},
+$\theta_{TL} \in \{ 0^{\circ}, 45^{\circ}, 90^{\circ}, 135^{\circ}, 180^{\circ},
 225^{\circ}, 270^{\circ}, 315^{\circ}\} $) \cite{Stone2017}. Together, the 16
 TL neurons encode the heading of the agent in a single timestep; each neuron
 receives input activation as:
@@ -866,6 +840,9 @@ $\theta_h \in [0^{\circ}, 360^{\circ})$ is the current heading of the agent, and
 $\phi_{TN}$ is the preferred angle of that TN neuron \cite{Stone2017}.
 \newline
 \par
+
+The TN neurons are not modelled in the \textit{basic} CX model on AntBot. There
+is, however, a \textit{holonomic} implementation which models these.
 
 % Function of TB1
 \textbf{TB1:}
@@ -944,7 +921,7 @@ provides input to a CPU1 neuron (so we get input from vector memory and current
 heading). The CPU1 input can be expressed as:
 
 \begin{equation}
-  I_{CPU1}^{(t)} = r_{CPU1}^{(t)} + r_{Pontine}^{(t)} - r_{TB1}^{(t)}
+  I_{CPU1}^{(t)} = r_{CPU1}^{(t)} - r_{Pontine}^{(t)} - r_{TB1}^{(t)}
 \end{equation}
 
 As can be seen the CPU1 neurons also receive input from the pontine neurons.
@@ -972,9 +949,9 @@ contains the full technical details of the model).
 In \cite{Zhang2017}, the MB network is modified by adding 7 MBONs. Each MBON has
 its own KC-MBON connection array, each with their own unique weights. Each
 connection array corresponds to one of the eight cardinal directions represented
-by the TB1 layer of the CX model (namely, $0^{\circ}$, $45^{\circ}$, $90^{\circ}$,
-$135^{\circ}$, $180^{\circ}$ ,$225^{\circ}$, $270^{\circ}$, $315^{\circ}$) (see
-Section \ref{CXBackground}).
+by the TB1 layer of the CX model (namely, $0^{\circ}$, $45^{\circ}$,
+$90^{\circ}$, $135^{\circ}$, $180^{\circ}$ ,$225^{\circ}$, $270^{\circ}$,
+$315^{\circ}$) (see Section \ref{CXBackground}).
 \newline
 \par
 
@@ -1062,7 +1039,10 @@ as a pre-requisite for testing the CXMB model, however, it demonstrates an
 important capability of the CX model; namely, the capability to directly load a
 state into its memory in order to navigate; a concept referred to as
 \textit{vector memory} in \cite{Webb2018}. Indeed, this concept of vector memory
-is shown to be quite a useful tool in insect navigation\cite{Webb2018}.
+is shown to be quite a useful tool in insect navigation \cite{Webb2018}. It is
+worth noting that, the precise biological mechanism employed by insects to
+perform this task, is unknown at time of writing. It would be neat to reuse
+the CX circuitry, but this is an open question.
 \newline
 \par
 
@@ -1076,17 +1056,29 @@ route, and loaded back into the network before the second inbound trip.
 more heading adjustments during its traversal, and, on average, performed
 slightly better than a pure CX implementation\cite{Zhang2017}. It should also
 be noted that the average performance of both models in \textit{Zhang's} work
-was good\cite{Zhang2017}.
+was good \cite{Zhang2017}.
+\newline
+\par
+
+We note two methodological problems with \textit{Zhang's} work: The outbound
+route, while randomly chosen, was the same accross all trials, and, for the
+copied memory and CXMB experiments, the agent was placed facing the nest for
+the test run (second inbound). To add to the first problem, the outbound route
+ended such that the robot was facing back towards the nest. Both of these flaws
+could lead to apparent path integration behaviour where, in fact, the agent
+could have made it sufficiently close to the nest by simply following a straight
+line. While the agent was certainly employing the CX to perform path integration,
+we do not feel that the tests chosen provide strong evidence of functionality.
 
 \subsection{ Review of Part 1 }
 The work in \cite{Mitchell2018} specifically covers the Mushroom Body
 and Optical Flow Collision Avoidance. The Mushroom Body model used in
 \cite{Mitchell2018} is the same as that used by \textit{Ardin et al.} in
-\cite{Ardin2016} though with 900 vPNs as opposed to 360. The model tested
-in \cite{Mitchell2018} used a single MBON with a scan-based route following
-strategy. The scanning differed from previous works as it was implemented
-as an image manipulation algorithm (termed \textit{visual scanning}) instead
-of a physical turn performed by the AntBot.
+\cite{Ardin2016}, except for the small differences noted in Section
+\ref{MBBackground}. The model tested in \cite{Mitchell2018} used a single MBON
+with a scan-based route following strategy. The scanning differed from previous
+works as it was implemented as an image manipulation algorithm (termed
+\textit{visual scanning}) instead of a physical turn performed by the AntBot.
 \newline
 \par
 
@@ -1186,5 +1178,42 @@ dismantling it.
 
 \bibliographystyle{plain}
 \bibliography{working}
+\appendix
+\section{Genetic Algorithms} \label{ap:ga}
+Genetic Algorithms (GAs) are metaheuristic
+optimisation algorithms which aim to optimise some (arbitrary) objective
+function. GAs perform this optimisation by taking inspiration from the
+theory of evolution by natural selection wherein species advance by genetic
+mixing (breeding) and a small chance of mutation with each offspring.
+The theory of evolution by natural selection suggests that mutations
+which are useful to the species become more potent over multiple generations
+as they allow the individual to live longer and/or reproduce more than those
+without the mutation; mutations which are useless die out or remain inert, and
+those which are harmful tend not to survive. This is an extremely simplified
+view.
+\newline
+\par
+
+With appropriate representation, this evolutionary concept can be
+translated into an optimisation algorithm. Say we choose to represent our data as
+4-bit binary strings. To start with, we generate some population of $n$ random
+4-bit bitstrings in the set range; two solutions are picked using some selection
+process, usually based on \textit{fitness}\footnote{Fitness - some measure of how
+  \textit{good} the solution is - e.g., minimisation would mean a lower value is
+  fitter.} and ``breed'' with probability $p_c$; the offspring are then mutated
+with (very small) probability $p_m$; finally the
+offspring/mutant-offspring/original bitstrings \footnote{Note that those chosen
+  may not breed with probability $p_c - 1$, and
+similarly, they may not be mutated with probability $p_m - 1$} form the next
+generation and the process repeats until some termination criterion is satisfied;
+this could be time, number of generations, stagnation of the population, etc.
+\newline
+\par
+
+This short explanation is merely to provide a high level idea of the concepts
+employed when working with GAs; there is a great deal of depth and nuance
+not captured by (and not necessary for) this paper. A tutorial by
+\textit{Whitley} can be found in \textit{Statistics and Computing, Volume 4
+  (1994)} \cite{Whitley1994}. Select terms will be defined as required.
 \end{document}
 

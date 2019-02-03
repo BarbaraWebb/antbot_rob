@@ -18,6 +18,52 @@ Milestones:
 	were the methodological issues I have discussed already. I already have CX
 	tests to cover this, however, CXMB + OFCA would be awesome.
 
+03 / 01 / 2019:
+Wrap up:
+- Fixed most of the points raised by Barbara, only haven't mentioned the AntBot
+	implementations of the AntBot CX.
+
+- Haven't done anything further on the platform summary.
+Todo:
+- Fix points raised by Barbara in feedback
+- Finish the platform summary; this should complete milestone 3
+
+Notes:
+- In 1.1 the phrase "synaptic plasticity" is used, which is underlined in red,
+	and I'm not sure why.
+
+- How FOE will work needs some more work from me.
+	- Have a look for some papers that have done this. It seemed to be a fairly
+		large body of work when researched.
+
+- (Fixed) GA stuff moved to Appendix (I'm keeping it, because I've written it and
+	an appendix is out of the way).
+
+- (non-issue) 2.3.1 paragraph break highlighted on \textit{Haferlach et al.}
+	present the model shown in figure... I don't know why this is highlighted.
+
+- (non-issue Comment about CPU4L/R being identical seemed to cast doubt when
+	Barbara mentioned it; I've left it unchanged but it would make sense for these
+	to be the same in the absence of Holonomic motion.
+
+- (Fixed) Pontine rate in Equation 14 is highlighted, but it was there in Stone
+	et al. Need to ask about this.
+
+	Changed a plus to a minus.
+
+- Need to mention AntBot implementations for each neuronal type. I don't think
+	this will be too bad. AAAAAAAAAAAAAAAAAAGGGGGGGHHHHHHHHHH! So, in looking into
+	how the TN neurons work on AntBot, its clear that this will need a lot more
+	time. May not be worth going into too much detail, but where to stop???
+	In most cases it just looks like a function to get the output from the
+	neuron using the rate model from Stone et al. which means they're mostly the
+	same
+
+
+Blocked:
+- FOE Testing
+Done:
+
 01 / 01 / 2019:
 Todo:
 - Try to get the video recording software working, or at least figure out the
