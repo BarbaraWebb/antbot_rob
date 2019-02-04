@@ -11,7 +11,7 @@
 \contentsline {subsection}{\numberline {2.3} The Central Complex for Path Integration }{7}
 \contentsline {subsubsection}{\numberline {2.3.1}The Evolved Model for Path Integration}{8}
 \contentsline {subsubsection}{\numberline {2.3.2}The Central Complex Model}{10}
-\contentsline {subsection}{\numberline {2.4} The Eight MBON Model (CXMB) }{14}
+\contentsline {subsection}{\numberline {2.4} The Eight MBON Model (CXMB) }{15}
 \contentsline {subsection}{\numberline {2.5} Review of Part 1 }{17}
 \contentsline {section}{\numberline {3} Platform }{19}
 \contentsline {subsection}{\numberline {3.1} Hardware }{19}

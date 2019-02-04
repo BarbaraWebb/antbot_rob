@@ -744,6 +744,8 @@ same activity patterns as the CPU4 neurons \cite{Stone2017}. Figure \ref{fig:cx}
 We now break down the different neuronal types and their proposed functions.
 Citation is given, but for the avoidance of any doubt, the following descriptions
 are adapted from \textit{Stone et al.} (see STAR Methods) \cite{Stone2017}.
+We also add implementation information for the AntBot where appropriate;
+occassionally the AntBot implementations are slightly different.
 \newline
 \par
 
@@ -836,7 +838,14 @@ $\phi_{TN}$ is the preferred angle of that TN neuron \cite{Stone2017}.
 \par
 
 The TN neurons are not modelled in the \textit{basic} CX model on AntBot. There
-is, however, a \textit{holonomic} implementation which models these.
+is, however, a \textit{holonomic} implementation which models both the TN1 and
+TN2 neurons is present on the robot. The formulae above are implemented on the
+robot but they are never used. Instead, the raw left and right speeds computed
+from the optical flow are passed in (see \textit{Scimeca} \cite{Scimeca2017} for
+the details of speed computation from optic flow). The TN2 neurons will simply
+clip these speeds to make sure they lie in $[0,1]$; the TN1 neurons will perform
+$(1 - s) / 2$ for both the left and right speeds $s$, then clip the output to lie
+in $[0,1]$.
 \newline
 \par
 
@@ -867,7 +876,8 @@ at timestep $t$ is:
 \end{equation}
 
 where $c = 0.33$ is a scaling factor which determines the relative strength
-of excitation from the CL1 layer and inhibition from other TB1 neurons. This
+of excitation from the CL1 layer and inhibition from other TB1 neurons;
+the AntBot implementation of the TB1 neurons is the same. This
 network layer produces a stable heading encoding which provides accurate
 input for the CPU4 layer, underpinning accurate path integration.
 \newline
@@ -881,7 +891,8 @@ from the TN2 neurons \cite{Stone2017}. The CPU4 neurons accumulate distance with
 direction. The input the CPU4 neurons is given by:
 
 \begin{equation}
-I_{CPU4}^{(t)} = I_{CPU4}^{(t - 1)} + h \cdot (r_{TN2}^{(t)} - r_{TN2}^{(t)} - k)
+  \label{eq:cpu4update}
+I_{CPU4}^{(t)} = I_{CPU4}^{(t - 1)} + h \cdot (r_{TN2}^{(t)} - r_{TB1}^{(t)} - k)
 \end{equation}
 
 where $h = 0.0025$ determines the rate of memory accumulation, and $k = 0.1$ is
@@ -900,6 +911,21 @@ form a basis for the \textit{vector memory} discussed by \textit{Webb} in
 \newline
 \par
 
+The basic CX model on the AntBot does not model TN neurons, so the input is
+computed differently; furthermore, the gain and loss factors are different.
+The input can be expressed as:
+
+\begin{align}
+  I_{CPU4}^{(t)} =
+  I_{CPU4}^{(t - 1)} + s \cdot ((1 - r_{TB1}^{(t)}) \cdot g - l)
+\end{align}
+
+where $l = 0.0026$ is the uniform rate of memory loss, $g = 0.005$ is the
+uniform rate of memory gain, and $s$ is the current speed. This value is
+then clipped to lie in $[0,1]$. As an aside, in the holonomic model
+mentioned previously, the input is computed as in Equation \ref{eq:cpu4update}
+as the TN neurons are present in the model.
+
 \textbf{Pontine:}
 The pontine neurons project contralaterally connecting opposite CBU columns
 (shown in Figure \ref{fig:cx} (Right)). The 16 pontine neurons each receive input
@@ -911,6 +937,11 @@ from one CPU4 column \cite{Stone2017}; pontine input can be given simply as:
   I_{Pontine}^{(t)} = r_{CPU4}^{(t)}
 \end{equation}
 
+The pontine neurons are not implemented on AntBot for simplicity. AntBot is
+incapable of holonomic motion, so they would have no functional effect.
+\newline
+\par
+
 % Function of CPU1
 \textbf{CPU1:}
 There are 16 CPU1 neurons present in the model. Each of which
@@ -921,21 +952,27 @@ provides input to a CPU1 neuron (so we get input from vector memory and current
 heading). The CPU1 input can be expressed as:
 
 \begin{equation}
-  I_{CPU1}^{(t)} = r_{CPU1}^{(t)} - r_{Pontine}^{(t)} - r_{TB1}^{(t)}
+  I_{CPU1}^{(t)} = r_{CPU4}^{(t)} - r_{Pontine}^{(t)} - r_{TB1}^{(t)}
 \end{equation}
 
 As can be seen the CPU1 neurons also receive input from the pontine neurons.
 The CPU1 neurons form two sets, those connecting to left motor units and those
-connecting to the right. We choose a direction simply by summing the CPU1 outputs
-on both sides and the difference indicates the direction and angle of the
-required heading correction:
+connecting to the right. On AntBot the pontine term is omitted
+(i.e. the input becomes
+$I_{CPU1}^{(t)} = r_{CPU4}^{(t)} - r_{TB1}^{(t)}$).
+\newline
+\par
+
+We choose a direction simply by summing the CPU1 outputs on both sides and the
+difference indicates the direction and angle of the required heading correction:
 
 \begin{equation}
   \theta_h^{(t)} = \theta_h^{(t - 1)} +
   m \cdot (\sum_{i = 1}^{8} r_{CPU1R_{i}} - \sum_{i = 1}^{8} r_{CPU1L_{i}})
 \end{equation}
 
-where $m = 0.5$ is a constant \cite{Stone2017}.
+where $m = 0.5$ is a constant \cite{Stone2017}. The angle computation is the
+same on the AntBot.
 \newline
 \par
 

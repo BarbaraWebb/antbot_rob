@@ -1,7 +1,8 @@
 The List: Stuff I have to do but am putting off for time management's sake
-- (IP) Platform summary
 - Re-write ABS (Planned to slot into ILW).
 - Build obstacles (Also planned for ILW but could do with being before)
+- Check the Equations in the dissertation background. Noticed a few wrong in
+  the CX section.
 
 Milestones:
 - (Done!) Get old CX working (and recorded)
@@ -21,8 +22,15 @@ Milestones:
 04 / 01 / 2019:
 Todo:
 - Finish dissertation redraft
-	- Cell descriptions for the AntBot if required. 
-- Finish platform summary
+	- Cell descriptions for the AntBot if required.
+	- TN:
+		- TN Input as described in Stone2017 does exist on the robot, however
+		  it is never used (according to Android Studio). Instead we take the
+			raw speeds computed from Optical Flow (See Scimeca for details)
+			and pass them as input. 
+
+Done:
+- (Done) Finish platform summary
 	- Added a potential section on Video Recording, but this isn't pressing as it
 		currently doesn't work.
 	- Just about done; just need to add figures.
