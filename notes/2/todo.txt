@@ -7,7 +7,7 @@ The List: Stuff I have to do but am putting off for time management's sake
 Milestones:
 - (Done!) Get old CX working (and recorded)
 - (Done!) Finish interim report
-- (IP) Finish first three chapters
+- (Done!) Finish first three chapters
 - (IP) Complete FOE OFCA model
 - Integrate into CXMB model (I think this is my best bet although there may
   be scope for modifying the CXMB model).
@@ -20,16 +20,21 @@ Milestones:
 	tests to cover this, however, CXMB + OFCA would be awesome.
 
 04 / 01 / 2019:
+Wrap-up:
+- First three chapters of dissertation complete! As always, could use a proof,
+	but the legwork is done.
 Todo:
-- Finish dissertation redraft
+
+
+Done:
+- (Done) Finish dissertation redraft
 	- Cell descriptions for the AntBot if required.
 	- TN:
 		- TN Input as described in Stone2017 does exist on the robot, however
 		  it is never used (according to Android Studio). Instead we take the
 			raw speeds computed from Optical Flow (See Scimeca for details)
-			and pass them as input. 
+			and pass them as input.
 
-Done:
 - (Done) Finish platform summary
 	- Added a potential section on Video Recording, but this isn't pressing as it
 		currently doesn't work.
