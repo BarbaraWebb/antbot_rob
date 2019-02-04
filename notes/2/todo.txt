@@ -18,6 +18,20 @@ Milestones:
 	were the methodological issues I have discussed already. I already have CX
 	tests to cover this, however, CXMB + OFCA would be awesome.
 
+04 / 01 / 2019:
+Todo:
+- Finish dissertation redraft
+	- Cell descriptions for the AntBot if required. 
+- Finish platform summary
+	- Added a potential section on Video Recording, but this isn't pressing as it
+		currently doesn't work.
+	- Just about done; just need to add figures.
+		- All figures from last year can likely be used. Double check that they're
+			relevant.
+		- Grab the images of the centre detection.
+		- Maybe a picture of the directory structure? I don't think this is
+			necessary.
+
 03 / 01 / 2019:
 Wrap up:
 - Fixed most of the points raised by Barbara, only haven't mentioned the AntBot

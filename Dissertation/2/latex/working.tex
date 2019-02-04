@@ -134,14 +134,6 @@ Dr. Barbara Webb
 \pagenumbering{arabic}
 
 \raggedright
-\textbf{DRAFT NOTE:} Footnotes marked with [DRAFT] are there purely to comment
-on something that may be relevant, for example, where a paragraph or idea
-will make more sense once the full dissertation is written, or simply to note
-points where I am confused and could do with specific feedback/clarification.
-These will be removed from the final version. Footnotes not marked with [DRAFT]
-are actual footnotes, and will be kept.
-\newline
-\par
 
 \section{ Introduction }
 Navigation is a complex task. Determining a sequence of actions to reach a
@@ -774,6 +766,8 @@ of each neuron that synapses onto it; say neuron $j$, the input is:
 
 The weights used by \textit{Stone et al.} can only be 0, 1, or -1 for
 no-connection, excitatory, or inhibitory respectively \cite{Stone2017}.
+\newline
+\par
 
 % Function of CL & TL
 \textbf{TL \& CL1:}
@@ -843,6 +837,8 @@ $\phi_{TN}$ is the preferred angle of that TN neuron \cite{Stone2017}.
 
 The TN neurons are not modelled in the \textit{basic} CX model on AntBot. There
 is, however, a \textit{holonomic} implementation which models these.
+\newline
+\par
 
 % Function of TB1
 \textbf{TB1:}
@@ -901,11 +897,15 @@ to navigate along arbitrary vectors \cite{Zhang2017}. While this seems intuitive
 the experimental evidence is valuable and demonstrates that the CPU4 layer could
 form a basis for the \textit{vector memory} discussed by \textit{Webb} in
 \cite{Webb2018} (see Section \ref{CXMBBackground}).
+\newline
+\par
 
 \textbf{Pontine:}
 The pontine neurons project contralaterally connecting opposite CBU columns
 (shown in Figure \ref{fig:cx} (Right)). The 16 pontine neurons each receive input
 from one CPU4 column \cite{Stone2017}; pontine input can be given simply as:
+\newline
+\par
 
 \begin{equation}
   I_{Pontine}^{(t)} = r_{CPU4}^{(t)}
@@ -1119,11 +1119,20 @@ and a Google Nexus 5 Android smartphone. The smartphone provides a
 power and memory to run the models, a convenient touchscreen interface to display
 information and an adaptable control interface, and a built-in camera and
 extensive software libraries. As such, the smartphone works as the computational
-centre, performing all higher sensory processing and decision making. Once the
-algorithm running on the phone has decided on a course of action, it sends a
-command via a serial connection to the Arduino board; the board, then parses
-the command and translates it into a sequence of motor commands which are sent
-to the built-in motor board in the chassis.
+centre, performing all higher sensory processing and acting on this analysis.
+Once the algorithm running on the phone has decided on a course of action, it
+sends a command via a serial connection to the Arduino board; the board, then
+parses the command and translates it into a sequence of motor commands which are
+sent to the built-in motor board in the chassis.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{AntBotCharging}
+  \caption{
+    \label{fig:antbotcomp} The AntBot, connected to the charging station.
+    This figure also shows the position of the mobile phone, camera attachment,
+    and retroflective motion capture markers on the top of the robot.
+    }
+\end{figure}
 
 Additionally, the robot possesses a $360^{\circ}$ camera attachment, giving the
 robot a panoramic view to match that of the desert ant\footnote{In reality,
@@ -1133,10 +1142,135 @@ robot a panoramic view to match that of the desert ant\footnote{In reality,
 \cite{Mitchell2018} to allow it to be charged with an external charger without
 dismantling it.
 
+\begin{figure}[t!]
+  \centering
+  \begin{minipage}[t!]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{KogetoDot}
+    \caption{The Kogeto Dot 360$^\circ$ panoramic lens attachment.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t!]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{PanoramicView}
+    \caption{A sample view of the lens from the front facing camera, before any
+      processing.}
+  \end{minipage}
+
+\end{figure}
+
 \subsection{ Software }
+The robot requires two levels of software; higher level Java (Android) code to
+perform the high level functions; and, lower level code written in C/C++
+(Arduino). The Arduino code can be thought of as the firmware.
+
 \subsubsection{ Android } \label{subsubsec:droid}
+Android can provide a nice basis for working on robotics projects. The
+Operating System permts multiple applications to run asynchronously and
+pass information between them; for example, the user could develop an application
+to perform all visual processing then broadcast a processed image for other
+applications which require it. The original AntBot software was split into
+separate five applications: Ant Eye, Visual Navigation, Path Integration,
+Combiner, and Serial Communications, neatly compartmentalising each task.
+Unfortunately, in recent years, this structure was abandoned and almost all code
+is contained within the \textit{AntEye} application. Only the Serial
+Communications application remains true-to-design.
+\newline
+\par
+
+Typical flow within AntEye will see an image captured from the front camera,
+processed such that we get a downsampled 90x10 image which represents the
+$360^{\circ}$ view around the robot. This image is then used for optical
+flow analysis. The image and flow analysis are then made available to any thread
+which requires it. A thread will then use this data to run an experiment.
+\newline
+\par
+
+There are a lot of criticisms we can raise about the robot (in both a hardware
+and software sense); ultimately the key problem may be lack of developer
+familiarity with the Android platform.  While Android seems to work well at
+first glance, it can ultimately be quite restrictive; we leave this to the
+later discussion.
+
 \subsubsection{ Arduino }
+The Arduino code acts as a bridge between the Android platform and the Dangu
+motor board, as there are no libraries which will directly connect the two.
+The Android code contains a Command class which allows the user to insert robot
+commands into the code; these are then transformed into serial messages by a
+broadcast library \cite{Eberding2016} and sent to the Arduino. The Arduino code
+contains a parser which will decode the serial messages and then call the
+correct method to execute the desired motor commands.
+
 \subsection{ Modifications }
+\textbf{Compass Sensor:}
+While the Android phone has a built-in compass (used for other parts of this
+project) this is impractical to use as part of a control system. The
+communications delay is too great to allow accurate feedback control.
+As a step to introducing proportional control to the robot, we undertook an
+investigation into available compass sensors. Multiple sensors and libraries
+were tested and ultimately we settled on a Grove 6-Axis Compass \& Accelerometer.
+This sensor remained reasonably accurate in when tested alongside motors (a
+source of magnetic interference) and the library code was straightforward to
+include. The sensor was installed by the Informatics Workshop. While we have not
+used it for this project, we would encourage a future student to make use of
+this.
+\newline
+\par
+
+\textbf{Ocular Calibration:}
+The $360^{\circ}$ camera attachment is held in place by a pressure sensitive
+adhesive which allows the position to shift if the attachment is knocked or
+removed. The lens was removed for use in another project, and on re-attaching, it
+was noticed that the image was warped, indicating that the pre-processing was not
+working as required. The image pre-processing algorithm used a hard-coded pixel
+value for the centre of the camera attachment which was no longer correct
+(see Figure \ref{fig:centre}). We implemented a simple detection
+algorithm using the Hough transform available in OpenCV to allow the user
+to detect the new position of the camera attachment and set the centre
+accordingly. The calibration is not performed automatically as the Hough
+transform can be slow, and is highly dependent on lighting; instead, it
+need only be done if the attachment is known to have moved.
+\newline
+\par
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\textwidth]{Centre}
+  \caption{\label{fig:centre} The hard-coded centre used for the polar transform
+    (red), against the circle detected using the Hough transform (green).
+   }
+\end{figure}
+
+\textbf{Code Refactor:}
+As mentioned above, all behavioural code for the robot has moved into the AntEye
+application. In fact, most code had been integrated into a single Android
+Activity (Java Class); this file contained multiple long threads dictating
+behaviour as well as a number of utility methods and robot commands. There
+were also a ludicrous number of global variables. The resulting file was over
+4000 lines long and almost unusable. Particuarly aggregious was the fact that
+roughly half of the code was irrelevant to this project, but did need archived
+for future use. As such, it was decided that it was worth refactoring the
+codebase in order to make it easier to work. All utility functions were split
+into their own static Util class, similarly, the robot control commands were
+moved to the Command class. Runnable threads were moved into an archive
+package, and split into classes according to their use: Mushroom Body,
+Central Complex, Optical Flow, or Old Navigation; that final group consists of
+the oldest code which is not used explicitly but is useful for reference
+purposes. A single thread was left in the main Activity file to act as a test
+thread. A lot of unused code was removed entirely.
+\newline
+\par
+
+There are still many problems with the existing codebase. This simple refactor
+ended up taking up a lot of time due to complications from working within the
+Android framework; furthermore, many concessions had to be made for the same
+reason.
+\newline
+\par
+
+\textbf{Video Recording:}
+You can write about this when it works.
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
