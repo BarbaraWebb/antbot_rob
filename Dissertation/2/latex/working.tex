@@ -845,7 +845,8 @@ from the optical flow are passed in (see \textit{Scimeca} \cite{Scimeca2017} for
 the details of speed computation from optic flow). The TN2 neurons will simply
 clip these speeds to make sure they lie in $[0,1]$; the TN1 neurons will perform
 $(1 - s) / 2$ for both the left and right speeds $s$, then clip the output to lie
-in $[0,1]$.
+in $[0,1]$. The output is returned directly, rather than being returned as a
+sigmoid (as for all other neuron types).
 \newline
 \par
 
