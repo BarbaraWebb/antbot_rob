@@ -6,26 +6,26 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Rec" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="_REC" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="AutomaticModuleUnloader">
     <loaded-modules>
-      <module name="AntEye" />
-      <module name="PathIntegrationApp" />
       <module name="CombinerApp" />
+      <module name="PathIntegrationApp" />
       <module name="Broadcast_Library" />
+      <module name="AntEye" />
       <module name="antbot_rob" />
-      <module name="VisualNavigationApp" />
       <module name="ffmpeg-2.1.1-android-arm" />
+      <module name="VisualNavigationApp" />
       <module name="SerialCommunicationApp" />
-      <module name="openCVLibrary300" />
       <module name="visualsandbox" />
+      <module name="openCVLibrary300" />
     </loaded-modules>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" line="128" />
-    <bookmark url="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" line="806" mnemonic="0" />
+    <bookmark url="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" line="130" />
+    <bookmark url="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" line="796" mnemonic="0" />
   </component>
   <component name="CMakeSettings">
     <configurations>
@@ -33,7 +33,26 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8af3e477-3606-4489-954e-dd5feaf85ae1" name="Default" comment="" />
+    <list default="true" id="8af3e477-3606-4489-954e-dd5feaf85ae1" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AntEye/AntEye.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/AntEye.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Recording/FFmpegFrameRecorder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Recording/FFmpegLockCallback.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Recording/Frame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Recording/FrameRecorder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/VideoRecorder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/2/rage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes/2/rage.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/2/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes/2/todo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -55,88 +74,68 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5531108">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="15">
-                  <caret line="554" column="24" selection-start-line="554" selection-start-column="24" selection-end-line="554" selection-end-column="25" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CX_Holonomic.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX_Holonomic.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-123">
-                  <caret line="463" column="30" selection-start-line="463" selection-start-column="24" selection-end-line="463" selection-end-column="30" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CX.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-258">
-                  <caret line="368" column="34" selection-start-line="368" selection-start-column="24" selection-end-line="368" selection-end-column="34" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CentralComplexThreads.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/CentralComplexThreads.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="12">
-                  <caret line="171" column="31" selection-start-line="171" selection-start-column="31" selection-end-line="171" selection-end-column="31" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/AntEye/build.gradle">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="345">
-                  <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Frame.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Recording/Frame.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="930">
-                  <caret line="107" column="44" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="44" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="CentralComplexThreads.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/CentralComplexThreads.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="270">
-                  <caret line="191" selection-start-line="191" selection-end-line="192" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="79">
+              <caret line="1187" lean-forward="true" selection-start-line="1187" selection-end-line="1187" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#45740#49446#0" expanded="true" />
+                <element signature="e#49445#49446#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MushroomBodyThreads.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/MushroomBodyThreads.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="143">
+              <caret line="192" column="54" selection-start-line="192" selection-start-column="50" selection-end-line="192" selection-end-column="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VideoRecorder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Media/VideoRecorder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="26">
+              <caret line="72" column="47" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#906#1662#0" expanded="true" />
+                <element signature="e#1661#1662#0" expanded="true" />
+                <element signature="e#1960#1961#0" expanded="true" />
+                <element signature="e#1998#1999#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Util.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-225">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -147,14 +146,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>testRun</find>
-      <find>test</find>
-      <find>ffmpeg</find>
-      <find>ffmp</find>
       <find>ini</find>
       <find>AbstractIpl</find>
       <find>onCameraFrame</find>
-      <find>recording</find>
       <find>getContext</find>
       <find>if (recor</find>
       <find>VideoRecor</find>
@@ -177,6 +171,11 @@
       <find>W_TB</find>
       <find>loss</find>
       <find>cpu4Update</find>
+      <find>Frame</find>
+      <find>recording</find>
+      <find>testRun</find>
+      <find>onCameraFram</find>
+      <find>Save</find>
     </findStrings>
     <replaceStrings>
       <replace>Util.printMemory(</replace>
@@ -5173,230 +5172,6 @@
             </list>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/ffmpeg-android-arm">
-          <value>
-            <list>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by project ':ffmpeg-android-arm'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-arm" />
-                <option name="name" value="components" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of project ':ffmpeg-android-arm'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-arm" />
-                <option name="name" value="projects" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in project ':ffmpeg-android-arm'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-arm" />
-                <option name="name" value="dependentComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in project ':ffmpeg-android-arm'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-arm" />
-                <option name="name" value="buildEnvironment" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in project ':ffmpeg-android-arm'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-arm" />
-                <option name="name" value="dependencyInsight" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in project ':ffmpeg-android-arm'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-arm" />
-                <option name="name" value="dependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays a help message." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-arm" />
-                <option name="name" value="help" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of project ':ffmpeg-android-arm'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-arm" />
-                <option name="name" value="model" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of project ':ffmpeg-android-arm'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-arm" />
-                <option name="name" value="properties" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from project ':ffmpeg-android-arm'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-arm" />
-                <option name="name" value="tasks" />
-              </ExternalTaskPojo>
-            </list>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/ffmpeg-android-x86">
-          <value>
-            <list>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by project ':ffmpeg-android-x86'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-x86" />
-                <option name="name" value="components" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of project ':ffmpeg-android-x86'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-x86" />
-                <option name="name" value="projects" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in project ':ffmpeg-android-x86'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-x86" />
-                <option name="name" value="dependentComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in project ':ffmpeg-android-x86'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-x86" />
-                <option name="name" value="buildEnvironment" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in project ':ffmpeg-android-x86'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-x86" />
-                <option name="name" value="dependencyInsight" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in project ':ffmpeg-android-x86'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-x86" />
-                <option name="name" value="dependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays a help message." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-x86" />
-                <option name="name" value="help" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of project ':ffmpeg-android-x86'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-x86" />
-                <option name="name" value="model" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of project ':ffmpeg-android-x86'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-x86" />
-                <option name="name" value="properties" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from project ':ffmpeg-android-x86'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/ffmpeg-android-x86" />
-                <option name="name" value="tasks" />
-              </ExternalTaskPojo>
-            </list>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/javacpp">
-          <value>
-            <list>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by project ':javacpp'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacpp" />
-                <option name="name" value="components" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of project ':javacpp'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacpp" />
-                <option name="name" value="projects" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in project ':javacpp'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacpp" />
-                <option name="name" value="dependentComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in project ':javacpp'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacpp" />
-                <option name="name" value="buildEnvironment" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in project ':javacpp'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacpp" />
-                <option name="name" value="dependencyInsight" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in project ':javacpp'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacpp" />
-                <option name="name" value="dependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays a help message." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacpp" />
-                <option name="name" value="help" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of project ':javacpp'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacpp" />
-                <option name="name" value="model" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of project ':javacpp'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacpp" />
-                <option name="name" value="properties" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from project ':javacpp'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacpp" />
-                <option name="name" value="tasks" />
-              </ExternalTaskPojo>
-            </list>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/javacv">
-          <value>
-            <list>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by project ':javacv'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacv" />
-                <option name="name" value="components" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of project ':javacv'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacv" />
-                <option name="name" value="projects" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in project ':javacv'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacv" />
-                <option name="name" value="dependentComponents" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in project ':javacv'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacv" />
-                <option name="name" value="buildEnvironment" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in project ':javacv'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacv" />
-                <option name="name" value="dependencyInsight" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in project ':javacv'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacv" />
-                <option name="name" value="dependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays a help message." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacv" />
-                <option name="name" value="help" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of project ':javacv'. [incubating]" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacv" />
-                <option name="name" value="model" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of project ':javacv'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacv" />
-                <option name="name" value="properties" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from project ':javacv'." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/javacv" />
-                <option name="name" value="tasks" />
-              </ExternalTaskPojo>
-            </list>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/openCVLibrary300">
           <value>
             <list>
@@ -8796,15 +8571,17 @@
         <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Recording/OpenCVFrameConverter.java" />
         <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Recording/Frame.java" />
         <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/VideoRecorder.java" />
-        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" />
         <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Recording/FFmpegFrameRecorder.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Media/VideoRecorder.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="y" value="25" />
-    <option name="width" value="683" />
-    <option name="height" value="743" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="625" />
+    <option name="y" value="211" />
+    <option name="width" value="673" />
+    <option name="height" value="557" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -8843,10 +8620,6 @@
             <path>
               <item name="antbot_rob" type="1abcf292:AndroidViewProjectNode" />
               <item name="openCVLibrary300" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="antbot_rob" type="1abcf292:AndroidViewProjectNode" />
-              <item name="VisualNavigationApp" type="feadf853:AndroidModuleNode" />
             </path>
           </expand>
           <select />
@@ -9270,7 +9043,7 @@
     <frame x="0" y="25" width="1366" height="743" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32890365" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
@@ -9280,26 +9053,49 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.1910299" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.330033" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Logcat" order="7" sideWeight="0.49924126" visible="true" weight="0.12292359" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="7" sideWeight="0.49924126" visible="true" weight="0.34053156" />
       <window_info id="Captures" order="2" weight="0.24962063" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.27921093" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.22757475" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13201821" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.14285715" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32890365" />
       <window_info anchor="right" id="Gradle" order="5" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" id="Device File Explorer" order="7" side_tool="true" weight="0.32928678" />
       <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32841328" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Build Variants" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5007587" side_tool="true" weight="0.43355483" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.27921093" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Logcat" order="7" sideWeight="0.49924126" visible="true" weight="0.12292359" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.330033" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32890365" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32890365" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32890365" />
+      <window_info anchor="right" id="Device File Explorer" order="7" side_tool="true" weight="0.32928678" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.1910299" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.22757475" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32841328" />
+      <window_info id="Captures" order="2" weight="0.24962063" />
+      <window_info anchor="right" id="Gradle" order="5" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info id="Designer" order="2" />
     </layout>
     <layout-to-restore>
       <window_info anchor="bottom" id="Build" order="7" weight="0.34551495" />
@@ -9317,6 +9113,7 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32890365" />
       <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Logcat" order="10" weight="0.7807309" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.330033" />
@@ -9330,7 +9127,6 @@
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32890365" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
     </layout-to-restore>
   </component>
@@ -9349,13 +9145,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/openCVLibrary300/src/main/java/org/opencv/android/CameraBridgeViewBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="134" column="19" selection-start-line="134" selection-start-column="19" selection-end-line="134" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Calibration/Calibration.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1590">
@@ -9374,13 +9163,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
           <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/MushroomBodyThreads.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1725">
-          <caret line="125" selection-start-line="125" selection-end-line="144" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -9503,13 +9285,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="66" selection-start-line="17" selection-start-column="66" selection-end-line="17" selection-end-column="66" />
         </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/Android/Sdk/platforms/android-23/android.jar!/java/util/zip/ZipOutputStream.class">
@@ -9555,8 +9337,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="-225">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -9565,8 +9350,8 @@
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Recording/BaseSettings.java" />
     <entry file="file://$PROJECT_DIR$/AntEye/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+        <state relative-caret-position="120">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -9634,19 +9419,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3735">
           <caret line="299" column="35" selection-start-line="299" selection-start-column="35" selection-end-line="299" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="554" column="24" selection-start-line="554" selection-start-column="24" selection-end-line="554" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -9678,6 +9450,39 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-123">
           <caret line="463" column="30" selection-start-line="463" selection-start-column="24" selection-end-line="463" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/MushroomBodyThreads.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="192" column="54" selection-start-line="192" selection-start-column="50" selection-end-line="192" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Media/VideoRecorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="72" column="47" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#906#1662#0" expanded="true" />
+            <element signature="e#1661#1662#0" expanded="true" />
+            <element signature="e#1960#1961#0" expanded="true" />
+            <element signature="e#1998#1999#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="79">
+          <caret line="1187" lean-forward="true" selection-start-line="1187" selection-end-line="1187" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#45740#49446#0" expanded="true" />
+            <element signature="e#49445#49446#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

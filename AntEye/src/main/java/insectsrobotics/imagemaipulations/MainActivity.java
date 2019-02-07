@@ -72,6 +72,7 @@ import insectsrobotics.imagemaipulations.NavigationModules.WillshawModule;
 import insectsrobotics.imagemaipulations.NavigationModules.RealWillshawModule;
 import insectsrobotics.imagemaipulations.NavigationModules.PerfectMemoryModule;
 import insectsrobotics.imagemaipulations.ThreadArchive.*;
+import insectsrobotics.imagemaipulations.Media.VideoRecorder;
 
 import static java.lang.Thread.sleep;
 import static org.opencv.imgproc.Imgproc.COLOR_BayerRG2RGB_EA;
@@ -101,9 +102,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     // Video recording - set to true to perform video capture of the main
     // processed video frame
     //
-    boolean recording = true;
+    public boolean recording = false;
+    public VideoRecorder recorder = new VideoRecorder();
 
-    VideoRecorder recorder;
+
 
     float global_x, global_y, global_z;
     public static final String TAG = "OCVSample::Activity";
@@ -544,18 +546,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         StatFileUtils.init(this.getApplicationContext()); //Statistical log file
         StatFileUtils.write("new", "new", "new"); //Add comments to delimit the instances of MainActivity in the stats file
         Context mContext = this.getApplicationContext();
-        //
-        // Initialise the video recorder
-        //
-        recorder = new VideoRecorder(
-                90,
-                10,
-                1,
-                30,
-                mContext,
-                "capture"
-        );
-
 
         //Initialise the combiner module
         combiner = new CombinedThread(this);
@@ -999,15 +989,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         processedDestImage.colRange(0, 68).copyTo(current_image.colRange(22, 90));
         processedDestImage.colRange(68, 90).copyTo(current_image.colRange(0, 22));
 
-        //
-        // Record a video frame if recording is enabled.
-        //
-        if (recording) {
-            byte[] byteFrame = new byte[current_image.rows() * current_image.cols()];
-            current_image.get(0, 0, byteFrame);
-            recorder.onFrame(byteFrame);
-        }
-
         // Left and Right flow images created here - RM
         // takes 360 image with center at 45 deg for left flow
         current_image.colRange(12, 90).copyTo(rightCXFlowImage.colRange(0, 78));
@@ -1020,7 +1001,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //Log.i("current_image channels", Integer.toString(current_image.channels()));
         // compute optic flow and charge the global variables with the speed values
 
-        // OPTICAL FLOW COMPUTED HERE - RM
+        // If recording is enabled, hand the current frame to the recorder
+        if (recording){ recorder.recordFrame(current_image); }
+
 
         // flowPointsCurrent = currentPointsToTrack; // Create a copy for the OF to utilise
         //flowPointsPrevious = prevPointsToTrack;
@@ -1203,6 +1186,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             String tag = "TEST";
             String output = "";
 
+            // Attempt to record
+            recording = true;
+            recorder.startRecording();
+
             ////////////////////////////////////////////////////////////////////////////////////////
 
             //
@@ -1214,7 +1201,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             int t0 = (int) SystemClock.elapsedRealtime(); // Start time
             int t = (int) SystemClock.elapsedRealtime() - t0; // Current time
-            int timeLimit = 30000; // Limit (millis)
+            int timeLimit = 10000; // Limit (millis)
 
 
             // Focus of expansion
@@ -1256,6 +1243,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 }
 
                 if ( (t > 5000) && (t_since_turn > 3000)) {
+                    /*
                     if (foe.get(0, 0)[0] < -5) {
                         try {
                             Command.turnAround(20);
@@ -1272,7 +1260,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                             e.printStackTrace();
                         }
                         t_turn = (int) SystemClock.elapsedRealtime();
-                    }
+                    }*/
                 } else {
                     try {
                         Command.go(new double[]{14, 13});
@@ -1289,7 +1277,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             try { Command.stop(); }catch(Exception e){ e.printStackTrace(); }
             try { sleep(1000);  } catch(Exception e){ e.printStackTrace(); }
-
+            recorder.stopRecording();
         }
     };
     ////////////////////////////////////////////////////////////////////////////////////////////////

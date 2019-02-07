@@ -19,7 +19,22 @@ Milestones:
 	were the methodological issues I have discussed already. I already have CX
 	tests to cover this, however, CXMB + OFCA would be awesome.
 
-04 / 01 / 2019:
+07 / 02 / 2019:
+Todo:
+- Compile recordings into video
+- Write offline video processing
+	- Compute optical flow field
+	- Compute FOE
+	- Draw FOE and flow field
+	- Upres to 900x100
+
+06 / 02 / 2019
+Todo:
+- Last-ditch effort to get libraries working
+- Write buffered version instead
+
+
+04 / 02 / 2019:
 Wrap-up:
 - First three chapters of dissertation complete! As always, could use a proof,
 	but the legwork is done.

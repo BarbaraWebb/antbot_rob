@@ -1,19 +1,19 @@
-package insectsrobotics.imagemaipulations;
+package utilities;
 
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
 import org.opencv.core.CvType;
+
 import org.opencv.core.Mat;
 
 import java.io.File;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
-import insectsrobotics.imagemaipulations.Recording.FFmpegFrameRecorder;
-import insectsrobotics.imagemaipulations.Recording.Frame;
-
+import org.bytedeco.javacv.FFmpegFrameRecorder;
+import org.bytedeco.javacv.Frame;
 //
 // Allows a developer to create multiple ffmpeg recording objects to record video data from the
 // robot.
@@ -26,6 +26,7 @@ public class VideoRecorder {
     private int frameRate;
     private int channels;
     private String ffmpegLink;
+
 
     private Frame videoFrame = null;
     private Context mContext;
@@ -45,7 +46,7 @@ public class VideoRecorder {
         ffmpegLink = videoFile.getAbsolutePath();
 
         Log.i(logTag, "VideoRecorder: " +
-        ffmpegLink + " imageWidth: " + imageWidth + "imageHeight" + imageHeight);
+                ffmpegLink + " imageWidth: " + imageWidth + "imageHeight" + imageHeight);
 
         recorder = new FFmpegFrameRecorder(ffmpegLink,width,height);
         recorder.setFormat("mp4"); // Default to MP4, but this could be passed as an arg
@@ -149,4 +150,7 @@ public class VideoRecorder {
         }
         return videoFile; //Return the File representing the statistics file
     }
+
+
 }
+

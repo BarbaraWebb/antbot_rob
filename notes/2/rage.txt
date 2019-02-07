@@ -17,3 +17,6 @@ This file contains a list of problems I'm finding with the AntBot:
 
    - Matrix multiplication is a pain on Android (OpenCV for Java/Android): Matrix
 	   ops in general tbh. Python would be easier (hint hint, Python)
+	 - Limited options for including hardware (IR or OF sensors could have been
+	 	 extremely useful
+	 - Library limitation OpenCV vs JavaCV ByteDeco
