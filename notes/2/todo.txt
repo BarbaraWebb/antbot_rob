@@ -22,11 +22,24 @@ Milestones:
 07 / 02 / 2019:
 Todo:
 - Compile recordings into video
-- Write offline video processing
+	(Should be doable with an ffmpeg command)
+	(actually worked it into a python script so its reusable)
+	- Works nicely, but highlighted a problem with the recorder, i.e. if a
+		recording is shorter than a previous one, frames are left over.
+		Plan is to fix this, write the analysis, then re-record.
+
+	- Fixed overwrite issue, on recording start, delete the directory if it exists
+	  and recreate.
+	- Would be nice to automatically pull video off of the phone, but this seems
+		more hassle than its worth
+
+- Write offline video processing (tried Python, didn't work for god knows what
+	reason)
 	- Compute optical flow field
 	- Compute FOE
 	- Draw FOE and flow field
 	- Upres to 900x100
+	- Store resulting video
 
 06 / 02 / 2019
 Todo:

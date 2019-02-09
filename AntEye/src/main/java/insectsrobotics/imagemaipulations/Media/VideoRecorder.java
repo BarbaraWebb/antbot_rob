@@ -46,12 +46,22 @@ public class VideoRecorder {
     private LinkedList<Mat> frameBuffer = new LinkedList<Mat>();
     private Thread recording = new Thread(recorder);
     private String tag = "_REC_";
+    File sd = new File(Environment.getExternalStorageDirectory(),"/DCIM/VideoFrames/");
+    boolean success = true;
 
     // Interrupt the recording if desired (at the end of a run)
     public void stopRecording(){ recording.interrupt(); }
 
     // Start recording
-    public void startRecording(){ recording.start(); }
+    public void startRecording(){
+        //
+        // If the Frame directory exists, delete it and recreate to guarantee an overwrite.
+        //
+        if (sd.exists()){ sd.delete(); }
+        success = sd.mkdir();
+
+        recording.start();
+    }
 
     //
     // Take on new frame; accounting for the fact that the save will be slower than the
@@ -85,11 +95,6 @@ public class VideoRecorder {
         FileOutputStream out = null;
         filename += ".png";
 
-        File sd = new File(Environment.getExternalStorageDirectory(),"/DCIM/VideoFrames/");
-        boolean success = true;
-        if (!sd.exists()) {
-            success = sd.mkdir();
-        }
         if (success) {
             File dest = new File(sd, filename);
             Log.d(tag, dest.getAbsolutePath());
