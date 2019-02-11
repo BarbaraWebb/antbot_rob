@@ -3,26 +3,11 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT" />
+        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/AntEye" />
-            <option value="$PROJECT_DIR$/Broadcast_Library" />
-            <option value="$PROJECT_DIR$/CombinerApp" />
-            <option value="$PROJECT_DIR$/PathIntegrationApp" />
-            <option value="$PROJECT_DIR$/SerialCommunicationApp" />
-            <option value="$PROJECT_DIR$/VisualNavigationApp" />
-            <option value="$PROJECT_DIR$/ffmpeg-2.1.1-android-arm" />
-            <option value="$PROJECT_DIR$/ffmpeg-android-arm" />
-            <option value="$PROJECT_DIR$/ffmpeg-android-x86" />
-            <option value="$PROJECT_DIR$/javacpp" />
-            <option value="$PROJECT_DIR$/javacv" />
-            <option value="$PROJECT_DIR$/openCVLibrary300" />
-            <option value="$PROJECT_DIR$/visualsandbox" />
-          </set>
-        </option>
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>

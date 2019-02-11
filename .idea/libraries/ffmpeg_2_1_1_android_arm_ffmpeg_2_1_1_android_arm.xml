@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="ffmpeg-2.1.1-android-arm.ffmpeg-2.1.1-android-arm">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/ffmpeg-2.1.1-android-arm/ffmpeg-2.1.1-android-arm.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
