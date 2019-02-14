@@ -19,6 +19,26 @@ Milestones:
 	were the methodological issues I have discussed already. I already have CX
 	tests to cover this, however, CXMB + OFCA would be awesome.
 
+13 / 02 / 2019:
+Notes:
+- Plotting the flow field seems to show that the flow detected is miniscule and
+	erratic.
+- I've emailed Garry to look for alternatives as I don't think anything flow
+	based	will do particularly well
+- That said, I'm not sure the recordings are the best. Even as a human its hard
+	to tell whats going on until the last minute.
+- Comfortingly, Luca's code seems to give a similar reading for the flow magnitude
+- The AntBot gets about 2 frames per second. Seriously?
+
+
+12 / 02 / 2019:
+Wrap-up:
+- Video recording utilities work; can plot the FOE on the video frame
+- As expected there isn't really a reliable relationship between a looming
+ 	obstacle and the FOE position, although in the recording it does jump
+	right
+- I need to redo the recordings anyway, so I'll check again, but as a preliminary
+  this is good, and I can start to look at alternatives.
 07 / 02 / 2019:
 Todo:
 - Compile recordings into video

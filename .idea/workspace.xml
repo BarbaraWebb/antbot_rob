@@ -1,126 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="_REC_" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d4af2663-68b5-4a8e-820d-7db8c35a2eec" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_27_1_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_23_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_27_1_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_2_0_0_alpha3_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_multidex_1_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_multidex_instrumentation_1_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_recyclerview_v7_27_1_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_27_1_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_27_1_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_27_1_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_27_1_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_23_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_27_1_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_2_2_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_2_2_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_exposed_instrumentation_api_publish_0_5_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_rules_0_5_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_0_5_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_common_1_1_0_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_common_1_1_0_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_common_1_1_0_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_common_1_1_0_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_26_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_27_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_23_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_26_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_27_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_2_0_0_alpha3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_multidex_1_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_multidex_instrumentation_1_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_recyclerview_v7_27_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_26_0_0_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_27_1_1_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_annotations_27_1_1_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_26_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_27_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_26_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_27_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_26_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_27_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_26_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_27_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_26_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_23_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_26_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_26_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_27_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_2_2_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_3_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_2_2_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_3_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_exposed_instrumentation_api_publish_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_monitor_1_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_rules_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_1_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_wendykierp_JTransforms_3_0_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_wendykierp_JTransforms_3_0_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_12_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_12_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_sf_kxml_kxml2_2_3_0_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_1_4_4_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_1_4_4_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_artoolkitplus_2_3_1_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_ffmpeg_4_1_1_4_4_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_ffmpeg_4_1_1_4_4_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_flandmark_1_07_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_flycapture_2_13_3_31_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_leptonica_1_77_0_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_libdc1394_2_2_5_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_libfreenect2_0_2_0_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_libfreenect_0_5_3_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_librealsense_1_12_1_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_opencv_4_0_1_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_tesseract_4_0_0_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacpp_presets_videoinput_0_200_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_bytedeco_javacv_1_4_4_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_all_0_29_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_all_0_29_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_core_0_29_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_core_0_29_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_dense64_0_29_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_dense64_0_29_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_denseC64_0_29_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_denseC64_0_29_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_equation_0_29_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_equation_0_29_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_simple_0_29_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ejml_simple_0_29_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__pl_edu_icm_JLargeArrays_1_2_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__pl_edu_icm_JLargeArrays_1_2_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/ffmpeg_2_1_1_android_arm_ffmpeg_2_1_1_android_arm.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_Broadcast_Library_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_openCVLibrary300_compileReleaseJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AntEye/AntEye.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/AntEye.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Media/VideoRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Media/VideoRecorder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/antbot_rob.iml" beforeDir="false" afterPath="$PROJECT_DIR$/antbot_rob.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ffmpeg-2.1.1-android-arm/ffmpeg-2.1.1-android-arm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ffmpeg-2.1.1-android-arm/ffmpeg-2.1.1-android-arm.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javacv/javacv.iml" beforeDir="false" afterPath="$PROJECT_DIR$/javacv/javacv.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/debug/org/opencv/engine/OpenCVEngineInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/debug/org/opencv/engine/OpenCVEngineInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/release/org/opencv/engine/OpenCVEngineInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/generated/source/aidl/release/org/opencv/engine/OpenCVEngineInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileDebugAidl/dependency.store" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileDebugAidl/dependency.store" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileReleaseAidl/dependency.store" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/compileReleaseAidl/dependency.store" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseAssets/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseAssets/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseShaders/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseShaders/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageDebugResources/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/packageReleaseResources/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/2/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes/2/todo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/default/classes.jar" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/bundles/default/classes.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-release.aar" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/build/outputs/aar/openCVLibrary300-release.aar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" beforeDir="false" afterPath="$PROJECT_DIR$/openCVLibrary300/openCVLibrary300.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualsandbox/visualsandbox.iml" beforeDir="false" afterPath="$PROJECT_DIR$/visualsandbox/visualsandbox.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -139,36 +59,238 @@
     <session id="-2094613750">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="332" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="332" />
         </counts>
       </usages-collector>
     </session>
   </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="211" column="44" selection-start-line="211" selection-start-column="44" selection-end-line="211" selection-end-column="44" />
+              <folding>
+                <element signature="e#600#601#0" expanded="true" />
+                <element signature="e#631#632#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="194">
+              <caret line="1006" column="60" selection-start-line="1006" selection-start-column="60" selection-end-line="1006" selection-end-column="60" />
+              <folding>
+                <element signature="e#8690#8728#0" />
+                <element signature="class#9924:10211" />
+                <element signature="method#onServiceConnected#0;class#9924:10211" />
+                <element signature="method#onServiceDisconnected#0;class#9924:10211" />
+                <element signature="class#10265:10491" />
+                <element signature="method#onServiceConnected#0;class#10265:10491" />
+                <element signature="method#onServiceDisconnected#0;class#10265:10491" />
+                <element signature="class#10547:10773" />
+                <element signature="method#onServiceConnected#0;class#10547:10773" />
+                <element signature="method#onServiceDisconnected#0;class#10547:10773" />
+                <element signature="class#10831:11059" />
+                <element signature="method#onServiceConnected#0;class#10831:11059" />
+                <element signature="method#onServiceDisconnected#0;class#10831:11059" />
+                <element signature="e#11483#11503#0" />
+                <element signature="class#11922:13261" />
+                <element signature="method#onManagerConnected#0;class#11922:13261" />
+                <element signature="e#13269#13492#0" />
+                <element signature="class#13544:15655" />
+                <element signature="method#onNewMessageFromSerialConnectionApp#0;class#13544:15655" />
+                <element signature="method#onNewMessageFromVisualNavigationApp#0;class#13544:15655" />
+                <element signature="method#onNewMessageFromCombinerApp#0;class#13544:15655" />
+                <element signature="method#onNewMessageFromIntegratorApp#0;class#13544:15655" />
+                <element signature="method#onNewMessageFromAntEyeApp#0;class#13544:15655" />
+                <element signature="e#15662#16286#0" />
+                <element signature="e#16292#16352#0" />
+                <element signature="e#16359#16420#0" />
+                <element signature="e#16359#20663#0" />
+                <element signature="e#18850#18914#0" />
+                <element signature="e#19069#19103#0" />
+                <element signature="e#20669#21769#0" />
+                <element signature="e#21775#21863#0" />
+                <element signature="e#21775#22118#0" />
+                <element signature="e#22124#23086#0" />
+                <element signature="e#22519#22564#0" />
+                <element signature="e#23092#23194#0" />
+                <element signature="e#23202#23265#0" />
+                <element signature="e#23202#24279#0" />
+                <element signature="e#23419#23449#0" />
+                <element signature="e#24285#24374#0" />
+                <element signature="e#24285#24792#0" />
+                <element signature="e#24798#24982#0" />
+                <element signature="e#24798#25383#0" />
+                <element signature="e#25104#25125#0" />
+                <element signature="e#25389#25463#0" />
+                <element signature="e#25469#25523#0" />
+                <element signature="e#25469#26725#0" />
+                <element signature="e#25702#25704#0" />
+                <element signature="e#26183#26185#0" />
+                <element signature="e#26731#29200#0" />
+                <element signature="e#27392#27394#0" />
+                <element signature="e#27511#27556#0" />
+                <element signature="e#28565#28649#0" />
+                <element signature="e#29042#29128#0" />
+                <element signature="e#29206#29582#0" />
+                <element signature="e#29652#29725#0" />
+                <element signature="e#31340#31342#0" />
+                <element signature="e#31946#32004#0" />
+                <element signature="e#33982#34030#0" />
+                <element signature="e#34451#34517#0" />
+                <element signature="e#36232#36314#0" />
+                <element signature="e#36552#36592#0" />
+                <element signature="e#36976#37023#0" />
+                <element signature="e#37484#37562#0" />
+                <element signature="e#37796#37879#0" />
+                <element signature="e#38352#38378#0" />
+                <element signature="e#39390#39440#0" />
+                <element signature="e#39599#39649#0" />
+                <element signature="e#42523#42598#0" />
+                <element signature="e#45740#49446#0" expanded="true" />
+                <element signature="e#46049#46137#0" />
+                <element signature="e#46628#46649#0" />
+                <element signature="e#46767#46769#0" />
+                <element signature="e#47312#47314#0" />
+                <element signature="e#49445#49446#0" expanded="true" />
+                <element signature="e#49555#51063#0" />
+                <element signature="e#49603#49641#0" />
+                <element signature="e#50275#50321#0" />
+                <element signature="e#51069#51761#0" />
+                <element signature="e#51767#58655#0" />
+                <element signature="e#53335#53396#0" />
+                <element signature="e#54827#54888#0" />
+                <element signature="e#55664#55726#0" />
+                <element signature="e#57260#57321#0" />
+                <element signature="e#61335#61396#0" />
+                <element signature="e#62003#62065#0" />
+                <element signature="e#63301#63362#0" />
+                <element signature="e#64311#67839#0" />
+                <element signature="e#65408#65517#0" />
+                <element signature="e#67847#67957#0" />
+                <element signature="e#67847#68768#0" />
+                <element signature="e#68046#68762#0" />
+                <element signature="e#68774#70422#0" />
+                <element signature="e#68853#70416#0" />
+                <element signature="e#70178#70238#0" />
+                <element signature="e#70428#71528#0" />
+                <element signature="e#70517#71522#0" />
+                <element signature="e#71534#71762#0" />
+                <element signature="e#71612#71756#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Media/VideoRecorder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="55" column="61" selection-start-line="55" selection-start-column="61" selection-end-line="55" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>getSpeedsFrom</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Media/VideoRecorder.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="77" />
-    <option name="y" value="47" />
-    <option name="width" value="1279" />
-    <option name="height" value="701" />
+    <option name="x" value="41" />
+    <option name="y" value="27" />
+    <option name="width" value="663" />
+    <option name="height" value="741" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="antbot_rob" type="1abcf292:AndroidViewProjectNode" />
+              <item name="AntEye" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="antbot_rob" type="1abcf292:AndroidViewProjectNode" />
+              <item name="AntEye" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="antbot_rob" type="1abcf292:AndroidViewProjectNode" />
+              <item name="AntEye" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="imagemaipulations" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="antbot_rob" type="1abcf292:AndroidViewProjectNode" />
+              <item name="AntEye" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="imagemaipulations" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="Media" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
+    <property name="device.picker.selection" value="0529f340f0c9e4d6" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="2.3.3" />
   </component>
   <component name="RunDashboard">
@@ -183,14 +305,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android App.visualsandbox">
+  <component name="RunManager" selected="Android App.AntEye">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AntEye" type="AndroidRunConfigurationType" factoryName="Android App">
+    <configuration name="AntEye" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="AntEye" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -579,31 +701,162 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="41" y="27" width="1325" height="741" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Capture Tool" />
-      <window_info active="true" content_ui="combo" id="Project" visible="true" weight="0.17926735" />
-      <window_info id="Structure" side_tool="true" />
-      <window_info id="Build Variants" side_tool="true" />
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="Favorites" side_tool="true" />
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Logcat" />
-      <window_info anchor="bottom" id="TODO" />
-      <window_info anchor="bottom" id="Android Profiler" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Build" visible="true" weight="0.35947713" />
-      <window_info anchor="right" id="Device File Explorer" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Gradle" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Assistant" weight="0.32983023" />
-      <window_info anchor="right" id="Palette&#9;" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.17904612" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Build Variants" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Designer" order="6" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info anchor="bottom" id="Run" />
+      <window_info anchor="bottom" id="Debug" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="1" sideWeight="0.49960908" visible="true" weight="0.25331125" />
+      <window_info anchor="bottom" id="TODO" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.50039095" side_tool="true" weight="0.6539735" />
+      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.49804536" weight="0.11589404" />
+      <window_info anchor="bottom" id="Android Profiler" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Gradle" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Assistant" order="5" weight="0.32983023" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Media/VideoRecorder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="55" column="61" selection-start-line="55" selection-start-column="61" selection-end-line="55" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="211" column="44" selection-start-line="211" selection-start-column="44" selection-end-line="211" selection-end-column="44" />
+          <folding>
+            <element signature="e#600#601#0" expanded="true" />
+            <element signature="e#631#632#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="1006" column="60" selection-start-line="1006" selection-start-column="60" selection-end-line="1006" selection-end-column="60" />
+          <folding>
+            <element signature="e#8690#8728#0" />
+            <element signature="class#9924:10211" />
+            <element signature="method#onServiceConnected#0;class#9924:10211" />
+            <element signature="method#onServiceDisconnected#0;class#9924:10211" />
+            <element signature="class#10265:10491" />
+            <element signature="method#onServiceConnected#0;class#10265:10491" />
+            <element signature="method#onServiceDisconnected#0;class#10265:10491" />
+            <element signature="class#10547:10773" />
+            <element signature="method#onServiceConnected#0;class#10547:10773" />
+            <element signature="method#onServiceDisconnected#0;class#10547:10773" />
+            <element signature="class#10831:11059" />
+            <element signature="method#onServiceConnected#0;class#10831:11059" />
+            <element signature="method#onServiceDisconnected#0;class#10831:11059" />
+            <element signature="e#11483#11503#0" />
+            <element signature="class#11922:13261" />
+            <element signature="method#onManagerConnected#0;class#11922:13261" />
+            <element signature="e#13269#13492#0" />
+            <element signature="class#13544:15655" />
+            <element signature="method#onNewMessageFromSerialConnectionApp#0;class#13544:15655" />
+            <element signature="method#onNewMessageFromVisualNavigationApp#0;class#13544:15655" />
+            <element signature="method#onNewMessageFromCombinerApp#0;class#13544:15655" />
+            <element signature="method#onNewMessageFromIntegratorApp#0;class#13544:15655" />
+            <element signature="method#onNewMessageFromAntEyeApp#0;class#13544:15655" />
+            <element signature="e#15662#16286#0" />
+            <element signature="e#16292#16352#0" />
+            <element signature="e#16359#16420#0" />
+            <element signature="e#16359#20663#0" />
+            <element signature="e#18850#18914#0" />
+            <element signature="e#19069#19103#0" />
+            <element signature="e#20669#21769#0" />
+            <element signature="e#21775#21863#0" />
+            <element signature="e#21775#22118#0" />
+            <element signature="e#22124#23086#0" />
+            <element signature="e#22519#22564#0" />
+            <element signature="e#23092#23194#0" />
+            <element signature="e#23202#23265#0" />
+            <element signature="e#23202#24279#0" />
+            <element signature="e#23419#23449#0" />
+            <element signature="e#24285#24374#0" />
+            <element signature="e#24285#24792#0" />
+            <element signature="e#24798#24982#0" />
+            <element signature="e#24798#25383#0" />
+            <element signature="e#25104#25125#0" />
+            <element signature="e#25389#25463#0" />
+            <element signature="e#25469#25523#0" />
+            <element signature="e#25469#26725#0" />
+            <element signature="e#25702#25704#0" />
+            <element signature="e#26183#26185#0" />
+            <element signature="e#26731#29200#0" />
+            <element signature="e#27392#27394#0" />
+            <element signature="e#27511#27556#0" />
+            <element signature="e#28565#28649#0" />
+            <element signature="e#29042#29128#0" />
+            <element signature="e#29206#29582#0" />
+            <element signature="e#29652#29725#0" />
+            <element signature="e#31340#31342#0" />
+            <element signature="e#31946#32004#0" />
+            <element signature="e#33982#34030#0" />
+            <element signature="e#34451#34517#0" />
+            <element signature="e#36232#36314#0" />
+            <element signature="e#36552#36592#0" />
+            <element signature="e#36976#37023#0" />
+            <element signature="e#37484#37562#0" />
+            <element signature="e#37796#37879#0" />
+            <element signature="e#38352#38378#0" />
+            <element signature="e#39390#39440#0" />
+            <element signature="e#39599#39649#0" />
+            <element signature="e#42523#42598#0" />
+            <element signature="e#45740#49446#0" expanded="true" />
+            <element signature="e#46049#46137#0" />
+            <element signature="e#46628#46649#0" />
+            <element signature="e#46767#46769#0" />
+            <element signature="e#47312#47314#0" />
+            <element signature="e#49445#49446#0" expanded="true" />
+            <element signature="e#49555#51063#0" />
+            <element signature="e#49603#49641#0" />
+            <element signature="e#50275#50321#0" />
+            <element signature="e#51069#51761#0" />
+            <element signature="e#51767#58655#0" />
+            <element signature="e#53335#53396#0" />
+            <element signature="e#54827#54888#0" />
+            <element signature="e#55664#55726#0" />
+            <element signature="e#57260#57321#0" />
+            <element signature="e#61335#61396#0" />
+            <element signature="e#62003#62065#0" />
+            <element signature="e#63301#63362#0" />
+            <element signature="e#64311#67839#0" />
+            <element signature="e#65408#65517#0" />
+            <element signature="e#67847#67957#0" />
+            <element signature="e#67847#68768#0" />
+            <element signature="e#68046#68762#0" />
+            <element signature="e#68774#70422#0" />
+            <element signature="e#68853#70416#0" />
+            <element signature="e#70178#70238#0" />
+            <element signature="e#70428#71528#0" />
+            <element signature="e#70517#71522#0" />
+            <element signature="e#71534#71762#0" />
+            <element signature="e#71612#71756#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

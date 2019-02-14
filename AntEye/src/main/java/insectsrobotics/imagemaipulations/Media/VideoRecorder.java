@@ -37,7 +37,9 @@ public class VideoRecorder {
                 if (!frameBuffer.isEmpty()) {
                     storeFrame(frameBuffer.removeFirst());
                     frameId++; // Increment frame counter
+                    Log.i(tag, "Stored Frame : " + frameId);
                 }
+
             }
         }
     };
@@ -50,7 +52,10 @@ public class VideoRecorder {
     boolean success = true;
 
     // Interrupt the recording if desired (at the end of a run)
-    public void stopRecording(){ recording.interrupt(); }
+    public void stopRecording(){
+        Log.i(tag, "Frames remaining : " + frameBuffer.size());
+        recording.interrupt();
+    }
 
     // Start recording
     public void startRecording(){

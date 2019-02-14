@@ -1002,7 +1002,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         // compute optic flow and charge the global variables with the speed values
 
         // If recording is enabled, hand the current frame to the recorder
-        if (recording){ recorder.recordFrame(current_image); }
+        if (recording){
+            recorder.recordFrame(current_image);
+            Log.i("_REC_", "Frame Rate : " + frame_rate_cx);
+        }
 
 
         // flowPointsCurrent = currentPointsToTrack; // Create a copy for the OF to utilise
@@ -1201,7 +1204,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             int t0 = (int) SystemClock.elapsedRealtime(); // Start time
             int t = (int) SystemClock.elapsedRealtime() - t0; // Current time
-            int timeLimit = 10000; // Limit (millis)
+            int timeLimit = 17000; // Limit (millis)
 
 
             // Focus of expansion
@@ -1212,7 +1215,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             // Move forward at a steady speed.
             //
             try {
-                Command.go(new double[]{14,13});
+                Command.go(new double[]{15,15});
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1263,7 +1266,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     }*/
                 } else {
                     try {
-                        Command.go(new double[]{14, 13});
+                        Command.go(new double[]{15, 15});
                         sleep(1000);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -1507,7 +1510,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 current_left_flow_vector = new double[]{Util.mod((int) currentPointsToTrack.get(y, x)[0] + x + 12, 90),
                                                         Util.mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)};
                 previous_left_flow_vector = new double[]{Util.mod(x + 12, 90), y};
-
+                Log.i("FLOW_TEST", "Abs diff : " + Math.abs(previous_left_flow_vector[0] - current_left_flow_vector[0]));
                 if (Math.abs(previous_left_flow_vector[0] - current_left_flow_vector[0]) < 70) {
                     //   print arrows on debugFlowImage image - DEBUG
                     /*

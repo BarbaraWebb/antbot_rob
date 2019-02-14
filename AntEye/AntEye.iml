@@ -77,14 +77,22 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/generated/not_namespaced_r_class_sources" />
       <excludeFolder url="file://$MODULE_DIR$/build/generated/source/r" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/multi-dex" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
+      <excludeFolder url="file://$MODULE_DIR$/build/tmp" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -103,6 +111,10 @@
     <orderEntry type="library" exported="" name="Gradle: com.android.support:support-annotations:23.0.1@jar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.android.support:multidex:1.0.1@aar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.bytedeco.javacpp-presets:ffmpeg:4.1-1.4.4@jar" level="project" />
+    <orderEntry type="module" module-name="Broadcast_Library" exported="" />
+    <orderEntry type="module" module-name="openCVLibrary300" exported="" />
+    <orderEntry type="module" module-name="Broadcast_Library" exported="" />
+    <orderEntry type="module" module-name="openCVLibrary300" exported="" />
     <orderEntry type="module" module-name="Broadcast_Library" exported="" />
     <orderEntry type="module" module-name="openCVLibrary300" exported="" />
   </component>
