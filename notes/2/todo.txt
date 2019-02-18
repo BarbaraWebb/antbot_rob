@@ -57,7 +57,12 @@ Todo:
 		- Aaaand, now I'm lost. I have no idea where I am in the process...
 
 		- I may have stumbled on a much easier way to extract the blue channel but I
-		  am loath to mess with it. 
+		  am loath to mess with it.
+
+
+		Okay, so, having moved all of the processing code into another file; it works.
+		However, the display issue is a problem. I could do with having a display on
+		the robot. Getting this image back to MainActivity is the problem.
 
 - Play about with new sensors to see if you can get anything to work
 - Look at TinkerCAD to model a piece for the front of the robot which
