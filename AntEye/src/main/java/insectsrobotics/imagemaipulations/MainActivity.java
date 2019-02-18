@@ -1004,9 +1004,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         // If recording is enabled, hand the current frame to the recorder
         if (recording){
             recorder.recordFrame(current_image);
-            Log.i("_REC_", "Frame Rate : " + frame_rate_cx);
         }
 
+        Log.i("_REC_", "Frame Rate : " + frame_rate_cx);
 
         // flowPointsCurrent = currentPointsToTrack; // Create a copy for the OF to utilise
         //flowPointsPrevious = prevPointsToTrack;
@@ -1015,11 +1015,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         getObstaclesFromSparseFlow();
         getSpeedsFromSparseFlow();
 */
-        computeDenseOpticFlow();
 
-        filterCollisionAvoidance(); //Collision avoidance using a flow filter and dense optic flow
-        //getObstaclesFromSparseFlow(); //Obstacle detection using time-to-contact
-        getSpeedsFromDenseFlow();
+        //computeDenseOpticFlow();
+        //filterCollisionAvoidance(); //Collision avoidance using a flow filter and dense optic flow
+        //getSpeedsFromDenseFlow();
         speed = (leftCXFlow + rightCXFlow) / 2;
 
 
@@ -1225,7 +1224,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             while(t < timeLimit){
                 try{ sleep(600); } catch (Exception e){ e.printStackTrace(); }
 
-                Util.computeFocusOfExpansion(prevPointsToTrack, currentPointsToTrack, foe);
+                //Util.computeFocusOfExpansion(prevPointsToTrack, currentPointsToTrack, foe);
                 Log.i(tag, foe.dump());
                 //
                 // Print FOE on the screen

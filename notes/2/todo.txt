@@ -19,6 +19,36 @@ Milestones:
 	were the methodological issues I have discussed already. I already have CX
 	tests to cover this, however, CXMB + OFCA would be awesome.
 
+18 / 02 / 2019:
+Todo:
+- Check framerate when recording isn't running.
+	- Roughly the same, maybe negligably higher.
+	- On average, getting 2/3 frames per second with occasional spikes and dips
+	- Speaking to Jan, he suggested looking at the framerate without the farneback
+		computation; also, just checking out the framerate through the stages of
+		image processing.
+	- Raising the framerate may help with the optical flow.
+	- All of the delays sprinkled through the code are also abnormal. Why do we
+	  have to put sleep statements in each while loop? Unless this is a really
+		terrible way of providing synchronisation.
+	- When dealing with all of this, we have to acknowledge that matched filters
+	  worked last year.
+	- So, an avenue for exploration; relegate the image preprocessing to its own
+		thread, then set this to be a max priority thread.
+		- Same frame buffering method as VideoRecorder???
+		- Probably not, we always need to know what the current frame is, but
+			processing likely wont be complete by the time the next frame is passed
+			to the application.
+		- Could just treat the newest frame off the pile as the current one?
+		- The same frames still need to be made global so they are visible to
+			the rest of the system. Safety push, then get started...
+
+- Play about with new sensors to see if you can get anything to work
+- Look at TinkerCAD to model a piece for the front of the robot which
+	can be used to mount the sensors.
+- Seriously; have a think as to whether this is the best course of action.
+	This is pretty extreme and it could easily have its own problems.
+
 13 / 02 / 2019:
 Notes:
 - Plotting the flow field seems to show that the flow detected is miniscule and
@@ -27,7 +57,8 @@ Notes:
 	based	will do particularly well
 - That said, I'm not sure the recordings are the best. Even as a human its hard
 	to tell whats going on until the last minute.
-- Comfortingly, Luca's code seems to give a similar reading for the flow magnitude
+- Comfortingly, Luca's code seems to give a similar reading for the flow
+	magnitude.
 - The AntBot gets about 2 frames per second. Seriously?
 
 
