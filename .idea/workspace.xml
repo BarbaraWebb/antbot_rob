@@ -11,6 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d4af2663-68b5-4a8e-820d-7db8c35a2eec" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/VisionUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterDir="false" />
@@ -19,13 +20,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AntEye/AntEye.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/AntEye.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/2/rage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes/2/rage.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notes/2/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes/2/todo.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,46 +51,36 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="3" />
+          <entry key="java" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="3" />
+          <entry key="JAVA" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="365" />
+          <entry key="java" value="6770" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="365" />
+          <entry key="JAVA" value="6770" />
         </counts>
       </usages-collector>
     </session>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="antbot_rob" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1965">
-              <caret line="211" column="44" selection-start-line="211" selection-start-column="44" selection-end-line="211" selection-end-column="44" />
-              <folding>
-                <element signature="e#600#601#0" expanded="true" />
-                <element signature="e#631#632#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="1226" column="18" selection-start-line="1226" selection-start-column="18" selection-end-line="1226" selection-end-column="18" />
+            <state relative-caret-position="154">
+              <caret line="1060" column="8" selection-start-line="1060" selection-start-column="8" selection-end-line="1060" selection-end-column="8" />
               <folding>
                 <element signature="e#8690#8728#0" />
                 <element signature="class#9924:10211" />
@@ -150,40 +136,97 @@
                 <element signature="e#28565#28649#0" />
                 <element signature="e#29042#29128#0" />
                 <element signature="e#29206#29582#0" />
-                <element signature="e#31340#31342#0" />
                 <element signature="e#31946#32004#0" />
                 <element signature="e#33982#34030#0" />
-                <element signature="e#34451#34517#0" />
-                <element signature="e#36232#36314#0" />
                 <element signature="e#36552#36592#0" />
                 <element signature="e#36976#37023#0" />
                 <element signature="e#37484#37562#0" />
+                <element signature="e#39682#43390#0" expanded="true" />
+                <element signature="e#41377#41774#0" expanded="true" />
+                <element signature="e#41773#41774#0" expanded="true" />
+                <element signature="e#43389#43390#0" expanded="true" />
+                <element signature="e#49636#51144#0" />
+                <element signature="e#51150#51842#0" />
+                <element signature="e#51848#58736#0" />
+                <element signature="e#58742#64507#0" />
+                <element signature="e#64513#68041#0" />
+                <element signature="e#61879#67311#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Media/VideoRecorder.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/VisionUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="54" column="32" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
+            <state relative-caret-position="2157">
+              <caret line="544" column="2" selection-start-line="544" selection-start-column="2" selection-end-line="544" selection-end-column="2" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#10785#13049#0" />
+                <element signature="e#13055#14387#0" />
+                <element signature="e#14393#15500#0" />
+                <element signature="e#15506#16315#0" />
+                <element signature="e#16321#17991#0" />
+                <element signature="e#17997#21673#0" />
+                <element signature="e#21720#22125#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getSpeedsFrom</find>
-      <find>recording = true</find>
-      <find>frame_rate</find>
-      <find>testRun</find>
-      <find>recorder.stop</find>
-      <find>computeDense</find>
-      <find>onCameraFrame</find>
+      <find>images_ac</find>
+      <find>pixel</find>
+      <find>opticCheck</find>
+      <find>fullSnapShot</find>
+      <find>sec_check</find>
+      <find>counting</find>
+      <find>SnapShot</find>
+      <find>temporaryImage</find>
+      <find>debugFlowImage</find>
+      <find>void filterCollisionAvoidance()</find>
+      <find>computeDenseOp</find>
+      <find>previous_image</find>
+      <find>Status</find>
+      <find>tracked</find>
+      <find>previous</find>
+      <find>processe</find>
+      <find>computeSparse</find>
+      <find>rgbaList</find>
+      <find>menu</find>
+      <find>initialise</find>
+      <find>app.app.</find>
+      <find>app.displayedImage</find>
+      <find>recording</find>
+      <find>app.recording</find>
+      <find>recorder.</find>
+      <find>return displa</find>
+      <find>displayedImage =</find>
+      <find>displayedImage</find>
+      <find>copyTo</find>
+      <find>displayAvai</find>
     </findStrings>
+    <replaceStrings>
+      <replace>app.rgbaList</replace>
+      <replace>app.from_to</replace>
+      <replace>frameRate</replace>
+      <replace>unwrapWidth</replace>
+      <replace>app.displayedImage</replace>
+      <replace>app.rgba</replace>
+      <replace>displayedImage</replace>
+      <replace>app.</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -193,15 +236,16 @@
       <list>
         <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java" />
         <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Media/VideoRecorder.java" />
+        <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/VisionUtil.java" />
         <option value="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="41" />
-    <option name="y" value="27" />
-    <option name="width" value="663" />
-    <option name="height" value="741" />
+    <option name="x" value="363" />
+    <option name="y" value="96" />
+    <option name="width" value="653" />
+    <option name="height" value="555" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -243,6 +287,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="//&#9;null&#9;null" />
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
@@ -660,19 +705,20 @@
     <frame x="41" y="27" width="1325" height="741" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.17904612" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49893844" visible="true" weight="0.17904612" />
       <window_info id="Structure" order="2" side_tool="true" />
-      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Favorites" order="3" sideWeight="0.50212765" side_tool="true" weight="0.17904612" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
+      <window_info anchor="bottom" id="Find" weight="0.5231788" />
       <window_info anchor="bottom" id="Version Control" order="0" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="1" sideWeight="0.49960908" visible="true" weight="0.2102649" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="1" sideWeight="0.49960908" visible="true" weight="0.397351" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.50039095" side_tool="true" weight="0.6539735" />
-      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.49804536" weight="0.11589404" />
+      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.49804536" weight="0.4370861" />
       <window_info anchor="bottom" id="Android Profiler" order="6" />
       <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="bottom" id="Run" order="8" />
@@ -689,9 +735,16 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/OldNavThreads.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1965">
+        <state relative-caret-position="-3360">
           <caret line="211" column="44" selection-start-line="211" selection-start-column="44" selection-end-line="211" selection-end-column="44" />
           <folding>
             <element signature="e#600#601#0" expanded="true" />
@@ -702,15 +755,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Media/VideoRecorder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="54" column="32" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
+        <state relative-caret-position="-306">
+          <caret line="19" column="59" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="59" />
+          <folding>
+            <element signature="method#stopRecording#0;class#VideoRecorder#0" />
+            <element signature="method#startRecording#0;class#VideoRecorder#0" />
+            <element signature="method#storeFrame#0;class#VideoRecorder#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="1226" column="18" selection-start-line="1226" selection-start-column="18" selection-end-line="1226" selection-end-column="18" />
+        <state relative-caret-position="154">
+          <caret line="1060" column="8" selection-start-line="1060" selection-start-column="8" selection-end-line="1060" selection-end-column="8" />
           <folding>
             <element signature="e#8690#8728#0" />
             <element signature="class#9924:10211" />
@@ -766,14 +824,38 @@
             <element signature="e#28565#28649#0" />
             <element signature="e#29042#29128#0" />
             <element signature="e#29206#29582#0" />
-            <element signature="e#31340#31342#0" />
             <element signature="e#31946#32004#0" />
             <element signature="e#33982#34030#0" />
-            <element signature="e#34451#34517#0" />
-            <element signature="e#36232#36314#0" />
             <element signature="e#36552#36592#0" />
             <element signature="e#36976#37023#0" />
             <element signature="e#37484#37562#0" />
+            <element signature="e#39682#43390#0" expanded="true" />
+            <element signature="e#41377#41774#0" expanded="true" />
+            <element signature="e#41773#41774#0" expanded="true" />
+            <element signature="e#43389#43390#0" expanded="true" />
+            <element signature="e#49636#51144#0" />
+            <element signature="e#51150#51842#0" />
+            <element signature="e#51848#58736#0" />
+            <element signature="e#58742#64507#0" />
+            <element signature="e#64513#68041#0" />
+            <element signature="e#61879#67311#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/VisionUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2157">
+          <caret line="544" column="2" selection-start-line="544" selection-start-column="2" selection-end-line="544" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10785#13049#0" />
+            <element signature="e#13055#14387#0" />
+            <element signature="e#14393#15500#0" />
+            <element signature="e#15506#16315#0" />
+            <element signature="e#16321#17991#0" />
+            <element signature="e#17997#21673#0" />
+            <element signature="e#21720#22125#0" />
           </folding>
         </state>
       </provider>

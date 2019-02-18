@@ -43,6 +43,22 @@ Todo:
 		- The same frames still need to be made global so they are visible to
 			the rest of the system. Safety push, then get started...
 
+	  - I'm using the same frame buffer system after all; I'd like to be able to
+		  put the thread to sleep, but I don't think it'll be an issue.
+
+		- Really want images to be available as much as possible. So, do we only
+		  update the current image after all processing is complete? Supposedly
+			slow, but I'm not so sure.
+
+    - Basically; start moving code across and see what happens; don't get too
+		  bogged down with details, but keep notes.
+
+		- I'm genuinely furious. The amount of unused, stupid code here is ridiculous.
+		- Aaaand, now I'm lost. I have no idea where I am in the process...
+
+		- I may have stumbled on a much easier way to extract the blue channel but I
+		  am loath to mess with it. 
+
 - Play about with new sensors to see if you can get anything to work
 - Look at TinkerCAD to model a piece for the front of the robot which
 	can be used to mount the sensors.

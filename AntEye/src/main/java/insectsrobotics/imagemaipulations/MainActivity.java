@@ -74,6 +74,7 @@ import insectsrobotics.imagemaipulations.NavigationModules.PerfectMemoryModule;
 import insectsrobotics.imagemaipulations.ThreadArchive.*;
 import insectsrobotics.imagemaipulations.Media.VideoRecorder;
 
+
 import static java.lang.Thread.sleep;
 import static org.opencv.imgproc.Imgproc.COLOR_BayerRG2RGB_EA;
 import static org.opencv.imgproc.Imgproc.GaussianBlur;
@@ -176,7 +177,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     //Calibration resulting variables
     Bundle mBundle;
     double[] theta_new = new double[40];
-    int[][][] directoryArray = new int[(theta_new.length + 1)][360][2];
 
     //Unwrapping variables
     int sourceResolution = 1;
@@ -229,9 +229,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     double unwrapWidth = 0;
     Mat imageMapX;
     Mat imageMapY;
-    double scale =1;
-    Mat mGray2;
-    boolean sec_check=false;
+    double scale = 1;
 
     //Visual Homing
     public Mat snapShot;
@@ -376,8 +374,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     //Log.i(myTag, "size: "+ imageMap[0].length +" X "+ imageMap[1].length);
                     unwrapMap();
 
-                    mGray2 = Mat.zeros(theta_new.length / sourceResolution, 360 / sourceResolution, CvType.CV_8UC1);
-                    second_frame= Mat.zeros(theta_new.length / resolution, 360 / resolution,CvType.CV_8UC1);
                     mOpenCvCameraView.enableView();
                 }
                 break;
@@ -556,6 +552,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         OFT = new OpticFlowThreads(this);
         ONT = new OldNavThreads(this);
 
+        //Initialise preprocessing thread
+        VisionUtil.initialise(this);
 
         try {
             FileOutputStream f = new FileOutputStream(file);
@@ -829,7 +827,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
      */
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         //Callback method, every camera frame received will go through here. - RM
-
+        VisionUtil.queueFrame(inputFrame.rgba());
+        /*
         //Initiation of the needed Variables
         rgbaList = new ArrayList<>();
         BlueChannelList = new ArrayList<>();
@@ -893,8 +892,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         double scale = rgba.width() / (360 / resolution);
         double rgbaHeight = rgba.height();
-        displayedImage = Mat.zeros((int) (rgbaHeight / scale), 360 / resolution, CvType.CV_8UC1);
-
+        */
+        displayedImage = Mat.zeros((int) (inputFrame.rgba().height() / scale), 360 / resolution, CvType.CV_8UC1);
+/*
         //Extract blue channel from RGBA image and store in BlueChannel - RM
         rgbaList.add(rgba);                                                 //Needed for channel extraction from rgba image
         BlueChannelList.add(BlueChannel);                                   //Needed for channel extraction from rgba image
@@ -935,7 +935,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
          * If the output resolution is different from 1x1° we have to down-sample the image.
          * openCVs RegionOfInterest method is perfect for this cause.
          *
-         */
 
         //Down-sampling, will always happen as res is hard-coded to 4 - RM
         //Will down-sample processedSourceImage and output it to processedDestImage - RM
@@ -964,9 +963,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
 
         }
-        /**
-         * If the output resolution is the same as the source resolution, we can use the same Image
-         */
+
+        // If the output resolution is the same as the source resolution, we can use the same Image
+
         else {
             processedDestImage = processedSourceImage;
         }
@@ -1014,7 +1013,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         computeSparseOpticFlow();
         getObstaclesFromSparseFlow();
         getSpeedsFromSparseFlow();
-*/
+//
 
         //computeDenseOpticFlow();
         //filterCollisionAvoidance(); //Collision avoidance using a flow filter and dense optic flow
@@ -1033,132 +1032,15 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         // opticCheck initialised to false, not ever reset. - RM
         // counting initialised to 1, reset after it reaches 20 - RM
         // So this if waits seven frames then runs this code once. - RM
-
+*/
         if( !opticCheck && counting > 7 ){
-            temporaryImageToCompare=Mat.zeros(processedDestImage.size(),processedDestImage.type());
-            opticCheck = true;
-            fullSnapShot = Mat.zeros(processedSourceImage.size(),processedSourceImage.type());
-            snapShot = Mat.zeros(processedDestImage.size(),processedDestImage.type());
-
-            processedDestImage.copyTo(snapShot); //Down-sampled copy of the image frame - RM
-            processedSourceImage.copyTo(fullSnapShot); // Full res copy of the image frame - M
-            rotatedImageDB = new ArrayList<>();
-
-            //Log.i(flowTag, "ModuleSelected"+selectedModule);
-            //Search hook : MENU_SELECTION
-            //Choose which module and which setting to run - RM
-            if(selectedModule==0){
-                // Uncomment to start recular CX (one speed input)
-                //obstacleAvoid=new Thread(CXthread);
-                // Uncomment to start Holonomic CS(two speed inputs)
-                obstacleAvoid=new Thread(CXT.CXHolonomicThread);
-                obstacleAvoid.start();
-            }else if (selectedModule == 1){ //If selected module is for visual navigation
-                switch(visualModule){  //Select type of navigation to be run
-                    case RUNDOWN:
-                        // Starting all RunDownThreads
-                        startHoming=new Thread(ONT.startHome);
-                        startHoming.start();
-                        runDown=new Thread(ONT.saveImagesRunDown);
-                        runDown.start();
-                        break;
-                    case TURN_TO_MIN:
-                        //Starting all Turn to minimum Threads
-                        startHoming=new Thread(ONT.startHome);
-                        startHoming.start();
-                        turnToMinimum=new Thread(ONT.saveImagesTurnMinimum);
-                        turnToMinimum.start();
-                        break;
-                    case SYSTEMATIC_SEARCH:
-                        //Starting all search threads
-                        startSearching=new Thread(ONT.startSearch);
-                        startSearching.start();
-                        search=new Thread(ONT.saveImagesRunDown);
-                        search.start();
-                        break;
-                    default:
-                        // Starting all RunDownThreads
-                        startHoming=new Thread(ONT.startHome);
-                        startHoming.start();
-                        runDown=new Thread(ONT.saveImagesRunDown);
-                        runDown.start();
-                        break;
-                }
-            } else if (selectedModule == 2) { //Else run the combiner module
-                switch(combinerModule){
-                    case BACK_WITH_MB:
-                        MethodChosen = 0;
-                        obstacleAvoid=new Thread(CXT.CXthread);
-                        obstacleAvoid.start();
-                        startHoming = new Thread(ONT.startScanning);
-                        break;
-                    case KLINOKINESIS:
-                        MethodChosen = 1;
-                        obstacleAvoid=new Thread(CXT.CXthread);
-                        obstacleAvoid.start();
-                        startHoming = new Thread(ONT.startKlinokinesis);
-                        break;
-                    case EIGHT_ENS:
-                        MethodChosen = 2;
-                        obstacleAvoid = new Thread(CXT.CXMBthread);
-                        obstacleAvoid.start();
-                        startHoming = new Thread(ONT.startCombiner);
-                        break;
-                }
-
-            }  else if (selectedModule == 3){
-                //Selected module is optical flow, see StartScreen and start_scree.xml - RM
-                //Switch to see which radio button was selected. 2 modes: Detect, and Avoid
-                //Former will detect obstacle, and range and stop at a given threshold
-                //Latter will detect obstacle and try and navigate around it, retaining it's path
-                switch(opticalFlowModule){
-                    case OF_DETECT:
-                        Log.i("OF: ", "Thread started");
-                        //opticalFlowThread = new Thread(combiner.sequentialThread);
-                        opticalFlowThread = new Thread(testRun);
-                        opticalFlowThread.start();
-                        break;
-                    case OF_AVOID:
-                        opticalFlowThread = new Thread(OFT.opticalFlowAvoidance);
-                        opticalFlowThread.start();
-                        break;
-                    default: //Default to detection
-                        opticalFlowThread = new Thread(testRun);
-                        opticalFlowThread.start();
-                        break;
-                    }
-            } else if (selectedModule == 4){
-
-                switch(visualNavigationModule){
-                    case VN_BASE:
-                        Log.i("VN: ", "Thread started");
-                        real = false;
-                        learning_trip = new Thread(MBT.navLearning);
-                        learning_trip.start();
-                        memory_trip = new Thread(MBT.navMemory);
-                        break;
-                    case VN_REAL:
-                        Log.i("VN: ", "Thread started: real");
-                        real = true;
-                        learning_trip = new Thread(MBT.navLearning);
-                        learning_trip.start();
-                        memory_trip = new Thread(MBT.navMemoryReal);
-                    default:
-                        learning_trip = new Thread(MBT.navLearning);
-                        learning_trip.start();
-                        memory_trip = new Thread(MBT.navMemory);
-                }
-            }
-
-
-        } // if ( !opticCheck && counting > 7 )
-
-        sec_check = true;
+            menuFunctionality();
+        }
 
         // Frame count management
         counting++;
         if( counting == 20 ) counting = 0;
-
+/*
         //Here we put the processed image back into a Mat with the proportions of the output image
         current_image.copyTo(
                     displayedImage.rowRange(0, current_image.rows())
@@ -1169,13 +1051,17 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     displayedImage.rowRange(displayedImage.rows()-debugFlowImage.rows(), displayedImage.rows())
                                   .colRange(0, displayedImage.cols())
         );
-
+*/
         //Resizing of the Image to fit the size of the JavaImageView
-        Size size = new Size(rgba.width(), rgba.height());
-        Imgproc.resize(displayedImage, displayedImage, size);
-        return displayedImage;
+//        while(!(VisionUtil.displayAvailable)){}
+
+//        Size size = new Size(rgba.width(), rgba.height());
+//        Imgproc.resize(displayedImage, displayedImage, size);
+
+        return VisionUtil.getFrameForDisplay();
 
     }
+
 
     //
     // Test thread code - This is explicitly a test thread for small scenarios. DO NOT WRITE ANY
@@ -1647,6 +1533,126 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
     }
 
 
+    //
+    // Handling of menu selections from the app screen. This code was originally raw in
+    // onCameraFrame. Moved here for readability's sake
+    //
+    private void menuFunctionality(){
+        temporaryImageToCompare = Mat.zeros(processedDestImage.size(),processedDestImage.type());
+        opticCheck = true;
+        fullSnapShot = Mat.zeros(processedSourceImage.size(),processedSourceImage.type());
+        snapShot = Mat.zeros(processedDestImage.size(),processedDestImage.type());
+
+        processedDestImage.copyTo(snapShot); //Down-sampled copy of the image frame - RM
+        processedSourceImage.copyTo(fullSnapShot); // Full res copy of the image frame - M
+        rotatedImageDB = new ArrayList<>();
+
+        //Log.i(flowTag, "ModuleSelected"+selectedModule);
+        //Search hook : MENU_SELECTION
+        //Choose which module and which setting to run - RM
+        if(selectedModule==0){
+            // Uncomment to start recular CX (one speed input)
+            //obstacleAvoid=new Thread(CXthread);
+            // Uncomment to start Holonomic CS(two speed inputs)
+            obstacleAvoid=new Thread(CXT.CXHolonomicThread);
+            obstacleAvoid.start();
+        }else if (selectedModule == 1){ //If selected module is for visual navigation
+            switch(visualModule){  //Select type of navigation to be run
+                case RUNDOWN:
+                    // Starting all RunDownThreads
+                    startHoming=new Thread(ONT.startHome);
+                    startHoming.start();
+                    runDown=new Thread(ONT.saveImagesRunDown);
+                    runDown.start();
+                    break;
+                case TURN_TO_MIN:
+                    //Starting all Turn to minimum Threads
+                    startHoming=new Thread(ONT.startHome);
+                    startHoming.start();
+                    turnToMinimum=new Thread(ONT.saveImagesTurnMinimum);
+                    turnToMinimum.start();
+                    break;
+                case SYSTEMATIC_SEARCH:
+                    //Starting all search threads
+                    startSearching=new Thread(ONT.startSearch);
+                    startSearching.start();
+                    search=new Thread(ONT.saveImagesRunDown);
+                    search.start();
+                    break;
+                default:
+                    // Starting all RunDownThreads
+                    startHoming=new Thread(ONT.startHome);
+                    startHoming.start();
+                    runDown=new Thread(ONT.saveImagesRunDown);
+                    runDown.start();
+                    break;
+            }
+        } else if (selectedModule == 2) { //Else run the combiner module
+            switch(combinerModule){
+                case BACK_WITH_MB:
+                    MethodChosen = 0;
+                    obstacleAvoid=new Thread(CXT.CXthread);
+                    obstacleAvoid.start();
+                    startHoming = new Thread(ONT.startScanning);
+                    break;
+                case KLINOKINESIS:
+                    MethodChosen = 1;
+                    obstacleAvoid=new Thread(CXT.CXthread);
+                    obstacleAvoid.start();
+                    startHoming = new Thread(ONT.startKlinokinesis);
+                    break;
+                case EIGHT_ENS:
+                    MethodChosen = 2;
+                    obstacleAvoid = new Thread(CXT.CXMBthread);
+                    obstacleAvoid.start();
+                    startHoming = new Thread(ONT.startCombiner);
+                    break;
+            }
+
+        }  else if (selectedModule == 3){
+            //Selected module is optical flow, see StartScreen and start_scree.xml - RM
+            //Switch to see which radio button was selected. 2 modes: Detect, and Avoid
+            //Former will detect obstacle, and range and stop at a given threshold
+            //Latter will detect obstacle and try and navigate around it, retaining it's path
+            switch(opticalFlowModule){
+                case OF_DETECT:
+                    Log.i("OF: ", "Thread started");
+                    //opticalFlowThread = new Thread(combiner.sequentialThread);
+                    opticalFlowThread = new Thread(testRun);
+                    opticalFlowThread.start();
+                    break;
+                case OF_AVOID:
+                    opticalFlowThread = new Thread(OFT.opticalFlowAvoidance);
+                    opticalFlowThread.start();
+                    break;
+                default: //Default to detection
+                    opticalFlowThread = new Thread(testRun);
+                    opticalFlowThread.start();
+                    break;
+            }
+        } else if (selectedModule == 4){
+
+            switch(visualNavigationModule){
+                case VN_BASE:
+                    Log.i("VN: ", "Thread started");
+                    real = false;
+                    learning_trip = new Thread(MBT.navLearning);
+                    learning_trip.start();
+                    memory_trip = new Thread(MBT.navMemory);
+                    break;
+                case VN_REAL:
+                    Log.i("VN: ", "Thread started: real");
+                    real = true;
+                    learning_trip = new Thread(MBT.navLearning);
+                    learning_trip.start();
+                    memory_trip = new Thread(MBT.navMemoryReal);
+                default:
+                    learning_trip = new Thread(MBT.navLearning);
+                    learning_trip.start();
+                    memory_trip = new Thread(MBT.navMemory);
+            }
+        }
+    }
 
     /**
      * The broadcast of the image takes place in a different thread so we have a proper running UI

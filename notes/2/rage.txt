@@ -1,8 +1,11 @@
 This file contains a list of problems I'm finding with the AntBot:
-1. Battery life (Nexus):
-2. Reset procedure:
-3. Flimsy construction (camera attachment):
-4. Inability to upgrade (sensor problem; speak to Garry first):
+1. Battery life (Nexus): Bad as screen must always be on; and the
+   phone is often connected to the PC as a power source; this kills the
+	 battery
+2. Reset procedure: Often doesn't work and a full reset is required
+3. Flimsy construction (camera attachment): Moves around
+4. Inability to upgrade (sensor problem; speak to Garry first): Yeah, likely
+	 less of an issue than first thought.
 5. Android:
    - Getting files off the thing is a pain
 	 - AntEye can suddenly vanish from the list of running applications
@@ -20,3 +23,14 @@ This file contains a list of problems I'm finding with the AntBot:
 	 - Limited options for including hardware (IR or OF sensors could have been
 	 	 extremely useful
 	 - Library limitation OpenCV vs JavaCV ByteDeco
+6. Code:
+   - No coding style enforced
+	 - A metric f*** tonne of unused code. Most of which isn't picked up as it
+	   includes matrix initialisations as a usage.
+		 - Literally, matrices declared, instantiated, maybe even copied into, and
+		 	 then never used again.
+	 - It's clear from some of the code that some progenetors did not understand
+	   how some things worked (Mat reference is getting old but it's true).
+	 - Poor documentation leads to fear of modifying existing code. Will it do exactly
+	   what the old version did?
+		 
