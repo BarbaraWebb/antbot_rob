@@ -1016,8 +1016,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         getSpeedsFromSparseFlow();
 */
 
-        //computeDenseOpticFlow();
-        //filterCollisionAvoidance(); //Collision avoidance using a flow filter and dense optic flow
+        computeDenseOpticFlow();
+        filterCollisionAvoidance(); //Collision avoidance using a flow filter and dense optic flow
         //getSpeedsFromDenseFlow();
         speed = (leftCXFlow + rightCXFlow) / 2;
 
