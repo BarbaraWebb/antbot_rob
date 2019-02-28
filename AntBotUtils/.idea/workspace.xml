@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56678dff-27eb-4ff0-b153-0579a250253a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/scratch.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/trajectory.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterDir="false" />
@@ -16,8 +10,11 @@
       <change beforePath="$PROJECT_DIR$/../.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/scratch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../AntEye/AntEye.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../AntEye/AntEye.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/CombinedThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/CombinedThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/OpticFlowThreads.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/OpticFlowThreads.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Broadcast_Library/Broadcast_Library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Broadcast_Library/Broadcast_Library.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CombinerApp/CombinerApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../CombinerApp/CombinerApp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PathIntegrationApp/PathIntegrationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../PathIntegrationApp/PathIntegrationApp.iml" afterDir="false" />
@@ -44,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/graphics/scratch.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="180">
+              <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -56,12 +53,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphics/trajectory.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
+            <state relative-caret-position="1575">
               <caret line="108" column="44" selection-start-line="108" selection-start-column="44" selection-end-line="108" selection-end-column="44" />
               <folding>
                 <element signature="e#14#33#0" expanded="true" />
-                <element signature="e#301#2498#0" />
-                <element signature="e#2555#2976#0" />
               </folding>
             </state>
           </provider>
@@ -182,13 +177,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="286" y="0" width="1080" height="1920" extended-state="6" />
+    <frame x="41" y="27" width="1325" height="741" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" weight="0.32978722" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3295964" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3289256" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3996637" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -202,7 +198,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="R Graphics" order="3" />
       <window_info anchor="right" id="R Packages" order="4" />
-      <window_info anchor="right" content_ui="combo" id="Project" order="5" visible="true" weight="0.15860735" />
+      <window_info anchor="right" content_ui="combo" id="Project" order="5" visible="true" weight="0.16106333" />
     </layout>
   </component>
   <component name="XDebuggerManager">
@@ -218,20 +214,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/graphics/trajectory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
+        <state relative-caret-position="1575">
           <caret line="108" column="44" selection-start-line="108" selection-start-column="44" selection-end-line="108" selection-end-column="44" />
           <folding>
             <element signature="e#14#33#0" expanded="true" />
-            <element signature="e#301#2498#0" />
-            <element signature="e#2555#2976#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/graphics/scratch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="180">
+          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>

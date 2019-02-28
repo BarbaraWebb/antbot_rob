@@ -9,8 +9,8 @@ if __name__ == '__main__':
 
     plt.ylim((1100, -1100))
     plt.xlim((-1500, 2500))
-    plt.xlabel('')
-    plt.ylabel('')
-    plt.title("Central Complex No-turn Test")
+    plt.xlabel('Distance (mm)')
+    plt.ylabel('Distance (mm)')
+    plt.title("Central Complex No-turn Test (Orange - Outbound; Blue - Inbound)")
     plt.grid(True)
     plt.show()

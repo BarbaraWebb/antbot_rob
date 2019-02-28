@@ -20,3 +20,12 @@ This file contains a list of problems I'm finding with the AntBot:
 	 - Limited options for including hardware (IR or OF sensors could have been
 	 	 extremely useful
 	 - Library limitation OpenCV vs JavaCV ByteDeco
+
+6. Multi-layer construction:
+	 - Impossible to use feedback to control motion in an immediate way
+	 - Can make operation clunky to the point it does not allow certain
+	   things to work (CX isHome does not work because odometry is painfully
+		 inaccurate)
+	 - Encoders are pretty much inaccessible (note; they're not but nothing is
+	   documented so it's difficult to figure out how to implement such a
+		 communication).

@@ -18,6 +18,153 @@ public class CombinedThread {
     public CombinedThread(MainActivity app){ this.app = app; }
 
     Runnable sequentialThread;
+    Runnable CXEThread;
+    {
+        CXEThread = new Runnable(){
+            @Override
+            public void run(){
+                try {
+                    sleep(3000);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                CXE extendedcx = new CXE();
+
+                int t0 = (int) SystemClock.elapsedRealtime();
+                int t = (int) SystemClock.elapsedRealtime() - t0;
+                int t_outbound = 25000;
+                int t_inbound = 80000;
+
+                //
+                // Connectivity matrix declarations
+                //
+                SimpleMatrix tl2 = new SimpleMatrix(CX.n_tl2, 1);
+                SimpleMatrix cl1 = new SimpleMatrix(CX.n_cl1, 1);
+                SimpleMatrix tb1 = new SimpleMatrix(CX.n_tb1, 1);
+                SimpleMatrix memory = new SimpleMatrix(CX.n_cpu4, 1);
+                SimpleMatrix cpu4 = new SimpleMatrix(CX.n_cpu4, 1);
+                SimpleMatrix cpu1 = new SimpleMatrix(CX.n_cpu1, 1);
+                SimpleMatrix en = new SimpleMatrix(CX_MB.n_tb1, 1);
+
+                //
+                // Connectivity matrix instantiations
+                //
+                tl2.set(0);
+                cl1.set(0);
+                tb1.set(0);
+                memory.set(.5);
+                cpu4.set(0);
+                cpu1.set(0);
+                en.set(0);
+
+                //
+                // Motor settings - Different speeds account for motor differences
+                //
+                int leftSpeed = 15;
+                int rightSpeed = 14;
+                boolean motorReset = true; // Used to alter motor speeds
+
+                int loopCounter = 0;
+
+                while(t < t_outbound){
+                    //
+                    // Loop synchronisation delay
+                    //
+                    try {
+                        sleep(600);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    //
+                    // Update the directional neurons from the compass
+                    //
+                    tl2 = extendedcx.tl2Output(Math.toRadians(app.currentDegree));
+                    cl1 = extendedcx.cl1Output(tl2);
+                    tb1 = extendedcx.tb1Output(cl1, tb1);
+
+                    //
+                    // Displacement update
+                    //
+                    double speed = 4; // Arbitrary speed value for the CX
+                    memory = extendedcx.cpu4Update(memory, tb1, speed);
+                    cpu4 = extendedcx.cpu4Output(memory.copy());
+
+                    //
+                    // Start motors if signalled
+                    //
+                    if (motorReset){
+                        motorReset = false;
+                        Command.go(new double[]{leftSpeed, rightSpeed});
+                        try{ sleep(1000); } catch (Exception e){ e.printStackTrace(); }
+                    }
+
+                    //
+                    // Turning generation
+                    //
+                    cpu1 = extendedcx.cpu1OutputCA(tb1, cpu4, en, app.leftCAFlow, app.rightCAFlow, true);
+                    app.CXmotor = extendedcx.motorOutput(cpu1);
+
+                    //
+                    // If a collision has been detected
+                    //
+                    if (CXE.collisionDetected){
+                        Command.stop();
+                        try{ sleep(1000); } catch (Exception e){e.printStackTrace();}
+
+                        app.CXtheta = app.CXmotor;
+                        try{ Command.turnAround(app.CXtheta); } catch(Exception e){ e.printStackTrace(); }
+                        loopCounter = 0;
+                        motorReset = true;
+                    }
+
+
+
+                    //
+                    // Else if for inbound
+                    //
+                    /*else if (loopCounter >= 2){
+                        loopCounter = 0;
+                        Command.stop();
+                        try { sleep(1000); } catch (Exception e) { e.printStackTrace(); }
+
+                        //
+                        // Generate target angle
+                        //
+                        cpu1 = extendedcx.cpu1Output(tb1, cpu4);
+                        app.CXmotor = extendedcx.motorOutput(cpu1);
+
+                        app.CXnewHeading =
+                                Math.toDegrees(
+                                        Math.toRadians(app.currentDegree) +
+                                                app.CXmotorChange * app.CXmotor
+                                );
+
+                        app.CXtheta = (app.CXnewHeading - app.currentDegree) % 360;
+
+                        //
+                        // Generate motor commands; if a turn should be generated
+                        //
+                        if (app.CXtheta > 1.5 || app.CXtheta < -1.5) {
+                            try {
+                                Command.turnAround(app.CXtheta);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        // Signal the motors to be restarted
+                        motorReset = true;
+                    }*/
+
+                    loopCounter++;
+                    t = (int) SystemClock.elapsedRealtime() - t0;
+                }
+
+            }
+        };
+    }
 
     {
         sequentialThread = new Runnable() {
@@ -37,7 +184,7 @@ public class CombinedThread {
 
                 int startTime = (int) SystemClock.elapsedRealtime();
                 int currentTime = (int) SystemClock.elapsedRealtime() - startTime;
-                int outboundTime = 20000;
+                int outboundTime = 25000;
                 int inboundTime = 80000;
 
                 //
@@ -245,8 +392,9 @@ public class CombinedThread {
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
+
                 //
-                // Turn around for the sake of ease.
+                // Turn around for ease.
                 //
                 try { Command.turnAround(170); } catch(Exception e) { e.printStackTrace(); }
 
@@ -310,7 +458,7 @@ public class CombinedThread {
                 // PI Inbound; Visual Learning of homeward and outward
                 // route.
                 //
-                while ( true /*currentTime < inboundTime*/) {
+                while ( !Util.isHome(memory) /*true /*currentTime < inboundTime*/) {
                     try {
                         sleep(600);
                     } catch (Exception e) {
@@ -405,12 +553,6 @@ public class CombinedThread {
                         //
                         if (app.CXtheta > 1.5 || app.CXtheta < -1.5) {
                             try {
-                                double angle = 0;
-                                if (app.CXtheta > 1.5) {
-                                    angle = 20;
-                                } else if (app.CXtheta < -1.5) {
-                                    angle = -20;
-                                }
                                 Command.turnAround(app.CXtheta);
                             } catch (Exception e) {
                                 e.printStackTrace();

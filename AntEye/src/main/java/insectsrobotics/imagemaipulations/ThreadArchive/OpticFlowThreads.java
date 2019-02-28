@@ -48,8 +48,8 @@ public class OpticFlowThreads {
             int dual_accumulator = 0; //Add both values and see if there's significant bias
             int left_accumulator = 0; //Add only left values
             int right_accumulator = 0; //Add only right values
-            int accumulation_threshold = 5000; //Threshold for a value to be accumulated (ignore all others) (def = 5000)
-            int reaction_threshold = 10000; //Value to be met for a reaction to be triggered. (need at most four readings) (def = 1000)
+            double accumulation_threshold = 0.04; //Threshold for a value to be accumulated (ignore all others) (def = 5000)
+            double reaction_threshold = 0.8; //Value to be met for a reaction to be triggered. (need at most four readings) (def = 10000)
             int turn = 20;
 
             boolean reaction_taken = false;

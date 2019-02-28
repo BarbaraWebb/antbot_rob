@@ -819,6 +819,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         unwrapMap();
     }
 
+
+
     /**
      * openCv Method with inputFrame from FrontCamera, imageProcessing and output to display.
      * At the same time the endless loop to do more or less all the work.
@@ -829,6 +831,14 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
      */
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         //Callback method, every camera frame received will go through here. - RM
+        //We have frame rate information computed here
+        prevFrameTime = currentFrameTime;
+        currentFrameTime = (float) SystemClock.elapsedRealtime();
+        if ((currentFrameTime-prevFrameTime)/1000 > 0){
+            frame_rate_cx = 1/((currentFrameTime-prevFrameTime)/1000);
+        } else {
+            frame_rate_cx = 0;
+        }
 
         //Initiation of the needed Variables
         rgbaList = new ArrayList<>();
@@ -836,6 +846,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         from_to = new MatOfInt(2, 0);
         rgba = new Mat();
         norm_rgba = new Mat();
+
+        //
+        // Q: Do these need to be initialised every time?
+        //
 
         // initialize some CX variables
         currentRightCXImage = Mat.zeros(10, 90, CvType.CV_8UC1);
@@ -856,14 +870,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         Mat tempRotate = Mat.zeros(processedSourceImage.size(), processedSourceImage.type());
         fullImageToDisplay = Mat.zeros(processedSourceImage.size(), processedSourceImage.type());
 
-        //We have frame rate information computed here
-        prevFrameTime = currentFrameTime;
-        currentFrameTime = (float) SystemClock.elapsedRealtime();
-        if ((currentFrameTime-prevFrameTime)/1000 > 0){
-            frame_rate_cx = 1/((currentFrameTime-prevFrameTime)/1000);
-        } else {
-            frame_rate_cx = 0;
-        }
+
 
         //Get input frame in RGBA then copy to BlueChannel Mat - RM
         rgba = inputFrame.rgba(); // Input Frame in rgba format
@@ -905,12 +912,11 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         //Resize into temp for image rotation - RM
         resize(unwrappedImg, tempRotate, processedSourceImage.size(), 2.81, 2.81, INTER_LANCZOS4);
-
+/*
         int counter1 = 0;
         int counter3;
         int colPosition;
 
-        //Image rotation? - RM
         for (int phi = 0; phi < 360; phi = phi + sourceResolution) {
             counter3 = 0;
             for (int theta_tmp = 0; theta_tmp < theta_new.length; theta_tmp = theta_tmp + sourceResolution) {
@@ -924,6 +930,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             }
             counter1++;
         }
+*/
+        tempRotate.colRange(180,359).copyTo(processedSourceImage.colRange(0,179));
+        tempRotate.colRange(0,179).copyTo(processedSourceImage.colRange(180, 359));
 
         //Rotated image now in processedSourceImage - RM
 
@@ -939,6 +948,12 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
         //Down-sampling, will always happen as res is hard-coded to 4 - RM
         //Will down-sample processedSourceImage and output it to processedDestImage - RM
+        if (resolution != 1) {
+            resize(processedSourceImage, processedDestImage, new Size(90,10));
+        } else {
+            processedDestImage = processedSourceImage;
+        }
+/*
         if (resolution != 1) {
             int destAzimuthCounter = 0;
             for (int azimuth = 0; azimuth < processedSourceImage.cols(); azimuth = azimuth + resolution) {
@@ -966,10 +981,10 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         }
         /**
          * If the output resolution is the same as the source resolution, we can use the same Image
-         */
+         *
         else {
             processedDestImage = processedSourceImage;
-        }
+        }*/
 
         //processedDestImage is now the down-sampled 90x10, blue channel image needed - RM
 
@@ -1006,7 +1021,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             recorder.recordFrame(current_image);
         }
 
-        Log.i("_REC_", "Frame Rate : " + frame_rate_cx);
+
+
 
         // flowPointsCurrent = currentPointsToTrack; // Create a copy for the OF to utilise
         //flowPointsPrevious = prevPointsToTrack;
@@ -1015,6 +1031,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         getObstaclesFromSparseFlow();
         getSpeedsFromSparseFlow();
 */
+
 
         computeDenseOpticFlow();
         filterCollisionAvoidance(); //Collision avoidance using a flow filter and dense optic flow
@@ -1114,8 +1131,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                 switch(opticalFlowModule){
                     case OF_DETECT:
                         Log.i("OF: ", "Thread started");
-                        //opticalFlowThread = new Thread(combiner.sequentialThread);
-                        opticalFlowThread = new Thread(testRun);
+                        opticalFlowThread = new Thread(combiner.CXEThread);
+                        //opticalFlowThread = new Thread(testRun);
                         opticalFlowThread.start();
                         break;
                     case OF_AVOID:
@@ -1173,7 +1190,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //Resizing of the Image to fit the size of the JavaImageView
         Size size = new Size(rgba.width(), rgba.height());
         Imgproc.resize(displayedImage, displayedImage, size);
-        return displayedImage;
+        Log.i("_REC_", "Frame Rate : " + frame_rate_cx);
+        return displayedImage; //inputFrame.rgba();
 
     }
 
@@ -1188,98 +1206,78 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             String tag = "TEST";
             String output = "";
 
-            // Attempt to record
-            recording = true;
-            recorder.startRecording();
-
-            ////////////////////////////////////////////////////////////////////////////////////////
+            // Begin recording
+            //recording = true;
+            //recorder.startRecording();
 
             //
-            // FOE test thread, get the robot to move forward at a steady speed and display the
-            // computed FOE on the screen.
+            // Initialise CX model
             //
+            CX c = new CX();
 
-            ////////////////////////////////////////////////////////////////////////////////////////
+            SimpleMatrix tl2 = new SimpleMatrix(CX.n_tl2, 1);
+            tl2.set(0);
+            SimpleMatrix cl1 = new SimpleMatrix(CX.n_cl1, 1);
+            cl1.set(0);
+            SimpleMatrix tb1 = new SimpleMatrix(CX.n_tb1, 1);
+            tb1.set(0);
+            SimpleMatrix memory = new SimpleMatrix(CX.n_cpu4, 1);
+            memory.set(.5);
+            SimpleMatrix cpu4 = new SimpleMatrix(CX.n_cpu4, 1);
+            cpu4.set(0);
+            SimpleMatrix cpu1 = new SimpleMatrix(CX.n_cpu1, 1);
+            cpu1.set(0);
 
-            int t0 = (int) SystemClock.elapsedRealtime(); // Start time
-            int t = (int) SystemClock.elapsedRealtime() - t0; // Current time
-            int timeLimit = 17000; // Limit (millis)
+            Log.i(tag, "Util.isHome(): " + Util.isHome(memory));
 
+            int t_trip = 10000;
+            int t0 = (int) SystemClock.elapsedRealtime();
+            int t = (int) SystemClock.elapsedRealtime() - t0;
 
-            // Focus of expansion
-            //Mat foe = new Mat(2,1,CvType.CV_32FC2);
-            foe = Mat.ones(2,1, CvType.CV_32FC1);
+            Command.go( new double[]{14,13} );
+            try{sleep(1000);} catch (Exception e) { e.printStackTrace(); }
 
             //
-            // Move forward at a steady speed.
+            // Synthetic outbound journey of 1000 steps
             //
-            try {
-                Command.go(new double[]{15,15});
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            while(t < t_trip){
 
-            int t_turn = t0;
-            int t_since_turn = t;
-            while(t < timeLimit){
-                try{ sleep(600); } catch (Exception e){ e.printStackTrace(); }
+                //------   COMPASS UPDATE  -----
+                tl2 = c.tl2Output(Math.toRadians(currentDegree));
+                cl1 = c.cl1Output(tl2);
+                tb1 = c.tb1Output(cl1, tb1);
 
-                //Util.computeFocusOfExpansion(prevPointsToTrack, currentPointsToTrack, foe);
-                Log.i(tag, foe.dump());
-                //
-                // Print FOE on the screen
-                //
-                try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            debugTextView.setText(String.format(
-                                    "FOE: (%f,%f)",
-                                    foe.get(0,0)[0],
-                                    foe.get(1, 0)[0]
-                            ));
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                if ( (t > 5000) && (t_since_turn > 3000)) {
-                    /*
-                    if (foe.get(0, 0)[0] < -5) {
-                        try {
-                            Command.turnAround(20);
-                            sleep(1000);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        t_turn = (int) SystemClock.elapsedRealtime();
-                    } else if (foe.get(0, 0)[0] > 5) {
-                        try {
-                            Command.turnAround(-20);
-                            sleep(1000);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        t_turn = (int) SystemClock.elapsedRealtime();
-                    }*/
-                } else {
-                    try {
-                        Command.go(new double[]{15, 15});
-                        sleep(1000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                // Update time
+                // ------ DISPLACEMENT UPDATE -----
+                memory = c.cpu4Update(memory, tb1, ANT_SPEED);
+                cpu4 = c.cpu4Output(memory.copy());
                 t = (int) SystemClock.elapsedRealtime() - t0;
-                t_since_turn = (int) SystemClock.elapsedRealtime() - t_turn;
             }
 
-            try { Command.stop(); }catch(Exception e){ e.printStackTrace(); }
-            try { sleep(1000);  } catch(Exception e){ e.printStackTrace(); }
-            recorder.stopRecording();
+            Command.stop();
+            try {Command.turnAround(170);}catch(Exception e) {e.printStackTrace();}
+            Command.go(new double[]{14, 13});
+
+
+            //
+            // Synthetic inbound journey of 1000 steps
+            //
+            int x = 1;
+            while(!Util.isHome(memory)){
+                //------   COMPASS UPDATE  -----
+                tl2 = c.tl2Output(Math.toRadians(currentDegree));
+                cl1 = c.cl1Output(tl2);
+                tb1 = c.tb1Output(cl1, tb1);
+
+                // ------ DISPLACEMENT UPDATE -----
+                memory = c.cpu4Update(memory, tb1, ANT_SPEED);
+                cpu4 = c.cpu4Output(memory.copy());
+                x++;
+                Log.i(tag, "Memory:\n " + Util.printMemory(memory));
+
+            }
+
+            // End recording
+            //recorder.stopRecording();
         }
     };
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1302,12 +1300,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             initialImage.convertTo(prevPointsToTrack, CvType.CV_32FC2);
         }
 
-        //What? Only the left flow is computed??? - RM
-        //Seemingly only using the central image so regular flow is computed -- RM
-        // now we can compute the flow
-        // left flow
 
-        //Seems to be an embellished if ( !(prevPointsToTrack == null) ) {}
         if (prevPointsToTrack.cols() > 0 && prevPointsToTrack.rows() > 0) {
             calcOpticalFlowPyrLK(
                     previous_image,
@@ -1336,7 +1329,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
             current_image.copyTo(previous_image);
         }
-
 
         calcOpticalFlowFarneback(
                 previous_image,
@@ -1580,8 +1572,17 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         int delta = (int) SystemClock.elapsedRealtime() - global_current_time; //Change in time since last read
         global_current_time = (int) SystemClock.elapsedRealtime() - global_start_time; //Time since start
 
-        Mat left_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), true); //Left flow filter
-        Mat right_filter = CX_Holonomic.get_preferred_flow(90, Math.toRadians(0), false); //Right flow filter
+        Mat left_filter = CX_Holonomic.get_preferred_flow(
+                90,
+                Math.toRadians(0),
+                true
+        ); //Left flow filter
+
+        Mat right_filter = CX_Holonomic.get_preferred_flow(
+                90,
+                Math.toRadians(0),
+                false
+        ); //Right flow filter
 
         //Filters are functionally identical, see Lucas' dissertation for the method used
 
@@ -1601,49 +1602,52 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         int offset = 4;
 
         for ( int y = 0; y < currentPointsToTrack.rows(); y++ ){
-            for ( int x = 0; x < currentPointsToTrack.cols(); x++ ){//These filters are functionally identical, see Luca's dissertation for the method used to compute the filter
-                //Compute left flow vector
+            for ( int x = 0; x < currentPointsToTrack.cols(); x++ ){
+                //
+                // Left filter comparison
+                //
+
                 //+-4 is the left/right offset for the flow frame; e.g. -4 centres the frame at -16deg.
                 //The narrower this is, the closer we are to considering the original flow filter.
-                //So this may effectively act as our rather than the raw pixel values.
+
                 previous_left_flow_vector = new double[]{Util.mod(x + offset, 90), y}; //((x+12), y)
-                current_left_flow_vector = new double[]{Util.mod((int) currentPointsToTrack.get(y, x)[0] + x + offset, 90),
+                current_left_flow_vector = new double[]{
+                        Util.mod((int) currentPointsToTrack.get(y, x)[0] + x + offset, 90),
                         Util.mod((int) currentPointsToTrack.get(y, x)[1] + y, 10)}; //Flow info returned by farneback
 
-                if ( (x >= 40) || (x < 50) ) { 
-                    left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]);
+                left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]);
 
-                    //Create 1x3 flow vector (the current flow vector)
-                    flow_vector.put(0, 0, current_left_flow_vector[0]);
-                    flow_vector.put(0, 1, current_left_flow_vector[1]);
-                    flow_vector.put(0, 2, 0);
+                //Create 1x3 flow vector (the current flow vector)
+                flow_vector.put(0, 0, current_left_flow_vector[0]);
+                flow_vector.put(0, 1, current_left_flow_vector[1]);
+                flow_vector.put(0, 2, 0);
 
-                    left_flow_sum += left_filter_vector.dot(flow_vector); //Filter and sum
-                }
+                left_flow_sum += left_filter_vector.dot(flow_vector); //Filter and sum
+
+                //
+                // Right filter comparison
+                //
+
                 //Compute right flow vector
                 previous_right_flow_vector = new double[] { Util.mod(x - offset, 90), y };
-                current_right_flow_vector = new double[] { Util.mod((int) currentPointsToTrack.get(y,x)[0] + x - offset, 90),
+                current_right_flow_vector = new double[] {
+                        Util.mod((int) currentPointsToTrack.get(y,x)[0] + x - offset, 90),
                         Util.mod((int) currentPointsToTrack.get(y,x)[1] + y, 10) };
 
-                if ( (x >= 40) || (x < 50) ) {
-                    right_filter_vector = right_filter.row((int) previous_right_flow_vector[0]); //Vector for x + 12 mod 90
+                right_filter_vector = right_filter.row((int) previous_right_flow_vector[0]); //Vector for x + 12 mod 90
 
-                    //Create 1x3 flow vector (the current flow vector)
-                    flow_vector.put(0, 0, current_right_flow_vector[0]);
-                    flow_vector.put(0, 1, current_right_flow_vector[1]);
-                    flow_vector.put(0, 2, 0);
+                //Create 1x3 flow vector (the current flow vector)
+                flow_vector.put(0, 0, current_right_flow_vector[0]);
+                flow_vector.put(0, 1, current_right_flow_vector[1]);
+                flow_vector.put(0, 2, 0);
 
-                    right_flow_sum += right_filter_vector.dot(flow_vector); //Filter and sum
-                }
+                right_flow_sum += right_filter_vector.dot(flow_vector); //Filter and sum
             }
         }
 
-
-
         //Again due to image shifting, left is right and right is left.
-        rightCAFlow =  1000 * left_flow_sum;// / (delta /*900*/);
-        leftCAFlow = 1000 * right_flow_sum; // / (delta /*900*/);
-
+        rightCAFlow =  1000 * left_flow_sum; // (delta);
+        leftCAFlow = 1000 * right_flow_sum; // (delta);
     }
 
 

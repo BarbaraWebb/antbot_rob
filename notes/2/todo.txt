@@ -19,6 +19,131 @@ Milestones:
 	were the methodological issues I have discussed already. I already have CX
 	tests to cover this, however, CXMB + OFCA would be awesome.
 
+28 / 02 / 2019:
+Wrap up:
+- Hacky way of doing CXE is implemented. Collision avoidance sets a flag which is
+	then checked by the main thread. Accumulators and reaction are computed in the
+	CXE model. Accumulation isn't happening and I'm not sure why. Log statements
+	in place in accumulateFlow. If i can solve this, I'll have CXCA.
+
+Todo:
+- Test isHome mechanism on standard CX
+
+Blocked:
+Notes:
+- All steering is being governed by CPU1. So, add the flowsums as input to the
+	cpu1Output function. Know this function is called once per loop iteration
+	so we can 
+
+- Desired usage of CXE
+	I'd like to run a thread that just uses the CX framework with a couple of extra
+	inputs. The most difficult bit isn't the obstacle avoidance. It's the
+	localisation. The isHome mechanism does not work - and I'm not sure it can work.
+	Deciding whether or not we're home is stupidly precise. I'm not sure the
+	measured odometry is actually that precise. Maybe an interesting test would be
+	to let the robot loose in the conference room to see if it ever does stop; or
+	if it tries to change its homing behaviour at all. Do this; it may provide the
+	yes/no to if I can use it at all.
+
+	Assuming the worst; how can I test my ideas without localisation?
+	I can get a single outbound/inbound run with CACX. That in itself	is useful. To
+	incorporate the mushroom body, I need to be able to navigate back out again,
+	which means	need to know when the robot is home. How?
+
+	- Hit a button on the robot? : Would cause interferance with saved images
+	  potentially and requires a lot of intervention.
+		
+	- Geomagnetic field sensor? I have no idea how accurate or feasible this is.
+	  This sensor should just be used to say home or food; it will not be used to
+		actually follow the vector. So define a home point then define a circle
+		with some radius around this point and class that as home.
+
+	- So what more am I doing tonight? Test geomagnetic idea; write CA into CXE
+	  (just set MB weighting to 0 for just now). Test; then go home.
+		- If the geomagnetic sensor on the phone doesn't work, don't sweat it.
+		  make the CXE so that the capability is there even if the technology
+			isn't
+	
+	
+	
+
+- Code formatting as I go
+- Clear that I need to think about the experiment scenario first.
+	- Robot starts from "home", navigates outward for some time using obstacle
+		avoidance. Store image with direction throughout.
+	- Navigates home using CX+CA. Store image with direction throughout.
+	- Need a way of determining home and food locations.
+		- A network state makes most sense (copied memory). Then we can check atFood,
+			or atNest or whatever. Can we use the network state to compute a new goal?
+			I.e. could I tell the network to zero on the food location?
+
+			Current Util.isHome function checks a SimpleMatrix representing memory to
+			see if enough neurons are sufficiently close to zero in value.
+
+			Works for isHome, but being at the nest presents more challenges; we could
+			just invert the instruction? Always navigate on the anti-home vector. That
+			should work! Then isFood or equivalent will check that the memory argument
+			is sufficiently close to the stored state. Plan.
+
+			Only problem is that the current isHome function does not work. It seems
+			designed to work with the memory structure rather than cpu4; though I'm not
+			sure why this is.
+			
+			
+
+Done:
+- (Done) Create a copy of the CXMB model
+- (Done) Recall the CXMB model
+
+
+26 / 02 / 2019:
+Todo:
+- Fix framerate issues when comparing filters
+	- Framerate issues resolved and flow filtering checked. Seems to be working
+	  reasonably though additional tuning may be required.
+		
+- Build integration
+
+Notes:
+	Integration:
+	- How to do this...
+	- An idea may be to have the CX constantly be in control of movement.
+	- In previous iterations, the CX does not control movement on the outbound
+	  run. In my case, I could include this with some input, unless the memory
+		layer would start screwing with things??? In my model I could simply say
+		that memory gets a weighting of zero on an outbound journey.
+	- The weighting is then modified to give control to memory only if collision
+	  avoidance has nothing to give. I.e. we navigate only when we are not in
+		immediate danger; same could be done including the MB.
+
+  - So first attempt; a CX model with some input from CA sums; or even the
+	  flow difference.
+				 - Could inject either: The sums, the difference, or the fact we need to
+				   turn follwed by a direction (a binary input; 1 turn right, 0 turn left)
+					 - If I do the sums, the accumulation and decision making is all
+					   contained in the model
+					 - If I do the difference, the decision making is in the model
+					 - If I do the binary input, the model is just told to make a turn
+					 - The first option easily makes the most sense.
+---
+- Framerate tanks as soon as filtering is included. Framerate approximately
+	halves
+
+- Sticking consistently around 15fps
+- Image rotation snippit drops about 5 frames. ~10fps
+- Downsampling drops a couple of frames too. ~11fps
+- Gaussian blur and histogram equalization drops a couple of frames. ~11
+- Copying doesn't affect it too badly; maybe 1 fps dropped.
+- With all copying in place, approx. 13/14fps
+
+- Bottlenecks found: Goal baseline, approx 13fps.
+	- Rotation; slightly improved performance by using the opencv copyTo method
+		(approx 13fps)
+	- Downsampling
+	- Gaussian blur and histogram equalization (may be better once the image is
+		smaller).
+		
+
 18 / 02 / 2019:
 Wrap-up:
 - Framerate issue: Found the sources after 5hrs

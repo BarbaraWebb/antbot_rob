@@ -326,16 +326,16 @@ public class Util {
     }
 
     public static boolean isHome(SimpleMatrix memory){
-        int time = (int) SystemClock.elapsedRealtime();
+        //int time = (int) SystemClock.elapsedRealtime();
         int count = 0;
-
+        //0.012008
         for(int i = 0; i < 16; i++){
-            if (Math.abs(memory.get(i) - 0.5) < 0.01){
+            if (Math.abs(memory.get(i) - 0.5) <= 0.0121){
                 count ++;
             }
         }
-
-        return count>14 & time>45000;
+        Log.i("TEST", "Number within range: "+count);
+        return count>14;// & time>45000;
     }
 
     //
