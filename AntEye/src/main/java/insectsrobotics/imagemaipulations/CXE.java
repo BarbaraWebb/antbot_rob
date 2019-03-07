@@ -35,11 +35,11 @@ public class CXE extends NavigationModules {
     private int lft_accumulator = 0;
     private int rgt_accumulator = 0;
     private int call_count = 0;
-    private int accumulation_threshold = 5000;
-    private int reaction_threshold = 10000;
+    private int accumulation_threshold = 100000;
+    private int reaction_threshold = 5000000;
     private boolean left_saccade = false;
     private boolean right_saccade = false;
-
+    private SimpleMatrix ca_neurons = new SimpleMatrix(8, 1);
     public static boolean collisionDetected = false;
 
 
@@ -626,17 +626,19 @@ public class CXE extends NavigationModules {
     //
     private boolean accumulateFlow(double leftSum, double rightSum){
         double flowDiff = leftSum - rightSum;
-
+        Log.i("CXE", "call_count: " + call_count );
         //
         // Reset the accumulators every two calls
         //
         if (call_count >= 2){
             lft_accumulator = 0;
             rgt_accumulator = 0;
+            call_count = 0;
         }
 
         Log.i("CXE", "Accumulators: (" + lft_accumulator + ", " + rgt_accumulator + ")");
         Log.i("CXE", "Sums: (" + leftSum + ", " + rightSum + ", " + flowDiff  + ")");
+        Log.i("CXE", "Diff: " + flowDiff);
 
 
         //
@@ -647,19 +649,21 @@ public class CXE extends NavigationModules {
         } else if (flowDiff <= -(accumulation_threshold)) {
             rgt_accumulator = rgt_accumulator + (int) Math.abs(rightSum);
         }
-
+        Log.i("CXE", "Accumulators: (" + lft_accumulator + ", " + rgt_accumulator + ")");
         //
         // Check the accumulator
         //
-        if (lft_accumulator >= accumulation_threshold){
+        if (lft_accumulator >= reaction_threshold){
             left_saccade = true;
-        } else if (rgt_accumulator >= accumulation_threshold){
+        } else if (rgt_accumulator >= reaction_threshold){
             right_saccade = true;
         }
 
         // Track the number of calls
         call_count++;
 
+
+        Log.i("CXE", "Return: " + (left_saccade || right_saccade));
         // Return true if we need to saccade
         return left_saccade || right_saccade;
     }
@@ -680,7 +684,7 @@ public class CXE extends NavigationModules {
         SimpleMatrix combiner;
 
         collisionDetected = accumulateFlow(leftFilterSum, rightFilterSum);
-
+        Log.i("CXE", "CXE.collisionDetected: " + collisionDetected);
         if (training){
             combiner = weighted_cpu4.plus(weighted_en);
         } else{
@@ -761,7 +765,7 @@ public class CXE extends NavigationModules {
 
     public Double motorOutput(SimpleMatrix cpu1){
         double saccade_angle = 20.0;
-
+        double output = 0;
         //
         // If a collision avoidance saccade is required, overwrite any CX output and send turn info
         // in the required direction.
@@ -769,18 +773,25 @@ public class CXE extends NavigationModules {
         if (left_saccade){
             left_saccade = false;
             right_saccade = false;
+            lft_accumulator = 0;
+            rgt_accumulator = 0;
             collisionDetected = false;
 
-            return saccade_angle;
+            output = saccade_angle;
         } else if (right_saccade) {
             left_saccade = false;
             right_saccade = false;
+            lft_accumulator = 0;
+            rgt_accumulator = 0;
             collisionDetected = false;
 
-            return -(saccade_angle);
+            output = -(saccade_angle);
         }
 
-        return this.W_CPU1_motor.dot(cpu1);
+        output =  this.W_CPU1_motor.dot(cpu1);
+        Log.i("CXE", "Output: " + output);
+        return output;
+        //return this.W_CPU1_motor.dot(cpu1);
     }
 
 

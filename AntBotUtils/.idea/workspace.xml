@@ -10,11 +10,10 @@
       <change beforePath="$PROJECT_DIR$/../.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/scratch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../AntEye/AntEye.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../AntEye/AntEye.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/CXE.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/CXE.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/CombinedThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/CombinedThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/OpticFlowThreads.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/OpticFlowThreads.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Broadcast_Library/Broadcast_Library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Broadcast_Library/Broadcast_Library.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CombinerApp/CombinerApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../CombinerApp/CombinerApp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PathIntegrationApp/PathIntegrationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../PathIntegrationApp/PathIntegrationApp.iml" afterDir="false" />
@@ -93,7 +92,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -110,6 +108,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -178,7 +177,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="41" y="27" width="1325" height="741" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" weight="0.32978722" />
@@ -198,7 +196,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="R Graphics" order="3" />
       <window_info anchor="right" id="R Packages" order="4" />
-      <window_info anchor="right" content_ui="combo" id="Project" order="5" visible="true" weight="0.16106333" />
+      <window_info anchor="right" content_ui="combo" id="Project" order="5" visible="true" weight="0.16340892" />
     </layout>
   </component>
   <component name="XDebuggerManager">

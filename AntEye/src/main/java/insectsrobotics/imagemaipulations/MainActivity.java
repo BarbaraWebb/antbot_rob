@@ -1210,70 +1210,24 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             //recording = true;
             //recorder.startRecording();
 
-            //
-            // Initialise CX model
-            //
-            CX c = new CX();
+            Command.go(new double[]{15, 15});
+            try{ sleep(3000); } catch (Exception e) { e.printStackTrace(); }
 
-            SimpleMatrix tl2 = new SimpleMatrix(CX.n_tl2, 1);
-            tl2.set(0);
-            SimpleMatrix cl1 = new SimpleMatrix(CX.n_cl1, 1);
-            cl1.set(0);
-            SimpleMatrix tb1 = new SimpleMatrix(CX.n_tb1, 1);
-            tb1.set(0);
-            SimpleMatrix memory = new SimpleMatrix(CX.n_cpu4, 1);
-            memory.set(.5);
-            SimpleMatrix cpu4 = new SimpleMatrix(CX.n_cpu4, 1);
-            cpu4.set(0);
-            SimpleMatrix cpu1 = new SimpleMatrix(CX.n_cpu1, 1);
-            cpu1.set(0);
-
-            Log.i(tag, "Util.isHome(): " + Util.isHome(memory));
-
-            int t_trip = 10000;
-            int t0 = (int) SystemClock.elapsedRealtime();
-            int t = (int) SystemClock.elapsedRealtime() - t0;
-
-            Command.go( new double[]{14,13} );
-            try{sleep(1000);} catch (Exception e) { e.printStackTrace(); }
-
-            //
-            // Synthetic outbound journey of 1000 steps
-            //
-            while(t < t_trip){
-
-                //------   COMPASS UPDATE  -----
-                tl2 = c.tl2Output(Math.toRadians(currentDegree));
-                cl1 = c.cl1Output(tl2);
-                tb1 = c.tb1Output(cl1, tb1);
-
-                // ------ DISPLACEMENT UPDATE -----
-                memory = c.cpu4Update(memory, tb1, ANT_SPEED);
-                cpu4 = c.cpu4Output(memory.copy());
-                t = (int) SystemClock.elapsedRealtime() - t0;
+            try{
+                Command.turnAround(20);
+                Command.go(new double[]{15, 15});
+                sleep(3000);
+            } catch (Exception e){
+                e.printStackTrace();
             }
 
-            Command.stop();
-            try {Command.turnAround(170);}catch(Exception e) {e.printStackTrace();}
-            Command.go(new double[]{14, 13});
 
-
-            //
-            // Synthetic inbound journey of 1000 steps
-            //
-            int x = 1;
-            while(!Util.isHome(memory)){
-                //------   COMPASS UPDATE  -----
-                tl2 = c.tl2Output(Math.toRadians(currentDegree));
-                cl1 = c.cl1Output(tl2);
-                tb1 = c.tb1Output(cl1, tb1);
-
-                // ------ DISPLACEMENT UPDATE -----
-                memory = c.cpu4Update(memory, tb1, ANT_SPEED);
-                cpu4 = c.cpu4Output(memory.copy());
-                x++;
-                Log.i(tag, "Memory:\n " + Util.printMemory(memory));
-
+            try{
+                Command.turnAround(-20);
+                Command.go(new double[]{15, 15});
+                sleep(3000);
+            } catch (Exception e){
+                e.printStackTrace();
             }
 
             // End recording

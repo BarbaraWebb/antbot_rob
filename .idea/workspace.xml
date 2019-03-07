@@ -6,12 +6,11 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="CXE:" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="CXE: Out" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d4af2663-68b5-4a8e-820d-7db8c35a2eec" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CXE.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterDir="false" />
@@ -21,18 +20,15 @@
       <change beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_AntEye_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AntBotUtils/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/AntBotUtils/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AntBotUtils/graphics/scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/AntBotUtils/graphics/scratch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AntEye/AntEye.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/AntEye.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CXE.java" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CXE.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CombinedThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CombinedThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/OpticFlowThreads.java" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/OpticFlowThreads.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Util.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Broadcast_Library/Broadcast_Library.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CombinerApp/CombinerApp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PathIntegrationApp/PathIntegrationApp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SerialCommunicationApp/SerialCommunicationApp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/VisualNavigationApp/VisualNavigationApp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notes/2/rage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes/2/rage.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notes/2/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/notes/2/todo.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,34 +48,35 @@
     <session id="-2094613750">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
+          <entry key="project.closed" value="8" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="3" />
           <entry key="project.open.time.11" value="2" />
+          <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="2" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="19" />
+          <entry key="java" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="19" />
+          <entry key="JAVA" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="6621" />
+          <entry key="java" value="7774" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="6621" />
+          <entry key="JAVA" value="7774" />
         </counts>
       </usages-collector>
     </session>
@@ -89,40 +86,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CombinedThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1562">
-              <caret line="116" column="61" selection-start-line="116" selection-start-column="61" selection-end-line="116" selection-end-column="61" />
+            <state relative-caret-position="59">
+              <caret line="245" column="40" lean-forward="true" selection-start-line="245" selection-start-column="40" selection-end-line="245" selection-end-column="40" />
               <folding>
-                <element signature="e#520#5757#0" expanded="true" />
-                <element signature="e#5756#5757#0" expanded="true" />
-                <element signature="e#5469#22102#0" expanded="true" />
-                <element signature="e#9933#10868#0" expanded="true" />
-                <element signature="e#10867#10868#0" expanded="true" />
-                <element signature="e#13730#14152#0" expanded="true" />
-                <element signature="e#14151#14152#0" expanded="true" />
-                <element signature="e#19716#20122#0" expanded="true" />
-                <element signature="e#20121#20122#0" expanded="true" />
-                <element signature="e#21141#21488#0" expanded="true" />
-                <element signature="e#21487#21488#0" expanded="true" />
-                <element signature="e#22101#22102#0" expanded="true" />
+                <element signature="e#583#10984#0" expanded="true" />
+                <element signature="e#10779#11153#0" expanded="true" />
+                <element signature="e#11152#11153#0" expanded="true" />
+                <element signature="e#10983#10984#0" expanded="true" />
+                <element signature="e#11026#27659#0" expanded="true" />
+                <element signature="e#15490#16425#0" expanded="true" />
+                <element signature="e#16424#16425#0" expanded="true" />
+                <element signature="e#19287#19709#0" expanded="true" />
+                <element signature="e#19708#19709#0" expanded="true" />
+                <element signature="e#27658#27659#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CXE.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="391" column="99" selection-start-line="391" selection-start-column="8" selection-end-line="391" selection-end-column="99" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Command.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="71" column="11" selection-start-line="71" selection-start-column="7" selection-end-line="71" selection-end-column="11" />
+            <state relative-caret-position="345">
+              <caret line="41" column="61" lean-forward="true" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -130,12 +119,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/CentralComplexThreads.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-955">
-              <caret line="294" column="24" selection-start-line="293" selection-start-column="12" selection-end-line="294" selection-end-column="24" />
-              <folding>
-                <element signature="e#10969#21811#0" expanded="true" />
-                <element signature="e#21810#21811#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="282">
+              <caret line="829" column="29" selection-start-line="829" selection-start-column="24" selection-end-line="829" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -143,8 +128,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="1133" column="73" selection-start-line="1133" selection-start-column="73" selection-end-line="1133" selection-end-column="73" />
+            <state relative-caret-position="86">
+              <caret line="1134" column="26" selection-start-line="1134" selection-start-column="26" selection-end-line="1134" selection-end-column="26" />
               <folding>
                 <element signature="e#8690#8728#0" />
                 <element signature="class#9924:10211" />
@@ -198,34 +183,8 @@
                 <element signature="e#27511#27556#0" />
                 <element signature="e#28565#28649#0" />
                 <element signature="e#29042#29128#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CXE.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="638" column="80" selection-start-line="638" selection-start-column="80" selection-end-line="638" selection-end-column="80" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#14812#14813#0" expanded="true" />
-                <element signature="e#14852#14853#0" expanded="true" />
-                <element signature="e#15504#15505#0" expanded="true" />
-                <element signature="e#15546#15547#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX_MB.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="701" column="5" selection-start-line="17" selection-end-line="701" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#46174#46679#0" expanded="true" />
+                <element signature="e#46678#46679#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -242,26 +201,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>filterColl</find>
-      <find>ca_flow</find>
-      <find>l</find>
-      <find>combinedThread</find>
-      <find>testT</find>
-      <find>testRun</find>
-      <find>ANT_SPEE</find>
-      <find>cpu4Update</find>
-      <find>0.2</find>
-      <find>k</find>
-      <find>motorOutput</find>
-      <find>lft</find>
-      <find>lft_acc</find>
-      <find>cpu1Outpu</find>
-      <find>static</find>
-      <find>CXMB</find>
-      <find>collision</find>
-      <find>lft_</find>
-      <find>accu</find>
-      <find>en</find>
       <find>en.</find>
       <find>isHome</find>
       <find>stop</find>
@@ -272,6 +211,26 @@
       <find>en =</find>
       <find>CXMotor =</find>
       <find>new Thread(te</find>
+      <find>collisionDetec</find>
+      <find>left_saccade</find>
+      <find>CXE.collisionDetected</find>
+      <find>collisionDetected</find>
+      <find>collisionDetected = f</find>
+      <find>accumulation_</find>
+      <find>motorOutput</find>
+      <find>accumulation</find>
+      <find>left_saccade = f</find>
+      <find>Output:</find>
+      <find>cpu1Outp</find>
+      <find>cpu1Ou</find>
+      <find>enOutput</find>
+      <find>runon</find>
+      <find>en</find>
+      <find>en =</find>
+      <find>testRun</find>
+      <find>calculateFamiliarityDis</find>
+      <find>network</find>
+      <find>networkSetUp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -293,7 +252,7 @@
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="41" />
     <option name="y" value="27" />
-    <option name="width" value="663" />
+    <option name="width" value="1325" />
     <option name="height" value="741" />
   </component>
   <component name="ProjectView">
@@ -301,6 +260,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
@@ -331,7 +291,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -759,11 +718,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="41" y="27" width="1325" height="741" extended-state="6" />
+    <frame x="41" y="27" width="1325" height="741" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.17904612" />
+      <window_info content_ui="combo" id="Project" order="1" weight="0.17904612" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -771,7 +730,7 @@
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Version Control" order="0" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="1" sideWeight="0.49960908" visible="true" weight="0.45860928" />
+      <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.49960908" visible="true" weight="0.1307947" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.3294702" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.3294702" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.50039095" side_tool="true" weight="0.6539735" />
@@ -825,23 +784,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Command.java">
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="71" column="11" selection-start-line="71" selection-start-column="7" selection-end-line="71" selection-end-column="11" />
+        <state relative-caret-position="4575">
+          <caret line="391" column="99" selection-start-line="391" selection-start-column="8" selection-end-line="391" selection-end-column="99" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX.java">
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/Command.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="391" column="99" selection-start-line="391" selection-start-column="8" selection-end-line="391" selection-end-column="99" />
+        <state relative-caret-position="1005">
+          <caret line="71" column="11" selection-start-line="71" selection-start-column="7" selection-end-line="71" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CX_MB.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
+        <state relative-caret-position="9120">
           <caret line="701" column="5" selection-start-line="17" selection-end-line="701" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -849,42 +808,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/CentralComplexThreads.java">
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CombinedThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-955">
-          <caret line="294" column="24" selection-start-line="293" selection-start-column="12" selection-end-line="294" selection-end-column="24" />
+        <state relative-caret-position="59">
+          <caret line="245" column="40" lean-forward="true" selection-start-line="245" selection-start-column="40" selection-end-line="245" selection-end-column="40" />
           <folding>
-            <element signature="e#10969#21811#0" expanded="true" />
-            <element signature="e#21810#21811#0" expanded="true" />
+            <element signature="e#583#10984#0" expanded="true" />
+            <element signature="e#10779#11153#0" expanded="true" />
+            <element signature="e#11152#11153#0" expanded="true" />
+            <element signature="e#10983#10984#0" expanded="true" />
+            <element signature="e#11026#27659#0" expanded="true" />
+            <element signature="e#15490#16425#0" expanded="true" />
+            <element signature="e#16424#16425#0" expanded="true" />
+            <element signature="e#19287#19709#0" expanded="true" />
+            <element signature="e#19708#19709#0" expanded="true" />
+            <element signature="e#27658#27659#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CombinedThread.java">
+    <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/ThreadArchive/CentralComplexThreads.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1562">
-          <caret line="116" column="61" selection-start-line="116" selection-start-column="61" selection-end-line="116" selection-end-column="61" />
-          <folding>
-            <element signature="e#520#5757#0" expanded="true" />
-            <element signature="e#5756#5757#0" expanded="true" />
-            <element signature="e#5469#22102#0" expanded="true" />
-            <element signature="e#9933#10868#0" expanded="true" />
-            <element signature="e#10867#10868#0" expanded="true" />
-            <element signature="e#13730#14152#0" expanded="true" />
-            <element signature="e#14151#14152#0" expanded="true" />
-            <element signature="e#19716#20122#0" expanded="true" />
-            <element signature="e#20121#20122#0" expanded="true" />
-            <element signature="e#21141#21488#0" expanded="true" />
-            <element signature="e#21487#21488#0" expanded="true" />
-            <element signature="e#22101#22102#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="282">
+          <caret line="829" column="29" selection-start-line="829" selection-start-column="24" selection-end-line="829" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="1133" column="73" selection-start-line="1133" selection-start-column="73" selection-end-line="1133" selection-end-column="73" />
+        <state relative-caret-position="86">
+          <caret line="1134" column="26" selection-start-line="1134" selection-start-column="26" selection-end-line="1134" selection-end-column="26" />
           <folding>
             <element signature="e#8690#8728#0" />
             <element signature="class#9924:10211" />
@@ -938,20 +891,18 @@
             <element signature="e#27511#27556#0" />
             <element signature="e#28565#28649#0" />
             <element signature="e#29042#29128#0" />
+            <element signature="e#46174#46679#0" expanded="true" />
+            <element signature="e#46678#46679#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AntEye/src/main/java/insectsrobotics/imagemaipulations/CXE.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="638" column="80" selection-start-line="638" selection-start-column="80" selection-end-line="638" selection-end-column="80" />
+        <state relative-caret-position="345">
+          <caret line="41" column="61" lean-forward="true" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#14812#14813#0" expanded="true" />
-            <element signature="e#14852#14853#0" expanded="true" />
-            <element signature="e#15504#15505#0" expanded="true" />
-            <element signature="e#15546#15547#0" expanded="true" />
           </folding>
         </state>
       </provider>

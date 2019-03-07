@@ -19,6 +19,35 @@ Milestones:
 	were the methodological issues I have discussed already. I already have CX
 	tests to cover this, however, CXMB + OFCA would be awesome.
 
+07 / 02 / 2019:
+Todo:
+- Check CXCA
+Notes:
+- CXCA works, kinda... The CA is too strong on the inbound run. Every turn is
+	triggered by CA, not CX.
+	- One avenue is to damp the CA response, it is still hypersensitive.
+	- Another, or maybe combined avenue would be to have the CA add to the
+	  CX response rather than just overwriting it? How? Adding them
+		may help, but the problem remains. The idea is clearly, boost it in the
+		direction of avoidance. The other problem is that my reactions are
+		binary, not in any way scalable; I don't think there is a way to solve this
+		for this year.
+	- I think dampening + adding proposed CX reaction to the CA reaction
+
+- Translating into an eight neuron thing. I can use the same W_TB1_CPU1 weight
+  matrix to describe the connections between the CA layer (TB1) and CPU1.
+	I have my left and right accumulation. So I have a 1/0 output for each neuron.
+
+  So, run the collision avoidance accumulations. Only when a threshold is reached
+	Set the neurons to have 1 at the desired turning heading, then set the others
+	to the sinusoid. Two neurons to the left or right?
+	
+
+		
+Done:
+- (Done) Collision avoidance works but needs tuned
+
+
 28 / 02 / 2019:
 Wrap up:
 - Hacky way of doing CXE is implemented. Collision avoidance sets a flag which is

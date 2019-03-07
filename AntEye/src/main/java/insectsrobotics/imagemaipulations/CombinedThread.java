@@ -1,6 +1,7 @@
 package insectsrobotics.imagemaipulations;
 
 import android.os.SystemClock;
+import android.util.Log;
 
 import org.ejml.simple.SimpleMatrix;
 
@@ -14,6 +15,7 @@ import static java.lang.Thread.sleep;
 public class CombinedThread {
     private MainActivity app;
     private double distance = 0;
+    private String tag = "CXEThread";
 
     public CombinedThread(MainActivity app){ this.app = app; }
 
@@ -33,7 +35,7 @@ public class CombinedThread {
 
                 int t0 = (int) SystemClock.elapsedRealtime();
                 int t = (int) SystemClock.elapsedRealtime() - t0;
-                int t_outbound = 25000;
+                int t_outbound = 40000;
                 int t_inbound = 80000;
 
                 //
@@ -104,27 +106,149 @@ public class CombinedThread {
                     // Turning generation
                     //
                     cpu1 = extendedcx.cpu1OutputCA(tb1, cpu4, en, app.leftCAFlow, app.rightCAFlow, true);
-                    app.CXmotor = extendedcx.motorOutput(cpu1);
 
                     //
                     // If a collision has been detected
                     //
+                    Log.i(tag, "CXE.collisionDetected: " + CXE.collisionDetected);
                     if (CXE.collisionDetected){
                         Command.stop();
                         try{ sleep(1000); } catch (Exception e){e.printStackTrace();}
-
+                        app.CXmotor = extendedcx.motorOutput(cpu1); //Lol, I'm dumb
                         app.CXtheta = app.CXmotor;
                         try{ Command.turnAround(app.CXtheta); } catch(Exception e){ e.printStackTrace(); }
                         loopCounter = 0;
                         motorReset = true;
                     }
 
+                    loopCounter++;
+                    t = (int) SystemClock.elapsedRealtime() - t0;
+                }
+
+                //
+                // Between run stuff
+                //
+                try{
+                    sleep(3000);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+
+                //
+                // Turn around for ease.
+                //
+                try { Command.turnAround(170); } catch(Exception e) { e.printStackTrace(); }
+
+                //
+                // Update the directional neurons from the compass
+                //
+                tl2 = extendedcx.tl2Output(Math.toRadians(app.currentDegree));
+                cl1 = extendedcx.cl1Output(tl2);
+                tb1 = extendedcx.tb1Output(cl1, tb1);
+
+                //
+                // Displacement update; really we just want to update the angle
+                //
+                memory = extendedcx.cpu4Update(memory, tb1, 0.0);
+                cpu4 = extendedcx.cpu4Output(memory.copy());
+
+                //
+                // Inbound route with CXPI parameter reset
+                //
+                t0 = (int) SystemClock.elapsedRealtime();
+                t = (int) SystemClock.elapsedRealtime() - t0;
+                motorReset = false;
+                loopCounter = 0;
+
+                // Willshaw stuff isn't in yet
+                // Prerequisite; initialise willshaw net, and turn to correct starting angle
+                //
+                /*boolean willshawInitialised = false;
+                while (!willshawInitialised){
+                    if (app.images_access) {
+                        app.new_image = app.new SaveImages();
+                        app.new_image.execute(app.processedDestImage, 7);
+                        willshawInitialised = true;
+                    }
+                }*/
+
+                //
+                // Compute motor output, and turn
+                //
+                app.CXmotor = extendedcx.motorOutput(cpu1);
+                app.CXnewHeading =
+                        Math.toDegrees(
+                                Math.toRadians(app.currentDegree) +
+                                        app.CXmotorChange * app.CXmotor
+                        );
+                app.CXtheta = (app.CXnewHeading - app.currentDegree) % 360;
+
+                //
+                // Generate motor commands
+                //
+                try {
+
+                    Command.turnAround(app.CXtheta);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
 
+                while(t < t_inbound){
                     //
-                    // Else if for inbound
+                    // Loop synchronisation delay
                     //
-                    /*else if (loopCounter >= 2){
+                    try {
+                        sleep(600);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    //
+                    // Update the directional neurons from the compass
+                    //
+                    tl2 = extendedcx.tl2Output(Math.toRadians(app.currentDegree));
+                    cl1 = extendedcx.cl1Output(tl2);
+                    tb1 = extendedcx.tb1Output(cl1, tb1);
+
+                    //
+                    // Displacement update
+                    //
+                    double speed = 4; // Arbitrary speed value for the CX
+                    memory = extendedcx.cpu4Update(memory, tb1, speed);
+                    cpu4 = extendedcx.cpu4Output(memory.copy());
+
+                    //
+                    // Start motors if signalled
+                    //
+                    if (motorReset){
+                        motorReset = false;
+                        Command.go(new double[]{leftSpeed, rightSpeed});
+                        try{ sleep(1000); } catch (Exception e){ e.printStackTrace(); }
+                    }
+
+                    //
+                    // Turning generation
+                    //
+                    cpu1 = extendedcx.cpu1OutputCA(tb1, cpu4, en, app.leftCAFlow, app.rightCAFlow, true);
+
+                    //
+                    // If a collision has been detected
+                    //
+                    Log.i(tag, "CXE.collisionDetected: " + CXE.collisionDetected);
+
+                    if (CXE.collisionDetected){
+                        Command.stop();
+                        try{ sleep(1000); } catch (Exception e){e.printStackTrace();}
+                        app.CXmotor = extendedcx.motorOutput(cpu1);
+                        app.CXtheta = app.CXmotor;
+                        try{ Command.turnAround(app.CXtheta); } catch(Exception e){ e.printStackTrace(); }
+                        loopCounter = 0;
+                        motorReset = true;
+                    } else if (loopCounter >= 2){
+                        //
+                        // Else if for inbound
+                        //
                         loopCounter = 0;
                         Command.stop();
                         try { sleep(1000); } catch (Exception e) { e.printStackTrace(); }
@@ -132,7 +256,6 @@ public class CombinedThread {
                         //
                         // Generate target angle
                         //
-                        cpu1 = extendedcx.cpu1Output(tb1, cpu4);
                         app.CXmotor = extendedcx.motorOutput(cpu1);
 
                         app.CXnewHeading =
@@ -156,7 +279,24 @@ public class CombinedThread {
 
                         // Signal the motors to be restarted
                         motorReset = true;
-                    }*/
+                    }
+
+                    //
+                    // Print out the turning angle
+                    //
+                    try {
+                        app.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                app.debugTextView.setText(String.format(
+                                        "CXTheta: %f",
+                                        app.CXtheta
+                                ));
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                     loopCounter++;
                     t = (int) SystemClock.elapsedRealtime() - t0;
