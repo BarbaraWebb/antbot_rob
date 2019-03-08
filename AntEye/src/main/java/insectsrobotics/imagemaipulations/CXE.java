@@ -30,8 +30,9 @@ public class CXE extends NavigationModules {
     private int learned_images= 0;
 
     //
-    // CA parameters
+    // CA parameters - Algorithmic, and neural model
     //
+
     private int lft_accumulator = 0;
     private int rgt_accumulator = 0;
     private int call_count = 0;
@@ -39,7 +40,13 @@ public class CXE extends NavigationModules {
     private int reaction_threshold = 5000000;
     private boolean left_saccade = false;
     private boolean right_saccade = false;
+
     private SimpleMatrix ca_neurons = new SimpleMatrix(8, 1);
+    private SimpleMatrix acc = new SimpleMatrix(2, 1);
+
+    // The accumulation neurons need some leak
+    private double acc_leak = 0.8;
+
     public static boolean collisionDetected = false;
 
 
@@ -49,6 +56,8 @@ public class CXE extends NavigationModules {
     public static int n_tb1 = 8;
     public static int n_cpu4 = 16;
     public static int n_cpu1 = 16;
+    public static int n_acc = 2;
+    public static int n_ca = 8;
 
     // Zhaoyu added this for right ENs
     static int n_en = 8;
@@ -595,7 +604,7 @@ public class CXE extends NavigationModules {
         // Ring attractor state on the protocerebral bridge.
         Double prop_cl1 = 0.667;
         Double prop_tb1 = 1.0 - prop_cl1;
-        SimpleMatrix output = CX_MB.dot(this.W_CL1_TB1, cl1).scale(prop_cl1).minus(CX_MB.dot(this.W_TB1_TB1, tb1).scale(prop_tb1));
+        SimpleMatrix output = CXE.dot(this.W_CL1_TB1, cl1).scale(prop_cl1).minus(CXE.dot(this.W_TB1_TB1, tb1).scale(prop_tb1));
         return noisySigmoid(output, this.tb1_slope, this.tb1_bias, this.noise);
     }
 
@@ -605,7 +614,7 @@ public class CXE extends NavigationModules {
         SimpleMatrix diffMatrix = new SimpleMatrix(cpu4_mem.numRows(), cpu4_mem.numCols());
         diffMatrix.set(speed*this.cpu4_mem_loss);
         cpu4_mem = cpu4_mem.minus(diffMatrix);
-        diffMatrix.set(CX_MB.dot(this.W_TB1_CPU4, ones.minus(tb1)).scale(speed*this.cpu4_mem_gain));
+        diffMatrix.set(CXE.dot(this.W_TB1_CPU4, ones.minus(tb1)).scale(speed*this.cpu4_mem_gain));
         cpu4_mem = cpu4_mem.plus(diffMatrix);
         for (int i=0; i<cpu4_mem.numRows(); i++){
             if (cpu4_mem.get(i,0) > 1){
@@ -619,6 +628,87 @@ public class CXE extends NavigationModules {
 
     public SimpleMatrix cpu4Output (SimpleMatrix cpu4_mem){
         return noisySigmoid(cpu4_mem, this.cpu4_slope, this.cpu4_bias, this.noise);
+    }
+
+    public SimpleMatrix accUpdate(double leftSum, double rightSum){
+        double flowDiff = leftSum - rightSum;
+        double l_val = acc.get(0,0);
+        double r_val = acc.get(1,0);
+
+        //
+        // Accumulate if difference is great enough
+        //
+        if (flowDiff >= accumulation_threshold){
+            l_val += (int) leftSum;
+        } else if (flowDiff <= -(accumulation_threshold)) {
+            r_val += (int) Math.abs(rightSum);
+        }
+
+        //
+        // Update accumulator after leak
+        //
+        l_val *= acc_leak;
+        r_val *= acc_leak;
+
+        acc.set(0, 0, l_val);
+        acc.set(1, 0, r_val);
+
+        return acc;
+    }
+
+    public SimpleMatrix caOutput(SimpleMatrix tb1, SimpleMatrix acc) {
+        // Offset, how far the sinusoid needs shifted to match the desired heading
+        int offset = 0;
+
+        //
+        // Check to see which neurons have fired. If either side fires,
+        // clear the acc neurons. If both have fired, we don't want to
+        // react. Surely this points to more than a matched filtering system.
+        //
+        if (acc.get(1,0) > reaction_threshold &&
+            acc.get(2,0) > reaction_threshold){
+            acc.set(0);
+            offset = 2;
+        }else if (acc.get(1,0) > reaction_threshold){
+            acc.set(0);
+            offset = 0;
+        } else if ( acc.get(2,0) > reaction_threshold){
+            acc.set(0);
+            offset = 4;
+        }
+
+        //
+        // Determine current direction
+        //
+        int current_heading = 0;
+        for (int i = 0; i < n_tb1; i++){
+            if (tb1.get(i, 0) > tb1.get(current_heading, 0)){
+                current_heading = i;
+            }
+        }
+
+        //Define a sin curve from pi to 3pi/4; shifted sine curve
+        double[] sinusoid = {
+                Math.sin(Math.PI),
+                Math.sin(5 * Math.PI / 4),
+                Math.sin(3 * Math.PI / 2),
+                Math.sin(7 * Math.PI / 4),
+                0,
+                Math.sin(Math.PI / 4),
+                Math.sin(Math.PI / 2),
+                Math.sin(3 * Math.PI / 4),
+        };
+
+        //
+        // Store the shifted sinusoid and compress it into y=[0,1]
+        //
+        SimpleMatrix output = new SimpleMatrix(n_ca, 1);
+        for (int i = 0; i < n_tb1; i++){
+            int s_idx = (i + offset + current_heading) % n_tb1;
+            output.set(s_idx,0, (sinusoid[i] + 1) / 2);
+        }
+
+        return output;
     }
 
     //
@@ -679,8 +769,8 @@ public class CXE extends NavigationModules {
             double rightFilterSum,
             Boolean training
     ){
-        SimpleMatrix weighted_cpu4 = CX_MB.dot(this.W_CPU4_CPU1, cpu4);
-        SimpleMatrix weighted_en = CX_MB.dot(this.W_TB1_CPU1, en);
+        SimpleMatrix weighted_cpu4 = CXE.dot(this.W_CPU4_CPU1, cpu4);
+        SimpleMatrix weighted_en = CXE.dot(this.W_TB1_CPU1, en);
         SimpleMatrix combiner;
 
         collisionDetected = accumulateFlow(leftFilterSum, rightFilterSum);
@@ -712,17 +802,18 @@ public class CXE extends NavigationModules {
         SimpleMatrix inputs = CXE.dot(this.W_CPU4_CPU1, cpu4).minus((CXE.dot(this.W_TB1_CPU1, tb1)));
 
         // Include the Mushroom Body output in the overall output
-        //SimpleMatrix inputs = combiner.minus((CX_MB.dot(this.W_TB1_CPU1, tb1)));
+        //SimpleMatrix inputs = combiner.minus((CXE.dot(this.W_TB1_CPU1, tb1)));
 
         // For testing Stored Memory Only
-        // SimpleMatrix inputs = CX_MB.dot(this.W_CPU4_CPU1, cpu4).minus((CX_MB.dot(this.W_TB1_CPU1, tb1)));
+        // SimpleMatrix inputs = CXE.dot(this.W_CPU4_CPU1, cpu4).minus((CXE.dot(this.W_TB1_CPU1, tb1)));
         return noisySigmoid(inputs, this.cpu1_slope, this.cpu1_bias, this.noise);
     }
 
+    /* Original function definition
     public SimpleMatrix cpu1Output (SimpleMatrix tb1, SimpleMatrix cpu4, SimpleMatrix en, Boolean training){
 
-        SimpleMatrix weighted_cpu4 = CX_MB.dot(this.W_CPU4_CPU1, cpu4);
-        SimpleMatrix weighted_en = CX_MB.dot(this.W_TB1_CPU1, en);
+        SimpleMatrix weighted_cpu4 = CXE.dot(this.W_CPU4_CPU1, cpu4);
+        SimpleMatrix weighted_en = CXE.dot(this.W_TB1_CPU1, en);
         SimpleMatrix combiner;
 
         if (training){
@@ -749,16 +840,62 @@ public class CXE extends NavigationModules {
         }
 
 
-        SimpleMatrix inputs = combiner.minus((CX_MB.dot(this.W_TB1_CPU1, tb1)));
+        SimpleMatrix inputs = combiner.minus((CXE.dot(this.W_TB1_CPU1, tb1)));
 
         // For testing Stored Memory Only
-        // SimpleMatrix inputs = CX_MB.dot(this.W_CPU4_CPU1, cpu4).minus((CX_MB.dot(this.W_TB1_CPU1, tb1)));
+        // SimpleMatrix inputs = CXE.dot(this.W_CPU4_CPU1, cpu4).minus((CXE.dot(this.W_TB1_CPU1, tb1)));
+        return noisySigmoid(inputs, this.cpu1_slope, this.cpu1_bias, this.noise);
+    }*/
+
+    public SimpleMatrix cpu1Output (
+            SimpleMatrix tb1,
+            SimpleMatrix cpu4,
+            SimpleMatrix en,
+            SimpleMatrix ca,
+            int mode){
+
+        SimpleMatrix weighted_cpu4 = CXE.dot(this.W_CPU4_CPU1, cpu4);
+        SimpleMatrix weighted_en = CXE.dot(this.W_TB1_CPU1, en);
+        SimpleMatrix weighted_ca = CXE.dot(this.W_TB1_CPU1, ca);
+        SimpleMatrix combiner;
+
+        if (mode == 0){
+            combiner = weighted_cpu4.plus(weighted_ca);
+            //combiner = weighted_cpu4.plus(weighted_en);
+        } else if (mode == 1) {
+            combiner = weighted_ca;
+        } else {
+            combiner = weighted_cpu4.divide(1.25).plus(weighted_en.divide(5));
+            String cpu4_str = "";
+            for (int i =0; i<weighted_cpu4.numRows(); i++){
+                cpu4_str += weighted_cpu4.get(i, 0)+ ",";
+            }
+            LogToFileUtils.write("CPU4: " + cpu4_str);
+
+            String en_str = "";
+            for (int i =0; i<weighted_en.numRows(); i++){
+                en_str += weighted_en.get(i, 0)+ ",";
+            }
+            LogToFileUtils.write("EN: " + en_str);
+
+            String c_str = "";
+            for (int i =0; i<combiner.numRows(); i++){
+                c_str += combiner.get(i, 0)+ ",";
+            }
+            LogToFileUtils.write("Combiner: " + c_str);
+        }
+
+
+        SimpleMatrix inputs = combiner.minus((CXE.dot(this.W_TB1_CPU1, tb1)));
+
+        // For testing Stored Memory Only
+        // SimpleMatrix inputs = CXE.dot(this.W_CPU4_CPU1, cpu4).minus((CXE.dot(this.W_TB1_CPU1, tb1)));
         return noisySigmoid(inputs, this.cpu1_slope, this.cpu1_bias, this.noise);
     }
 
     public SimpleMatrix cpu1EnOutput (SimpleMatrix tb1, SimpleMatrix en){
 
-        SimpleMatrix inputs = CX_MB.dot(this.W_TB1_CPU1, en).minus((CX_MB.dot(this.W_TB1_CPU1, tb1)));
+        SimpleMatrix inputs = CXE.dot(this.W_TB1_CPU1, en).minus((CXE.dot(this.W_TB1_CPU1, tb1)));
 
         return noisySigmoid(inputs, this.cpu1_slope, this.cpu1_bias, this.noise);
     }

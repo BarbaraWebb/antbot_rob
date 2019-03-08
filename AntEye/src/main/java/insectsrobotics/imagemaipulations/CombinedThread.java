@@ -10,6 +10,7 @@ import java.util.List;
 
 import insectsrobotics.imagemaipulations.NavigationModules.WillshawModule;
 
+import static java.lang.Thread.activeCount;
 import static java.lang.Thread.sleep;
 
 public class CombinedThread {
@@ -47,7 +48,9 @@ public class CombinedThread {
                 SimpleMatrix memory = new SimpleMatrix(CX.n_cpu4, 1);
                 SimpleMatrix cpu4 = new SimpleMatrix(CX.n_cpu4, 1);
                 SimpleMatrix cpu1 = new SimpleMatrix(CX.n_cpu1, 1);
-                SimpleMatrix en = new SimpleMatrix(CX_MB.n_tb1, 1);
+                SimpleMatrix en = new SimpleMatrix(CXE.n_tb1, 1);
+                SimpleMatrix ca = new SimpleMatrix(CXE.n_ca, 1);
+                SimpleMatrix acc = new SimpleMatrix(2,1);
 
                 //
                 // Connectivity matrix instantiations
@@ -59,6 +62,8 @@ public class CombinedThread {
                 cpu4.set(0);
                 cpu1.set(0);
                 en.set(0);
+                ca.set(0);
+                acc.set(0);
 
                 //
                 // Motor settings - Different speeds account for motor differences
@@ -94,6 +99,12 @@ public class CombinedThread {
                     cpu4 = extendedcx.cpu4Output(memory.copy());
 
                     //
+                    // Collision avoidance update
+                    //
+                    acc = extendedcx.accUpdate(app.leftCAFlow, app.rightCAFlow);
+                    ca = extendedcx.caOutput(tb1, acc);
+
+                    //
                     // Start motors if signalled
                     //
                     if (motorReset){
@@ -105,17 +116,27 @@ public class CombinedThread {
                     //
                     // Turning generation
                     //
-                    cpu1 = extendedcx.cpu1OutputCA(tb1, cpu4, en, app.leftCAFlow, app.rightCAFlow, true);
+                    cpu1 = extendedcx.cpu1Output(tb1, cpu4, en, ca, 1);
 
                     //
-                    // If a collision has been detected
+                    // Compute heading in regular intervals.
                     //
                     Log.i(tag, "CXE.collisionDetected: " + CXE.collisionDetected);
-                    if (CXE.collisionDetected){
+                    if (loopCounter >= 2){
                         Command.stop();
                         try{ sleep(1000); } catch (Exception e){e.printStackTrace();}
-                        app.CXmotor = extendedcx.motorOutput(cpu1); //Lol, I'm dumb
-                        app.CXtheta = app.CXmotor;
+
+                        //
+                        // Generate turn
+                        //
+                        app.CXmotor = extendedcx.motorOutput(cpu1);
+                        app.CXnewHeading =
+                                Math.toDegrees(
+                                        Math.toRadians(app.currentDegree) +
+                                                app.CXmotorChange * app.CXmotor
+                                );
+                        app.CXtheta = (app.CXnewHeading - app.currentDegree) % 360;
+
                         try{ Command.turnAround(app.CXtheta); } catch(Exception e){ e.printStackTrace(); }
                         loopCounter = 0;
                         motorReset = true;
@@ -212,6 +233,12 @@ public class CombinedThread {
                     tb1 = extendedcx.tb1Output(cl1, tb1);
 
                     //
+                    // Update the flow
+                    //
+                    acc = extendedcx.accUpdate(app.leftCAFlow, app.rightCAFlow);
+                    ca = extendedcx.caOutput(tb1, acc);
+
+                    //
                     // Displacement update
                     //
                     double speed = 4; // Arbitrary speed value for the CX
@@ -230,22 +257,14 @@ public class CombinedThread {
                     //
                     // Turning generation
                     //
-                    cpu1 = extendedcx.cpu1OutputCA(tb1, cpu4, en, app.leftCAFlow, app.rightCAFlow, true);
+                    cpu1 = extendedcx.cpu1Output(tb1, cpu4, en, ca, 0);
 
                     //
                     // If a collision has been detected
                     //
                     Log.i(tag, "CXE.collisionDetected: " + CXE.collisionDetected);
 
-                    if (CXE.collisionDetected){
-                        Command.stop();
-                        try{ sleep(1000); } catch (Exception e){e.printStackTrace();}
-                        app.CXmotor = extendedcx.motorOutput(cpu1);
-                        app.CXtheta = app.CXmotor;
-                        try{ Command.turnAround(app.CXtheta); } catch(Exception e){ e.printStackTrace(); }
-                        loopCounter = 0;
-                        motorReset = true;
-                    } else if (loopCounter >= 2){
+                    if (loopCounter >= 2){
                         //
                         // Else if for inbound
                         //
