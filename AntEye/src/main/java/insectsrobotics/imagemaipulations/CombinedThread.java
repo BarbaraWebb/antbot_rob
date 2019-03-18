@@ -16,6 +16,7 @@ import static java.lang.Thread.sleep;
 public class CombinedThread {
     private MainActivity app;
     private double distance = 0;
+    private int current_direction = 0;
     private String tag = "CXEThread";
 
     public CombinedThread(MainActivity app){ this.app = app; }
@@ -36,7 +37,7 @@ public class CombinedThread {
 
                 int t0 = (int) SystemClock.elapsedRealtime();
                 int t = (int) SystemClock.elapsedRealtime() - t0;
-                int t_outbound = 40000;
+                int t_outbound = 50000; //40000
                 int t_inbound = 80000;
 
                 //
@@ -78,11 +79,11 @@ public class CombinedThread {
                     //
                     // Loop synchronisation delay
                     //
-                    try {
+                    /*try {
                         sleep(600);
                     } catch (Exception e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
                     //
                     // Update the directional neurons from the compass
@@ -90,6 +91,11 @@ public class CombinedThread {
                     tl2 = extendedcx.tl2Output(Math.toRadians(app.currentDegree));
                     cl1 = extendedcx.cl1Output(tl2);
                     tb1 = extendedcx.tb1Output(cl1, tb1);
+                    for(int i = 0; i < extendedcx.n_tb1; i++){
+                        if (tb1.get(i, 0) > tb1.get(current_direction, 0)){
+                            current_direction = i;
+                        }
+                    }
 
                     //
                     // Displacement update
@@ -102,8 +108,9 @@ public class CombinedThread {
                     // Collision avoidance update
                     //
                     acc = extendedcx.accUpdate(app.leftCAFlow, app.rightCAFlow);
+                    Log.i(tag, "Acc bef: " + acc.get(0,0) + " " + acc.get(1,0));
                     ca = extendedcx.caOutput(tb1, acc);
-
+                    Log.i(tag, "Acc aft: " + acc.get(0,0) + " " + acc.get(1,0));
                     //
                     // Start motors if signalled
                     //
@@ -122,25 +129,65 @@ public class CombinedThread {
                     // Compute heading in regular intervals.
                     //
                     Log.i(tag, "CXE.collisionDetected: " + CXE.collisionDetected);
-                    if (loopCounter >= 2){
+
+                    //Command.stop();
+                    //try{ sleep(1000); } catch (Exception e){e.printStackTrace();}
+
+
+
+                    //if (CXE.collisionDetected){
+                    //
+                    // Generate turn
+                    //
+                    app.CXmotor = extendedcx.motorOutput(cpu1);
+                    app.CXnewHeading =
+                            Math.toDegrees(
+                                    Math.toRadians(app.currentDegree) +
+                                            app.CXmotorChange * app.CXmotor
+                            );
+                    app.CXtheta = (app.CXnewHeading - app.currentDegree) % 360;
+
+                    Log.i(tag, "CXTheta: " + app.CXtheta);
+
+                    if (extendedcx.collisionDetected && (app.CXtheta > 1.5 || app.CXtheta < -1.5)){
+                        // Hacky, but allows easy checking
+                        extendedcx.collisionDetected = false;
+                        // Cap turns at 30 degrees
+                        app.CXtheta = app.CXtheta < -30 ? -30 : app.CXtheta;
+                        app.CXtheta = app.CXtheta > 30 ? 30 : app.CXtheta;
+
                         Command.stop();
-                        try{ sleep(1000); } catch (Exception e){e.printStackTrace();}
-
-                        //
-                        // Generate turn
-                        //
-                        app.CXmotor = extendedcx.motorOutput(cpu1);
-                        app.CXnewHeading =
-                                Math.toDegrees(
-                                        Math.toRadians(app.currentDegree) +
-                                                app.CXmotorChange * app.CXmotor
-                                );
-                        app.CXtheta = (app.CXnewHeading - app.currentDegree) % 360;
-
-                        try{ Command.turnAround(app.CXtheta); } catch(Exception e){ e.printStackTrace(); }
+                        try{ sleep(1000); } catch (Exception e){ e.printStackTrace(); }
+                        try{
+                            Command.turnAround(app.CXtheta);
+                            sleep(500);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                         loopCounter = 0;
                         motorReset = true;
                     }
+
+                    //
+                    // Print out the turning angle
+                    //
+                    try {
+                        app.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                app.debugTextView.setText(String.format(
+                                        "CXTheta: %f\n" +
+                                        "Current: %d",
+                                        app.CXtheta,
+                                        current_direction
+                                ));
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
 
                     loopCounter++;
                     t = (int) SystemClock.elapsedRealtime() - t0;
@@ -158,7 +205,12 @@ public class CombinedThread {
                 //
                 // Turn around for ease.
                 //
-                try { Command.turnAround(170); } catch(Exception e) { e.printStackTrace(); }
+                try {
+                    Command.turnAround(170);
+                    sleep(500);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
 
                 //
                 // Update the directional neurons from the compass
@@ -210,21 +262,13 @@ public class CombinedThread {
                 try {
 
                     Command.turnAround(app.CXtheta);
+                    sleep(500);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
 
                 while(t < t_inbound){
-                    //
-                    // Loop synchronisation delay
-                    //
-                    try {
-                        sleep(600);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
                     //
                     // Update the directional neurons from the compass
                     //
@@ -264,41 +308,40 @@ public class CombinedThread {
                     //
                     Log.i(tag, "CXE.collisionDetected: " + CXE.collisionDetected);
 
-                    if (loopCounter >= 2){
-                        //
-                        // Else if for inbound
-                        //
-                        loopCounter = 0;
+
+                    //
+                    // Generate target angle
+                    //
+                    app.CXmotor = extendedcx.motorOutput(cpu1);
+
+                    app.CXnewHeading =
+                            Math.toDegrees(
+                                    Math.toRadians(app.currentDegree) +
+                                            app.CXmotorChange * app.CXmotor
+                            );
+
+                    app.CXtheta = (app.CXnewHeading - app.currentDegree) % 360;
+                    Log.i(tag, "Inbound CXTheta: " + app.CXtheta);
+
+                    //
+                    // Generate motor commands; if a turn should be generated; should be true by
+                    // proxy if a collision has been detected. I think...
+                    //
+                    if (app.CXtheta > 1.5 || app.CXtheta < -1.5) {
                         Command.stop();
                         try { sleep(1000); } catch (Exception e) { e.printStackTrace(); }
-
-                        //
-                        // Generate target angle
-                        //
-                        app.CXmotor = extendedcx.motorOutput(cpu1);
-
-                        app.CXnewHeading =
-                                Math.toDegrees(
-                                        Math.toRadians(app.currentDegree) +
-                                                app.CXmotorChange * app.CXmotor
-                                );
-
-                        app.CXtheta = (app.CXnewHeading - app.currentDegree) % 360;
-
-                        //
-                        // Generate motor commands; if a turn should be generated
-                        //
-                        if (app.CXtheta > 1.5 || app.CXtheta < -1.5) {
-                            try {
-                                Command.turnAround(app.CXtheta);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                        try {
+                            Command.turnAround(app.CXtheta);
+                            sleep(500);
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-
                         // Signal the motors to be restarted
                         motorReset = true;
                     }
+
+
+
 
                     //
                     // Print out the turning angle

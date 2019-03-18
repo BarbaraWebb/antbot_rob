@@ -19,6 +19,124 @@ Milestones:
 	were the methodological issues I have discussed already. I already have CX
 	tests to cover this, however, CXMB + OFCA would be awesome.
 
+17 / 03 / 2019:
+Todo:
+- Quick check, dot ca by weightings from CPU4 to CPU1, see behaviour (if any);
+- Assuming this doesn't work immediately, begin investigating why the raw values
+	don't work to generate an angle. How could I generate an arbitrary turning
+	angle as output (this is probably your key question for the day).
+
+Notes:
+- CACX didn't work as I thought it was in last entry. I was producing an
+	incorrect mapping.
+- Dotting by CPU4-CPU1 weightings gives output. The strength of this output
+	seems variable. Worth a run to check.
+	xs
+- Response in a clear environment looked promising. Putting in a full arena shows
+  that it doesn't work cleanly but symptoms indicate a hypersensitive CA component.
+	- Desensitized the CA component and the robot behaves as if there is no CA. This
+		is a good sign.
+	- Offsets are definitely showing the correct direction. I still end up with
+		weird turns. I'd expect one direction, but it goes another. However,
+		sensitivity looks about right.
+	- Also worth noting that outputs are not consistent when I feel they should be;
+		also also worth noting that they are a hell of a lot more consisent than they
+		were before. Maybe offsets of 1 as opposed to 2?
+	- Output signals are still inconsistent. I think that the only point of change
+		is the inputs matrix. It is created based on the combiner minus the tb1
+		signal.
+		- Tried to remove, no reaction is generated whatsoever. Makes sense as I
+			think this is the comparison with the current direction. So this potential
+			source of inconsistency is going to have to stay in. Worth trying a couple
+			of behavioural tests.
+	- Generate consistent turns in one direction. Right turns reasonably consistent.
+		So are left. So, I can generate reasonably consistent turns by shifting the
+		offset. They vary but they're large enough to be CA saccades. They could be
+		capped at 30 perhaps.
+	- Now worth including ecx.collisionDetected in the check. Now guaranteed that
+		all turns in outbound are from CA.
+	- Just got one of those sadly promising runs.
+
+	- Okay, it seems to be the collision avoidance system only that's breaking.
+		Turns are generated in the wrong direction, and it isn't the inconsistency
+	
+
+14 / 03 / 2019:
+Todo:
+- Tune CACX system. Collision avoidance in the CX seems to work!
+  But, it needs tuned.
+	- Reaction saccade
+	- Reaction sensitivity
+	- Balance with CX
+
+Notes;
+- Trying to remove the whole shift index thing from the process of building the
+  sinusoid; maybe this plus the dot product with the current heading are causing
+	issues but I wouldn't have thought so.
+
+- Turns seem erratic; though the erratacism is seemingly consistent.
+- The TB1 headings are relative to the direction in which the robot started, so
+	the mod operation could be the issue.
+- I knew it couldn't be that easy. The reaction isn't due to sensitivity, it's
+	due to odd CX outputs. The weighted CA is outputting that we should change
+	course even if no collision has been detected by the accumulators.  Why is
+	this?
+
+- As per, stuff from last year that I thought was wrong is actually right...
+  Zhaoyu's expansion matrix was correct.
+
+
+
+13 / 03 / 2019:
+Todo:
+- Further debugging
+
+Notes:
+- Performance improved by combining with memory circuit, but this doesn't make
+  sense.
+	- Okay, plan: re-insert the flag-based method. The model will signal if a
+		collision has been detected. Then we get output from the model.
+	- Now, the model is producing collision avoidance output, however, the
+	  response is too small and the detection is too sensitive.
+	- Wondering if there's something wrong with the extension matrix
+	  I'm now ending up with just a really long sin curve which isn't ideal.
+	- Got some weirdly promising results back from an initial test.
+
+- CA seems to work surprisingly. About as sensitive as it was before; but seems
+  close could maybe do with slightly higher sensitivity. Leak factor instead of
+	hard reset may be causing issues; but all in all it seems okay.
+- Reaction still isn't really big enough and I've run out of space.
+  If I were to add another cell's worth of offset I'd be telling the robot just
+	to go backwards.
+- Also I'd like to try just injecting the CA output : DOESN'T WORK
+	- I don't get this. It has to be combined with the weighted CPU4, however, the
+	  numbers are almost identical. When combined with weighted CPU4 it seems to
+		work. I don't want to know if this is just luck haha
+- Index out of bound for SimpleMatrix caused by remainder instead of mod but I
+  don't know why it only happens on inbound
+
+- I think CA behaviour so far has been mostly luck. I think the matrix that
+	extends to 16 neurons is incorrect. We therefore end up with replication
+	and the robot is pulled equally in both directions rather than a significant
+	direction.
+11 / 03 / 2019:
+Todo:
+- Check accumulation; make sure reaction is being triggered.
+- Check reaction; make sure shape is correct
+Notes:
+- First thing, accumulation leak now ensures that a reaction will be
+  triggered eventually as data builds up.
+- Can now trigger turns coursly, however, the generated sinusoid is completely
+  wrong. I have no idea how to fix this... (I'm dumb, yet again)
+- Is there any way I can make the original method more accurate???
+  The response is pretty much guaranteed to be course.
+- The sinusoid response is being correctly computed and shifted. Stop trying to
+  write "efficient" code.
+- Next step is the incorporation into the output. But that's a story for another
+  day.
+
+Done:
+- Made neural CA model (last commit)
 07 / 02 / 2019:
 Todo:
 - Check CXCA

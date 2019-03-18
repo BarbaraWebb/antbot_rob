@@ -36,8 +36,8 @@ public class CXE extends NavigationModules {
     private int lft_accumulator = 0;
     private int rgt_accumulator = 0;
     private int call_count = 0;
-    private int accumulation_threshold = 100000;
-    private int reaction_threshold = 5000000;
+    private int accumulation_threshold = 250000;
+    private int reaction_threshold = 1000000;
     private boolean left_saccade = false;
     private boolean right_saccade = false;
 
@@ -45,7 +45,7 @@ public class CXE extends NavigationModules {
     private SimpleMatrix acc = new SimpleMatrix(2, 1);
 
     // The accumulation neurons need some leak
-    private double acc_leak = 0.8;
+    private double acc_leak = 0.1;
 
     public static boolean collisionDetected = false;
 
@@ -57,7 +57,7 @@ public class CXE extends NavigationModules {
     public static int n_cpu4 = 16;
     public static int n_cpu1 = 16;
     public static int n_acc = 2;
-    public static int n_ca = 8;
+    public static int n_ca = 16;
 
     // Zhaoyu added this for right ENs
     static int n_en = 8;
@@ -635,23 +635,36 @@ public class CXE extends NavigationModules {
         double l_val = acc.get(0,0);
         double r_val = acc.get(1,0);
 
+        if (call_count > 2){
+            // Old method, clear accumulators every 2 calls
+            acc.set(0);
+            call_count = 0;
+        }
+
         //
         // Accumulate if difference is great enough
         //
         if (flowDiff >= accumulation_threshold){
-            l_val += (int) leftSum;
+            l_val += (int) flowDiff;
         } else if (flowDiff <= -(accumulation_threshold)) {
-            r_val += (int) Math.abs(rightSum);
+            r_val += (int) Math.abs(flowDiff);
         }
+        Log.i("CXE", "flowDiff: " + flowDiff);
+
 
         //
         // Update accumulator after leak
         //
-        l_val *= acc_leak;
-        r_val *= acc_leak;
+        //l_val *= acc_leak;
+        //r_val *= acc_leak;
 
         acc.set(0, 0, l_val);
         acc.set(1, 0, r_val);
+
+        call_count++;
+        Log.i("CXE", "(lval, rval): (" + l_val + ", " + r_val + ")");
+
+
 
         return acc;
     }
@@ -665,17 +678,26 @@ public class CXE extends NavigationModules {
         // clear the acc neurons. If both have fired, we don't want to
         // react. Surely this points to more than a matched filtering system.
         //
-        if (acc.get(1,0) > reaction_threshold &&
-            acc.get(2,0) > reaction_threshold){
-            acc.set(0);
-            offset = 2;
-        }else if (acc.get(1,0) > reaction_threshold){
+        if (acc.get(0,0) > reaction_threshold &&
+                acc.get(1,0) > reaction_threshold) {
+            //
+            // THis section will never run
+            //
             acc.set(0);
             offset = 0;
-        } else if ( acc.get(2,0) > reaction_threshold){
+            CXE.collisionDetected = false;
+        } else if (acc.get(0,0) > reaction_threshold){
             acc.set(0);
-            offset = 4;
+            offset = -2;
+            CXE.collisionDetected = true;
+            left_saccade = true;
+        } else if ( acc.get(1,0) > reaction_threshold){
+            acc.set(0);
+            offset = 2;
+            CXE.collisionDetected = true;
+            right_saccade = true;
         }
+        Log.i("CXE", "Offset: " + offset);
 
         //
         // Determine current direction
@@ -687,28 +709,51 @@ public class CXE extends NavigationModules {
             }
         }
 
-        //Define a sin curve from pi to 3pi/4; shifted sine curve
+        //Define a sin curve from pi/2 to pi/4; shifted sine curve
         double[] sinusoid = {
-                Math.sin(Math.PI),
+                Math.sin(Math.PI / 2),
+                Math.sin(3 * Math.PI / 4),
+                0,
                 Math.sin(5 * Math.PI / 4),
                 Math.sin(3 * Math.PI / 2),
                 Math.sin(7 * Math.PI / 4),
                 0,
-                Math.sin(Math.PI / 4),
-                Math.sin(Math.PI / 2),
-                Math.sin(3 * Math.PI / 4),
+                Math.sin(Math.PI / 4)
         };
 
         //
         // Store the shifted sinusoid and compress it into y=[0,1]
         //
+        String out = "";
         SimpleMatrix output = new SimpleMatrix(n_ca, 1);
+        SimpleMatrix halfOutput = new SimpleMatrix(n_tb1, 1);
         for (int i = 0; i < n_tb1; i++){
-            int s_idx = (i + offset + current_heading) % n_tb1;
-            output.set(s_idx,0, (sinusoid[i] + 1) / 2);
+            int s_idx = Util.mod((i + offset + current_heading), n_tb1);
+            //int s_idx = Util.mod((i + offset), n_tb1);
+            halfOutput.set(s_idx,0, (sinusoid[i]));
+            Log.i("CXE", "i: " + i + ", shift: " + s_idx);
         }
 
-        return output;
+        //
+        // Interleave results (extend to 16x1 by entering each element twice)
+        //
+
+        for ( int i = 0; i < n_ca/2; i++) {
+            output.set(i, 0, halfOutput.get(i,0));
+            output.set(i + 8, 0, halfOutput.get(i,0));
+        }
+
+
+        //
+        // DEBUG: Sinusoid check
+        //
+        String outstring = "";
+        for ( int i = 0; i < n_ca; i++ ){
+            outstring = outstring + output.get(i,0) + " ";
+        }
+
+        Log.i("CXE", "Current " + current_heading + " : " + outstring);
+        return noisySigmoid(output, this.cpu4_slope, this.cpu4_bias, this.noise);
     }
 
     //
@@ -856,14 +901,19 @@ public class CXE extends NavigationModules {
 
         SimpleMatrix weighted_cpu4 = CXE.dot(this.W_CPU4_CPU1, cpu4);
         SimpleMatrix weighted_en = CXE.dot(this.W_TB1_CPU1, en);
-        SimpleMatrix weighted_ca = CXE.dot(this.W_TB1_CPU1, ca);
+        SimpleMatrix weighted_ca = CXE.dot(this.W_CPU4_CPU1, ca);
         SimpleMatrix combiner;
 
+        // Collision avoidance precedence in PI + CA mode
+        double ca_weight = 0.5;
+
         if (mode == 0){
-            combiner = weighted_cpu4.plus(weighted_ca);
+            //combiner = weighted_cpu4.plus(weighted_ca);
+            combiner = weighted_cpu4.scale(1 - ca_weight).plus(weighted_ca.scale(ca_weight));
             //combiner = weighted_cpu4.plus(weighted_en);
         } else if (mode == 1) {
-            combiner = weighted_ca;
+            // Just CA, for some reason we need to include cpu4 or we get no reaction.
+            combiner = weighted_ca; //weighted_cpu4.plus(weighted_ca);
         } else {
             combiner = weighted_cpu4.divide(1.25).plus(weighted_en.divide(5));
             String cpu4_str = "";
@@ -885,8 +935,43 @@ public class CXE extends NavigationModules {
             LogToFileUtils.write("Combiner: " + c_str);
         }
 
+        String t_str = "";
+        for(int i = 0; i < tb1.numRows(); i++)
+            t_str += tb1.get(i, 0) + " ";
+
+        Log.i("CXE", "TB1 bef: " + t_str);
+
+        SimpleMatrix w_tb1 = CXE.dot(this.W_TB1_CPU1, tb1);
+        t_str = "";
+        for(int i = 0; i < w_tb1.numRows(); i++)
+            t_str += w_tb1.get(i, 0) + " ";
+
+        Log.i("CXE", "TB1 aft: " + t_str);
 
         SimpleMatrix inputs = combiner.minus((CXE.dot(this.W_TB1_CPU1, tb1)));
+        SimpleMatrix out = noisySigmoid(inputs, this.cpu1_slope, this.cpu1_bias, this.noise);
+
+        //
+        // DEBUG: Compute output strings
+        //
+        String ca_string = "";
+        String cpu4_string = "";
+        String combiner_string = "";
+        String i_str = "";
+        String o_str = "";
+        for (int i = 0; i < (2*n_tb1); i++){
+            ca_string = ca_string + weighted_ca.get(i, 0) + ", ";
+            cpu4_string = cpu4_string + weighted_cpu4.get(i, 0) + ", ";
+            combiner_string = combiner_string + combiner.get(i, 0) + ", ";
+            i_str += inputs.get(i, 0) + ", ";
+            o_str += out.get(i,0) + ", ";
+        }
+        Log.i("CXE", "WCA: " + ca_string);
+        Log.i("CXE", "CPU4: " + cpu4_string);
+        Log.i("CXE", "COM: "+ combiner_string);
+        Log.i("CXE", "TBI: "+ i_str);
+        Log.i("CXE", "TBO: "+ o_str);
+
 
         // For testing Stored Memory Only
         // SimpleMatrix inputs = CXE.dot(this.W_CPU4_CPU1, cpu4).minus((CXE.dot(this.W_TB1_CPU1, tb1)));
@@ -906,23 +991,23 @@ public class CXE extends NavigationModules {
         //
         // If a collision avoidance saccade is required, overwrite any CX output and send turn info
         // in the required direction.
-        //
+       //
         if (left_saccade){
             left_saccade = false;
             right_saccade = false;
             lft_accumulator = 0;
             rgt_accumulator = 0;
-            collisionDetected = false;
+            //collisionDetected = false;
 
-            output = saccade_angle;
+//            output = saccade_angle;
         } else if (right_saccade) {
             left_saccade = false;
             right_saccade = false;
             lft_accumulator = 0;
             rgt_accumulator = 0;
-            collisionDetected = false;
+            //collisionDetected = false;
 
-            output = -(saccade_angle);
+//            output = -(saccade_angle);
         }
 
         output =  this.W_CPU1_motor.dot(cpu1);
