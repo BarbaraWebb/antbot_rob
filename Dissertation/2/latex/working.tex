@@ -1239,7 +1239,11 @@ broadcast library \cite{Eberding2016} and sent to the Arduino. The Arduino code
 contains a parser which will decode the serial messages and then call the
 correct method to execute the desired motor commands.
 
-\subsection{ Modifications }
+\subsection{ Modifications and Development }
+The modifications or additions listed below are a small part of the dissertation,
+however, for one reason or another (see Discussion) these ended up taking
+most of the project time. 
+
 \textbf{Compass Sensor:}
 While the Android phone has a built-in compass (used for other parts of this
 project) this is impractical to use as part of a control system. The
@@ -1308,7 +1312,60 @@ reason.
 \par
 
 \textbf{Video Recording:}
-You can write about this when it works.
+In order to analyse the visual processing in more detail, a video recording
+utility was added to AntBot. Again platform constraints mean that the utility
+is perhaps not as well-made as it could be. A straightforward method using
+FFMPEG had to be abandoned due to library conflicts; this method would
+have allowed a video file to be recorded directly rather than the frame-stitching
+solution described below. The real reason this proved difficult was that the
+recording had to take place after preprocessing (image unwrapping and
+downsampling to the 90x10 $360^{\circ}$ image). In order to achieve this frames
+are passed off to a recording buffer after processing, the buffer is then
+processed asynchronously by a separate thread which saves the frames to a
+set directory. Pleasantly, this does not impact the frame rate. The video frames
+then have to be retrieved from the robot and stitched together using a custom
+python utility (a simple wrapper around an FFMPEG command). The recorded video
+can then be analysed offline. This utility was created to offline analysis of
+optical flow, however, it also highlighted a major problem with the robot which
+was not previously known.
+\newline
+\par
+
+\textbf{Video Pre-processing Pipeline:}
+When stitching the video frames from the recorder, it was noticed that the
+framerate was not quite right. The framerate on the robot was found to be
+an unacceptably low 2fps. In an effort to improve the framerate we isolated
+different parts of the processing pipeline. We found the best possible
+framerate to be approximately 14fps with no processing (this is computed simply
+as the numebr of times the \textit{onCameraFrame()} callback function is called
+per-second). Adding processing steps back to the pipeline, two steps were found
+which caused the framerate to crash. The first step was an image convolution
+algorithm; the unwrapped image does not line up with the direction of travel of
+the agent, so the resulting frame must be shifted (azimuth) so that the centre of
+the frame is in line with the forward direction. This step was reducing the
+framerate by approximately 5fps. Replacing the implemented algorithm with an
+OpenCV library implementation reduced this to approximately 1fps cost. Similarly,
+an image downsampling algorithm had been manually implemented which cost around
+5fps; again, replacing this with an OpenCV library implementation reduced the
+cost to approximately 1fps, if that. The full pipeline can now run at 10-12fps
+with the recording utility running on top. When simulating a model like the ECX,
+the framerate does drop to 8-10fps.
+\newline
+\par
+
+This raises an interesting problem. We do not know when this code was added
+to the robot but in any project following its insertion, the framerate surely
+affected the performance of the agent. We can say for sure that the algorithms
+used and tested in \cite{Mitchell2018} were affected. Indeed, in \cite{Mitchell2018}
+it is noted that few images were stored during Visual Navigation experiments. The
+low storage rate was thought to be a thread synchronisation issue, but it is now
+clear that the frames were simply not finished processing in time to be stored.
+In testing the matched-filter collision avoidance system from \cite{Mitchell2018}
+we note a significant change in behaviour after the framerate improvement. It is
+suspected that this is due to an increase in flow information, and therefore an
+increase in noise which causes erroneous and erratic behaviour, not witnessed in
+\cite{Mitchell2018}. 
+
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
