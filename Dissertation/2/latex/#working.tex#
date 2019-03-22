@@ -1502,8 +1502,13 @@ matching, please see \cite{Mitchell2018}. Once the input has been thresholded,
 an ACC neuron at time $t + 1$ can be described as:
 
 \begin{equation}
-  V(t + 1) = \alpha \cdot V(t) + I
+  V(t + 1) = \gamma \cdot V(t) + I_{ext}
 \end{equation}
+
+where $V(t)$ is the \textit{membrane potential}\footnote{We do not model any
+  particular voltage. In the model this is just an arbitrary value that
+  accumulates over time} at timestep $t$, $\gamma$ is
+the leak strength, and $I_{ext}$ is the external input to the neuron.
 
 
 %% STOP POINT
