@@ -1296,11 +1296,11 @@ behaviour as well as a number of utility methods and robot commands. There
 were also a ludicrous number of global variables. The resulting file was over
 4000 lines long and almost unusable. Particuarly aggregious was the fact that
 roughly half of the code was irrelevant to this project, but did need archived
-for future use. As such, it was decided that it was worth refactoring the
+for reference purposes. As such, it was decided that it was worth refactoring the
 codebase in order to make it easier to work. All utility functions were split
 into their own static Util class, similarly, the robot control commands were
 moved to the Command class. Runnable threads were moved into an archive
-package, and split into classes according to their use: Mushroom Body,
+package and split into classes according to their use: Mushroom Body,
 Central Complex, Optical Flow, or Old Navigation; that final group consists of
 the oldest code which is not used explicitly but is useful for reference
 purposes. A single thread was left in the main Activity file to act as a test
@@ -1483,28 +1483,113 @@ CX. We will use the language of artifiial neural networks, but the principle is
 essentially the same as \cite{Mitchell2018}.
 \newline\par
 
-Firstly, we require two neurons to interpret the information from the optical
-flow input; we term these $ACC_L$ and $ACC_R$. Contrary to most of the neurons
-in the CX model, we use a leaky Integrate and Fire (lI\&F) representation
-instead of the rate model used by the rest of the system. The lI\&F
-representation was chosen as it fit best with the existing matched-filter model,
-though a rate model could also be used.
+The neural model for collision avoidance features two types of neuron, ACC
+(ACCumulation) and MRSP (Movement ReSPonse). ACC neurons are key in a working
+system, so we spend most of the time discussing them.
 \newline\par
 
-The matched-filter model produces a sum for the left and right hand sides of the
+\textbf{ACC Neurons:}
+ACC neurons take on the role of the leaky accumulators from \cite{Mitchell2018,
+  Stewart2010}. The system contains two ACC neurons, ACC$_{left}$ and
+ACC$_{right}$ for the left and right sides respectively. We investigate three
+different representations of these neurons: Rate, Leaky Integrate \& Fire
+(LI\&F), and Reset Integrate \& Fire (RI\&F). The two I\&F variants are only
+subtly different and behaved largely the same but we include them for
+completeness. We will go through them in chronological order.
+\newline\par
+
+The matched-filter system produces a sum for the left and right hand sides of the
 robot. This sum denotes the difference between the expected motion and the
 observed motion in the image frame. If we take the difference between the two
 sums we can see if one side has experienced a significant deviation from the
 expected motion (i.e. a looming obstacle on that side). This difference acts
-as the input to the $ACC$ neurons. Each input must be greater than (absolute
-value) a lower threshold to reduce noise. For more details as to the filter
-matching, please see \cite{Mitchell2018}. Once the input has been thresholded,
-an ACC neuron at time $t + 1$ can be described as:
+as the input to the ACC neurons.
+\newline\par
+
+\textbf{ACC Neurons (LI\&F):}
+For both I\&F models, we need to set a lower bound on what we consider an
+input.  Each input must be greater than (absolute value) a lower threshold in an
+attempt to reduce noisy inputs to the ACC neurons. For more details as to the
+filter matching, please see \cite{Mitchell2018}. Once the input has been
+thresholded, an ACC neuron at time $t$ can be described as:
 
 \begin{equation}
-  V(t + 1) = \alpha \cdot V(t) + I
+  V(t) = \gamma \cdot V(t-1) + I_{ext}
 \end{equation}
 
+where $V(t)$ is the membrane potential, $t$ is the current timestep,
+$\gamma$ is the leak current and $I_{ext}$ is the external current flowing in
+- the thresholded difference of flow sums.
+We use terms like membrane potential and external current because these best
+describe the function in the language of simulated neurons. It should be noted
+by the reader that we do not explicitly model voltages and currents in the model
+though this is just a case of semantics; these properties could be modelled more
+explicitly.
+\newline\par
+
+We also define $V_{fire}$, the value at which the ACC neurons fire.
+If $V(t) > V_{fire}$ for some ACC neuron, then the neuron that exceeded
+$V_{fire}$ produces some output signal and both have their membrane potential
+reset to zero (the resting potential). The neuron that fires then governs the
+signal produced by the MRSP layer.
+\newline\par
+
+\textbf{ACC Neurons (RI\&F):}
+The RI\&F representation is almost identical. The difference arises from the leak
+model. In RI\&F we reset the neuron periodically (e.g. every third timestep).
+While this is functionally and I\&F neuron, it does not function in any
+biologically plausible manner. It is essentially the same as the leaky
+accumulators from \cite{Mitchell2018}. We can describe the RI\&F neuron at time
+$t$ by:
+
+\begin{equation}
+  V(t) =
+  \begin{cases}
+    V(t-1) + I_{ext} & \text{if } t \not\equiv 0 \bmod p \\
+    0 & \text{otherwise}
+  \end{cases}
+\end{equation}
+
+where $V(t)$, $I_{ext}$, and $t$ are as above and $p$ is the reset period (for
+example, if $p = 3$ the membrane potential is reset every 3 timesteps). Firing
+behavriour is the same as the LI\&F model.
+\newline\par
+
+\textbf{ACC Neurons (Rate):}
+While I\&F neurons provide an intuitive neural metaphor for the leaky
+accumulators, the CX model (into which this CA system is being built) uses
+a rate model for all other neurons (including our own MRSP neurons). As such we
+felt it appropriate to investigate such a representation for the ACC layer. In
+fact, using a rate representation requires only a single ACC neuron and allows
+for the generation of a steering response which is proportional to the size of
+the optical flow disturbance (in theory, the bigger the obstacle or loom effect,
+the bigger the response); neither of which are possible with the I\&F
+representation. Recall, a firing rate given some input $I$ is represented as a
+sigmoid:
+
+\begin{equation}
+r = \frac{1}{1 + e^{-(aI - b)}}
+\end{equation}
+
+where $a$ and $b$ determine the \textit{slope} and \textit{bias} of the function
+respectively. If we set $a = 5$, $b = 0$ we get the rate function shown in Figure
+\ref{fig:accrate}. Importantly, we must scale down the input (difference of flow
+sums) such that it lies in (-1,1).
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.9\textwidth]{ACCRate}
+  \caption{\label{fig:accrate} Function of firing rate response of the single ACC
+    neuron against difference input; sigmoid with $a = 5$, $b = 0$. The input to
+  this neuron is scaled down to lie between -1 and 1.}
+\end{figure}
+
+If the flow disturbance observed on both sides is equal, then the rate response
+should lie around 0.5. A looming object detected on the right-hand side results
+in a negative input drawing the output closer to 0. Conversly, a looming object
+detected on the left-hand side wil result in a positive input, driving the output
+closer to 1. We have, in a roundabout way, ended up with an optical-flow balance
+strategy \cite{Julien2017}.
 
 %% STOP POINT
 %% Describe the results of the offline analysis

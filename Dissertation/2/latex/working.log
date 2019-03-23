@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.10.18)  4 FEB 2019 16:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  23 MAR 2019 14:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **working
 (./working.tex
-LaTeX2e <2017/01/01> patch level 3
-Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+LaTeX2e <2017-04-15>
+Babel <3.18> and hyphenation patterns for 3 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
@@ -30,7 +30,7 @@ Package: appendix 2009/09/02 v1.2b extra appendix facilities
 \c@@ppsaveapp=\count89
 )
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2016/11/05 v2.16a AMS math features
+Package: amsmath 2017/09/02 v2.17a AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
@@ -95,7 +95,7 @@ Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks19
 )
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
 )
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
@@ -118,10 +118,10 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@dimlist=\toks20
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2016/10/09 v1.0u Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
@@ -132,15 +132,7 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2017/01/12 v0.06k Graphics/color for pdfTeX
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count105
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen120
 \Gin@req@width=\dimen121
@@ -162,15 +154,15 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 \caption@parindent=\dimen127
 \caption@hangindent=\dimen128
 )
-\c@ContinuedFloat=\count106
+\c@ContinuedFloat=\count105
 )
-\c@subfigure=\count107
-\c@subtable=\count108
+\c@subfigure=\count106
+\c@subtable=\count107
 )
 (/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
 \multirow@colwidth=\skip46
-\multirow@cntb=\count109
+\multirow@cntb=\count108
 \multirow@dima=\skip47
 \bigstrutjot=\dimen129
 )
@@ -193,15 +185,15 @@ Package tocbibind Info: The document has section divisions on input line 50.
 Package tocbibind Note: Using section or other style headings.
 
 ) (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
-Package: multicol 2016/04/07 v1.8p multicolumn formatting (FMi)
-\c@tracingmulticols=\count110
+Package: multicol 2017/04/11 v1.8q multicolumn formatting (FMi)
+\c@tracingmulticols=\count109
 \mult@box=\box28
 \multicol@leftmargin=\dimen132
-\c@unbalance=\count111
-\c@collectmore=\count112
-\doublecol@number=\count113
-\multicoltolerance=\count114
-\multicolpretolerance=\count115
+\c@unbalance=\count110
+\c@collectmore=\count111
+\doublecol@number=\count112
+\multicoltolerance=\count113
+\multicolpretolerance=\count114
 \full@width=\dimen133
 \page@free=\dimen134
 \premulticols=\dimen135
@@ -232,19 +224,19 @@ Package: multicol 2016/04/07 v1.8p multicolumn formatting (FMi)
 \@tempa=\box49
 \@tempa=\box50
 \@tempa=\box51
-\c@columnbadness=\count116
-\c@finalcolumnbadness=\count117
+\c@columnbadness=\count115
+\c@finalcolumnbadness=\count116
 \last@try=\dimen138
 \multicolovershoot=\dimen139
 \multicolundershoot=\dimen140
 \mult@nat@firstbox=\box52
 \colbreak@box=\box53
-\mc@col@check@num=\count118
+\mc@col@check@num=\count117
 )
 (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen141
 \WF@size=\dimen142
-\c@WF@wrappedlines=\count119
+\c@WF@wrappedlines=\count118
 \WF@box=\box54
 \WF@everypar=\toks22
 Package: wrapfig 2003/01/31  v 3.6
@@ -305,39 +297,32 @@ LaTeX Font Info:    ... okay on input line 32.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count120
+\scratchcounter=\count119
 \scratchdimen=\dimen143
 \scratchbox=\box55
-\nofMPsegments=\count121
-\nofMParguments=\count122
+\nofMPsegments=\count120
+\nofMParguments=\count121
 \everyMPshowfont=\toks23
-\MPscratchCnt=\count123
+\MPscratchCnt=\count122
 \MPscratchDim=\dimen144
-\MPnumerator=\count124
-\makeMPintoPDFobject=\count125
+\MPnumerator=\count123
+\makeMPintoPDFobject=\count124
 \everyMPtoPDFconversion=\toks24
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-))
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 
@@ -346,15 +331,28 @@ Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
 Package etexcmds Info: Could not find \expanded.
 (etexcmds)             That can mean that you are not using pdfTeX 1.50 or
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/01/21 v0.26 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 38.
 Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 
@@ -388,101 +386,263 @@ Package caption Info: End \AtBeginDocument code.
 \openout5 = `working.lot'.
 
 
-[11] [12] [1
+[11] [12]
 
-] [2] [3] [4
+LaTeX Warning: Citation `Stone2017' on page 1 undefined on input line 157.
+
+
+LaTeX Warning: Citation `Webb2018' on page 1 undefined on input line 160.
+
+
+LaTeX Warning: Citation `Stone2017' on page 1 undefined on input line 166.
+
+
+LaTeX Warning: Citation `Wehner2009' on page 1 undefined on input line 173.
+
+
+LaTeX Warning: Citation `Webb2018' on page 1 undefined on input line 177.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 1 undefined on input line 180.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 1 undefined on input line 181.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 1 undefined on input line 190.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 1 undefined on input line 191.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 1 undefined on input line 199.
+
+[1
+
+]
+
+LaTeX Warning: Citation `Zhang2017' on page 2 undefined on input line 252.
+
+[2]
+
+LaTeX Warning: Citation `Zhang2017' on page 3 undefined on input line 283.
+
+[3] [4
 
 ] [5]
-<Images/Ardin2010MBModel.PNG, id=79, 523.83705pt x 395.91914pt>
-File: Images/Ardin2010MBModel.PNG Graphic file (type png)
 
+LaTeX Warning: Citation `Tistarelli1991' on page 6 undefined on input line 393.
+
+
+
+LaTeX Warning: Citation `Zhang2017' on page 6 undefined on input line 465.
+
+<Images/Ardin2010MBModel.PNG, id=78, 523.83705pt x 395.91914pt>
+File: Images/Ardin2010MBModel.PNG Graphic file (type png)
 <use Images/Ardin2010MBModel.PNG>
-Package pdftex.def Info: Images/Ardin2010MBModel.PNG used on input line 468.
+Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 472.
 (pdftex.def)             Requested size: 317.07614pt x 239.65565pt.
- [6] [7 <./Images/Ardin2010MBModel.PNG>]
+
+LaTeX Warning: Citation `Zhang2017' on page 6 undefined on input line 501.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 6 undefined on input line 502.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 6 undefined on input line 502.
+
+[6]
+
+LaTeX Warning: Citation `Zhang2017' on page 7 undefined on input line 517.
+
+
+LaTeX Warning: Citation `Stone2017' on page 7 undefined on input line 531.
+
+[7 <./Images/Ardin2010MBModel.PNG>]
+
+LaTeX Warning: Reference `ap:ga' on page 8 undefined on input line 557.
+
 <Images/MarkerBasedEncoding.png, id=86, 728.7225pt x 552.56438pt>
 File: Images/MarkerBasedEncoding.png Graphic file (type png)
-
 <use Images/MarkerBasedEncoding.png>
-Package pdftex.def Info: Images/MarkerBasedEncoding.png used on input line 584.
-
+Package pdftex.def Info: Images/MarkerBasedEncoding.png  used on input line 588
+.
 (pdftex.def)             Requested size: 407.66833pt x 309.11354pt.
- [8 <./Images/MarkerBasedEncoding.png>]
-Overfull \hbox (2.05414pt too wide) detected at line 637
+[8 <./Images/MarkerBasedEncoding.png>]
+Overfull \hbox (2.05414pt too wide) detected at line 641
 \OML/cmm/m/it/12 f \OT1/cmr/m/n/12 = []
  []
 
-<Images/EvolvedNetwork.png, id=91, 651.18282pt x 539.76656pt>
+[9]
+<Images/EvolvedNetwork.png, id=95, 651.18282pt x 539.76656pt>
 File: Images/EvolvedNetwork.png Graphic file (type png)
-
 <use Images/EvolvedNetwork.png>
-Package pdftex.def Info: Images/EvolvedNetwork.png used on input line 669.
+Package pdftex.def Info: Images/EvolvedNetwork.png  used on input line 673.
 (pdftex.def)             Requested size: 317.07614pt x 262.83246pt.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Citation `Stone2017' on page 10 undefined on input line 684.
 
-[9]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 687.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 691.
 
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 687.
-
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 691.
 <Images/StoneCXModel.jpg, id=96, 803.0pt x 520.94624pt>
 File: Images/StoneCXModel.jpg Graphic file (type jpg)
-
 <use Images/StoneCXModel.jpg>
-Package pdftex.def Info: Images/StoneCXModel.jpg used on input line 697.
+Package pdftex.def Info: Images/StoneCXModel.jpg  used on input line 701.
 (pdftex.def)             Requested size: 452.9679pt x 293.86618pt.
 
 
+LaTeX Warning: Citation `Stone2017' on page 10 undefined on input line 711.
+
+
+LaTeX Warning: Citation `Stone2017' on page 10 undefined on input line 711.
+
+
+LaTeX Warning: Citation `Stone2017' on page 10 undefined on input line 711.
+
+
+LaTeX Warning: Citation `Stone2017' on page 10 undefined on input line 711.
+
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Citation `Stone2017' on page 10 undefined on input line 723.
+
+
+LaTeX Warning: Citation `Stone2017' on page 10 undefined on input line 729.
 
 [10 <./Images/EvolvedNetwork.png>]
 <Images/Figure5F.jpg, id=100, 483.8075pt x 347.2975pt>
 File: Images/Figure5F.jpg Graphic file (type jpg)
-
 <use Images/Figure5F.jpg>
-Package pdftex.def Info: Images/Figure5F.jpg used on input line 732.
+Package pdftex.def Info: Images/Figure5F.jpg  used on input line 736.
 (pdftex.def)             Requested size: 317.07614pt x 227.62195pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[11 <./Images/StoneCXModel.jpg>] [12 <./Images/Figure5F.jpg>] [13] [14]
+
+LaTeX Warning: Citation `Stone2017' on page 11 undefined on input line 750.
+
+
+LaTeX Warning: Citation `Stone2017' on page 11 undefined on input line 765.
+
+[11 <./Images/StoneCXModel.jpg>]
+
+LaTeX Warning: Citation `Stone2017' on page 12 undefined on input line 774.
+
+
+LaTeX Warning: Citation `Stone2017' on page 12 undefined on input line 787.
+
+
+LaTeX Warning: Citation `Stone2017' on page 12 undefined on input line 792.
+
+
+LaTeX Warning: Citation `Stone2017' on page 12 undefined on input line 803.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 12 undefined on input line 806.
+
+[12 <./Images/Figure5F.jpg>]
+
+LaTeX Warning: Citation `Stone2017' on page 13 undefined on input line 818.
+
+
+LaTeX Warning: Citation `Stone2017' on page 13 undefined on input line 824.
+
+
+LaTeX Warning: Citation `Stone2017' on page 13 undefined on input line 840.
+
+
+LaTeX Warning: Citation `Stone2017' on page 13 undefined on input line 865.
+
+[13]
+
+LaTeX Warning: Citation `Stone2017' on page 14 undefined on input line 895.
+
+
+LaTeX Warning: Citation `Stone2017' on page 14 undefined on input line 904.
+
+
+LaTeX Warning: Citation `Stone2017' on page 14 undefined on input line 906.
+
+
+LaTeX Warning: Citation `Stone2017' on page 14 undefined on input line 910.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 14 undefined on input line 912.
+
+
+LaTeX Warning: Citation `Webb2018' on page 14 undefined on input line 915.
+
+
+LaTeX Warning: Citation `Stone2017' on page 14 undefined on input line 937.
+
+[14]
+
+LaTeX Warning: Citation `Stone2017' on page 15 undefined on input line 979.
+
+
+LaTeX Warning: Citation `Stone2017' on page 15 undefined on input line 987.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 15 undefined on input line 991.
+
 <Images/EightENModel.png, id=114, 838.13126pt x 965.6075pt>
 File: Images/EightENModel.png Graphic file (type png)
-
 <use Images/EightENModel.png>
-Package pdftex.def Info: Images/EightENModel.png used on input line 1007.
+Package pdftex.def Info: Images/EightENModel.png  used on input line 1012.
 (pdftex.def)             Requested size: 407.66833pt x 469.6746pt.
-
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[15] [16 <./Images/EightENModel.png>] [17] [18]
+
+LaTeX Warning: Citation `Zhang2017' on page 15 undefined on input line 1028.
+
+[15] [16 <./Images/EightENModel.png>]
+
+LaTeX Warning: Citation `Zhang2017' on page 17 undefined on input line 1060.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 17 undefined on input line 1066.
+
+
+LaTeX Warning: Citation `Webb2018' on page 17 undefined on input line 1083.
+
+
+LaTeX Warning: Citation `Webb2018' on page 17 undefined on input line 1084.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 17 undefined on input line 1099.
+
+
+LaTeX Warning: Citation `Zhang2017' on page 17 undefined on input line 1101.
+
+
+Underfull \vbox (badness 1248) has occurred while \output is active []
+
+ [17]
+[18]
 <Images/AntBotCharging.JPG, id=131, 6006.44pt x 3388.66pt>
 File: Images/AntBotCharging.JPG Graphic file (type jpg)
-
 <use Images/AntBotCharging.JPG>
-Package pdftex.def Info: Images/AntBotCharging.JPG used on input line 1166.
+Package pdftex.def Info: Images/AntBotCharging.JPG  used on input line 1171.
 (pdftex.def)             Requested size: 317.07614pt x 178.85355pt.
-
 <Images/KogetoDot.jpeg, id=132, 351.3125pt x 351.3125pt>
 File: Images/KogetoDot.jpeg Graphic file (type jpg)
-
 <use Images/KogetoDot.jpeg>
-Package pdftex.def Info: Images/KogetoDot.jpeg used on input line 1186.
+Package pdftex.def Info: Images/KogetoDot.jpeg  used on input line 1191.
 (pdftex.def)             Requested size: 183.4495pt x 183.45546pt.
-
 <Images/PanoramicView.jpg, id=133, 614.295pt x 614.295pt>
 File: Images/PanoramicView.jpg Graphic file (type jpg)
-
 <use Images/PanoramicView.jpg>
-Package pdftex.def Info: Images/PanoramicView.jpg used on input line 1192.
+Package pdftex.def Info: Images/PanoramicView.jpg  used on input line 1197.
 (pdftex.def)             Requested size: 183.4495pt x 183.4463pt.
  [19
 
@@ -490,22 +650,58 @@ Package pdftex.def Info: Images/PanoramicView.jpg used on input line 1192.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [20 <./Images/AntBotCharging.JPG> <./Images/KogetoDot.jpeg> <./Images/Panorami
-cView.jpg>] <Images/Centre.png, id=141, 603.25375pt x 450.68375pt>
+cView.jpg>]
+<Images/Centre.png, id=141, 603.25375pt x 450.68375pt>
 File: Images/Centre.png Graphic file (type png)
-
 <use Images/Centre.png>
-Package pdftex.def Info: Images/Centre.png used on input line 1276.
+Package pdftex.def Info: Images/Centre.png  used on input line 1285.
 (pdftex.def)             Requested size: 317.07614pt x 236.88069pt.
- [21 <./Images/Centre.png>] [22] [23
-
-] [24
-
-] [25] [26
+[21 <./Images/Centre.png>] [22] [23] [24
 
 ]
-[27] [28
 
-] [29] (./working.bbl [30
+LaTeX Warning: Citation `Stewart2010' on page 25 undefined on input line 1396.
+
+
+LaTeX Warning: Citation `Vanderstap2012' on page 25 undefined on input line 139
+6.
+
+
+LaTeX Warning: Citation `Vanderstap2012' on page 25 undefined on input line 139
+7.
+
+
+LaTeX Warning: Citation `Souhila2007' on page 25 undefined on input line 1397.
+
+
+LaTeX Warning: Citation `Stewart2010' on page 25 undefined on input line 1398.
+
+
+LaTeX Warning: Reference `sec:OFBackground' on page 25 undefined on input line 
+1419.
+
+[25]
+
+LaTeX Warning: Citation `Stewart2010' on page 26 undefined on input line 1493.
+
+[26]
+<Images/ACCRate.png, id=162, 1387.584pt x 717.6411pt>
+File: Images/ACCRate.png Graphic file (type png)
+<use Images/ACCRate.png>
+Package pdftex.def Info: Images/ACCRate.png  used on input line 1581.
+(pdftex.def)             Requested size: 407.66833pt x 210.8372pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[27] [28 <./Images/ACCRate.png>] [29
+
+] [30
+
+] [31] [32
+
+] [33] (./working.bbl
+[34
 
 ]
 Missing character: There is no Ã in font cmr12!
@@ -514,41 +710,12 @@ Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¼ in font cmr12!
 Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¶ in font cmr12!
-) [31] [32
 
-] [33] (./working.aux) ) 
-Here is how much of TeX's memory you used:
- 4328 strings out of 493013
- 64819 string characters out of 6135681
- 140025 words of memory out of 5000000
- 7773 multiletter control sequences out of 15000+600000
- 14648 words of font info for 51 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 42i,21n,40p,756b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on working.pdf (47 pages, 8457714 bytes).
-PDF statistics:
- 254 PDF objects out of 1000 (max. 8388607)
- 170 compressed objects within 2 object streams
- 0 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+! Misplaced alignment tab character &.
+l.64 \newblock {\em Arthropod Structure &
+                                          Development}, 46(5):703 -- 717, 2017.
 
+? 
+! Interruption.
+<to be read again> 
+      

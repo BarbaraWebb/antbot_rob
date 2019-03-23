@@ -58,6 +58,24 @@ Keram Pfeiffer and Uwe Homberg.
 Luca Scimeca.
 \newblock {AntBot: A biologically inspired approach to Path Integration}, 2017.
 
+\bibitem{Julien2017}
+Julien~R. Serres and Franck Ruffier.
+\newblock Optic flow-based collision-free strategies: From insects to robots.
+\newblock {\em Arthropod Structure & Development}, 46(5):703 -- 717, 2017.
+\newblock From Insects to Robots.
+
+\bibitem{Souhila2007}
+Kahlouche Souhila and Achour Karim.
+\newblock Optical flow based robot obstacle avoidance.
+\newblock {\em International Journal of Advanced Robotic Systems}, 4(1):2,
+  2007.
+
+\bibitem{Stewart2010}
+Finlay~J. Stewart, Dean~A. Baker, and Barbara Webb.
+\newblock A model of visual{\textendash}olfactory integration for odour
+  localisation in free-flying fruit flies.
+\newblock {\em Journal of Experimental Biology}, 213(11):1886--1900, 2010.
+
 \bibitem{Stone2017}
 Thomas Stone, Barbara Webb, Andrea Adden, Nicolai~Ben Weddig, Anna Honkanen,
   Rachel Templin, William Wcislo, Luca Scimeca, Eric Warrant, and Stanley
@@ -71,6 +89,12 @@ Massimo Tistarelli, Enrico Grosso, and Giulio Sandini.
 \newblock Dynamic stereo in visual navigation.
 \newblock In {\em Computer Vision and Pattern Recognition, 1991. Proceedings
   CVPR'91., IEEE Computer Society Conference on}, pages 186--193. IEEE, 1991.
+
+\bibitem{Vanderstap2012}
+N.~{van der Stap}, R.~{Reilink}, S.~{Misra}, I.~A. M.~J. {Broeders}, and
+  F.~{van der Heijden}.
+\newblock The use of the focus of expansion for automated steering of flexible
+  endoscopes, June 2012.
 
 \bibitem{Webb2018}
 Barbara Webb.

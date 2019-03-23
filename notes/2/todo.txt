@@ -19,6 +19,14 @@ Milestones:
 	were the methodological issues I have discussed already. I already have CX
 	tests to cover this, however, CXMB + OFCA would be awesome.
 
+23 / 03 / 19:
+Todo:
+- Dissertation
+
+Notes:
+- Need a bit of background to describe the neural representations I am using
+	Short and sweet, introduce only the basic concepts.
+
 22 / 03 / 2019:
 Wrap-up:
 - Rate model did not work as well as the I&F model (which also didn't work...)
