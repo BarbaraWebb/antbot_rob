@@ -149,7 +149,7 @@ public class CombinedThread {
 
                     Log.i(tag, "CXTheta: " + app.CXtheta);
 
-                    if (extendedcx.collisionDetected && (app.CXtheta > 1.5 || app.CXtheta < -1.5)){
+                    if (/*extendedcx.collisionDetected && */(app.CXtheta > 1.5 || app.CXtheta < -1.5)){
                         // Hacky, but allows easy checking
                         extendedcx.collisionDetected = false;
                         // Cap turns at 30 degrees

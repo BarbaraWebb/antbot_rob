@@ -1207,31 +1207,28 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
             String output = "";
 
             // Begin recording
-            //recording = true;
-            //recorder.startRecording();
+            recording = true;
+            recorder.startRecording();
+
+            int t0 = (int) SystemClock.elapsedRealtime();
+            int t = (int) SystemClock.elapsedRealtime() - t0;
+            int t_out = 20000;
 
             Command.go(new double[]{15, 15});
-            try{ sleep(3000); } catch (Exception e) { e.printStackTrace(); }
+            try{ sleep(1000); } catch (Exception e) { e.printStackTrace(); }
 
-            try{
-                Command.turnAround(20);
-                Command.go(new double[]{15, 15});
-                sleep(3000);
-            } catch (Exception e){
-                e.printStackTrace();
+            while (t < t_out){
+                t = (int) SystemClock.elapsedRealtime() - t0;
             }
 
+            Command.stop();
+            try{ sleep(1000); } catch (Exception e) { e.printStackTrace(); }
+            Log.i(tag, "Frame rate = " + frame_rate_cx);
 
-            try{
-                Command.turnAround(-20);
-                Command.go(new double[]{15, 15});
-                sleep(3000);
-            } catch (Exception e){
-                e.printStackTrace();
-            }
+
 
             // End recording
-            //recorder.stopRecording();
+            recorder.stopRecording();
         }
     };
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1602,6 +1599,8 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         //Again due to image shifting, left is right and right is left.
         rightCAFlow =  1000 * left_flow_sum; // (delta);
         leftCAFlow = 1000 * right_flow_sum; // (delta);
+        //Log.i("MAIN", "(lval, rval): (" + leftCAFlow + ", " + rightCAFlow + ")" );
+        //Log.i("MAIN", "DIFF = " + (leftCAFlow - rightCAFlow));
     }
 
 

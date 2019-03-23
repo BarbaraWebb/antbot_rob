@@ -635,6 +635,9 @@ public class CXE extends NavigationModules {
         double l_val = acc.get(0,0);
         double r_val = acc.get(1,0);
 
+        leftSum /= 1000000;
+        rightSum /= 1000000;
+
         if (call_count > 2){
             // Old method, clear accumulators every 2 calls
             acc.set(0);
@@ -658,31 +661,44 @@ public class CXE extends NavigationModules {
         //l_val *= acc_leak;
         //r_val *= acc_leak;
 
-        acc.set(0, 0, l_val);
-        acc.set(1, 0, r_val);
+        acc.set(0, 0, leftSum - rightSum);
+        acc.set(1, 0, rightSum - leftSum);
+
 
         call_count++;
-        Log.i("CXE", "(lval, rval): (" + l_val + ", " + r_val + ")");
+
+
+        //Each neuron's activity is the rate (sigmoid) of the input, then inhibited by the
+        // opposite side
+        SimpleMatrix ret = noisySigmoid(acc, 4, 0, this.noise);
+     /*   SimpleMatrix inh = new SimpleMatrix(2,1);
+        Log.i("CXE", "(lval, rval): (" + ret.get(0,0) + ", " + ret.get(1,0) + ")");
+        //Each side inhibits the other
+        inh.set(0,0, -ret.get(1,0));
+        inh.set(1,0, -ret.get(0,0));
+        Log.i("CXE", "(lval, rval): (" + inh.get(0,0) + ", " + inh .get(1,0) + ")");
+        //Apply inhibition
+        ret = ret.plus(inh);
+        ret = ret.scale(300);*/
+        Log.i("CXE", "ret (lval, rval): (" + ret.get(0,0) + ", " + ret.get(1,0) + ")");
 
 
 
-        return acc;
+        return ret; //noisySigmoid(acc, 10, 0, this.noise);
     }
 
     public SimpleMatrix caOutput(SimpleMatrix tb1, SimpleMatrix acc) {
         // Offset, how far the sinusoid needs shifted to match the desired heading
-        int offset = 0;
+        //int offset = 0;
 
         //
         // Check to see which neurons have fired. If either side fires,
         // clear the acc neurons. If both have fired, we don't want to
         // react. Surely this points to more than a matched filtering system.
         //
+        /*
         if (acc.get(0,0) > reaction_threshold &&
                 acc.get(1,0) > reaction_threshold) {
-            //
-            // THis section will never run
-            //
             acc.set(0);
             offset = 0;
             CXE.collisionDetected = false;
@@ -698,8 +714,16 @@ public class CXE extends NavigationModules {
             right_saccade = true;
         }
         Log.i("CXE", "Offset: " + offset);
+*/
 
-        //
+        Log.i("CXE", "(lval, rval): (" + acc.get(0,0) + ", " + acc.get(1,0) + ")");
+
+        int offset = (acc.get(0,0) > acc.get(1,0)) ?
+                (int) (4*(acc.get(0,0) - 0.5)) :
+                (int) -(4*(acc.get(1,0) - 0.5));
+
+        Log.i("CXE", "Offset: " + offset);
+        Log.i("CXE", "Offset: " + 4*(acc.get(0,0) - 0.5));
         // Determine current direction
         //
         int current_heading = 0;

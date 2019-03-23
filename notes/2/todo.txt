@@ -19,6 +19,43 @@ Milestones:
 	were the methodological issues I have discussed already. I already have CX
 	tests to cover this, however, CXMB + OFCA would be awesome.
 
+22 / 03 / 2019:
+Wrap-up:
+- Rate model did not work as well as the I&F model (which also didn't work...)
+  I suspect the problem is now down to the optical flow computation, noise needs
+	filtered out, but I no longer have time to spend on it. Write methods, and then
+	experiment with parameters offline. Noise may be reducable by considering a
+	subset dense field, but I would rather use a different filter.
+Todo:
+- Try a rate model for the accumulators.
+
+Notes:
+- How do I write this as a rate model??? Firing rate is somehow proportional to
+  input. So, the output would just be a sigmoid of the input?
+
+	The differences between the accumulation are tiny. If we put them through a
+	sigmoid the differences are still tiny, but if you only take the one with the
+	maximum rate then you're generating a turn regardless. What happens if you just
+	take the rates and feed them into the neurons to the left and right of the
+	current direction? The tiny differences may be enough?
+
+	Each accumulator has to inhibit the other. The larger the rate, the larger the
+	inhibition
+		left = sigmoid(leftsum)
+		right = sigmoid(rightsum)
+		nleft = left - right;
+		nright = right - left;
+	
+	
+	
+
+Done:
+- (Done) Get better recordings of the AntBot's forward motion, look at flow pattern
+	- Recordings good, flow adequately shows what I'm trying to show.
+	- Videos moved to drive for safekeeping
+- (Done) See if periodically clearing the CA layer does anything
+	This wouldn't have an effect as the CA layer is completely redone each
+	iteration.
 17 / 03 / 2019:
 Todo:
 - Quick check, dot ca by weightings from CPU4 to CPU1, see behaviour (if any);
