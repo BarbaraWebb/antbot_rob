@@ -1,0 +1,36 @@
+\contentsline {section}{List of Figures}{ix}
+\contentsline {section}{List of Tables}{xi}
+\contentsline {section}{\numberline {1} Introduction }{1}
+\contentsline {subsection}{\numberline {1.1} Motivation }{1}
+\contentsline {subsection}{\numberline {1.2} Practical Goals }{2}
+\contentsline {subsection}{\numberline {1.3} Results }{2}
+\contentsline {section}{\numberline {2} Background }{5}
+\contentsline {subsection}{\numberline {2.1} Optical Flow for Collision Avoidance }{5}
+\contentsline {subsubsection}{\numberline {2.1.1}The Least Squared-Error method}{5}
+\contentsline {subsection}{\numberline {2.2} The Mushroom Body for Visual Navigation }{6}
+\contentsline {subsection}{\numberline {2.3} The Central Complex for Path Integration }{7}
+\contentsline {subsubsection}{\numberline {2.3.1}The Evolved Model for Path Integration}{8}
+\contentsline {subsubsection}{\numberline {2.3.2}The Central Complex Model}{10}
+\contentsline {subsection}{\numberline {2.4} The Eight MBON Model (CXMB) }{15}
+\contentsline {subsection}{\numberline {2.5} Review of Part 1 }{18}
+\contentsline {section}{\numberline {3} Platform }{19}
+\contentsline {subsection}{\numberline {3.1} Hardware }{19}
+\contentsline {subsection}{\numberline {3.2} Software }{19}
+\contentsline {subsubsection}{\numberline {3.2.1} Android }{19}
+\contentsline {subsubsection}{\numberline {3.2.2} Arduino }{20}
+\contentsline {subsection}{\numberline {3.3} Modifications and Development }{21}
+\contentsline {section}{\numberline {4} Methods }{25}
+\contentsline {subsection}{\numberline {4.1} Collision Avoidance }{25}
+\contentsline {subsubsection}{\numberline {4.1.1} Shifting Expansion Fields }{25}
+\contentsline {subsubsection}{\numberline {4.1.2}Matched Filters}{26}
+\contentsline {subsection}{\numberline {4.2} Path Integration }{29}
+\contentsline {subsection}{\numberline {4.3} The Complete System}{29}
+\contentsline {section}{\numberline {5}Experimentation}{31}
+\contentsline {subsection}{\numberline {5.1}General}{31}
+\contentsline {subsection}{\numberline {5.2}Collision Avoidance}{31}
+\contentsline {subsection}{\numberline {5.3}Visual Navigation}{31}
+\contentsline {subsection}{\numberline {5.4}Path Integration}{31}
+\contentsline {section}{\numberline {6} Results and Evaluation }{33}
+\contentsline {section}{\numberline {7} Discussion }{35}
+\contentsline {section}{\numberline {8}References}{37}
+\contentsline {section}{\numberline {A}Genetic Algorithms}{39}

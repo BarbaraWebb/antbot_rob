@@ -1485,7 +1485,7 @@ essentially the same as \cite{Mitchell2018}.
 
 The neural model for collision avoidance features two types of neuron, ACC
 (ACCumulation) and MRSP (Movement ReSPonse). ACC neurons are key in a working
-system, so we spend most of the time discussing them.
+system, so we discuss them first.
 \newline\par
 
 \textbf{ACC Neurons:}
@@ -1574,7 +1574,7 @@ r = \frac{1}{1 + e^{-(aI - b)}}
 where $a$ and $b$ determine the \textit{slope} and \textit{bias} of the function
 respectively. If we set $a = 5$, $b = 0$ we get the rate function shown in Figure
 \ref{fig:accrate}. Importantly, we must scale down the input (difference of flow
-sums) such that it lies in (-1,1).
+sums) such that it lies in (-1,1).\newline\par
 
 \begin{figure}[h!]
   \centering
@@ -1589,7 +1589,58 @@ should lie around 0.5. A looming object detected on the right-hand side results
 in a negative input drawing the output closer to 0. Conversly, a looming object
 detected on the left-hand side wil result in a positive input, driving the output
 closer to 1. We have, in a roundabout way, ended up with an optical-flow balance
-strategy \cite{Julien2017}.
+strategy - a flawed, simplistic, yet not entirely implausible method for avoiding
+collisions \cite{Julien2017}. If our output remains close to 0.5 we need not
+react, close to 1 we must turn right, and close to 0 we must turn left. Thus,
+with a single neuron we can react to both scenarios. Furthermore, the signal
+is proportional to the disturbance observed and we can therefore scale our
+steering command as necessary.
+\newline\par
+
+\textbf{MRSP Neurons}:
+There are 16 MRSP neurons laid out in the same fashion as the CPU4 layer. The
+MRSP neurons also utilise the same connection pattern as the CPU4-CPU1
+connections. The MRSP neurons always use a rate representation. In all
+cases the MRSP layer functions by generating a sine wave with the peak in the
+desired direction of travel; the method for constructing and positioning this
+sine wave is purely algorithmic, we did not investigate a way to model this
+behaviour using neural connections.
+\newline\par
+
+We first create an array of eight evenly distributed points on a shifted sine wave.
+The curve is shifted by $-\frac{\pi}{2}$ in the $x$-axis such that
+$\sin(\frac{\pi}{2})$ is in the first element (this is simply housekeeping, it
+makes index arithmetic easier when creating the output). We then compute an
+offset based on the response from the ACC neurons. This offset will always be
+an integer between -2 and 2 inclusive; it represents how far we wish to shift the
+sine wave from the current direction read from the TB1 layer (how far to the
+left/right of our current direction do we wish to turn). How this offset is
+generated differs between the I\&F and rate models of the ACC layer.
+\newline\par
+
+In the I\&F case, the offset will be -2, 0, or 2 depending on which
+ACC neuron fires (ACC$_{right}$, both, or ACC$_{left}$ respectively). This is a
+coarse but functional reaction which generates a saccade of approximately $30^{\circ}$ in
+either direction. We included the case where both fire to act as a balance case,
+however, in practice this never happens. This is functionally identical to
+the behaviour displayed by the CA system in \cite{Mitchell2018}, piped through
+the CX structure.
+\newline\par
+
+In the rate case, we instead receive a single input from the ACC layer.
+This input will lie in (0,1) and we need only a simple linear transform to
+choose an offset from this value. The transform has the conditions that
+$f(0.5) = 0$, $f(1) = 2$, and $f(0) = -2$.
+
+\begin{equation}
+  \label{eq:transform}
+ f(x) = 4x - 2
+\end{equation}
+
+satisfies these conditions. The output of Eq. \ref{eq:transform} is then rounded
+to the nearest integer to determine the offset. This method is nice and simple,
+however it is highly susceptible to noise.
+
 
 %% STOP POINT
 %% Describe the results of the offline analysis
