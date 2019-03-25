@@ -1639,30 +1639,89 @@ $f(0.5) = 0$, $f(1) = 2$, and $f(0) = -2$.
 
 satisfies these conditions. The output of Eq. \ref{eq:transform} is then rounded
 to the nearest integer to determine the offset. This method is nice and simple,
-however it is highly susceptible to noise.
-
+however it is highly susceptible to noise, as we will see this is a critical
+flaw.
 
 %% STOP POINT
 %% Describe the results of the offline analysis
 %% Provide a figure showing the flow field.
 
 \subsection{ Path Integration }
-% Discuss CX implementation
+The path integration circuit in use is a slightly simplified version of that
+presented in Section \ref{sec:CXBackground}. This version does not model the
+TN neurons or the Pontine neurons. The model is the same as that used in
+\cite{Scimeca2017, Zhang2017}, and the robot-based tests from \cite{Stone2017}.
+\newline\par
+
+We use the CX firstly for a round of experiments in which we wish to address a
+key methodological flaw observed in the experiments of \textit{Zhang}
+\cite{Zhang2017}. We then use the CXMB variant (the 8-MBON model)
+as the basis for the ECX model. \textit{Zhang} does not make it entirely clear
+(though it is stated) that the 8-MBON model is actually an adapted CX model.
+Distance measurements are arbitrary, there is no access to wheel encoder
+measurements. Unlike previous works, the agent moves only in the forward
+direction so we can reasonably assume that the robot will travel roughly the same
+distance in a set time interval.
 
 \subsection{ The Complete System}
+Unfortunately, the complete ECX system envisioned was not fully realised. A
+complete model has been constructed. Present on the robot is a singular model
+which, in theory, will perform collision avoidance, path integration, and
+direction-associated visual memory (simultaneously); however, we were
+unsuccessful in performing any meaningful testing due to technical and time
+constraints. We present the model here and present the issues experienced and
+reasoning in Section \ref{sec:results}.
+\newline\par
 
-\section{Experimentation}\label{sec:test}
-\textit{
-  Experimentation methods not final, anything in this section illustrates a
-  rough plan only.
-}
-\subsection{General}
+In an effort to keep the integration simple at a late stage in the project,
+the first version of this model allowed the collision avoidance system to fully
+overwrite any steering instruction in the event of a detected obstacle. While
+straightforward and intuitive, this method proved far too coarse. If a full
+model was to be constructed, it was clear that a full neural representation
+for the collision avoidance system would need to be constructed; this and
+tested variants have been described above.
+\newline\par
+
+The final model takes the 8-MBON CXMB model and inserts the additional ACC and
+MRSP neurons required for the integrated collision avoidance system. The
+connections between TB1 and MRSP are the same as the connections between TB1
+and CPU4, likewise the connections between MRSP and CPU1 are the same as those
+between CPU4 and CPU1. In fact, as the eight MBONs are expanded out to a
+sixteen neuron representation (see Section \ref{sec:CXMBBackground}) the
+model can be visualised as the CX with two additional layers of sixteen neurons
+between CPU4 and CPU1 plus one or two ACC neurons depending on the neural
+representation used. The final version implemented on the robot used the rate
+representation for a single ACC neuron.
+\newline\par
+
+The output of the network can be selected by simply changing the mode of the
+CPU1 output stage. In this fashion, one can isolate each system and produce
+the steering output using specific systems. The key modes currently present on
+the agent are CA-only, and CXCA which are the isolated collision avoidance system
+and the combined output of the path integrator and the collision avoidance
+system respectively; adding further combinations should be trivial. The limited
+selection currently available is due to the component level testing that
+was in progress towards the end of the project The weighting applied to each
+layer can be specified and ideally it should be dynamic; we had intented to
+approach this during the project but it was not possible. While the visual
+memory infrastructure is entirely present, it was not tested; however, as stated
+it is identical to that presented by \textit{Zhang} so we have no reason to
+think it should not work to the degree presented in \cite{Zhang2017}.
+
+\section{Experimentation and Testing}\label{sec:test}
+We re-use the experimental environment from \cite{Mitchell2018}. A collapsible
+boundary wall
+%% \textit{
+%%   Experimentation methods not final, anything in this section illustrates a
+%%   rough plan only.
+%% }
+%% \subsection{General}
+\subsection{Path Integration}
+
 \subsection{Collision Avoidance}
 % Write new collision avoidance system, test it independently
-\subsection{Visual Navigation}
-% Do the same for the MB
-\subsection{Path Integration}
-% And for PI
+
+
 \newpage
 
 \section{ Results and Evaluation } \label{sec:results}
