@@ -25,12 +25,13 @@
 \contentsline {subsubsection}{\numberline {4.1.2}Matched Filters}{26}
 \contentsline {subsection}{\numberline {4.2} Path Integration }{29}
 \contentsline {subsection}{\numberline {4.3} The Complete System}{29}
-\contentsline {section}{\numberline {5}Experimentation}{31}
-\contentsline {subsection}{\numberline {5.1}General}{31}
-\contentsline {subsection}{\numberline {5.2}Collision Avoidance}{31}
-\contentsline {subsection}{\numberline {5.3}Visual Navigation}{31}
-\contentsline {subsection}{\numberline {5.4}Path Integration}{31}
-\contentsline {section}{\numberline {6} Results and Evaluation }{33}
-\contentsline {section}{\numberline {7} Discussion }{35}
-\contentsline {section}{\numberline {8}References}{37}
-\contentsline {section}{\numberline {A}Genetic Algorithms}{39}
+\contentsline {section}{\numberline {5}Experimentation and Testing}{31}
+\contentsline {subsection}{\numberline {5.1}Path Integration}{31}
+\contentsline {subsection}{\numberline {5.2}Collision Avoidance}{33}
+\contentsline {subsubsection}{\numberline {5.2.1}Shifting Expansion Patterns}{33}
+\contentsline {subsubsection}{\numberline {5.2.2}Neural Matched Filters}{34}
+\contentsline {subsection}{\numberline {5.3}ECX}{34}
+\contentsline {section}{\numberline {6} Results and Evaluation }{35}
+\contentsline {section}{\numberline {7} Discussion }{37}
+\contentsline {section}{\numberline {8}References}{39}
+\contentsline {section}{\numberline {A}Genetic Algorithms}{41}

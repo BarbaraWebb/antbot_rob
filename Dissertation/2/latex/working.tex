@@ -1706,20 +1706,171 @@ layer can be specified and ideally it should be dynamic; we had intented to
 approach this during the project but it was not possible. While the visual
 memory infrastructure is entirely present, it was not tested; however, as stated
 it is identical to that presented by \textit{Zhang} so we have no reason to
-think it should not work to the degree presented in \cite{Zhang2017}.
+think that this subsystem should not work to the degree presented in
+\cite{Zhang2017}.
 
 \section{Experimentation and Testing}\label{sec:test}
 We re-use the experimental environment from \cite{Mitchell2018}. A collapsible
-boundary wall
-%% \textit{
-%%   Experimentation methods not final, anything in this section illustrates a
-%%   rough plan only.
-%% }
-%% \subsection{General}
+boundary wall is constructed on the robot-football pitch in G.17 in the
+Informatics Forum. Small ``tussocks'' are used as objects in the environment
+(e.g. to avoid or to provide visual information). A sequence of VICON
+motion-capture cameras sit above the pitch and allow accurate tracking
+of the agent's movement and heading.
+
 \subsection{Path Integration}
+The first round of tests aims to establish firmly that the CX model is capable of
+robust path integration in the real world. The CX has undergone reasonably
+extensive testing on the AntBot, however, two key issues were noted across all
+tests.
+
+\begin{enumerate}
+\item{
+  The outbound route of the agent is always the same. While this route
+  was randomly chosen, it is entirely possible that any parameter tuning was
+  performed with respect to this route. Good performance on a single route does
+  not indicate good performance as a general path integrator.
+}
+
+\item{
+  The outbound route always finishes with the agent directed at the nest. This
+  means that the robot could potentially navigate home by making little to no
+  change in its trajectory.
+}
+\end{enumerate}
+
+The second problem is more of a symptom of the first; to remedy both problems we
+need only fix the first. This can be done in a few of ways. Firstly, we could
+simply generate a randomised turning command at set (or even random) intervals.
+There are many variations on this theme, however, the original goal of this paper
+was to provide a complete navigational system. It makes more sense for us to use
+a collision avoidance system to generate the outbound routes.
+\newline\par
+
+We take the collision avoidance system from \cite{Mitchell2018} to fill this
+role. For the standard CX experiments, this collision avoidance system was
+entirely unmodified and separate from the path integration circuit. The outbound
+route was governed by the CA system (with the path integrator updated on each
+step) and the inbound route was governed entirely by the CX. These experiments
+pre-date the neural collision avoidance system so there is no way to provide
+CA and PI behaviour simulaneously. Thus, the experimental arena was carefully
+chosen based on known properties of the CA system.
+\newline
+\par
+
+We place only two tussocks in the south-east corner of the arena to ensure the
+agent is always directed into the arena. The full reasoning behind this obstacle
+placement is given in \cite{Mitchell2018}; while navigation towards the arena
+wall is still successful CA behaviour, it is not useful for testing other
+systems. The rest of the arena is left clear. The CA system from
+\cite{Mitchell2018} is sensitive enough to provide non-deterministic reactions
+where no obstacles are present whilst successfully avoiding the arena walls
+(see CA experimental results from \cite{Mitchell2018}). We therefore manage
+a non-deterministic outbound route based on CA while keeping the arena clear
+for the PI stage of the test. These experiments were conducted before the
+framerate improvement so CA behaviour can be considered comparable to
+\cite{Mitchell2018}.
+\newline\par
+
+The agent was permitted to make a $180^{\circ}$ (approx.) turn at the
+end of the outbound route. This does not make the robot point directly towards
+the nest. The justification for this procedure can be seen in Figure
+\ref{fig:cxnt}. The output from the CX model is a left/right turning instruction
+with some strength; the greater then angle between the current and home vector,
+the greater the output signal in the required direction, however, the output is
+not the required angular correction. As such, the agent required a large turning
+arc (and a long time) to reorient itself with the home vector before it could
+even begin the journey. Encouraging as this behaviour is for the performance of
+the CX circuit, we felt it more practical to avoid it for formal experiments.
+\newline\par
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{CXNT}
+  \caption{\label{fig:cxnt} An initial recording from the Central Complex
+    PI experiments. The agent successfully navigates home but requires a large
+    turning arc to point back towards the nest. This is because the output of the
+    CX is not a precise angle but instead a turn direction with some strength.
+    This behaviour was our prompt and justification to include an about turn on
+    completion of the outbound route; the space present in the arena simply did
+    not permit such routes for formal experiments.
+  }
+\end{figure}
+
+Finally,  we should note that the locomotion of the robot is different to that of
+previous tests. Previous works with the CX model look to keep the motion of the
+agent continuous. The impracticality of such motion on the AntBot is noted in
+\cite{Mitchell2018} and below in our own discussion. Instead, we keep the motion
+in discrete steps; the agent moves forward, stops, turns on the spot, and
+continues. In the case of the PI experiments, the oubound route is made up of
+steps broken by turns generated from OFCA at irregular intervals, the inbound
+route consists of steps broken by regular course correction turns (e.g. every two
+seconds, the CX output is checked). The distance measurement is still updated
+continuously; as we use time-travelled as the distance metric (assuming we
+travel the same distance in the same amount of time). While this is generally
+considered a bad way to measure distance, many problems are mitigated by the
+fact the agent only moves in the forward direction, and to a degree this model
+should be robust to \textit{rough} or \textit{noisy} inputs. We are pleased to
+report that the CX performs well, even with a problematic distance metric.
 
 \subsection{Collision Avoidance}
+We present here semi-formal testing methods used for all optic flow collision
+avoidance mechanics.
+
+\subsubsection{Shifting Expansion Patterns}
+The initial tests for the shifted expansion pattern system involved computing
+a FOE and checking for its horizontal position in the image frame. Our
+original hypothesis was that the FOE would be drawn
+to the deepest part (frontal) of an image, and therefore its horizontal position
+would dictate the desired direction of travel. We would, of course, take any
+predictable behaviour which could be used for the desired behaviour.
+\newline\par
+
+The agent was set on a collision course with a cluster of tussocks and watched
+for consistent reaction behaviour. No such consistent behaviour was observed.
+To further test the hypothesis, it was clear that further work was needed to
+verify that there was no usable behaviour. The processed image frame (the view
+of the agent) may be viewed on the smartphone screen; unfortunately, it is too
+small to really pick out any details of a flow vector field. As a general point,
+testing optical flow behaviour on the robot is generally quite difficult due to
+the field of view. Even outputting an FOE location and moving an object in front
+of the robot cannot tell us if we are producing the desired behaviour; firstly,
+because the object will not move realistically in the frame; and secondly,
+because the robot will observe motion from all directions which would not
+normally be present. This is generally true with the robot; it is hard to produce
+reliable output from algorithms when testing.
+\newline\par
+
+Two solutions to this problem have been developed over previous years:
+\textit{LogToFileUtils} developed by \textit{Zhang} to provide textual logging
+utilities where it was not normally possible to use such logs \cite{Zhang2017}
+and \textit{StatFileUtils}, a variant of \textit{Zhang's} logging utility which
+produced regular file output which could be easily parsed to produce graphical
+plots from recorded data \cite{Mitchell2018}. Unfortunately, neither were really
+useful in testing the FOE position; we could log it, but there would be no way
+of correlating its behaviour with the agent's view of the environment. Instead,
+we chose to implement a video recording tool which would allow us to record
+controlled runs of the agent through an environment. Furthermore, this video
+could be processed offline using the same systems implemented on the robot, then
+scaled up to give a much clearer view of what the robot was actually seeing.
+This proved incredibly useful and allowed us to almost immediately denounce this
+method for use on the AntBot.
+\newline\par
+
+The recording tool was used to show the infeasibility of this method informally,
+however, we present below some frames from formal recordings, taken to
+demonstrate our findings for the purpose of this paper. Two such recordings were
+taken, both in the experimental arena. The first was taken with no objects
+present, in the second, the arena contained two objects staggered to the right
+and left of the robot's path. These objects were not in the robot's immediate
+path, as such, in both recordings the direction of motion was entirely
+translational in the direction of view; no turns took place. The robot was
+permitted to move from one end of the arena to the other without interruption,
+aside from a manual stop which was done with minimal disturbance to the agent.
+
+\subsubsection{Neural Matched Filters}
 % Write new collision avoidance system, test it independently
+
+\subsection{ECX}
 
 
 \newpage
