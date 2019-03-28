@@ -1865,10 +1865,36 @@ and left of the robot's path. These objects were not in the robot's immediate
 path, as such, in both recordings the direction of motion was entirely
 translational in the direction of view; no turns took place. The robot was
 permitted to move from one end of the arena to the other without interruption,
-aside from a manual stop which was done with minimal disturbance to the agent.
+aside from a manual stop which was done with minimal disturbance to
+the agent. The arena can be seen in Figure \ref{fig:foetest}, the
+robot's path is shown in red.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{FOETest}
+  \caption{\label{fig:foetest}
+    The non-empty arena used for testing the shifting expansion field
+    system. Tussocks were set to the left and right of the robot's
+    trajectory (shown in red) so that they were not on a collision
+    course but should still affect the expansion field. We had hoped
+    the FOE would drift left then right as each object was passed.
+  }
+\end{figure}
 
 \subsubsection{Neural Matched Filters}
-% Write new collision avoidance system, test it independently
+The testing for the neural matched filter system was far more
+simple. In this case, we know that the underlying method (matched
+filter collision avoidance) is sound, we just wish to translate it
+into a neural representation. Thus, the first thing we need to test is
+the ability to generate an arbitrary turn by inducing activity in the
+MRSP layer of the model. We take the current direction from the TB1
+layer, generate our sin curve and shift it to the left or right of the
+current heading. We can then check if we can generate consistent turns
+consistently.
+\newline
+\par
+
+
 
 \subsection{ECX}
 

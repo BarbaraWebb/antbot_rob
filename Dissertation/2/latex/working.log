@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  27 MAR 2019 15:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  28 MAR 2019 21:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -523,10 +523,16 @@ Package pdftex.def Info: Images/CXNT.png  used on input line 1788.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [32 <./Images/CXNT.png>]
-Underfull \vbox (badness 3098) has occurred while \output is active []
+<Images/FOETest.jpg, id=185, 6006.44pt x 3388.66pt>
+File: Images/FOETest.jpg Graphic file (type jpg)
+<use Images/FOETest.jpg>
+Package pdftex.def Info: Images/FOETest.jpg  used on input line 1874.
+(pdftex.def)             Requested size: 452.9679pt x 255.53462pt.
 
- [33]
-[34] [35
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[33] [34 <./Images/FOETest.jpg>] [35
 
 ] [36
 
@@ -539,7 +545,8 @@ Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¼ in font cmr12!
 Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¶ in font cmr12!
- [39]) [40] [41
+ [39])
+[40] [41
 
 ] (./working.aux)
 
@@ -547,10 +554,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4298 strings out of 494923
- 64428 string characters out of 6180741
- 131957 words of memory out of 5000000
- 7513 multiletter control sequences out of 15000+600000
+ 4304 strings out of 494923
+ 64543 string characters out of 6180741
+ 131967 words of memory out of 5000000
+ 7518 multiletter control sequences out of 15000+600000
  14648 words of font info for 51 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  42i,21n,40p,756b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -574,10 +581,10 @@ s/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmti9.pfb>
-Output written on working.pdf (55 pages, 8554992 bytes).
+Output written on working.pdf (55 pages, 14089868 bytes).
 PDF statistics:
- 284 PDF objects out of 1000 (max. 8388607)
+ 285 PDF objects out of 1000 (max. 8388607)
  188 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
