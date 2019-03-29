@@ -1465,6 +1465,9 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
                     }*/
                     //-----------------------------------------------------------
 
+
+
+
                     // preferred flow vector as 1x3 Mat
                     left_pref_vector = left_preferred_flow.row((int) previous_left_flow_vector[0]);
 
@@ -1551,6 +1554,7 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
         float right_flow_sum = 0;
 
         int offset = 4;
+        int length_thresh = 70;
 
         for ( int y = 0; y < currentPointsToTrack.rows(); y++ ){
             for ( int x = 0; x < currentPointsToTrack.cols(); x++ ){
@@ -1568,13 +1572,21 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 left_filter_vector = left_filter.row((int) previous_left_flow_vector[0]);
 
-                //Create 1x3 flow vector (the current flow vector)
-                flow_vector.put(0, 0, current_left_flow_vector[0]);
-                flow_vector.put(0, 1, current_left_flow_vector[1]);
-                flow_vector.put(0, 2, 0);
+                double x_new = current_left_flow_vector[0];
+                double y_new = current_left_flow_vector[1];
+                double length = Math.sqrt(
+                        Math.pow((x_new - previous_left_flow_vector[0]),2) +
+                                Math.pow(y_new - previous_left_flow_vector[1],2)
+                );
+                if (length < length_thresh) {
+                    Log.i(flowTag, "Length: " + length);
+                    //Create 1x3 flow vector (the current flow vector)
+                    flow_vector.put(0, 0, current_left_flow_vector[0]);
+                    flow_vector.put(0, 1, current_left_flow_vector[1]);
+                    flow_vector.put(0, 2, 0);
 
-                left_flow_sum += left_filter_vector.dot(flow_vector); //Filter and sum
-
+                    left_flow_sum += left_filter_vector.dot(flow_vector); //Filter and sum
+                }
                 //
                 // Right filter comparison
                 //
@@ -1587,12 +1599,20 @@ public class MainActivity extends Activity implements CvCameraViewListener2 , Br
 
                 right_filter_vector = right_filter.row((int) previous_right_flow_vector[0]); //Vector for x + 12 mod 90
 
-                //Create 1x3 flow vector (the current flow vector)
-                flow_vector.put(0, 0, current_right_flow_vector[0]);
-                flow_vector.put(0, 1, current_right_flow_vector[1]);
-                flow_vector.put(0, 2, 0);
+                 x_new = current_right_flow_vector[0];
+                 y_new = current_right_flow_vector[1];
+                 length = Math.sqrt(
+                        Math.pow((x_new - previous_right_flow_vector[0]),2) +
+                                Math.pow(y_new - previous_right_flow_vector[1],2)
+                );
+                if (length < length_thresh) {
+                    //Create 1x3 flow vector (the current flow vector)
+                    flow_vector.put(0, 0, current_right_flow_vector[0]);
+                    flow_vector.put(0, 1, current_right_flow_vector[1]);
+                    flow_vector.put(0, 2, 0);
 
-                right_flow_sum += right_filter_vector.dot(flow_vector); //Filter and sum
+                    right_flow_sum += right_filter_vector.dot(flow_vector); //Filter and sum
+                }
             }
         }
 

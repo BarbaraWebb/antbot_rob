@@ -277,15 +277,11 @@ Significant contributions of this project:
   outbound route.
 }
 
-\item{
-  \textit{[FUTURE]}
-  Construction of a modified optical flow collision avoidance system, and a
-  modified Mushroom Body model based on \cite{Mitchell2018} and \cite{Zhang2017}
-  respectively.
-}
+\item{ Construction of a neural collision avoidance model based on the
+  matched-filter system from \cite{Mitchell2018, Stewart2010}. }
 
 \item{
-  \textit{[FUTURE]} Construction of a biologically plausible ``base model'' for
+  Implementation of a biologically plausible ``base model'' for
   insect navigation, the Extended Central Complex (ECX) model.
 }
 
@@ -1867,7 +1863,7 @@ translational in the direction of view; no turns took place. The robot was
 permitted to move from one end of the arena to the other without interruption,
 aside from a manual stop which was done with minimal disturbance to
 the agent. The arena can be seen in Figure \ref{fig:foetest}, the
-robot's path is shown in red.
+robot's intended path is shown in red.
 
 \begin{figure}[h!]
   \centering
@@ -1894,10 +1890,28 @@ consistently.
 \newline
 \par
 
-
+We then test the three different implementations of the ACC neurons
+separately. The testing for each type did not extend very far. Each
+implementation was tested in a mostly clear arena with multiple
+obstacles placed in a large, obvious cluster in the centre. The robot
+was started from the starting block (marked with masking tape) on the
+south side of the enclosure, on a direct collision course with the
+cluster. The agent would then attempt to traverse the arena without
+collisions using only the neural CA system.
+\newline\par
 
 \subsection{ECX}
+The testing methodology for the ECX was to test each individual system
+and then full combination. Our earlier experiments with the CX
+demonstrate the capability of the circuit as a path integrator - and,
+of course it has been demonstrated in simulation
+\cite{Stone2017}. This model has already been tested in conjunction
+with the MB (\textit{Zhang's} CXMB)\cite{Zhang2017}. Similarly, the MB
+model has been shown to provide robust visual navigation on the robot
+\cite{Mitchell2018}.\newline\par
 
+Therefore, the only things left to test are the neural CA system, and
+then each step of integration, CA $\rightarrow$ CXCA $\rightarrow$ ECX.
 
 \newpage
 
