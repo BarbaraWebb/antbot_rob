@@ -2090,22 +2090,24 @@ we can look to another example in Figure \ref{fig:foeframesempty}.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=\textwidth]{frame_00057}
-  \includegraphics[width=\textwidth]{frame_00058}
-  \includegraphics[width=\textwidth]{frame_00059}
-  \includegraphics[width=\textwidth]{frame_00060}
-  \includegraphics[width=\textwidth]{frame_00061}
+  \includegraphics[width=\textwidth]{frame_00064}
+  \includegraphics[width=\textwidth]{frame_00065}
+  \includegraphics[width=\textwidth]{frame_00066}
+  \includegraphics[width=\textwidth]{frame_00067}
+  \includegraphics[width=\textwidth]{frame_00068}
   \caption{\label{fig:foeframesempty} Another set of consecutive
-    frames, this time captured in an environment with no objects present.
+    frames, this time captured in an environment with no objects
+    present. The FOE is still unpredictable, though it does not move
+    as drastically in the horizontal axis.
   }
 \end{figure}
 
 In this case there are no obstacles present in the arena, and thus
 minimal sources flow field disturbance. Nevertheless, we can still see
-that the FOE jumps erratically. The views are perhaps deceptive but
-for clarity we note that each pixel represents 4$^\circ$ of horizontal
-arc. Even small FOE jumps in the image frame are large with respect to
-the world.\newline\par
+that the FOE jumps, though not quite as drastically.  The views are
+perhaps deceptive but for clarity we note that each pixel represents
+4$^\circ$ of horizontal arc. Even small FOE jumps in the image frame
+are large with respect to the world.\newline\par
 
 While it would be interesting to test empirically such use of the FOE
 in a different setting, we can conclude that the FOE may not be used
@@ -2121,14 +2123,114 @@ implementing the neural filter model for collision avoidance, or the
 ECX, as a continuation of this work.
 
 \subsubsection{Neural Matched Filters}
+The two variants of the neural filter model involve using the
+different representations of the ACC neurons.In testing, the I\&F
+performed identically under observation, so we will discuss them as
+one.\newline\par
 
+\textbf{I\&F:} Unfortunately, the performance was generally poor,
+though this was the only variant which managed successful collision
+free runs (though this was not consistent enough to gather any formal
+data). It is no surprise that this variant came closest to replicating
+the behaviour (if not the performance) of the original model from
+\cite{Mitchell2018} as it is, functionally, a dressed up version of
+this model (with the addition of neural steering generation).
+\newline\par
 
-\section{ECX}
+With this in mind, one would reasonably ask why this model does not
+function consistently where the one from \cite{Mitchell2018}
+did. Indeed, we used the model from \cite{Mitchell2018} successfully
+in this work for our path integration experiments (and it was tested
+successfully alongside the MB model in a cluttered environment during
+the code refactor process). The neural OFCA model was implemented
+after the improvements to the visual pipeline; as this was the only
+change we suspected this was the problem. In testing the original
+model from \cite{Mitchell2018} \textit{after} the improvement to the
+framerate, the behaviour was noticably different (and degraded).
+\newline\par
 
+As mentioned in Section \ref{sec:mod} we suspect this is due to the
+drastic increase in flow information which is now fed into the
+model. As can be seen from Figures \ref{fig:foeframes} and
+\ref{fig:foeframesclear}, the flow information is relatively noisy
+with the features indicitive of an obstacle being fairly coarse. The
+tuning methods applied in \cite{Mitchell2018} where the accumulation
+and reaction thresholds are adjusted are clearly no longer
+sufficient; in testing, the model was either hypersensitive or
+hyposensitive. The line for a functional middle ground is clearly very
+fine. Tuning at the sensory level is clearly required; fortunately,
+such tuning could also prove vital for the rate model.
+\newline\par
+
+\textbf{Rate:} The rate model provided no predictable reaction,
+however, this is very likely due to the fact that the inputs are not
+filtered at all. The flow sums for each side are computed, adjusted,
+and their full difference is supplied as input to compute the firing
+rate. In the I\&F and algorithmic variants, this problem is (or was)
+mitigated by the accumulation threshold parameter. It is clear that
+such a parameter could be added to the rate model, however, we propose
+a solution at a lower level.\newline\par
+
+One should look to clean the optical flow field in some way. This
+could be done simply by filtering out all vectors which do not meet
+some threshold for length (this is distinctly different from the
+thresholds applied in \cite{Mitchell2018}). A crude but potentially
+effective method as it can be seen in Figure \ref{fig:foeframes} that
+looming obstacles result in a few vectors with large displacements;
+all other information could be considered noise. Alternatively,
+different filters\footnote{The flow filter in use is still the filter
+  implemented by \textit{Scimeca} for speed
+  retrieval\cite{Scimeca2017,Mitchell2018}. } or even a dedicated
+sensor could be used (see Discussion).\newline\par
+
+Despite the fact that the rate model as presented does not behave
+consistently in the presence of obstacles, it would still be our
+preferred approach going forward. We feel it better fits the existing
+CX architecture and also allows a proportional response to be
+generated. It is a more flexible and perhaps, a more biologically
+plausible approach to the simulation. Based on our previous experience
+with optical flow models for collision avoidance we are confident in
+our assertion that the erratic behaviour can be (mostly) explained by
+a noisy optical flow field though we should reiterate that this is
+conjecture.
+
+\subsection{ECX (CXCA)}
+As stated in Section \ref{sec:test}, the ECX model only got as far as
+the CXCA (Central Complex with Collision Avoidance) step in testing,
+using the I\&F CA model. This parameterisation of the CA model was
+consistent enough to allow specific tests in tailored environments
+such that we could at least check that steering signals were being
+generated as a combination of the path integrator and the collision
+avoidance system. As such we could observe (mostly) successful
+collision avoidance behaviour on the outbound run. The inbound runs
+proved less successful, however. Due to the hypersensitivity of the
+collision avoidance system it proved difficult to find a reasonable
+weighting to balance the two systems.
+\newline\par
+
+Intuition would suggest that we generate the vast majority of the
+steering signal from collision avoidance; any steering signal
+generated by this system is clearly an immediate danger to the agent,
+the path integration circuit can compensate later. However, under
+observation the path integrator never gets the chance to
+compensate. An early prototype of the CACX integration allowed the CA
+subsystem to completely overwrite the steering command in the event of
+a collision detection; with a hypersensitive CA system this presents
+the obvious problem that CA saccades become the only steering output.
+Later versions which allowed integration of the outputs experienced
+the same problem; lowering the precedence of CA either did not
+mitigate the problem or resulted in an unacceptable degradation of an
+already poor CA system. We can at least conclude that the CXCA and
+therefore the complete ECX are plausible once the problems are ironed
+out of the CA system. We regret not making more progress towards
+making this a usable model, though a complete implementation is now
+available on the AntBot.
 \newpage
 
-\section{ Discussion }
-\textit{Included for skeleton purposes.}
+\section{ Discussion and Future Work}
+This section will largely delve into my own personal opinion and
+feelings towards the work completed. Ironically, the word that comes
+to mind when thinking on this year's work is: incomplete.
 \newpage
 
 \bibliographystyle{plain}
