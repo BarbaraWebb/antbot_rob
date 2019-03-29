@@ -1644,7 +1644,7 @@ flaw.
 
 \subsection{ Path Integration }
 The path integration circuit in use is a slightly simplified version of that
-presented in Section \ref{sec:CXBackground}. This version does not model the
+presented in Section \ref{CXBackground}. This version does not model the
 TN neurons or the Pontine neurons. The model is the same as that used in
 \cite{Scimeca2017, Zhang2017}, and the robot-based tests from \cite{Stone2017}.
 \newline\par
@@ -1683,7 +1683,7 @@ MRSP neurons required for the integrated collision avoidance system. The
 connections between TB1 and MRSP are the same as the connections between TB1
 and CPU4, likewise the connections between MRSP and CPU1 are the same as those
 between CPU4 and CPU1. In fact, as the eight MBONs are expanded out to a
-sixteen neuron representation (see Section \ref{sec:CXMBBackground}) the
+sixteen neuron representation (see Section \ref{CXMBBackground}) the
 model can be visualised as the CX with two additional layers of sixteen neurons
 between CPU4 and CPU1 plus one or two ACC neurons depending on the neural
 representation used. The final version implemented on the robot used the rate
@@ -1753,18 +1753,24 @@ chosen based on known properties of the CA system.
 \newline
 \par
 
-We place only two tussocks in the south-east corner of the arena to ensure the
-agent is always directed into the arena. The full reasoning behind this obstacle
-placement is given in \cite{Mitchell2018}; while navigation towards the arena
-wall is still successful CA behaviour, it is not useful for testing other
-systems. The rest of the arena is left clear. The CA system from
-\cite{Mitchell2018} is sensitive enough to provide non-deterministic reactions
-where no obstacles are present whilst successfully avoiding the arena walls
-(see CA experimental results from \cite{Mitchell2018}). We therefore manage
-a non-deterministic outbound route based on CA while keeping the arena clear
-for the PI stage of the test. These experiments were conducted before the
-framerate improvement so CA behaviour can be considered comparable to
-\cite{Mitchell2018}.
+For half of the runs the agent was started from the tape markings in
+the South West corner of the arena and for the other half the agent
+was started from the marking at the South end.  We place only two
+tussocks in the south-east corner of the arena to ensure the agent is
+always directed into the arena. The full reasoning behind this
+obstacle placement is given in \cite{Mitchell2018}; while navigation
+towards the arena wall is still successful CA behaviour, it is not
+useful for testing higher navigational systems. The rest of the arena
+is left clear. The CA system from \cite{Mitchell2018} is sensitive
+enough to provide non-deterministic reactions where no direct
+obstacles are present whilst successfully avoiding the arena walls
+(see CA experimental results from \cite{Mitchell2018}). We therefore
+manage a non-deterministic outbound route based on CA while keeping
+the arena clear for the PI stage of the test. These experiments were
+conducted before the framerate improvement so CA behaviour can be
+considered comparable to \cite{Mitchell2018}. Any test in which the CA
+system failed was to be ignored as only the CX was to be tested,
+though there was only one such case.
 \newline\par
 
 The agent was permitted to make a $180^{\circ}$ (approx.) turn at the
@@ -1792,6 +1798,14 @@ the CX circuit, we felt it more practical to avoid it for formal experiments.
   }
 \end{figure}
 
+Success was measured by the ability of the agent to touch the tape
+square from which it started. This could be any part of the robot
+(i.e. a tread running over the corner of the square). The agent was
+stopped manually once either a success state was reached or a success
+state could not be reached; in essance, if the robot collided with an
+arena wall.
+\newline\par
+
 Finally,  we should note that the locomotion of the robot is different to that of
 previous tests. Previous works with the CX model look to keep the motion of the
 agent continuous. The impracticality of such motion on the AntBot is noted in
@@ -1809,9 +1823,6 @@ should be robust to \textit{rough} or \textit{noisy} inputs. We are pleased to
 report that the CX performs well, even with a problematic distance metric.
 
 \subsection{Collision Avoidance}
-We present here semi-formal testing methods used for all optic flow collision
-avoidance mechanics.
-
 \subsubsection{Shifting Expansion Patterns}
 The initial tests for the shifted expansion pattern system involved computing
 a FOE and checking for its horizontal position in the image frame. Our
@@ -1897,7 +1908,11 @@ obstacles placed in a large, obvious cluster in the centre. The robot
 was started from the starting block (marked with masking tape) on the
 south side of the enclosure, on a direct collision course with the
 cluster. The agent would then attempt to traverse the arena without
-collisions using only the neural CA system.
+collisions using only the neural CA system. The I\&F
+variant\footnote{We take the LI\&F representation forward, observed
+  behaviour between RI\&F and LI\&F was not significantly different.}
+of the ACC neurons was the only implementation that functioned
+consistently enough to take forward to the next stage of testing.
 \newline\par
 
 \subsection{ECX}
@@ -1911,12 +1926,124 @@ model has been shown to provide robust visual navigation on the robot
 \cite{Mitchell2018}.\newline\par
 
 Therefore, the only things left to test are the neural CA system, and
-then each step of integration, CA $\rightarrow$ CXCA $\rightarrow$ ECX.
+then each step of integration, CA $\rightarrow$ CXCA $\rightarrow$
+ECX. Note that testing CA alongside the MB model would be redundant as
+the routes recalledf from visual memory would incorporate any obstacle
+avoidance maneuvers. Fortunately, we can simply use the full ECX model
+and turn particular outputs on or off depending on the desired
+functionality.
+\newline\par
 
+Unfortunately, we did not advance past the CXCA testing stage. The
+CXCA was tested only with the LI\&F ACC neurons. We used both an empty
+environment (to check for basic functionality) and a cluttered
+environment; one with a singular central obstacle and a second with a
+tussock density of 2 per pitch quadrant.
 \newpage
 
-\section{ Results and Evaluation } \label{sec:results}
-\textit{Included for skeleton purposes.}
+\section{ Results } \label{sec:results}
+\subsection{ Path Integration and Evaluation }
+We are pleased to report excellent performance from the CX model. We
+observed successful homing in 7/10 tests performed, though in all
+cases the agent proceeded in the correct general direction. Of the
+failures, two were minor and one was more significant. The full
+results can be seen in Table \ref{tab:cxres}.
+\newline
+\par
+
+\begin{table}[h!]
+  \centering
+\begin{tabular}{|c|l|l|l|}
+\hline
+\multicolumn{1}{|l|}{\textbf{Test}} & \textbf{Start Point} &
+\textbf{Success/Failure} & \textbf{Distance from Start Point (mm)} \\ \hline
+\textbf{AB\textunderscore CX\textunderscore 1}                          & SW                   & Success                  &  306                                  \\ \hline
+\textbf{AB\textunderscore CX\textunderscore 2}                          & SW                   & Success                  &  348                                  \\ \hline
+\textbf{AB\textunderscore CX\textunderscore 3}                          & SW                   & Failure                  &  517                                  \\ \hline
+\textbf{AB\textunderscore CX\textunderscore 4}                          & SW                   & Success*                 &  325                                  \\ \hline
+\textbf{AB\textunderscore CX\textunderscore 5}                          & SW                   & Failure                  &  581                                  \\ \hline
+\textbf{AB\textunderscore CX\textunderscore 6}                          & S                    & Success                  &  356                                  \\ \hline
+\textbf{AB\textunderscore CX\textunderscore 7}                          & S                    & Success                  &  304                                  \\ \hline
+\textbf{AB\textunderscore CX\textunderscore 8}                          & S                    & Success                  &  296                                  \\ \hline
+\textbf{AB\textunderscore CX\textunderscore 9}                          & S                    & Success                  &  311                                  \\ \hline
+\textbf{AB\textunderscore CX\textunderscore 10}                         & S                    & Failure**                & 458                                   \\ \hline
+\end{tabular}
+
+\caption{\label{tab:cxres} The compiled results from the CX path
+  integration experiments. (*) While this test succeeded, it was
+  close.  The CA system failed at the last section of the outbound run
+  which could be the cause of the near-failure. (**) We consider this
+  the worst failure; while this run is not the furthest from its start
+  point, it can be seen from Figure \ref{fig:abcx10i}that the agent
+  actively deviates from its route.  }
+
+\end{table}
+
+Vicon recordings from all tests are available in Appendix
+\ref{ap:cxfigs}. While the results appeared good under observation and
+in the figures, we must note the distance measurements in Table
+\ref{tab:cxres}. These measurements are taken from the central axis of
+the Vicon skeleton applied to the robot, essentially, the central axis
+of the robot. Due to the size of the robot, we must note that our
+success criterion may be deceptive. The closest arrival at the nest is
+29.6cm; while the robot did indeed make it back to its starting box,
+this is still a reasonably large deviation. Given that the agent's
+general direction is almost always correct (except Figure
+\ref{fig:abcx10i}), we think it is fair to presume that the deviation
+could be due to the inaccurate odometry; counting timesteps where an
+agent is in motion is generally considered a crude and inaccurate
+method of tracking distance travelled, we use this method as it was
+all that was immediately available on the robot (see Discussion).
+\newline\par
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_10}
+  \caption{\label{fig:abcx10i} PI test AB\textunderscore
+    CX\textunderscore 10. This was considered the worst failure of the
+  system despite not having the greatest deviation from the start point.}
+\end{figure}
+
+An example of favourable behaviour (under experimental protocol) can
+be seen in Figure \ref{fig:abcx8i}. In this case, the agent is already
+close to its home vector but still corrects to achieve more accurate
+homing. This is also the run which achieves the best performance by
+the distance-to-start measurement.
+\newline\par
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_8}
+  \caption{\label{fig:abcx8i} PI test PI test AB\textunderscore
+    CX\textunderscore 8. Arguably the most successful recording from
+    the formal experiments. The agent still corrects to achieve a
+    better homing path, despite the fact it could likely have
+    travelled in a straight line. }
+\end{figure}
+
+While we still consider these experiments a successful demonstration
+of the capability of the CX (especially with the informal trail in
+Figure \ref{fig:cxnt}), we must acknowledge certain methodological
+issues. Firstly, the deviation and secondly the run length. All runs
+can be seen to be very short. We think it would be prudent to repeat
+these experiments with longer runs and a platform with better
+odometric capabilities (see Discussion). Despite our justification, it
+may also be prudent to remove the 180$^{\circ}$ turn at the end of the
+outbound run. In some recordings, it can be seen that the robot is
+still pointing directly home after its outbound run (Figure
+\ref{fig:abcx1i}), though this is not always the case.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_1}
+  \caption{\label{fig:abcx1i} PI test AB\textunderscore
+    CX\textunderscore 1. In this case, we note the exact same
+    methodological flaw we sought to avoid.}
+\end{figure}
+
+\subsection{Collision Avoidance}
+\subsubsection{Shifting Expansion Patterns}
+\subsubsection{Neural Matched Filters}
 \newpage
 
 \section{ Discussion }
@@ -1961,6 +2088,67 @@ This short explanation is merely to provide a high level idea of the concepts
 employed when working with GAs; there is a great deal of depth and nuance
 not captured by (and not necessary for) this paper. A tutorial by
 \textit{Whitley} can be found in \textit{Statistics and Computing, Volume 4
-  (1994)} \cite{Whitley1994}. Select terms will be defined as required.
+  (1994)} \cite{Whitley1994}. 
+
+\section{CX Vicon Recordings}\label{ap:cxfigs}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_1}
+  \caption{\label{fig:abcx1}}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_2}
+  \caption{\label{fig:abcx2}}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_3}
+  \caption{\label{fig:abcx3}}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_4}
+  \caption{\label{fig:abcx4}}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_5}
+  \caption{\label{fig:abcx5}}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_6}
+  \caption{\label{fig:abcx6}}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_7}
+  \caption{\label{fig:abcx7}}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_8}
+  \caption{\label{fig:abcx8}}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_9}
+  \caption{\label{fig:abcx9}}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{AB_CX_10}
+  \caption{\label{fig:abcx10}}
+\end{figure}
 \end{document}
 

@@ -12,3 +12,13 @@
 \contentsline {figure}{\numberline {12}{\ignorespaces Function of firing rate response of the single ACC neuron against difference input; sigmoid with $a = 5$, $b = 0$. The input to this neuron is scaled down to lie between -1 and 1.\relax }}{28}
 \contentsline {figure}{\numberline {13}{\ignorespaces An initial recording from the Central Complex PI experiments. The agent successfully navigates home but requires a large turning arc to point back towards the nest. This is because the output of the CX is not a precise angle but instead a turn direction with some strength. This behaviour was our prompt and justification to include an about turn on completion of the outbound route; the space present in the arena simply did not permit such routes for formal experiments. \relax }}{32}
 \contentsline {figure}{\numberline {14}{\ignorespaces The non-empty arena used for testing the shifting expansion field system. Tussocks were set to the left and right of the robot's trajectory (shown in red) so that they were not on a collision course but should still affect the expansion field. We had hoped the FOE would drift left then right as each object was passed. \relax }}{34}
+\contentsline {figure}{\numberline {15}{\ignorespaces \relax }}{45}
+\contentsline {figure}{\numberline {16}{\ignorespaces \relax }}{45}
+\contentsline {figure}{\numberline {17}{\ignorespaces \relax }}{46}
+\contentsline {figure}{\numberline {18}{\ignorespaces \relax }}{46}
+\contentsline {figure}{\numberline {19}{\ignorespaces \relax }}{47}
+\contentsline {figure}{\numberline {20}{\ignorespaces \relax }}{47}
+\contentsline {figure}{\numberline {21}{\ignorespaces \relax }}{48}
+\contentsline {figure}{\numberline {22}{\ignorespaces \relax }}{48}
+\contentsline {figure}{\numberline {23}{\ignorespaces \relax }}{49}
+\contentsline {figure}{\numberline {24}{\ignorespaces \relax }}{49}
