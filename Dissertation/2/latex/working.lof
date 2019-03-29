@@ -8,17 +8,22 @@
 \contentsline {figure}{\numberline {8}{\ignorespaces The Kogeto Dot 360$^\circ $ panoramic lens attachment.\relax }}{20}
 \contentsline {figure}{\numberline {9}{\ignorespaces A sample view of the lens from the front facing camera, before any processing.\relax }}{20}
 \contentsline {figure}{\numberline {10}{\ignorespaces The hard-coded centre used for the polar transform (red), against the circle detected using the Hough transform (green). \relax }}{21}
-\contentsline {figure}{\numberline {11}{\ignorespaces A subset of points from the dense optical flow field observed by the agent. The agent is experiencing forward translational motion. These frames were captured after the framerate improvement from Section 3.3\hbox {}. The FOE is also shown in green. \relax }}{25}
+\contentsline {figure}{\numberline {11}{\ignorespaces A subset of points from the dense optical flow field observed by the agent. The agent is experiencing forward translational motion. These frames were captured after the framerate improvement from Section 3.3\hbox {}. The FOE is also shown in green. There are no obstacles present in the arena. \relax }}{25}
 \contentsline {figure}{\numberline {12}{\ignorespaces Function of firing rate response of the single ACC neuron against difference input; sigmoid with $a = 5$, $b = 0$. The input to this neuron is scaled down to lie between -1 and 1.\relax }}{28}
 \contentsline {figure}{\numberline {13}{\ignorespaces An initial recording from the Central Complex PI experiments. The agent successfully navigates home but requires a large turning arc to point back towards the nest. This is because the output of the CX is not a precise angle but instead a turn direction with some strength. This behaviour was our prompt and justification to include an about turn on completion of the outbound route; the space present in the arena simply did not permit such routes for formal experiments. \relax }}{32}
 \contentsline {figure}{\numberline {14}{\ignorespaces The non-empty arena used for testing the shifting expansion field system. Tussocks were set to the left and right of the robot's trajectory (shown in red) so that they were not on a collision course but should still affect the expansion field. We had hoped the FOE would drift left then right as each object was passed. \relax }}{34}
-\contentsline {figure}{\numberline {15}{\ignorespaces \relax }}{45}
-\contentsline {figure}{\numberline {16}{\ignorespaces \relax }}{45}
-\contentsline {figure}{\numberline {17}{\ignorespaces \relax }}{46}
-\contentsline {figure}{\numberline {18}{\ignorespaces \relax }}{46}
-\contentsline {figure}{\numberline {19}{\ignorespaces \relax }}{47}
-\contentsline {figure}{\numberline {20}{\ignorespaces \relax }}{47}
-\contentsline {figure}{\numberline {21}{\ignorespaces \relax }}{48}
-\contentsline {figure}{\numberline {22}{\ignorespaces \relax }}{48}
-\contentsline {figure}{\numberline {23}{\ignorespaces \relax }}{49}
-\contentsline {figure}{\numberline {24}{\ignorespaces \relax }}{49}
+\contentsline {figure}{\numberline {15}{\ignorespaces PI test AB\textunderscore CX\textunderscore 10. This was considered the worst failure of the system despite not having the greatest deviation from the start point.\relax }}{38}
+\contentsline {figure}{\numberline {16}{\ignorespaces PI test PI test AB\textunderscore CX\textunderscore 8. Arguably the most successful recording from the formal experiments. The agent still corrects to achieve a better homing path, despite the fact it could likely have travelled in a straight line. \relax }}{38}
+\contentsline {figure}{\numberline {17}{\ignorespaces PI test AB\textunderscore CX\textunderscore 1. In this case, we note the exact same methodological flaw we sought to avoid in which the robot requires no correction to home successfully.\relax }}{39}
+\contentsline {figure}{\numberline {18}{\ignorespaces Five consecutive image frames with optical flow information superimposed over the top. It can be seen that the FOE position (central pixel of the blue cross) is not consistent across multiple frames. This figure also shows the disturbance caused by approaching a tussock on the right hand side (3rd and 4th frames). Video captured at approximately 10fps (i.e. these images were captured accross roughly 0.5 seconds). \relax }}{40}
+\contentsline {figure}{\numberline {19}{\ignorespaces Another set of consecutive frames, this time captured in an environment with no objects present. \relax }}{40}
+\contentsline {figure}{\numberline {20}{\ignorespaces \relax }}{51}
+\contentsline {figure}{\numberline {21}{\ignorespaces \relax }}{51}
+\contentsline {figure}{\numberline {22}{\ignorespaces \relax }}{52}
+\contentsline {figure}{\numberline {23}{\ignorespaces \relax }}{52}
+\contentsline {figure}{\numberline {24}{\ignorespaces \relax }}{53}
+\contentsline {figure}{\numberline {25}{\ignorespaces \relax }}{53}
+\contentsline {figure}{\numberline {26}{\ignorespaces \relax }}{54}
+\contentsline {figure}{\numberline {27}{\ignorespaces \relax }}{54}
+\contentsline {figure}{\numberline {28}{\ignorespaces \relax }}{55}
+\contentsline {figure}{\numberline {29}{\ignorespaces \relax }}{55}

@@ -33,7 +33,11 @@
 \contentsline {subsection}{\numberline {5.3}ECX}{34}
 \contentsline {section}{\numberline {6} Results }{37}
 \contentsline {subsection}{\numberline {6.1} Path Integration and Evaluation }{37}
-\contentsline {section}{\numberline {7} Discussion }{39}
-\contentsline {section}{\numberline {8}References}{41}
-\contentsline {section}{\numberline {A}Genetic Algorithms}{43}
-\contentsline {section}{\numberline {B}CX Vicon Recordings}{45}
+\contentsline {subsection}{\numberline {6.2}Collision Avoidance}{39}
+\contentsline {subsubsection}{\numberline {6.2.1}Shifting Expansion Patterns}{39}
+\contentsline {subsubsection}{\numberline {6.2.2}Neural Matched Filters}{41}
+\contentsline {section}{\numberline {7}ECX}{43}
+\contentsline {section}{\numberline {8} Discussion }{45}
+\contentsline {section}{\numberline {9}References}{47}
+\contentsline {section}{\numberline {A}Genetic Algorithms}{49}
+\contentsline {section}{\numberline {B}CX Vicon Recordings}{51}
