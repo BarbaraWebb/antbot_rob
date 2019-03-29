@@ -5,6 +5,7 @@ import pandas as pd
 import os
 import shutil
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 #
@@ -104,9 +105,19 @@ class Trajectory:
         return dataframe
 
     def generate_plot(self, clean_frame_list):
-        ax1 = clean_frame_list[0].plot(x="TY", y="TX", legend=False)
-        for idx in range(1,len(clean_frame_list)):
-            clean_frame_list[idx].plot(x="TY", y="TX", legend=False, ax=ax1)
+        ax1 = clean_frame_list[0].plot(x="TY", y="TX", legend=False, label='Inbound')
+        for idx in range(1, len(clean_frame_list)):
+            clean_frame_list[idx].plot(x="TY", y="TX", legend=False, ax=ax1, label='Outbound')
+
+        # Add distance between the start and stop of the route
+        xs = [ clean_frame_list[1]["TY"][0], clean_frame_list[0]["TY"][len(clean_frame_list[0]["TY"]) - 1] ]
+        ys = [clean_frame_list[1]["TX"][0], clean_frame_list[0]["TX"][len(clean_frame_list[0]["TX"]) - 1]]
+        dist = np.sqrt((xs[0] - xs[1])**2 + (ys[0] - ys[1])**2)
+
+        pltlabel = "Distance: " + str(int(dist)) + "mm"
+        plt.plot(xs, ys, 'ro-', label=pltlabel)
+        plt.legend()
+        print(dist)
 
         return ax1
 

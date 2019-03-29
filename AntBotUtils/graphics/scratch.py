@@ -2,7 +2,8 @@ from trajectory import Trajectory
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
-    TB1 = [0.004844757667970644, 0.009794723832215692, 0.4461262303138885,
+    '''
+        TB1 = [0.004844757667970644, 0.009794723832215692, 0.4461262303138885,
            0.7729869360434123, 0.8495361745432531, 0.7729869360719391,
            0.44612622934228774, 0.009794723914234875, 0.004844757667970644,
            0.009794723832215692, 0.4461262303138885, 0.7729869360434123,
@@ -28,25 +29,33 @@ if __name__ == '__main__':
     plt.plot(CPU4)
     plt.plot(WCPU4)
     plt.xlim(0, 16)
+'''
 
+    path = "/home/robert/Uni/project/antbot_rob/notes/2/data/cx_csv/"
+    for idx in range(1,11):
+        runtitle = "AB_CX_" + str(idx)
+        print("Plotting " + runtitle)
 
-    plt.show()
+        out_path = path + runtitle + "_O.csv" #"CX_out_test.csv"
+        in_path = path + runtitle + "_I.csv"#"CX_in_test.csv"
+        traj_plot = Trajectory(out_path, in_path, clean=True)
+
+        #plt.ylim((1100, -1100))
+        #plt.xlim((-1500, 2500))
+
+        plt.ylim((1500, -1500))
+        plt.xlim((-2500, 2500))
+
+        plt.xlabel('Distance (mm)')
+        plt.ylabel('Distance (mm)')
+        plt.title("PI Run: " + runtitle)
+        plt.grid(True)
+    
+        plt.savefig("/home/robert/Pictures/ABFigs/" + runtitle + ".png")
 
     #plt.plot(COM)
 
 
 
-    '''
-    path = "/home/robert/Uni/project/antbot_rob/notes/2/data/cx_csv/"
-    out_path = path + "CX_out_test.csv"
-    in_path = path + "CX_in_test.csv"
-    traj_plot = Trajectory(out_path, in_path, clean=True)
 
-    plt.ylim((1100, -1100))
-    plt.xlim((-1500, 2500))
-    plt.xlabel('Distance (mm)')
-    plt.ylabel('Distance (mm)')
-    plt.title("Central Complex No-turn Test (Orange - Outbound; Blue - Inbound)")
-    plt.grid(True)
-    plt.show()
-    '''
+
