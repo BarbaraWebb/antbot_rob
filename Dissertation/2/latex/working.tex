@@ -277,8 +277,24 @@ Significant contributions of this project:
   outbound route.
 }
 
+\item{
+  Construction of a video recording tool to allow processed
+  image frames to be recorded from the robot for later viewing and
+  offline analysis.
+}
+
+\item{ Results definitively showing the impracticality of a focus of
+    expansion based system for collision avoidance and justifying
+    continued use of matched filters.
+}
+
+\item{ Identified and fixed a bug in the visual preprocessing system
+  to raise the framerate from 2fps to approximately 10fps under normal usage.}
+
 \item{ Construction of a neural collision avoidance model based on the
   matched-filter system from \cite{Mitchell2018, Stewart2010}. }
+
+
 
 \item{
   Implementation of a biologically plausible ``base model'' for
@@ -286,7 +302,8 @@ Significant contributions of this project:
 }
 
 \item{
-  \textit{[FUTURE]} Results indicating the capability of the ECX model.
+ Justification for the recommendation that the AntBot be retired at
+ the earliest opportunity.
 }
 \end{enumerate}
 \newpage
@@ -336,10 +353,8 @@ computation of sparse fields was shown to be unreliable on the AntBot. This make
 the problem more difficult; the basic from-flow method for computing the FOE
 given by \cite{ODonovan2005} is computationally complex for a dense flow field
 \cite{Mitchell2018}. The time taken to compute may become prohibitive. We will
-therefore look at using a \textit{subset}\footnote{[DRAFT]This is a subset of a
-  dense flow field, tracking every $n$th pixel instead of all pixels. This isn't a
-  dense flow field and it isn't sparse in the classical sense so I provide this
-  term; it will be explained in Methods.} (see Section \ref{sec:methods}) optical
+therefore look at using a \textit{subset}\footnote{A subset of flow
+  vectors computed as part of a dense optical flow field.} (see Section \ref{sec:methods}) optical
 flow field for the method provided by \textit{O'Donovan}.
 
 We will also revisit the matched-filter collision avoidance system from
@@ -528,11 +543,7 @@ brain\cite{Pfeiffer2014, Stone2017}. Though the finer structural details and
 component position may vary, the basic composition is more or less the same
 across species \cite{Pfeiffer2014}. Organization and function of the
 various parts of the CX are given by \textit{Pfeiffer and Homberg} in
-\cite{Pfeiffer2014}\footnote{[DRAFT] I would like to include a short overview
-  of the neurobiology but have left it until I can properly read through
-  \cite{Pfeiffer2014}. I think I will need to leave this out, however, as I'm
-  not sure how to summarise the most relevant parts of their work.
-}
+\cite{Pfeiffer2014}.
 \newline
 \par
 
@@ -562,19 +573,7 @@ the definitions of the actual neurons or sensors present in the model. The
 complete model (topography, connection weights, sensors, and effectors) is
 limited to a fixed-size encoding (genome limited to 500 parameters; ~$50$ neurons
 maximum) \cite{Haferlach2007}. An example encoding from \cite{Haferlach2007} can
-be seen in Figure \ref{fig:markerbasedencoding}\footnote{[DRAFT] This figure
-  doesn't seem to explain how the connections are actually mapped. A connection
-  destination is given for the Sigmoid Neuron as +4 but I have no idea
-  how this actually converts to a connection. Along the same lines, the
-  Memory Neuron gives -6 as its connection destination, but it connects back
-  to the Sigmoid Neuron which only required +4 to reach the Memory Neuron. How
-  were these mappings determined?
-
-  Glancing at the paper by \textit{Fullmer and Miikkulainen, 1992} (cited as
-  inspiration); they give a key to each neuron which identifies it uniquely,
-  which doesn't seem toappear in the model in the Figure
-  \ref{fig:markerbasedencoding}.
-}.
+be seen in Figure \ref{fig:markerbasedencoding}.
 \newline
 \par
 
@@ -2227,11 +2226,390 @@ making this a usable model, though a complete implementation is now
 available on the AntBot.
 \newpage
 
+
 \section{ Discussion and Future Work}
-This section will largely delve into my own personal opinion and
-feelings towards the work completed. Ironically, the word that comes
-to mind when thinking on this year's work is: incomplete.
+This section will largely delve personal opinion and feelings towards
+the work completed. Ironically, the word that comes to mind when
+thinking on this year's work is: incomplete. While we have presented
+and implemented the ECX, a complete theoretical base model for insect
+navigation, we did not manage to gather and present any formal
+experimental data. The only real barrier to testing towards the end of
+the project was the tuning of the collision avoidance system,
+something not predicted to be problematic as we already had a working
+system from \cite{Mitchell2018}. This became a problem as the work
+completed in \cite{Mitchell2018} was completed under the assumption
+that the robot's basic systems functioned sufficiently well that they
+need not be changed. This assumption was seriously flawed (as noted
+towards the end of \cite{Mitchell2018}), but such an assumption is
+inherent in a generational project or platform such as the development
+of AntBot.
+\newline\par
+
+It is our view that the AntBot should be retired. We believe that the
+platform has fulfilled its usefulness and it would be worth having a
+new platform constructed, perhaps as part of a new project. There are
+certainly still tests which could be conducted on the AntBot; a
+Mushroom Body circuit with real-valued weightings could be tested, the
+ECX could be tested if the CA system could be tuned, in fact, likely
+all of the work from \cite{Mitchell2018} could now be meaningfully
+repeated. Something as simple as a framerate change could be enough to
+effect significant change in the MB circuit performance; we have
+already reported the changes seen in the OFCA sytem. However, the
+benefit of having the AntBot available to test such system is vastly
+outweighed by the potential technial difficulties the researcher could
+experience; it is not an exaggeration to say that we lost weeks worth
+of work due to ultimately simple problems. We justify our
+recommendation by reporting our own experiences from
+\cite{Mitchell2018} and this work.
+\newline\par
+
+%% \textbf{Battery life:} A simple yet perpetually irritating issue. As
+%% the smartphone screen is constantly on during testing and
+%% experimentation, the battery life is understandably poor. This is not
+%% helped by the fact that this battery has been continuously
+%% charged/discharged for short periods of time as part of the
+%% development cycle over multiple years; this charging behaviour is
+%% known to cause battery life to degrade.
+
+\subsection{Matrix behaviour} During \cite{Mitchell2018}, we noted that
+one of the main issues we experienced while implementing visual
+scanning was matrix manipulation (shifting rows and columns). When
+checking the manipulation alone, it functioned perfectly fine,
+however, when moving into its own function problems arose. As it
+happens, OpenCV matrices are represented by a wrapper object in the
+Java bindings which essentially acts as a pointer. When treating
+parameter passing as a reference, suddenly functions involving
+matrices began to work as expected. This is a technical detail, it is
+available in the documentation (albeit hard to find), why is it worth
+mentioning?\newline\par
+
+It is worth mentioning as neither of our direct
+predecessors noticed this (as we understand it, the code was changed
+significantly after \textit{Eberding's} project so we cannot include
+him). As a result, some truly ridiculous code has wormed its way into
+the robot over the years. During our code refactor as part of this
+project, we found numerous unused functions which treated matrices
+by-value, where identical code suspiciously appeared in the visual
+pre-processing pipeline. It was clear that previous students had
+attempted to give each stage its own function, but this did not work
+and all code was moved directly into, frankly, a monster of a callback
+function - called for every camera frame.
+\newline\par
+
+This is understandable. During a masters or honours project, technical
+hiccups like this are easier to bypass than to solve. Time is tight
+and there are ``more important'' things to worry about. Each student
+need only worry about the codebase for one academic year; each student
+going out does not worry about the code they leave behind and each
+student going in is told they have a working platform and codebase on
+which to test their models. Clearly there is some disconnect in these
+attitudes. Please do not think that we stand upon the mountain top
+bemoaning the the sins of our predecessors; we are by no means
+innocent in this department. The code refactor undertaken is an
+excellent example; it made development far easier for the project, but
+there were design decisions taken that make no sense in a general
+software engineering context, but perfect sense if you are experienced
+with the AntBot. It is inevitable that every student will have to deal
+with the mess of the previous and ultimately contribute their own. We
+use the example of matrix manipulation to make this more general
+point.
+\newline\par
+
+This is perhaps not specific to the AntBot, any generational project
+would suffer from the same issue. Methods of mitigating this effect
+simply add more work to the student who must document and justify all
+coding decisions made, limiting the already limited time they have to
+work on the biorobotic component. We believe that the AntBot is on the
+verge of becoming unusable.
+
+\subsection{Lack of documentation} The only documentation on the platform
+is available in the form of previous dissertations. These do not go
+into sufficient detail to explain the function and usage of each
+section of the code (as technical documentation should). This means
+that some potential functionality is near impossible to understand.
+Again, a specific example; we noted earlier that encoders were not
+available to provide feedback for odometry. Actually, it could very
+well be possible to get collect encoder information and send it from
+the Arduino layer to the smartphone. We do not know, because the
+serial communications system is not documented, the path taken by
+serial information is incredibly difficult to follow from the code
+alone. While there are examples to follow for sending data \textit{to}
+the Arduino and decoding it, there are no examples for encoding data
+and sending it \textit{from} the Arduino. It was decided that it was
+not worth the time required to understand and we would default to
+odometry based on time (as in previous iterations of the project) so
+as to collect some data on the CX functionality. In fact, the encoders
+have not been used since \textit{Eberding's} original work, where they
+were used only for a specific purpose. This is unfortunate considering
+the encoder capability of the Rover 5 chassis is given as one of the
+main reasons for moving away from Roboant \cite{Eberding2016} (perhaps
+made worse by the fact that optical encoders \textit{are} available
+for the Polulu Zumo motor board used by Roboant).While we have
+successful results to present, it is undeniable that the decision not
+to use encoders likely affected the performance of the model. Encoders
+are not the most accurate odometry technology, but they would provide
+a more accurate measure than time - especially on AntBot, where
+threads are constantly put to sleep to permit time for serial
+communications.
+\newline\par
+
+\subsection{Flimsy construction} When we inherited the project in late 2017, the
+robot chassis was not in one piece; the top plates were not attached
+as students required access to the battery connection to turn the
+robot on or off and remove the batteries for charging. This was solved
+as part of \cite{Mitchell2018} but it should never have been an issue
+with a pre-existing platform.
+\newline\par
+
+When returning this year for this project, the 360$^\circ$ camera
+attachment had been removed and used for another project. It was
+reattached and work commenced. We noticed that the CA system was not
+functioning as we expected during early tests of component systems for
+the ECX. The system constantly reacted in the same direction,
+regardless of the stimulus present. Initially we thought this was due
+to the code refactor (the code, but not the logic, was changed), then
+due to parameter tuning, and finally we noticed that the processed
+image was warped. This warp left a large blind spot on one side of the
+image which explained the behaviour. Previously this warp had only
+been experienced in cases where part of the lens attachment was
+obstructed, however, this time the full view was available. This
+resulted in at least two weeks of breaking down the image processing and unwrap
+process before finally tracing the issue. Namely, that the centre of
+the circle used for the polar transform which unwraps the image was
+hard coded to a specific pixel value. Despite the fact that we were
+specifically informed, and legacy applications demonstrate, that there
+was an automatic detection method in place. Two weeks of available
+time lost (after finding the image warp) to something that should have
+been a non-issue.
+\newline\par
+
+\subsection{Limitations imposed by software (Android)}
+\subsubsection{Library conflicts and limitations}
+The existing hardware is reaching the end of its life. Specifically,
+the smartphone is out of date; while mid-tier modern phones could
+provide better sensors (e.g. compass), faster communication protocols,
+or faster processing speeds, arguably the biggest limitation is now
+becoming the software as a result of outdated (and
+unsupported) hardware. \newline\par
+
+This was most prominent when developing the video recording tool. To
+record a video directly required use of an FFMPEG wrapper, available
+via a specific library (JavaCV). This library also included OpenCV
+bindings which led to conflicts with a system which already included
+an OpenCV library. Furthermore, the OpenCV portion could not be
+excluded. Switching to the JavaCV library would have required
+rewriting much of the existing OpenCV imports and code.
+\newline\par
+
+One other potential avenue existed in importing the required libraries
+independently of the JavaCV library, however, the minimum SDK version
+required for at least one of the components was higher than the
+project target which could not be increased because it is not
+supported on the version of Android installed on the
+smartphone. Therefore, we ended up with the implemented hack solution
+of buffering video frames to be stored as individual images which are
+copied from the robot and stitched together by a python script (using
+FFMPEG). What we end up with is a massively roundabout way of
+accomplishing the same thing by using the same technologies in
+different ways.
+\newline\par
+
+\subsubsection{File management}
+Small gripe, but retrieving files and file management in general
+can be convoluted. As an example, the videoframes are stored to a
+particular directory, this directory is deleted and reformed for every
+recording to ensure that the old frames are always overwritten,
+however, this does not happen consistently; why, is a mystery. Often
+files written during the last run cannot be seen when the phone is
+plugged into a computer, the user must go into the file manager on the
+phone and copy the files to a higher directory for them to become
+visible. This was experienced in \cite{Mitchell2018} when using
+\textit{StatFileUtils}, but only when dealing with the video frames
+this year did we note just how ridiculous this process is. The only
+way to guarantee your video data will be recorded and available is to
+go into the file manager on the phone, delete the destination (and any
+copies made in an attempt to read it), run the agent, go back into the
+file manager, copy the destination directory (usually to the top
+directory on the SD card). In writing this it occurs that a solution
+could be to install a Secure Shell (SSH) server on the smartphone to
+make file transfer easier, but this then requires further development
+and testing for something that should be available by default.
+
+\subsubsection{Software structure restrictions}
+Android applications have a reasonably strict structure. Certain
+things, for example scoping rules for specific variables can be
+enforced unexpectedly in ways which only make sense within the Android
+ecosystem. When undertaking the code refactor we discovered reasonable
+explanations as to why everything had been kept in the same file. Our
+experience of this is minimal but it causes issues when trying to move
+code around in \textit{traditional} ways. As an example, consider
+global variables; generally considered bad practice unless absolutely
+necessary, but, if we want to display their value on-screen then they
+are absolutely necessary. All variables to be displayed must be global
+for reasons we admit we do not totally understand. In many cases these
+are variables modified in multiple places, at multiple stages, in
+multiple threads (though in theory, not simultaneously). This is a
+small example but application structure cropped up a few times in
+different ways. In another case, a function required a Context object
+which was not available until particular point in application
+initialisation.
+\newline\par
+
+This is, again, a small problem but it can result in roundabout
+solutions to problems which would be simple under normal
+circumstances.
+
+\subsubsection{Overhead}
+The overhead required for learning enough about the Android ecosystem
+to successfully develop within it is massive. It is no surprise that
+the original application structure from \cite{Eberding2016} was almost
+immediately dropped, as this would require learning how applications
+in Android interact to pass data back and forth. There may also have
+been latency involved in inter-application communications but no
+previous works have reported this as a reason for moving away from the
+original application structure.\newline\par
+
+While it is not unreasonable to ask prospective students to learn
+about Android development, asking them to interpret the existing
+application structure and legacy code without any documentation, is.
+While the obvious solution is for a student to reach out to the last
+\textit{caretaker} of the project, it is also reasonable to expect a
+student to simply look for the place in the code where they can insert
+their own, and then build everything around that. It is no surprise
+that this location was found to be the AntEye application as all
+visual information is immdiately available.
+\newline\par
+
+This raises a problem in that there is still legacy code that must be
+running alongside AntEye. An Android Toast appears when starting any
+thread which states ``Visual Navigation service started.'', and
+another which appears when stopping a thread to inform you the service
+has stopped. After multiple years of development it can be almost
+impossible to figure out what is running where and doing what outside
+of the small bubble provided by AntEye. Thus, not only does a future
+student have to understand Android, they have to be able to notice and
+understand the workarounds applied by previous years (we will bring it
+up again, with no documentation).
+
+\subsection{Limitations of hardware}
+The construction of the robot further limits development. It is
+impossible to use any useful form of feedback control due to the
+communication latency between the smartphone and Arduino
+\cite{Mitchell2018}. Movements are therefore coarse and
+inconsistent. Feedback control could perhaps be implemented at the
+firmware level, but attaching sensors to make this possible is
+difficult (a compass sensor was added as part of this project, but
+getting it to show up on the I$^2$C bus proved difficult). This would
+futher reqire re-writing most of the firmware on the robot (again this
+firmware is uncommented and undocumented) to implement control adding
+more busy work to a potential project. It was actually planned that
+the control code would be re-written as part of this project but this
+gradually slid further down the list of priorities as difficulties
+were encountered with higher level systems.
+\newline\par
+
+It could also be argued that implementing proportional control at the
+level of the firmware is not useful enough to warrant doing in the
+first place. The motion of the agent would still need to be performed
+in the same discrete steps. The only potential gain would be more
+accurate turns which, given the visual scanning implemented for the MB
+circuit and the lack of scanning in the CXMB/ECX variants, would be of
+minimal importance.
+\newline\par
+
+While it is difficult to add sensors to the Arduino, it is impossible
+to fit additional sensors to the phone. Dedicated optical flow sensors
+could provide more useful input than the field computed from the field
+of view, however, they cannot be added.
+\newline\par
+
+Already mentioned are the numerous delays required to execute
+commands. Stopping the robot after detecting, for example, an
+obstacle, adds a second of delay to the thread calling the
+function. It also seems that instructions can remain in the pipeline
+even after the application has been stopped, to the point that a full
+reset is required to guarantee consistent behaviour. This reset
+procedure is:
+
+\begin{enumerate}
+\item{Switch off the chassis/motorboard.}
+\item{Unplug the serial cable from the smartphone.}
+\item{Kill the entire application on the phone (not just the thread
+    that was running).}
+\item{Re-insert the serial cable.}
+\item{Restart the application.}
+\item{Switch the chassis back on before running any thread.}
+\end{enumerate}
+
+Performing these steps out of order (or skipping any individual step)
+will result in unpredictable behaviour. The robot behaves as if it
+were still executing the previous task. Killing the application is
+made more difficult by the fact that the application can randomly
+vanish from the list of running applications, despite the fact it is
+still running. You can only be sure it has stopped if you see the
+``Visual Navigation service stopped'' Toast. At times this behaviour
+can cause uncertainty as to whether a model does not work, or whether
+the robot is simply acting out.
+\newline\par
+
+The robot is also large, making testing in the available space
+difficult. Early in the project, we considered reverting to the old
+Roboant design. The old parts were put together and tested, but again,
+this would have required re-writing the firmware at the Arduino level
+as Roboant used not only a different Arduino board, but a different
+motor board. Given that the angular turning on the Roboant chassis
+was observed to be less accurate than the AntBot chassis, we decided
+not to invest the time in re-writing the firmware. Reasonably accurate
+turning was preferable to a smaller form factor, but with modern
+systems, a small robot capable of accurate locomotion should be easily
+constructable.
+
+\subsection{Assumed functionality}
+The final and most serious issue to raise (which most previous points
+boil down to) is assumed functionality. When taking on the project it
+is not unreasonable for a student to assume that the robot (having
+been through many years of development) works sufficiently well for
+them to test their thesis. In 2017, we started work on the AntBot with
+exactly this assumption. AntBot is presented as a stable, reliable
+platform for testing and development. The discussion here presented
+should show that this is not the case.\newline\par
+
+The best example to show this definitively should be the frame rate
+bug discovered as part of this project. A significantly reduced
+framerate affected the perfomance of the CA system tested successfully
+and likely affected the Mushroom Body circuit's performance as well
+\cite{Mitchell2018}. Experimental results can only be trusted if the
+platform can be trusted to work correctly to provide models with the
+correct information and actions. The MB received reduced visual
+information, the CA system received reduced motion information, and
+the CX received highly inaccurate time-based displacement
+information. Not one of the systems under test received reliable
+input, simply due to the implementation of the robot.
+\newline\par
+
+Many other platforms could be possible, our favoured approach being a
+small omni-wheel design capable of holonomic motion with algorithmic
+redundancies for any biological system (e.g. an ultrasonic collision
+avoidance system to compare to any visual model). Regardless of
+platform, it cannot be denied that many of the problems experienced
+are inherent to a generational project, unless development (software
+and hardware) is managed more closely.
+
+\section{Closing}
+\textit{In progress, intended to be a single paragraph summary of the
+  work presented.}
+
+
 \newpage
+
+
+
+
+
+%%%%%%%%% END %%%%%%%%%
+
+
+
 
 \bibliographystyle{plain}
 \bibliography{working}

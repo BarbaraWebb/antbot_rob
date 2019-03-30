@@ -10,9 +10,9 @@
 \contentsline {subsection}{\numberline {2.2} The Mushroom Body for Visual Navigation }{6}
 \contentsline {subsection}{\numberline {2.3} The Central Complex for Path Integration }{7}
 \contentsline {subsubsection}{\numberline {2.3.1}The Evolved Model for Path Integration}{8}
-\contentsline {subsubsection}{\numberline {2.3.2}The Central Complex Model}{10}
+\contentsline {subsubsection}{\numberline {2.3.2}The Central Complex Model}{9}
 \contentsline {subsection}{\numberline {2.4} The Eight MBON Model (CXMB) }{15}
-\contentsline {subsection}{\numberline {2.5} Review of Part 1 }{18}
+\contentsline {subsection}{\numberline {2.5} Review of Part 1 }{17}
 \contentsline {section}{\numberline {3} Platform }{19}
 \contentsline {subsection}{\numberline {3.1} Hardware }{19}
 \contentsline {subsection}{\numberline {3.2} Software }{19}
@@ -38,6 +38,17 @@
 \contentsline {subsubsection}{\numberline {6.2.2}Neural Matched Filters}{41}
 \contentsline {subsection}{\numberline {6.3}ECX (CXCA)}{42}
 \contentsline {section}{\numberline {7} Discussion and Future Work}{43}
-\contentsline {section}{\numberline {8}References}{45}
-\contentsline {section}{\numberline {A}Genetic Algorithms}{47}
-\contentsline {section}{\numberline {B}CX Vicon Recordings}{49}
+\contentsline {subsection}{\numberline {7.1}Matrix behaviour}{43}
+\contentsline {subsection}{\numberline {7.2}Lack of documentation}{44}
+\contentsline {subsection}{\numberline {7.3}Flimsy construction}{44}
+\contentsline {subsection}{\numberline {7.4}Limitations imposed by software (Android)}{45}
+\contentsline {subsubsection}{\numberline {7.4.1}Library conflicts and limitations}{45}
+\contentsline {subsubsection}{\numberline {7.4.2}File management}{45}
+\contentsline {subsubsection}{\numberline {7.4.3}Software structure restrictions}{46}
+\contentsline {subsubsection}{\numberline {7.4.4}Overhead}{46}
+\contentsline {subsection}{\numberline {7.5}Limitations of hardware}{47}
+\contentsline {subsection}{\numberline {7.6}Assumed functionality}{48}
+\contentsline {section}{\numberline {8}Closing}{49}
+\contentsline {section}{\numberline {9}References}{51}
+\contentsline {section}{\numberline {A}Genetic Algorithms}{53}
+\contentsline {section}{\numberline {B}CX Vicon Recordings}{55}

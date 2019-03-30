@@ -29,3 +29,5 @@ This file contains a list of problems I'm finding with the AntBot:
 	 - Encoders are pretty much inaccessible (note; they're not but nothing is
 	   documented so it's difficult to figure out how to implement such a
 		 communication).
+
+7. (Apparently) Incorrect code
