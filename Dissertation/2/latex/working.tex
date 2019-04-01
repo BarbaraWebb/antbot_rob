@@ -2365,9 +2365,148 @@ the model. To complete the navigational system, we investigate and
 give evidence against a collision avoidance model based on the focus
 of expansion of an optical flow field; furthermore, we present a
 neural adaptation of the matched filter collision avoidance system
-from \cite{Mitchell2018} which has been integrated into
-\textit{Zhang's} CXMB model to provide a conceptually complete base
-model for insect navigation.
+from \cite{Mitchell2018}. This neural adaptation investigates three
+different neuronal representations resulting in two different
+architectures; this neural matched filter model has been integrated
+into \textit{Zhang's} CXMB model to provide a conceptually complete
+base model for insect navigation. The code for both implementations
+has been added to the AntBot, but currently in use is the rate-based
+version.\newline\par
+
+We also provide several technical advancements to the robot which
+address many of the problems we experienced through
+\cite{Mitchell2018} (MInf Part 1) and this work. This includes a code refactor to
+clean up the existing codebase, the addition of a compass sensor at
+the Arduino level, a calibration system to auto-detect the position of
+the 360$^\circ$ camera attachment, construction of a video recording
+tool to record the agent's point of view during tests, and finally,
+the identification and correction of a fairly major bug in the visual
+pre-processing system which is now known to have affected past works.
+
+\subsection{Future work}
+\subsubsection{Building upon the work presented}
+While we are ultimately pleased with the progress made in the
+development of AntBot, there are undoubtedly things which could be
+improved.\newline\par
+
+\textbf{CX Experiments:} The experiments presented undoubtedly show
+that the CX model functions well as a path integrator, however, there
+are some issues with our methodology. Firstly, the outward routes are
+quite short and not as varied as we had hoped. Experiments
+demonstrating the network's capabilities over a longer, more varied
+(but still non-deterministic) route would be of value. Our routes were
+restricted by the experimental enclosure, which in-turn, is restricted
+by the size of the pitch in IF G.17. There is no reason a larger
+enclosure (which is still viewable by the VICON system) could not be
+built, we simply used materials which were immediately available
+during \cite{Mitchell2018}. Alternatively a smaller robot may be used.
+\newline\par
+
+While the enclosure itself may seem like the limitation here, we think
+it is valuable in terms of providing some degree of control to the
+visual scene experienced during experiments. As such, we would
+recommend the continued use of some enclosing wall. We would also
+recommend continued use of the robocup pitch as it is lit
+consistently, is equipped with VICON, and is self-contained within a
+secure lab (meaning that it will not become unexpectedly unavailable).
+\newline\par
+
+\textbf{Neural Matched Filters:} We do not present any formal results
+for the neural matched filter system as we encountered unforseen
+difficulties after fixing the framerate bug. However, we are convinced
+that this sytem is conceptually sound. We would encourage others to
+work with the rate-based system, as, after development, this seems the
+most intuitive, efficient, and useful representation. As a start, we
+would suggest looking at the flow vectors produced during the filter
+matching stage (\textit{filterCollisionAvoidance()} in
+MainActivity.java) and looking for a way to filter out low level
+noise in the flow sum calculation. Furthermore, alternate flow filters
+could be investigated.
+\newline\par
+
+\textbf{Extended Central Complex:} Functioning neural matched
+filtering (or an algorithmic alternative) is a pre-requisite, however,
+we would strongly encourage future work on this model. If some
+reliable collision detection input can be provided (note this need not
+be based on optical flow), then the ECX could be comprehensively
+tested. Our original vision for this was a multi-stage navigational
+exercise; the robot performs an outward trip using CA alone, homeward
+using CACX (during which a visual route is learned), then outward once
+more using either visual information or an inverted home vector in
+CACX to learn a visual outbound route. On completion of the second
+outbound trip, the robot should have all of the information it
+requires to make the trip reliably, from visual memory. \newline\par
+
+To apply the different systems dynamically, they must be weighted at
+each stage with the initial goal of gradually reducing the reliance on
+collision avoidance and path integration, using vision almost
+exclusively. A further advancement could see a system which can place
+some \textit{confidence} in the output from each system, thereby
+choosing the one which gave the best chance of successful navigation.
+\newline\par
+
+\subsubsection{Platform}\label{sec:disc:platform}
+\textbf{Software:} While our code refactor was extensive, there are
+still aspects of the software which could be fixed. There are still
+many varibles which are global to the application (referenced via the
+MainActivity class). This is not only bad practice in a software
+engineering sense, but it makes tracing variable updates needlessly
+difficult. Some such variables have been moved where possible but
+there is still a lot which could be fixed.\newline\par
+
+Most of the unused code which is still present is commented and/or
+specifically marked for archival purposes. We would recommend
+removal of any and all remaining dead code which has been
+missed. Likewise, many unused variables were removed but some remain;
+use great caution when removing these! Code which seems unused may be
+used indirectly (even if you search for references and find none), use
+all tools afforded by Android Studio to ensure nothing
+breaks and update version control excessively.
+\newline\par
+
+Library upticks may be useful, but we are not sure of the extent to
+which this may be done. We experienced difficulties in using some
+libraries during the development of the recording tool due to a
+version conflict between JavaCV (which contained required FFMPEG
+bindings) and the version of OpenCV present on the robot (3.0.0,
+compiled from source). We also experienced problems when investigating
+the few possible alternatives as the minimum Android SDK version for
+the libraries was greater than the target for the project; to
+complicate matters further, a later version of the Android SDK was
+incompatible with the Google Nexus 5 platform. The project and
+dependency versioning and package management is a bit of a mess and
+could do with being cleaned up where possible. A good start point
+would be to move the project away from the source version of OpenCV
+and onto an appropriate Maven\footnote{Maven - The Android Studio
+  package manager.} package. This would, however, require updating
+many legacy imports and changing (or removing\footnote{We think this
+  is inadvisable.}) a lot of legacy code.\newline\par
+
+\textbf{Hardware/Firmware:}
+Potential upgrades to hardware are extremely limited. During this
+project, we note the difficulty in adding a single compass sensor to
+the robot, with the goal of later adding proportional control
+code. The Arduino has a shield board connected which governs all of
+the connections to the motor board. This board occupies the connectors
+usually used for the I$^2$C bus, however, it is possible (to a limited
+extent) to piggy-back on the shield connections. A better solution
+which we are advised could be implemented by the Informatics workshop,
+would be to have a different shield made up with provisions for a
+break-out board which would permit easier addition and testing of
+different sensory systems.\newline\par
+
+At one point in the project, we considered adding an ultrasonic sensor
+array to the front of the robot (three sensors, mounted in an arc on a
+custom 3D printed frame). The technical implications were too great
+for the late stage at which this was considered. However, if a future
+student could delve into the serial broadcast library and learn how to
+send serial messages from the Arduino to the smartphone this could be
+of great benefit. Firstly, the chassis has built-in encoders which
+could be queried to provide more accurate odometric measurements to
+higher models; furthermore, this could perhaps be used to introduce an
+algorithmic alternative to the matched filter model for collision
+avoidance, which could be useful in testing higher models (e.g. the
+ECX) where visual collision avoidance may be unreliable.
 
 
 %% This section will largely delve personal opinion and feelings towards
