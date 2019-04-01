@@ -2369,7 +2369,7 @@ from \cite{Mitchell2018}. This neural adaptation investigates three
 different neuronal representations resulting in two different
 architectures; this neural matched filter model has been integrated
 into \textit{Zhang's} CXMB model to provide a conceptually complete
-base model for insect navigation. The code for both implementations
+base model for insect navigation. The code for both architectures
 has been added to the AntBot, but currently in use is the rate-based
 version.\newline\par
 
@@ -2493,7 +2493,10 @@ extent) to piggy-back on the shield connections. A better solution
 which we are advised could be implemented by the Informatics workshop,
 would be to have a different shield made up with provisions for a
 break-out board which would permit easier addition and testing of
-different sensory systems.\newline\par
+different sensory systems. We would encourage a future student to
+make use of the compass sensor to rewrite the control (specifically
+turning) code such that the locomotion of the robot could be made more
+accurate.\newline\par
 
 At one point in the project, we considered adding an ultrasonic sensor
 array to the front of the robot (three sensors, mounted in an arc on a
@@ -2507,6 +2510,119 @@ higher models; furthermore, this could perhaps be used to introduce an
 algorithmic alternative to the matched filter model for collision
 avoidance, which could be useful in testing higher models (e.g. the
 ECX) where visual collision avoidance may be unreliable.
+\newline\par
+
+We greatly encourage further investigation to get the most out of the
+available platform, however, we remain wary of the serial
+communications. It has been noted in this work and \cite{Mitchell2018}
+that executing commands requires a delay, however, we cannot speak for
+an event listener on the smartphone which simply listens for specific
+serial events. This may prove to be much faster and more usable than
+we might expect and is potentially worth further research.\newline\par
+
+
+
+\textbf{A New Platform:} We have listed some potential avenues for
+improvement which could breath new life into AntBot. In particular, if
+I$^2$C connections (and other I/O ports) can be made available (or
+more easily accessible in some cases) on the Arduino and the serial
+communications improved, this could eliminate many of the limitations
+we have experienced in this work (e.g. no access to accurate encoder
+information, no proportional control at a high level, no algorithmic
+alternatives to bio-inspired systems - usfeul as experimental controls
+for comparison). However, we feel that this is a large ``if''.
+\newline\par
+
+Even if the more problematic hardware/firmware limitations were lifted, there
+are still some limitations inherent in the Android OS and codebase.
+Solving these problems may well require as much work as constructing
+something new from scratch; the existing codebase (including the
+serial communications system) is almost entirely undocumented and
+poorly commented; this is something we have tried to fix where we can
+but we have only touched a small section of the existing architecture,
+and we cannot deny that we are also guilty of writing poorly
+commented, difficult-to-read code in the run up to deadlines.
+\newline\par
+
+Android can place limitations on how code is written, this is not a
+massive problem but it tends to rear its head in strange ways; for
+example, in the current codebase, variables have to be global to the
+activity to be output on screen. Android versioning may start to cause
+greater problems in the years to come as the Google Nexus 5 grows
+further into obselescence. However, we can say with confidence that the
+biggest problems are due to the generational nature of the codebase.
+\newline\par
+
+AntBot has been in continuous use for the three years since its
+development by four different students across five projects
+\cite{Eberding2016,Scimeca2017,Zhang2017,Mitchell2018} (and this
+work). Different coding styles and standards have been put into
+practice throughout; in addition to the lack of documentation and
+comments, the differing styles can make some sections exceedingly
+difficult to work with when required. As two examples we give the
+ocular calibration and framerate bug; in both cases, a large
+proportion of the time dedicated to the issue was spent attempting to
+figure out what legacy code was doing and if it was relevant to the
+problem; once function and relevance had been identified, a solution
+which fit into the AntEye application without breaking existing code
+had to be designed. This view to design can result in poor software
+engineering practices, further compounding the problem with code which
+then only makes sense in the context of the AntEye application and the
+operational procedures of the AntBot.
+\newline\par
+
+To the best of our knowledge of the history of the platform (and the
+codebase itself) the original application structure (Section
+\ref{sec:platform}) was abandoned in the year after its creation.
+This means we have a codebase which has never been used as it was
+originally designed, resulting in what little documentation there is
+on the application structure being mostly incorrect. As another
+concrete example, previous works \cite{Eberding2016, Scimeca2017,
+  Zhang2017} list a serial message which sends encoder values from the
+Arduino to the smartphone, however they fail to mention that it was
+used only as part of a particular Arduino function\footnote{Confirmed
+  by observation an correspondence with \textit{Eberding}.} and furthermore,
+that this functionality has actually been removed\footnote{This removal is
+thought to be part of \cite{Scimeca2017}, version control records
+should be available to confirm.}. The instruction absence was found
+during \cite{Mitchell2018} but its approximate removal date was
+revealed in the early stages of this work when attempting to retrieve
+encoder values from the Arduino on-demand.
+\newline\par
+
+It is with this justification (including the hardware/firmware
+limitations mentioned above) that we recommend the AntBot be retired
+and a new platform be constructed. We present some broad suggestions
+based on the problems and limitations we have experienced with
+AntBot. A small omni-wheeled design capable of holonomic motion would
+be useful in testing the bio-inspired models with greater rigour. A
+singular computational unit, capable of interfacing with a motor board
+(e.g. a Raspberry Pi) would eliminate the control and feedback latency
+problems experienced on the current platform; this would also allow a
+redundant sensor array to be added and used to provide some baseline
+or algorithmic performance against which biological models can be
+compared. We feel there is something to be said also for using a
+general purpose OS, instead of a mobile platform. We feel this
+presents a shallow learning curve compared to the likes of the Android
+ecosystem and it may also allow more freedom in application
+design.
+
+\subsubsection{Closing}
+With all of this said, we have to note that our predecessors have been
+extraordinarily helpful in working with the codebase. In particular,
+\textit{Zhang} and \textit{Eberding} were of great help in
+establishing an early understanding of the codebase, robot operation,
+and in confirming some elusive technical details. We also intend to
+make ourselves available for any questions we can answer about the
+system. While we are pleased with the results we have gathered and the
+models we have constructed, we feel it clear that the robot is no longer
+fit-for-purpose as a ready-made platform, on which students can test
+and implement bio-inspired algorithms.
+\newline\par
+
+AntBot has been worked hard in the years since its creation. It
+deserves some rest.
+
 
 
 %% This section will largely delve personal opinion and feelings towards

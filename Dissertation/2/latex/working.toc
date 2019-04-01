@@ -43,6 +43,7 @@
 \contentsline {subsection}{\numberline {7.2}Future work}{43}
 \contentsline {subsubsection}{\numberline {7.2.1}Building upon the work presented}{43}
 \contentsline {subsubsection}{\numberline {7.2.2}Platform}{44}
-\contentsline {section}{\numberline {8}References}{47}
-\contentsline {section}{\numberline {A}Genetic Algorithms}{49}
-\contentsline {section}{\numberline {B}CX Vicon Recordings}{51}
+\contentsline {subsubsection}{\numberline {7.2.3}Closing}{47}
+\contentsline {section}{\numberline {8}References}{49}
+\contentsline {section}{\numberline {A}Genetic Algorithms}{51}
+\contentsline {section}{\numberline {B}CX Vicon Recordings}{53}
