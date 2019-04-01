@@ -7,54 +7,52 @@ Warning--entry type for "Mitchell2018" isn't style-file defined
 --line 15 of file working.bib
 Warning--entry type for "Vanderstap2012" isn't style-file defined
 --line 47 of file working.bib
-Warning--entry type for "Webb2018" isn't style-file defined
---line 87 of file working.bib
 Warning--entry type for "Eberding2016" isn't style-file defined
---line 180 of file working.bib
+--line 192 of file working.bib
 Warning--entry type for "Scimeca2017" isn't style-file defined
---line 188 of file working.bib
+--line 200 of file working.bib
 Warning--entry type for "Zhang2017" isn't style-file defined
---line 194 of file working.bib
+--line 206 of file working.bib
 Warning--empty journal in ODonovan2005
-You've used 20 entries,
+You've used 19 entries,
             2118 wiz_defined-function locations,
-            636 strings with 7855 characters,
-and the built_in function-call counts, 6600 in all, are:
-= -- 625
-> -- 332
-< -- 2
-+ -- 139
-- -- 112
-* -- 471
-:= -- 1100
-add.period$ -- 56
-call.type$ -- 20
-change.case$ -- 116
+            632 strings with 7627 characters,
+and the built_in function-call counts, 6175 in all, are:
+= -- 585
+> -- 319
+< -- 1
++ -- 135
+- -- 108
+* -- 452
+:= -- 1048
+add.period$ -- 54
+call.type$ -- 19
+change.case$ -- 111
 chr.to.int$ -- 0
-cite$ -- 21
-duplicate$ -- 219
-empty$ -- 522
-format.name$ -- 112
-if$ -- 1364
+cite$ -- 20
+duplicate$ -- 199
+empty$ -- 477
+format.name$ -- 108
+if$ -- 1258
 int.to.chr$ -- 0
-int.to.str$ -- 20
+int.to.str$ -- 19
 missing$ -- 14
-newline$ -- 98
-num.names$ -- 40
-pop$ -- 131
+newline$ -- 94
+num.names$ -- 38
+pop$ -- 116
 preamble$ -- 1
-purify$ -- 96
+purify$ -- 92
 quote$ -- 0
-skip$ -- 173
+skip$ -- 152
 stack$ -- 0
-substring$ -- 406
-swap$ -- 39
-text.length$ -- 2
+substring$ -- 374
+swap$ -- 28
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 80
+type$ -- 76
 warning$ -- 1
-while$ -- 61
-width$ -- 22
-write$ -- 205
-(There were 7 warnings)
+while$ -- 57
+width$ -- 21
+write$ -- 197
+(There were 6 warnings)

@@ -7,12 +7,6 @@ Paul Ardin, Fei Peng, Michael Mangan, Konstantinos Lagogiannis, and Barbara
   complex natural environments.
 \newblock {\em PLOS Computational Biology}, 12(2):1--22, 02 2016.
 
-\bibitem{Burger1989}
-W.~Burger and B.~Bhanu.
-\newblock On computing a 'fuzzy' focus of expansion for autonomous navigation.
-\newblock In {\em Proceedings CVPR '89: IEEE Computer Society Conference on
-  Computer Vision and Pattern Recognition}, pages 563--568, June 1989.
-
 \bibitem{Eberding2016}
 Leonard Eberding.
 \newblock {Development and Testing of an Android-Application-Network based on
@@ -96,9 +90,10 @@ N.~{van der Stap}, R.~{Reilink}, S.~{Misra}, I.~A. M.~J. {Broeders}, and
 \newblock The use of the focus of expansion for automated steering of flexible
   endoscopes, June 2012.
 
-\bibitem{Webb2018}
+\bibitem{Webb2019}
 Barbara Webb.
-\newblock {PLACEHOLDER: JEB REVIEW PAPER; GET CORRECT CITATION"}, 2018.
+\newblock The internal maps of insects.
+\newblock {\em Journal of Experimental Biology}, 222(Suppl 1), 2019.
 
 \bibitem{Wehner2009}
 R\"udiger Wehner.

@@ -137,7 +137,7 @@ Dr. Barbara Webb
 
 \section{ Introduction }
 Navigation is a complex task. Determining a sequence of actions to reach a
-known location, based on a combination of sensory inputs requires a lot of
+known location based on a combination of sensory inputs requires a lot of
 computational power. Desert ants, are capable of performing such a task
 over comparitively huge distances with limited, low resolution sensory
 information and remarkable efficiency. While the exact method by which
@@ -147,57 +147,67 @@ which may mimic the insect behaviour.
 \newline
 \par
 
-In this paper we introduce a combined model, the Extended Central Complex (ECX)
-model for insect
-navigation. To be clear, there is no (known) physiological basis for such a
-model; however, is not biologically infeasible, and may provide insight into
-the operation of the real insect brain. The ECX model combines the tasks of
-Visual Navigation, Path Integration, and Collision Avoidance; using, the Mushroom
-Body Circuit (MB) \cite{Ardin2016}, the Central Complex model (CX)
-\cite{Stone2017}, and Optical Flow Collision Avoidance (OFCA) \cite{Mitchell2018}
-for each task at a low level, then combining their outputs to get a form of
-higher visual processing (similar to the weighted ``base model'' described in
-\cite{Webb2018}\footnote{[DRAFT] This is the review paper that you sent me in
-  prepreint. So far as I can tell, it has not yet been published; will it be out
-  by April? How should I refer to this if the paper has not been published?}).
-The ECX model is a modified Central Complex model, named simply
-to ensure distinction between the two models. The individual components are all
-biologically plausible and two of three are known to be physiologically
-plausible. \cite{Ardin2016, Stone2017, Mitchell2018}.
+In this paper we introduce a theoretical combined model, the Extended
+Central Complex (ECX) model for insect navigation. To be clear, there
+is no (known) physiological basis for such a model; however, is not
+biologically infeasible and may provide insight into the operation of
+the real insect brain. The ECX model combines the tasks of Visual
+Navigation, Path Integration, and Collision Avoidance; using, the
+Mushroom Body Circuit (MB) \cite{Ardin2016}, the Central Complex model
+(CX) \cite{Stone2017}, and Optical Flow Collision Avoidance (OFCA)
+\cite{Mitchell2018, Stewart2010} for each task at a low level, then
+combining their outputs to get a form of higher navigational processing
+(similar to the weighted ``base model'' described in \cite{Webb2019}).
+The ECX model is a modified Central Complex model, named simply to
+ensure distinction between the two models. The individual components
+are all biologically plausible and two of three are known to hava a
+physiological basis. \cite{Ardin2016, Stone2017, Mitchell2018,
+  Stewart2010, Julien2017}.
 \newline
 \par
 
-This project primarily extends the work done in \cite{Mitchell2018}. As such we
-continue using the AntBot platform; a robot constructed for the express purpose
-of experimenting with the algorithms in the \textit{Ant Navigational Toolkit}
-\cite{Eberding2016, Wehner2009}.
+This project primarily extends the work done in
+\cite{Mitchell2018}. As such we continue using the AntBot platform; a
+robot constructed for the express purpose of experimenting with the
+algorithms in the \textit{Ant Navigational Toolkit}
+\cite{Eberding2016, Wehner2009}. Through our experience in
+\cite{Mitchell2018} and in constructing this work, we have concluded
+that, while the AntBot could still be of use for specific tests, it is
+generally no longer fit for purpose (see Discussion).
 
 \subsection{ Motivation }
 Currently, a full base model for insect navigation does not exist
-\cite{Webb2018}. We here aim to take the abstraction presented by \textit{Webb}
-and create a biologically plausible implementation using our three-system
-approach. Both the MB and CX models have been implemented and tested on AntBot
-previously \cite{Scimeca2017, Mitchell2018, Eberding2016, Zhang2017}, and a model
-combining the two has also been attempted by \textit{Zhang} in \cite{Zhang2017}.
-This is used as an inspiration and will be discussed further in Section
-\ref{CXMBBackground}.
+\cite{Webb2019}. We here aim to take the abstraction presented by
+\textit{Webb} and create a biologically plausible implementation using
+our three-system approach. Both the MB and CX models have been
+implemented and tested on AntBot previously \cite{Scimeca2017,
+  Mitchell2018, Eberding2016, Zhang2017}, and a model combining the
+two has also been constructed by \textit{Zhang} \cite{Zhang2017}.
+This combined model is used as a basis for our own and will be
+discussed further in Section \ref{CXMBBackground}.
 \newline
 \par
 
-The previous AntBot implementations have demonstrated good performance of the CX
-and MB models individually \cite{Scimeca2017, Mitchell2018}. Performance of
-a combined system has also been shown to be reasonable, however, it is less
-consistent than we would desire \cite{Zhang2017}. In the combined model tests
-from \cite{Zhang2017} we note two key methodological problems: A fixed outbound
-route, and fixed component weightings. We address the former by adding the OFCA
-component to our model; as in \cite{Mitchell2018}, the AntBot will follow a
-non-deterministic outbound route through a cluttered arena. The latter brings up
-the more complicated question of plausible synaptic plasticity which, while
-undoubtedly interesting, lies outside the scope of this project (though some
-modelling of plasticity will be included). It is worth noting that here may also
-have been unknown tecnical issues with the robot which affected the results of
-\cite{Zhang2017}, making them less consistent than they should be in reality (see
-\cite{Mitchell2018} and later in this work).
+The previous AntBot implementations have demonstrated good performance
+of the CX and MB models individually \cite{Scimeca2017,
+  Mitchell2018}. Performance of a combined system has also been shown
+to be reasonable, however, it is less consistent than we would desire
+\cite{Zhang2017}. In the combined model tests from \cite{Zhang2017} we
+note two key methodological problems: A fixed outbound route, and
+fixed component weightings; the fixed outbound route was also present
+in the CX experiments conducted by \textit{Scimeca}. We address the
+former by adding the OFCA component to our model; as in
+\cite{Mitchell2018}, the AntBot will follow a non-deterministic
+outbound route through an arena with obejcts present (due to the level
+of implementation achieved these objects will be placed
+strategically). The latter methodilogical brings up the
+more complicated question of plausible synaptic plasticity which,
+while undoubtedly interesting, lies outside the scope of this project
+(though we will discuss the idea to a small extent). It is worth
+noting that here may also have been unknown tecnical issues with the
+robot which affected the results of \cite{Zhang2017}, making them less
+consistent than they should be in reality (see \cite{Mitchell2018} and
+later in this work).
 \newline
 \par
 
@@ -212,20 +222,21 @@ Our ultimate hope, is to provide some insight into the precise biological
 systems in play during a point-to-point navigational task.
 
 \subsection { Practical Goals }
-We aim to build upon the experimental scenario from \cite{Mitchell2018}. The
-robot will be tested by allowing it to navigate through a cluttered environment
-using a collision avoidance system. The navigational systems will then be
-tasked with bringing the robot home through the cluttered environment using
-a combination of visual information, a path integration vector, and
-collision avoidance.
+The original aim of this project was to build on the experimental
+scenario from \cite{Mitchell2018}. The robot would be tested by
+allowing it to navigate through a cluttered environment using a
+collision avoidance system. The navigational systems would then be
+tasked with bringing the robot home through the cluttered environment
+using a combination of visual information, a path integration vector,
+and collision avoidance.
 \newline
 \par
 
 In order to achieve this experimental goal, we break the project down
-into four components:
+into four stages:
 
 \begin{enumerate}
-\item{The first stage will involve solving some technical issues
+\item{The first stage will involve solving some choice technical issues
   picked up by \cite{Mitchell2018}; making any hardware/software adjustments
   required to provide a solid foundation on which to develop.}
 
@@ -237,7 +248,7 @@ appropriate metrics by testing the existing CX model in a non-deterministic
 navigational task (see Section \ref{sec:methods}).}
 
 \item{This stage will involve the set up and testing of the individual components
-  of the ECX model. Building the modified optical flow system, adapting the work
+  of the ECX model. Building the modified optical flow system, using the work
   from \textit{Zhang} to combine the MB model with the CX, and finally, putting
   the three pieces together.}
 
@@ -245,6 +256,9 @@ navigational task (see Section \ref{sec:methods}).}
 and the individual systems.}
 \end{enumerate}
 
+As will be discussed later, we did not reach our goal. We will discuss
+our progress and testing up to the end of stage three of the project, we did not
+manage to complete stage four.
 
 \subsection { Results }
 This work is based on work done previously by Leonard Eberding, Luca Scimeca,
@@ -256,10 +270,7 @@ Significant contributions of this project:
 \begin{enumerate}
 \item{
   Research and installation of a new compass sensor for the AntBot control
-  systems.\footnote{[DRAFT] practically, its looking like this will be less
-    and less useful, I've not had a chance to actually try re-writing the control
-    code to use the new sensor. That said, time went into this early on, and it
-    would be nice to include this.}
+  systems.
 }
 
 \item{
@@ -269,7 +280,7 @@ Significant contributions of this project:
 
 \item{
   Addition of a calibration system to allow the user to auto-detect the position
-  of the camera lens attachment (see Section \ref{sec:platform}).
+  of the camera lens attachment (see Section \ref{sec:mod}).
 }
 
 \item{
@@ -295,7 +306,6 @@ Significant contributions of this project:
   matched-filter system from \cite{Mitchell2018, Stewart2010}. }
 
 
-
 \item{
   Implementation of a biologically plausible ``base model'' for
   insect navigation, the Extended Central Complex (ECX) model.
@@ -305,6 +315,7 @@ Significant contributions of this project:
  Justification for the recommendation that the AntBot be retired at
  the earliest opportunity.
 }
+  
 \end{enumerate}
 \newpage
 
@@ -320,46 +331,46 @@ that took place and any relevant results or new perspectives. For more detail,
 please consult \cite{Mitchell2018}.
 
 
-\subsection{ Optical Flow for Collision Avoidance } \label{OFBackground}
-Optical flow is a large and diverse area of study. As such, we will not provide
-a complete background on the fundamental principles. Relevant terms will be
-explained, however, a succinct background of the concepts necessary for this
-paper can be found in \cite{Mitchell2018}. A comprehensive introduction is
-given by \textit{O'Donovan} in \cite{ODonovan2005}.
+\subsection{ The Focus of Expansion for Collision Avoidance } \label{OFBackground}
+Optical flow is a large and diverse area of study. As such, we will
+not provide a complete background on the fundamental
+principles. Relevant terms will be explained, however, a succinct
+background of the concepts necessary for this paper can be found in
+\cite{Mitchell2018}. A comprehensive introduction is given by
+\textit{O'Donovan} in \cite{ODonovan2005}.
 \newline
 \par
 
-The main driving point in this paper is the integration of multiple navigational
-systems into a single model, namely, the Central Complex.
-Optical flow flitering worked well for a standalone collision avoidance system,
-however, it does not fit so neatly into the CX model. We therefore require a
-different approach. The relevant background revisits the concept of the
-\textit{focus of expansion} (FOE) from \cite{Mitchell2018, ODonovan2005}.
-The FOE is the point from which all optical flow vectors originate. The location
-of the FOE can tell us things about the motion, and depth of the image.
+The main driving point in this paper is the integration of multiple
+navigational systems into a single model, namely, the Central Complex.
+Optical flow filtering worked well for a standalone collision
+avoidance system, however, it does not fit so intuitively into the CX
+model. We therefore investigate an alternate approach. The relevant
+background revisits the concept of the \textit{focus of expansion}
+(FOE) from \cite{Mitchell2018, ODonovan2005}.  The FOE is defined as
+the point from which all optical flow vectors originate. The location
+of the FOE, and its relationship with the rest of the flow field, can
+tell us things about the motion and depth of the image.
 \newline
 \par
 
-In \cite{Mitchell2018}, the FOE was used only to compute time-to-contact
-with an obstacle. In this work, we instead use it directly to determine the
-potential location of an obstacle. As stated in \cite{Burger1989}
-\footnote{[DRAFT] This is the source for the 'fuzzy' FOE; not included in this
-  submission
-  but I may revisit it, time-allowing; I have most of the section written},
-computing the
-FOE is not trivial. Following \cite{Mitchell2018} we will be using a dense
-optic flow field (tracking motion for every pixel in the image) as the
-computation of sparse fields was shown to be unreliable on the AntBot. This makes
-the problem more difficult; the basic from-flow method for computing the FOE
-given by \cite{ODonovan2005} is computationally complex for a dense flow field
-\cite{Mitchell2018}. The time taken to compute may become prohibitive. We will
-therefore look at using a \textit{subset}\footnote{A subset of flow
-  vectors computed as part of a dense optical flow field.} (see Section \ref{sec:methods}) optical
-flow field for the method provided by \textit{O'Donovan}.
-
-We will also revisit the matched-filter collision avoidance system from
-\cite{Mitchell2018}, though this system remains wholly unchanged at its core. For
-details, please see \cite{Mitchell2018}.
+In \cite{Mitchell2018}, the FOE was used only to compute
+time-to-contact with an obstacle. In this work, we instead attempt to
+use it directly to determine the potential location of an
+obstacle. Following \cite{Mitchell2018} we will be using a dense optic
+flow field (tracking motion for every pixel in the image) as the
+computation of sparse fields was shown to be unreliable on the
+AntBot. This potentially makes the problem more difficult; the basic
+method for computing the FOE given by \cite{ODonovan2005} is
+computationally complex for a dense flow field
+\cite{Mitchell2018}. The time taken to compute may become prohibitive,
+though as will be seen, this computation did not become the main
+barrier to efficiency in implementation. A common, reliable and
+intuitive method of computing the FOE is the Least Squared-Error (LSE)
+method \cite{Tistarelli1991, ODonovan2005, Vanderstap2012}. This
+method also appears to be in use in \cite{Souhila2007}, a major
+inspiration for the optical flow methods presented in
+\cite{Mitchell2018}, though it is presented in a different manner
 
 \subsubsection{The Least Squared-Error method}
 This is the method given by \textit{O'Donovan} and discussed in
@@ -406,81 +417,148 @@ and it serves as an excellent example for the reason the FOE is so difficult to
 compute. In theory, we should be able to take any two vectors $\mathbf{u}$,
 $\mathbf{v}$ from the flow field, and compute the point at which lines
 running along them intersect. This point of intersection would give us the
-FOE\cite{ODonovan2005}. While wonderfully simple, this method only works for
+FOE \cite{ODonovan2005}. While wonderfully simple, this method only works for
 a perfect flow field. In reality, flow fields are imperfect; for example,
 visual noise can cause disruptions to areas of the field. Therefore picking two
 arbitrary vectors could lead to an erroneous FOE. Unravelling the matrix notation
 of Equation \ref{eq:foe}, shows this to be a least squares technique;
-essentially, we try to fit the best FOE to the flow field given.
+essentially, we compute the best FOE for the flow field given.
 
-%\subsubsection{The fuzzy method}
-%Instead of attempting to estimate an exact point which is likely to be the
-%FOE, \textit{Burger and Bhanu} propose a method for computing a small region
-%which is likely to contain the FOE. This region is referred to as the
-%\textit{fuzzy FOE}\cite{Burger1989}.
-%\newline
-%\par
+%% \subsubsection{The fuzzy method}
+%% This method was not used for this paper but it was researched as an
+%% alternative to the LSE method; we found this interesting as most
+%% papers seemed to default to the LSE method or a variation. We present
+%% this briefly for the sake of curiosity, we would encourage the reader
+%% to investigate the work presented in \cite{Burger1989}.
+%% \newline\par
 
-%Their motivation for using a region as opposed to a point is the rotational
-%aspect of motion. If we have a wheeled robotwith a fixed camera, the camera has
-%(broadly) two aspects to its motion: Translational and Rotational. Translation is
-%experienced when the robot moves forward, or backward in a straight line
-%(i.e. the camera is moving directly into the image or away from it). Rotation
-%occurs when the robot turns. If the robot moves in a straight line, the rotation
-%component can be ignored; similarly, if the robot turns on the spot, the
-%translation component can be ignored. Many papers on using the FOE will ignore
-%rotation. In many applications (including our own) this is completely acceptable;
-%for example, if the robot only ever moves in straight lines with stationary
-%turns. Their discussion takes place in the context of an Autonomous Land Vehicle
-%(ALV) which is capable of arcing movements, so both components come into play.
-%\newline
-%\par
+%% Instead of attempting to estimate an exact point which is likely to be
+%% the FOE, \textit{Burger and Bhanu} propose a method for computing a
+%% small region which is likely to contain the FOE. This region is
+%% referred to as the \textit{fuzzy FOE}\cite{Burger1989}.
+%% \newline
+%% \par
 
-%Perhaps counter-intuitively, their computation still requires testing and
-%working with a single FOE.
+%% Their motivation for using a region as opposed to a point is the rotational
+%% aspect of motion. If we have a wheeled robot with a fixed camera, the camera has
+%% (broadly) two aspects to its motion: Translational and Rotational. Translation is
+%% experienced when the robot moves forward, or backward in a straight line
+%% (i.e. the camera is moving directly into the image or away from it). Rotation
+%% occurs when the robot turns. If the robot moves in a straight line, the rotation
+%% component can be ignored; similarly, if the robot turns on the spot, the
+%% translation component can be ignored. Many papers on using the FOE will ignore
+%% rotation. In many applications (including our own) this is completely acceptable;
+%% for example, if the robot only ever moves in straight lines with stationary
+%% turns. Their discussion takes place in the context of an Autonomous Land Vehicle
+%% (ALV) which is capable of arcing movements, so both components come into play.
+%% \newline
+%% \par
 
-%The computation takes two steps:
-%\begin{enumerate}
-%\item{
-%  Search for a location (they call it $\mathbf{x}_{min}$) of local minimum error
-%  starting from an arbitrary location $\mathbf{x}_0$.
-%}
+%% Perhaps counter-intuitively, their computation still requires testing and
+%% working with a single FOE.
 
-%\item{
-%  \textit{Grow} a connected region around this $\mathbf{x}_{min}$ until some
-%  criterion is met.
-%}
+%% The computation takes two steps:
+%% \begin{enumerate}
+%% \item{
+%%  Search for a location (they call it $\mathbf{x}_{min}$) of local minimum error
+%%  starting from an arbitrary location $\mathbf{x}_0$.
+%% }
 
-%\end{enumerate}
+%% \item{
+%%  \textit{Grow} a connected region around this $\mathbf{x}_{min}$ until some
+%%  criterion is met.
+%% }
 
-%The criterion they choose is an accumulated error volume threshold; i.e. setting
-%a limit on the amount of error that can be contained in the fuzzy FOE;
-%intuitively, the smaller the error, the more likely the region is to contain the
-%FOE.
+%% \end{enumerate}
 
-%\subsubsection{The direct method}
+%% The criterion they choose is an accumulated error volume threshold; i.e. setting
+%% a limit on the amount of error that can be contained in the fuzzy FOE;
+%% intuitively, the smaller the error, the more likely the region is to contain the
+%% FOE.\newline\par
+
+%% The difference between the two methods could be described by the
+%% concept of local/global minima. Usually we wish to look for global
+%% minima and local minima are a trap which must be keenly sidestepped,
+%% however, in this case the global minimum may be the eroneous result.
+%% \newline\par
+
+%% While in theory, the LSE method can find the exact FOE with only two
+%% flow vectors, in practice flow fields are often incredibly noisy. The
+%% LSE method searches for a minimum error across the whole vector field
+%% simultaneously, if the field is noisy, then there is a high chance
+%% that the computed FOE will be incorrect, despite the fact it minimises
+%% error across the whole flow field.
+%% \newline\par
+
+%% The fuzzy method, on the other hand, looks at local error; in essence,
+%% we want to know how accurate the computed FOE is for the vectors in a
+%% specific region. The region which minimises this error is highly
+%% likely to contain the true FOE (though it may not be the one under test).
+
+%
+
+\subsection{Matched Filters for Collision Avoidance}\label{sec:offbg}
+In light of the results we gather with regards to the FOE, we will
+also revisit the matched-filter collision avoidance system from
+\cite{Mitchell2018}, though the flow field computation, filter
+generation and comparision are unchanged. We present a brief
+description of the intuition here as we will go on to develop neural
+representations of this model later. For details of the filter and
+matching process, please see \cite{Mitchell2018}.
+\newline\par
+
+In brief, we compare the observed optical flow field to a precomputed
+filter. This filter represents the motion we expect to observe in the
+image frame given some self (camera) motion. This method for collision
+avoidance has been an active area of research in the biorobotics (and
+wider robotics) community for some time though there are different
+hypotheses about how the information is actually used by insects
+\cite{Julien2017}.\newline\par
+
+The difference between the expected flow field (the filter) and the
+actual flow field computed from consecutive images was used by
+\textit{Scimeca} for speed retrieval \cite{Scimeca2017}. In
+\cite{Mitchell2018} we observe that objects in different 3D positions
+will appear to move at different speeds in the image frame;
+specifically objects which are on a collision course will appear to
+loom (grow quickly) in the agent's field of view. Therefore, by
+computing the speed from optical flow on both sides of the field of
+view, we can determine if an object is looming on a particular side by
+comparing the observed speed on both sides; this can then be used to
+generate an avoidance saccade\footnote{This is subtly different from
+  the balance strategy presented in \cite{Julien2017}, though we adapt
+  the system into a balance strategy as part of the neural
+  implementation.}. This method was also used by \textit{Stewart et
+  al.} in their simulations of Drosophila \cite{Stewart2010};
+interestingly they use the matched filter to detect a collision, then
+use the position of the FOE to determine a steering direction
+\cite{Stewart2010}. An example of the flow disturbance caused by a
+looming object can be seen in Figure \ref{fig:flowfield}.
+\newline\par
 
 \subsection{ The Mushroom Body for Visual Navigation } \label{MBBackground}
 The Mushroom Body model is an artificial neural network which models
-the mushroom body structures present in the insect brain\cite{Ardin2016}. It
-consists of three layers: Projection Neurons (PNs), Kenyon Cells (KCs) and
-Mushroom Body Output Neurons (MBONs). These MBONs are also referred to as
-Extrinsic Neurons (ENs) by older works, we use MBON herein. The original MB model
-proposed by \textit{Ardin et al.} for navigation in \cite{Ardin2016} contained
-360 visual PNs (vPNs), 20,000 KCs, and a single MBON. Every KC connects to the
-MBON, and each KC also connects to 10 vPNs chosen uniform randomly. The KC-MBON
-connections all start with weight $w=1$. The figure and caption from
-\textit{Ardin et al.} is given here in Figure \ref{fig:mb}. In the implementation
-by \textit{Ardin et al.} and previous AntBot implementations, captured images
-were converted to greyscale and downsampled \cite{Ardin2016, Eberding2016,
-  Zhang2017, Mitchell2018}. As such, each pixel can be described by its
+the mushroom body structures present in the insect brain
+\cite{Ardin2016}. It consists of three layers: Projection Neurons
+(PNs), Kenyon Cells (KCs) and Mushroom Body Output Neurons
+(MBONs). These MBONs are also referred to as Extrinsic Neurons (ENs)
+by older works, we use MBON herein. The original MB model proposed by
+\textit{Ardin et al.} for navigation in \cite{Ardin2016} contained 360
+visual PNs (vPNs), 20,000 KCs, and a single MBON. Every KC connects to
+the MBON, and each KC also connects to 10 vPNs chosen uniform
+randomly. The KC-MBON connections all start with weight $w=1$. The
+figure and caption from \textit{Ardin et al.} is given here in Figure
+\ref{fig:mb}. In their implementation and previous AntBot
+implementations, captured images were converted to greyscale and
+downsampled \cite{Ardin2016, Eberding2016, Zhang2017,
+  Mitchell2018}. As such, each pixel can be described by its
 brightness (greyscale value) and each KC has a brightness threshold.
 \newline
 \par
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{Ardin2010MBModel}
+  \includegraphics[width=0.9\textwidth]{Ardin2010MBModel}
   \caption{\label{fig:mb} The Mushroom Body circuit: (Caption from
     \textit{Ardin et al.}, Figure 2; note, their description and figure uses
     ``EN'' instead of ``MBON''): Images (see Fig 1) activate the visual
@@ -517,29 +595,30 @@ is used whereby the agent scans an arc for the most familiar direction.
 \par
 
 This has been a brief explanation for context. Part 1 gives slightly deeper
-insight\cite{Mitchell2018} (particularly in relation to AntBot projects), and of
+insight \cite{Mitchell2018} (particularly in relation to AntBot projects), and of
 course the work of \textit{Ardin et al.} can give the full details
 \cite{Ardin2016}.
 \newline
 \par
 
-The MB model described above has been tested on the AntBot in three different
-works (albeit using different methods and metrics); the network as presented in
-\cite{Eberding2016, Zhang2017, Mitchell2018} differs only in the number of PNs
-present (900 vPNs are used in all three works), and the KC
-modelling (\textit{Ardin et al.} use a spiking model\footnote{The AntBot
-  projects do not explicitly model membrane potentials and realistic responses.
-  They use a simple abstraction for the sake of complexity. The network function
-  is essentially the same.} for the KCs
-\cite{Ardin2016}). More relevant to this work, is
-the proposed modification given by \textit{Zhang}, whereby, 8 MBONs are present
-as opposed to 1 (see Section \ref{CXMBBackground}).
+The MB model described above has been tested on the AntBot in three
+different works (albeit using different methods and metrics); the
+network as presented in \cite{Eberding2016, Zhang2017, Mitchell2018}
+differs only in the number of PNs present (900 vPNs are used in all
+three works), and the KC modelling (\textit{Ardin et al.} use a
+spiking model\footnote{The AntBot projects do not explicitly model
+  membrane potentials and realistic neural responses.  They use a
+  simple abstraction for the sake of complexity. The network function
+  is the same.} for the KCs \cite{Ardin2016}). More
+relevant to this work, is the proposed modification given by
+\textit{Zhang}, whereby, 8 MBONs are present as opposed to 1 (see
+Section \ref{CXMBBackground}).
 \newline
 \par
 
 \subsection{ The Central Complex for Path Integration } \label{CXBackground}
 The Central Complex (CX) is a highly conserved structure present in the insect
-brain\cite{Pfeiffer2014, Stone2017}. Though the finer structural details and
+brain \cite{Pfeiffer2014, Stone2017}. Though the finer structural details and
 component position may vary, the basic composition is more or less the same
 across species \cite{Pfeiffer2014}. Organization and function of the
 various parts of the CX are given by \textit{Pfeiffer and Homberg} in
@@ -548,11 +627,12 @@ various parts of the CX are given by \textit{Pfeiffer and Homberg} in
 \par
 
 We instead direct our attention to the CX model presented by
-\textit{Stone et al.} which is the first neural model for path integration
-in the insect brain, with structure drawn purely from physiology. Interestingly,
-this model is a more advanced version of an earlier model presented by
-\textit{Haferlach et al.}, which was \textit{evolved} using a Genetic Algorithm
-\cite{Haferlach2007}. We present this also, purely for the sake of interest.
+\textit{Stone et al.}  which is the first neural model for path
+integration in the insect brain with structure drawn purely from
+physiology. Interestingly, this model is a more advanced version of an
+earlier model presented by \textit{Haferlach et al.}, which was
+\textit{evolved} using a Genetic Algorithm \cite{Haferlach2007}. We
+present this also, for interest.
 
 \subsubsection{The Evolved Model for Path Integration}
 Prior to the CX model described below, there were several candidate neural
@@ -561,7 +641,8 @@ report the
 two best-known candidates being hand-designed, with more recent research
 into an evolutionary approach to network design \cite{Haferlach2007}. The
 approach presented in \cite{Haferlach2007} follows this trend and employs
-a Genetic Algorithm (GA) (see Appendix \ref{ap:ga} for a brief overview) to
+a Genetic Algorithm (GA) (see Appendix \ref{ap:ga} for a brief
+overview of GAs) to
 evolve a neural model which is suitable for PI with biologically plausible
 inputs.
 \newline
@@ -587,18 +668,18 @@ be seen in Figure \ref{fig:markerbasedencoding}.
     integers.}
 \end{figure}
 
-Localised \textit{tournament selection}\footnote{Tournament Selection - Two
-  solutions are picked randomly, then their fitness compared to determine if they
-  will be selected} is used to pick solution for transition into the next
-generation. Each solution is assigned a location in 1-dimensional space; a
-solution is picked randomly, then another solution within distance $k$ of the
+Localised \textit{tournament selection} is used
+to pick solution for transition into the next generation. Each
+solution is assigned a location in 1-dimensional space; a solution is
+picked randomly, then another solution within distance $k$ of the
 first is picked for the tournament ($k$ usually between 5 and 15)
-\cite{Haferlach2007}. The solution with higher fitness wins the tournament
-and progresses to mutation and \textit{crossover}\footnote{Crossover - A
-  particular method for breeding two solutions whereby their genomes are cut at
-  a particular point and the ends swapped.} This localised selection allows
-the algorithm to find multiple \textit{good} solutions which need not share the
-same genetic information.
+\cite{Haferlach2007}. The solution with higher fitness wins the
+tournament and progresses to mutation and
+\textit{crossover}\footnote{Crossover - A particular method for
+  breeding two solutions whereby their genomes are cut at a particular
+  point and the ends swapped.} This localised selection allows the
+algorithm to find multiple \textit{good} solutions which need not
+share the same genetic information.
 \newline
 \par
 
@@ -618,38 +699,34 @@ then the inverse sum of squared distances \cite{Haferlach2007}:
 The fitness is then augmented to penalise homeward routes which
 spiral (circling the start point, getting closer with each pass), and
 also to reward networks which are simple in structure; shown in
-Equations \ref{eq:fithead} and \ref{eq:fitsimple} respectively\footnote{
-  [DRAFT] I didn't have time to fix the equation formatting
-  (equation number bumped out of position). This will be sorted
-  in the final version.
-  }.
+Equations \ref{eq:fithead} and \ref{eq:fitsimple} respectively.
 
-\begin{multicols}{2}
-  \begin{equation}
-    \label{eq:fithead}
-   f = \frac{1}{\sqrt{\int_{0}^m dist_t^2 |\theta - \omega | dt}}
-  \end{equation}\break
-  \begin{equation}
-    \label{eq:fitsimple}
-    f = \frac{1}{(1 + k_n)^{c_n}(1 + k_c)^{c_c}
-      \sqrt{\int_{0}^m dist_t^2 |\theta - \omega | dt}}
-  \end{equation}
-\end{multicols}
+\begin{equation}
+  \label{eq:fithead}
+  f = \frac{1}{\sqrt{\int_{0}^m dist_t^2 |\theta - \omega | dt}}
+\end{equation}
+\begin{equation}
+  \label{eq:fitsimple}
+  f = \frac{1}{(1 + k_n)^{c_n}(1 + k_c)^{c_c}
+    \sqrt{\int_{0}^m dist_t^2 |\theta - \omega | dt}}
+\end{equation}
 
-where $\omega$ is the nest heading, $\theta$ is the agent's heading, $k_n$ is
-a neuron penalty constant, $k_c$ is a connection penalty constant, $c_n$ is
-the number of neurons, and $c_c$ is the number of connections (i.e.
-the network is heavily penalised for the number of connections and neurons it
-has, forcing simpler networks) \cite{Haferlach2007}. These are applied as a
-two-stage evolutionary process; evolve a solution first using Equation
-\ref{eq:fithead} to compute the fitness, then use this solution to seed a new
-population and evolve a solution from here using Equation \ref{eq:fitsimple}. The
-two-stage evolutionary processalone did not find acceptable solutions. The search
-space was constrained by providing the following four constraints on network
-topology: Each direction cell had to be connected to at least one memory neuron;
-each direction cell had to be connected to at least one sigmoid neuron; sigmoid
-neurons had to be connected to turn effectors; a maximum of two turn effectors
-(left and right) were allowed \cite{Haferlach2007}.
+where $\omega$ is the nest heading, $\theta$ is the agent's heading,
+$k_n$ is a neuron penalty constant, $k_c$ is a connection penalty
+constant, $c_n$ is the number of neurons, and $c_c$ is the number of
+connections (i.e.  the network is heavily penalised for the number of
+connections and neurons it has, forcing simpler networks)
+\cite{Haferlach2007}. These are applied as a two-stage evolutionary
+process; evolve a solution first using Equation \ref{eq:fithead} to
+compute the fitness, then use this solution to seed a new population
+and evolve a solution from here using Equation \ref{eq:fitsimple}. The
+two-stage evolutionary process alone did not find acceptable
+solutions. The search space was constrained by providing the following
+four constraints on network topology: Each direction cell had to be
+connected to at least one memory neuron; each direction cell had to be
+connected to at least one sigmoid neuron; sigmoid neurons had to be
+connected to turn effectors; a maximum of two turn effectors (left and
+right) were allowed \cite{Haferlach2007}.
 \newline
 \par
 
@@ -657,7 +734,7 @@ neurons had to be connected to turn effectors; a maximum of two turn effectors
 \ref{fig:evolvednetwork}; notice the evolved structure bears a striking
 resemblance to the CX model presented by \textit{Stone et al.} (Figure
 \ref{fig:cx}). Indeed, this network operates on the same principle; encoding
-a heading vector across multiple neurons with directional preference. This
+a heading vector across multiple neurons with directional preferences. This
 network provides a compact, elegant, robust model capable of performing
 path integration with reasonable errors. The network also demonstrated
 some capability for PI with obstacles present (though errors were generally much
@@ -706,8 +783,9 @@ functionality:
   }
 \end{figure}
 
-Figure \ref{fig:cx} shows four types of neuron: TN (Tangential Neuron), TB1
-(green), CPU4 (yellow and orange), and CPU1 (dark blue, light blue, and purple).
+Figure \ref{fig:cx} shows four types of neuron: TN (Tangential Neuron,
+brown), TB1 (green), CPU4 (yellow and orange), and CPU1 (dark blue,
+light blue, and purple).
 \newline
 \par
 
@@ -736,7 +814,7 @@ same activity patterns as the CPU4 neurons \cite{Stone2017}. Figure \ref{fig:cx}
     CPU4 (memory). TN neurons (speed sensitivity) input directly to CPU4.
     So, the combination of heading and speed inputs to CPU4 gives a measure
     of distance travelled in a particular direction; this facilitates generation
-    of a steering command in CPU1 providing a mechanism for Path Integration.
+    of a steering command in CPU1 providing a mechanism for path integration.
   }
 \end{figure}
 
@@ -756,10 +834,12 @@ a sigmoid function of the input $I$:
 r = \frac{1}{1 + e^{-(aI - b)}}
 \end{equation}
 
-where $a$ and $b$ are parameters which control the slope and offset of the
-sigmoid function \cite{Stone2017}. Optionally, Gaussian noise may be added
-to the output. The input to each neuron is a weighted sum of the activity
-of each neuron that synapses onto it; say neuron $j$, the input is:
+where $a$ and $b$ are parameters which control the slope and offset of
+the sigmoid function \cite{Stone2017}. Optionally, Gaussian noise may
+be added to the output (no noise is applied in AntBot
+implementations). The input to each neuron is a weighted sum of the
+activity of each neuron that synapses onto it; say neuron $j$, the
+input is:
 
 \begin{equation}
   I_j = \sum_{i} w_{ij} \cdot r_i
@@ -774,8 +854,8 @@ no-connection, excitatory, or inhibitory respectively \cite{Stone2017}.
 \textbf{TL \& CL1:}
 The TL neurons are the input point for heading information. In the ant brain
 this heading information comes from a \textit{sky-compass}; the ant eye contains
-cells sensitive to polarized light which allows the ant to infer an accurate,
-allothetic direction from vision. Interestingly, there is also evidence that ants
+cells sensitive to polarized light which allows the ant to infer an accurate
+allothetic heading from vision alone. Interestingly, there is also evidence that ants
 have the capability to infer a direction without a view of celestial cues,
 suggesting they may have access to some other signal, the candidate signal being
 the geomagnetic field \cite{Fleischmann2018, Grob2017}. The TL neurons have been
@@ -789,7 +869,7 @@ TL neurons encode the heading of the agent in a single timestep; each neuron
 receives input activation as:
 
 \begin{equation}
-  I_{TL} = cos( \theta_{TL} - \theta_{h} )
+  I_{TL} = \cos ( \theta_{TL} - \theta_{h} )
 \end{equation}
 
 where $\theta_{TL} $ is the preferred heading of the neuron as above, and
@@ -806,14 +886,14 @@ compass on the mobile phone (see Section \ref{sec:platform}).
 % Function of TN
 \textbf{TN:}
 There are 4 TN neurons which act as an input for speed information. The TN
-neurons are sensitive to optical flow, and can be split into two subtypes:
+neurons are sensitive to optical flow and can be split into two subtypes:
 TN1, and TN2. \textit{Stone et al.} showed that TN1 neurons are inhibited by
 simulated forward flight and excited by simulated backward flight, while TN2
 neurons are inhibited by simulated backward flight and excited by simulated
 forward flight \cite{Stone2017}. Each of the four TN neurons has a tuning
 preference; these tuning preferences were measured in bees as approximately
 $+45^{\circ}$/$-45^{\circ}$ for TN2, and $+135^{\circ}$/$-135^{\circ}$ for TN1
-(where $0^{\circ}$ is straight ahead). In short, we have TN$1_{left}$,
+(where $0^{\circ}$ is straight ahead). In summary, we have TN$1_{left}$,
 TN1$_{right}$, TN$2_{left}$, and TN$2_{right}$. It is thought that these neurons
 provide a (or part of a) mechanism for odometry by allowing the model to
 integrate speed with respect to time giving a distance measure \cite{Stone2017}.
@@ -822,12 +902,12 @@ as:
 
 \begin{equation}
   I_{TN_{L}} =
-  [ sin(\theta_{h} + \phi_{TN}) \quad cos(\theta_{h} + \phi_{TN}) ]\mathbf{v}
+  [ \sin (\theta_{h} + \phi_{TN}) \quad \cos (\theta_{h} + \phi_{TN}) ]\mathbf{v}
 \end{equation}
 
 \begin{equation}
   I_{TN_{R}} =
-  [ sin(\theta_{h} - \phi_{TN}) \quad cos(\theta_{h} - \phi_{TN}) ]\mathbf{v}
+  [ \sin (\theta_{h} - \phi_{TN}) \quad \cos (\theta_{h} - \phi_{TN}) ]\mathbf{v}
 \end{equation}
 
 where $\mathbf{v}$ is the velocity of the agent in Cartesian coordinates,
@@ -862,7 +942,7 @@ inhibitory connection from neuron $i$ to neuron $j$ is given by:
 
 \begin{equation}
   w_{ij} =
-  \frac{cos(\theta_{TB1,i} - \theta_{TB1,j}) - 1}{2}
+  \frac{\cos (\theta_{TB1,i} - \theta_{TB1,j}) - 1}{2}
 \end{equation}
 
 where $\theta_{TB1,i}$ is the direction preference of TB1 neuron $i$ (similarly
@@ -907,7 +987,7 @@ that the network can be initialised to an arbitrary state, allowing the agent
 to navigate along arbitrary vectors \cite{Zhang2017}. While this seems intuitive,
 the experimental evidence is valuable and demonstrates that the CPU4 layer could
 form a basis for the \textit{vector memory} discussed by \textit{Webb} in
-\cite{Webb2018} (see Section \ref{CXMBBackground}).
+\cite{Webb2019} (see Section \ref{CXMBBackground}).
 \newline
 \par
 
@@ -925,6 +1005,7 @@ uniform rate of memory gain, and $s$ is the current speed. This value is
 then clipped to lie in $[0,1]$. As an aside, in the holonomic model
 mentioned previously, the input is computed as in Equation \ref{eq:cpu4update}
 as the TN neurons are present in the model.
+\newline\par
 
 \textbf{Pontine:}
 The pontine neurons project contralaterally connecting opposite CBU columns
@@ -963,8 +1044,9 @@ $I_{CPU1}^{(t)} = r_{CPU4}^{(t)} - r_{TB1}^{(t)}$).
 \newline
 \par
 
-We choose a direction simply by summing the CPU1 outputs on both sides and the
-difference indicates the direction and angle of the required heading correction:
+We choose a direction simply by summing the CPU1 outputs on both sides
+and the difference indicates the direction and strength of the
+required heading correction:
 
 \begin{equation}
   \theta_h^{(t)} = \theta_h^{(t - 1)} +
@@ -992,12 +1074,13 @@ $315^{\circ}$) (see Section \ref{CXBackground}).
 \newline
 \par
 
-Image memory now has an associated direction, so, training is performed with
-respect to orientation. For example, if the agent has a heading of $45^{\circ}$
-when a image is stored, then only the corresponding connection array has its
-weights updated during learning. Practically, this is done by querying the TB1
-layer of the CX model to find the current direction according to the model
-(rather than directly querying the robot's onboard compass). This process is
+Image memory now has an associated direction, so training is performed
+with respect to orientation. For example, if the agent has a heading
+of $45^{\circ}$ when a image is stored, then only the corresponding
+connection array has its weights updated during learning. Practically,
+this is done by querying the TB1 layer of the CX model to find the
+current direction according to the model (rather than directly
+querying the robot's onboard compass directly). This process is
 visualised in Figure \ref{fig:eightmbon}.
 \newline
 \par
@@ -1016,10 +1099,11 @@ visualised in Figure \ref{fig:eightmbon}.
 \end{figure}
 
 While, in theory, this eight MBON model could function independently,
-\textit{Zhang} uses it to (rather neatly) augment the CX model; this allows
-navigation to be performed using a combination of visual memory and path
-integration information. The navigation process can be described by a sequence
-of equations. We modify the notation slightly for clarity, but the
+\textit{Zhang} uses it to (rather neatly) augment the CX model
+(creating the combined CXMB model); this allows navigation to be
+performed using a combination of visual memory and path integration
+information. The navigation process can be described by a sequence of
+equations. We modify the notation slightly for clarity, but the
 equations are the same as presented in \cite{Zhang2017}.
 \newline
 \par
@@ -1062,7 +1146,7 @@ an identity matrix that will expand the MBON response array from 8x1 to 16x1
 \newline
 \par
 
-In oreder to test the CXMB model, \textit{Zhang} first demonstrated the
+In order to test the CXMB model, \textit{Zhang} first demonstrated the
 functionality of a \textit{copied memory model}. The test of the copied memory
 model aimed to prove that the CPU4 state of the agent could be copied and stored,
 the CPU4 state modified, and then restored from the copy to allow the agent to
@@ -1075,8 +1159,8 @@ and tasked with navigating home a second time. The copied memory model was teste
 as a pre-requisite for testing the CXMB model, however, it demonstrates an
 important capability of the CX model; namely, the capability to directly load a
 state into its memory in order to navigate; a concept referred to as
-\textit{vector memory} in \cite{Webb2018}. Indeed, this concept of vector memory
-is shown to be quite a useful tool in insect navigation \cite{Webb2018}. It is
+\textit{vector memory} in \cite{Webb2019}. Indeed, this concept of vector memory
+is shown to be quite a useful tool in insect navigation \cite{Webb2019}. It is
 worth noting that, the precise biological mechanism employed by insects to
 perform this task, is unknown at time of writing. It would be neat to reuse
 the CX circuitry, but this is an open question.
@@ -1120,14 +1204,12 @@ works as it was implemented as an image manipulation algorithm (termed
 \par
 
 Multiple OFCA systems were tested, however, in final experiments an
-optical flow filtering system is used. In short, a pattern of expected motion is
-created, then the actual observed motion is projected on top of it. An absolute
-difference is computed between the two and this can tell us if part of the image
-is moving faster than we expect. This can be used to detect obstacles. This
-strategy proved simple, but effective. While we move away from it for the
-bulk of this project, it was used for initial tests of the CX model, as it
-provided a simple out-of-the-box method to generate a non-deterministic
-path for the model to integrate.
+optical flow filtering system is used (see Section
+\ref{sec:offbg}). This strategy proved simple, but effective. While we
+move away from it for the bulk of this project, it was used for
+initial tests of the CX model, as it provided a simple out-of-the-box
+method to generate a non-deterministic path for the model to
+integrate.
 \newline
 \par
 
@@ -1143,7 +1225,7 @@ learned in a non-deterministic fashion through a cluttered environment.
 % High level description of the platform. This section can be short. Refer back
 % to Part 1 for detail.
 \section{ Platform } \label{sec:platform}
-The AntBot is a small autonomous robot built to allow easy testing of the
+The AntBot is an autonomous robot built to allow easy testing of the
 various navigational algorithms in the \textit{Ant Navigational Toolkit}
 on a physical agent. AntBot is assembled using off-the-shelf parts with an
 Android phone at its heart. We give a high level description here; additional
@@ -1154,14 +1236,14 @@ The robot is composed of three main parts: a Dangu Rover 5 chassis, an Arduino,
 and a Google Nexus 5 Android smartphone. The smartphone provides a
 (theoretically) solid base for an autonomous agent, with sufficient processing
 power and memory to run the models, a convenient touchscreen interface to display
-information and an adaptable control interface, and a built-in camera and
+information and an adaptable control interface, a built-in camera, and
 extensive software libraries. As such, the smartphone works as the computational
 centre, performing all higher sensory processing and acting on this analysis.
 Once the algorithm running on the phone has decided on a course of action, it
 sends a command via a serial connection to the Arduino board; the board, then
 parses the command and translates it into a sequence of motor commands which are
-sent to the built-in motor board in the chassis.
-\begin{figure}
+sent to the built-in motor board in the chassis.\newline\par
+\begin{figure}[h!]
   \centering
   \includegraphics[width=0.7\textwidth]{AntBotCharging}
   \caption{
@@ -1198,12 +1280,12 @@ dismantling it.
 
 \subsection{ Software }
 The robot requires two levels of software; higher level Java (Android) code to
-perform the high level functions; and, lower level code written in C/C++
-(Arduino). The Arduino code can be thought of as the firmware.
+perform the high level functions and lower level code written in C/C++
+(Arduino dialect). The Arduino code can be thought of as the firmware.
 
 \subsubsection{ Android } \label{subsubsec:droid}
 Android can provide a nice basis for working on robotics projects. The
-Operating System permts multiple applications to run asynchronously and
+Operating System permits multiple applications to run asynchronously and
 pass information between them; for example, the user could develop an application
 to perform all visual processing then broadcast a processed image for other
 applications which require it. The original AntBot software was split into
@@ -1241,7 +1323,7 @@ correct method to execute the desired motor commands.
 \subsection{ Modifications and Development }\label{sec:mod}
 The modifications or additions listed below are a small part of the dissertation,
 however, for one reason or another (see Discussion) these ended up taking
-most of the project time.
+most of the project time.\newline\par
 
 \textbf{Compass Sensor:}
 While the Android phone has a built-in compass (used for other parts of this
@@ -1261,7 +1343,7 @@ this.
 \textbf{Ocular Calibration:}
 The $360^{\circ}$ camera attachment is held in place by a pressure sensitive
 adhesive which allows the position to shift if the attachment is knocked or
-removed. The lens was removed for use in another project, and on re-attaching, it
+removed. The lens was removed for use in another project and on re-attaching, it
 was noticed that the image was warped, indicating that the pre-processing was not
 working as required. The image pre-processing algorithm used a hard-coded pixel
 value for the centre of the camera attachment which was no longer correct
@@ -1283,23 +1365,24 @@ need only be done if the attachment is known to have moved.
    }
 \end{figure}
 
-\textbf{Code Refactor:}
-As mentioned above, all behavioural code for the robot has moved into the AntEye
-application. In fact, most code had been integrated into a single Android
-Activity (Java Class); this file contained multiple long threads dictating
-behaviour as well as a number of utility methods and robot commands. There
-were also a ludicrous number of global variables. The resulting file was over
-4000 lines long and almost unusable. Particuarly aggregious was the fact that
-roughly half of the code was irrelevant to this project, but did need archived
-for reference purposes. As such, it was decided that it was worth refactoring the
-codebase in order to make it easier to work. All utility functions were split
-into their own static Util class, similarly, the robot control commands were
-moved to the Command class. Runnable threads were moved into an archive
-package and split into classes according to their use: Mushroom Body,
-Central Complex, Optical Flow, or Old Navigation; that final group consists of
-the oldest code which is not used explicitly but is useful for reference
-purposes. A single thread was left in the main Activity file to act as a test
-thread. A lot of unused code was removed entirely.
+\textbf{Code Refactor:} As mentioned above, all behavioural code for
+the robot has moved into the AntEye application. In fact, most code
+had been integrated into a single Android Activity (Java Class); this
+file contained multiple long threads dictating behaviour as well as a
+number of utility methods and robot commands. There were also a
+ludicrous number of global variables. The resulting file was over 4000
+lines long and almost unusable. Particuarly aggregious was the fact
+that roughly half of the code was irrelevant to this project, but did
+need archived for reference purposes. As such, it was decided that it
+was worth refactoring the codebase in order to make it easier to
+work. All utility functions were split into their own static Util
+class, similarly, the robot control commands were moved to the Command
+class. Runnable threads were moved into an archive package and split
+into classes according to their use: Mushroom Body, Central Complex,
+Optical Flow, or Old Navigation; that final group consists of the
+oldest code which is not used explicitly but is useful for
+reference. A single thread was left in the main Activity file to act
+as a test thread. A lot of unused code was removed entirely.
 \newline
 \par
 
@@ -1310,23 +1393,24 @@ reason.
 \newline
 \par
 
-\textbf{Video Recording:}
-In order to analyse the visual processing in more detail, a video recording
-utility was added to AntBot. Again platform constraints mean that the utility
-is perhaps not as well-made as it could be. A straightforward method using
-FFMPEG had to be abandoned due to library conflicts; this method would
-have allowed a video file to be recorded directly rather than the frame-stitching
-solution described below. The real reason this proved difficult was that the
-recording had to take place after preprocessing (image unwrapping and
-downsampling to the 90x10 $360^{\circ}$ image). In order to achieve this frames
-are passed off to a recording buffer after processing, the buffer is then
-processed asynchronously by a separate thread which saves the frames to a
-set directory. Pleasantly, this does not impact the frame rate. The video frames
-then have to be retrieved from the robot and stitched together using a custom
-python utility (a simple wrapper around an FFMPEG command). The recorded video
-can then be analysed offline. This utility was created to offline analysis of
-optical flow, however, it also highlighted a major problem with the robot which
-was not previously known.
+\textbf{Video Recording:} In order to analyse the visual processing in
+more detail, a video recording utility was added to AntBot. Again
+platform constraints mean that the utility is perhaps not as well-made
+as it could be. A straightforward method using FFMPEG had to be
+abandoned due to library conflicts; this method would have allowed a
+video file to be recorded directly rather than the frame-stitching
+solution described below. The real reason this proved difficult was
+that the recording had to take place after preprocessing (image
+unwrapping and downsampling to the 90x10 $360^{\circ}$ image). In
+order to achieve this frames are passed off to a recording buffer
+after processing, the buffer is then processed asynchronously by a
+separate thread which saves the frames to a set directory. Pleasantly,
+this does not impact the frame rate. The video frames then have to be
+retrieved from the robot and stitched together using a custom python
+utility (a simple wrapper around an FFMPEG command). The recorded
+video can then be analysed offline. This utility was created to allow
+offline analysis of optical flow, however, it also highlighted a major
+problem with the robot which was not previously known.
 \newline
 \par
 
@@ -1336,7 +1420,7 @@ framerate was not quite right. The framerate on the robot was found to be
 an unacceptably low 2fps. In an effort to improve the framerate we isolated
 different parts of the processing pipeline. We found the best possible
 framerate to be approximately 14fps with no processing (this is computed simply
-as the numebr of times the \textit{onCameraFrame()} callback function is called
+as the number of times the \textit{onCameraFrame()} callback function is called
 per-second). Adding processing steps back to the pipeline, two steps were found
 which caused the framerate to crash. The first step was an image convolution
 algorithm; the unwrapped image does not line up with the direction of travel of
@@ -1354,19 +1438,23 @@ bugs and did not improve the framerate in any noticable way.
 \newline
 \par
 
-This raises an interesting problem. We do not know when this code was added
-to the robot but in any project following its insertion, the framerate surely
-affected the performance of the agent. We can say for sure that the algorithms
-used and tested in \cite{Mitchell2018} were affected. Indeed, in \cite{Mitchell2018}
-it is noted that few images were stored during Visual Navigation experiments. The
-low storage rate was thought to be a thread synchronisation issue, but it is now
-clear that the frames were simply not finished processing in time to be stored.
-In testing the matched-filter collision avoidance system from \cite{Mitchell2018}
-we note a significant change in behaviour after the framerate improvement. It is
-suspected that this is due to an increase in flow information, and therefore an
-increase in noise which can cause erroneous and erratic behaviour, not witnessed
-in \cite{Mitchell2018}.
-
+This raises an interesting problem. We do not know when this code was
+added to the robot, knowledge of the platform history would suggest it
+was added as part of \cite{Scimeca2017} but we cannot be certain.  In
+any project following its insertion, the framerate surely affected the
+performance of the agent. We can say for sure that the algorithms used
+and tested in \cite{Mitchell2018} were affected. Indeed, in
+\cite{Mitchell2018} it is noted that few images were stored during
+Visual Navigation experiments. The low storage rate was thought to be
+a thread synchronisation issue, but it is now clear that the frames
+were simply not finished processing in time to be stored.  In testing
+the matched-filter collision avoidance system from \cite{Mitchell2018}
+we note a significant change in behaviour after the framerate
+improvement. It is suspected that this is due to an increase in flow
+information, and therefore an increase in noise which can cause
+erroneous and erratic behaviour, not witnessed in \cite{Mitchell2018}.
+This is one of the main issues that resulted in our lack of results
+for the ECX.
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1391,27 +1479,34 @@ a turn direction in the event a collision is determined \cite{Stewart2010,
   Vanderstap2012}. We also note that the often the FOE seems to shift to the
 deepest part of the image \cite{Vanderstap2012, Souhila2007} (though we should
 also note that in \cite{Stewart2010} an avoidance saccade is triggered
-\textit{away from} the FOE).
+\textit{away from} the FOE); this is not an empirical observation,
+however, it was enough for us to want to test if the position of the
+FOE was predictable given an approaching scene.
 \newline
 \par
 
-If the FOE \textit{is} drawn to the deepest part of the image then its location
-could be reliably used to choose a steering direction in a collision avoidance
-system. Furthermore, this has an
-intuitive integration into the CX. If we split the $360^{\circ}$ image seen by
-AntBot into eight equal sections reflecting the eight cardinal directions of the
-CX model, we can use the horizontal position of the FOE as an input signal. The
-position would mark a ``bump'' of activity in a set of eight neurons (similar to
-the output layer of the eight MBON MB model). Ultimately we wish to see if the
-FOE will behave predictably in the presence of a looming obstacle, which relies
-on being able to compute the FOE reliably.
-When working with the FOE, \cite{Mitchell2018} notes difficulty in computing it
-consistently. Often nonsensical values would be output by the computation. Here
-however, we managed to compute reasonably sensible values, though they were not
-consistent or predictable. To compute the FOE we use the OpenCV
-\textit{calcOpticalFlowFarneback()} function to produce a dense optical flow
-field then use the computation from \cite{ODonovan2005} (see Section
-\ref{sec:OFBackground}).
+If the FOE \textit{is} drawn to the deepest part of the image then its
+location could be reliably used to choose a steering direction in a
+collision avoidance system. Furthermore, this has an intuitive
+integration into the CX. If we split the $360^{\circ}$ image seen by
+AntBot into eight equal sections reflecting the eight cardinal
+directions of the CX model, we can use the horizontal position of the
+FOE as an input signal. The position would mark a ``bump'' of activity
+in a set of eight neurons (similar to the output layer of the eight
+MBON MB model). Ultimately we wish to see if the FOE will behave
+predictably in the presence of a looming obstacle, which relies on
+being able to compute the FOE reliably.  When working with the FOE,
+\cite{Mitchell2018} notes difficulty in computing it
+consistently. Often nonsensical values would be output by the
+computation. This was suspected to be due to a technical detail not
+known at the time of implementation and thus warranted further
+investigation (see Section \ref{sec:mat}). Here, we managed to compute
+reasonably sensible values, though they were not consistent or
+predictable (meaning that the technical problems from
+\cite{Mitchell2018} did indeed affect the results). To compute the FOE
+we use the OpenCV \textit{calcOpticalFlowFarneback()} function to
+produce a dense optical flow field then use the computation from
+\cite{ODonovan2005} (see Section \ref{OFBackground}).
 \newline
 \par
 
@@ -1421,9 +1516,8 @@ for further investigation. For this purpose, the video recording tool described
 in Section \ref{sec:mod} was developed with the goal of performing offline
 video analysis of the agent's point of view. Thus, we can visualise the
 computed optical flow field observed by the robot under controlled circumstances
-(see Figure \ref{fig:flowfield}).
+(see Figure \ref{fig:flowfield}).\newline\par
 
-%FIGURE PLACEHOLDER: OPTICAL FLOW FIELD over multiple frames
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{frame_00066}
@@ -1433,7 +1527,7 @@ computed optical flow field observed by the robot under controlled circumstances
     A subset of points from the dense optical flow field observed by the agent.
     The agent is experiencing forward translational motion. These frames were
     captured after the framerate improvement from Section \ref{sec:mod}. The
-    FOE is also shown in green. There are no obstacles present in the arena.
+    FOE is also shown in blue. There are no obstacles present in the arena.
   }
 \end{figure}
 
@@ -1447,38 +1541,40 @@ This analysis produced the following observations:
 \item{
   The amount of perceived motion is tiny: In simply looking at the video it is
   incredibly difficult to determine how the motion observed relates to the
-  movement experienced by the camera.
+  movement experienced by the camera. In most frames the perceived
+  flow is as shown in Figure \ref{fig:flowfield}, where each vector is
+  only about 1 pixel in length.
 }
 
-\item{
-  The FOE jumps randomly between frames: The FOE is not consistent between frames
-  though it does appear to stay in the same region (though we are not sure this
-  indicates anything significant). We cannot rely on its location when presented
-  with a looming object in the frame.
-}
+\item{ The FOE jumps randomly between frames: The FOE is not
+  consistent between frames though it can appear to stay in the same
+  rough region (we do not think this indicates anything
+  significant). We cannot rely on its location when presented with a
+  looming object in the frame.  }
 
-\item{
-  Looming objects can be identified from the flow field: This observation
-  explains the good performance seen by \cite{Mitchell2018} when examining
-  a matched-filter system. Looming objects can appear as a large (often single
-  frame) disturbance of the low-level noise produced by the flow field.
-}
+\item{ Looming objects can be identified from the flow field: This
+  observation explains the good performance seen by
+  \cite{Mitchell2018} when examining a matched-filter system. Looming
+  objects can appear as a large (potentially single frame) disturbance
+  of the low-level noise produced by the flow field.  }
 \end{enumerate}
 
-We can therefore conclude that optical flow cannot be used to compute any
-fine-grain properties. The flow field at large is just noise, and only drastic
-disturbances result in a large disturbance in a specific region. While this
-effectively closes the lid on any further investigation into the FOE/depth
-methods which utilise optical flow, it does give us one semi-predictable property
-of the flow field which can potentially be used.
+We can therefore conclude that optical flow cannot be used to compute
+any fine-grain properties. The flow field at large is just noise, and
+only drastic image changes result in a large disturbance in a specific
+region of the flow field. While this effectively closes the lid on any
+further investigation into the FOE/depth methods which utilise optical
+flow, it does give us one semi-predictable property of the flow field
+which can potentially be used.
 
 \subsubsection{Matched Filters}
-The matched-filter model of collision avoidance as seen in \cite{Mitchell2018}
-was used without modification for the experimental results in this paper.
-However, in an effort to establish the ECX model, we present here an adaption of
-matched-filter collision avoidance which can have its outputs integrated into the
-CX. We will use the language of artifiial neural networks, but the principle is
-essentially the same as \cite{Mitchell2018}.
+The matched-filter model of collision avoidance as seen in
+\cite{Mitchell2018} was used without modification for the experimental
+results in this paper.  However, in an effort to establish the ECX
+model, we present here an adaptation of matched-filter collision
+avoidance which can have its outputs integrated with the CX and MB
+models. We will use the language of artificial neural networks, but
+the principle is essentially the same as \cite{Mitchell2018}.
 \newline\par
 
 The neural model for collision avoidance features two types of neuron, ACC
@@ -1504,25 +1600,25 @@ expected motion (i.e. a looming obstacle on that side). This difference acts
 as the input to the ACC neurons.
 \newline\par
 
-\textbf{ACC Neurons (LI\&F):}
-For both I\&F models, we need to set a lower bound on what we consider an
-input.  Each input must be greater than (absolute value) a lower threshold in an
-attempt to reduce noisy inputs to the ACC neurons. For more details as to the
-filter matching, please see \cite{Mitchell2018}. Once the input has been
-thresholded, an ACC neuron at time $t$ can be described as:
+\textbf{ACC Neurons (LI\&F):} For both I\&F models, we need to set a
+lower bound on what we consider an input.  Each input must be greater
+than (absolute value) a lower threshold in an attempt to reduce noisy
+inputs to the ACC neurons. For more details as to the output from
+filter matching, please see \cite{Mitchell2018}. Once the input has
+been thresholded, an ACC neuron at time $t$ can be described as:
 
 \begin{equation}
   V(t) = \gamma \cdot V(t-1) + I_{ext}
 \end{equation}
 
 where $V(t)$ is the membrane potential, $t$ is the current timestep,
-$\gamma$ is the leak current and $I_{ext}$ is the external current flowing in
-- the thresholded difference of flow sums.
-We use terms like membrane potential and external current because these best
-describe the function in the language of simulated neurons. It should be noted
-by the reader that we do not explicitly model voltages and currents in the model
-though this is just a case of semantics; these properties could be modelled more
-explicitly.
+$\gamma$ is the leak current and $I_{ext}$ is the external current
+flowing in - the thresholded difference of flow sums.  We use terms
+like membrane potential and external current because these best
+describe the function in the language of simulated neurons. It should
+be noted by the reader that we do not explicitly model voltages and
+currents in the model though this is just a case of semantics; these
+properties could be modelled more explicitly.
 \newline\par
 
 We also define $V_{fire}$, the value at which the ACC neurons fire.
@@ -1535,7 +1631,7 @@ signal produced by the MRSP layer.
 \textbf{ACC Neurons (RI\&F):}
 The RI\&F representation is almost identical. The difference arises from the leak
 model. In RI\&F we reset the neuron periodically (e.g. every third timestep).
-While this is functionally and I\&F neuron, it does not function in any
+While this is functionally an I\&F neuron, it does not function in any
 biologically plausible manner. It is essentially the same as the leaky
 accumulators from \cite{Mitchell2018}. We can describe the RI\&F neuron at time
 $t$ by:
@@ -1565,9 +1661,9 @@ the bigger the response); neither of which are possible with the I\&F
 representation. Recall, a firing rate given some input $I$ is represented as a
 sigmoid:
 
-\begin{equation}
+\begin{equation*}
 r = \frac{1}{1 + e^{-(aI - b)}}
-\end{equation}
+\end{equation*}
 
 where $a$ and $b$ determine the \textit{slope} and \textit{bias} of the function
 respectively. If we set $a = 5$, $b = 0$ we get the rate function shown in Figure
@@ -1582,17 +1678,19 @@ sums) such that it lies in (-1,1).\newline\par
   this neuron is scaled down to lie between -1 and 1.}
 \end{figure}
 
-If the flow disturbance observed on both sides is equal, then the rate response
-should lie around 0.5. A looming object detected on the right-hand side results
-in a negative input drawing the output closer to 0. Conversly, a looming object
-detected on the left-hand side wil result in a positive input, driving the output
-closer to 1. We have, in a roundabout way, ended up with an optical-flow balance
-strategy - a flawed, simplistic, yet not entirely implausible method for avoiding
-collisions \cite{Julien2017}. If our output remains close to 0.5 we need not
-react, close to 1 we must turn right, and close to 0 we must turn left. Thus,
-with a single neuron we can react to both scenarios. Furthermore, the signal
-is proportional to the disturbance observed and we can therefore scale our
-steering command as necessary.
+If the flow disturbance observed on both sides is equal, then the rate
+response should lie around 0.5. A looming object detected on the
+right-hand side results in a negative input drawing the output closer
+to 0. Conversly, a looming object detected on the left-hand side wil
+result in a positive input, driving the output closer to 1. We have,
+in a roundabout way, ended up with an optical-flow balance strategy -
+a flawed, simplistic, yet not entirely implausible hypothesis for
+collision avoidance in insects \cite{Julien2017}. If our output
+remains close to 0.5 we need not react, close to 1 we must turn right,
+and close to 0 we must turn left. Thus, with a single neuron we can
+react to both scenarios; furthermore, the signal is proportional to
+the disturbance observed and we can therefore scale our steering
+command as necessary.
 \newline\par
 
 \textbf{MRSP Neurons}:
@@ -1605,24 +1703,29 @@ sine wave is purely algorithmic, we did not investigate a way to model this
 behaviour using neural connections.
 \newline\par
 
-We first create an array of eight evenly distributed points on a shifted sine wave.
-The curve is shifted by $-\frac{\pi}{2}$ in the $x$-axis such that
-$\sin(\frac{\pi}{2})$ is in the first element (this is simply housekeeping, it
-makes index arithmetic easier when creating the output). We then compute an
-offset based on the response from the ACC neurons. This offset will always be
-an integer between -2 and 2 inclusive; it represents how far we wish to shift the
-sine wave from the current direction read from the TB1 layer (how far to the
-left/right of our current direction do we wish to turn). How this offset is
-generated differs between the I\&F and rate models of the ACC layer.
+We first create an array of eight evenly distributed points on a
+shifted sine wave; the array is expanded to 16 elements once the
+correct curve has been generated, similar to the way the 8 MBON signal
+is expanded to 16 neurons for integration.  The curve is shifted by
+$-\frac{\pi}{2}$ in the $x$-axis such that $\sin(\frac{\pi}{2})$ is in
+the first element (this is simply housekeeping, it makes index
+arithmetic easier when creating the output). We then compute an offset
+based on the response from the ACC neurons. This offset will always be
+an integer between -2 and 2 inclusive; it represents how far we wish
+to shift the sine wave from the current direction read from the TB1
+layer (how far to the left/right of our current direction do we wish
+to turn). How this offset is generated differs between the I\&F and
+rate models of the ACC layer.
 \newline\par
 
 In the I\&F case, the offset will be -2, 0, or 2 depending on which
-ACC neuron fires (ACC$_{right}$, both, or ACC$_{left}$ respectively). This is a
-coarse but functional reaction which generates a saccade of approximately $30^{\circ}$ in
-either direction. We included the case where both fire to act as a balance case,
-however, in practice this never happens. This is functionally identical to
-the behaviour displayed by the CA system in \cite{Mitchell2018}, piped through
-the CX structure.
+ACC neuron fires (ACC$_{right}$, both/neither, or ACC$_{left}$
+respectively). This is a coarse but functional reaction which
+generates a saccade of approximately $30^{\circ}$ in either
+direction. We included the case where both fire to act as a balance
+case, however, in practice this never happens. This is functionally
+identical to the behaviour displayed by the CA system in
+\cite{Mitchell2018}, piped through the CX structure.
 \newline\par
 
 In the rate case, we instead receive a single input from the ACC layer.
@@ -1699,7 +1802,7 @@ the agent are CA-only, and CXCA which are the isolated collision avoidance syste
 and the combined output of the path integrator and the collision avoidance
 system respectively; adding further combinations should be trivial. The limited
 selection currently available is due to the component level testing that
-was in progress towards the end of the project The weighting applied to each
+was in progress towards the end of the project. The weighting applied to each
 layer can be specified and ideally it should be dynamic; we had intented to
 approach this during the project but it was not possible. While the visual
 memory infrastructure is entirely present, it was not tested; however, as stated
@@ -1708,12 +1811,13 @@ think that this subsystem should not work to the degree presented in
 \cite{Zhang2017}.
 
 \section{Experimentation and Testing}\label{sec:test}
-We re-use the experimental environment from \cite{Mitchell2018}. A collapsible
-boundary wall is constructed on the robot-football pitch in G.17 in the
-Informatics Forum. Small ``tussocks'' are used as objects in the environment
-(e.g. to avoid or to provide visual information). A sequence of VICON
-motion-capture cameras sit above the pitch and allow accurate tracking
-of the agent's movement and heading.
+We re-use the experimental environment from \cite{Mitchell2018}. A
+collapsible boundary wall is constructed on the robot-football pitch
+in G.17 in the Informatics Forum. Small ``tussocks'' are used as
+objects in the environment (e.g. to avoid or to provide visual
+information). A sequence of VICON motion-capture cameras are arranged
+in a ring above the pitch and allow accurate tracking of the agent's
+movement and heading.
 
 \subsection{Path Integration}
 The first round of tests aims to establish firmly that the CX model is capable of
@@ -1758,7 +1862,7 @@ chosen based on known properties of the CA system.
 For half of the runs the agent was started from the tape markings in
 the South West corner of the arena and for the other half the agent
 was started from the marking at the South end.  We place only two
-tussocks in the south-east corner of the arena to ensure the agent is
+tussocks in the South East corner of the arena to ensure the agent is
 always directed into the arena. The full reasoning behind this
 obstacle placement is given in \cite{Mitchell2018}; while navigation
 towards the arena wall is still successful CA behaviour, it is not
@@ -1771,20 +1875,22 @@ manage a non-deterministic outbound route based on CA while keeping
 the arena clear for the PI stage of the test. These experiments were
 conducted before the framerate improvement so CA behaviour can be
 considered comparable to \cite{Mitchell2018}. Any test in which the CA
-system failed was to be ignored as only the CX was to be tested,
-though there was only one such case.
+system failed catastrophically (direct collision) was to be ignored as
+only the CX was to be tested, though there was only one such case.
 \newline\par
 
 The agent was permitted to make a $180^{\circ}$ (approx.) turn at the
-end of the outbound route. This does not make the robot point directly towards
-the nest. The justification for this procedure can be seen in Figure
-\ref{fig:cxnt}. The output from the CX model is a left/right turning instruction
-with some strength; the greater then angle between the current and home vector,
-the greater the output signal in the required direction, however, the output is
-not the required angular correction. As such, the agent required a large turning
-arc (and a long time) to reorient itself with the home vector before it could
-even begin the journey. Encouraging as this behaviour is for the performance of
-the CX circuit, we felt it more practical to avoid it for formal experiments.
+end of the outbound route. In most cases, this does not make the robot
+point directly towards the nest. The justification for this procedure
+can be seen in Figure \ref{fig:cxnt}. The output from the CX model is
+a left/right turning instruction with some strength; the greater then
+angle between the current and home vector, the greater the output
+signal in the required direction, however, the output is not the
+precise angular correction required. As such, the agent required a large
+turning arc (and a long time) to reorient itself with the home vector
+before it could even begin the journey. Encouraging as this behaviour
+is for the performance of the CX circuit, we felt it more practical to
+avoid it for formal experiments.
 \newline\par
 
 \begin{figure}[h!]
@@ -1802,10 +1908,10 @@ the CX circuit, we felt it more practical to avoid it for formal experiments.
 
 Success was measured by the ability of the agent to touch the tape
 square from which it started. This could be any part of the robot
-(i.e. a tread running over the corner of the square). The agent was
+(e.g. a tread running over the corner of the square). The agent was
 stopped manually once either a success state was reached or a success
-state could not be reached; in essance, if the robot collided with an
-arena wall.
+state could not be reached; for example, if the robot collided with
+the arena wall during PI, or passed the start point without touching it.
 \newline\par
 
 Finally,  we should note that the locomotion of the robot is different to that of
@@ -1816,8 +1922,9 @@ in discrete steps; the agent moves forward, stops, turns on the spot, and
 continues. In the case of the PI experiments, the oubound route is made up of
 steps broken by turns generated from OFCA at irregular intervals, the inbound
 route consists of steps broken by regular course correction turns (e.g. every two
-seconds, the CX output is checked). The distance measurement is still updated
-continuously; as we use time-travelled as the distance metric (assuming we
+seconds, the CX output is checked); this behaviour can be seen most
+clearly in Figure \ref{fig:cxnt}. The distance measurement is still updated
+continuously; we use time-travelled as the distance metric (assuming we
 travel the same distance in the same amount of time). While this is generally
 considered a bad way to measure distance, many problems are mitigated by the
 fact the agent only moves in the forward direction, and to a degree this model
@@ -1831,12 +1938,12 @@ a FOE and checking for its horizontal position in the image frame. Our
 original hypothesis was that the FOE would be drawn
 to the deepest part (frontal) of an image, and therefore its horizontal position
 would dictate the desired direction of travel. We would, of course, take any
-predictable behaviour which could be used for the desired behaviour.
+predictable behaviour which could be used for collision avoidance.
 \newline\par
 
 The agent was set on a collision course with a cluster of tussocks and watched
 for consistent reaction behaviour. No such consistent behaviour was observed.
-To further test the hypothesis, it was clear that further work was needed to
+To test our hypothess completely, it was clear that further work was needed to
 verify that there was no usable behaviour. The processed image frame (the view
 of the agent) may be viewed on the smartphone screen; unfortunately, it is too
 small to really pick out any details of a flow vector field. As a general point,
@@ -1861,33 +1968,36 @@ we chose to implement a video recording tool which would allow us to record
 controlled runs of the agent through an environment. Furthermore, this video
 could be processed offline using the same systems implemented on the robot, then
 scaled up to give a much clearer view of what the robot was actually seeing.
-This proved incredibly useful and allowed us to almost immediately denounce this
+This proved incredibly useful and allowed us to almost immediately dismiss this
 method for use on the AntBot.
 \newline\par
 
-The recording tool was used to show the infeasibility of this method informally,
-however, we present below some frames from formal recordings, taken to
-demonstrate our findings for the purpose of this paper. Two such recordings were
-taken, both in the experimental arena. The first was taken with no objects
-present, in the second, the arena contained two objects staggered to the right
-and left of the robot's path. These objects were not in the robot's immediate
-path, as such, in both recordings the direction of motion was entirely
-translational in the direction of view; no turns took place. The robot was
-permitted to move from one end of the arena to the other without interruption,
-aside from a manual stop which was done with minimal disturbance to
-the agent. The arena can be seen in Figure \ref{fig:foetest}, the
+The recording tool was used to show the infeasibility of this method
+informally, however, we present below some frames from formal
+recordings, taken to demonstrate our findings for the purpose of this
+paper. Two such recordings were taken, both in the experimental
+arena. The first was taken with no objects present, in the second, the
+arena contained two objects staggered to the right and left of the
+robot's path. These objects were not in the robot's immediate path, as
+such, in both recordings the direction of motion was entirely
+translational in the direction of view; no turns took place. The robot
+was permitted to move from one end of the arena to the other without
+interruption, aside from a manual stop which was done with minimal
+disturbance. The arena can be seen in Figure \ref{fig:foetest}, the
 robot's intended path is shown in red.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{FOETest}
-  \caption{\label{fig:foetest}
-    The non-empty arena used for testing the shifting expansion field
-    system. Tussocks were set to the left and right of the robot's
-    trajectory (shown in red) so that they were not on a collision
-    course but should still affect the expansion field. We had hoped
-    the FOE would drift left then right as each object was passed.
-  }
+  \caption{\label{fig:foetest} The non-empty arena used for testing
+    the shifting expansion field system. Tussocks were set to the left
+    and right of the robot's trajectory (shown in red) so that they
+    were not on a collision course but should still affect the
+    expansion field. We had hoped the FOE would either remain central
+    or drift horizontally (in a consistent fashion) as each object was
+    passed. Note that the agent was not started directly on the tape
+    square, it was offset as shown by the path; this was oversight on
+    our part.  }
 \end{figure}
 
 \subsubsection{Neural Matched Filters}
@@ -1898,8 +2008,8 @@ into a neural representation. Thus, the first thing we need to test is
 the ability to generate an arbitrary turn by inducing activity in the
 MRSP layer of the model. We take the current direction from the TB1
 layer, generate our sin curve and shift it to the left or right of the
-current heading. We can then check if we can generate consistent turns
-consistently.
+current heading. We can then check if we can generate consistent
+steering commands.
 \newline
 \par
 
@@ -1908,44 +2018,55 @@ separately. The testing for each type did not extend very far. Each
 implementation was tested in a mostly clear arena with multiple
 obstacles placed in a large, obvious cluster in the centre. The robot
 was started from the starting block (marked with masking tape) on the
-south side of the enclosure, on a direct collision course with the
+South side of the enclosure on a direct collision course with the
 cluster. The agent would then attempt to traverse the arena without
 collisions using only the neural CA system. The I\&F
 variant\footnote{We take the LI\&F representation forward, observed
   behaviour between RI\&F and LI\&F was not significantly different.}
 of the ACC neurons was the only implementation that functioned
-consistently enough to take forward to the next stage of testing.
+consistently enough to allow limited testing of the ECX, however, we
+later learned that the neural CA was not working to the degree
+previously thought.
 \newline\par
 
-\subsection{ECX}
+\subsection{ECX (CXCA)}
 The testing methodology for the ECX was to test each individual system
 and then full combination. Our earlier experiments with the CX
 demonstrate the capability of the circuit as a path integrator - and,
-of course it has been demonstrated in simulation
+of course, it has been demonstrated in simulation
 \cite{Stone2017}. This model has already been tested in conjunction
-with the MB (\textit{Zhang's} CXMB)\cite{Zhang2017}. Similarly, the MB
+with the MB (\textit{Zhang's} CXMB) \cite{Zhang2017}. Similarly, the MB
 model has been shown to provide robust visual navigation on the robot
 \cite{Mitchell2018}.\newline\par
 
 Therefore, the only things left to test are the neural CA system, and
 then each step of integration, CA $\rightarrow$ CXCA $\rightarrow$
 ECX. Note that testing CA alongside the MB model would be redundant as
-the routes recalledf from visual memory would incorporate any obstacle
-avoidance maneuvers. Fortunately, we can simply use the full ECX model
-and turn particular outputs on or off depending on the desired
-functionality.
+the routes recalled from visual memory should incorporate any obstacle
+avoidance maneuvers \cite{Mitchell2018}. Fortunately, we can simply
+use the full ECX model and turn particular outputs on or off depending
+on the desired functionality.
 \newline\par
 
 Unfortunately, we did not advance past the CXCA testing stage. The
 CXCA was tested only with the LI\&F ACC neurons. We used both an empty
-environment (to check for basic functionality) and a cluttered
+environment (to check for basic functionality) and a lightly cluttered
 environment; one with a singular central obstacle and a second with a
 tussock density of 2 per pitch quadrant.
+\newline\par
+
+The informal tests were conducted by allowing the agent to navigate
+outward using the neural CA system; the agent then attempted to
+navigate home using a weighted combination of the CX and CA outputs
+(CXCA). The reader should note that these informal tests were somewhat
+intertwined with the neural CA tests. If the neural CA performed
+correctly, then we felt it appropriate to allow the agent to attempt a
+homeward navigation.
 \newpage
 
 \section{ Results } \label{sec:results}
-\subsection{ Path Integration and Evaluation }
-We are pleased to report excellent performance from the CX model. We
+\subsection{ Path Integration }
+We are pleased to report good performance from the CX model. We
 observed successful homing in 7/10 tests performed, though in all
 cases the agent proceeded in the correct general direction. Of the
 failures, two were minor and one was more significant. The full
@@ -1976,16 +2097,16 @@ results can be seen in Table \ref{tab:cxres}.
   close.  The CA system failed at the last section of the outbound run
   which could be the cause of the near-failure. (**) We consider this
   the worst failure; while this run is not the furthest from its start
-  point, it can be seen from Figure \ref{fig:abcx10i}that the agent
+  point, it can be seen from Figure \ref{fig:abcx10i} that the agent
   actively deviates from its route.  }
 
 \end{table}
 
-Vicon recordings from all tests are available in Appendix
+VICON recordings from all tests are available in Appendix
 \ref{ap:cxfigs}. While the results appeared good under observation and
 in the figures, we must note the distance measurements in Table
 \ref{tab:cxres}. These measurements are taken from the central axis of
-the Vicon skeleton applied to the robot, essentially, the central axis
+the VICON skeleton applied to the robot, essentially, the central axis
 of the robot. Due to the size of the robot, we must note that our
 success criterion may be deceptive. The closest arrival at the nest is
 29.6cm; while the robot did indeed make it back to its starting box,
@@ -2016,7 +2137,7 @@ the distance-to-start measurement.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{AB_CX_8}
-  \caption{\label{fig:abcx8i} PI test PI test AB\textunderscore
+  \caption{\label{fig:abcx8i} PI test AB\textunderscore
     CX\textunderscore 8. Arguably the most successful recording from
     the formal experiments. The agent still corrects to achieve a
     better homing path, despite the fact it could likely have
@@ -2024,7 +2145,7 @@ the distance-to-start measurement.
 \end{figure}
 
 While we still consider these experiments a successful demonstration
-of the capability of the CX (especially with the informal trail in
+of the capability of the CX (especially with the early test run in
 Figure \ref{fig:cxnt}), we must acknowledge certain methodological
 issues. Firstly, the deviation and secondly the run length. All runs
 can be seen to be very short. We think it would be prudent to repeat
@@ -2040,7 +2161,7 @@ still pointing directly home after its outbound run (Figure
   \includegraphics[width=0.8\textwidth]{AB_CX_1}
   \caption{\label{fig:abcx1i} PI test AB\textunderscore
     CX\textunderscore 1. In this case, we note the exact same
-    methodological flaw we sought to avoid in which the robot requires
+    experimental flaw we sought to avoid in which the robot requires
     no correction to home successfully.}
 \end{figure}
 
@@ -2105,11 +2226,11 @@ we can look to another example in Figure \ref{fig:foeframesempty}.
 \end{figure}
 
 In this case there are no obstacles present in the arena, and thus
-minimal sources flow field disturbance. Nevertheless, we can still see
-that the FOE jumps, though not quite as drastically.  The views are
-perhaps deceptive but for clarity we note that each pixel represents
-4$^\circ$ of horizontal arc. Even small FOE jumps in the image frame
-are large with respect to the world.\newline\par
+there should be minimal sources flow field disturbance. Nevertheless,
+we can still see that the FOE jumps, though not quite as drastically.
+The views are perhaps deceptive but for clarity we note that each
+pixel represents 4$^\circ$ of horizontal arc. Even small FOE jumps in
+the image frame are large with respect to the world.\newline\par
 
 While it would be interesting to test empirically such use of the FOE
 in a different setting, we can conclude that the FOE may not be used
@@ -2125,28 +2246,28 @@ implementing the neural filter model for collision avoidance, or the
 ECX, as a continuation of this work.
 
 \subsubsection{Neural Matched Filters}
-The two variants of the neural filter model involve using the
-different representations of the ACC neurons.In testing, the I\&F
-performed identically under observation, so we will discuss them as
-one.\newline\par
+The three variants of the neural filter model involve using the
+different representations of the ACC neurons. In testing, the I\&F
+versions performed identically under observation, so we will discuss
+them as one.\newline\par
 
 \textbf{I\&F:} Unfortunately, the performance was generally poor,
 though this was the only variant which managed successful collision
-free runs (though this was not consistent enough to gather any formal
+free runs (not consistent enough to gather any formal
 data). It is no surprise that this variant came closest to replicating
 the behaviour (if not the performance) of the original model from
 \cite{Mitchell2018} as it is, functionally, a dressed up version of
 this model (with the addition of neural steering generation).
 \newline\par
 
-With this in mind, one would reasonably ask why this model does not
+With this in mind, one could reasonably ask why this model does not
 function consistently where the one from \cite{Mitchell2018}
 did. Indeed, we used the model from \cite{Mitchell2018} successfully
 in this work for our path integration experiments (and it was tested
 successfully alongside the MB model in a cluttered environment during
 the code refactor process). The neural OFCA model was implemented
 after the improvements to the visual pipeline; as this was the only
-change we suspected this was the problem. In testing the original
+change, we suspect this is the problem. In testing the original
 model from \cite{Mitchell2018} \textit{after} the improvement to the
 framerate, the behaviour was noticably different (and degraded).
 \newline\par
@@ -2154,14 +2275,14 @@ framerate, the behaviour was noticably different (and degraded).
 As mentioned in Section \ref{sec:mod} we suspect this is due to the
 drastic increase in flow information which is now fed into the
 model. As can be seen from Figures \ref{fig:foeframes} and
-\ref{fig:foeframesclear}, the flow information is relatively noisy
-with the features indicitive of an obstacle being fairly coarse. The
-tuning methods applied in \cite{Mitchell2018} where the accumulation
-and reaction thresholds are adjusted are clearly no longer
-sufficient; in testing, the model was either hypersensitive or
+\ref{fig:foeframesempty}, the flow information is relatively noisy
+with the features indicitive of an obstacle being large and
+obvious. The tuning methods applied in \cite{Mitchell2018} where the
+accumulation and reaction thresholds are adjusted are clearly no
+longer sufficient; in testing, the model was either hypersensitive or
 hyposensitive. The line for a functional middle ground is clearly very
-fine. Tuning at the sensory level is clearly required; fortunately,
-such tuning could also prove vital for the rate model.
+fine. Tuning at the sensory level is required; fortunately, such
+tuning could also prove useful for the rate model.
 \newline\par
 
 \textbf{Rate:} The rate model provided no predictable reaction,
@@ -2207,7 +2328,9 @@ avoidance system. As such we could observe (mostly) successful
 collision avoidance behaviour on the outbound run. The inbound runs
 proved less successful, however. Due to the hypersensitivity of the
 collision avoidance system it proved difficult to find a reasonable
-weighting to balance the two systems.
+weighting to balance the two systems. It was when attempting runs in a
+moderately cluttered environment that we discovered the CA was not
+working to the limited degree previously thought.
 \newline\par
 
 Intuition would suggest that we generate the vast majority of the
@@ -2231,376 +2354,394 @@ available on the AntBot.
 
 
 \section{ Discussion and Future Work}
-This section will largely delve personal opinion and feelings towards
-the work completed. Ironically, the word that comes to mind when
-thinking on this year's work is: incomplete. While we have presented
-and implemented the ECX, a complete theoretical base model for insect
-navigation, we did not manage to gather and present any formal
-experimental data. The only real barrier to testing towards the end of
-the project was the tuning of the collision avoidance system,
-something not predicted to be problematic as we already had a working
-system from \cite{Mitchell2018}. This became a problem as the work
-completed in \cite{Mitchell2018} was completed under the assumption
-that the robot's basic systems functioned sufficiently well that they
-need not be changed. This assumption was seriously flawed (as noted
-towards the end of \cite{Mitchell2018}), but such an assumption is
-inherent in a generational project or platform such as the development
-of AntBot.
-\newline\par
+\subsection{Conclusion}
+We have presented here an investigation into a unified navigational
+base model, inspired by the insect brain. We show experimental results
+demonstrating the capability of the Central Complex model as a path
+integration circuit over random outbound routes; we also note that
+this good performance was achieved with what is generally considered
+to be a poor odometric measurement, further showing the strength of
+the model. To complete the navigational system, we investigate and
+give evidence against a collision avoidance model based on the focus
+of expansion of an optical flow field; furthermore, we present a
+neural adaptation of the matched filter collision avoidance system
+from \cite{Mitchell2018} which has been integrated into
+\textit{Zhang's} CXMB model to provide a conceptually complete base
+model for insect navigation.
 
-It is our view that the AntBot should be retired. We believe that the
-platform has fulfilled its usefulness and it would be worth having a
-new platform constructed, perhaps as part of a new project. There are
-certainly still tests which could be conducted on the AntBot; a
-Mushroom Body circuit with real-valued weightings could be tested, the
-ECX could be tested if the CA system could be tuned, in fact, likely
-all of the work from \cite{Mitchell2018} could now be meaningfully
-repeated. Something as simple as a framerate change could be enough to
-effect significant change in the MB circuit performance; we have
-already reported the changes seen in the OFCA sytem. However, the
-benefit of having the AntBot available to test such system is vastly
-outweighed by the potential technial difficulties the researcher could
-experience; it is not an exaggeration to say that we lost weeks worth
-of work due to ultimately simple problems. We justify our
-recommendation by reporting our own experiences from
-\cite{Mitchell2018} and this work.
-\newline\par
 
-%% \textbf{Battery life:} A simple yet perpetually irritating issue. As
-%% the smartphone screen is constantly on during testing and
-%% experimentation, the battery life is understandably poor. This is not
-%% helped by the fact that this battery has been continuously
-%% charged/discharged for short periods of time as part of the
-%% development cycle over multiple years; this charging behaviour is
-%% known to cause battery life to degrade.
+%% This section will largely delve personal opinion and feelings towards
+%% the work completed. Ironically, the word that comes to mind when
+%% thinking on this year's work is: incomplete. While we have presented
+%% and implemented the ECX, a complete theoretical base model for insect
+%% navigation, we did not manage to gather and present any formal
+%% experimental data. The only real barrier to testing towards the end of
+%% the project was the tuning of the collision avoidance system,
+%% something not predicted to be problematic as we already had a working
+%% system from \cite{Mitchell2018}. This became a problem as the work
+%% completed in \cite{Mitchell2018} was completed under the assumption
+%% that the robot's basic systems functioned sufficiently well that they
+%% need not be changed. This assumption was seriously flawed (as noted
+%% towards the end of \cite{Mitchell2018}), but such an assumption is
+%% inherent in a generational project or platform such as the development
+%% of AntBot.
+%% \newline\par
 
-\subsection{Matrix behaviour} During \cite{Mitchell2018}, we noted that
-one of the main issues we experienced while implementing visual
-scanning was matrix manipulation (shifting rows and columns). When
-checking the manipulation alone, it functioned perfectly fine,
-however, when moving into its own function problems arose. As it
-happens, OpenCV matrices are represented by a wrapper object in the
-Java bindings which essentially acts as a pointer. When treating
-parameter passing as a reference, suddenly functions involving
-matrices began to work as expected. This is a technical detail, it is
-available in the documentation (albeit hard to find), why is it worth
-mentioning?\newline\par
+%% It is our view that the AntBot should be retired. We believe that the
+%% platform has fulfilled its usefulness and it would be worth having a
+%% new platform constructed, perhaps as part of a new project. There are
+%% certainly still tests which could be conducted on the AntBot; a
+%% Mushroom Body circuit with real-valued weightings could be tested, the
+%% ECX could be tested if the CA system could be tuned, in fact, likely
+%% all of the work from \cite{Mitchell2018} could now be meaningfully
+%% repeated. Something as simple as a framerate change could be enough to
+%% effect significant change in the MB circuit performance; we have
+%% already reported the changes seen in the OFCA sytem. However, the
+%% benefit of having the AntBot available to test such system is vastly
+%% outweighed by the potential technial difficulties the researcher could
+%% experience; it is not an exaggeration to say that we lost weeks worth
+%% of work due to ultimately simple problems. We justify our
+%% recommendation by reporting our own experiences from
+%% \cite{Mitchell2018} and this work.
+%% \newline\par
 
-It is worth mentioning as neither of our direct
-predecessors noticed this (as we understand it, the code was changed
-significantly after \textit{Eberding's} project so we cannot include
-him). As a result, some truly ridiculous code has wormed its way into
-the robot over the years. During our code refactor as part of this
-project, we found numerous unused functions which treated matrices
-by-value, where identical code suspiciously appeared in the visual
-pre-processing pipeline. It was clear that previous students had
-attempted to give each stage its own function, but this did not work
-and all code was moved directly into, frankly, a monster of a callback
-function - called for every camera frame.
-\newline\par
+%% %% \textbf{Battery life:} A simple yet perpetually irritating issue. As
+%% %% the smartphone screen is constantly on during testing and
+%% %% experimentation, the battery life is understandably poor. This is not
+%% %% helped by the fact that this battery has been continuously
+%% %% charged/discharged for short periods of time as part of the
+%% %% development cycle over multiple years; this charging behaviour is
+%% %% known to cause battery life to degrade.
 
-This is understandable. During a masters or honours project, technical
-hiccups like this are easier to bypass than to solve. Time is tight
-and there are ``more important'' things to worry about. Each student
-need only worry about the codebase for one academic year; each student
-going out does not worry about the code they leave behind and each
-student going in is told they have a working platform and codebase on
-which to test their models. Clearly there is some disconnect in these
-attitudes. Please do not think that we stand upon the mountain top
-bemoaning the the sins of our predecessors; we are by no means
-innocent in this department. The code refactor undertaken is an
-excellent example; it made development far easier for the project, but
-there were design decisions taken that make no sense in a general
-software engineering context, but perfect sense if you are experienced
-with the AntBot. It is inevitable that every student will have to deal
-with the mess of the previous and ultimately contribute their own. We
-use the example of matrix manipulation to make this more general
-point.
-\newline\par
+%% \subsection{Matrix behaviour}\label{sec:mat}
+%% During \cite{Mitchell2018}, we noted that
+%% one of the main issues we experienced while implementing visual
+%% scanning was matrix manipulation (shifting rows and columns). When
+%% checking the manipulation alone, it functioned perfectly fine,
+%% however, when moving into its own function problems arose. As it
+%% happens, OpenCV matrices are represented by a wrapper object in the
+%% Java bindings which essentially acts as a pointer. When treating
+%% parameter passing as a reference, suddenly functions involving
+%% matrices began to work as expected. This is a technical detail, it is
+%% available in the documentation (albeit hard to find), why is it worth
+%% mentioning?\newline\par
 
-This is perhaps not specific to the AntBot, any generational project
-would suffer from the same issue. Methods of mitigating this effect
-simply add more work to the student who must document and justify all
-coding decisions made, limiting the already limited time they have to
-work on the biorobotic component. We believe that the AntBot is on the
-verge of becoming unusable.
+%% It is worth mentioning as neither of our direct
+%% predecessors noticed this (as we understand it, the code was changed
+%% significantly after \textit{Eberding's} project so we cannot include
+%% him). As a result, some truly ridiculous code has wormed its way into
+%% the robot over the years. During our code refactor as part of this
+%% project, we found numerous unused functions which treated matrices
+%% by-value, where identical code suspiciously appeared in the visual
+%% pre-processing pipeline. It was clear that previous students had
+%% attempted to give each stage its own function, but this did not work
+%% and all code was moved directly into, frankly, a monster of a callback
+%% function - called for every camera frame.
+%% \newline\par
 
-\subsection{Lack of documentation} The only documentation on the platform
-is available in the form of previous dissertations. These do not go
-into sufficient detail to explain the function and usage of each
-section of the code (as technical documentation should). This means
-that some potential functionality is near impossible to understand.
-Again, a specific example; we noted earlier that encoders were not
-available to provide feedback for odometry. Actually, it could very
-well be possible to get collect encoder information and send it from
-the Arduino layer to the smartphone. We do not know, because the
-serial communications system is not documented, the path taken by
-serial information is incredibly difficult to follow from the code
-alone. While there are examples to follow for sending data \textit{to}
-the Arduino and decoding it, there are no examples for encoding data
-and sending it \textit{from} the Arduino. It was decided that it was
-not worth the time required to understand and we would default to
-odometry based on time (as in previous iterations of the project) so
-as to collect some data on the CX functionality. In fact, the encoders
-have not been used since \textit{Eberding's} original work, where they
-were used only for a specific purpose. This is unfortunate considering
-the encoder capability of the Rover 5 chassis is given as one of the
-main reasons for moving away from Roboant \cite{Eberding2016} (perhaps
-made worse by the fact that optical encoders \textit{are} available
-for the Polulu Zumo motor board used by Roboant).While we have
-successful results to present, it is undeniable that the decision not
-to use encoders likely affected the performance of the model. Encoders
-are not the most accurate odometry technology, but they would provide
-a more accurate measure than time - especially on AntBot, where
-threads are constantly put to sleep to permit time for serial
-communications.
-\newline\par
+%% This is understandable. During a masters or honours project, technical
+%% hiccups like this are easier to bypass than to solve. Time is tight
+%% and there are ``more important'' things to worry about. Each student
+%% need only worry about the codebase for one academic year; each student
+%% going out does not worry about the code they leave behind and each
+%% student going in is told they have a working platform and codebase on
+%% which to test their models. Clearly there is some disconnect in these
+%% attitudes. Please do not think that we stand upon the mountain top
+%% bemoaning the the sins of our predecessors; we are by no means
+%% innocent in this department. The code refactor undertaken is an
+%% excellent example; it made development far easier for the project, but
+%% there were design decisions taken that make no sense in a general
+%% software engineering context, but perfect sense if you are experienced
+%% with the AntBot. It is inevitable that every student will have to deal
+%% with the mess of the previous and ultimately contribute their own. We
+%% use the example of matrix manipulation to make this more general
+%% point.
+%% \newline\par
 
-\subsection{Flimsy construction} When we inherited the project in late 2017, the
-robot chassis was not in one piece; the top plates were not attached
-as students required access to the battery connection to turn the
-robot on or off and remove the batteries for charging. This was solved
-as part of \cite{Mitchell2018} but it should never have been an issue
-with a pre-existing platform.
-\newline\par
+%% This is perhaps not specific to the AntBot, any generational project
+%% would suffer from the same issue. Methods of mitigating this effect
+%% simply add more work to the student who must document and justify all
+%% coding decisions made, limiting the already limited time they have to
+%% work on the biorobotic component. We believe that the AntBot is on the
+%% verge of becoming unusable.
 
-When returning this year for this project, the 360$^\circ$ camera
-attachment had been removed and used for another project. It was
-reattached and work commenced. We noticed that the CA system was not
-functioning as we expected during early tests of component systems for
-the ECX. The system constantly reacted in the same direction,
-regardless of the stimulus present. Initially we thought this was due
-to the code refactor (the code, but not the logic, was changed), then
-due to parameter tuning, and finally we noticed that the processed
-image was warped. This warp left a large blind spot on one side of the
-image which explained the behaviour. Previously this warp had only
-been experienced in cases where part of the lens attachment was
-obstructed, however, this time the full view was available. This
-resulted in at least two weeks of breaking down the image processing and unwrap
-process before finally tracing the issue. Namely, that the centre of
-the circle used for the polar transform which unwraps the image was
-hard coded to a specific pixel value. Despite the fact that we were
-specifically informed, and legacy applications demonstrate, that there
-was an automatic detection method in place. Two weeks of available
-time lost (after finding the image warp) to something that should have
-been a non-issue.
-\newline\par
+%% \subsection{Lack of documentation} The only documentation on the platform
+%% is available in the form of previous dissertations. These do not go
+%% into sufficient detail to explain the function and usage of each
+%% section of the code (as technical documentation should). This means
+%% that some potential functionality is near impossible to understand.
+%% Again, a specific example; we noted earlier that encoders were not
+%% available to provide feedback for odometry. Actually, it could very
+%% well be possible to get collect encoder information and send it from
+%% the Arduino layer to the smartphone. We do not know, because the
+%% serial communications system is not documented, the path taken by
+%% serial information is incredibly difficult to follow from the code
+%% alone. While there are examples to follow for sending data \textit{to}
+%% the Arduino and decoding it, there are no examples for encoding data
+%% and sending it \textit{from} the Arduino. It was decided that it was
+%% not worth the time required to understand and we would default to
+%% odometry based on time (as in previous iterations of the project) so
+%% as to collect some data on the CX functionality. In fact, the encoders
+%% have not been used since \textit{Eberding's} original work, where they
+%% were used only for a specific purpose. This is unfortunate considering
+%% the encoder capability of the Rover 5 chassis is given as one of the
+%% main reasons for moving away from Roboant \cite{Eberding2016} (perhaps
+%% made worse by the fact that optical encoders \textit{are} available
+%% for the Polulu Zumo motor board used by Roboant).While we have
+%% successful results to present, it is undeniable that the decision not
+%% to use encoders likely affected the performance of the model. Encoders
+%% are not the most accurate odometry technology, but they would provide
+%% a more accurate measure than time - especially on AntBot, where
+%% threads are constantly put to sleep to permit time for serial
+%% communications.
+%% \newline\par
 
-\subsection{Limitations imposed by software (Android)}
-\subsubsection{Library conflicts and limitations}
-The existing hardware is reaching the end of its life. Specifically,
-the smartphone is out of date; while mid-tier modern phones could
-provide better sensors (e.g. compass), faster communication protocols,
-or faster processing speeds, arguably the biggest limitation is now
-becoming the software as a result of outdated (and
-unsupported) hardware. \newline\par
+%% \subsection{Flimsy construction} When we inherited the project in late 2017, the
+%% robot chassis was not in one piece; the top plates were not attached
+%% as students required access to the battery connection to turn the
+%% robot on or off and remove the batteries for charging. This was solved
+%% as part of \cite{Mitchell2018} but it should never have been an issue
+%% with a pre-existing platform.
+%% \newline\par
 
-This was most prominent when developing the video recording tool. To
-record a video directly required use of an FFMPEG wrapper, available
-via a specific library (JavaCV). This library also included OpenCV
-bindings which led to conflicts with a system which already included
-an OpenCV library. Furthermore, the OpenCV portion could not be
-excluded. Switching to the JavaCV library would have required
-rewriting much of the existing OpenCV imports and code.
-\newline\par
+%% When returning this year for this project, the 360$^\circ$ camera
+%% attachment had been removed and used for another project. It was
+%% reattached and work commenced. We noticed that the CA system was not
+%% functioning as we expected during early tests of component systems for
+%% the ECX. The system constantly reacted in the same direction,
+%% regardless of the stimulus present. Initially we thought this was due
+%% to the code refactor (the code, but not the logic, was changed), then
+%% due to parameter tuning, and finally we noticed that the processed
+%% image was warped. This warp left a large blind spot on one side of the
+%% image which explained the behaviour. Previously this warp had only
+%% been experienced in cases where part of the lens attachment was
+%% obstructed, however, this time the full view was available. This
+%% resulted in at least two weeks of breaking down the image processing
+%% and unwrap process before finally tracing the issue. Namely, that the
+%% centre of the circle used for the polar transform which unwraps the
+%% image was hard coded to a specific pixel value. Despite the fact that
+%% we were specifically informed, and legacy applications demonstrate,
+%% that there was an automatic detection method in place. At least two
+%% weeks of available time lost (after finding the image warp) to
+%% something that should have been a non-issue.
+%% \newline\par
 
-One other potential avenue existed in importing the required libraries
-independently of the JavaCV library, however, the minimum SDK version
-required for at least one of the components was higher than the
-project target which could not be increased because it is not
-supported on the version of Android installed on the
-smartphone. Therefore, we ended up with the implemented hack solution
-of buffering video frames to be stored as individual images which are
-copied from the robot and stitched together by a python script (using
-FFMPEG). What we end up with is a massively roundabout way of
-accomplishing the same thing by using the same technologies in
-different ways.
-\newline\par
+%% \subsection{Limitations imposed by software (Android)}
+%% \subsubsection{Library conflicts and limitations}
+%% The existing hardware is reaching the end of its life. Specifically,
+%% the smartphone is out of date; while mid-tier modern phones could
+%% provide better sensors (e.g. compass), faster communication protocols,
+%% or faster processing speeds, arguably the biggest limitation of the
+%% smartphone is now becoming the software as a result of outdated (and
+%% unsupported) hardware. \newline\par
 
-\subsubsection{File management}
-Small gripe, but retrieving files and file management in general
-can be convoluted. As an example, the videoframes are stored to a
-particular directory, this directory is deleted and reformed for every
-recording to ensure that the old frames are always overwritten,
-however, this does not happen consistently; why, is a mystery. Often
-files written during the last run cannot be seen when the phone is
-plugged into a computer, the user must go into the file manager on the
-phone and copy the files to a higher directory for them to become
-visible. This was experienced in \cite{Mitchell2018} when using
-\textit{StatFileUtils}, but only when dealing with the video frames
-this year did we note just how ridiculous this process is. The only
-way to guarantee your video data will be recorded and available is to
-go into the file manager on the phone, delete the destination (and any
-copies made in an attempt to read it), run the agent, go back into the
-file manager, copy the destination directory (usually to the top
-directory on the SD card). In writing this it occurs that a solution
-could be to install a Secure Shell (SSH) server on the smartphone to
-make file transfer easier, but this then requires further development
-and testing for something that should be available by default.
+%% This was most prominent when developing the video recording tool. To
+%% record a video directly required use of an FFMPEG wrapper, available
+%% via a specific library (JavaCV). This library also included OpenCV
+%% bindings which led to conflicts with a system which already included
+%% an OpenCV library (in a non-standard way, see Assumed
+%% Functionality). Furthermore, the OpenCV portion could not be
+%% excluded. Switching to the JavaCV library would have required
+%% rewriting much of the existing OpenCV imports and code.
+%% \newline\par
 
-\subsubsection{Software structure restrictions}
-Android applications have a reasonably strict structure. Certain
-things, for example scoping rules for specific variables can be
-enforced unexpectedly in ways which only make sense within the Android
-ecosystem. When undertaking the code refactor we discovered reasonable
-explanations as to why everything had been kept in the same file. Our
-experience of this is minimal but it causes issues when trying to move
-code around in \textit{traditional} ways. As an example, consider
-global variables; generally considered bad practice unless absolutely
-necessary, but, if we want to display their value on-screen then they
-are absolutely necessary. All variables to be displayed must be global
-for reasons we admit we do not totally understand. In many cases these
-are variables modified in multiple places, at multiple stages, in
-multiple threads (though in theory, not simultaneously). This is a
-small example but application structure cropped up a few times in
-different ways. In another case, a function required a Context object
-which was not available until particular point in application
-initialisation.
-\newline\par
+%% One other potential avenue existed in importing the required libraries
+%% independently of the JavaCV library, however, the minimum SDK version
+%% required for at least one of the components was higher than the
+%% project target which could not be increased because it is not
+%% supported on the version of Android installed on the
+%% smartphone. Therefore, we ended up with the implemented hack solution
+%% of buffering video frames to be stored as individual images which are
+%% copied from the robot and stitched together by a python script (using
+%% FFMPEG). What we end up with is a massively roundabout way of
+%% accomplishing the same thing by using the same technologies in
+%% different ways.
+%% \newline\par
 
-This is, again, a small problem but it can result in roundabout
-solutions to problems which would be simple under normal
-circumstances.
+%% \subsubsection{File management}
+%% Small gripe, but retrieving files and file management in general
+%% can be convoluted. As an example, the videoframes are stored to a
+%% particular directory, this directory is deleted and reformed for every
+%% recording to ensure that the old frames are always overwritten,
+%% however, this does not happen consistently; why, is a mystery. Often
+%% files written during the last run cannot be seen when the phone is
+%% plugged into a computer, the user must go into the file manager on the
+%% phone and copy the files to a higher directory for them to become
+%% visible. This was experienced in \cite{Mitchell2018} when using
+%% \textit{StatFileUtils}, but only when dealing with the video frames
+%% this year did we note just how ridiculous this process is. The only
+%% way to guarantee your video data will be recorded and available is to
+%% go into the file manager on the phone, delete the destination (and any
+%% copies made in an attempt to read it), run the agent, go back into the
+%% file manager, copy the destination directory (usually to the top
+%% directory on the SD card). In writing this it occurs that a solution
+%% could be to install a Secure Shell (SSH) server on the smartphone to
+%% make file transfer easier, but this then requires further development
+%% and testing for something that should be available by default.
 
-\subsubsection{Overhead}
-The overhead required for learning enough about the Android ecosystem
-to successfully develop within it is massive. It is no surprise that
-the original application structure from \cite{Eberding2016} was almost
-immediately dropped, as this would require learning how applications
-in Android interact to pass data back and forth. There may also have
-been latency involved in inter-application communications but no
-previous works have reported this as a reason for moving away from the
-original application structure.\newline\par
+%% \subsubsection{Software structure restrictions}
+%% Android applications have a reasonably strict structure. Certain
+%% things, for example scoping rules for specific variables can be
+%% enforced unexpectedly in ways which only make sense within the Android
+%% ecosystem. When undertaking the code refactor we discovered reasonable
+%% explanations as to why everything had been kept in the same file. Our
+%% experience of this is minimal but it causes issues when trying to move
+%% code around in \textit{traditional} ways. As an example, consider
+%% global variables; generally considered bad practice unless absolutely
+%% necessary, but, if we want to display their value on-screen then they
+%% are absolutely necessary. All variables to be displayed must be global
+%% for reasons we admit we do not totally understand. In many cases these
+%% are variables modified in multiple places, at multiple stages, in
+%% multiple threads (though in theory, not simultaneously). This is a
+%% small example but application structure cropped up a few times in
+%% different ways. In another case, a function required a Context object
+%% which was not available until particular point in application
+%% initialisation.
+%% \newline\par
 
-While it is not unreasonable to ask prospective students to learn
-about Android development, asking them to interpret the existing
-application structure and legacy code without any documentation, is.
-While the obvious solution is for a student to reach out to the last
-\textit{caretaker} of the project, it is also reasonable to expect a
-student to simply look for the place in the code where they can insert
-their own, and then build everything around that. It is no surprise
-that this location was found to be the AntEye application as all
-visual information is immdiately available.
-\newline\par
+%% This is, again, a small problem but it can result in roundabout
+%% solutions to problems which would be simple under normal
+%% circumstances.
 
-This raises a problem in that there is still legacy code that must be
-running alongside AntEye. An Android Toast appears when starting any
-thread which states ``Visual Navigation service started.'', and
-another which appears when stopping a thread to inform you the service
-has stopped. After multiple years of development it can be almost
-impossible to figure out what is running where and doing what outside
-of the small bubble provided by AntEye. Thus, not only does a future
-student have to understand Android, they have to be able to notice and
-understand the workarounds applied by previous years (we will bring it
-up again, with no documentation).
+%% \subsubsection{Overhead}
+%% The overhead required for learning enough about the Android ecosystem
+%% to successfully develop within it is massive. It is no surprise that
+%% the original application structure from \cite{Eberding2016} was almost
+%% immediately dropped, as this would require learning how applications
+%% in Android interact to pass data back and forth. There may also have
+%% been latency involved in inter-application communications but no
+%% previous works have reported this as a reason for moving away from the
+%% original application structure.\newline\par
 
-\subsection{Limitations of hardware}
-The construction of the robot further limits development. It is
-impossible to use any useful form of feedback control due to the
-communication latency between the smartphone and Arduino
-\cite{Mitchell2018}. Movements are therefore coarse and
-inconsistent. Feedback control could perhaps be implemented at the
-firmware level, but attaching sensors to make this possible is
-difficult (a compass sensor was added as part of this project, but
-getting it to show up on the I$^2$C bus proved difficult). This would
-futher reqire re-writing most of the firmware on the robot (again this
-firmware is uncommented and undocumented) to implement control adding
-more busy work to a potential project. It was actually planned that
-the control code would be re-written as part of this project but this
-gradually slid further down the list of priorities as difficulties
-were encountered with higher level systems.
-\newline\par
+%% While it is not unreasonable to ask prospective students to learn
+%% about Android development, asking them to interpret the existing
+%% application structure and legacy code without any documentation, is.
+%% While the obvious solution is for a student to reach out to the last
+%% \textit{caretaker} of the project, it is also reasonable to expect a
+%% student to simply look for the place in the code where they can insert
+%% their own, and then build everything around that. It is no surprise
+%% that this location was found to be the AntEye application as all
+%% visual information is immdiately available.
+%% \newline\par
 
-It could also be argued that implementing proportional control at the
-level of the firmware is not useful enough to warrant doing in the
-first place. The motion of the agent would still need to be performed
-in the same discrete steps. The only potential gain would be more
-accurate turns which, given the visual scanning implemented for the MB
-circuit and the lack of scanning in the CXMB/ECX variants, would be of
-minimal importance.
-\newline\par
+%% This raises a problem in that there is still legacy code that must be
+%% running alongside AntEye. An Android Toast appears when starting any
+%% thread which states ``Visual Navigation service started.'', and
+%% another which appears when stopping a thread to inform you the service
+%% has stopped. After multiple years of development it can be almost
+%% impossible to figure out what is running where and doing what outside
+%% of the small bubble provided by AntEye. Thus, not only does a future
+%% student have to understand Android, they have to be able to notice and
+%% understand the workarounds applied by previous years (we will bring it
+%% up again, with no documentation).
 
-While it is difficult to add sensors to the Arduino, it is impossible
-to fit additional sensors to the phone. Dedicated optical flow sensors
-could provide more useful input than the field computed from the field
-of view, however, they cannot be added.
-\newline\par
+%% \subsection{Limitations of hardware}
+%% The construction of the robot further limits development. It is
+%% impossible to use any useful form of feedback control due to the
+%% communication latency between the smartphone and Arduino
+%% \cite{Mitchell2018}. Movements are therefore coarse and
+%% inconsistent. Feedback control could perhaps be implemented at the
+%% firmware level, but attaching sensors to make this possible is
+%% difficult (a compass sensor was added as part of this project, but
+%% getting it to show up on the I$^2$C bus proved difficult). This would
+%% futher reqire re-writing most of the firmware on the robot (again this
+%% firmware is uncommented and undocumented) to implement control adding
+%% more busy work to a potential project. It was actually planned that
+%% the control code would be re-written as part of this project but this
+%% gradually slid further down the list of priorities as difficulties
+%% were encountered with higher level systems.
+%% \newline\par
 
-Already mentioned are the numerous delays required to execute
-commands. Stopping the robot after detecting, for example, an
-obstacle, adds a second of delay to the thread calling the
-function. It also seems that instructions can remain in the pipeline
-even after the application has been stopped, to the point that a full
-reset is required to guarantee consistent behaviour. This reset
-procedure is:
+%% It could also be argued that implementing proportional control at the
+%% level of the firmware is not useful enough to warrant doing in the
+%% first place. The motion of the agent would still need to be performed
+%% in the same discrete steps. The only potential gain would be more
+%% accurate turns which, given the visual scanning implemented for the MB
+%% circuit and the lack of scanning in the CXMB/ECX variants, would be of
+%% minimal importance.
+%% \newline\par
 
-\begin{enumerate}
-\item{Switch off the chassis/motorboard.}
-\item{Unplug the serial cable from the smartphone.}
-\item{Kill the entire application on the phone (not just the thread
-    that was running).}
-\item{Re-insert the serial cable.}
-\item{Restart the application.}
-\item{Switch the chassis back on before running any thread.}
-\end{enumerate}
+%% While it is difficult to add sensors to the Arduino, it is impossible
+%% to fit additional sensors to the phone. Dedicated optical flow sensors
+%% could provide more useful input than the field computed from the field
+%% of view, however, they cannot be added.
+%% \newline\par
 
-Performing these steps out of order (or skipping any individual step)
-will result in unpredictable behaviour. The robot behaves as if it
-were still executing the previous task. Killing the application is
-made more difficult by the fact that the application can randomly
-vanish from the list of running applications, despite the fact it is
-still running. You can only be sure it has stopped if you see the
-``Visual Navigation service stopped'' Toast. At times this behaviour
-can cause uncertainty as to whether a model does not work, or whether
-the robot is simply acting out.
-\newline\par
+%% Already mentioned are the numerous delays required to execute
+%% commands. Stopping the robot after detecting, for example, an
+%% obstacle, adds a second of delay to the thread calling the
+%% function. It also seems that instructions can remain in the pipeline
+%% even after the application has been stopped, to the point that a full
+%% reset is required to guarantee consistent behaviour. This reset
+%% procedure is:
 
-The robot is also large, making testing in the available space
-difficult. Early in the project, we considered reverting to the old
-Roboant design. The old parts were put together and tested, but again,
-this would have required re-writing the firmware at the Arduino level
-as Roboant used not only a different Arduino board, but a different
-motor board. Given that the angular turning on the Roboant chassis
-was observed to be less accurate than the AntBot chassis, we decided
-not to invest the time in re-writing the firmware. Reasonably accurate
-turning was preferable to a smaller form factor, but with modern
-systems, a small robot capable of accurate locomotion should be easily
-constructable.
+%% \begin{enumerate}
+%% \item{Switch off the chassis/motorboard.}
+%% \item{Unplug the serial cable from the smartphone.}
+%% \item{Kill the entire application on the phone (not just the thread
+%%     that was running).}
+%% \item{Re-insert the serial cable.}
+%% \item{Restart the application.}
+%% \item{Switch the chassis back on before running any thread.}
+%% \end{enumerate}
 
-\subsection{Assumed functionality}
-The final and most serious issue to raise (which most previous points
-boil down to) is assumed functionality. When taking on the project it
-is not unreasonable for a student to assume that the robot (having
-been through many years of development) works sufficiently well for
-them to test their thesis. In 2017, we started work on the AntBot with
-exactly this assumption. AntBot is presented as a stable, reliable
-platform for testing and development. The discussion here presented
-should show that this is not the case.\newline\par
+%% Performing these steps out of order (or skipping any individual step)
+%% will result in unpredictable behaviour. The robot behaves as if it
+%% were still executing the previous task. Killing the application is
+%% made more difficult by the fact that the application can randomly
+%% vanish from the list of running applications, despite the fact it is
+%% still running. You can only be sure it has stopped if you see the
+%% ``Visual Navigation service stopped'' Toast. At times this behaviour
+%% can cause uncertainty as to whether a model does not work, or whether
+%% the robot is simply acting out.
+%% \newline\par
 
-The best example to show this definitively should be the frame rate
-bug discovered as part of this project. A significantly reduced
-framerate affected the perfomance of the CA system tested successfully
-and likely affected the Mushroom Body circuit's performance as well
-\cite{Mitchell2018}. Experimental results can only be trusted if the
-platform can be trusted to work correctly to provide models with the
-correct information and actions. The MB received reduced visual
-information, the CA system received reduced motion information, and
-the CX received highly inaccurate time-based displacement
-information. Not one of the systems under test received reliable
-input, simply due to the implementation of the robot.
-\newline\par
+%% The robot is also large, making testing in the available space
+%% difficult. Early in the project, we considered reverting to the old
+%% Roboant design. The old parts were put together and tested, but again,
+%% this would have required re-writing the firmware at the Arduino level
+%% as Roboant used not only a different Arduino board, but a different
+%% motor board. Given that the angular turning on the Roboant chassis
+%% was observed to be less accurate than the AntBot chassis, we decided
+%% not to invest the time in re-writing the firmware. Reasonably accurate
+%% turning was preferable to a smaller form factor, but with modern
+%% systems, a small robot capable of accurate locomotion should be easily
+%% constructable.
 
-Many other platforms could be possible, our favoured approach being a
-small omni-wheel design capable of holonomic motion with algorithmic
-redundancies for any biological system (e.g. an ultrasonic collision
-avoidance system to compare to any visual model). Regardless of
-platform, it cannot be denied that many of the problems experienced
-are inherent to a generational project, unless development (software
-and hardware) is managed more closely.
+%% \subsection{Assumed functionality}
+%% The final and most serious issue to raise (which most previous points
+%% boil down to) is assumed functionality. When taking on the project it
+%% is not unreasonable for a student to assume that the robot (having
+%% been through many years of development) works sufficiently well for
+%% them to test their thesis. In 2017, we started work on the AntBot with
+%% exactly this assumption. AntBot is presented as a stable, reliable
+%% platform for testing and development. The discussion here presented
+%% should show that this is not the case.\newline\par
 
-\section{Closing}
-\textit{In progress, intended to be a single paragraph summary of the
-  work presented.}
+%% The best example to show this definitively should be the frame rate
+%% bug discovered as part of this project. A significantly reduced
+%% framerate affected the perfomance of the CA system tested successfully
+%% and likely affected the Mushroom Body circuit's performance as well
+%% \cite{Mitchell2018}. Experimental results can only be trusted if the
+%% platform can be trusted to work correctly to provide models with the
+%% correct information and actions. The MB received reduced visual
+%% information, the CA system received reduced motion information, and
+%% the CX received highly inaccurate time-based displacement
+%% information. Not one of the systems under test received reliable
+%% input, simply due to the implementation of the robot.
+%% \newline\par
+
+%% Many other platforms could be possible, our favoured approach being a
+%% small omni-wheel design capable of holonomic motion with algorithmic
+%% redundancies for any biological system (e.g. an ultrasonic collision
+%% avoidance system to compare to any visual model). Regardless of
+%% platform, it cannot be denied that many of the problems experienced
+%% are inherent to a generational project, unless development (software
+%% and hardware) is managed more closely.
+
+%% \section{Closing}
+%% \textit{In progress, intended to be a single paragraph summary of the
+%%   work presented.}
 
 
 \newpage
