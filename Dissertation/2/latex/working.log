@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  2 APR 2019 00:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  2 APR 2019 23:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -366,7 +366,15 @@ Package caption Info: End \AtBeginDocument code.
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [1] [2] [3] [4]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 73.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 73.
+ [1] [2] [3] [4]
 [5] [6
 
 ] (./working.toc [7])
@@ -375,32 +383,32 @@ Package caption Info: End \AtBeginDocument code.
 
  [8] (./working.lof [9
 
-])
+] [10])
 \tf@lof=\write4
 \openout4 = `working.lof'.
 
- [10] (./working.lot)
+ [11] [12
+
+]
+(./working.lot)
 \tf@lot=\write5
 \openout5 = `working.lot'.
 
-
-[11
-
-] [12] [1
+ [13] [14] [1
 
 ] [2] [3] [4
 
 ] [5] [6]
-<Images/Ardin2010MBModel.PNG, id=81, 523.83705pt x 395.91914pt>
+<Images/Ardin2010MBModel.PNG, id=87, 523.83705pt x 395.91914pt>
 File: Images/Ardin2010MBModel.PNG Graphic file (type png)
 <use Images/Ardin2010MBModel.PNG>
-Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 561.
+Package pdftex.def Info: Images/Ardin2010MBModel.PNG  used on input line 625.
 (pdftex.def)             Requested size: 407.66833pt x 308.12698pt.
  [7 <./Images/Ardin2010MBModel.PNG>]
-<Images/MarkerBasedEncoding.png, id=85, 728.7225pt x 552.56438pt>
+<Images/MarkerBasedEncoding.png, id=91, 728.7225pt x 552.56438pt>
 File: Images/MarkerBasedEncoding.png Graphic file (type png)
 <use Images/MarkerBasedEncoding.png>
-Package pdftex.def Info: Images/MarkerBasedEncoding.png  used on input line 664
+Package pdftex.def Info: Images/MarkerBasedEncoding.png  used on input line 728
 .
 (pdftex.def)             Requested size: 407.66833pt x 309.11354pt.
 
@@ -411,36 +419,30 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Underfull \vbox (badness 1990) has occurred while \output is active []
 
  [9 <./Images/MarkerBasedEncoding.png>]
-<Images/EvolvedNetwork.png, id=92, 651.18282pt x 539.76656pt>
+<Images/EvolvedNetwork.png, id=99, 651.18282pt x 539.76656pt>
 File: Images/EvolvedNetwork.png Graphic file (type png)
 <use Images/EvolvedNetwork.png>
-Package pdftex.def Info: Images/EvolvedNetwork.png  used on input line 745.
+Package pdftex.def Info: Images/EvolvedNetwork.png  used on input line 809.
 (pdftex.def)             Requested size: 317.07614pt x 262.83246pt.
  [10 <./Images/EvolvedNetwork.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 763.
-
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 763.
-<Images/StoneCXModel.jpg, id=97, 803.0pt x 520.94624pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 827.
+<Images/StoneCXModel.jpg, id=104, 803.0pt x 520.94624pt>
 File: Images/StoneCXModel.jpg Graphic file (type jpg)
 <use Images/StoneCXModel.jpg>
-Package pdftex.def Info: Images/StoneCXModel.jpg  used on input line 773.
+Package pdftex.def Info: Images/StoneCXModel.jpg  used on input line 837.
 (pdftex.def)             Requested size: 452.9679pt x 293.86618pt.
  [11 <./Images/StoneCXModel.jpg>]
-<Images/Figure5F.jpg, id=102, 483.8075pt x 347.2975pt>
+<Images/Figure5F.jpg, id=108, 483.8075pt x 347.2975pt>
 File: Images/Figure5F.jpg Graphic file (type jpg)
 <use Images/Figure5F.jpg>
-Package pdftex.def Info: Images/Figure5F.jpg  used on input line 809.
+Package pdftex.def Info: Images/Figure5F.jpg  used on input line 873.
 (pdftex.def)             Requested size: 317.07614pt x 227.62195pt.
  [12 <./Images/Figure5F.jpg>] [13] [14] [15]
-<Images/EightENModel.png, id=115, 838.13126pt x 965.6075pt>
+<Images/EightENModel.png, id=122, 838.13126pt x 965.6075pt>
 File: Images/EightENModel.png Graphic file (type png)
 <use Images/EightENModel.png>
-Package pdftex.def Info: Images/EightENModel.png  used on input line 1090.
+Package pdftex.def Info: Images/EightENModel.png  used on input line 1154.
 (pdftex.def)             Requested size: 407.66833pt x 469.6746pt.
 
 
@@ -450,161 +452,171 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [17 <./Images/EightENModel.png>] [18]
-<Images/AntBotCharging.JPG, id=131, 6006.44pt x 3388.66pt>
+<Images/AntBotCharging.JPG, id=137, 6006.44pt x 3388.66pt>
 File: Images/AntBotCharging.JPG Graphic file (type jpg)
 <use Images/AntBotCharging.JPG>
-Package pdftex.def Info: Images/AntBotCharging.JPG  used on input line 1248.
+Package pdftex.def Info: Images/AntBotCharging.JPG  used on input line 1312.
 (pdftex.def)             Requested size: 317.07614pt x 178.85355pt.
-<Images/KogetoDot.jpeg, id=132, 351.3125pt x 351.3125pt>
+<Images/KogetoDot.jpeg, id=138, 351.3125pt x 351.3125pt>
 File: Images/KogetoDot.jpeg Graphic file (type jpg)
 <use Images/KogetoDot.jpeg>
-Package pdftex.def Info: Images/KogetoDot.jpeg  used on input line 1268.
+Package pdftex.def Info: Images/KogetoDot.jpeg  used on input line 1332.
 (pdftex.def)             Requested size: 183.4495pt x 183.45546pt.
-<Images/PanoramicView.jpg, id=133, 614.295pt x 614.295pt>
+<Images/PanoramicView.jpg, id=139, 614.295pt x 614.295pt>
 File: Images/PanoramicView.jpg Graphic file (type jpg)
 <use Images/PanoramicView.jpg>
-Package pdftex.def Info: Images/PanoramicView.jpg  used on input line 1274.
+Package pdftex.def Info: Images/PanoramicView.jpg  used on input line 1338.
 (pdftex.def)             Requested size: 183.4495pt x 183.4463pt.
  [19
 
  <./Images/AntBotCharging.JPG>] [20 <./Images/KogetoDot.jpeg> <./Images/Panoram
 icView.jpg>]
-<Images/Centre.png, id=141, 603.25375pt x 450.68375pt>
+<Images/Centre.png, id=147, 603.25375pt x 450.68375pt>
 File: Images/Centre.png Graphic file (type png)
 <use Images/Centre.png>
-Package pdftex.def Info: Images/Centre.png  used on input line 1362.
+Package pdftex.def Info: Images/Centre.png  used on input line 1426.
 (pdftex.def)             Requested size: 317.07614pt x 236.88069pt.
  [21 <./Images/Centre.png>] [22]
 [23] [24
 
 ]
-
-LaTeX Warning: Reference `sec:mat' on page 25 undefined on input line 1503.
-
-<Images/frame_00066.png, id=156, 90.3375pt x 10.0375pt>
+<Images/frame_00066.png, id=162, 90.3375pt x 10.0375pt>
 File: Images/frame_00066.png Graphic file (type png)
 <use Images/frame_00066.png>
-Package pdftex.def Info: Images/frame_00066.png  used on input line 1523.
+Package pdftex.def Info: Images/frame_00066.png  used on input line 1590.
 (pdftex.def)             Requested size: 452.9679pt x 50.34337pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [25] [26 <./Images/frame_00066.png (PNG copy)>] [27]
-<ACCRate.png, id=166, 462.528pt x 346.896pt>
+<ACCRate.png, id=173, 462.528pt x 346.896pt>
 File: ACCRate.png Graphic file (type png)
 <use ACCRate.png>
-Package pdftex.def Info: ACCRate.png  used on input line 1675.
+Package pdftex.def Info: ACCRate.png  used on input line 1742.
 (pdftex.def)             Requested size: 407.66833pt x 305.76697pt.
  [28 <./ACCRate.png>]
-[29] [30] [31
+<Images/NeuralCASignalProp.png, id=178, 780.516pt x 1346.3901pt>
+File: Images/NeuralCASignalProp.png Graphic file (type png)
+<use Images/NeuralCASignalProp.png>
+Package pdftex.def Info: Images/NeuralCASignalProp.png  used on input line 1821
+.
+(pdftex.def)             Requested size: 362.37569pt x 625.09935pt.
+
+
+LaTeX Warning: Float too large for page by 21.99252pt on input line 1836.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[29] [30] [31 <./Images/NeuralCASignalProp.png>] [32] [33
+
 
 ]
-<Images/CXNT.png, id=181, 957.5775pt x 484.209pt>
+<Images/CXNT.png, id=196, 957.5775pt x 484.209pt>
 File: Images/CXNT.png Graphic file (type png)
 <use Images/CXNT.png>
-Package pdftex.def Info: Images/CXNT.png  used on input line 1898.
+Package pdftex.def Info: Images/CXNT.png  used on input line 2005.
 (pdftex.def)             Requested size: 452.9679pt x 229.04855pt.
- [32 <./Images/CXNT.png>] [33]
-<Images/FOETest.jpg, id=189, 6006.44pt x 3388.66pt>
+ [34 <./Images/CXNT.png>] [35]
+<Images/FOETest.jpg, id=205, 6006.44pt x 3388.66pt>
 File: Images/FOETest.jpg Graphic file (type jpg)
 <use Images/FOETest.jpg>
-Package pdftex.def Info: Images/FOETest.jpg  used on input line 1991.
+Package pdftex.def Info: Images/FOETest.jpg  used on input line 2104.
 (pdftex.def)             Requested size: 452.9679pt x 255.53462pt.
- [34 <./Images/FOETest.jpg>]
-[35] [36
+ [36 <./Images/FOETest.jpg>] [37] [38
 
 ]
-<Images/AB_CX_10.png, id=201, 462.528pt x 346.896pt>
+<Images/AB_CX_10.png, id=215, 462.528pt x 346.896pt>
 File: Images/AB_CX_10.png Graphic file (type png)
 <use Images/AB_CX_10.png>
-Package pdftex.def Info: Images/AB_CX_10.png  used on input line 2124.
+Package pdftex.def Info: Images/AB_CX_10.png  used on input line 2225.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/AB_CX_8.png, id=202, 462.528pt x 346.896pt>
+<Images/AB_CX_8.png, id=216, 462.528pt x 346.896pt>
 File: Images/AB_CX_8.png Graphic file (type png)
 <use Images/AB_CX_8.png>
-Package pdftex.def Info: Images/AB_CX_8.png  used on input line 2139.
+Package pdftex.def Info: Images/AB_CX_8.png  used on input line 2240.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[37]
-<Images/AB_CX_1.png, id=206, 462.528pt x 346.896pt>
-File: Images/AB_CX_1.png Graphic file (type png)
-<use Images/AB_CX_1.png>
-Package pdftex.def Info: Images/AB_CX_1.png  used on input line 2161.
-(pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
-
+[39]
 Underfull \vbox (badness 2635) has occurred while \output is active []
 
- [38 <./Images/AB_CX_10.png> <./Images/AB_CX_8.png>]
-<Images/frame_00057.png, id=212, 90.3375pt x 10.0375pt>
+ [40 <./Images/AB_CX_10.png> <./Images/AB_CX_8.png>]
+<Images/AB_CX_1.png, id=226, 462.528pt x 346.896pt>
+File: Images/AB_CX_1.png Graphic file (type png)
+<use Images/AB_CX_1.png>
+Package pdftex.def Info: Images/AB_CX_1.png  used on input line 2264.
+(pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
+<Images/frame_00057.png, id=227, 90.3375pt x 10.0375pt>
 File: Images/frame_00057.png Graphic file (type png)
 <use Images/frame_00057.png>
-Package pdftex.def Info: Images/frame_00057.png  used on input line 2189.
+Package pdftex.def Info: Images/frame_00057.png  used on input line 2292.
 (pdftex.def)             Requested size: 452.9679pt x 50.34337pt.
-<Images/frame_00058.png, id=213, 90.3375pt x 10.0375pt>
+<Images/frame_00058.png, id=228, 90.3375pt x 10.0375pt>
 File: Images/frame_00058.png Graphic file (type png)
 <use Images/frame_00058.png>
-Package pdftex.def Info: Images/frame_00058.png  used on input line 2190.
+Package pdftex.def Info: Images/frame_00058.png  used on input line 2293.
 (pdftex.def)             Requested size: 452.9679pt x 50.34337pt.
-<Images/frame_00059.png, id=214, 90.3375pt x 10.0375pt>
+<Images/frame_00059.png, id=229, 90.3375pt x 10.0375pt>
 File: Images/frame_00059.png Graphic file (type png)
 <use Images/frame_00059.png>
-Package pdftex.def Info: Images/frame_00059.png  used on input line 2191.
+Package pdftex.def Info: Images/frame_00059.png  used on input line 2294.
 (pdftex.def)             Requested size: 452.9679pt x 50.34337pt.
-<Images/frame_00060.png, id=215, 90.3375pt x 10.0375pt>
+<Images/frame_00060.png, id=230, 90.3375pt x 10.0375pt>
 File: Images/frame_00060.png Graphic file (type png)
 <use Images/frame_00060.png>
-Package pdftex.def Info: Images/frame_00060.png  used on input line 2192.
+Package pdftex.def Info: Images/frame_00060.png  used on input line 2295.
 (pdftex.def)             Requested size: 452.9679pt x 50.34337pt.
-<Images/frame_00061.png, id=216, 90.3375pt x 10.0375pt>
+<Images/frame_00061.png, id=231, 90.3375pt x 10.0375pt>
 File: Images/frame_00061.png Graphic file (type png)
 <use Images/frame_00061.png>
-Package pdftex.def Info: Images/frame_00061.png  used on input line 2193.
+Package pdftex.def Info: Images/frame_00061.png  used on input line 2296.
 (pdftex.def)             Requested size: 452.9679pt x 50.34337pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/frame_00064.png, id=217, 90.3375pt x 10.0375pt>
+<Images/frame_00064.png, id=232, 90.3375pt x 10.0375pt>
 File: Images/frame_00064.png Graphic file (type png)
 <use Images/frame_00064.png>
-Package pdftex.def Info: Images/frame_00064.png  used on input line 2216.
+Package pdftex.def Info: Images/frame_00064.png  used on input line 2319.
 (pdftex.def)             Requested size: 452.9679pt x 50.34337pt.
-<Images/frame_00065.png, id=218, 90.3375pt x 10.0375pt>
+<Images/frame_00065.png, id=233, 90.3375pt x 10.0375pt>
 File: Images/frame_00065.png Graphic file (type png)
 <use Images/frame_00065.png>
-Package pdftex.def Info: Images/frame_00065.png  used on input line 2217.
+Package pdftex.def Info: Images/frame_00065.png  used on input line 2320.
 (pdftex.def)             Requested size: 452.9679pt x 50.34337pt.
 File: Images/frame_00066.png Graphic file (type png)
 <use Images/frame_00066.png>
-Package pdftex.def Info: Images/frame_00066.png  used on input line 2218.
+Package pdftex.def Info: Images/frame_00066.png  used on input line 2321.
 (pdftex.def)             Requested size: 452.9679pt x 50.34337pt.
-<Images/frame_00067.png, id=219, 90.3375pt x 10.0375pt>
+<Images/frame_00067.png, id=234, 90.3375pt x 10.0375pt>
 File: Images/frame_00067.png Graphic file (type png)
 <use Images/frame_00067.png>
-Package pdftex.def Info: Images/frame_00067.png  used on input line 2219.
+Package pdftex.def Info: Images/frame_00067.png  used on input line 2322.
 (pdftex.def)             Requested size: 452.9679pt x 50.34337pt.
-<Images/frame_00068.png, id=220, 90.3375pt x 10.0375pt>
+<Images/frame_00068.png, id=235, 90.3375pt x 10.0375pt>
 File: Images/frame_00068.png Graphic file (type png)
 <use Images/frame_00068.png>
-Package pdftex.def Info: Images/frame_00068.png  used on input line 2220.
+Package pdftex.def Info: Images/frame_00068.png  used on input line 2323.
 (pdftex.def)             Requested size: 452.9679pt x 50.34337pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[39 <./Images/AB_CX_1.png>] [40 <./Images/frame_00057.png (PNG copy)> <./Images
+[41 <./Images/AB_CX_1.png>] [42 <./Images/frame_00057.png (PNG copy)> <./Images
 /frame_00058.png (PNG copy)> <./Images/frame_00059.png (PNG copy)> <./Images/fr
 ame_00060.png (PNG copy)> <./Images/frame_00061.png (PNG copy)> <./Images/frame
 _00064.png (PNG copy)> <./Images/frame_00065.png (PNG copy)> <./Images/frame_00
-067.png (PNG copy)> <./Images/frame_00068.png (PNG copy)>] [41] [42] [43
+067.png (PNG copy)> <./Images/frame_00068.png (PNG copy)>] [43] [44] [45]
+[46
 
-]
-[44] [45] [46] [47] (./working.bbl [48
+] [47] [48] [49] [50] [51] (./working.bbl [52
 
 ]
 Missing character: There is no Ã in font cmr12!
@@ -613,122 +625,118 @@ Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¼ in font cmr12!
 Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¶ in font cmr12!
- [49]) [50] [51
+ [53]) [54] [55
 
-] [52
+] [56
 
 ]
 File: Images/AB_CX_1.png Graphic file (type png)
 <use Images/AB_CX_1.png>
-Package pdftex.def Info: Images/AB_CX_1.png  used on input line 3056.
+Package pdftex.def Info: Images/AB_CX_1.png  used on input line 3199.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
-<Images/AB_CX_2.png, id=267, 462.528pt x 346.896pt>
+<Images/AB_CX_2.png, id=288, 462.528pt x 346.896pt>
 File: Images/AB_CX_2.png Graphic file (type png)
 <use Images/AB_CX_2.png>
-Package pdftex.def Info: Images/AB_CX_2.png  used on input line 3062.
+Package pdftex.def Info: Images/AB_CX_2.png  used on input line 3206.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
-<Images/AB_CX_3.png, id=268, 462.528pt x 346.896pt>
+<Images/AB_CX_3.png, id=289, 462.528pt x 346.896pt>
 File: Images/AB_CX_3.png Graphic file (type png)
 <use Images/AB_CX_3.png>
-Package pdftex.def Info: Images/AB_CX_3.png  used on input line 3068.
+Package pdftex.def Info: Images/AB_CX_3.png  used on input line 3213.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/AB_CX_4.png, id=269, 462.528pt x 346.896pt>
+<Images/AB_CX_4.png, id=290, 462.528pt x 346.896pt>
 File: Images/AB_CX_4.png Graphic file (type png)
 <use Images/AB_CX_4.png>
-Package pdftex.def Info: Images/AB_CX_4.png  used on input line 3074.
+Package pdftex.def Info: Images/AB_CX_4.png  used on input line 3220.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/AB_CX_5.png, id=270, 462.528pt x 346.896pt>
+<Images/AB_CX_5.png, id=291, 462.528pt x 346.896pt>
 File: Images/AB_CX_5.png Graphic file (type png)
 <use Images/AB_CX_5.png>
-Package pdftex.def Info: Images/AB_CX_5.png  used on input line 3080.
+Package pdftex.def Info: Images/AB_CX_5.png  used on input line 3227.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/AB_CX_6.png, id=271, 462.528pt x 346.896pt>
+<Images/AB_CX_6.png, id=292, 462.528pt x 346.896pt>
 File: Images/AB_CX_6.png Graphic file (type png)
 <use Images/AB_CX_6.png>
-Package pdftex.def Info: Images/AB_CX_6.png  used on input line 3086.
+Package pdftex.def Info: Images/AB_CX_6.png  used on input line 3234.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/AB_CX_7.png, id=272, 462.528pt x 346.896pt>
+<Images/AB_CX_7.png, id=293, 462.528pt x 346.896pt>
 File: Images/AB_CX_7.png Graphic file (type png)
 <use Images/AB_CX_7.png>
-Package pdftex.def Info: Images/AB_CX_7.png  used on input line 3092.
+Package pdftex.def Info: Images/AB_CX_7.png  used on input line 3241.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: Images/AB_CX_8.png Graphic file (type png)
 <use Images/AB_CX_8.png>
-Package pdftex.def Info: Images/AB_CX_8.png  used on input line 3098.
+Package pdftex.def Info: Images/AB_CX_8.png  used on input line 3248.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/AB_CX_9.png, id=273, 462.528pt x 346.896pt>
+<Images/AB_CX_9.png, id=294, 462.528pt x 346.896pt>
 File: Images/AB_CX_9.png Graphic file (type png)
 <use Images/AB_CX_9.png>
-Package pdftex.def Info: Images/AB_CX_9.png  used on input line 3104.
+Package pdftex.def Info: Images/AB_CX_9.png  used on input line 3255.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 File: Images/AB_CX_10.png Graphic file (type png)
 <use Images/AB_CX_10.png>
-Package pdftex.def Info: Images/AB_CX_10.png  used on input line 3110.
+Package pdftex.def Info: Images/AB_CX_10.png  used on input line 3262.
 (pdftex.def)             Requested size: 362.37569pt x 271.79521pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[53 <./Images/AB_CX_2.png>] [54 <./Images/AB_CX_3.png> <./Images/AB_CX_4.png>]
-[55 <./Images/AB_CX_5.png> <./Images/AB_CX_6.png>] [56 <./Images/AB_CX_7.png>]
-[57 <./Images/AB_CX_9.png>] (./working.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+[57 <./Images/AB_CX_2.png>] [58 <./Images/AB_CX_3.png> <./Images/AB_CX_4.png>]
+[59 <./Images/AB_CX_5.png> <./Images/AB_CX_6.png>] [60 <./Images/AB_CX_7.png>]
+[61 <./Images/AB_CX_9.png>] (./working.aux) ) 
 Here is how much of TeX's memory you used:
- 4422 strings out of 494923
- 66999 string characters out of 6180741
- 134156 words of memory out of 5000000
- 7616 multiletter control sequences out of 15000+600000
+ 4432 strings out of 494923
+ 67237 string characters out of 6180741
+ 134208 words of memory out of 5000000
+ 7625 multiletter control sequences out of 15000+600000
  14648 words of font info for 51 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,21n,40p,756b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmti9.pfb>
-Output written on working.pdf (71 pages, 14381240 bytes).
+ 42i,21n,40p,907b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on working.pdf (77 pages, 14515115 bytes).
 PDF statistics:
- 366 PDF objects out of 1000 (max. 8388607)
- 222 compressed objects within 3 object streams
+ 388 PDF objects out of 1000 (max. 8388607)
+ 236 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 166 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 171 words of extra memory for PDF output out of 10000 (max. 10000000)
 

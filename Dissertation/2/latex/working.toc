@@ -1,5 +1,5 @@
 \contentsline {section}{List of Figures}{ix}
-\contentsline {section}{List of Tables}{xi}
+\contentsline {section}{List of Tables}{xiii}
 \contentsline {section}{\numberline {1} Introduction }{1}
 \contentsline {subsection}{\numberline {1.1} Motivation }{1}
 \contentsline {subsection}{\numberline {1.2} Practical Goals }{2}
@@ -26,24 +26,25 @@
 \contentsline {subsubsection}{\numberline {4.1.2}Matched Filters}{26}
 \contentsline {subsection}{\numberline {4.2} Path Integration }{29}
 \contentsline {subsection}{\numberline {4.3} The Complete System}{29}
-\contentsline {section}{\numberline {5}Experimentation and Testing}{31}
-\contentsline {subsection}{\numberline {5.1}Path Integration}{31}
-\contentsline {subsection}{\numberline {5.2}Collision Avoidance}{33}
-\contentsline {subsubsection}{\numberline {5.2.1}Shifting Expansion Patterns}{33}
-\contentsline {subsubsection}{\numberline {5.2.2}Neural Matched Filters}{34}
-\contentsline {subsection}{\numberline {5.3}ECX (CXCA)}{35}
-\contentsline {section}{\numberline {6} Results }{37}
-\contentsline {subsection}{\numberline {6.1} Path Integration }{37}
-\contentsline {subsection}{\numberline {6.2}Collision Avoidance}{39}
-\contentsline {subsubsection}{\numberline {6.2.1}Shifting Expansion Patterns}{39}
-\contentsline {subsubsection}{\numberline {6.2.2}Neural Matched Filters}{41}
-\contentsline {subsection}{\numberline {6.3}ECX (CXCA)}{42}
-\contentsline {section}{\numberline {7} Discussion and Future Work}{43}
-\contentsline {subsection}{\numberline {7.1}Conclusion}{43}
-\contentsline {subsection}{\numberline {7.2}Future work}{43}
-\contentsline {subsubsection}{\numberline {7.2.1}Building upon the work presented}{43}
-\contentsline {subsubsection}{\numberline {7.2.2}Platform}{44}
-\contentsline {subsubsection}{\numberline {7.2.3}Closing}{47}
-\contentsline {section}{\numberline {8}References}{49}
-\contentsline {section}{\numberline {A}Genetic Algorithms}{51}
-\contentsline {section}{\numberline {B}CX Vicon Recordings}{53}
+\contentsline {subsection}{\numberline {4.4}Tussocks}{30}
+\contentsline {section}{\numberline {5}Experimentation and Testing}{33}
+\contentsline {subsection}{\numberline {5.1}Path Integration}{33}
+\contentsline {subsection}{\numberline {5.2}Collision Avoidance}{35}
+\contentsline {subsubsection}{\numberline {5.2.1}Shifting Expansion Patterns}{35}
+\contentsline {subsubsection}{\numberline {5.2.2}Neural Matched Filters}{36}
+\contentsline {subsection}{\numberline {5.3}ECX (CXCA)}{37}
+\contentsline {section}{\numberline {6} Results }{39}
+\contentsline {subsection}{\numberline {6.1} Path Integration }{39}
+\contentsline {subsection}{\numberline {6.2}Collision Avoidance}{41}
+\contentsline {subsubsection}{\numberline {6.2.1}Shifting Expansion Patterns}{41}
+\contentsline {subsubsection}{\numberline {6.2.2}Neural Matched Filters}{43}
+\contentsline {subsection}{\numberline {6.3}ECX (CXCA)}{44}
+\contentsline {section}{\numberline {7} Discussion and Future Work}{47}
+\contentsline {subsection}{\numberline {7.1}Conclusion}{47}
+\contentsline {subsection}{\numberline {7.2}Future work}{47}
+\contentsline {subsubsection}{\numberline {7.2.1}Building upon the work presented}{47}
+\contentsline {subsubsection}{\numberline {7.2.2}Platform}{48}
+\contentsline {subsubsection}{\numberline {7.2.3}Closing}{51}
+\contentsline {section}{\numberline {8}References}{53}
+\contentsline {section}{\numberline {A}Genetic Algorithms}{55}
+\contentsline {section}{\numberline {B}CX VICON Recordings}{57}

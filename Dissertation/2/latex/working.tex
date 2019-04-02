@@ -66,7 +66,54 @@ Dr. Barbara Webb
 \centering
 {\LARGE \textbf{Acknowledgements}}
 \begin{flushleft}
- {\small \textit{Pending . . .} }
+  {\small I would like to thank the following people, each of whom as
+    provided support, academic or otherwise throughout this work.
+
+    \begin{itemize}
+    \item{Prof. Barbara Webb - Thank you for your guidance and insight
+      throughout the project. The support and constant feedback you
+      have provided in your role as supervisor have been invaluable.}
+
+    \item{The insect robotics group - I would also like to thank the
+      wider insect robotics group, all of whom have been approachable
+      and open to discussion throughout. In particular, I would like
+      to thank Jan Stankiewicz. Our conversations regarding the
+      operation of the Central Complex and biological approaches to
+      optical flow sensitivity in insects greatly aided my
+      understanding of the topics and helped me develop much of the
+      work in this paper. }
+
+    \item{My parents: Tom, and Linda Mitchell - Your unwavering
+      support throughout my education, of my subject
+      choices, and of my goals of further study have allowed and
+      encouraged to push beyond my limits and work to the best of my
+      ability. I can never thank you enough.
+        }
+
+    \item{My closest friends: Marko Kerr, Ethan Piddington, and Nik
+      Hogarth - Regardless of how busy or detached I have been through
+      this past year, I have always known I could step back into the
+      circle as if no time had passed at all. Thank you for being
+      there. }
+
+    \item{John ``Hedge'' Hall - It is fair you to say that you have
+      been somewhat of a mentor figure throughout my University
+      career. In the last two years, our conversations on academia,
+      success, education, and whatever philosophy you happened to be
+      reading about at the time, have helped me maintain a healthy
+      perspective on life. You introduced me to the practice of
+      meditation, which has helped me maintain a cool head, where
+      previously I would be absorbed by stress. Thank you for giving
+      me a more robust approach to mental health, and for showing me
+      that getting older does not mean growing up.}
+
+    \item{Alana L. White - Your enduring support and love throughout
+      these last years has kept me grounded in an otherwise turbulent
+      time. You were always there for me when I needed you most but
+      best of all, you were there for me when I did not. You were the
+      constant on which I could always rely. Thank you, for everything.}
+    \end{itemize}
+  }
 \end{flushleft}
 
 \newpage
@@ -102,9 +149,28 @@ Dr. Barbara Webb
 \centering
 {\LARGE\textbf{Abstract}}
 \begin{flushleft}
-  {\small \textit{Pending . . .}}
+  {\small Ants are incredible navigators. With limited sensory and
+    computational capabilities, they are able to perform robust
+    navigation over relatively vast distances, through varying
+    terrains and lighting conditions. How this is done is not quite
+    known, however, models for individual aspects of the navigational
+    process have been constructed and demonstrated in recent years in
+    simulation, and on robot platforms.  We take two such models, the
+    Mushroom Body circuit for Visual Navigataion and the Central
+    Complex model for Path Integration. We combine these with a
+    biologically plausible neural model for collision avoidance to
+    provide a conceptually complete \textit{base model} for insect
+    navigation, the Extended Central Complex. This model has been
+    implemented on a robot platform, AntBot. In an effort to establish
+    the model we also present several advancements to the AntBot
+    platform, experimentation with an alternative optical flow method
+    for collision avoidance, experiments with the Central Complex
+    model to address some isssues with previous tests, and promising
+    (though informal) early results indicating the plausibility of our
+    approach. Finally, we present suggestions for future work on both
+    the component models and our combined model, as well as
+    recommendations for future development of the AntBot platform.}
 \end{flushleft}
-
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -160,7 +226,7 @@ combining their outputs to get a form of higher navigational processing
 (similar to the weighted ``base model'' described in \cite{Webb2019}).
 The ECX model is a modified Central Complex model, named simply to
 ensure distinction between the two models. The individual components
-are all biologically plausible and two of three are known to hava a
+are all biologically plausible and two of three are known to have a
 physiological basis. \cite{Ardin2016, Stone2017, Mitchell2018,
   Stewart2010, Julien2017}.
 \newline
@@ -170,10 +236,7 @@ This project primarily extends the work done in
 \cite{Mitchell2018}. As such we continue using the AntBot platform; a
 robot constructed for the express purpose of experimenting with the
 algorithms in the \textit{Ant Navigational Toolkit}
-\cite{Eberding2016, Wehner2009}. Through our experience in
-\cite{Mitchell2018} and in constructing this work, we have concluded
-that, while the AntBot could still be of use for specific tests, it is
-generally no longer fit for purpose (see Discussion).
+\cite{Eberding2016, Wehner2009}.
 
 \subsection{ Motivation }
 Currently, a full base model for insect navigation does not exist
@@ -256,10 +319,6 @@ navigational task (see Section \ref{sec:methods}).}
 and the individual systems.}
 \end{enumerate}
 
-As will be discussed later, we did not reach our goal. We will discuss
-our progress and testing up to the end of stage three of the project, we did not
-manage to complete stage four.
-
 \subsection { Results }
 This work is based on work done previously by Leonard Eberding, Luca Scimeca,
 Zhaoyu Zhang, and Robert Mitchell.
@@ -294,16 +353,20 @@ Significant contributions of this project:
   offline analysis.
 }
 
+\item{ Construction of new, larger, more robust tussocks for use in
+  experimentation (as realistic obstacles and visual landmarks), based
+  on the recommendation in \cite{Mitchell2018}}
+
 \item{ Results definitively showing the impracticality of a focus of
     expansion based system for collision avoidance and justifying
     continued use of matched filters.
 }
 
-\item{ Identified and fixed a bug in the visual preprocessing system
+\item{ Identification and correction of a bug in the visual preprocessing system
   to raise the framerate from 2fps to approximately 10fps under normal usage.}
 
 \item{ Construction of a neural collision avoidance model based on the
-  matched-filter system from \cite{Mitchell2018, Stewart2010}. }
+  matched filter system from \cite{Mitchell2018, Stewart2010}. }
 
 
 \item{
@@ -312,10 +375,11 @@ Significant contributions of this project:
 }
 
 \item{
- Justification for the recommendation that the AntBot be retired at
- the earliest opportunity.
+  Justification of the recommendation that the current AntBot platform
+  be retired, and suggestions for a new platform based on lessons
+  learned from the AntBot.
 }
-  
+
 \end{enumerate}
 \newpage
 
@@ -499,7 +563,7 @@ essentially, we compute the best FOE for the flow field given.
 
 \subsection{Matched Filters for Collision Avoidance}\label{sec:offbg}
 In light of the results we gather with regards to the FOE, we will
-also revisit the matched-filter collision avoidance system from
+also revisit the matched filter collision avoidance system from
 \cite{Mitchell2018}, though the flow field computation, filter
 generation and comparision are unchanged. We present a brief
 description of the intuition here as we will go on to develop neural
@@ -830,7 +894,7 @@ occassionally the AntBot implementations are slightly different.
 Each neuron is described by its firing rate, where the firing rate $r$ is
 a sigmoid function of the input $I$:
 
-\begin{equation}
+\begin{equation}\label{eq:sig}
 r = \frac{1}{1 + e^{-(aI - b)}}
 \end{equation}
 
@@ -1448,7 +1512,7 @@ and tested in \cite{Mitchell2018} were affected. Indeed, in
 Visual Navigation experiments. The low storage rate was thought to be
 a thread synchronisation issue, but it is now clear that the frames
 were simply not finished processing in time to be stored.  In testing
-the matched-filter collision avoidance system from \cite{Mitchell2018}
+the matched filter collision avoidance system from \cite{Mitchell2018}
 we note a significant change in behaviour after the framerate
 improvement. It is suspected that this is due to an increase in flow
 information, and therefore an increase in noise which can cause
@@ -1463,13 +1527,14 @@ for the ECX.
 \section{ Methods } \label{sec:methods}
 \subsection{ Collision Avoidance }
 % Discuss new method (eight directional FOEs)
-The AntBot cannot be fitted with sensors which feedback to the higher models
-(see Discussion). We therefore continue to look for a method of collision
-avoidance which can be integrated into the Central Complex which uses the
-available visual information. The matched-filter model from \cite{Mitchell2018}
-performed reasonably consistently but was initially considered too coarse-grained
-for integration into a modified CX. Our first approach therefore looked for
-expansion patterns in certain areas of the flow field.
+Fitting AntBot with sensors which feedback to the higher models is
+prohibitively difficult (see Discussion). We therefore continue to
+look for a method of collision avoidance which can be integrated into
+the Central Complex which uses the available visual information. The
+matched filter model from \cite{Mitchell2018} performed reasonably
+consistently but was initially considered too coarse-grained for
+integration into a modified CX. Our first approach therefore looked
+for expansion patterns in certain areas of the flow field.
 
 \subsubsection{ Shifting Expansion Fields }
 We noted in research that the Focus of Expansion is used in many visual collision
@@ -1500,13 +1565,15 @@ being able to compute the FOE reliably.  When working with the FOE,
 consistently. Often nonsensical values would be output by the
 computation. This was suspected to be due to a technical detail not
 known at the time of implementation and thus warranted further
-investigation (see Section \ref{sec:mat}). Here, we managed to compute
-reasonably sensible values, though they were not consistent or
-predictable (meaning that the technical problems from
-\cite{Mitchell2018} did indeed affect the results). To compute the FOE
-we use the OpenCV \textit{calcOpticalFlowFarneback()} function to
-produce a dense optical flow field then use the computation from
-\cite{ODonovan2005} (see Section \ref{OFBackground}).
+investigation\footnote{See \cite{Mitchell2018}, discussion of general
+  purpose matrix multiplication in the OpenCV implementation for
+  Java.}. Here, we managed to compute reasonably sensible values,
+though they were not consistent or predictable (meaning that the
+technical problems from \cite{Mitchell2018} did indeed affect the
+results). To compute the FOE we use the OpenCV
+\textit{calcOpticalFlowFarneback()} function to produce a dense
+optical flow field then use the computation from \cite{ODonovan2005}
+(see Section \ref{OFBackground}).
 \newline
 \par
 
@@ -1521,14 +1588,13 @@ computed optical flow field observed by the robot under controlled circumstances
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{frame_00066}
-  \caption{\label{fig:flowfield}
-    \textit{[DRAFT NOTE] I may remove this figure as it does not feel
-    useful when Figure \ref{fig:foeframes} is shown later on.}
-    A subset of points from the dense optical flow field observed by the agent.
-    The agent is experiencing forward translational motion. These frames were
-    captured after the framerate improvement from Section \ref{sec:mod}. The
-    FOE is also shown in blue. There are no obstacles present in the arena.
-  }
+  \caption{\label{fig:flowfield} Frame 3 from Figure
+    \ref{fig:foeframesempty}. A subset of points from the dense
+    optical flow field observed by the agent.  The agent is
+    experiencing forward translational motion. These frames were
+    captured after the framerate improvement from Section
+    \ref{sec:mod}. The FOE is also shown in blue. There are no
+    obstacles present in the arena.  }
 \end{figure}
 
 This analysis produced the following observations:
@@ -1554,9 +1620,10 @@ This analysis produced the following observations:
 
 \item{ Looming objects can be identified from the flow field: This
   observation explains the good performance seen by
-  \cite{Mitchell2018} when examining a matched-filter system. Looming
+  \cite{Mitchell2018} when examining a matched filter system. Looming
   objects can appear as a large (potentially single frame) disturbance
-  of the low-level noise produced by the flow field.  }
+  of the low-level noise produced by the flow field (Figure
+  \ref{fig:foeframes}).  }
 \end{enumerate}
 
 We can therefore conclude that optical flow cannot be used to compute
@@ -1568,10 +1635,10 @@ flow, it does give us one semi-predictable property of the flow field
 which can potentially be used.
 
 \subsubsection{Matched Filters}
-The matched-filter model of collision avoidance as seen in
+The matched filter model of collision avoidance as seen in
 \cite{Mitchell2018} was used without modification for the experimental
 results in this paper.  However, in an effort to establish the ECX
-model, we present here an adaptation of matched-filter collision
+model, we present here an adaptation of matched filter collision
 avoidance which can have its outputs integrated with the CX and MB
 models. We will use the language of artificial neural networks, but
 the principle is essentially the same as \cite{Mitchell2018}.
@@ -1592,7 +1659,7 @@ subtly different and behaved largely the same but we include them for
 completeness. We will go through them in chronological order.
 \newline\par
 
-The matched-filter system produces a sum for the left and right hand sides of the
+The matched filter system produces a sum for the left and right hand sides of the
 robot. This sum denotes the difference between the expected motion and the
 observed motion in the image frame. If we take the difference between the two
 sums we can see if one side has experienced a significant deviation from the
@@ -1659,7 +1726,7 @@ for the generation of a steering response which is proportional to the size of
 the optical flow disturbance (in theory, the bigger the obstacle or loom effect,
 the bigger the response); neither of which are possible with the I\&F
 representation. Recall, a firing rate given some input $I$ is represented as a
-sigmoid:
+sigmoid (Eq. \ref{eq:sig}):
 
 \begin{equation*}
 r = \frac{1}{1 + e^{-(aI - b)}}
@@ -1743,9 +1810,31 @@ to the nearest integer to determine the offset. This method is nice and simple,
 however it is highly susceptible to noise, as we will see this is a critical
 flaw.
 
-%% STOP POINT
-%% Describe the results of the offline analysis
-%% Provide a figure showing the flow field.
+\begin{figure}[h!]
+  \caption{\label{fig:mrspRateArrangement}[PLACEHOLDER] \textit{This
+      figure will show the full architecture of the rate-based system.}}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \vspace{-35pt}
+  \includegraphics[width=0.8\textwidth]{NeuralCASignalProp}
+  \caption{\label{fig:mrspRateResponse} An example of signal
+    propogation and generated output from the rate-based system
+    (left-to-right, top-to-bottom). An example flow input is given as
+    0.25. The ACC rate response is then put through the offset computation
+    function (Eq. \ref{eq:transform}). The default sinusoid function
+    is generated over eight array elements. The function is then
+    shifted such that the maximum lies at \textit{current\textunderscore
+    direction + round(offset)} which in this case is 5. This sinusoid
+    is then extended to a sixteen elements to match the representation
+    in CPU4. Each element of the sinusoid is then supplied as input to
+    the corresponding MRSP neuron to give the rate output in the final
+    plot. This MRSP response is used as input to the CPU1 layer, in
+    this example a small right turn will be generated.
+  }
+\end{figure}
+
 
 \subsection{ Path Integration }
 The path integration circuit in use is a slightly simplified version of that
@@ -1765,13 +1854,13 @@ direction so we can reasonably assume that the robot will travel roughly the sam
 distance in a set time interval.
 
 \subsection{ The Complete System}
-Unfortunately, the complete ECX system envisioned was not fully realised. A
-complete model has been constructed. Present on the robot is a singular model
-which, in theory, will perform collision avoidance, path integration, and
-direction-associated visual memory (simultaneously); however, we were
-unsuccessful in performing any meaningful testing due to technical and time
-constraints. We present the model here and present the issues experienced and
-reasoning in Section \ref{sec:results}.
+A complete model has been constructed. Present on the robot is a
+singular model which, in theory, will perform collision avoidance,
+path integration, and direction-associated visual memory
+(simultaneously); however, we did not manage to collect formal results
+due to technical and time constraints (though some informal testing
+has been conducted). We present the model here and present the issues
+experienced and reasoning in Section \ref{sec:results}.
 \newline\par
 
 In an effort to keep the integration simple at a late stage in the project,
@@ -1800,15 +1889,33 @@ CPU1 output stage. In this fashion, one can isolate each system and produce
 the steering output using specific systems. The key modes currently present on
 the agent are CA-only, and CXCA which are the isolated collision avoidance system
 and the combined output of the path integrator and the collision avoidance
-system respectively; adding further combinations should be trivial. The limited
+system respectively; adding further combinations should be trivial. The
 selection currently available is due to the component level testing that
 was in progress towards the end of the project. The weighting applied to each
-layer can be specified and ideally it should be dynamic; we had intented to
-approach this during the project but it was not possible. While the visual
+layer can be specified and ideally it should be dynamic. While the visual
 memory infrastructure is entirely present, it was not tested; however, as stated
 it is identical to that presented by \textit{Zhang} so we have no reason to
 think that this subsystem should not work to the degree presented in
 \cite{Zhang2017}.
+
+\begin{figure}
+\caption{\label{fig:ecx} [PLACEHOLDER] Attempt to show the full thing if possible
+  but this may be prohibitively difficult.}
+\end{figure}
+
+\subsection{Tussocks}
+During \cite{Mitchell2018}, we note that the tussocks were extremely
+small in the view of AntBot; furthermore, they were incredibly
+fragile. They were originally constructed by connecting synthetic
+boxwood bushes to wooden blocks with wood glue; the glue became
+disconnected quickly and all had to be repaired with superglue
+multiple times during the experimentation phase of
+\cite{Mitchell2018}. For convenience, we construct new synthetic
+tussocks. The basic idea is the same, but the wood blocks were made
+larger, and the synthetic foliage sits higher. The two pieces were
+stapled together resulting in a much more robust structure. From video
+data it can be seen that they are farm more prominent in the image
+frame, as required.
 
 \section{Experimentation and Testing}\label{sec:test}
 We re-use the experimental environment from \cite{Mitchell2018}. A
@@ -1896,7 +2003,7 @@ avoid it for formal experiments.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{CXNT}
-  \caption{\label{fig:cxnt} An initial recording from the Central Complex
+  \caption{\label{fig:cxnt} A test recording from the Central Complex
     PI experiments. The agent successfully navigates home but requires a large
     turning arc to point back towards the nest. This is because the output of the
     CX is not a precise angle but instead a turn direction with some strength.
@@ -1941,35 +2048,41 @@ would dictate the desired direction of travel. We would, of course, take any
 predictable behaviour which could be used for collision avoidance.
 \newline\par
 
-The agent was set on a collision course with a cluster of tussocks and watched
-for consistent reaction behaviour. No such consistent behaviour was observed.
-To test our hypothess completely, it was clear that further work was needed to
-verify that there was no usable behaviour. The processed image frame (the view
-of the agent) may be viewed on the smartphone screen; unfortunately, it is too
-small to really pick out any details of a flow vector field. As a general point,
-testing optical flow behaviour on the robot is generally quite difficult due to
-the field of view. Even outputting an FOE location and moving an object in front
-of the robot cannot tell us if we are producing the desired behaviour; firstly,
-because the object will not move realistically in the frame; and secondly,
-because the robot will observe motion from all directions which would not
-normally be present. This is generally true with the robot; it is hard to produce
-reliable output from algorithms when testing.
+The agent was set on a collision course with a cluster of tussocks and
+watched for consistent reaction behaviour. No such consistent
+behaviour was observed.  To test our hypothesis completely, it was
+clear that further work was needed to verify that there was no usable
+behaviour. The processed image frame (the view of the agent) may be
+viewed on the smartphone screen; unfortunately, it is too small to
+pick out any details of a flow-vector field. As a general point,
+testing optical flow behaviour on the robot is quite difficult due to
+the field of view. Even outputting an FOE location and moving an
+object in front of the robot cannot tell us if we are producing the
+desired behaviour; firstly, because the object will not move
+realistically in the frame; and secondly, because the robot will
+observe motion from all directions which would not normally be present
+(i.e. the body and arms of the tester manipulating the object). This
+is true for all visual testing with the robot; it is hard to produce
+reliable output as the input is likely unrealistic.
 \newline\par
 
 Two solutions to this problem have been developed over previous years:
-\textit{LogToFileUtils} developed by \textit{Zhang} to provide textual logging
-utilities where it was not normally possible to use such logs \cite{Zhang2017}
-and \textit{StatFileUtils}, a variant of \textit{Zhang's} logging utility which
-produced regular file output which could be easily parsed to produce graphical
-plots from recorded data \cite{Mitchell2018}. Unfortunately, neither were really
-useful in testing the FOE position; we could log it, but there would be no way
-of correlating its behaviour with the agent's view of the environment. Instead,
-we chose to implement a video recording tool which would allow us to record
-controlled runs of the agent through an environment. Furthermore, this video
-could be processed offline using the same systems implemented on the robot, then
-scaled up to give a much clearer view of what the robot was actually seeing.
-This proved incredibly useful and allowed us to almost immediately dismiss this
-method for use on the AntBot.
+\textit{LogToFileUtils} developed by \textit{Zhang} to provide textual
+logging utilities where it was not normally possible to use such logs
+\cite{Zhang2017} and \textit{StatFileUtils}, a variant of
+\textit{Zhang's} logging utility which produced regular file output
+which could be easily parsed to produce graphical plots from recorded
+data \cite{Mitchell2018}. Unfortunately, neither were really useful in
+testing the FOE position; we could log it, but there would be no way
+of correlating its behaviour with the agent's view of the
+environment. Instead, we chose to implement a video recording tool
+which would allow us to record controlled runs of the agent through an
+environment. Furthermore, this video could be processed offline using
+the same systems implemented on the robot, then scaled up to give a
+much clearer view of what the robot was actually seeing.  This proved
+incredibly useful and allowed us to almost immediately dismiss
+shifting expansion patterns as a method for collision avoidance on the
+AntBot.
 \newline\par
 
 The recording tool was used to show the infeasibility of this method
@@ -2014,55 +2127,43 @@ steering commands.
 \par
 
 We then test the three different implementations of the ACC neurons
-separately. The testing for each type did not extend very far. Each
-implementation was tested in a mostly clear arena with multiple
-obstacles placed in a large, obvious cluster in the centre. The robot
-was started from the starting block (marked with masking tape) on the
-South side of the enclosure on a direct collision course with the
-cluster. The agent would then attempt to traverse the arena without
-collisions using only the neural CA system. The I\&F
-variant\footnote{We take the LI\&F representation forward, observed
-  behaviour between RI\&F and LI\&F was not significantly different.}
-of the ACC neurons was the only implementation that functioned
-consistently enough to allow limited testing of the ECX, however, we
-later learned that the neural CA was not working to the degree
-previously thought.
+separately. Each type was tested initially in an empty arena. This
+basic test ensured that reactions were being generated and that the
+system was responding in a sensible, sensitive fashion. We then add an
+obstacle.  For ACC implementation, the agent was started in the South
+end of the arena, on a collision course with a cluster of tussocks
+positioned in the centre. We wished to see if the neural system would
+replicate the performance of the neural matched filter system from
+\cite{Mitchell2018} by starting with a variation of the most basic
+obstacle avoidance scenario presented (Table 2, Arena 2 from
+\cite{Mitchell2018}).
 \newline\par
+
+No system performed consistently well in the presence of an obstacle,
+however, the I\&F variant\footnote{As behaviour between the two I\&F
+  variants was identical, we will discuss them together going
+  forward. Most testing took place with lI\&F ACC neurons.} provided
+consistent enough reactions to observe some runs of the ECX.
 
 \subsection{ECX (CXCA)}
 The testing methodology for the ECX was to test each individual system
-and then full combination. Our earlier experiments with the CX
-demonstrate the capability of the circuit as a path integrator - and,
-of course, it has been demonstrated in simulation
-\cite{Stone2017}. This model has already been tested in conjunction
-with the MB (\textit{Zhang's} CXMB) \cite{Zhang2017}. Similarly, the MB
-model has been shown to provide robust visual navigation on the robot
-\cite{Mitchell2018}.\newline\par
-
-Therefore, the only things left to test are the neural CA system, and
-then each step of integration, CA $\rightarrow$ CXCA $\rightarrow$
-ECX. Note that testing CA alongside the MB model would be redundant as
-the routes recalled from visual memory should incorporate any obstacle
-avoidance maneuvers \cite{Mitchell2018}. Fortunately, we can simply
-use the full ECX model and turn particular outputs on or off depending
-on the desired functionality.
+and then full combination. There is a set order to this as each step
+of the integration requires some prerequisite. The CA system must be
+tested first, then the combination of CA and PI (CACX) as we need
+working PI to learn homeward visual routes, finally, the MB can be
+connected and the full ECX can then be tested.
 \newline\par
 
-Unfortunately, we did not advance past the CXCA testing stage. The
-CXCA was tested only with the LI\&F ACC neurons. We used both an empty
-environment (to check for basic functionality) and a lightly cluttered
-environment; one with a singular central obstacle and a second with a
-tussock density of 2 per pitch quadrant.
-\newline\par
+All systems are implemented and available; we present testing only up
+to the CACX implementation. The CACX was tested (informally) by
+allowing the combined system to navigate homeward following a
+successful collision free run outbound run. The combined model was
+only tested using the I\&F variant of the neural CA model as this
+version managed successful collision avoidance behaviour. As CXCA
+tests followed successful CA tests, the CXCA is tested in the same
+environments: an empty environment, and one with a single large
+cluster of tussocks.
 
-The informal tests were conducted by allowing the agent to navigate
-outward using the neural CA system; the agent then attempted to
-navigate home using a weighted combination of the CX and CA outputs
-(CXCA). The reader should note that these informal tests were somewhat
-intertwined with the neural CA tests. If the neural CA performed
-correctly, then we felt it appropriate to allow the agent to attempt a
-homeward navigation.
-\newpage
 
 \section{ Results } \label{sec:results}
 \subsection{ Path Integration }
@@ -2149,12 +2250,14 @@ of the capability of the CX (especially with the early test run in
 Figure \ref{fig:cxnt}), we must acknowledge certain methodological
 issues. Firstly, the deviation and secondly the run length. All runs
 can be seen to be very short. We think it would be prudent to repeat
-these experiments with longer runs and a platform with better
-odometric capabilities (see Discussion). Despite our justification, it
-may also be prudent to remove the 180$^{\circ}$ turn at the end of the
-outbound run. In some recordings, it can be seen that the robot is
-still pointing directly home after its outbound run (Figure
-\ref{fig:abcx1i}), though this is not always the case.
+these experiments with longer runs and more accurate odometry (see
+Discussion). Despite our justification, it may also be prudent to
+remove the 180$^{\circ}$ turn at the end of the outbound run; perhaps
+90$^\circ$ would allow the network to perform corrections while still
+removing the need for large loops. In some
+recordings, it can be seen that the robot is still pointing directly
+home after its outbound run (Figure \ref{fig:abcx1i}), though this is
+not always the case.
 
 \begin{figure}[h!]
   \centering
@@ -2251,105 +2354,145 @@ different representations of the ACC neurons. In testing, the I\&F
 versions performed identically under observation, so we will discuss
 them as one.\newline\par
 
-\textbf{I\&F:} Unfortunately, the performance was generally poor,
-though this was the only variant which managed successful collision
-free runs (not consistent enough to gather any formal
-data). It is no surprise that this variant came closest to replicating
-the behaviour (if not the performance) of the original model from
-\cite{Mitchell2018} as it is, functionally, a dressed up version of
-this model (with the addition of neural steering generation).
+\textbf{I\&F:} Performance of the system was promising though
+inconsistent, though collision free behaviour was observed. Behaviour
+was similar to, though not as consistent as, that observed in
+\cite{Mitchell2018}.
 \newline\par
 
-With this in mind, one could reasonably ask why this model does not
-function consistently where the one from \cite{Mitchell2018}
-did. Indeed, we used the model from \cite{Mitchell2018} successfully
-in this work for our path integration experiments (and it was tested
-successfully alongside the MB model in a cluttered environment during
-the code refactor process). The neural OFCA model was implemented
-after the improvements to the visual pipeline; as this was the only
-change, we suspect this is the problem. In testing the original
-model from \cite{Mitchell2018} \textit{after} the improvement to the
-framerate, the behaviour was noticably different (and degraded).
+In the obstacle free case, the system mostly managed to avoid the
+arena walls. The behaviour seemed more sensitive than
+that given by \cite{Mitchell2018}. Note that the algorithmic matched
+filter system also experienced problems in an empty arena, so similar
+behaviour in the neural model did not prove discouraging.
 \newline\par
 
-As mentioned in Section \ref{sec:mod} we suspect this is due to the
-drastic increase in flow information which is now fed into the
-model. As can be seen from Figures \ref{fig:foeframes} and
-\ref{fig:foeframesempty}, the flow information is relatively noisy
-with the features indicitive of an obstacle being large and
-obvious. The tuning methods applied in \cite{Mitchell2018} where the
-accumulation and reaction thresholds are adjusted are clearly no
-longer sufficient; in testing, the model was either hypersensitive or
-hyposensitive. The line for a functional middle ground is clearly very
-fine. Tuning at the sensory level is required; fortunately, such
-tuning could also prove useful for the rate model.
+With an obstacle present, the behaviour of the system was initially
+positive. The agent did in fact manage to navigate around a single
+large obstacle successfully on multiple ocassions. However, the
+behaviour was inconsistent; in many cases the agent would turn
+towards the obstacle coming very close to collisions (or colliding)
+with the obstacle. On some occassions the agent would avoid the
+obstacle and then collide with the arena wall. Performance here was
+positive enough to warrant testing with a sparsely occupied
+environment (two tussocks per pitch quadrant); at this point the
+observed performance broke down, collisions became far more common
+with many being caused by unnecessary turns \textit{towards} obstacles
+(i.e. the agent's path was clear but a turn was triggered, often
+putting the agent at immediate risk of a collision). The architecture
+is clearly functioning as intended, however, further tuning of the
+input is required to obtain consistent collision avoidance behaviour
+(see Section \ref{sec:future}).
 \newline\par
 
-\textbf{Rate:} The rate model provided no predictable reaction,
-however, this is very likely due to the fact that the inputs are not
-filtered at all. The flow sums for each side are computed, adjusted,
-and their full difference is supplied as input to compute the firing
-rate. In the I\&F and algorithmic variants, this problem is (or was)
-mitigated by the accumulation threshold parameter. It is clear that
-such a parameter could be added to the rate model, however, we propose
+%% Unfortunately, the performance was generally poor,
+%% though this was the only variant which managed successful collision
+%% free runs (not consistent enough to gather any formal
+%% data). It is no surprise that this variant came closest to replicating
+%% the behaviour (if not the performance) of the original model from
+%% \cite{Mitchell2018} as it is, functionally, a dressed up version of
+%% this model (with the addition of neural steering generation).
+%% \newline\par
+
+%% With this in mind, one could reasonably ask why this model does not
+%% function consistently where the one from \cite{Mitchell2018}
+%% did. Indeed, we used the model from \cite{Mitchell2018} successfully
+%% in this work for our path integration experiments (and it was tested
+%% successfully alongside the MB model in a cluttered environment during
+%% the code refactor process). The neural OFCA model was implemented
+%% after the improvements to the visual pipeline; as this was the only
+%% change, we suspect this is the problem. In testing the original
+%% model from \cite{Mitchell2018} \textit{after} the improvement to the
+%% framerate, the behaviour was noticably different (and degraded).
+%% \newline\par
+
+%% As mentioned in Section \ref{sec:mod} we suspect this is due to the
+%% drastic increase in flow information which is now fed into the
+%% model. As can be seen from Figures \ref{fig:foeframes} and
+%% \ref{fig:foeframesempty}, the flow information is relatively noisy
+%% with the features indicitive of an obstacle being large and
+%% obvious. The tuning methods applied in \cite{Mitchell2018} where the
+%% accumulation and reaction thresholds are adjusted are clearly no
+%% longer sufficient; in testing, the model was either hypersensitive or
+%% hyposensitive. The line for a functional middle ground is clearly very
+%% fine. Tuning at the sensory level is required; fortunately, such
+%% tuning could also prove useful for the rate model.
+%% \newline\par
+
+\textbf{Rate:} The rate model provided no consistent reaction (in both
+the empty arena and with a single large obstacle present), however,
+this is very likely due to the fact that the inputs are not filtered
+at all. The flow sums for each side are computed, adjusted, and their
+full difference (scaled down to lie in (0,1)) is supplied as input to
+compute the firing rate. In the I\&F and algorithmic variants this
+problem is mitigated by the \textit{accumulation threshold} parameter.
+Such a parameter could be added to the rate model, however, we propose
 a solution at a lower level.\newline\par
 
-One should look to clean the optical flow field in some way. This
-could be done simply by filtering out all vectors which do not meet
-some threshold for length (this is distinctly different from the
-thresholds applied in \cite{Mitchell2018}). A crude but potentially
-effective method as it can be seen in Figure \ref{fig:foeframes} that
-looming obstacles result in a few vectors with large displacements;
-all other information could be considered noise. Alternatively,
-different filters\footnote{The flow filter in use is still the filter
-  implemented by \textit{Scimeca} for speed
+We think the solution lies in cleaning the computed optical flow
+field. This could be done simply by filtering out all vectors which do
+not meet some threshold for length (this is distinctly different from
+the thresholds applied in \cite{Mitchell2018}). This is a simple, but
+potentially effective method as it can be seen in Figure
+\ref{fig:foeframes} that looming obstacles result in a few vectors
+with large displacements; all other information could be considered
+noise. Alternatively, different filters\footnote{The flow filter in
+  use is still the filter implemented by \textit{Scimeca} for speed
   retrieval\cite{Scimeca2017,Mitchell2018}. } or even a dedicated
-sensor could be used (see Discussion).\newline\par
+sensor could perhaps be used (see Discussion).\newline\par
 
 Despite the fact that the rate model as presented does not behave
-consistently in the presence of obstacles, it would still be our
+consistently, it is again clear that the architecture functions as
+intended, which presents a significant step towards integrating CA
+behaviour into the CX structure.  The rate model would be our
 preferred approach going forward. We feel it better fits the existing
 CX architecture and also allows a proportional response to be
-generated. It is a more flexible and perhaps, a more biologically
-plausible approach to the simulation. Based on our previous experience
-with optical flow models for collision avoidance we are confident in
-our assertion that the erratic behaviour can be (mostly) explained by
-a noisy optical flow field though we should reiterate that this is
-conjecture.
+generated from a single neuron. It is a more flexible aproach to the
+simulation. Based on our previous experience with optical flow models
+for collision avoidance we are confident in our assertion that the
+behaviour observed can be explained by a noisy optical flow field.
 
 \subsection{ECX (CXCA)}
-As stated in Section \ref{sec:test}, the ECX model only got as far as
-the CXCA (Central Complex with Collision Avoidance) step in testing,
-using the I\&F CA model. This parameterisation of the CA model was
-consistent enough to allow specific tests in tailored environments
-such that we could at least check that steering signals were being
-generated as a combination of the path integrator and the collision
-avoidance system. As such we could observe (mostly) successful
-collision avoidance behaviour on the outbound run. The inbound runs
-proved less successful, however. Due to the hypersensitivity of the
-collision avoidance system it proved difficult to find a reasonable
-weighting to balance the two systems. It was when attempting runs in a
-moderately cluttered environment that we discovered the CA was not
-working to the limited degree previously thought.
+As stated in Section \ref{sec:test}, the ECX model was tested as an
+extension of successful CA runs and thus, was only tested using I\&F
+ACC neurons. In an empty arena, successful homing was observed in a
+few (though not all) tests; these cases are promising results, as it
+was clear that the CA and CX systems were interacting to produce an
+output. \newline\par
+
+With the obstacle present, homing was never sucessful but desired
+behaviour was exhibited in some tests. On these occassions the agent
+navigated around the obstacle with minimal disruption to the home
+vector given by the path integrator. Once the agent had passed the
+obstacle however, the trajectory often deviated from that
+desired. This behaviour is caused by erroneous outputs from the
+(hypersensitive) CA subsystem. We reduced the weighting applied to the
+CA in the output to 50\% (originally, 90\% of the steering command was
+given by CA, 10\% by PI) and performed the test again. The steering
+generated was better with respect to the home vector, however, the
+robot could not home due to greatly increased collisions.
 \newline\par
 
-Intuition would suggest that we generate the vast majority of the
-steering signal from collision avoidance; any steering signal
-generated by this system is clearly an immediate danger to the agent,
-the path integration circuit can compensate later. However, under
-observation the path integrator never gets the chance to
-compensate. An early prototype of the CACX integration allowed the CA
-subsystem to completely overwrite the steering command in the event of
-a collision detection; with a hypersensitive CA system this presents
-the obvious problem that CA saccades become the only steering output.
-Later versions which allowed integration of the outputs experienced
-the same problem; lowering the precedence of CA either did not
-mitigate the problem or resulted in an unacceptable degradation of an
-already poor CA system. We can at least conclude that the CXCA and
-therefore the complete ECX are plausible once the problems are ironed
-out of the CA system. We regret not making more progress towards
-making this a usable model, though a complete implementation is now
-available on the AntBot.
+The 90\% weighting applied to CA seems high however, in an ideal
+scenario, the CA system should only be contributing output in an
+immediate collision scenario (i.e. when it is critical that the CA
+system governs the steering). We therefore felt it appropriate to set
+the weighting high; it is understandable that this would cause
+problems in the case that the CA system is hypersensitive. We also
+note that, even with only a 10\% weighting, the path integrator was still
+contributing noticably to the output. The difference between the
+combined system and the prototype in which the CA generated all of the
+output was significant.
+\newline\par
+
+The modification of component weightings was applied only to check
+that the CA system was indeed the cause of the unsuccessful homing,
+once the agent had passed the obstacle. The effect of component
+weightings, or even applying dynamic component weighting would be an
+interesting branch of investigation for any formal experiments using
+the ECX. We think the behaviour observed in testing represents a
+significant conceptual step towards such formal experiments with a
+complete base model for insect navigation.
 \newpage
 
 
@@ -2384,8 +2527,8 @@ the identification and correction of a fairly major bug in the visual
 pre-processing system which is now known to have affected past works.
 
 \subsection{Future work}
-\subsubsection{Building upon the work presented}
-While we are ultimately pleased with the progress made in the
+\subsubsection{Building upon the work presented}\label{sec:future}
+While we are pleased with the overall progress made in the
 development of AntBot, there are undoubtedly things which could be
 improved.\newline\par
 
@@ -2455,13 +2598,12 @@ difficult. Some such variables have been moved where possible but
 there is still a lot which could be fixed.\newline\par
 
 Most of the unused code which is still present is commented and/or
-specifically marked for archival purposes. We would recommend
-removal of any and all remaining dead code which has been
-missed. Likewise, many unused variables were removed but some remain;
-use great caution when removing these! Code which seems unused may be
-used indirectly (even if you search for references and find none), use
-all tools afforded by Android Studio to ensure nothing
-breaks and update version control excessively.
+specifically marked for archival purposes. We would recommend removal
+of any and all remaining dead code which has been missed. Likewise,
+many unused variables were removed but some remain; great caution
+should be applied when modifying these variables. Code which seems
+unused may be used indirectly (even in cases where Android Studio
+shows no uses). Liberal use of version control is recommended.
 \newline\par
 
 Library upticks may be useful, but we are not sure of the extent to
@@ -2527,10 +2669,11 @@ improvement which could breath new life into AntBot. In particular, if
 I$^2$C connections (and other I/O ports) can be made available (or
 more easily accessible in some cases) on the Arduino and the serial
 communications improved, this could eliminate many of the limitations
-we have experienced in this work (e.g. no access to accurate encoder
-information, no proportional control at a high level, no algorithmic
-alternatives to bio-inspired systems - usfeul as experimental controls
-for comparison). However, we feel that this is a large ``if''.
+we have experienced in this work. Examples of such limitations
+include: no access to accurate encoder information, no proportional
+control at a high level, and no algorithmic alternatives to
+bio-inspired systems which could be usfeul as experimental controls
+for comparison. However, we feel that this is a large ``if''.
 \newline\par
 
 Even if the more problematic hardware/firmware limitations were lifted, there
@@ -3050,65 +3193,75 @@ not captured by (and not necessary for) this paper. A tutorial by
 \textit{Whitley} can be found in \textit{Statistics and Computing, Volume 4
   (1994)} \cite{Whitley1994}. 
 
-\section{CX Vicon Recordings}\label{ap:cxfigs}
+\section{CX VICON Recordings}\label{ap:cxfigs}
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{AB_CX_1}
-  \caption{\label{fig:abcx1}}
+  \caption{\label{fig:abcx1} PI test AB\textunderscore
+    CX\textunderscore 1}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{AB_CX_2}
-  \caption{\label{fig:abcx2}}
+  \caption{\label{fig:abcx2}PI test AB\textunderscore
+    CX\textunderscore 2}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{AB_CX_3}
-  \caption{\label{fig:abcx3}}
+  \caption{\label{fig:abcx3}PI test AB\textunderscore
+    CX\textunderscore 3}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{AB_CX_4}
-  \caption{\label{fig:abcx4}}
+  \caption{\label{fig:abcx4}PI test AB\textunderscore
+    CX\textunderscore 4}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{AB_CX_5}
-  \caption{\label{fig:abcx5}}
+  \caption{\label{fig:abcx5} PI test AB\textunderscore
+    CX\textunderscore 5}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{AB_CX_6}
-  \caption{\label{fig:abcx6}}
+  \caption{\label{fig:abcx6} PI test AB\textunderscore
+    CX\textunderscore 6}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{AB_CX_7}
-  \caption{\label{fig:abcx7}}
+  \caption{\label{fig:abcx7} PI test AB\textunderscore
+    CX\textunderscore 7}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{AB_CX_8}
-  \caption{\label{fig:abcx8}}
+  \caption{\label{fig:abcx8} PI test AB\textunderscore
+    CX\textunderscore 8}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{AB_CX_9}
-  \caption{\label{fig:abcx9}}
+  \caption{\label{fig:abcx9} PI test AB\textunderscore
+    CX\textunderscore 9}
 \end{figure}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.8\textwidth]{AB_CX_10}
-  \caption{\label{fig:abcx10}}
+  \caption{\label{fig:abcx10} PI test AB\textunderscore
+    CX\textunderscore 10}
 \end{figure}
 \end{document}
 
