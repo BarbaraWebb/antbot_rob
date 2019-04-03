@@ -1,3 +1,6 @@
+
+
+
 \documentclass[a4paper,11pt,twoside,openright]{article}
 
 \usepackage[toc,page]{appendix}
@@ -567,11 +570,11 @@ we will also revisit the matched filter collision avoidance system
 from \cite{Mitchell2018}, though the flow field computation, filter
 generation and comparision are unchanged. We present a brief
 description of the intuition here as we will go on to develop neural
-representations of this model later. For details of the filter and
+representations of this model later. For full details of the filter and
 matching process, please see \cite{Mitchell2018}.
 \newline\par
 
-In brief, we compare the observed optical flow field to a precomputed
+We compare the observed optical flow field to a precomputed
 filter. This filter represents the motion we expect to observe in the
 image frame given some self (camera) motion. This method for collision
 avoidance has been an active area of research in the biorobotics (and
@@ -582,7 +585,7 @@ hypotheses about how the information is actually used by insects
 The difference between the expected flow field (the filter) and the
 actual flow field computed from consecutive images was used by
 \textit{Scimeca} for speed retrieval \cite{Scimeca2017}. In
-\cite{Mitchell2018} we observe that objects in different 3D positions
+\cite{Mitchell2018} we observed that objects in different 3D positions
 will appear to move at different speeds in the image frame;
 specifically objects which are on a collision course will appear to
 loom (grow quickly) in the agent's field of view. Therefore, by
@@ -1870,11 +1873,6 @@ and an example MRSP layer output is shown in Figure
 \ref{fig:mrspRateResponse}.
 
 \begin{figure}[h!]
-  \caption{\label{fig:mrspRateArrangement}[PLACEHOLDER] \textit{This
-      figure will show the full architecture of the rate-based system.}}
-\end{figure}
-
-\begin{figure}[h!]
   \centering
   \vspace{-45pt}
   \includegraphics[width=0.8\textwidth]{NeuralCASignalProp}
@@ -1932,45 +1930,51 @@ representation for the collision avoidance system would need to be
 constructed; this and tested variants have been described above.
 \newline\par
 
-The final model takes the 8-MBON CXMB model and inserts the additional ACC and
-MRSP neurons required for the integrated collision avoidance system. The
-connections between TB1 and MRSP are the same as the connections between TB1
-and CPU4, likewise the connections between MRSP and CPU1 are the same as those
-between CPU4 and CPU1. In fact, as the eight MBONs are expanded out to a
-sixteen neuron representation (see Section \ref{CXMBBackground}) the
-model can be visualised as the CX with two additional layers of sixteen neurons
-between CPU4 and CPU1 plus one or two ACC neurons depending on the neural
-representation used. The final version implemented on the robot used the rate
-representation for a single ACC neuron.
+The final model takes the 8-MBON CXMB model and inserts the additional
+ACC and MRSP neurons required for the integrated collision avoidance
+system. The connections between TB1 and MRSP are the same as the
+connections between TB1 and CPU4, likewise the connections between
+MRSP and CPU1 are the same as those between CPU4 and CPU1. In fact, as
+the eight MBONs are expanded out to a sixteen neuron representation
+(see Section \ref{CXMBBackground}) the model can be visualised as the
+CX in Figure \ref{fig:cx} (Left) with two additional layers of sixteen
+neurons between CPU4 and CPU1 plus one or two ACC neurons depending on
+the neural representation used. The final version implemented on the
+robot uses the rate representation with a single ACC neuron.
 \newline\par
 
 The output of the network can be selected by changing the mode of the
-CPU1 output stage. In this fashion, one can isolate each system and produce
-the steering output using specific systems. The key modes currently present on
-the agent are CA-only, and CXCA which are the isolated collision avoidance system
-and the combined output of the path integrator and the collision avoidance
-system respectively; adding further combinations should be trivial. The
-selection currently available is due to the component level testing that
-was in progress towards the end of the project. The weighting applied to each
-layer can be specified and ideally it should be dynamic. While the visual
-memory infrastructure is entirely present, it was not tested; however, as stated,
-it is identical to that presented by \textit{Zhang} so we have no reason to
-think that this subsystem should not work to the degree presented in
-\cite{Zhang2017}.
+CPU1 output stage. In this fashion, one can isolate each system and
+produce the steering output using specific systems. The key modes
+currently present on the agent are CA-only, and CXCA which are the
+isolated collision avoidance system and the combined output of the
+path integrator and the collision avoidance system respectively;
+adding further combinations should be trivial. The selection currently
+available is due to the component level testing that was in progress
+towards the end of the project. The weighting applied to each layer
+can be specified and ideally it should be dynamic. While the visual
+memory infrastructure is entirely present, it was not tested; however,
+as stated, it is identical to that presented by \textit{Zhang} so we
+have no reason to think that this subsystem should not work to the
+degree presented in \cite{Zhang2017}. As all three systems produce a
+signal which is passed to CPU1 for the final steering output, the
+combined input to CPU1 could be stated as:
 
-\begin{figure}
-\caption{\label{fig:ecx} [PLACEHOLDER] Attempt to show the full thing if possible
-  but this may be prohibitively difficult.}
-\end{figure}
+\begin{equation}
+  I_{CPU1}^{(t)} = a \cdot r_{CPU4}^{(t)} + b \cdot r_{MRSP}^{(t)} + c \cdot r_{MBON}^{(t)} - r_{TB1}^{(t)}
+\end{equation}
+
+where $a + b + c = 1$, and $a,b,c$ represent the proportion of the
+output being governed by PI, CA, or VN respectively. Each subsystem
+uses the same connection array between itself and CPU1 (namely,
+$W_{CPU4}$ from Section \ref{CXMBBackground}) so without weighting,
+each would have equal influence.
 
 \subsection{Tussocks}
 During \cite{Mitchell2018}, we note that the tussocks were extremely
 small in the view of AntBot; furthermore they were incredibly
-fragile. They were originally constructed by connecting synthetic
-boxwood bushes to wooden blocks with wood glue; the glue became
-disconnected quickly and all had to be repaired with superglue
-multiple times during the experimentation phase of
-\cite{Mitchell2018}. For convenience, we construct new synthetic
+fragile, requiring repairs multiple times during the experimentation
+phase of \cite{Mitchell2018}. For convenience, we construct new synthetic
 tussocks. The basic idea is the same, but the wood blocks were made
 larger, and the synthetic foliage sits higher. The two pieces were
 stapled together resulting in a much more robust structure. From video
