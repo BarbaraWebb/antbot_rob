@@ -11,7 +11,7 @@
 \contentsline {subsection}{\numberline {2.3} The Mushroom Body for Visual Navigation }{6}
 \contentsline {subsection}{\numberline {2.4} The Central Complex for Path Integration }{8}
 \contentsline {subsubsection}{\numberline {2.4.1}The Evolved Model for Path Integration}{8}
-\contentsline {subsubsection}{\numberline {2.4.2}The Central Complex Model}{11}
+\contentsline {subsubsection}{\numberline {2.4.2}The Central Complex Model}{10}
 \contentsline {subsection}{\numberline {2.5} The Eight MBON Model (CXMB) }{16}
 \contentsline {subsection}{\numberline {2.6} Review of Part 1 }{18}
 \contentsline {section}{\numberline {3} Platform }{19}

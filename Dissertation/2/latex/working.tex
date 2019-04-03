@@ -150,10 +150,10 @@ Dr. Barbara Webb
 {\LARGE\textbf{Abstract}}
 \begin{flushleft}
   {\small Ants are incredible navigators. With limited sensory and
-    computational capabilities, they are able to perform robust
+    computational capabilities they are able to perform robust
     navigation over relatively vast distances, through varying
     terrains and lighting conditions. How this is done is not quite
-    known, however, models for individual aspects of the navigational
+    known, however models for individual aspects of the navigational
     process have been constructed and demonstrated in recent years in
     simulation, and on robot platforms.  We take two such models, the
     Mushroom Body circuit for Visual Navigataion and the Central
@@ -161,7 +161,7 @@ Dr. Barbara Webb
     biologically plausible neural model for collision avoidance to
     provide a conceptually complete \textit{base model} for insect
     navigation, the Extended Central Complex. This model has been
-    implemented on a robot platform, AntBot. In an effort to establish
+    implemented on a robot platform, AntBot. In an effort to develop
     the model we also present several advancements to the AntBot
     platform, experimentation with an alternative optical flow method
     for collision avoidance, experiments with the Central Complex
@@ -204,7 +204,7 @@ Dr. Barbara Webb
 \section{ Introduction }
 Navigation is a complex task. Determining a sequence of actions to reach a
 known location based on a combination of sensory inputs requires a lot of
-computational power. Desert ants, are capable of performing such a task
+computational power. Desert ants are capable of performing such a task
 over comparitively huge distances with limited, low resolution sensory
 information and remarkable efficiency. While the exact method by which
 the ants perform this task is still unknown, a reasonably complete navigational
@@ -215,20 +215,20 @@ which may mimic the insect behaviour.
 
 In this paper we introduce a theoretical combined model, the Extended
 Central Complex (ECX) model for insect navigation. To be clear, there
-is no (known) physiological basis for such a model; however, is not
+is no (known) physiological basis for such a model; however, it is not
 biologically infeasible and may provide insight into the operation of
 the real insect brain. The ECX model combines the tasks of Visual
-Navigation, Path Integration, and Collision Avoidance; using, the
+Navigation, Path Integration, and Collision Avoidance; using the
 Mushroom Body Circuit (MB) \cite{Ardin2016}, the Central Complex model
 (CX) \cite{Stone2017}, and Optical Flow Collision Avoidance (OFCA)
 \cite{Mitchell2018, Stewart2010} for each task at a low level, then
-combining their outputs to get a form of higher navigational processing
-(similar to the weighted ``base model'' described in \cite{Webb2019}).
-The ECX model is a modified Central Complex model, named simply to
-ensure distinction between the two models. The individual components
-are all biologically plausible and two of three are known to have a
-physiological basis. \cite{Ardin2016, Stone2017, Mitchell2018,
-  Stewart2010, Julien2017}.
+combining their outputs to get a form of higher navigational
+processing (similar to the weighted ``base model'' described in
+\cite{Webb2019}).  The ECX model is a modified Central Complex model,
+named simply to ensure distinction between the two models. The
+individual components are all biologically plausible and two of three
+are known to have a physiological basis. \cite{Ardin2016, Stone2017,
+  Mitchell2018, Stewart2010, Julien2017}.
 \newline
 \par
 
@@ -256,32 +256,31 @@ of the CX and MB models individually \cite{Scimeca2017,
   Mitchell2018}. Performance of a combined system has also been shown
 to be reasonable, however, it is less consistent than we would desire
 \cite{Zhang2017}. In the combined model tests from \cite{Zhang2017} we
-note two key methodological problems: A fixed outbound route, and
+note two key methodological problems: a fixed outbound route, and
 fixed component weightings; the fixed outbound route was also present
 in the CX experiments conducted by \textit{Scimeca}. We address the
 former by adding the OFCA component to our model; as in
 \cite{Mitchell2018}, the AntBot will follow a non-deterministic
 outbound route through an arena with obejcts present (due to the level
 of implementation achieved these objects will be placed
-strategically). The latter methodilogical brings up the
-more complicated question of plausible synaptic plasticity which,
-while undoubtedly interesting, lies outside the scope of this project
-(though we will discuss the idea to a small extent). It is worth
-noting that here may also have been unknown tecnical issues with the
-robot which affected the results of \cite{Zhang2017}, making them less
-consistent than they should be in reality (see \cite{Mitchell2018} and
-later in this work).
+strategically). The latter brings up the more complicated question of
+plausible synaptic plasticity which, while undoubtedly interesting,
+lies outside the scope of this project (though we will discuss the
+idea to a small extent). It is worth noting that there may also have
+been unknown tecnical issues with the robot which affected the results
+of \cite{Zhang2017}, making them less consistent than they should be
+in reality (see \cite{Mitchell2018} and later in this work).
 \newline
 \par
 
 While \cite{Mitchell2018} provides a reasonable collision avoidance system
 based on optical flow, it does not fit so neatly into the ECX model. We therefore
-aim to explore an alternative, yet still biologically plausible collision
+aim to explore an alternative yet still biologically plausible collision
 avoidance system which will fit into the ECX model.
 \newline
 \par
 
-Our ultimate hope, is to provide some insight into the precise biological
+Our ultimate goal is to provide some insight into the precise biological
 systems in play during a point-to-point navigational task.
 
 \subsection { Practical Goals }
@@ -389,16 +388,15 @@ Significant contributions of this project:
 % Brief summaries of OF and MB, more detailed discussion of CX
 \section{ Background }
 This project builds directly upon \cite{Mitchell2018}. We first provide a review
-of the relevant background topics from that paper, before developing the relevant
+of the relevant background topics from that paper, before developing the key
 ideas further for this project. This will be a very brief summary of the work
-that took place and any relevant results or new perspectives. For more detail,
-please consult \cite{Mitchell2018}.
+that took place and any relevant results or new perspectives.
 
 
 \subsection{ The Focus of Expansion for Collision Avoidance } \label{OFBackground}
 Optical flow is a large and diverse area of study. As such, we will
 not provide a complete background on the fundamental
-principles. Relevant terms will be explained, however, a succinct
+principles. Relevant terms will be explained, a succinct
 background of the concepts necessary for this paper can be found in
 \cite{Mitchell2018}. A comprehensive introduction is given by
 \textit{O'Donovan} in \cite{ODonovan2005}.
@@ -408,13 +406,13 @@ background of the concepts necessary for this paper can be found in
 The main driving point in this paper is the integration of multiple
 navigational systems into a single model, namely, the Central Complex.
 Optical flow filtering worked well for a standalone collision
-avoidance system, however, it does not fit so intuitively into the CX
+avoidance system, however it does not fit so intuitively into the CX
 model. We therefore investigate an alternate approach. The relevant
 background revisits the concept of the \textit{focus of expansion}
 (FOE) from \cite{Mitchell2018, ODonovan2005}.  The FOE is defined as
 the point from which all optical flow vectors originate. The location
 of the FOE, and its relationship with the rest of the flow field, can
-tell us things about the motion and depth of the image.
+give us information about a 3D scene from a 2D image.
 \newline
 \par
 
@@ -674,7 +672,7 @@ spiking model\footnote{The AntBot projects do not explicitly model
   membrane potentials and realistic neural responses.  They use a
   simple abstraction for the sake of complexity. The network function
   is the same.} for the KCs \cite{Ardin2016}). More
-relevant to this work, is the proposed modification given by
+relevant to this work is the proposed modification given by
 \textit{Zhang}, whereby, 8 MBONs are present as opposed to 1 (see
 Section \ref{CXMBBackground}).
 \newline
@@ -786,13 +784,16 @@ compute the fitness, then use this solution to seed a new population
 and evolve a solution from here using Equation \ref{eq:fitsimple}. The
 two-stage evolutionary process alone did not find acceptable
 solutions. The search space was constrained by providing the following
-four constraints on network topology: Each direction cell had to be
-connected to at least one memory neuron; each direction cell had to be
-connected to at least one sigmoid neuron; sigmoid neurons had to be
-connected to turn effectors; a maximum of two turn effectors (left and
-right) were allowed \cite{Haferlach2007}.
-\newline
-\par
+four constraints on network topology:
+
+\begin{itemize}
+\item{each direction cell had to be connected to at least one memory neuron;}
+\item{each direction cell had to be connected to at least one sigmoid neuron;}
+\item{sigmoid neurons had to be connected to turn effectors;}
+\item{a maximum of two turn effectors (left and right) were allowed
+  \cite{Haferlach2007}.}
+\end{itemize}
+
 
 \textit{Haferlach et al.} present the model shown in Figure
 \ref{fig:evolvednetwork}; notice the evolved structure bears a striking
@@ -923,7 +924,7 @@ allothetic heading from vision alone. Interestingly, there is also evidence that
 have the capability to infer a direction without a view of celestial cues,
 suggesting they may have access to some other signal, the candidate signal being
 the geomagnetic field \cite{Fleischmann2018, Grob2017}. The TL neurons have been
-shown to be polarisation sensiive across multiple insect species \cite{Stone2017}
+shown to be polarisation sensitive across multiple insect species \cite{Stone2017}
 (see STAR Methods). Each TL neuron has a preferred direction (i.e. a specific
 direction of poliarisation sensitivity) $\theta_{TL} $, and there are 16 such
 neurons representing the 8 directions around the agent (i.e.
@@ -1225,8 +1226,8 @@ important capability of the CX model; namely, the capability to directly load a
 state into its memory in order to navigate; a concept referred to as
 \textit{vector memory} in \cite{Webb2019}. Indeed, this concept of vector memory
 is shown to be quite a useful tool in insect navigation \cite{Webb2019}. It is
-worth noting that, the precise biological mechanism employed by insects to
-perform this task, is unknown at time of writing. It would be neat to reuse
+worth noting that the precise biological mechanism employed by insects to
+perform this task is unknown at time of writing. It would be neat to reuse
 the CX circuitry, but this is an open question.
 \newline
 \par
@@ -1238,7 +1239,7 @@ feeder, and finally, tasked with navigating back again, this time using the CXMB
 model. To be clear, the CPU4 state of the CX model is stored after the outbound
 route, and loaded back into the network before the second inbound trip.
 \textit{Zhang} reports that the second inbound trip (using both CXMB) showed
-more heading adjustments during its traversal, and, on average, performed
+more heading adjustments during its traversal and, on average, performed
 slightly better than a pure CX implementation\cite{Zhang2017}. It should also
 be noted that the average performance of both models in \textit{Zhang's} work
 was good \cite{Zhang2017}.
@@ -1267,7 +1268,7 @@ works as it was implemented as an image manipulation algorithm (termed
 \newline
 \par
 
-Multiple OFCA systems were tested, however, in final experiments an
+Multiple OFCA systems were tested, however in final experiments an
 optical flow filtering system is used (see Section
 \ref{sec:offbg}). This strategy proved simple, but effective. While we
 move away from it for the bulk of this project, it was used for
@@ -1369,7 +1370,7 @@ which requires it. A thread will then use this data to run an experiment.
 \newline
 \par
 
-There are a lot of criticisms we can raise about the robot (in both a hardware
+There are a number of criticisms we can raise about the robot (in both a hardware
 and software sense); ultimately the key problem may be lack of developer
 familiarity with the Android platform.  While Android seems to work well at
 first glance, it can ultimately be quite restrictive; we leave this to the
@@ -1386,7 +1387,7 @@ correct method to execute the desired motor commands.
 
 \subsection{ Modifications and Development }\label{sec:mod}
 The modifications or additions listed below are a small part of the dissertation,
-however, for one reason or another (see Discussion) these ended up taking
+however for one reason or another (see Discussion) these ended up taking
 most of the project time.\newline\par
 
 \textbf{Compass Sensor:}
@@ -1396,7 +1397,7 @@ communications delay is too great to allow accurate feedback control.
 As a step to introducing proportional control to the robot, we undertook an
 investigation into available compass sensors. Multiple sensors and libraries
 were tested and ultimately we settled on a Grove 6-Axis Compass \& Accelerometer.
-This sensor remained reasonably accurate in when tested alongside motors (a
+This sensor remained reasonably accurate when tested alongside motors (a
 source of magnetic interference) and the library code was straightforward to
 include. The sensor was installed by the Informatics Workshop. While we have not
 used it for this project, we would encourage a future student to make use of
@@ -1430,17 +1431,16 @@ need only be done if the attachment is known to have moved.
 \end{figure}
 
 \textbf{Code Refactor:} As mentioned above, all behavioural code for
-the robot has moved into the AntEye application. In fact, most code
-had been integrated into a single Android Activity (Java Class); this
-file contained multiple long threads dictating behaviour as well as a
-number of utility methods and robot commands. There were also a
-ludicrous number of global variables. The resulting file was over 4000
-lines long and almost unusable. Particuarly aggregious was the fact
-that roughly half of the code was irrelevant to this project, but did
-need archived for reference purposes. As such, it was decided that it
-was worth refactoring the codebase in order to make it easier to
-work. All utility functions were split into their own static Util
-class, similarly, the robot control commands were moved to the Command
+the robot has moved into the AntEye application. In fact most code had
+been integrated into a single Android Activity (Java Class); this file
+contained multiple long threads dictating behaviour as well as a
+number of utility methods and robot commands. There were also a large
+number of global variables. The resulting file was over 4000 lines
+long and almost unusable. Approximately half of the code is useful
+only for archival purposes. As such, it was decided that it was worth
+refactoring the codebase in order to make it easier to work. All
+utility functions were split into their own static Util class,
+similarly the robot control commands were moved to the Command
 class. Runnable threads were moved into an archive package and split
 into classes according to their use: Mushroom Body, Central Complex,
 Optical Flow, or Old Navigation; that final group consists of the
@@ -1463,7 +1463,7 @@ platform constraints mean that the utility is perhaps not as well-made
 as it could be. A straightforward method using FFMPEG had to be
 abandoned due to library conflicts; this method would have allowed a
 video file to be recorded directly rather than the frame-stitching
-solution described below. The real reason this proved difficult was
+solution described below. The reason this proved difficult was
 that the recording had to take place after preprocessing (image
 unwrapping and downsampling to the 90x10 $360^{\circ}$ image). In
 order to achieve this frames are passed off to a recording buffer
@@ -1473,7 +1473,7 @@ this does not impact the frame rate. The video frames then have to be
 retrieved from the robot and stitched together using a custom python
 utility (a simple wrapper around an FFMPEG command). The recorded
 video can then be analysed offline. This utility was created to allow
-offline analysis of optical flow, however, it also highlighted a major
+offline analysis of optical flow, however it also highlighted a major
 problem with the robot which was not previously known.
 \newline
 \par
@@ -1497,28 +1497,26 @@ an image downsampling algorithm had been manually implemented which cost around
 cost to approximately 1fps, if that. The full pipeline can now run at 10-12fps
 with the recording utility running on top. When simulating a model like the ECX,
 the framerate does drop to 8-10fps. We also attempted to move the frame
-processing into its own high-priority thread, however, this resulted in numerous
+processing into its own high-priority thread, however this resulted in numerous
 bugs and did not improve the framerate in any noticable way.
 \newline
 \par
 
-This raises an interesting problem. We do not know when this code was
-added to the robot, knowledge of the platform history would suggest it
-was added as part of \cite{Scimeca2017} but we cannot be certain.  In
-any project following its insertion, the framerate surely affected the
-performance of the agent. We can say for sure that the algorithms used
-and tested in \cite{Mitchell2018} were affected. Indeed, in
-\cite{Mitchell2018} it is noted that few images were stored during
-Visual Navigation experiments. The low storage rate was thought to be
-a thread synchronisation issue, but it is now clear that the frames
-were simply not finished processing in time to be stored.  In testing
-the matched filter collision avoidance system from \cite{Mitchell2018}
-we note a significant change in behaviour after the framerate
-improvement. It is suspected that this is due to an increase in flow
-information, and therefore an increase in noise which can cause
-erroneous and erratic behaviour, not witnessed in \cite{Mitchell2018}.
-This is one of the main issues that resulted in our lack of results
-for the ECX.
+This raises an interesting problem. We do not know when the
+problematic code was added.  In any project following its insertion,
+the framerate surely affected the performance of the agent. We can say
+with certainty that the algorithms used and tested in \cite{Mitchell2018}
+were affected. Indeed, in \cite{Mitchell2018} it is noted that few
+images were stored during Visual Navigation experiments. The low
+storage rate was thought to be a thread synchronisation issue, but it
+is now clear that the frames were simply not finished processing in
+time to be stored.  In testing the matched filter collision avoidance
+system from \cite{Mitchell2018} we note a significant change in
+behaviour after the framerate improvement. It is suspected that this
+is due to an increase in flow information, and therefore an increase
+in noise which can cause erroneous and erratic behaviour, not
+witnessed in \cite{Mitchell2018}.  This is one of the main issues that
+resulted in our lack of results for the ECX.
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1545,7 +1543,7 @@ a turn direction in the event a collision is determined \cite{Stewart2010,
 deepest part of the image \cite{Vanderstap2012, Souhila2007} (though we should
 also note that in \cite{Stewart2010} an avoidance saccade is triggered
 \textit{away from} the FOE); this is not an empirical observation,
-however, it was enough for us to want to test if the position of the
+however it was enough for us to want to test if the position of the
 FOE was predictable given an approaching scene.
 \newline
 \par
@@ -1717,7 +1715,7 @@ $t$ by:
 
 where $V(t)$, $I_{ext}$, and $t$ are as above and $p$ is the reset period (for
 example, if $p = 3$ the membrane potential is reset every 3 timesteps). Firing
-behavriour is the same as the LI\&F model.
+behaviour is the same as the LI\&F model.
 \newline\par
 
 \textbf{ACC Neurons (Rate):}
@@ -1937,7 +1935,7 @@ system respectively; adding further combinations should be trivial. The
 selection currently available is due to the component level testing that
 was in progress towards the end of the project. The weighting applied to each
 layer can be specified and ideally it should be dynamic. While the visual
-memory infrastructure is entirely present, it was not tested; however, as stated
+memory infrastructure is entirely present, it was not tested; however, as stated,
 it is identical to that presented by \textit{Zhang} so we have no reason to
 think that this subsystem should not work to the degree presented in
 \cite{Zhang2017}.
@@ -1949,7 +1947,7 @@ think that this subsystem should not work to the degree presented in
 
 \subsection{Tussocks}
 During \cite{Mitchell2018}, we note that the tussocks were extremely
-small in the view of AntBot; furthermore, they were incredibly
+small in the view of AntBot; furthermore they were incredibly
 fragile. They were originally constructed by connecting synthetic
 boxwood bushes to wooden blocks with wood glue; the glue became
 disconnected quickly and all had to be repaired with superglue
@@ -1958,7 +1956,7 @@ multiple times during the experimentation phase of
 tussocks. The basic idea is the same, but the wood blocks were made
 larger, and the synthetic foliage sits higher. The two pieces were
 stapled together resulting in a much more robust structure. From video
-data it can be seen that they are farm more prominent in the image
+data it can be seen that they are far more prominent in the image
 frame, as required.
 
 \section{Experimentation and Testing}\label{sec:test}
@@ -1992,9 +1990,9 @@ tests.
 \end{enumerate}
 
 The second problem is more of a symptom of the first; to remedy both problems we
-need only fix the first. This can be done in a few of ways. Firstly, we could
+need only fix the first. This can be done in a few ways. Firstly, we could
 simply generate a randomised turning command at set (or even random) intervals.
-There are many variations on this theme, however, the original goal of this paper
+There are many variations on this theme, however the original goal of this paper
 was to provide a complete navigational system. It makes more sense for us to use
 a collision avoidance system to generate the outbound routes.
 \newline\par
@@ -2184,7 +2182,7 @@ obstacle avoidance scenario presented (Table 2, Arena 2 from
 \newline\par
 
 No system performed consistently well in the presence of an obstacle,
-however, the I\&F variant\footnote{As behaviour between the two I\&F
+however the I\&F variant\footnote{As behaviour between the two I\&F
   variants was identical, we will discuss them together going
   forward. Most testing took place with lI\&F ACC neurons.} provided
 consistent enough reactions to observe some runs of the ECX.
@@ -2201,11 +2199,11 @@ connected and the full ECX can then be tested.
 All systems are implemented and available; we present testing only up
 to the CACX implementation. The CACX was tested (informally) by
 allowing the combined system to navigate homeward following a
-successful collision free run outbound run. The combined model was
+successful collision free outbound run. The combined model was
 only tested using the I\&F variant of the neural CA model as this
 version managed successful collision avoidance behaviour. As CXCA
 tests followed successful CA tests, the CXCA is tested in the same
-environments: an empty environment, and one with a single large
+environments: an empty environment and one with a single large
 cluster of tussocks.
 
 
@@ -2251,7 +2249,7 @@ VICON recordings from all tests are available in Appendix
 \ref{ap:cxfigs}. While the results appeared good under observation and
 in the figures, we must note the distance measurements in Table
 \ref{tab:cxres}. These measurements are taken from the central axis of
-the VICON skeleton applied to the robot, essentially, the central axis
+the VICON skeleton applied to the robot, approximately the central axis
 of the robot. Due to the size of the robot, we must note that our
 success criterion may be deceptive. The closest arrival at the nest is
 29.6cm; while the robot did indeed make it back to its starting box,
@@ -2292,7 +2290,7 @@ the distance-to-start measurement.
 While we still consider these experiments a successful demonstration
 of the capability of the CX (especially with the early test run in
 Figure \ref{fig:cxnt}), we must acknowledge certain methodological
-issues. Firstly, the deviation and secondly the run length. All runs
+issues. Firstly the deviation and secondly the run length. All runs
 can be seen to be very short. We think it would be prudent to repeat
 these experiments with longer runs and more accurate odometry (see
 Discussion). Despite our justification, it may also be prudent to
@@ -2316,7 +2314,7 @@ not always the case.
 \subsubsection{Shifting Expansion Patterns}
 The optical flow experiments conducted allow us to state with a high
 degree of confidence that the FOE cannot reliably be used to generate
-a steering command, in the case of the AntBot. We limit our claims as:
+a steering command in the case of the AntBot. We limit our claims as:
 
 \begin{enumerate}
 \item{This is the only platform on which testing has taken place.}
@@ -2388,7 +2386,7 @@ as to conclude that the FOE is of no use to the AntBot at all.
 Going forward, we have no further formal results to present. We will
 instead discuss behaviour experienced during developmental
 testing. These are not discussions from which concrete conclusions may
-be drawn, however, they may provide insight for anyone considering
+be drawn, however they may provide insight for anyone considering
 implementing the neural filter model for collision avoidance, or the
 ECX, as a continuation of this work.
 
@@ -2399,7 +2397,7 @@ versions performed identically under observation, so we will discuss
 them as one.\newline\par
 
 \textbf{I\&F:} Performance of the system was promising though
-inconsistent, though collision free behaviour was observed. Behaviour
+inconsistent, however collision free behaviour was observed. Behaviour
 was similar to, though not as consistent as, that observed in
 \cite{Mitchell2018}.
 \newline\par
@@ -2499,9 +2497,9 @@ behaviour observed can be explained by a noisy optical flow field.
 \subsection{ECX (CXCA)}
 As stated in Section \ref{sec:test}, the ECX model was tested as an
 extension of successful CA runs and thus, was only tested using I\&F
-ACC neurons. In an empty arena, successful homing was observed in a
-few (though not all) tests; these cases are promising results, as it
-was clear that the CA and CX systems were interacting to produce an
+ACC neurons. In an empty arena, successful homing was observed in
+several (though not all) tests; these cases are promising results, as
+it was clear that the CA and CX systems were interacting to produce an
 output. \newline\par
 
 With the obstacle present, homing was never sucessful but desired
@@ -2530,7 +2528,7 @@ output was significant.
 \newline\par
 
 The modification of component weightings was applied only to check
-that the CA system was indeed the cause of the unsuccessful homing,
+that the CA system was indeed the cause of the unsuccessful homing
 once the agent had passed the obstacle. The effect of component
 weightings, or even applying dynamic component weighting would be an
 interesting branch of investigation for any formal experiments using
@@ -2557,8 +2555,8 @@ different neuronal representations resulting in two different
 architectures; this neural matched filter model has been integrated
 into \textit{Zhang's} CXMB model to provide a conceptually complete
 base model for insect navigation. The code for both architectures
-has been added to the AntBot, but currently in use is the rate-based
-version.\newline\par
+has been added to the AntBot, but currently the rate-based system is
+in use.\newline\par
 
 We also provide several technical advancements to the robot which
 address many of the problems we experienced through
@@ -2572,17 +2570,17 @@ pre-processing system which is now known to have affected past works.
 
 \subsection{Future work}
 \subsubsection{Building upon the work presented}\label{sec:future}
-While we are pleased with the overall progress made in the
-development of AntBot, there are undoubtedly things which could be
+We are pleased with the overall progress made in the development of
+AntBot, there are undoubtedly things which could be
 improved.\newline\par
 
 \textbf{CX Experiments:} The experiments presented undoubtedly show
-that the CX model functions well as a path integrator, however, there
+that the CX model functions well as a path integrator, however there
 are some issues with our methodology. Firstly, the outward routes are
 quite short and not as varied as we had hoped. Experiments
 demonstrating the network's capabilities over a longer, more varied
 (but still non-deterministic) route would be of value. Our routes were
-restricted by the experimental enclosure, which in-turn, is restricted
+restricted by the experimental enclosure, which in-turn is restricted
 by the size of the pitch in IF G.17. There is no reason a larger
 enclosure (which is still viewable by the VICON system) could not be
 built, we simply used materials which were immediately available
@@ -2612,7 +2610,7 @@ could be investigated.
 \newline\par
 
 \textbf{Extended Central Complex:} Functioning neural matched
-filtering (or an algorithmic alternative) is a pre-requisite, however,
+filtering (or an algorithmic alternative) is a pre-requisite, however
 we would strongly encourage future work on this model. If some
 reliable collision detection input can be provided (note this need not
 be based on optical flow), then the ECX could be comprehensively
@@ -2637,7 +2635,7 @@ choosing the one which gave the best chance of successful navigation.
 still aspects of the software which could be fixed. There are still
 many varibles which are global to the application (referenced via the
 MainActivity class). This is not only bad practice in a software
-engineering sense, but it makes tracing variable updates needlessly
+engineering sense, but it makes tracing variable updates
 difficult. Some such variables have been moved where possible but
 there is still a lot which could be fixed.\newline\par
 
@@ -2731,7 +2729,7 @@ and we cannot deny that we are also guilty of writing poorly
 commented, difficult-to-read code in the run up to deadlines.
 \newline\par
 
-Android can place limitations on how code is written, this is not a
+Android can place limitations on how code is written. This is not a
 massive problem but it tends to rear its head in strange ways; for
 example, in the current codebase, variables have to be global to the
 activity to be output on screen. Android versioning may start to cause
@@ -2803,7 +2801,7 @@ and in confirming some elusive technical details. We also intend to
 make ourselves available for any questions we can answer about the
 system. While we are pleased with the results we have gathered and the
 models we have constructed, we feel it clear that the robot is no longer
-fit-for-purpose as a ready-made platform, on which students can test
+fit-for-purpose as a ready-made platform on which students can test
 and implement bio-inspired algorithms.
 \newline\par
 
