@@ -242,81 +242,82 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces  Function of firing rate response of the single ACC neuron against difference input; sigmoid with $a = 5$, $b = 0$. The input to this neuron is scaled down to lie between -1 and 1.\relax }}{28}}
 \newlabel{fig:accrate}{{12}{28}}
 \citation{Mitchell2018}
+\newlabel{eq:transform}{{22}{29}}
+\newlabel{eq:rmrsp}{{23}{29}}
 \citation{Scimeca2017}
 \citation{Zhang2017}
 \citation{Stone2017}
 \citation{Zhang2017}
-\newlabel{eq:transform}{{22}{29}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces [PLACEHOLDER] \textit  {This figure will show the full architecture of the rate-based system.}\relax }}{29}}
-\newlabel{fig:mrspRateArrangement}{{13}{29}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2} Path Integration }{29}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3} The Complete System}{29}}
+\citation{Zhang2017}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces [PLACEHOLDER] \textit  {This figure will show the full architecture of the rate-based system.}\relax }}{30}}
+\newlabel{fig:mrspRateArrangement}{{13}{30}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2} Path Integration }{30}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3} The Complete System}{30}}
+\citation{Mitchell2018}
+\citation{Mitchell2018}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Tussocks}{31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces  An example of signal propogation and generated output from the rate-based system (left-to-right, top-to-bottom). An example flow input is given as 0.25. The ACC rate response is then put through the offset computation function (Eq. 22\hbox {}). The default sinusoid function is generated over eight array elements. The sinusoid is then shifted such that the maximum lies at \textit  {current\textunderscore direction + round(offset)} which in this case is 5. This sinusoid is then extended to a sixteen elements to match the representation in CPU4. Each element of the sinusoid is then supplied as input to the corresponding MRSP neuron to give the rate output in the final plot; as there are two neurons for each cardinal direction, the two maxima indicate a single direction. This MRSP response is used as input to the CPU1 layer, in this example a small right turn will be generated. \relax }}{32}}
+\newlabel{fig:mrspRateResponse}{{14}{32}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces  [PLACEHOLDER] Attempt to show the full thing if possible but this may be prohibitively difficult.\relax }}{33}}
+\newlabel{fig:ecx}{{15}{33}}
+\citation{Mitchell2018}
+\citation{Mitchell2018}
+\citation{Mitchell2018}
+\citation{Mitchell2018}
+\citation{Mitchell2018}
+\citation{Mitchell2018}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experimentation and Testing}{35}}
+\newlabel{sec:test}{{5}{35}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Path Integration}{35}}
+\citation{Mitchell2018}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces  A test recording from the Central Complex PI experiments. The agent successfully navigates home but requires a large turning arc to point back towards the nest. This is because the output of the CX is not a precise angle but instead a turn direction with some strength. This behaviour was our prompt and justification to include an about turn on completion of the outbound route; the space present in the arena simply did not permit such routes for formal experiments. \relax }}{36}}
+\newlabel{fig:cxnt}{{16}{36}}
 \citation{Zhang2017}
 \citation{Mitchell2018}
-\citation{Mitchell2018}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Tussocks}{30}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces  An example of signal propogation and generated output from the rate-based system (left-to-right, top-to-bottom). An example flow input is given as 0.25. The ACC rate response is then put through the offset computation function (Eq. 22\hbox {}). The default sinusoid function is generated over eight array elements. The function is then shifted such that the maximum lies at \textit  {current\textunderscore direction + round(offset)} which in this case is 5. This sinusoid is then extended to a sixteen elements to match the representation in CPU4. Each element of the sinusoid is then supplied as input to the corresponding MRSP neuron to give the rate output in the final plot. This MRSP response is used as input to the CPU1 layer, in this example a small right turn will be generated. \relax }}{31}}
-\newlabel{fig:mrspRateResponse}{{14}{31}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces  [PLACEHOLDER] Attempt to show the full thing if possible but this may be prohibitively difficult.\relax }}{32}}
-\newlabel{fig:ecx}{{15}{32}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Collision Avoidance}{37}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Shifting Expansion Patterns}{37}}
 \citation{Mitchell2018}
 \citation{Mitchell2018}
-\citation{Mitchell2018}
-\citation{Mitchell2018}
-\citation{Mitchell2018}
-\citation{Mitchell2018}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Experimentation and Testing}{33}}
-\newlabel{sec:test}{{5}{33}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Path Integration}{33}}
-\citation{Mitchell2018}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces  A test recording from the Central Complex PI experiments. The agent successfully navigates home but requires a large turning arc to point back towards the nest. This is because the output of the CX is not a precise angle but instead a turn direction with some strength. This behaviour was our prompt and justification to include an about turn on completion of the outbound route; the space present in the arena simply did not permit such routes for formal experiments. \relax }}{34}}
-\newlabel{fig:cxnt}{{16}{34}}
-\citation{Zhang2017}
-\citation{Mitchell2018}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Collision Avoidance}{35}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Shifting Expansion Patterns}{35}}
-\citation{Mitchell2018}
-\citation{Mitchell2018}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces  The non-empty arena used for testing the shifting expansion field system. Tussocks were set to the left and right of the robot's trajectory (shown in red) so that they were not on a collision course but should still affect the expansion field. We had hoped the FOE would either remain central or drift horizontally (in a consistent fashion) as each object was passed. Note that the agent was not started directly on the tape square, it was offset as shown by the path; this was oversight on our part. \relax }}{36}}
-\newlabel{fig:foetest}{{17}{36}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Neural Matched Filters}{36}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}ECX (CXCA)}{37}}
-\@writefile{toc}{\contentsline {section}{\numberline {6} Results }{39}}
-\newlabel{sec:results}{{6}{39}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1} Path Integration }{39}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces  The compiled results from the CX path integration experiments. (*) While this test succeeded, it was close. The CA system failed at the last section of the outbound run which could be the cause of the near-failure. (**) We consider this the worst failure; while this run is not the furthest from its start point, it can be seen from Figure 18\hbox {} that the agent actively deviates from its route. \relax }}{39}}
-\newlabel{tab:cxres}{{1}{39}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 10. This was considered the worst failure of the system despite not having the greatest deviation from the start point.\relax }}{40}}
-\newlabel{fig:abcx10i}{{18}{40}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 8. Arguably the most successful recording from the formal experiments. The agent still corrects to achieve a better homing path, despite the fact it could likely have travelled in a straight line. \relax }}{40}}
-\newlabel{fig:abcx8i}{{19}{40}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces  The non-empty arena used for testing the shifting expansion field system. Tussocks were set to the left and right of the robot's trajectory (shown in red) so that they were not on a collision course but should still affect the expansion field. We had hoped the FOE would either remain central or drift horizontally (in a consistent fashion) as each object was passed. Note that the agent was not started directly on the tape square, it was offset as shown by the path; this was oversight on our part. \relax }}{38}}
+\newlabel{fig:foetest}{{17}{38}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Neural Matched Filters}{38}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}ECX (CXCA)}{39}}
+\@writefile{toc}{\contentsline {section}{\numberline {6} Results }{41}}
+\newlabel{sec:results}{{6}{41}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1} Path Integration }{41}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces  The compiled results from the CX path integration experiments. (*) While this test succeeded, it was close. The CA system failed at the last section of the outbound run which could be the cause of the near-failure. (**) We consider this the worst failure; while this run is not the furthest from its start point, it can be seen from Figure 18\hbox {} that the agent actively deviates from its route. \relax }}{41}}
+\newlabel{tab:cxres}{{1}{41}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 10. This was considered the worst failure of the system despite not having the greatest deviation from the start point.\relax }}{42}}
+\newlabel{fig:abcx10i}{{18}{42}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 8. Arguably the most successful recording from the formal experiments. The agent still corrects to achieve a better homing path, despite the fact it could likely have travelled in a straight line. \relax }}{42}}
+\newlabel{fig:abcx8i}{{19}{42}}
 \citation{Stewart2010}
 \citation{Vanderstap2012}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 1. In this case, we note the exact same experimental flaw we sought to avoid in which the robot requires no correction to home successfully.\relax }}{41}}
-\newlabel{fig:abcx1i}{{20}{41}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Collision Avoidance}{41}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Shifting Expansion Patterns}{41}}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces  Five consecutive image frames with optical flow information superimposed over the top. It can be seen that the FOE position (central pixel of the blue cross) is not consistent across multiple frames. This figure also shows the disturbance caused by approaching a tussock on the right hand side (3rd and 4th frames). Video captured at approximately 10fps (i.e. these images were captured accross roughly 0.5 seconds). \relax }}{42}}
-\newlabel{fig:foeframes}{{21}{42}}
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces  Another set of consecutive frames, this time captured in an environment with no objects present. The FOE is still unpredictable, though it does not move as drastically in the horizontal axis. \relax }}{42}}
-\newlabel{fig:foeframesempty}{{22}{42}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 1. In this case, we note the exact same experimental flaw we sought to avoid in which the robot requires no correction to home successfully.\relax }}{43}}
+\newlabel{fig:abcx1i}{{20}{43}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Collision Avoidance}{43}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.1}Shifting Expansion Patterns}{43}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces  Five consecutive image frames with optical flow information superimposed over the top. It can be seen that the FOE position (central pixel of the blue cross) is not consistent across multiple frames. This figure also shows the disturbance caused by approaching a tussock on the right hand side (3rd and 4th frames). Video captured at approximately 10fps (i.e. these images were captured accross roughly 0.5 seconds). \relax }}{44}}
+\newlabel{fig:foeframes}{{21}{44}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces  Another set of consecutive frames, this time captured in an environment with no objects present. The FOE is still unpredictable, though it does not move as drastically in the horizontal axis. \relax }}{44}}
+\newlabel{fig:foeframesempty}{{22}{44}}
 \citation{Mitchell2018}
 \citation{Mitchell2018}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Neural Matched Filters}{43}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.2}Neural Matched Filters}{45}}
 \citation{Mitchell2018}
 \citation{Scimeca2017}
 \citation{Mitchell2018}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}ECX (CXCA)}{44}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}ECX (CXCA)}{46}}
 \citation{Mitchell2018}
 \citation{Mitchell2018}
 \citation{Mitchell2018}
-\@writefile{toc}{\contentsline {section}{\numberline {7} Discussion and Future Work}{47}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Conclusion}{47}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Future work}{47}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.1}Building upon the work presented}{47}}
-\newlabel{sec:future}{{7.2.1}{47}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.2}Platform}{48}}
-\newlabel{sec:disc:platform}{{7.2.2}{48}}
+\@writefile{toc}{\contentsline {section}{\numberline {7} Discussion and Future Work}{49}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Conclusion}{49}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Future work}{49}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.1}Building upon the work presented}{49}}
+\newlabel{sec:future}{{7.2.1}{49}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.2}Platform}{50}}
+\newlabel{sec:disc:platform}{{7.2.2}{50}}
 \citation{Mitchell2018}
 \citation{Eberding2016}
 \citation{Scimeca2017}
@@ -327,7 +328,7 @@
 \citation{Zhang2017}
 \citation{Scimeca2017}
 \citation{Mitchell2018}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.3}Closing}{51}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.3}Closing}{53}}
 \bibstyle{plain}
 \bibdata{working}
 \bibcite{Ardin2016}{1}
@@ -346,32 +347,32 @@
 \bibcite{Tistarelli1991}{14}
 \bibcite{Vanderstap2012}{15}
 \bibcite{Webb2019}{16}
-\@writefile{toc}{\contentsline {section}{\numberline {8}References}{53}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}References}{55}}
 \bibcite{Wehner2009}{17}
 \bibcite{Whitley1994}{18}
 \bibcite{Zhang2017}{19}
 \citation{Whitley1994}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Genetic Algorithms}{55}}
-\newlabel{ap:ga}{{A}{55}}
-\@writefile{toc}{\contentsline {section}{\numberline {B}CX VICON Recordings}{57}}
-\newlabel{ap:cxfigs}{{B}{57}}
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 1\relax }}{57}}
-\newlabel{fig:abcx1}{{23}{57}}
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces PI test AB\textunderscore CX\textunderscore 2\relax }}{57}}
-\newlabel{fig:abcx2}{{24}{57}}
-\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces PI test AB\textunderscore CX\textunderscore 3\relax }}{58}}
-\newlabel{fig:abcx3}{{25}{58}}
-\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces PI test AB\textunderscore CX\textunderscore 4\relax }}{58}}
-\newlabel{fig:abcx4}{{26}{58}}
-\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 5\relax }}{59}}
-\newlabel{fig:abcx5}{{27}{59}}
-\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 6\relax }}{59}}
-\newlabel{fig:abcx6}{{28}{59}}
-\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 7\relax }}{60}}
-\newlabel{fig:abcx7}{{29}{60}}
-\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 8\relax }}{60}}
-\newlabel{fig:abcx8}{{30}{60}}
-\@writefile{lof}{\contentsline {figure}{\numberline {31}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 9\relax }}{61}}
-\newlabel{fig:abcx9}{{31}{61}}
-\@writefile{lof}{\contentsline {figure}{\numberline {32}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 10\relax }}{61}}
-\newlabel{fig:abcx10}{{32}{61}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Genetic Algorithms}{57}}
+\newlabel{ap:ga}{{A}{57}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}CX VICON Recordings}{59}}
+\newlabel{ap:cxfigs}{{B}{59}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 1\relax }}{59}}
+\newlabel{fig:abcx1}{{23}{59}}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces PI test AB\textunderscore CX\textunderscore 2\relax }}{59}}
+\newlabel{fig:abcx2}{{24}{59}}
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces PI test AB\textunderscore CX\textunderscore 3\relax }}{60}}
+\newlabel{fig:abcx3}{{25}{60}}
+\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces PI test AB\textunderscore CX\textunderscore 4\relax }}{60}}
+\newlabel{fig:abcx4}{{26}{60}}
+\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 5\relax }}{61}}
+\newlabel{fig:abcx5}{{27}{61}}
+\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 6\relax }}{61}}
+\newlabel{fig:abcx6}{{28}{61}}
+\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 7\relax }}{62}}
+\newlabel{fig:abcx7}{{29}{62}}
+\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 8\relax }}{62}}
+\newlabel{fig:abcx8}{{30}{62}}
+\@writefile{lof}{\contentsline {figure}{\numberline {31}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 9\relax }}{63}}
+\newlabel{fig:abcx9}{{31}{63}}
+\@writefile{lof}{\contentsline {figure}{\numberline {32}{\ignorespaces  PI test AB\textunderscore CX\textunderscore 10\relax }}{63}}
+\newlabel{fig:abcx10}{{32}{63}}

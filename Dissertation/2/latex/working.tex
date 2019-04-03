@@ -1641,7 +1641,11 @@ results in this paper.  However, in an effort to establish the ECX
 model, we present here an adaptation of matched filter collision
 avoidance which can have its outputs integrated with the CX and MB
 models. We will use the language of artificial neural networks, but
-the principle is essentially the same as \cite{Mitchell2018}.
+the principle is essentially the same as \cite{Mitchell2018}. The
+neural approaches presented are all integrated directly into the CX so
+that we can make use of the existing architecture and information
+available (e.g. the heading information from TB1 and steering output
+from CPU1).
 \newline\par
 
 The neural model for collision avoidance features two types of neuron, ACC
@@ -1757,32 +1761,32 @@ remains close to 0.5 we need not react, close to 1 we must turn right,
 and close to 0 we must turn left. Thus, with a single neuron we can
 react to both scenarios; furthermore, the signal is proportional to
 the disturbance observed and we can therefore scale our steering
-command as necessary.
+command as necessary. This method is simple and flexible, however it is
+highly susceptible to noise, as we will see this is a critical flaw.
 \newline\par
 
-\textbf{MRSP Neurons}:
-There are 16 MRSP neurons laid out in the same fashion as the CPU4 layer. The
-MRSP neurons also utilise the same connection pattern as the CPU4-CPU1
-connections. The MRSP neurons always use a rate representation. In all
-cases the MRSP layer functions by generating a sine wave with the peak in the
-desired direction of travel; the method for constructing and positioning this
-sine wave is purely algorithmic, we did not investigate a way to model this
-behaviour using neural connections.
+\textbf{MRSP Neurons}: There are 16 MRSP neurons laid out in the same
+fashion as the CPU4 layer. The MRSP connects to CPU1 using the same
+connection pattern as CPU4-CPU1 in the existing CX model. For clarity,
+the MRSP neurons always use a rate representation. In all cases the
+MRSP layer functions by generating a sine wave with the peak in the
+desired direction of travel; the method for constructing and
+positioning this sine wave is purely algorithmic, we did not
+investigate a way to model this behaviour using neural connections.
 \newline\par
 
 We first create an array of eight evenly distributed points on a
-shifted sine wave; the array is expanded to 16 elements once the
-correct curve has been generated, similar to the way the 8 MBON signal
-is expanded to 16 neurons for integration.  The curve is shifted by
-$-\frac{\pi}{2}$ in the $x$-axis such that $\sin(\frac{\pi}{2})$ is in
-the first element (this is simply housekeeping, it makes index
-arithmetic easier when creating the output). We then compute an offset
-based on the response from the ACC neurons. This offset will always be
-an integer between -2 and 2 inclusive; it represents how far we wish
-to shift the sine wave from the current direction read from the TB1
-layer (how far to the left/right of our current direction do we wish
-to turn). How this offset is generated differs between the I\&F and
-rate models of the ACC layer.
+shifted sine wave.  The curve is shifted by $-\frac{\pi}{2}$ in the
+$x$-axis such that $\sin(\frac{\pi}{2})$ is in the first element (this
+is simply housekeeping, it makes index arithmetic easier when creating
+the output). The peak of this sinusoid array will denote the desired
+direction of travel, we therefore need to shift the array so that the
+maximum lies in the correct place. This \textit{shift} is calculated
+as $\textit{shift} = \textit{current\textunderscore direction} +
+\textit{offset}$. The current direction can be read from the TB1 layer
+(the TB1 neuron with the highest firing rate). The offset is computed
+based on the response from the ACC layer; this computation is
+different in the I\&F and Rate cases.
 \newline\par
 
 In the I\&F case, the offset will be -2, 0, or 2 depending on which
@@ -1795,7 +1799,7 @@ identical to the behaviour displayed by the CA system in
 \cite{Mitchell2018}, piped through the CX structure.
 \newline\par
 
-In the rate case, we instead receive a single input from the ACC layer.
+In the Rate case, we instead receive a single input from the ACC layer.
 This input will lie in (0,1) and we need only a simple linear transform to
 choose an offset from this value. The transform has the conditions that
 $f(0.5) = 0$, $f(1) = 2$, and $f(0) = -2$.
@@ -1805,10 +1809,49 @@ $f(0.5) = 0$, $f(1) = 2$, and $f(0) = -2$.
  f(x) = 4x - 2
 \end{equation}
 
-satisfies these conditions. The output of Eq. \ref{eq:transform} is then rounded
-to the nearest integer to determine the offset. This method is nice and simple,
-however it is highly susceptible to noise, as we will see this is a critical
-flaw.
+satisfies these conditions. The output of Eq. \ref{eq:transform} is
+then rounded to the nearest integer to determine the offset.  \newline\par
+
+In both cases, once the offset has been determined the sinusoid array
+will be shifted such that the maximum is in the desired element. The
+shifted sinusoid array is then extended to sixteen elements to match
+the CPU4 representation. The final extended sinusoid array is used as
+input to the MRSP neurons whose output is computed as:
+
+\begin{equation}
+  \label{eq:rmrsp}
+  r_{MRSP} = \frac{1}{1 + e^{-(5I - 2.5)}}
+\end{equation}
+
+The computed firing rates are then supplied to the CPU1 layer of the
+CX by utilising CPU4-CPU1 connection array. The CPU1 layer then
+generates the steering command. In fact, as the MRSP layer utilises
+the same neural architecture as CPU4, we can give the input to CPU1
+as:
+
+\begin{equation}
+I_{CPU1}^{(t)} = r_{MRSP}^{(t)} - r_{TB1}^{(t)}
+\end{equation}
+
+Note that this is in the case where we only the CA system is
+contributing to the output (i.e. no path integration or visual
+navigation). The TB1 subtraction is still required in the input to
+generate an avoidance saccade relative to the current heading of the
+agent.
+\newline\par
+
+An example of the signal propogation from ACC (rate-based) response to
+MRSP output can be seen in Figure \ref{fig:mrspRateResponse}. Input
+($I=0.25$) is supplied to the ACC neuron, its firing rate ($r=0.78$)
+is put through the offset computation function ($\textit{offset} =
+1.11 \rightarrow 1$), and this offset is added to the current
+direction ($\textit{current\textunderscore direction} = 4$ in the
+example) to give the total offset. The sinusoid array is rotated such
+that the maximum (index 5) indicates the desired direction of travel,
+the sinusoid is extended to sixteen elements and supplied as input to
+the MRSP neurons; the MRSP firing rate is given by Eq. \ref{eq:rmrsp},
+and an example MRSP layer output is shown in Figure
+\ref{fig:mrspRateResponse}.
 
 \begin{figure}[h!]
   \caption{\label{fig:mrspRateArrangement}[PLACEHOLDER] \textit{This
@@ -1817,22 +1860,23 @@ flaw.
 
 \begin{figure}[h!]
   \centering
-  \vspace{-35pt}
+  \vspace{-45pt}
   \includegraphics[width=0.8\textwidth]{NeuralCASignalProp}
   \caption{\label{fig:mrspRateResponse} An example of signal
     propogation and generated output from the rate-based system
     (left-to-right, top-to-bottom). An example flow input is given as
-    0.25. The ACC rate response is then put through the offset computation
-    function (Eq. \ref{eq:transform}). The default sinusoid function
-    is generated over eight array elements. The function is then
-    shifted such that the maximum lies at \textit{current\textunderscore
-    direction + round(offset)} which in this case is 5. This sinusoid
-    is then extended to a sixteen elements to match the representation
-    in CPU4. Each element of the sinusoid is then supplied as input to
-    the corresponding MRSP neuron to give the rate output in the final
-    plot. This MRSP response is used as input to the CPU1 layer, in
-    this example a small right turn will be generated.
-  }
+    0.25. The ACC rate response is then put through the offset
+    computation function (Eq. \ref{eq:transform}). The default
+    sinusoid function is generated over eight array elements. The
+    sinusoid is then shifted such that the maximum lies at
+    \textit{current\textunderscore direction + round(offset)} which in
+    this case is 5. This sinusoid is then extended to a sixteen
+    elements to match the representation in CPU4. Each element of the
+    sinusoid is then supplied as input to the corresponding MRSP
+    neuron to give the rate output in the final plot; as there are two
+    neurons for each cardinal direction, the two maxima indicate a
+    single direction. This MRSP response is used as input to the CPU1
+    layer, in this example a small right turn will be generated.  }
 \end{figure}
 
 
