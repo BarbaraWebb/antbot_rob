@@ -545,7 +545,7 @@ Todo:
 Notes:
 - bytedeco/javacv1.4.4
 - Can now confirm, reoving the bytedeco library has removed the duplicate entry.
-	Fuck.
+
 - Okay, there are no resources on how to use multiple versions of opencv in the
 	same project.
 - Going to see if I can rebuild the recorder using the utilities available in

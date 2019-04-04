@@ -135,7 +135,7 @@ Dr. Barbara Webb
     contained herein is my own except where explicitly stated otherwise
     in the text, and that this work has not been submitted for any other
     degree or professional qualification except as specified.
-    \par
+    \newline\par
 
     \textit{Robert Mitchell}}
 
@@ -236,11 +236,11 @@ basis. \cite{Ardin2016, Stone2017, Mitchell2018, Stewart2010,
 \newline
 \par
 
-This project primarily extends the work done in
-\cite{Mitchell2018}. Therefore we continue using the AntBot platform; a
-robot constructed for the express purpose of experimenting with the
-algorithms in the \textit{Ant Navigational Toolkit}
-\cite{Eberding2016, Wehner2009}.
+This is Part 2 of the MInf qualification; the project primarily
+extends the work done in \cite{Mitchell2018} (Part 1). Therefore we
+continue using the AntBot platform; a robot constructed for the
+express purpose of experimenting with the algorithms in the
+\textit{Ant Navigational Toolkit} \cite{Eberding2016, Wehner2009}.
 
 \subsection{ Motivation }
 Currently, a full base model for insect navigation does not exist
@@ -267,8 +267,9 @@ former by adding the OFCA component to our model; as in
 \cite{Mitchell2018}, the AntBot will follow a non-deterministic
 outbound route through an arena with obejcts present. The latter
 brings up the more complicated question of plausible synaptic
-plasticity which, though undoubtedly interesting, lies outside the
-scope of this project (though we will discuss the concept to a limited
+plasticity (i.e. modifying component weightings dynamically in some
+fashion) which, though undoubtedly interesting, lies outside the scope
+of this project (though we will discuss the concept to a limited
 extent). It is worth noting that there may also have been unknown
 tecnical issues with the robot which affected the results of
 \cite{Zhang2017}, making them less consistent than they should be in
@@ -277,10 +278,10 @@ reality (see \cite{Mitchell2018} and later in this work).
 \par
 
 While \cite{Mitchell2018} provides a reasonable collision avoidance
-system based on optical flow, it does not fit so neatly into the ECX
-model.Therefore we aim to explore an alternative yet still
-biologically plausible collision avoidance system which will fit into
-the ECX model.
+system based on optical flow, it does not fit so intuitively into the
+CX architecture. Therefore we aim to explore an alternative yet still
+biologically plausible collision avoidance system which will allow us
+to develop the ECX model.
 \newline
 \par
 
@@ -391,9 +392,7 @@ The significant contributions of this project are:
 \section{ Background }
 This project builds directly upon \cite{Mitchell2018}. We first provide a review
 of the relevant background topics from that paper, before developing the key
-ideas further for this project. This will be a very brief summary of the work
-that took place and any relevant results or new perspectives.
-
+ideas further for this project. 
 
 \subsection{ The Focus of Expansion for Collision Avoidance } \label{OFBackground}
 Optical flow is the 2D approximation of image flow, the 3D motion
@@ -429,11 +428,7 @@ use it directly to determine the potential location of an
 obstacle. Following \cite{Mitchell2018} we will be using a dense optic
 flow field (tracking motion for every pixel in the image) as the
 computation of sparse fields was shown to be unreliable on the
-AntBot. This potentially makes the problem more difficult; the basic
-method for calculating the FOE given by \cite{ODonovan2005} is
-computationally complex for a dense flow field
-\cite{Mitchell2018}. The time taken to compute may become
-prohibitive. A common, reliable and intuitive method of computing the
+AntBot. A common, reliable and intuitive method of computing the
 FOE is the Least Squared-Error (LSE) method \cite{Tistarelli1991,
   ODonovan2005, Vanderstap2012}. This method also appears to be in use
 in \cite{Souhila2007}, a major inspiration for the optical flow
@@ -479,9 +474,9 @@ This method for estimating the focus of expansion was originally given
 by \textit{Tistarelli et al.} in their paper \textit{Dynamic Stereo in
   Visual Navigation}\cite{Tistarelli1991, ODonovan2005}, and it serves
 as an excellent example for the reason the FOE is so difficult to
-compute. In theory, we should be able to take any two vectors
-$\mathbf{u}$, $\mathbf{v}$ from the flow field, and compute the point
-at which lines running along them intersect. This point of
+compute in practice. In theory, we should be able to take any two
+vectors $\mathbf{u}$, $\mathbf{v}$ from the flow field, and compute
+the point at which lines running along them intersect. This point of
 intersection would give us the FOE \cite{ODonovan2005}. While
 wonderfully simple in theory, this method only works for a perfect
 flow field. In reality, flow fields are imperfect; for example, visual
@@ -568,39 +563,140 @@ field given.
 In light of the results we will present later with regards to the FOE,
 we will also revisit the matched filter collision avoidance system
 from \cite{Mitchell2018}, though the flow field computation, filter
-generation and comparision are unchanged. We present a brief
-description of the intuition here as we will go on to develop neural
-representations of this model later. For full details of the filter and
-matching process, please see \cite{Mitchell2018}.
+generation and comparision are unchanged. 
 \newline\par
 
-We compare the observed optical flow field to a precomputed
-filter. This filter represents the motion we expect to observe in the
+We compare the observed optical flow field to a precomputed optical flow
+\textit{filter}. This filter represents the motion we expect to observe in the
 image frame given some self (camera) motion. This method for collision
 avoidance has been an active area of research in the biorobotics (and
 wider robotics) community for some time though there are different
 hypotheses about how the information is actually used by insects
 \cite{Julien2017}.\newline\par
 
-The difference between the expected flow field (the filter) and the
-actual flow field computed from consecutive images was used by
-\textit{Scimeca} for speed retrieval \cite{Scimeca2017}. In
-\cite{Mitchell2018} we observed that objects in different 3D positions
-will appear to move at different speeds in the image frame;
-specifically objects which are on a collision course will appear to
-loom (grow quickly) in the agent's field of view. Therefore, by
-computing the speed from optical flow on both sides of the field of
-view, we can determine if an object is looming on a particular side by
-comparing the observed speed on both sides; this can then be used to
-generate an avoidance saccade\footnote{This is subtly different from
-  the balance strategy presented in \cite{Julien2017}, though we adapt
-  the system into a balance strategy as part of the neural
-  implementation.}. This method was also used by \textit{Stewart et
-  al.} in their simulations of Drosophila \cite{Stewart2010};
-interestingly they use the matched filter to detect a collision, then
-use the position of the FOE to determine a steering direction
-\cite{Stewart2010}. An example of the flow disturbance caused by a
-looming object can be seen in Figure \ref{fig:flowfield}.
+In \cite{Mitchell2018} (and this work), the filter in use is one
+implemented by \textit{Scimeca} for the purposes of speed
+retrieval. This filter represents the flow we would expect to observe
+when the agent experiences forward translational motion, in a clear
+environment. A graphical representation of the filter can be seen in
+Figure \ref{fig:offilter}.
+\newline\par
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{OFFilter}
+  \caption{\label{fig:offilter} The optical flow filter given by
+    \textit{Scimeca} for speed retrieval, caption by \textit{Scimeca},
+    Figure 13 (clarifications in square brackets given by
+    \textit{Mitchell} in \cite{Mitchell2018}): Figure (a) shows the
+    idea behind the modiﬁcation of the ﬁlter for speed retrieval. When
+    moving forward, for example, we expect the rectangular 360
+    [degree] image to have vector ﬂows in diﬀerent length throughout
+    the frame, in the pattern shown in the Figure. Figure (b) shows
+    the ﬁlter response of the modiﬁed ﬁltering process for this
+    [Scimeca’s] project. During matching, the found ﬂow vectors will
+    be projected onto the corresponding ﬁlter vectors nullifying the
+    information on the y axis and scaling the vectors diﬀerently
+    depending on the area of the image they are found in.
+  }
+\end{figure}
+
+The mathematical breakdown of the filter computation and application
+process are given by \cite{Mitchell2018} as follows. The filter is
+given as an $N \times 3$ matrix $F$ such that:
+
+\begin{equation}
+  \label{eq:filter}
+F_i = [ \quad sin(-\pi + i\frac{2\pi}{N}) \qquad 0 \qquad 0 \quad ]
+\quad \textit{for} \quad i \in \{0, N - 1\}
+\end{equation}
+
+where $F_i$ is the $i$th row of $F$ and each row corresponds to a
+pixel value in the $x$-axis of the 360$^\circ$ image (see Section
+\ref{sec:platform}). Let $M$ be the matrix returned by the OpenCV
+\textit{calcOpticalFlowFarneback()} function when it is given two
+consecutive image frames. $M$ represents the dense
+flow field computed by the function and is constructed such that
+$M_{y,x}$ is a one-dimensional array with two elements, where
+$M_{y,x}[0]$ is the pixel displacement in the $x$-axis, and
+$M_{y,x}[1]$ is the pixel displacement in the $y$-axis. The filter is
+then applied by performing the following computation; for each $x,y$:
+\newline\par
+
+\centering
+Compute pixel's starting location in the shifted frames as:
+\begin{align*}
+  PLF = [ \quad (x + 4)\Mod{N} \qquad y \quad ]\\
+  PRF = [ \quad (x - 4)\Mod{N} \qquad y \quad ]
+\end{align*}
+
+Compute the flow vector from the start location to where it is now as:
+\begin{align*}
+  CLF = [ (M_{y,x}[0] + x + 4)\Mod{N} \qquad (M_{y,x}[1] + y) \Mod{R} ]\\
+  CRF = [ (M_{y,x}[0] + x - 4)\Mod{N} \qquad (M_{y,x}[1] + y) \Mod{R} ]
+\end{align*}
+
+Extract the correct filter vector from matrix $F$ (Eq. \ref{eq:filter}):
+\begin{align*}
+  LFilter = F_{PLF[0]}\\
+  RFilter = F_{PRF[0]}
+\end{align*}
+
+Apply the filter:
+\begin{align}
+  LFD = LFilter \cdot CLF \\
+  RFD = RFilter \cdot CRF
+\end{align}
+
+\raggedright where $N=90$ is the number of horizontal pixels and
+$R=10$ is the number of vertical pixels. $LFD$ and $RFD$ give a
+numerical measure of how far the observed flow field deviates from the
+expected flow field on the left and right sides respectively. These
+measures are then summed over the entire shifted image frame for each
+side which gives us a measure of overall deviation from the filter:
+
+\begin{align}
+  LeftFlowSum = \sum_{i = 0}^{K - 1} LFD_i \qquad
+  RightFlowSum = \sum_{i = 0}^{K - 1} RFD_i
+\end{align}
+
+where $K = N \cdot R$ and $LFD_i, RFD_i$ are the left and right
+differences for the $i$th pixel. Finally, the difference between the
+two flow sums is computed:
+
+\begin{equation}
+  FlowDifference = LeftFlowSum - RightFlowSum
+\end{equation}
+
+The flow difference tells us if one side is experiencing a dramatic
+increase in flow disturbance (e.g. if an object is looming, Figure
+\ref{fig:flowfield}). Therefore, this difference can be used to
+dictate whether an avoidance maneuver is required and in which
+direction the agent should turn.
+\newline\par
+
+%% The difference between the expected flow field (the filter) and the
+%% actual flow field computed from consecutive images was used by
+%% \textit{Scimeca} for speed retrieval \cite{Scimeca2017}. In
+%% \cite{Mitchell2018} we observed that objects in different 3D positions
+%% will appear to move at different speeds in the image frame;
+%% specifically objects which are on a collision course will appear to
+%% loom (grow quickly) in the agent's field of view. Therefore, by
+%% computing the speed from optical flow on both sides of the field of
+%% view, we can determine if an object is looming on a particular side by
+%% comparing the observed speed on both sides; this can then be used to
+%% generate an avoidance saccade\footnote{This is subtly different from
+%%   the balance strategy presented in \cite{Julien2017}, though we adapt
+%%   the system into a balance strategy as part of the neural
+%%   implementation.}.
+
+
+A similar method was also used by \textit{Stewart et al.} in their
+simulations of Drosophila \cite{Stewart2010}; interestingly they use
+a matched filter to detect a collision, then use the position of the
+FOE to determine a steering direction \cite{Stewart2010}. An example
+of the flow disturbance caused by a looming object can be seen in
+Figure \ref{fig:flowfield}.
 \newline\par
 
 \subsection{ The Mushroom Body for Visual Navigation } \label{MBBackground}
@@ -614,7 +710,7 @@ by older works, we use MBON herein. The original MB model proposed by
 visual PNs (vPNs), 20,000 KCs, and a single MBON. Every KC connects to
 the MBON, and each KC also connects to 10 vPNs chosen uniform
 randomly. The KC-MBON connections all start with weight $w=1$. The
-figure and caption from \textit{Ardin et al.} is given here in Figure
+figure and caption from \textit{Ardin et al.} are given here in Figure
 \ref{fig:mb}. In their implementation and previous AntBot
 implementations, captured images were converted to greyscale and
 downsampled \cite{Ardin2016, Eberding2016, Zhang2017,
@@ -848,7 +944,7 @@ a breakdown of functionality:
   \centering
   \includegraphics[width=\textwidth]{StoneCXModel}
   \caption{\label{fig:cx} The Central Complex model presented by
-    \textit{Stone et al.}. (Left) This graph demonstrates the basic structure of
+    \textit{Stone et al.} (Left) This graph demonstrates the basic structure of
     the CX model (Figure 5G from \cite{Stone2017}). Pontine neurons have been
     excluded for clarity.
     (Right) This graph shows how signals propogate through the network where the
@@ -1334,13 +1430,14 @@ in the chassis.\newline\par
     }
 \end{figure}
 
-Additionally, the robot possesses a $360^{\circ}$ camera attachment, giving the
-robot a panoramic view to match that of the desert ant\footnote{In reality,
-  the desert ant has a visual field of only ~$280^{\circ}$\cite{Ardin2016},
-  however an approxmiation of $360^{\circ}$ was considered appropriate when
-  the robot was built.}. The robot was also modified as part of
-\cite{Mitchell2018} to allow it to be charged with an external charger without
-dismantling it.
+Additionally, the robot possesses a $360^{\circ}$ camera attachment,
+giving the robot a panoramic view to match that of the desert
+ant\footnote{In reality, the desert ant has a visual field of only
+  $280^{\circ}$ (approx.)\cite{Ardin2016}, however an approxmiation of
+  $360^{\circ}$ was considered appropriate when the robot was
+  built.}. The robot was also modified as part of \cite{Mitchell2018}
+to allow it to be charged with an external charger without dismantling
+it.
 
 \begin{figure}[t!]
   \centering
@@ -1372,11 +1469,12 @@ user could develop an application to perform all visual processing
 then broadcast a processed image for other applications which require
 it. The original AntBot software was split into separate five
 applications: Ant Eye, Visual Navigation, Path Integration, Combiner,
-and Serial Communications, neatly compartmentalising each task.
-In recent years, this structure appears to have been abandoned and
-almost all code is contained within the \textit{AntEye}
-application. Only the Serial Communications application remains
-true-to-design.
+and Serial Communications, neatly compartmentalising each task.  In
+recent years, this structure appears to have been abandoned and almost
+all code is contained within the \textit{AntEye}
+application\footnote{This was the case on our inheretance of the
+  platform for \cite{Mitchell2018}.}. Only the Serial Communications
+application remains true-to-design.
 \newline
 \par
 
@@ -1385,14 +1483,6 @@ processed such that we get a downsampled 90x10 image which represents the
 $360^{\circ}$ view around the robot. This image is then used for optical
 flow analysis. The image and flow analysis are then made available to any thread
 which requires it. A thread will then use this data to run an experiment.
-\newline
-\par
-
-There are a number of criticisms we can raise about the robot (in both a hardware
-and software sense); ultimately the key problem may be lack of developer
-familiarity with the Android platform.  While Android seems to work well at
-first glance, it can ultimately be quite restrictive; we leave this to the
-later discussion.
 
 \subsubsection{ Arduino }
 The Arduino code acts as a bridge between the Android platform and the Dangu
@@ -1467,10 +1557,6 @@ reference. A single thread was left in the MainActivity file to act
 as a test thread. An amount of unused code was removed entirely.
 \newline
 \par
-
-Problems remain in the codebase. We identify some such problems and
-leave suggestions for further work in our discussion.
-\newline\par
 
 
 \textbf{Video Recording:} In order to analyse the visual processing in
@@ -1762,10 +1848,11 @@ scale down the input (difference of flow sums) such that it lies in
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.9\textwidth]{ACCRate}
-  \caption{\label{fig:accrate} Function of firing rate response of the single ACC
-    neuron against difference input; sigmoid with $a = 5$, $b = 0$. The input to
-  this neuron is scaled down to lie between -1 and 1.}
+  \includegraphics[width=0.8\textwidth]{ACCRate}
+  \caption{\label{fig:accrate} Function of firing rate response of the
+    single ACC neuron against difference input; sigmoid
+    (Eq. \ref{eq:sig}) with $a = 5$, $b = 0$. The input to this neuron
+    must be scaled down to lie between -1 and 1.}
 \end{figure}
 
 If the flow disturbance observed on both sides is equal, then the rate
@@ -1866,7 +1953,7 @@ is put through the offset computation function ($\textit{offset} =
 1.11 \rightarrow 1$), and this offset is added to the current
 direction ($\textit{current\textunderscore direction} = 4$ in the
 example) to give the total offset. The sinusoid array is rotated such
-that the maximum (index 5) indicates the desired direction of travel,
+that the maximum indicates the desired direction of travel (index 5),
 the sinusoid is extended to sixteen elements and supplied as input to
 the MRSP neurons; the MRSP firing rate is given by Eq. \ref{eq:rmrsp},
 and an example MRSP layer output is shown in Figure
@@ -1921,7 +2008,7 @@ has been conducted). We present the model here and present the issues
 experienced and learning points in Section \ref{sec:results}.
 \newline\par
 
-In an effort to keep the integration simple, first version of this
+In an effort to keep the integration simple, the first version of this
 model allowed the collision avoidance system to fully overwrite any
 steering instruction in the event of a detected obstacle. While
 straightforward and intuitive, this method proved too coarse. If a
@@ -1944,8 +2031,8 @@ robot uses the rate representation with a single ACC neuron.
 \newline\par
 
 The output of the network can be selected by changing the mode of the
-CPU1 output stage. In this fashion, one can isolate each system and
-produce the steering output using specific systems. The key modes
+input to the CPU1 layer. In this fashion, one can isolate each system
+and produce the steering output using specific systems. The key modes
 currently present on the agent are CA-only, and CXCA which are the
 isolated collision avoidance system and the combined output of the
 path integrator and the collision avoidance system respectively;
@@ -1964,11 +2051,12 @@ combined input to CPU1 could be stated as:
   I_{CPU1}^{(t)} = a \cdot r_{CPU4}^{(t)} + b \cdot r_{MRSP}^{(t)} + c \cdot r_{MBON}^{(t)} - r_{TB1}^{(t)}
 \end{equation}
 
-where $a + b + c = 1$, and $a,b,c$ represent the proportion of the
+where $a + b + c = 1$, and $a,b,c \in [0,1]$ represent the proportion of the
 output being governed by PI, CA, or VN respectively. Each subsystem
 uses the same connection array between itself and CPU1 (namely,
 $W_{CPU4}$ from Section \ref{CXMBBackground}) so without weighting,
-each would have equal influence.
+each would have equal influence. For example, in the CXCA case, we
+use $a=0.1$, $b=0.9$, and $c=0$ (see Results).
 
 \subsection{Tussocks}
 During \cite{Mitchell2018}, we note that the tussocks were extremely
@@ -2207,8 +2295,8 @@ obstacle avoidance scenario presented (Table 2, Arena 2 from
 No system performed consistently well in the presence of an obstacle,
 however the I\&F variant\footnote{As behaviour between the two I\&F
   variants was identical, we will discuss them together going
-  forward. Most testing took place with lI\&F ACC neurons.} provided
-sufficiently consistent reactions to observe some runs of the
+  forward. Most testing took place with leaky-I\&F ACC neurons.}
+provided sufficiently consistent reactions to observe some runs of the
 ECX.
 
 \subsection{ECX (CXCA)}
@@ -2216,19 +2304,19 @@ The testing methodology for the ECX was to test each individual system
 and then the full combination. There is a set order to this testing as
 each step of the integration requires some prerequisite (except
 CA). The CA system must be tested first, then the combination of CA
-and PI (CACX) as we need working PI to learn homeward visual routes,
+and PI (CXCA) as we need working PI to learn homeward visual routes,
 finally, the MB can be connected and the full ECX can then be tested.
 \newline\par
 
 All systems are implemented and available; we present testing only up
-to the CACX implementation. The CACX was tested (informally) by
+to the CXCA implementation. The CXCA was tested (informally) by
 allowing the combined system to navigate homeward following a
-successful collision free outbound run. The combined model was
-only tested using the I\&F variant of the neural CA model as this
-version managed successful collision avoidance behaviour. As CXCA
+successful collision free outbound run of the CA system. The combined
+model was only tested using the I\&F variant of the neural CA model as
+this version managed successful collision avoidance behaviour. As CXCA
 tests followed successful CA tests, the CXCA is tested in the same
-environments: an empty environment and one with a single large
-cluster of tussocks.
+environments: an empty environment and one with a single large cluster
+of tussocks.
 
 
 \section{ Results } \label{sec:results}
@@ -2413,7 +2501,7 @@ as to conclude that the FOE is of no use to the AntBot at all.
 The remainder of our results discussion arises from developmental testing.
 These are not results from which concrete conclusions may
 be drawn, however they may provide insight for anyone considering
-implementing the neural filter model for collision avoidance, or the
+working with the neural filter model for collision avoidance, or the
 ECX, as a continuation of this work.
 
 \subsubsection{Neural Matched Filters}
@@ -2523,9 +2611,10 @@ explained by a noisy optical flow field.
 \subsection{ECX (CXCA)}
 As stated in Section \ref{sec:test}, the ECX model was tested as an
 extension of successful CA runs and thus, was only tested using I\&F
-ACC neurons. In an empty arena, successful homing was observed in
-several (though not all) tests; these cases are promising results, as
-it was clear that the CA and CX systems were interacting to produce an
+ACC neurons. Futhermore, only the combination of PI and CA was
+tested. In an empty arena, successful homing was observed in several
+(though not all) tests; these cases are promising results, as it was
+clear that the CA and CX systems were interacting to produce an
 output. \newline\par
 
 With the obstacle present, homing was never sucessful but desired
@@ -2644,9 +2733,9 @@ reliable collision detection input can be provided (note this need not
 be based on optical flow), then the ECX could be comprehensively
 tested. Our original vision for this was a multi-stage navigational
 exercise; the robot performs an outward trip using CA alone, homeward
-using CACX (during which a visual route is learned), then outward once
+using CXCA (during which a visual route is learned), then outward once
 more using either visual information or an inverted home vector in
-CACX to learn a visual outbound route. On completion of the second
+CXCA to learn a visual outbound route. On completion of the second
 outbound trip, the robot should have all of the information it
 requires to make the trip reliably, from visual memory. \newline\par
 
@@ -2795,7 +2884,7 @@ concrete example, previous works \cite{Eberding2016, Scimeca2017,
   Zhang2017} list a serial message which sends encoder values from the
 Arduino to the smartphone, however they fail to mention that it was
 used only as part of a particular Arduino function\footnote{Confirmed
-  by observation an correspondence with \textit{Eberding}.} and furthermore,
+  by observation and correspondence with \textit{Eberding}.} and furthermore,
 that this functionality has since been removed\footnote{This removal is
 thought to be part of \cite{Scimeca2017}, version control records
 should be available to confirm.}.

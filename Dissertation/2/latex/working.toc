@@ -8,43 +8,43 @@
 \contentsline {subsection}{\numberline {2.1} The Focus of Expansion for Collision Avoidance }{5}
 \contentsline {subsubsection}{\numberline {2.1.1}The Least Squared-Error method}{5}
 \contentsline {subsection}{\numberline {2.2}Matched Filters for Collision Avoidance}{6}
-\contentsline {subsection}{\numberline {2.3} The Mushroom Body for Visual Navigation }{6}
-\contentsline {subsection}{\numberline {2.4} The Central Complex for Path Integration }{8}
-\contentsline {subsubsection}{\numberline {2.4.1}The Evolved Model for Path Integration}{8}
-\contentsline {subsubsection}{\numberline {2.4.2}The Central Complex Model}{10}
-\contentsline {subsection}{\numberline {2.5} The Eight MBON Model (CXMB) }{16}
-\contentsline {subsection}{\numberline {2.6} Review of Part 1 }{18}
-\contentsline {section}{\numberline {3} Platform }{19}
-\contentsline {subsection}{\numberline {3.1} Hardware }{19}
-\contentsline {subsection}{\numberline {3.2} Software }{19}
-\contentsline {subsubsection}{\numberline {3.2.1} Android }{20}
-\contentsline {subsubsection}{\numberline {3.2.2} Arduino }{20}
-\contentsline {subsection}{\numberline {3.3} Modifications and Development }{21}
-\contentsline {section}{\numberline {4} Methods }{25}
-\contentsline {subsection}{\numberline {4.1} Collision Avoidance }{25}
-\contentsline {subsubsection}{\numberline {4.1.1} Shifting Expansion Fields }{25}
-\contentsline {subsubsection}{\numberline {4.1.2}Matched Filters}{26}
-\contentsline {subsection}{\numberline {4.2} Path Integration }{30}
-\contentsline {subsection}{\numberline {4.3} The Complete System}{30}
-\contentsline {subsection}{\numberline {4.4}Tussocks}{31}
-\contentsline {section}{\numberline {5}Experimentation and Testing}{33}
-\contentsline {subsection}{\numberline {5.1}Path Integration}{33}
-\contentsline {subsection}{\numberline {5.2}Collision Avoidance}{35}
-\contentsline {subsubsection}{\numberline {5.2.1}Shifting Expansion Patterns}{35}
-\contentsline {subsubsection}{\numberline {5.2.2}Neural Matched Filters}{36}
-\contentsline {subsection}{\numberline {5.3}ECX (CXCA)}{37}
-\contentsline {section}{\numberline {6} Results }{39}
-\contentsline {subsection}{\numberline {6.1} Path Integration }{39}
-\contentsline {subsection}{\numberline {6.2}Collision Avoidance}{41}
-\contentsline {subsubsection}{\numberline {6.2.1}Shifting Expansion Patterns}{41}
-\contentsline {subsubsection}{\numberline {6.2.2}Neural Matched Filters}{43}
-\contentsline {subsection}{\numberline {6.3}ECX (CXCA)}{44}
-\contentsline {section}{\numberline {7} Discussion and Future Work}{47}
-\contentsline {subsection}{\numberline {7.1}Conclusion}{47}
-\contentsline {subsection}{\numberline {7.2}Future work}{47}
-\contentsline {subsubsection}{\numberline {7.2.1}Building upon the work presented}{47}
-\contentsline {subsubsection}{\numberline {7.2.2}Platform}{48}
-\contentsline {subsubsection}{\numberline {7.2.3}Closing}{51}
-\contentsline {section}{\numberline {8}References}{53}
-\contentsline {section}{\numberline {A}Genetic Algorithms}{55}
-\contentsline {section}{\numberline {B}CX VICON Recordings}{57}
+\contentsline {subsection}{\numberline {2.3} The Mushroom Body for Visual Navigation }{8}
+\contentsline {subsection}{\numberline {2.4} The Central Complex for Path Integration }{10}
+\contentsline {subsubsection}{\numberline {2.4.1}The Evolved Model for Path Integration}{10}
+\contentsline {subsubsection}{\numberline {2.4.2}The Central Complex Model}{12}
+\contentsline {subsection}{\numberline {2.5} The Eight MBON Model (CXMB) }{18}
+\contentsline {subsection}{\numberline {2.6} Review of Part 1 }{20}
+\contentsline {section}{\numberline {3} Platform }{23}
+\contentsline {subsection}{\numberline {3.1} Hardware }{23}
+\contentsline {subsection}{\numberline {3.2} Software }{23}
+\contentsline {subsubsection}{\numberline {3.2.1} Android }{24}
+\contentsline {subsubsection}{\numberline {3.2.2} Arduino }{24}
+\contentsline {subsection}{\numberline {3.3} Modifications and Development }{24}
+\contentsline {section}{\numberline {4} Methods }{29}
+\contentsline {subsection}{\numberline {4.1} Collision Avoidance }{29}
+\contentsline {subsubsection}{\numberline {4.1.1} Shifting Expansion Fields }{29}
+\contentsline {subsubsection}{\numberline {4.1.2}Matched Filters}{30}
+\contentsline {subsection}{\numberline {4.2} Path Integration }{34}
+\contentsline {subsection}{\numberline {4.3} The Complete System}{34}
+\contentsline {subsection}{\numberline {4.4}Tussocks}{35}
+\contentsline {section}{\numberline {5}Experimentation and Testing}{37}
+\contentsline {subsection}{\numberline {5.1}Path Integration}{37}
+\contentsline {subsection}{\numberline {5.2}Collision Avoidance}{39}
+\contentsline {subsubsection}{\numberline {5.2.1}Shifting Expansion Patterns}{39}
+\contentsline {subsubsection}{\numberline {5.2.2}Neural Matched Filters}{40}
+\contentsline {subsection}{\numberline {5.3}ECX (CXCA)}{41}
+\contentsline {section}{\numberline {6} Results }{43}
+\contentsline {subsection}{\numberline {6.1} Path Integration }{43}
+\contentsline {subsection}{\numberline {6.2}Collision Avoidance}{45}
+\contentsline {subsubsection}{\numberline {6.2.1}Shifting Expansion Patterns}{45}
+\contentsline {subsubsection}{\numberline {6.2.2}Neural Matched Filters}{47}
+\contentsline {subsection}{\numberline {6.3}ECX (CXCA)}{48}
+\contentsline {section}{\numberline {7} Discussion and Future Work}{51}
+\contentsline {subsection}{\numberline {7.1}Conclusion}{51}
+\contentsline {subsection}{\numberline {7.2}Future work}{51}
+\contentsline {subsubsection}{\numberline {7.2.1}Building upon the work presented}{51}
+\contentsline {subsubsection}{\numberline {7.2.2}Platform}{52}
+\contentsline {subsubsection}{\numberline {7.2.3}Closing}{55}
+\contentsline {section}{\numberline {8}References}{57}
+\contentsline {section}{\numberline {A}Genetic Algorithms}{59}
+\contentsline {section}{\numberline {B}CX VICON Recordings}{61}
